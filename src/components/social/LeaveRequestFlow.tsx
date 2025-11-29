@@ -65,6 +65,13 @@ export const LeaveRequestFlow: React.FC = () => {
         const beneficiary = initialBeneficiaries.find(b => b.id === selectedBeneficiaryId);
         if (!beneficiary) return;
 
+        // --- PROTECTION SHIELD: Scenario A ---
+        if (beneficiary.guardianRelation === 'State Ward' || beneficiary.socialStatus.includes('يتيم')) {
+            alert("⚠️ تنبيه أمني عالي الخطورة: هذا المستفيد (يتيم/تحت رعاية الدولة). لا يمكن إنشاء طلب خروج أو زيارة إلا بموجب أمر قضائي أو موافقة المدير العام المباشرة.\n\nتم إيقاف العملية لحماية المستفيد.");
+            return;
+        }
+        // -------------------------------------
+
         const newRequest: LeaveRequest = {
             id: `LR-${Date.now()}`,
             beneficiaryId: beneficiary.id,

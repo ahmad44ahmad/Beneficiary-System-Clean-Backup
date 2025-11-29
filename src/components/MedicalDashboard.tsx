@@ -11,8 +11,24 @@ interface MedicalDashboardProps {
     };
 }
 
+import { beneficiaries } from '../data/beneficiaries';
+
 export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ vaccinations, isolationStats }) => {
     const overdueVaccinations = vaccinations.filter(v => v.status === 'Overdue');
+
+    // --- CONTINUITY TEST: Scenario B ---
+    const elderlyPatients = beneficiaries.filter(b => b.age >= 60);
+    const continuityAnalysis = elderlyPatients.map(p => {
+        const isSevere = p.medicalDiagnosis.includes('Severe') || p.medicalDiagnosis.includes('شديد') || p.medicalDiagnosis.includes('Quadriplegia');
+        return {
+            ...p,
+            recommendation: isSevere ? 'RETAIN' : 'TRANSFER',
+            reason: isSevere
+                ? 'Condition requires specialized medical care not available in Elderly Homes.'
+                : 'Standard age progression to Elderly Care.'
+        };
+    });
+    // -----------------------------------
 
     return (
         <div className="dashboard-panel fade-in">
@@ -21,6 +37,32 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ vaccinations
             </div>
 
             <div className="dashboard-content-grid">
+                {/* Continuity of Care Analysis (New Section) */}
+                <div className="dashboard-section col-span-2 bg-blue-50 border border-blue-200">
+                    <h3 className="text-blue-800 flex items-center gap-2 mb-4">
+                        <ShieldAlert className="w-5 h-5" />
+                        نظام استمرارية الرعاية (Continuity of Care AI)
+                    </h3>
+                    <div className="space-y-3">
+                        {continuityAnalysis.length > 0 ? continuityAnalysis.map(p => (
+                            <div key={p.id} className="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center">
+                                <div>
+                                    <h4 className="font-bold text-gray-900">{p.fullName} (Age: {p.age})</h4>
+                                    <p className="text-sm text-gray-600">{p.medicalDiagnosis}</p>
+                                </div>
+                                <div className={`text-left px-4 py-2 rounded-lg border-l-4 ${p.recommendation === 'RETAIN' ? 'border-green-500 bg-green-50' : 'border-yellow-500 bg-yellow-50'}`}>
+                                    <div className={`font-bold ${p.recommendation === 'RETAIN' ? 'text-green-700' : 'text-yellow-700'}`}>
+                                        RECOMMENDATION: {p.recommendation}
+                                    </div>
+                                    <div className="text-xs text-gray-500 mt-1">{p.reason}</div>
+                                </div>
+                            </div>
+                        )) : (
+                            <p className="text-gray-500 italic">No elderly patients found for analysis.</p>
+                        )}
+                    </div>
+                </div>
+
                 {/* High Priority Alerts - Vaccinations */}
                 <div className="dashboard-section">
                     <h3 className="text-red-600 flex items-center gap-2">
