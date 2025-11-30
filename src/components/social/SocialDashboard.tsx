@@ -45,14 +45,14 @@ export const SocialDashboard: React.FC = () => {
 
             {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="p-4 border-r-4 border-r-blue-500">
+                <Card className="p-4 border-r-4 border-r-primary-500">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm text-gray-500">إجمالي المستفيدين</p>
                             <h3 className="text-2xl font-bold text-gray-900">{stats.totalBeneficiaries}</h3>
                         </div>
-                        <div className="p-3 bg-blue-50 rounded-full">
-                            <Users className="w-6 h-6 text-blue-600" />
+                        <div className="p-3 bg-primary-50 rounded-full">
+                            <Users className="w-6 h-6 text-primary-600" />
                         </div>
                     </div>
                 </Card>
@@ -106,7 +106,7 @@ export const SocialDashboard: React.FC = () => {
                             <div className="space-y-4">
                                 {recentActivities.map((activity) => (
                                     <div key={activity.id} className="flex items-start gap-4 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                                        <div className={`p-2 rounded-full shrink-0 ${activity.type === 'research' ? 'bg-blue-100 text-blue-600' :
+                                        <div className={`p-2 rounded-full shrink-0 ${activity.type === 'research' ? 'bg-primary-100 text-primary-600' :
                                             activity.type === 'leave' ? 'bg-green-100 text-green-600' :
                                                 'bg-purple-100 text-purple-600'
                                             }`}>

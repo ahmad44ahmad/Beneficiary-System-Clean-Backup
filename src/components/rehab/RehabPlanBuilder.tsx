@@ -208,8 +208,8 @@ export const RehabPlanBuilder: React.FC = () => {
                         <div className="space-y-6">
                             {/* Context Summary */}
                             <div className="space-y-3 text-sm">
-                                <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
-                                    <span className="text-blue-500 block text-xs mb-1">التشخيص الطبي</span>
+                                <div className="bg-primary-50 p-3 rounded-lg border border-primary-100">
+                                    <span className="text-primary-500 block text-xs mb-1">التشخيص الطبي</span>
                                     <span className="font-medium text-gray-900">{selectedBeneficiary.medicalDiagnosis}</span>
                                 </div>
                                 <div className="bg-green-50 p-3 rounded-lg border border-green-100">
@@ -260,7 +260,7 @@ export const RehabPlanBuilder: React.FC = () => {
 
                     <div className="space-y-4">
                         {plan.goals?.map((goal, idx) => (
-                            <Card key={goal.id} className="p-4 border-r-4 border-r-blue-500 shadow-sm hover:shadow-md transition-shadow">
+                            <Card key={goal.id} className="p-4 border-r-4 border-r-primary-500 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex justify-between items-start mb-3">
                                     <div className="flex-1">
                                         <Input
@@ -295,7 +295,7 @@ export const RehabPlanBuilder: React.FC = () => {
                                 <div className="bg-gray-50 p-3 rounded-lg mt-2">
                                     <div className="flex justify-between text-xs mb-2">
                                         <span className="font-semibold text-gray-600">مؤشر التقدم (KPI Tracker)</span>
-                                        <span className={`font-bold ${goal.progress === 100 ? 'text-green-600' : 'text-blue-600'}`}>{goal.progress}%</span>
+                                        <span className={`font-bold ${goal.progress === 100 ? 'text-green-600' : 'text-primary-600'}`}>{goal.progress}%</span>
                                     </div>
                                     <input
                                         type="range"
@@ -303,7 +303,7 @@ export const RehabPlanBuilder: React.FC = () => {
                                         max="100"
                                         value={goal.progress}
                                         onChange={e => updateGoal(goal.id, { progress: parseInt(e.target.value) })}
-                                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
                                     />
                                 </div>
                             </Card>
@@ -354,7 +354,7 @@ export const RehabPlanBuilder: React.FC = () => {
                     </div>
 
                     <div className="mt-8 pt-6 border-t">
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-3" onClick={handleSave}>
+                        <Button className="w-full bg-primary hover:bg-primary-600 text-white mb-3" onClick={handleSave}>
                             <Save className="w-4 h-4 ml-2" />
                             حفظ المسودة
                         </Button>

@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
 import { UserProvider } from '../context/UserContext';
 import { ToastProvider } from '../context/ToastContext';
-import { ProtectedRoute } from './ProtectedRoute';
+import { ProtectedRoute } from './common/ProtectedRoute';
 
 // Data Imports
 import { beneficiaries } from '../data/beneficiaries';
@@ -22,15 +22,15 @@ import { MedicalProfile, VaccinationRecord } from '../types/medical';
 
 // Component Imports
 import { Dashboard } from '../pages/Dashboard';
-import { DashboardPanel } from './DashboardPanel';
-import { BeneficiaryListPanel } from './BeneficiaryListPanel';
-import { BeneficiaryDetailPanel } from './BeneficiaryDetailPanel';
-import { MedicalDashboard } from './MedicalDashboard';
-import { InventoryPanel } from './InventoryPanel';
-import { ClothingManagementPanel } from './ClothingManagementPanel';
-import { DailyFollowUpPanel } from './DailyFollowUpPanel';
-import { SocialActivitiesPanel } from './SocialActivitiesPanel';
-import { NewAdmissionForm } from './NewAdmissionForm';
+import { DashboardPanel } from './dashboard/DashboardPanel';
+import { BeneficiaryListPanel } from './beneficiary/BeneficiaryListPanel';
+import { BeneficiaryDetailPanel } from './beneficiary/BeneficiaryDetailPanel';
+import { MedicalDashboard } from './medical/MedicalDashboard';
+import { InventoryPanel } from './dashboard/InventoryPanel';
+import { ClothingManagementPanel } from './clothing/ClothingManagementPanel';
+import { DailyFollowUpPanel } from './dashboard/DailyFollowUpPanel';
+import { SocialActivitiesPanel } from './social/SocialActivitiesPanel';
+import { NewAdmissionForm } from './beneficiary/NewAdmissionForm';
 import { SocialDashboard } from './social/SocialDashboard';
 import { LeaveRequestFlow } from './social/LeaveRequestFlow';
 import { SocialResearchWizard } from './social/SocialResearchWizard';
@@ -41,19 +41,19 @@ import { QualityDashboard } from '../pages/QualityDashboard';
 import { ReportsDashboard } from './reports/ReportsDashboard';
 
 // Form Imports (kept for now, will be refactored into pages later)
-import { CaseStudyForm } from './CaseStudyForm';
-import { SocialResearchForm } from './SocialResearchForm';
-import { RehabilitationPlanForm } from './RehabilitationPlanForm';
-import { ClothingRequestForm } from './ClothingRequestForm';
-import { MedicalExaminationForm } from './MedicalExaminationForm';
-import { IndividualEducationalPlanForm } from './IndividualEducationalPlanForm';
-import { InjuryReportForm } from './InjuryReportForm';
-import { FamilyCaseStudyForm } from './FamilyCaseStudyForm';
-import { TrainingReferralForm } from './TrainingReferralForm';
-import { TrainingPlanFollowUpForm } from './TrainingPlanFollowUpForm';
-import { VocationalEvaluationForm } from './VocationalEvaluationForm';
-import { FamilyGuidanceReferralForm } from './FamilyGuidanceReferralForm';
-import { PostCareFollowUpForm } from './PostCareFollowUpForm';
+import { CaseStudyForm } from './social/CaseStudyForm';
+import { SocialResearchForm } from './social/SocialResearchForm';
+import { RehabilitationPlanForm } from './beneficiary/RehabilitationPlanForm';
+import { ClothingRequestForm } from './clothing/ClothingRequestForm';
+import { MedicalExaminationForm } from './medical/MedicalExaminationForm';
+import { IndividualEducationalPlanForm } from './beneficiary/IndividualEducationalPlanForm';
+import { InjuryReportForm } from './medical/InjuryReportForm';
+import { FamilyCaseStudyForm } from './social/FamilyCaseStudyForm';
+import { TrainingReferralForm } from './beneficiary/TrainingReferralForm';
+import { TrainingPlanFollowUpForm } from './beneficiary/TrainingPlanFollowUpForm';
+import { VocationalEvaluationForm } from './beneficiary/VocationalEvaluationForm';
+import { FamilyGuidanceReferralForm } from './social/FamilyGuidanceReferralForm';
+import { PostCareFollowUpForm } from './beneficiary/PostCareFollowUpForm';
 
 export const App = () => {
     // -------------------------------------------------------------------------

@@ -7,36 +7,39 @@ export default {
     theme: {
         extend: {
             colors: {
-                // HRSD Brand Colors
                 primary: {
-                    DEFAULT: '#FF9E1B', // Pantone 1375 C
-                    light: '#FFB75E',
-                    dark: '#D48200',
+                    DEFAULT: '#006241', // HRSD Green
+                    50: '#e6efec',
+                    100: '#cce0d9',
+                    200: '#99c2b3',
+                    300: '#66a38c',
+                    400: '#338566',
+                    500: '#006241',
+                    600: '#004f34',
+                    700: '#003b27',
+                    800: '#00271a',
+                    900: '#00140d',
                 },
                 secondary: {
-                    DEFAULT: '#FFB81C', // Pantone 1235 C
+                    DEFAULT: '#D4AF37', // HRSD Gold
+                    50: '#fbf7eb',
+                    100: '#f7efd6',
+                    200: '#efdfad',
+                    300: '#e7cf85',
+                    400: '#dfbf5c',
+                    500: '#D4AF37',
+                    600: '#aa8c2c',
+                    700: '#806921',
+                    800: '#554616',
+                    900: '#2a230b',
                 },
-                accent: {
-                    DEFAULT: '#006C70', // Teal
-                },
-                // Map 'blue' to primary to fix existing components
-                blue: {
-                    50: '#FFF8E1', // Lightest Gold
-                    100: '#FFE0B2',
-                    200: '#FFCC80',
-                    300: '#FFB74D',
-                    400: '#FFA726',
-                    500: '#FF9E1B', // Primary
-                    600: '#FB8C00',
-                    700: '#F57C00',
-                    800: '#EF6C00',
-                    900: '#E65100',
-                }
+                accent: '#c5a47e',
+                surface: '#F9FAFB',
             },
             fontFamily: {
-                sans: ['Cairo', 'Tajawal', 'IBM Plex Sans Arabic', 'sans-serif'],
-            }
+                sans: ['Tajawal', 'IBM Plex Sans Arabic', 'sans-serif'],
+            },
         },
     },
     plugins: [],
-}
+};

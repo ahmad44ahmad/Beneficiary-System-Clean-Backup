@@ -47,12 +47,62 @@ export interface ClothingRequestItem {
     quantity: number;
 }
 
+export type ClothingSeason = 'summer' | 'winter' | 'eid' | 'other';
+
 export interface ClothingRequest {
     id: string;
     beneficiaryId: string;
     requestDate: string;
+    type: ClothingSeason;
     items: ClothingRequestItem[];
     status: 'pending' | 'approved' | 'rejected' | 'dispensed';
+    notes?: string;
+    receiverName?: string;
+    signature?: string;
+}
+
+export interface ClothingItemEntry {
+    itemId: string;
+    quantity: number;
+    notes?: string;
+}
+
+export interface WardrobeInventory {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    year: number;
+    season: ClothingSeason;
+    items: ClothingItemEntry[];
+    notes?: string;
+}
+
+export interface ClothingNeeds {
+    id: string;
+    year: number;
+    season: ClothingSeason;
+    gender: 'male' | 'female';
+    items: ClothingItemEntry[];
+    status: 'draft' | 'approved';
+    notes?: string;
+}
+
+export interface ClothingDispensation {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    season: ClothingSeason;
+    items: ClothingItemEntry[];
+    receiverName: string;
+    notes?: string;
+}
+
+export interface ClothingProcurement {
+    id: string;
+    date: string;
+    invoiceNumber?: string;
+    items: ClothingItemEntry[];
+    totalAmount: number;
     notes?: string;
 }
 
@@ -347,36 +397,74 @@ export interface IncidentReport {
 }
 
 // Case Study & Social Research (Legacy - to be refactored)
+// Case Study & Social Research (Legacy - to be refactored)
 export interface CaseStudy {
     id: string;
     beneficiaryId: string;
-    date: string;
-    researcherName: string;
-    informantName: string;
-    informantRelation: string;
-    familyStructure: string;
-    economicSituation: string;
-    housingCondition: string;
-    socialRelations: string;
-    problems: string;
-    recommendations: string;
+    beneficiaryName?: string;
+    beneficiaryAge?: number;
+    medicalDiagnosis?: string;
+    date?: string; // Legacy
+    researcherName?: string; // Legacy
+
+    // New fields from CaseStudyForm
+    interviewDate?: string;
+    interviewLocation?: string;
+    interviewDuration?: string;
+    interviewParties?: string;
+    interviewResults?: string;
+    housingType?: string;
+    homeOwnership?: string;
+    professionalStatus?: string;
+    reasonForNotWorking?: string;
+    familyIncomeDetails?: string;
+    socialResearchSummary?: string;
+
+    informantName?: string;
+    informantRelation?: string;
+    familyStructure?: string;
+    economicSituation?: string;
+    housingCondition?: string;
+    socialRelations?: string;
+    problems?: string;
+    recommendations?: string;
 }
 
 export interface SocialResearch {
     id: string;
     beneficiaryId: string;
-    date: string;
+    beneficiaryName?: string;
+    date?: string; // Legacy
     researcherName: string;
-    reasonForResearch: string;
-    socialHistory: string;
-    familyHistory: string;
-    economicHistory: string;
-    medicalHistory: string;
-    psychologicalHistory: string;
-    educationalHistory: string;
-    currentSituation: string;
-    researcherOpinion: string;
-    recommendations: string;
+
+    // New fields from SocialResearchForm
+    researchDate?: string;
+    guardianName?: string;
+    guardianGender?: string;
+    guardianAge?: string;
+    guardianRelation?: string;
+    guardianEducation?: string;
+    guardianProfession?: string;
+    isFatherAlive?: string;
+    isMotherAlive?: string;
+    guardianMobile?: string;
+    familyComposition?: string;
+    disabilityCause?: string;
+    hasChronicIllness?: string;
+    chronicIllnessDetails?: string;
+    familyAdaptation?: string;
+    socialResearchSummary?: string;
+
+    reasonForResearch?: string;
+    socialHistory?: string;
+    familyHistory?: string;
+    economicHistory?: string;
+    medicalHistory?: string;
+    psychologicalHistory?: string;
+    educationalHistory?: string;
+    currentSituation?: string;
+    researcherOpinion?: string;
+    recommendations?: string;
 }
 
 export interface VisitLog {
@@ -411,16 +499,20 @@ export interface MedicalExamination {
 export interface FamilyCaseStudy {
     id: string;
     beneficiaryId: string;
-    date: string;
-    researcherName: string;
-    familyComposition: string;
-    economicStatus: string;
-    housingStatus: string;
-    socialStatus: string;
-    healthStatus: string;
-    problems: string;
-    goals: string;
-    plan: string;
+    date?: string; // Legacy
+    studyDate?: string; // New
+    researcherName?: string; // Legacy
+    socialWorkerName?: string; // New
+
+    familyComposition?: string;
+    economicStatus?: string;
+    housingStatus?: string;
+    socialStatus?: string;
+    healthStatus?: string;
+    problems?: string;
+    goals?: string;
+    plan?: string;
+    recommendations?: string;
 }
 
 export interface SocialActivityPlan {

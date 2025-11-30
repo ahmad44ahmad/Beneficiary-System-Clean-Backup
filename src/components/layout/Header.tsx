@@ -14,23 +14,23 @@ export const Header = () => {
                     <input
                         type="text"
                         placeholder="بحث عام..."
-                        className="w-full h-9 pr-9 pl-4 rounded-md border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full h-9 pr-9 pl-4 rounded-md border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                 </div>
             </div>
 
             <div className="flex items-center gap-4">
                 <Button variant="ghost" size="sm" className="relative">
-                    <Bell className="w-5 h-5 text-gray-600" />
+                    <Bell className="w-5 h-5 text-gray-600 hover:text-primary transition-colors" />
                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </Button>
 
                 <div className="flex items-center gap-3 pl-2 border-l border-gray-200">
                     <div className="text-left hidden md:block">
                         <p className="text-sm font-semibold text-gray-900">{currentUser?.name}</p>
-                        <p className="text-xs text-gray-500 capitalize">{currentUser?.role}</p>
+                        <p className="text-xs text-primary-600 capitalize font-medium">{currentUser?.role}</p>
                     </div>
-                    <div className="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                    <div className="w-9 h-9 bg-primary-50 rounded-full flex items-center justify-center text-primary border border-primary-100">
                         <User className="w-5 h-5" />
                     </div>
                 </div>
