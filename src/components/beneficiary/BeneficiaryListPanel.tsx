@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Beneficiary } from '../../types';
 import { SearchBar } from '../common/SearchBar';
 import { BeneficiaryListItem } from './BeneficiaryListItem';
+import { BeneficiaryMasterView } from '../profile/BeneficiaryMasterView';
 
 interface BeneficiaryListPanelProps {
     beneficiaries: Beneficiary[];
@@ -12,6 +13,8 @@ interface BeneficiaryListPanelProps {
 }
 
 export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ beneficiaries, selectedBeneficiary, onSelect, searchTerm, onSearchChange }) => {
+    const [viewingBeneficiaryId, setViewingBeneficiaryId] = React.useState<string | null>(null);
+
     const filteredBeneficiaries = beneficiaries.filter(
         (b) =>
             b.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -46,9 +49,18 @@ export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ bene
                         beneficiary={beneficiary}
                         isSelected={selectedBeneficiary?.id === beneficiary.id && selectedBeneficiary?.fullName === beneficiary.fullName}
                         onSelect={onSelect}
+                        onQuickView={(id) => setViewingBeneficiaryId(id)}
                     />
                 ))}
             </ul>
+
+            {viewingBeneficiaryId && (
+                <BeneficiaryMasterView
+                    beneficiaryId={viewingBeneficiaryId}
+                    isOpen={!!viewingBeneficiaryId}
+                    onClose={() => setViewingBeneficiaryId(null)}
+                />
+            )}
         </aside>
     );
 };
