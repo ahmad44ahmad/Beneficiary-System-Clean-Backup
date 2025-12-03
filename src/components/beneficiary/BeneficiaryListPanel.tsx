@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Beneficiary } from '../../types';
 import { SearchBar } from '../common/SearchBar';
 import { BeneficiaryListItem } from './BeneficiaryListItem';
-import { BeneficiaryMasterView } from '../profile/BeneficiaryMasterView';
 
 interface BeneficiaryListPanelProps {
     beneficiaries: Beneficiary[];
@@ -12,14 +11,30 @@ interface BeneficiaryListPanelProps {
     onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ beneficiaries, selectedBeneficiary, onSelect, searchTerm, onSearchChange }) => {
-    const [viewingBeneficiaryId, setViewingBeneficiaryId] = React.useState<string | null>(null);
+const ITEMS_PER_PAGE = 20;
 
-    const filteredBeneficiaries = beneficiaries.filter(
-        (b) =>
-            b.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            b.id.includes(searchTerm)
-    );
+export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ beneficiaries, selectedBeneficiary, onSelect, searchTerm, onSearchChange }) => {
+    const [currentPage, setCurrentPage] = React.useState(1);
+
+    const filteredBeneficiaries = React.useMemo(() => {
+        return beneficiaries.filter(
+            (b) =>
+                b.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                b.id.includes(searchTerm)
+        );
+    }, [beneficiaries, searchTerm]);
+
+    // Reset to page 1 when search changes
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm]);
+
+    const paginatedBeneficiaries = React.useMemo(() => {
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        return filteredBeneficiaries.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    }, [filteredBeneficiaries, currentPage]);
+
+    const totalPages = Math.ceil(filteredBeneficiaries.length / ITEMS_PER_PAGE);
 
     const handleExport = () => {
         const csvContent = "data:text/csv;charset=utf-8,\uFEFF" +
@@ -35,31 +50,58 @@ export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ bene
     };
 
     return (
-        <aside className="beneficiary-list-panel">
-            <div className="panel-header-actions" style={{ padding: '1rem', display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
+        <aside className="beneficiary-list-panel flex flex-col h-full">
+            <div className="panel-header-actions p-4 flex flex-col gap-2 shrink-0 bg-white border-b z-10">
                 <SearchBar searchTerm={searchTerm} onSearchChange={onSearchChange} />
-                <button onClick={handleExport} className="btn-secondary" style={{ width: '100%', fontSize: '0.9rem' }}>
+                <button onClick={handleExport} className="btn-secondary w-full text-sm py-2 rounded bg-gray-100 hover:bg-gray-200 transition-colors">
                     تصدير القائمة (Excel)
                 </button>
+                <div className="text-xs text-gray-500 text-center">
+                    Showing {paginatedBeneficiaries.length} of {filteredBeneficiaries.length} beneficiaries
+                </div>
             </div>
-            <ul className="beneficiary-list" role="listbox">
-                {filteredBeneficiaries.map((beneficiary) => (
-                    <BeneficiaryListItem
-                        key={beneficiary.id + beneficiary.fullName}
-                        beneficiary={beneficiary}
-                        isSelected={selectedBeneficiary?.id === beneficiary.id && selectedBeneficiary?.fullName === beneficiary.fullName}
-                        onSelect={onSelect}
-                        onQuickView={(id) => setViewingBeneficiaryId(id)}
-                    />
-                ))}
-            </ul>
 
-            {viewingBeneficiaryId && (
-                <BeneficiaryMasterView
-                    beneficiaryId={viewingBeneficiaryId}
-                    isOpen={!!viewingBeneficiaryId}
-                    onClose={() => setViewingBeneficiaryId(null)}
-                />
+            <div className="flex-1 overflow-y-auto">
+                <ul className="beneficiary-list" role="listbox">
+                    {paginatedBeneficiaries.map((beneficiary) => (
+                        <BeneficiaryListItem
+                            key={beneficiary.id}
+                            beneficiary={beneficiary}
+                            isSelected={selectedBeneficiary?.id === beneficiary.id}
+                            onSelect={onSelect}
+                            onQuickView={() => onSelect(beneficiary)}
+                        />
+                    ))}
+                </ul>
+
+                {filteredBeneficiaries.length === 0 && (
+                    <div className="p-8 text-center text-gray-500">
+                        No beneficiaries found matching "{searchTerm}"
+                    </div>
+                )}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+                <div className="p-2 border-t bg-gray-50 flex justify-between items-center shrink-0">
+                    <button
+                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                        className="px-3 py-1 text-sm bg-white border rounded disabled:opacity-50"
+                    >
+                        Previous
+                    </button>
+                    <span className="text-sm text-gray-600">
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                        className="px-3 py-1 text-sm bg-white border rounded disabled:opacity-50"
+                    >
+                        Next
+                    </button>
+                </div>
             )}
         </aside>
     );

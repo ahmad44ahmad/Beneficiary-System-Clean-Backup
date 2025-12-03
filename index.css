@@ -52,9 +52,13 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: 16px;
-    /* Increased base font size */
+    /* Base font size */
     font-weight: 500;
-    /* Increased base font weight */
+}
+
+/* Utility for backdrop blur */
+.backdrop-blur-sm {
+    backdrop-filter: blur(4px);
 }
 
 #root {
@@ -237,8 +241,8 @@ body {
     background-color: var(--white-color);
     border-radius: 8px;
     box-shadow: 0 1px 3px var(--shadow-color);
-    margin-bottom: 1rem;
-    /* Reduced margin */
+    margin-bottom: 1.5rem;
+    /* Increased margin */
     overflow: hidden;
 }
 
@@ -246,8 +250,8 @@ body {
     background-color: var(--accent-teal);
     /* Teal Header for Formalism - HRSD Brand */
     color: var(--white-color);
-    padding: 0.5rem 1rem;
-    /* Reduced padding */
+    padding: 1rem 1.5rem;
+    /* Increased padding */
     font-size: 1.1rem;
     /* Adjusted font size */
     font-weight: 700;
@@ -259,8 +263,8 @@ body {
 }
 
 .card-content {
-    padding: 1rem;
-    /* Reduced padding */
+    padding: 1.5rem;
+    /* Increased padding */
 }
 
 .detail-grid {
@@ -334,6 +338,8 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    /* Added backdrop blur */
     display: flex;
     align-items: center;
     justify-content: center;

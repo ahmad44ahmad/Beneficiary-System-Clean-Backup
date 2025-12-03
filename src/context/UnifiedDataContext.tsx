@@ -5,7 +5,8 @@ import {
     SocialResearch,
     VisitLog,
     IncidentReport,
-    IndividualEducationalPlan
+    IndividualEducationalPlan,
+    InventoryItem
 } from '../types';
 import { MedicalExamination } from '../types/medical';
 import { RehabPlan } from '../types/rehab';
@@ -14,6 +15,7 @@ import { RehabPlan } from '../types/rehab';
 import { beneficiaries as initialBeneficiaries } from '../data/beneficiaries';
 import { visitLogs as initialVisits } from '../data/visits';
 import { rehabPlans as initialRehabPlans } from '../data/rehabPlans';
+import { inventoryItems as initialInventory } from '../data/inventory';
 
 interface UnifiedDataContextType {
     beneficiaries: Beneficiary[];
@@ -21,6 +23,7 @@ interface UnifiedDataContextType {
     socialResearchForms: SocialResearch[];
     rehabilitationPlans: RehabPlan[];
     visitLogs: VisitLog[];
+    inventory: InventoryItem[]; // Added inventory
     incidents: IncidentReport[];
     medicalExaminations: MedicalExamination[];
     educationalPlans: IndividualEducationalPlan[];
@@ -38,6 +41,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>(initialBeneficiaries);
     const [visitLogs, setVisitLogs] = useState<VisitLog[]>(initialVisits);
     const [rehabilitationPlans, setRehabilitationPlans] = useState<RehabPlan[]>(initialRehabPlans);
+    const [inventory, setInventory] = useState<InventoryItem[]>(initialInventory);
 
     // Empty states for now (or load from future static files)
     const [medicalProfiles, setMedicalProfiles] = useState<MedicalProfile[]>([]);
@@ -60,6 +64,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             socialResearchForms,
             rehabilitationPlans,
             visitLogs,
+            inventory,
             incidents,
             medicalExaminations,
             educationalPlans,
