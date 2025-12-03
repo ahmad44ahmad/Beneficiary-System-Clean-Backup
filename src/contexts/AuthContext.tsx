@@ -23,38 +23,40 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
+    // MOCK USER FOR DEVELOPMENT - BYPASS LOGIN
+    const mockUser = {
+        uid: 'dev-user-123',
+        email: 'dev@example.com',
+        emailVerified: true,
+        isAnonymous: false,
+        metadata: {},
+        providerData: [],
+        refreshToken: '',
+        tenantId: null,
+        delete: async () => { },
+        getIdToken: async () => 'mock-token',
+        getIdTokenResult: async () => ({
+            token: 'mock-token',
+            signInProvider: 'password',
+            claims: {},
+            authTime: Date.now().toString(),
+            issuedAtTime: Date.now().toString(),
+            expirationTime: (Date.now() + 3600000).toString(),
+        }),
+        reload: async () => { },
+        toJSON: () => ({}),
+        displayName: 'Dev User',
+        phoneNumber: null,
+        photoURL: null,
+        providerId: 'firebase',
+    } as unknown as User;
+
+    const [user, setUser] = useState<User | null>(mockUser);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // MOCK USER FOR DEVELOPMENT - BYPASS LOGIN
-        const mockUser = {
-            uid: 'dev-user-123',
-            email: 'dev@example.com',
-            emailVerified: true,
-            isAnonymous: false,
-            metadata: {},
-            providerData: [],
-            refreshToken: '',
-            tenantId: null,
-            delete: async () => { },
-            getIdToken: async () => 'mock-token',
-            getIdTokenResult: async () => ({
-                token: 'mock-token',
-                signInProvider: 'password',
-                claims: {},
-                authTime: Date.now().toString(),
-                issuedAtTime: Date.now().toString(),
-                expirationTime: (Date.now() + 3600000).toString(),
-            }),
-            reload: async () => { },
-            toJSON: () => ({}),
-            displayName: 'Dev User',
-            phoneNumber: null,
-            photoURL: null,
-            providerId: 'firebase',
-        } as unknown as User;
-
+        // Keep the listener but we already initialized with mock user
+        // This ensures if firebase actually connects, it might update, but for now we force mock
         setUser(mockUser);
         setLoading(false);
     }, []);

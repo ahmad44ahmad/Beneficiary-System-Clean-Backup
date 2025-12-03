@@ -4,15 +4,7 @@ import { MainLayout } from './layout/MainLayout';
 import { UserProvider } from '../context/UserContext';
 import { ToastProvider } from '../context/ToastContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
-import { AuthProvider, useAuth } from '../contexts/AuthContext';
-import { Login } from './auth/Login';
-
-const RequireAuth = ({ children }: { children: JSX.Element }) => {
-    const { user, loading } = useAuth();
-    if (loading) return <div>Loading...</div>;
-    if (!user) return <Navigate to="/login" replace />;
-    return children;
-};
+import { AuthProvider } from '../contexts/AuthContext';
 
 // Data Imports
 import { beneficiaries } from '../data/beneficiaries';
@@ -173,12 +165,7 @@ export const App = () => {
             <UserProvider>
                 <ToastProvider>
                     <Routes>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/" element={
-                            <RequireAuth>
-                                <MainLayout />
-                            </RequireAuth>
-                        }>
+                        <Route path="/" element={<MainLayout />}>
                             <Route index element={<Navigate to="/dashboard" replace />} />
 
                             <Route path="dashboard" element={<Dashboard />} />

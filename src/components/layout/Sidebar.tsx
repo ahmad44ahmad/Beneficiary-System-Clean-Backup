@@ -26,7 +26,7 @@ export const Sidebar = () => {
     ];
 
     return (
-        <aside className="w-64 text-white flex flex-col h-screen fixed right-0 top-0 border-l z-50 shadow-xl" style={{ backgroundColor: '#14415A', borderColor: '#148287' }}>
+        <aside className="w-64 text-white flex flex-col h-screen border-l z-50 shadow-xl flex-shrink-0" style={{ backgroundColor: '#14415A', borderColor: '#148287' }}>
             <div className="p-6 border-b flex items-center gap-3" style={{ borderColor: '#148287', backgroundColor: '#0f3447' }}>
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm p-1">
                     <svg viewBox="0 0 100 100" className="w-full h-full">

@@ -7,7 +7,7 @@ export const Header = () => {
     const { currentUser } = useApp();
 
     return (
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 fixed top-0 right-64 left-0 z-10 app-header" style={{ background: 'linear-gradient(135deg, #148287, #F5961E)', borderBottom: '4px solid #FAB414' }}>
+        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-10 app-header" style={{ background: 'linear-gradient(135deg, #148287, #F5961E)', borderBottom: '4px solid #FAB414' }}>
             <div className="flex items-center gap-4 w-96">
                 <div className="relative w-full">
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
