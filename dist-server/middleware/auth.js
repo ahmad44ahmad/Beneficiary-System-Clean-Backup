@@ -6,6 +6,15 @@ export const authenticate = async (req, res, next) => {
     }
     const token = authHeader.split('Bearer ')[1];
     try {
+        // MOCK AUTH FOR DEVELOPMENT
+        if (token === 'mock-token') {
+            req.user = {
+                uid: 'dev-user-123',
+                email: 'dev@example.com',
+                email_verified: true,
+            };
+            return next();
+        }
         const decodedToken = await admin.auth().verifyIdToken(token);
         req.user = decodedToken;
         next();

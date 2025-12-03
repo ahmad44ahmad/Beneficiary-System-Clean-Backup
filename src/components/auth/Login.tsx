@@ -7,7 +7,7 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { signIn } = useAuth();
+    const { signIn, signUp, signInWithGoogle } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -19,6 +19,34 @@ export const Login = () => {
             navigate('/dashboard');
         } catch (err) {
             setError('Failed to sign in. Please check your credentials.');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSignUp = async () => {
+        try {
+            setError('');
+            setLoading(true);
+            await signUp(email, password);
+            navigate('/dashboard');
+        } catch (err: any) {
+            setError('Failed to create account. ' + err.message);
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleSignIn = async () => {
+        try {
+            setError('');
+            setLoading(true);
+            await signInWithGoogle();
+            navigate('/dashboard');
+        } catch (err: any) {
+            setError('Failed to sign in with Google. ' + err.message);
             console.error(err);
         } finally {
             setLoading(false);
@@ -57,13 +85,29 @@ export const Login = () => {
                             required
                         />
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col items-center justify-between">
                         <button
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
                             type="submit"
                             disabled={loading}
                         >
                             {loading ? 'جاري التحميل...' : 'دخول'}
+                        </button>
+                        <button
+                            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
+                            type="button"
+                            onClick={handleSignUp}
+                            disabled={loading}
+                        >
+                            تسجيل جديد
+                        </button>
+                        <button
+                            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                            type="button"
+                            onClick={handleGoogleSignIn}
+                            disabled={loading}
+                        >
+                            تسجيل الدخول عبر Google
                         </button>
                     </div>
                 </form>
