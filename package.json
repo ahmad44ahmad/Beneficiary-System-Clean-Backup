@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ahmad44ahmad.github.io/updated_Beneficiary-Management-System/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
