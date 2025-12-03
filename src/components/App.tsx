@@ -27,6 +27,7 @@ import { Dashboard } from '../pages/Dashboard';
 import { DashboardPanel } from './dashboard/DashboardPanel';
 import { BeneficiaryListPanel } from './beneficiary/BeneficiaryListPanel';
 import { BeneficiaryDetailPanel } from './beneficiary/BeneficiaryDetailPanel';
+import { BeneficiaryMasterView } from './profile/BeneficiaryMasterView';
 import { MedicalDashboard } from './medical/MedicalDashboard';
 import { InventoryPanel } from './dashboard/InventoryPanel';
 import { ClothingManagementPanel } from './clothing/ClothingManagementPanel';
@@ -63,6 +64,7 @@ export const App = () => {
     // -------------------------------------------------------------------------
     const [selectedBeneficiary, setSelectedBeneficiary] = useState<Beneficiary | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isMasterViewOpen, setIsMasterViewOpen] = useState(false);
 
     // Domain Data State
     const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -130,7 +132,10 @@ export const App = () => {
     // -------------------------------------------------------------------------
     // Handlers
     // -------------------------------------------------------------------------
-    const handleSelectBeneficiary = (beneficiary: Beneficiary) => setSelectedBeneficiary(beneficiary);
+    const handleSelectBeneficiary = (beneficiary: Beneficiary) => {
+        setSelectedBeneficiary(beneficiary);
+        setIsMasterViewOpen(true);
+    };
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value);
 
     // Form Handlers
@@ -317,6 +322,15 @@ export const App = () => {
                         )}
                         {isCreatingPostCareFollowUp && selectedBeneficiary && (
                             <PostCareFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSavePostCareFollowUp} onCancel={() => setIsCreatingPostCareFollowUp(false)} />
+                        )}
+
+                        {/* Master View Modal */}
+                        {selectedBeneficiary && (
+                            <BeneficiaryMasterView
+                                beneficiaryId={selectedBeneficiary.id}
+                                isOpen={isMasterViewOpen}
+                                onClose={() => setIsMasterViewOpen(false)}
+                            />
                         )}
                     </ToastProvider>
                 </UserProvider>
