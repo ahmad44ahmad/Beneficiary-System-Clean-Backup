@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { mockAssets, mockTickets } from '../data/assets';
 import { AssetRegistry } from '../components/assets/AssetRegistry';
-import { InventoryPanel } from '../components/InventoryPanel'; // Reusing existing component
+import { InventoryPanel } from '../components/dashboard/InventoryPanel'; // Reusing existing component
 import { inventoryItems } from '../data/inventory'; // Existing data
 import { Card } from '../components/ui/Card';
 import {

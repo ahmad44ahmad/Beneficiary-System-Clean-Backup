@@ -5,7 +5,7 @@ import { Shield } from 'lucide-react';
 export const DebugRoleSwitcher: React.FC = () => {
     const { currentUser, switchRole } = useUser();
 
-    if (process.env.NODE_ENV === 'production') return null;
+    if (!import.meta.env.DEV) return null;
 
     return (
         <div className="fixed bottom-4 right-4 z-50 bg-gray-900 text-white p-3 rounded-lg shadow-xl opacity-90 hover:opacity-100 transition-opacity">
@@ -19,8 +19,8 @@ export const DebugRoleSwitcher: React.FC = () => {
                         key={role}
                         onClick={() => switchRole(role)}
                         className={`px-2 py-1 text-xs rounded border ${currentUser.role === role
-                                ? 'bg-blue-600 border-blue-500 text-white'
-                                : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'
+                            ? 'bg-blue-600 border-blue-500 text-white'
+                            : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'
                             }`}
                         title={`Switch to ${role}`}
                     >

@@ -4,6 +4,15 @@ import { MainLayout } from './layout/MainLayout';
 import { UserProvider } from '../context/UserContext';
 import { ToastProvider } from '../context/ToastContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
+import { AuthProvider, useAuth } from '../contexts/AuthContext';
+import { Login } from './auth/Login';
+
+const RequireAuth = ({ children }: { children: JSX.Element }) => {
+    const { user, loading } = useAuth();
+    if (loading) return <div>Loading...</div>;
+    if (!user) return <Navigate to="/login" replace />;
+    return children;
+};
 
 // Data Imports
 import { beneficiaries } from '../data/beneficiaries';
@@ -160,161 +169,168 @@ export const App = () => {
     // Render
     // -------------------------------------------------------------------------
     return (
-        <UserProvider>
-            <ToastProvider>
-                <Routes>
-                    <Route path="/" element={<MainLayout />}>
-                        <Route index element={<Navigate to="/dashboard" replace />} />
+        <AuthProvider>
+            <UserProvider>
+                <ToastProvider>
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/" element={
+                            <RequireAuth>
+                                <MainLayout />
+                            </RequireAuth>
+                        }>
+                            <Route index element={<Navigate to="/dashboard" replace />} />
 
-                        <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="dashboard" element={<Dashboard />} />
 
-                        <Route path="beneficiaries" element={
-                            <div className="flex gap-4 h-[calc(100vh-8rem)]">
-                                <BeneficiaryListPanel
-                                    beneficiaries={beneficiaries}
-                                    selectedBeneficiary={selectedBeneficiary}
-                                    onSelect={handleSelectBeneficiary}
-                                    searchTerm={searchTerm}
-                                    onSearchChange={handleSearchChange}
-                                />
-                                <div className="flex-1 overflow-y-auto">
-                                    <BeneficiaryDetailPanel
-                                        beneficiary={selectedBeneficiary}
-                                        caseStudies={caseStudies}
-                                        socialResearchForms={socialResearchForms}
-                                        rehabilitationPlans={rehabilitationPlans}
-                                        visitLogs={visitLogs}
-                                        medicalExaminations={medicalExaminations}
-                                        educationalPlans={educationalPlans}
-                                        injuryReports={injuryReports}
-                                        familyCaseStudies={familyCaseStudies}
-                                        trainingReferrals={trainingReferrals}
-                                        trainingPlanFollowUps={trainingPlanFollowUps}
-                                        vocationalEvaluations={vocationalEvaluations}
-                                        familyGuidanceReferrals={familyGuidanceReferrals}
-                                        postCareFollowUps={postCareFollowUps}
-                                        // Handlers
-                                        onStartCreateCaseStudy={() => setIsCreatingCaseStudy(true)}
-                                        onStartCreateSocialResearch={() => setIsCreatingSocialResearch(true)}
-                                        onStartCreateRehabPlan={() => setIsCreatingRehabPlan(true)}
-                                        onAddVisitLog={handleAddVisitLog}
-                                        onStartClothingRequest={() => setIsCreatingClothingRequest(true)}
-                                        onStartCreateMedicalExam={() => setIsCreatingMedicalExam(true)}
-                                        onStartCreateEducationalPlan={() => setIsCreatingEducationalPlan(true)}
-                                        onStartCreateInjuryReport={() => setIsCreatingInjuryReport(true)}
-                                        onStartCreateFamilyCaseStudy={() => setIsCreatingFamilyCaseStudy(true)}
-                                        onStartCreateTrainingReferral={() => setIsCreatingTrainingReferral(true)}
-                                        onStartCreateTrainingFollowUp={() => setIsCreatingTrainingFollowUp(true)}
-                                        onStartCreateVocationalEval={() => setIsCreatingVocationalEval(true)}
-                                        onStartCreateFamilyGuidanceReferral={() => setIsCreatingFamilyGuidanceReferral(true)}
-                                        onStartCreatePostCareFollowUp={() => setIsCreatingPostCareFollowUp(true)}
+                            <Route path="beneficiaries" element={
+                                <div className="flex gap-4 h-[calc(100vh-8rem)]">
+                                    <BeneficiaryListPanel
+                                        beneficiaries={beneficiaries}
+                                        selectedBeneficiary={selectedBeneficiary}
+                                        onSelect={handleSelectBeneficiary}
+                                        searchTerm={searchTerm}
+                                        onSearchChange={handleSearchChange}
                                     />
+                                    <div className="flex-1 overflow-y-auto">
+                                        <BeneficiaryDetailPanel
+                                            beneficiary={selectedBeneficiary}
+                                            caseStudies={caseStudies}
+                                            socialResearchForms={socialResearchForms}
+                                            rehabilitationPlans={rehabilitationPlans}
+                                            visitLogs={visitLogs}
+                                            medicalExaminations={medicalExaminations}
+                                            educationalPlans={educationalPlans}
+                                            injuryReports={injuryReports}
+                                            familyCaseStudies={familyCaseStudies}
+                                            trainingReferrals={trainingReferrals}
+                                            trainingPlanFollowUps={trainingPlanFollowUps}
+                                            vocationalEvaluations={vocationalEvaluations}
+                                            familyGuidanceReferrals={familyGuidanceReferrals}
+                                            postCareFollowUps={postCareFollowUps}
+                                            // Handlers
+                                            onStartCreateCaseStudy={() => setIsCreatingCaseStudy(true)}
+                                            onStartCreateSocialResearch={() => setIsCreatingSocialResearch(true)}
+                                            onStartCreateRehabPlan={() => setIsCreatingRehabPlan(true)}
+                                            onAddVisitLog={handleAddVisitLog}
+                                            onStartClothingRequest={() => setIsCreatingClothingRequest(true)}
+                                            onStartCreateMedicalExam={() => setIsCreatingMedicalExam(true)}
+                                            onStartCreateEducationalPlan={() => setIsCreatingEducationalPlan(true)}
+                                            onStartCreateInjuryReport={() => setIsCreatingInjuryReport(true)}
+                                            onStartCreateFamilyCaseStudy={() => setIsCreatingFamilyCaseStudy(true)}
+                                            onStartCreateTrainingReferral={() => setIsCreatingTrainingReferral(true)}
+                                            onStartCreateTrainingFollowUp={() => setIsCreatingTrainingFollowUp(true)}
+                                            onStartCreateVocationalEval={() => setIsCreatingVocationalEval(true)}
+                                            onStartCreateFamilyGuidanceReferral={() => setIsCreatingFamilyGuidanceReferral(true)}
+                                            onStartCreatePostCareFollowUp={() => setIsCreatingPostCareFollowUp(true)}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        } />
+                            } />
 
-                        <Route path="medical" element={
-                            <div className="medical-view">
-                                <div className="actions mb-4 flex justify-end">
-                                    <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors" onClick={() => setIsCreatingMedicalProfile(true)}>
-                                        + تسجيل دخول طبي جديد (Admission)
-                                    </button>
+                            <Route path="medical" element={
+                                <div className="medical-view">
+                                    <div className="actions mb-4 flex justify-end">
+                                        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors" onClick={() => setIsCreatingMedicalProfile(true)}>
+                                            + تسجيل دخول طبي جديد (Admission)
+                                        </button>
+                                    </div>
+                                    <MedicalDashboard vaccinations={vaccinations} isolationStats={isolationStats} />
                                 </div>
-                                <MedicalDashboard vaccinations={vaccinations} isolationStats={isolationStats} />
-                            </div>
-                        } />
+                            } />
 
-                        <Route path="social" element={<SocialDashboard />} />
-                        <Route path="social/leaves" element={<LeaveRequestFlow />} />
-                        <Route path="social/research/new" element={<SocialResearchWizard />} />
+                            <Route path="social" element={<SocialDashboard />} />
+                            <Route path="social/leaves" element={<LeaveRequestFlow />} />
+                            <Route path="social/research/new" element={<SocialResearchWizard />} />
 
-                        <Route path="rehab/plan/new" element={
-                            <ProtectedRoute allowedRoles={['director', 'doctor', 'social_worker']}>
-                                <RehabPlanBuilder />
-                            </ProtectedRoute>
-                        } />
+                            <Route path="rehab/plan/new" element={
+                                <ProtectedRoute allowedRoles={['director', 'doctor', 'social_worker']}>
+                                    <RehabPlanBuilder />
+                                </ProtectedRoute>
+                            } />
 
-                        <Route path="reports/strategic" element={
-                            <ProtectedRoute allowedRoles={['director', 'admin']}>
-                                <StrategicDashboard />
-                            </ProtectedRoute>
-                        } />
+                            <Route path="reports/strategic" element={
+                                <ProtectedRoute allowedRoles={['director', 'admin']}>
+                                    <StrategicDashboard />
+                                </ProtectedRoute>
+                            } />
 
-                        <Route path="inventory" element={<InventoryPanel inventory={inventory} />} />
+                            <Route path="inventory" element={<InventoryPanel inventory={inventory} />} />
 
-                        <Route path="clothing" element={<ClothingManagementPanel />} />
+                            <Route path="clothing" element={<ClothingManagementPanel />} />
 
-                        <Route path="daily-follow-up" element={<DailyFollowUpPanel />} />
+                            <Route path="daily-follow-up" element={<DailyFollowUpPanel />} />
 
-                        <Route path="support" element={
-                            <ProtectedRoute allowedRoles={['director', 'admin', 'social_worker']}>
-                                <SupportDashboard />
-                            </ProtectedRoute>
-                        } />
+                            <Route path="support" element={
+                                <ProtectedRoute allowedRoles={['director', 'admin', 'social_worker']}>
+                                    <SupportDashboard />
+                                </ProtectedRoute>
+                            } />
 
-                        <Route path="quality" element={
-                            <ProtectedRoute allowedRoles={['director', 'admin']}>
-                                <QualityDashboard />
-                            </ProtectedRoute>
-                        } />
+                            <Route path="quality" element={
+                                <ProtectedRoute allowedRoles={['director', 'admin']}>
+                                    <QualityDashboard />
+                                </ProtectedRoute>
+                            } />
 
-                        <Route path="reports" element={
-                            <ProtectedRoute allowedRoles={['director', 'admin']}>
-                                <ReportsDashboard />
-                            </ProtectedRoute>
-                        } />
-                    </Route>
-                </Routes>
+                            <Route path="reports" element={
+                                <ProtectedRoute allowedRoles={['director', 'admin']}>
+                                    <ReportsDashboard />
+                                </ProtectedRoute>
+                            } />
+                        </Route>
+                    </Routes>
 
-                {/* Modals */}
-                {isCreatingMedicalProfile && (
-                    <NewAdmissionForm
-                        beneficiaries={beneficiaries}
-                        onSave={(profile) => { setMedicalProfiles([...medicalProfiles, profile]); setIsCreatingMedicalProfile(false); }}
-                        onCancel={() => setIsCreatingMedicalProfile(false)}
-                    />
-                )}
+                    {/* Modals */}
+                    {isCreatingMedicalProfile && (
+                        <NewAdmissionForm
+                            beneficiaries={beneficiaries}
+                            onSave={(profile) => { setMedicalProfiles([...medicalProfiles, profile]); setIsCreatingMedicalProfile(false); }}
+                            onCancel={() => setIsCreatingMedicalProfile(false)}
+                        />
+                    )}
 
-                {isCreatingCaseStudy && selectedBeneficiary && (
-                    <CaseStudyForm beneficiary={selectedBeneficiary} onSave={handleSaveCaseStudy} onCancel={() => setIsCreatingCaseStudy(false)} />
-                )}
-                {isCreatingSocialResearch && selectedBeneficiary && (
-                    <SocialResearchForm beneficiary={selectedBeneficiary} onSave={handleSaveSocialResearch} onCancel={() => setIsCreatingSocialResearch(false)} />
-                )}
-                {isCreatingRehabPlan && selectedBeneficiary && (
-                    <RehabilitationPlanForm beneficiary={selectedBeneficiary} onSave={handleSaveRehabPlan} onCancel={() => setIsCreatingRehabPlan(false)} />
-                )}
-                {isCreatingClothingRequest && selectedBeneficiary && (
-                    <ClothingRequestForm beneficiary={selectedBeneficiary} inventory={inventory} onSave={handleSaveClothingRequest} onCancel={() => setIsCreatingClothingRequest(false)} />
-                )}
-                {isCreatingMedicalExam && selectedBeneficiary && (
-                    <MedicalExaminationForm beneficiary={selectedBeneficiary} onSave={handleSaveMedicalExam} onCancel={() => setIsCreatingMedicalExam(false)} />
-                )}
-                {isCreatingEducationalPlan && selectedBeneficiary && (
-                    <IndividualEducationalPlanForm beneficiary={selectedBeneficiary} onSave={handleSaveEducationalPlan} onCancel={() => setIsCreatingEducationalPlan(false)} />
-                )}
-                {isCreatingInjuryReport && selectedBeneficiary && (
-                    <InjuryReportForm beneficiary={selectedBeneficiary} onSave={handleSaveInjuryReport} onCancel={() => setIsCreatingInjuryReport(false)} />
-                )}
-                {isCreatingFamilyCaseStudy && selectedBeneficiary && (
-                    <FamilyCaseStudyForm beneficiary={selectedBeneficiary} onSave={handleSaveFamilyCaseStudy} onCancel={() => setIsCreatingFamilyCaseStudy(false)} />
-                )}
-                {isCreatingTrainingReferral && selectedBeneficiary && (
-                    <TrainingReferralForm beneficiary={selectedBeneficiary} onSave={handleSaveTrainingReferral} onCancel={() => setIsCreatingTrainingReferral(false)} />
-                )}
-                {isCreatingTrainingFollowUp && selectedBeneficiary && (
-                    <TrainingPlanFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSaveTrainingFollowUp} onCancel={() => setIsCreatingTrainingFollowUp(false)} />
-                )}
-                {isCreatingVocationalEval && selectedBeneficiary && (
-                    <VocationalEvaluationForm beneficiary={selectedBeneficiary} onSave={handleSaveVocationalEval} onCancel={() => setIsCreatingVocationalEval(false)} />
-                )}
-                {isCreatingFamilyGuidanceReferral && selectedBeneficiary && (
-                    <FamilyGuidanceReferralForm beneficiary={selectedBeneficiary} onSave={handleSaveFamilyGuidanceReferral} onCancel={() => setIsCreatingFamilyGuidanceReferral(false)} />
-                )}
-                {isCreatingPostCareFollowUp && selectedBeneficiary && (
-                    <PostCareFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSavePostCareFollowUp} onCancel={() => setIsCreatingPostCareFollowUp(false)} />
-                )}
-            </ToastProvider>
-        </UserProvider>
+                    {isCreatingCaseStudy && selectedBeneficiary && (
+                        <CaseStudyForm beneficiary={selectedBeneficiary} onSave={handleSaveCaseStudy} onCancel={() => setIsCreatingCaseStudy(false)} />
+                    )}
+                    {isCreatingSocialResearch && selectedBeneficiary && (
+                        <SocialResearchForm beneficiary={selectedBeneficiary} onSave={handleSaveSocialResearch} onCancel={() => setIsCreatingSocialResearch(false)} />
+                    )}
+                    {isCreatingRehabPlan && selectedBeneficiary && (
+                        <RehabilitationPlanForm beneficiary={selectedBeneficiary} onSave={handleSaveRehabPlan} onCancel={() => setIsCreatingRehabPlan(false)} />
+                    )}
+                    {isCreatingClothingRequest && selectedBeneficiary && (
+                        <ClothingRequestForm beneficiary={selectedBeneficiary} inventory={inventory} onSave={handleSaveClothingRequest} onCancel={() => setIsCreatingClothingRequest(false)} />
+                    )}
+                    {isCreatingMedicalExam && selectedBeneficiary && (
+                        <MedicalExaminationForm beneficiary={selectedBeneficiary} onSave={handleSaveMedicalExam} onCancel={() => setIsCreatingMedicalExam(false)} />
+                    )}
+                    {isCreatingEducationalPlan && selectedBeneficiary && (
+                        <IndividualEducationalPlanForm beneficiary={selectedBeneficiary} onSave={handleSaveEducationalPlan} onCancel={() => setIsCreatingEducationalPlan(false)} />
+                    )}
+                    {isCreatingInjuryReport && selectedBeneficiary && (
+                        <InjuryReportForm beneficiary={selectedBeneficiary} onSave={handleSaveInjuryReport} onCancel={() => setIsCreatingInjuryReport(false)} />
+                    )}
+                    {isCreatingFamilyCaseStudy && selectedBeneficiary && (
+                        <FamilyCaseStudyForm beneficiary={selectedBeneficiary} onSave={handleSaveFamilyCaseStudy} onCancel={() => setIsCreatingFamilyCaseStudy(false)} />
+                    )}
+                    {isCreatingTrainingReferral && selectedBeneficiary && (
+                        <TrainingReferralForm beneficiary={selectedBeneficiary} onSave={handleSaveTrainingReferral} onCancel={() => setIsCreatingTrainingReferral(false)} />
+                    )}
+                    {isCreatingTrainingFollowUp && selectedBeneficiary && (
+                        <TrainingPlanFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSaveTrainingFollowUp} onCancel={() => setIsCreatingTrainingFollowUp(false)} />
+                    )}
+                    {isCreatingVocationalEval && selectedBeneficiary && (
+                        <VocationalEvaluationForm beneficiary={selectedBeneficiary} onSave={handleSaveVocationalEval} onCancel={() => setIsCreatingVocationalEval(false)} />
+                    )}
+                    {isCreatingFamilyGuidanceReferral && selectedBeneficiary && (
+                        <FamilyGuidanceReferralForm beneficiary={selectedBeneficiary} onSave={handleSaveFamilyGuidanceReferral} onCancel={() => setIsCreatingFamilyGuidanceReferral(false)} />
+                    )}
+                    {isCreatingPostCareFollowUp && selectedBeneficiary && (
+                        <PostCareFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSavePostCareFollowUp} onCancel={() => setIsCreatingPostCareFollowUp(false)} />
+                    )}
+                </ToastProvider>
+            </UserProvider>
+        </AuthProvider>
     );
 };

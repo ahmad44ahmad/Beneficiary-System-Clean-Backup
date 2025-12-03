@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Beneficiary } from '../types';
+import { Beneficiary } from '../../types';
 
 interface BeneficiaryListItemProps {
     beneficiary: Beneficiary;
