@@ -106,6 +106,51 @@ export const deriveSmartTags = (profile: UnifiedBeneficiaryProfile): SmartTag[] 
         });
     }
 
+    // 5. Infection Control (Safety Path)
+    const infectionKeywords = {
+        'scabies': { type: 'contact', label: 'Contact Isolation (Scabies)', icon: 'ShieldAlert', color: 'red' },
+        'جرب': { type: 'contact', label: 'عزل تلامس (جرب)', icon: 'ShieldAlert', color: 'red' },
+        'tuberculosis': { type: 'airborne', label: 'Airborne Isolation (TB)', icon: 'Wind', color: 'red' },
+        'سل': { type: 'airborne', label: 'عزل هوائي (سل)', icon: 'Wind', color: 'red' },
+        'flu': { type: 'droplet', label: 'Droplet Isolation (Flu)', icon: 'CloudRain', color: 'orange' },
+        'أنفلونزا': { type: 'droplet', label: 'عزل رذاذ (أنفلونزا)', icon: 'CloudRain', color: 'orange' },
+        'corona': { type: 'droplet', label: 'Droplet Isolation (COVID-19)', icon: 'Virus', color: 'red' },
+        'كورونا': { type: 'droplet', label: 'عزل رذاذ (كورونا)', icon: 'Virus', color: 'red' }
+    };
+
+    for (const [keyword, config] of Object.entries(infectionKeywords)) {
+        if (diagnosis.includes(keyword) || notes.includes(keyword)) {
+            tags.push({
+                id: `isolation-${config.type}`,
+                label: config.label,
+                color: config.color as any,
+                icon: config.icon,
+                description: `Requires ${config.type} precautions. Check Global Alerts.`
+            });
+        }
+    }
+
+    // 6. Evacuation Priority (Safety Path)
+    // Assuming 'mobility' field exists or inferred from diagnosis/notes for now if not in profile type explicitly
+    // In a real scenario, we'd check profile.mobilityStatus
+    if (diagnosis.includes('wheelchair') || diagnosis.includes('مقعد') || notes.includes('wheelchair')) {
+        tags.push({
+            id: 'evac-assist',
+            label: 'Evac: Assist Required',
+            color: 'orange',
+            icon: 'AlertCircle',
+            description: 'Priority 2: Needs wheelchair assistance.'
+        });
+    } else if (diagnosis.includes('bedridden') || diagnosis.includes('طريح فراش') || notes.includes('bedridden')) {
+        tags.push({
+            id: 'evac-stretcher',
+            label: 'Evac: Stretcher Only',
+            color: 'red',
+            icon: 'Stretcher', // Lucide icon name, might need mapping
+            description: 'Priority 1: Complex evacuation required.'
+        });
+    }
+
     return tags;
 };
 
