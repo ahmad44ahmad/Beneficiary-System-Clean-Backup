@@ -15,6 +15,7 @@ import { deriveSmartTags } from '../utils/tagEngine';
 
 // Import Demo Data
 import { demoBeneficiaries } from '../data/demoData';
+import { beneficiaries as originalBeneficiaries } from '../data/beneficiaries';
 
 interface UnifiedDataContextType {
     beneficiaries: UnifiedBeneficiaryProfile[];
@@ -30,12 +31,25 @@ interface UnifiedDataContextType {
 const UnifiedDataContext = createContext<UnifiedDataContextType | undefined>(undefined);
 
 export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // Initialize with Demo Data and apply Smart Tags
+    // Initialize with BOTH Original and Demo Data and apply Smart Tags
     const [beneficiaries, setBeneficiaries] = useState<UnifiedBeneficiaryProfile[]>(() => {
-        return demoBeneficiaries.map(b => ({
+        // Map original beneficiaries to UnifiedBeneficiaryProfile structure
+        const mappedOriginals: UnifiedBeneficiaryProfile[] = originalBeneficiaries.map(b => ({
             ...b,
+            visitLogs: [],
+            incidents: [],
+            medicalHistory: [],
+            socialResearch: [],
+            rehabPlans: [],
             smartTags: deriveSmartTags(b) // Apply tags on load
         }));
+
+        const allBeneficiaries = [...mappedOriginals, ...demoBeneficiaries];
+
+        // Remove duplicates if any (based on ID)
+        const uniqueBeneficiaries = Array.from(new Map(allBeneficiaries.map(item => [item.id, item])).values());
+
+        return uniqueBeneficiaries;
     });
 
     const [visitLogs, setVisitLogs] = useState<VisitLog[]>([]);
