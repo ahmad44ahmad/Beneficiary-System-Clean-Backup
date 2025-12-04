@@ -6,6 +6,7 @@ interface AppState {
     activeBeneficiary: Beneficiary | null;
     theme: 'light' | 'dark';
     language: 'ar' | 'en';
+    isMasterViewOpen: boolean;
 }
 
 // Define the Actions (Methods to update state)
@@ -13,6 +14,7 @@ interface AppContextType extends AppState {
     setActiveBeneficiary: (beneficiary: Beneficiary | null) => void;
     toggleTheme: () => void;
     setLanguage: (lang: 'ar' | 'en') => void;
+    setIsMasterViewOpen: (isOpen: boolean) => void;
 }
 
 // Create Context with default values
@@ -24,6 +26,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const [activeBeneficiary, setActiveBeneficiary] = useState<Beneficiary | null>(null);
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
     const [language, setLanguage] = useState<'ar' | 'en'>('ar');
+    const [isMasterViewOpen, setIsMasterViewOpen] = useState(false);
 
     // Actions
     const toggleTheme = () => {
@@ -35,9 +38,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         activeBeneficiary,
         theme,
         language,
+        isMasterViewOpen,
         setActiveBeneficiary,
         toggleTheme,
-        setLanguage
+        setLanguage,
+        setIsMasterViewOpen
     };
 
     return (
