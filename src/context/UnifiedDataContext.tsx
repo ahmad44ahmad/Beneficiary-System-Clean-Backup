@@ -10,49 +10,41 @@ import {
 } from '../types';
 import { MedicalExamination } from '../types/medical';
 import { RehabPlan } from '../types/rehab';
+import { UnifiedBeneficiaryProfile } from '../types/unified';
+import { deriveSmartTags } from '../utils/tagEngine';
 
-// Import Static Data
-import { beneficiaries as initialBeneficiaries } from '../data/beneficiaries';
-import { visitLogs as initialVisits } from '../data/visits';
-import { rehabPlans as initialRehabPlans } from '../data/rehabPlans';
-import { inventoryItems as initialInventory } from '../data/inventory';
+// Import Demo Data
+import { demoBeneficiaries } from '../data/demoData';
 
 interface UnifiedDataContextType {
-    beneficiaries: Beneficiary[];
-    medicalProfiles: MedicalProfile[];
-    socialResearchForms: SocialResearch[];
-    rehabilitationPlans: RehabPlan[];
+    beneficiaries: UnifiedBeneficiaryProfile[];
+    // Legacy arrays kept for compatibility if needed, but main data is in beneficiaries
     visitLogs: VisitLog[];
-    inventory: InventoryItem[]; // Added inventory
-    incidents: IncidentReport[];
-    medicalExaminations: MedicalExamination[];
-    educationalPlans: IndividualEducationalPlan[];
+    inventory: InventoryItem[];
 
     // Actions
-    addVisitLog: (log: VisitLog) => void;
-    addIncident: (incident: IncidentReport) => void;
+    getBeneficiaryById: (id: string) => UnifiedBeneficiaryProfile | undefined;
     updateBeneficiary: (id: string, data: Partial<Beneficiary>) => void;
 }
 
 const UnifiedDataContext = createContext<UnifiedDataContextType | undefined>(undefined);
 
 export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // State Initialization
-    const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>(initialBeneficiaries);
-    const [visitLogs, setVisitLogs] = useState<VisitLog[]>(initialVisits);
-    const [rehabilitationPlans, setRehabilitationPlans] = useState<RehabPlan[]>(initialRehabPlans);
-    const [inventory, setInventory] = useState<InventoryItem[]>(initialInventory);
+    // Initialize with Demo Data and apply Smart Tags
+    const [beneficiaries, setBeneficiaries] = useState<UnifiedBeneficiaryProfile[]>(() => {
+        return demoBeneficiaries.map(b => ({
+            ...b,
+            smartTags: deriveSmartTags(b) // Apply tags on load
+        }));
+    });
 
-    // Empty states for now (or load from future static files)
-    const [medicalProfiles, setMedicalProfiles] = useState<MedicalProfile[]>([]);
-    const [socialResearchForms, setSocialResearchForms] = useState<SocialResearch[]>([]);
-    const [incidents, setIncidents] = useState<IncidentReport[]>([]);
-    const [medicalExaminations, setMedicalExaminations] = useState<MedicalExamination[]>([]);
-    const [educationalPlans, setEducationalPlans] = useState<IndividualEducationalPlan[]>([]);
+    const [visitLogs, setVisitLogs] = useState<VisitLog[]>([]);
+    const [inventory, setInventory] = useState<InventoryItem[]>([]);
 
-    // Actions
-    const addVisitLog = (log: VisitLog) => setVisitLogs(prev => [log, ...prev]);
-    const addIncident = (incident: IncidentReport) => setIncidents(prev => [incident, ...prev]);
+    const getBeneficiaryById = (id: string) => {
+        return beneficiaries.find(b => b.id === id);
+    };
+
     const updateBeneficiary = (id: string, data: Partial<Beneficiary>) => {
         setBeneficiaries(prev => prev.map(b => b.id === id ? { ...b, ...data } : b));
     };
@@ -60,16 +52,9 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     return (
         <UnifiedDataContext.Provider value={{
             beneficiaries,
-            medicalProfiles,
-            socialResearchForms,
-            rehabilitationPlans,
             visitLogs,
             inventory,
-            incidents,
-            medicalExaminations,
-            educationalPlans,
-            addVisitLog,
-            addIncident,
+            getBeneficiaryById,
             updateBeneficiary
         }}>
             {children}

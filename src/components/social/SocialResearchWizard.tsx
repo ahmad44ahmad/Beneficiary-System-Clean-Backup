@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '../../context/AppContext';
+import { useUser } from '../../context/UserContext';
 import { Beneficiary } from '../../types';
 import { SocialResearch } from '../../types/social';
 import { beneficiaries as initialBeneficiaries } from '../../data/beneficiaries';
@@ -19,7 +19,7 @@ const STEPS = [
 
 export const SocialResearchWizard: React.FC = () => {
     const navigate = useNavigate();
-    const { currentUser } = useApp();
+    const { currentUser } = useUser();
     const [currentStep, setCurrentStep] = useState(1);
     const [selectedBeneficiaryId, setSelectedBeneficiaryId] = useState('');
 

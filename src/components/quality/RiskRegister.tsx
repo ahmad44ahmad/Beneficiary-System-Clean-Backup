@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
-import { AlertTriangle, TrendingUp, Shield, Activity, Droplet } from 'lucide-react';
+import { Shield, Activity, Droplet } from 'lucide-react';
+import { UnifiedBeneficiaryProfile } from '../../types/unified';
 
-interface RiskItem {
-    id: string;
-    category: 'Falls' | 'Choking' | 'Infection' | 'Behavioral' | 'Medical';
-    probability: 'Low' | 'Medium' | 'High';
-    impact: 'Low' | 'Medium' | 'High';
-    mitigation: string;
-    lastReview: string;
+interface RiskRegisterProps {
+    profile?: UnifiedBeneficiaryProfile;
 }
 
-export const RiskRegister: React.FC = () => {
-    const [risks, setRisks] = useState<RiskItem[]>([
-        { id: '1', category: 'Falls', probability: 'Medium', impact: 'High', mitigation: 'Bed rails, Non-slip socks', lastReview: '2023-10-01' },
-        { id: '2', category: 'Choking', probability: 'Low', impact: 'High', mitigation: 'Soft diet, Supervision during meals', lastReview: '2023-10-01' },
-        { id: '3', category: 'Infection', probability: 'High', impact: 'Medium', mitigation: 'Isolation protocol, PPE', lastReview: '2023-10-15' }
-    ]);
+export const RiskRegister: React.FC<RiskRegisterProps> = ({ profile }) => {
+    if (!profile) return null;
+
+    const risks = profile.risks || [];
 
     const getRiskScore = (p: string, i: string) => {
         const map: any = { 'Low': 1, 'Medium': 2, 'High': 3 };
@@ -50,7 +44,7 @@ export const RiskRegister: React.FC = () => {
                         <Droplet className="w-8 h-8 text-red-500" />
                         <div>
                             <span className="text-xs font-bold text-red-400 uppercase">Blood Type</span>
-                            <div className="text-2xl font-bold text-red-700">O+</div>
+                            <div className="text-2xl font-bold text-red-700">{profile.medicalProfile?.bloodType || 'N/A'}</div>
                         </div>
                     </div>
                 </Card>
@@ -59,7 +53,9 @@ export const RiskRegister: React.FC = () => {
                         <Activity className="w-8 h-8 text-orange-500" />
                         <div>
                             <span className="text-xs font-bold text-orange-400 uppercase">Allergies</span>
-                            <div className="text-lg font-bold text-orange-700">Penicillin, Nuts</div>
+                            <div className="text-lg font-bold text-orange-700">
+                                {profile.medicalProfile?.allergies?.length ? profile.medicalProfile.allergies.join(', ') : 'None'}
+                            </div>
                         </div>
                     </div>
                 </Card>
@@ -77,7 +73,7 @@ export const RiskRegister: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {risks.map((risk) => {
+                        {risks.length > 0 ? risks.map((risk) => {
                             const score = getRiskScore(risk.probability, risk.impact);
                             return (
                                 <tr key={risk.id}>
@@ -91,7 +87,11 @@ export const RiskRegister: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{risk.lastReview}</td>
                                 </tr>
                             );
-                        })}
+                        }) : (
+                            <tr>
+                                <td colSpan={4} className="px-6 py-4 text-center text-gray-500 italic">No active risks identified.</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useApp } from '../../context/AppContext';
+import { useUser } from '../../context/UserContext';
 import { LeaveRequest, LeaveRequestStatus, LeaveRequestAction } from '../../types/social';
 import { Beneficiary } from '../../types';
 import { beneficiaries as initialBeneficiaries } from '../../data/beneficiaries';
@@ -17,7 +17,7 @@ const mockMedicalStatus: Record<string, { infection: boolean; unstableVitals: bo
 };
 
 export const LeaveRequestFlow: React.FC = () => {
-    const { currentUser } = useApp();
+    const { currentUser } = useUser();
     const [requests, setRequests] = useState<LeaveRequest[]>([
         {
             id: 'LR-001',

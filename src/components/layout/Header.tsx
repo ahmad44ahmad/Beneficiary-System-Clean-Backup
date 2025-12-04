@@ -1,10 +1,10 @@
 import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { useApp } from '../../context/AppContext';
+import { useUser } from '../../context/UserContext';
 
 export const Header = () => {
-    const { currentUser } = useApp();
+    const { currentUser } = useUser();
 
     return (
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-10 app-header" style={{ background: 'linear-gradient(135deg, #148287, #F5961E)', borderBottom: '4px solid #FAB414' }}>

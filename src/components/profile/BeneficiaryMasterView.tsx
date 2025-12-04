@@ -231,7 +231,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {activeTab === 'quality' && (
                     <div className="space-y-6">
                         <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <RiskRegister />
+                            <RiskRegister profile={profile} />
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-sm">
                             <DigitalAuditTool />

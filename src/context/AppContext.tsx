@@ -3,11 +3,6 @@ import { Beneficiary } from '../types';
 
 // Define the shape of our Global State
 interface AppState {
-    currentUser: {
-        id: string;
-        name: string;
-        role: 'admin' | 'doctor' | 'social_worker' | 'nurse';
-    } | null;
     activeBeneficiary: Beneficiary | null;
     theme: 'light' | 'dark';
     language: 'ar' | 'en';
@@ -15,7 +10,6 @@ interface AppState {
 
 // Define the Actions (Methods to update state)
 interface AppContextType extends AppState {
-    setCurrentUser: (user: AppState['currentUser']) => void;
     setActiveBeneficiary: (beneficiary: Beneficiary | null) => void;
     toggleTheme: () => void;
     setLanguage: (lang: 'ar' | 'en') => void;
@@ -27,11 +21,6 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 // Provider Component
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     // State Initialization
-    const [currentUser, setCurrentUser] = useState<AppState['currentUser']>({
-        id: '1',
-        name: 'Admin User',
-        role: 'admin' // Default for dev
-    });
     const [activeBeneficiary, setActiveBeneficiary] = useState<Beneficiary | null>(null);
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
     const [language, setLanguage] = useState<'ar' | 'en'>('ar');
@@ -43,11 +32,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     };
 
     const value = {
-        currentUser,
         activeBeneficiary,
         theme,
         language,
-        setCurrentUser,
         setActiveBeneficiary,
         toggleTheme,
         setLanguage

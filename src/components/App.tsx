@@ -4,7 +4,7 @@ import { MainLayout } from './layout/MainLayout';
 import { UserProvider } from '../context/UserContext';
 import { ToastProvider } from '../context/ToastContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
-import { AuthProvider } from '../contexts/AuthContext';
+import { AuthProvider } from '../context/AuthContext';
 import { UnifiedDataProvider } from '../context/UnifiedDataContext';
 
 // Data Imports

@@ -41,6 +41,18 @@ export interface UnifiedBeneficiaryProfile extends Beneficiary {
 
     // Empowerment Path
     empowermentProfile?: EmpowermentProfile;
+
+    // Risk Management
+    risks?: RiskEntry[];
+}
+
+export interface RiskEntry {
+    id: string;
+    category: 'Medical' | 'Behavioral' | 'Environmental' | 'Social';
+    probability: 'Low' | 'Medium' | 'High';
+    impact: 'Low' | 'Medium' | 'High';
+    mitigation: string;
+    lastReview: string;
 }
 
 export interface EmpowermentProfile {
@@ -59,6 +71,7 @@ export interface EmpowermentGoal {
     category: 'education' | 'employment' | 'social_integration' | 'health' | 'skill_development';
     status: 'draft' | 'active' | 'completed' | 'on_hold' | 'cancelled';
     progress: number; // 0-100
+    startDate?: string;
     targetDate: string;
     smartCriteria?: {
         specific: string;
