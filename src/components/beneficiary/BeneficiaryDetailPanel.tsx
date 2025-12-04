@@ -19,25 +19,11 @@ interface BeneficiaryDetailPanelProps {
     educationalPlans: IndividualEducationalPlan[];
     injuryReports: InjuryReport[];
     familyCaseStudies: FamilyCaseStudy[];
-    onStartCreateCaseStudy: () => void;
-    onStartCreateSocialResearch: () => void;
-    onStartCreateRehabPlan: () => void;
-    onAddVisitLog: (log: VisitLog) => void;
-    onStartClothingRequest: () => void;
-    onStartCreateMedicalExam: () => void;
-    onStartCreateEducationalPlan: () => void;
-    onStartCreateInjuryReport: () => void;
-    onStartCreateFamilyCaseStudy: () => void;
     trainingReferrals: TrainingReferral[];
     trainingPlanFollowUps: TrainingPlanFollowUp[];
     vocationalEvaluations: VocationalEvaluation[];
-    onStartCreateTrainingReferral: () => void;
-    onStartCreateTrainingFollowUp: () => void;
-    onStartCreateVocationalEval: () => void;
     familyGuidanceReferrals: FamilyGuidanceReferral[];
     postCareFollowUps: PostCareFollowUp[];
-    onStartCreateFamilyGuidanceReferral: () => void;
-    onStartCreatePostCareFollowUp: () => void;
 }
 
 export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
@@ -50,25 +36,11 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
     educationalPlans,
     injuryReports,
     familyCaseStudies,
-    onStartCreateCaseStudy,
-    onStartCreateSocialResearch,
-    onStartCreateRehabPlan,
-    onAddVisitLog,
-    onStartClothingRequest,
-    onStartCreateMedicalExam,
-    onStartCreateEducationalPlan,
-    onStartCreateInjuryReport,
-    onStartCreateFamilyCaseStudy,
     trainingReferrals,
     trainingPlanFollowUps,
     vocationalEvaluations,
-    onStartCreateTrainingReferral,
-    onStartCreateTrainingFollowUp,
-    onStartCreateVocationalEval,
     familyGuidanceReferrals,
-    postCareFollowUps,
-    onStartCreateFamilyGuidanceReferral,
-    onStartCreatePostCareFollowUp
+    postCareFollowUps
 }) => {
     const [activeTab, setActiveTab] = useState<'rehab' | 'social' | 'family' | 'training'>('rehab');
 
@@ -138,10 +110,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                 {activeTab === 'rehab' && (
                     <>
                         <div className="flex flex-wrap gap-3">
-                            <Button onClick={onStartCreateRehabPlan}>إضافة خطة تأهيل</Button>
-                            <Button variant="outline" onClick={onStartCreateEducationalPlan}>إضافة خطة تربوية (IEP)</Button>
-                            <Button variant="outline" onClick={onStartCreateMedicalExam}>إضافة كشف طبي</Button>
-                            <Button variant="outline" onClick={onStartCreateSocialResearch}>إضافة بحث اجتماعي</Button>
+                            {/* Actions removed as part of cleanup */}
                         </div>
 
                         <DetailCard title="البيانات الأساسية والتقييم">
@@ -195,14 +164,12 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                 {activeTab === 'social' && (
                     <>
                         <div className="flex flex-wrap gap-3">
-                            <Button onClick={onStartClothingRequest}>صرف كسوة</Button>
-                            <Button variant="outline" onClick={onStartCreateInjuryReport}>إبلاغ عن إصابة</Button>
+                            {/* Actions removed as part of cleanup */}
                         </div>
 
                         <VisitLogPanel
                             beneficiary={beneficiary}
                             logs={visitLogs}
-                            onAddLog={onAddVisitLog}
                         />
 
                         <DetailCard title="سجل الإصابات والحوادث">
@@ -226,10 +193,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                 {activeTab === 'family' && (
                     <>
                         <div className="flex flex-wrap gap-3">
-                            <Button onClick={onStartCreateFamilyCaseStudy}>إضافة دراسة حالة أسرية</Button>
-                            <Button variant="outline" onClick={onStartCreateCaseStudy}>إضافة دراسة حالة عامة</Button>
-                            <Button variant="outline" onClick={onStartCreateFamilyGuidanceReferral}>تحويل للإرشاد الأسري</Button>
-                            <Button variant="outline" onClick={onStartCreatePostCareFollowUp}>متابعة رعاية لاحقة</Button>
+                            {/* Actions removed as part of cleanup */}
                         </div>
 
                         <DetailCard title="بيانات الأسرة والولي">
@@ -298,9 +262,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                 {activeTab === 'training' && (
                     <>
                         <div className="flex flex-wrap gap-3">
-                            <Button onClick={onStartCreateTrainingReferral}>تحويل للتدريب</Button>
-                            <Button variant="outline" onClick={onStartCreateTrainingFollowUp}>متابعة الخطة التدريبية</Button>
-                            <Button variant="outline" onClick={onStartCreateVocationalEval}>تقييم مهني</Button>
+                            {/* Actions removed as part of cleanup */}
                         </div>
 
                         <DetailCard title="تحويلات التدريب">

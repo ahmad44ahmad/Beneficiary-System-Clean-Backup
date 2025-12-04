@@ -115,6 +115,9 @@ export const App = () => {
     // -------------------------------------------------------------------------
     // Modal State (Legacy - to be refactored)
     // -------------------------------------------------------------------------
+    // Removed legacy modal state variables and useEffect as part of cleanup.
+    // The Master View is now the primary modal, managed by AppContext.
+    // Other forms should be migrated to proper routes or context-managed modals if needed.
     const [isCreatingCaseStudy, setIsCreatingCaseStudy] = useState(false);
     const [isCreatingSocialResearch, setIsCreatingSocialResearch] = useState(false);
     const [isCreatingRehabPlan, setIsCreatingRehabPlan] = useState(false);
@@ -147,29 +150,8 @@ export const App = () => {
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value);
 
     // Form Handlers
-    const handleSaveCaseStudy = (newStudy: CaseStudy) => { setCaseStudies(prev => [...prev, newStudy]); setIsCreatingCaseStudy(false); };
-    const handleSaveSocialResearch = (newResearch: SocialResearch) => { setSocialResearchForms(prev => [...prev, newResearch]); setIsCreatingSocialResearch(false); };
-    const handleSaveRehabPlan = (newPlan: RehabilitationPlan) => { setRehabilitationPlans(prev => [...prev, newPlan]); setIsCreatingRehabPlan(false); };
+    // Form Handlers removed as part of cleanup
     const handleAddVisitLog = (newLog: VisitLog) => setVisitLogs(prev => [newLog, ...prev]);
-    const handleSaveClothingRequest = (request: ClothingRequest) => {
-        setClothingRequests(prev => [...prev, request]);
-        const updatedInventory = inventory.map(item => {
-            const requestedItem = request.items.find(ri => ri.itemId === item.id);
-            if (requestedItem) return { ...item, quantity: Math.max(0, item.quantity - requestedItem.quantity) };
-            return item;
-        });
-        setInventory(updatedInventory);
-        setIsCreatingClothingRequest(false);
-    };
-    const handleSaveMedicalExam = (newExam: MedicalExamination) => { setMedicalExaminations(prev => [...prev, newExam]); setIsCreatingMedicalExam(false); };
-    const handleSaveEducationalPlan = (newPlan: IndividualEducationalPlan) => { setEducationalPlans(prev => [...prev, newPlan]); setIsCreatingEducationalPlan(false); };
-    const handleSaveInjuryReport = (newReport: InjuryReport) => { setInjuryReports(prev => [...prev, newReport]); setIsCreatingInjuryReport(false); };
-    const handleSaveFamilyCaseStudy = (newStudy: FamilyCaseStudy) => { setFamilyCaseStudies(prev => [...prev, newStudy]); setIsCreatingFamilyCaseStudy(false); };
-    const handleSaveTrainingReferral = (item: TrainingReferral) => { setTrainingReferrals(prev => [...prev, item]); setIsCreatingTrainingReferral(false); };
-    const handleSaveTrainingFollowUp = (item: TrainingPlanFollowUp) => { setTrainingPlanFollowUps(prev => [...prev, item]); setIsCreatingTrainingFollowUp(false); };
-    const handleSaveVocationalEval = (item: VocationalEvaluation) => { setVocationalEvaluations(prev => [...prev, item]); setIsCreatingVocationalEval(false); };
-    const handleSaveFamilyGuidanceReferral = (item: FamilyGuidanceReferral) => { setFamilyGuidanceReferrals(prev => [...prev, item]); setIsCreatingFamilyGuidanceReferral(false); };
-    const handleSavePostCareFollowUp = (item: PostCareFollowUp) => { setPostCareFollowUps(prev => [...prev, item]); setIsCreatingPostCareFollowUp(false); };
 
     // -------------------------------------------------------------------------
     // Render
@@ -207,21 +189,8 @@ export const App = () => {
                                     vocationalEvaluations={vocationalEvaluations}
                                     familyGuidanceReferrals={familyGuidanceReferrals}
                                     postCareFollowUps={postCareFollowUps}
-                                    // Handlers
-                                    onStartCreateCaseStudy={() => setIsCreatingCaseStudy(true)}
-                                    onStartCreateSocialResearch={() => setIsCreatingSocialResearch(true)}
-                                    onStartCreateRehabPlan={() => setIsCreatingRehabPlan(true)}
-                                    onAddVisitLog={handleAddVisitLog}
-                                    onStartClothingRequest={() => setIsCreatingClothingRequest(true)}
-                                    onStartCreateMedicalExam={() => setIsCreatingMedicalExam(true)}
-                                    onStartCreateEducationalPlan={() => setIsCreatingEducationalPlan(true)}
-                                    onStartCreateInjuryReport={() => setIsCreatingInjuryReport(true)}
-                                    onStartCreateFamilyCaseStudy={() => setIsCreatingFamilyCaseStudy(true)}
-                                    onStartCreateTrainingReferral={() => setIsCreatingTrainingReferral(true)}
-                                    onStartCreateTrainingFollowUp={() => setIsCreatingTrainingFollowUp(true)}
-                                    onStartCreateVocationalEval={() => setIsCreatingVocationalEval(true)}
-                                    onStartCreateFamilyGuidanceReferral={() => setIsCreatingFamilyGuidanceReferral(true)}
-                                    onStartCreatePostCareFollowUp={() => setIsCreatingPostCareFollowUp(true)}
+                                // Handlers
+                                // Legacy handlers removed
                                 />
                             </div>
                         </div>
@@ -291,71 +260,7 @@ export const App = () => {
                 )
             }
 
-            {
-                isCreatingCaseStudy && selectedBeneficiary && (
-                    <CaseStudyForm beneficiary={selectedBeneficiary} onSave={handleSaveCaseStudy} onCancel={() => setIsCreatingCaseStudy(false)} />
-                )
-            }
-            {
-                isCreatingSocialResearch && selectedBeneficiary && (
-                    <SocialResearchForm beneficiary={selectedBeneficiary} onSave={handleSaveSocialResearch} onCancel={() => setIsCreatingSocialResearch(false)} />
-                )
-            }
-            {
-                isCreatingRehabPlan && selectedBeneficiary && (
-                    <RehabilitationPlanForm beneficiary={selectedBeneficiary} onSave={handleSaveRehabPlan} onCancel={() => setIsCreatingRehabPlan(false)} />
-                )
-            }
-            {
-                isCreatingClothingRequest && selectedBeneficiary && (
-                    <ClothingRequestForm beneficiary={selectedBeneficiary} inventory={inventory} onSave={handleSaveClothingRequest} onCancel={() => setIsCreatingClothingRequest(false)} />
-                )
-            }
-            {
-                isCreatingMedicalExam && selectedBeneficiary && (
-                    <MedicalExaminationForm beneficiary={selectedBeneficiary} onSave={handleSaveMedicalExam} onCancel={() => setIsCreatingMedicalExam(false)} />
-                )
-            }
-            {
-                isCreatingEducationalPlan && selectedBeneficiary && (
-                    <IndividualEducationalPlanForm beneficiary={selectedBeneficiary} onSave={handleSaveEducationalPlan} onCancel={() => setIsCreatingEducationalPlan(false)} />
-                )
-            }
-            {
-                isCreatingInjuryReport && selectedBeneficiary && (
-                    <InjuryReportForm beneficiary={selectedBeneficiary} onSave={handleSaveInjuryReport} onCancel={() => setIsCreatingInjuryReport(false)} />
-                )
-            }
-            {
-                isCreatingFamilyCaseStudy && selectedBeneficiary && (
-                    <FamilyCaseStudyForm beneficiary={selectedBeneficiary} onSave={handleSaveFamilyCaseStudy} onCancel={() => setIsCreatingFamilyCaseStudy(false)} />
-                )
-            }
-            {
-                isCreatingTrainingReferral && selectedBeneficiary && (
-                    <TrainingReferralForm beneficiary={selectedBeneficiary} onSave={handleSaveTrainingReferral} onCancel={() => setIsCreatingTrainingReferral(false)} />
-                )
-            }
-            {
-                isCreatingTrainingFollowUp && selectedBeneficiary && (
-                    <TrainingPlanFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSaveTrainingFollowUp} onCancel={() => setIsCreatingTrainingFollowUp(false)} />
-                )
-            }
-            {
-                isCreatingVocationalEval && selectedBeneficiary && (
-                    <VocationalEvaluationForm beneficiary={selectedBeneficiary} onSave={handleSaveVocationalEval} onCancel={() => setIsCreatingVocationalEval(false)} />
-                )
-            }
-            {
-                isCreatingFamilyGuidanceReferral && selectedBeneficiary && (
-                    <FamilyGuidanceReferralForm beneficiary={selectedBeneficiary} onSave={handleSaveFamilyGuidanceReferral} onCancel={() => setIsCreatingFamilyGuidanceReferral(false)} />
-                )
-            }
-            {
-                isCreatingPostCareFollowUp && selectedBeneficiary && (
-                    <PostCareFollowUpForm beneficiary={selectedBeneficiary} onSave={handleSavePostCareFollowUp} onCancel={() => setIsCreatingPostCareFollowUp(false)} />
-                )
-            }
+            {/* Legacy Modals removed */}
 
 
 
