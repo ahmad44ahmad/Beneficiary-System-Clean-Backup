@@ -1,24 +1,30 @@
 import { useMemo } from 'react';
-import { beneficiaries } from '../data/beneficiaries';
-import { rehabPlans } from '../data/rehabPlans';
+import { useUnifiedData } from '../context/UnifiedDataContext';
 import { GoalType } from '../types/rehab';
 
 export const useDashboardMetrics = () => {
+    const { beneficiaries } = useUnifiedData();
+
     return useMemo(() => {
         // 1. Real-Time KPIs
         const totalBeneficiaries = beneficiaries.length;
-        const activeBeneficiaries = beneficiaries.filter(b => b.status === 'active').length; // Assuming 'active' status exists or logic needed
+        const activeBeneficiaries = beneficiaries.filter(b => b.status === 'active').length;
 
-        // Plan Compliance: % of beneficiaries with an Approved (Active) Rehab Plan vs Total Beneficiaries (or vs Draft)
-        // Let's calculate it as: (Active Plans / Total Beneficiaries) * 100 to show coverage
-        const activePlansCount = rehabPlans.filter(p => p.status === 'active').length;
-        const draftPlansCount = rehabPlans.filter(p => p.status === 'draft').length;
+        // Plan Compliance: Beneficiaries with an active rehab plan
+        const activePlansCount = beneficiaries.filter(b => b.activeRehabPlan?.status === 'active').length;
+        // Draft plans (simulated logic: if no active plan, maybe they have a draft? 
+        // For demo, let's assume if not active, it's draft or missing. 
+        // Or we can check if they have a plan but status is draft. 
+        // Since our type puts the plan in 'activeRehabPlan', let's just count those with 'draft' status there if any, 
+        // or assume missing ones are 'pending'.
+        const draftPlansCount = beneficiaries.filter(b => b.activeRehabPlan?.status === 'draft').length;
+
         const planComplianceRate = totalBeneficiaries > 0 ? Math.round((activePlansCount / totalBeneficiaries) * 100) : 0;
 
         // Goal Achievement Rate
         let totalGoals = 0;
         let totalProgress = 0;
-        const goalsByType: Record<GoalType, { total: number; completed: number; progressSum: number }> = {
+        const goalsByType: Record<string, { total: number; completed: number; progressSum: number }> = {
             medical: { total: 0, completed: 0, progressSum: 0 },
             social: { total: 0, completed: 0, progressSum: 0 },
             psychological: { total: 0, completed: 0, progressSum: 0 },
@@ -26,19 +32,26 @@ export const useDashboardMetrics = () => {
             occupational: { total: 0, completed: 0, progressSum: 0 }
         };
 
-        rehabPlans.forEach(plan => {
-            plan.goals.forEach(goal => {
-                totalGoals++;
-                totalProgress += goal.progress;
+        beneficiaries.forEach(b => {
+            if (b.activeRehabPlan && b.activeRehabPlan.goals) {
+                b.activeRehabPlan.goals.forEach(goal => {
+                    totalGoals++;
+                    totalProgress += goal.progress;
 
-                if (goalsByType[goal.type]) {
-                    goalsByType[goal.type].total++;
-                    goalsByType[goal.type].progressSum += goal.progress;
-                    if (goal.status === 'achieved' || goal.progress === 100) {
-                        goalsByType[goal.type].completed++;
+                    // Normalize type to lowercase just in case
+                    const type = goal.type.toLowerCase();
+                    if (!goalsByType[type]) {
+                        goalsByType[type] = { total: 0, completed: 0, progressSum: 0 };
                     }
-                }
-            });
+
+                    goalsByType[type].total++;
+                    goalsByType[type].progressSum += goal.progress;
+
+                    if (goal.status === 'completed' || goal.progress === 100) {
+                        goalsByType[type].completed++;
+                    }
+                });
+            }
         });
 
         const overallGoalAchievementRate = totalGoals > 0 ? Math.round(totalProgress / totalGoals) : 0;
@@ -48,17 +61,16 @@ export const useDashboardMetrics = () => {
             type,
             avgProgress: data.total > 0 ? Math.round(data.progressSum / data.total) : 0,
             totalGoals: data.total
-        })).filter(d => d.totalGoals > 0); // Only show departments with goals
+        })).filter(d => d.totalGoals > 0);
 
         // 3. Operational Alerts
         // Pending Approvals: Plans waiting for Director
-        const pendingDirectorApprovals = rehabPlans.filter(p =>
-            p.approvals.some(a => a.role === 'director' && a.status === 'pending')
+        const pendingDirectorApprovals = beneficiaries.filter(b =>
+            b.activeRehabPlan?.approvals.some(a => a.role === 'director' && a.status === 'pending')
         ).length;
 
         // Critical Cases: High Risk Level
-        // We look at the socialContext.riskLevel in the plans
-        const criticalCasesCount = rehabPlans.filter(p => p.socialContext.riskLevel === 'high').length;
+        const criticalCasesCount = beneficiaries.filter(b => b.riskLevel === 'high' || b.riskLevel === 'critical').length;
 
         return {
             kpis: {
@@ -75,5 +87,5 @@ export const useDashboardMetrics = () => {
                 criticalCasesCount
             }
         };
-    }, []);
+    }, [beneficiaries]);
 };

@@ -44,6 +44,13 @@ export interface UnifiedBeneficiaryProfile extends Beneficiary {
 
     // Risk Management
     risks?: RiskEntry[];
+
+    // Support Services
+    clothingRequests?: ClothingRequestEntry[];
+    nutritionPlan?: NutritionPlan;
+
+    // Quality
+    auditResults?: AuditResultEntry[];
 }
 
 export interface RiskEntry {
@@ -88,4 +95,32 @@ export interface SkillTrack {
     status: 'enrolled' | 'in_progress' | 'completed' | 'dropped';
     startDate: string;
     providerName?: string;
+}
+
+// Support Services Types
+export interface ClothingRequestEntry {
+    id: string;
+    item: string;
+    size: string;
+    status: 'pending' | 'approved' | 'delivered' | 'rejected';
+    requestDate: string;
+    notes?: string;
+}
+
+export interface NutritionPlan {
+    dietType: 'Regular' | 'Diabetic' | 'Low Sodium' | 'Soft' | 'Liquid';
+    allergies: string[];
+    restrictions: string[];
+    hydrationGoal: string; // e.g. "2L per day"
+    lastAssessmentDate: string;
+}
+
+// Quality Audit Types
+export interface AuditResultEntry {
+    id: string;
+    auditDate: string;
+    auditorName: string;
+    score: number; // 0-100
+    findings: string[];
+    status: 'compliant' | 'non_compliant' | 'needs_improvement';
 }
