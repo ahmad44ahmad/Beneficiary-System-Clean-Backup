@@ -6,6 +6,7 @@ import { Card } from '../ui/Card';
 import { UnifiedTimeline } from './UnifiedTimeline';
 import { GlobalAlerts } from '../common/GlobalAlerts';
 import { DigitalAuditTool } from '../quality/DigitalAuditTool';
+import { EmpowermentPlanBuilder } from '../empowerment/EmpowermentPlanBuilder';
 import {
     User,
     Activity,
@@ -18,7 +19,8 @@ import {
     Shield,
     Users,
     X,
-    ShieldCheck // Added ShieldCheck icon
+    ShieldCheck,
+    Zap // Added Zap icon
 } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 
@@ -34,7 +36,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
     onClose
 }) => {
     const profile = useUnifiedProfile(beneficiaryId);
-    const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'medical' | 'social' | 'rehab' | 'quality'>('overview');
+    const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'medical' | 'social' | 'rehab' | 'quality' | 'empowerment'>('overview');
 
     if (!profile) return null;
 
@@ -111,7 +113,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
 
                 {/* Navigation Tabs */}
                 <div className="flex gap-6 mt-6 border-b border-gray-100">
-                    {['overview', 'timeline', 'medical', 'social', 'rehab', 'quality'].map((tab) => (
+                    {['overview', 'timeline', 'medical', 'social', 'rehab', 'quality', 'empowerment'].map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab as any)}
@@ -228,6 +230,15 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {activeTab === 'quality' && (
                     <div className="bg-white p-6 rounded-lg shadow-sm">
                         <DigitalAuditTool />
+                    </div>
+                )}
+
+                {activeTab === 'empowerment' && (
+                    <div className="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <EmpowermentPlanBuilder
+                            initialProfile={profile.empowermentProfile}
+                            onSave={(newProfile) => console.log('Saving Empowerment Profile:', newProfile)}
+                        />
                     </div>
                 )}
 

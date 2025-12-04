@@ -350,3 +350,41 @@ SELECT * FROM inventory WHERE quantity <= min_quantity;
 
 CREATE VIEW critical_risks AS
 SELECT * FROM risks WHERE (likelihood * impact) >= 15;
+
+-- Empowerment Path Tables
+
+CREATE TABLE capabilities_assessment (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    beneficiary_id UUID REFERENCES beneficiaries(id),
+    strengths TEXT[], -- Array of discovered strengths
+    hobbies TEXT[], -- Array of hobbies/interests
+    skills TEXT[], -- Array of existing skills
+    readiness_level TEXT CHECK (readiness_level IN ('not_ready', 'contemplation', 'preparation', 'action', 'maintenance')),
+    assessor_id UUID,
+    assessment_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    notes TEXT
+);
+
+CREATE TABLE empowerment_goals (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    beneficiary_id UUID REFERENCES beneficiaries(id),
+    title TEXT NOT NULL,
+    category TEXT CHECK (category IN ('education', 'employment', 'social_integration', 'health', 'skill_development')),
+    status TEXT CHECK (status IN ('draft', 'active', 'completed', 'on_hold', 'cancelled')),
+    start_date DATE,
+    target_date DATE,
+    progress INTEGER DEFAULT 0 CHECK (progress >= 0 AND progress <= 100),
+    smart_criteria JSONB -- { specific: '', measurable: '', achievable: '', relevant: '', time_bound: '' }
+);
+
+CREATE TABLE skill_tracks (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    beneficiary_id UUID REFERENCES beneficiaries(id),
+    track_name TEXT NOT NULL, -- e.g., 'Graphic Design', 'Carpentry'
+    status TEXT CHECK (status IN ('enrolled', 'in_progress', 'completed', 'dropped')),
+    start_date DATE,
+    completion_date DATE,
+    certification_obtained BOOLEAN DEFAULT FALSE,
+    provider_name TEXT
+);
+

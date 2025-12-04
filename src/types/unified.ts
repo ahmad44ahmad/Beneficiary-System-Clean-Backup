@@ -38,4 +38,41 @@ export interface UnifiedBeneficiaryProfile extends Beneficiary {
     isOrphan: boolean;
     hasChronicCondition: boolean;
     requiresIsolation: boolean;
+
+    // Empowerment Path
+    empowermentProfile?: EmpowermentProfile;
+}
+
+export interface EmpowermentProfile {
+    readinessLevel: 'not_ready' | 'contemplation' | 'preparation' | 'action' | 'maintenance';
+    strengths: string[];
+    aspirations: string[]; // What they want to become/do
+    hobbies: string[];
+    skills: string[];
+    goals: EmpowermentGoal[];
+    currentTracks: SkillTrack[];
+}
+
+export interface EmpowermentGoal {
+    id: string;
+    title: string;
+    category: 'education' | 'employment' | 'social_integration' | 'health' | 'skill_development';
+    status: 'draft' | 'active' | 'completed' | 'on_hold' | 'cancelled';
+    progress: number; // 0-100
+    targetDate: string;
+    smartCriteria?: {
+        specific: string;
+        measurable: string;
+        achievable: string;
+        relevant: string;
+        timeBound: string;
+    };
+}
+
+export interface SkillTrack {
+    id: string;
+    trackName: string;
+    status: 'enrolled' | 'in_progress' | 'completed' | 'dropped';
+    startDate: string;
+    providerName?: string;
 }
