@@ -1,109 +1,168 @@
-import React, { useState } from 'react';
-import { Audit, AuditFinding } from '../../types/quality';
-import { CheckCircle, XCircle, FileText, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { governanceStandards } from '../../data/governanceStandards';
+import { AuditStandard, AuditResult, AuditStatus } from '../../types/quality';
+import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import {
+    CheckCircle,
+    XCircle,
+    AlertTriangle,
+    FileText,
+    ShieldCheck,
+    BarChart3,
+    ChevronDown,
+    ChevronUp
+} from 'lucide-react';
 
-interface DigitalAuditToolProps {
-    audit: Audit;
-    onUpdateFinding: (findingId: string, isCompliant: boolean, evidence?: string) => void;
-    onCompleteAudit: () => void;
-}
+export const DigitalAuditTool: React.FC = () => {
+    const [results, setResults] = useState<Record<string, AuditResult>>({});
+    const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
-export const DigitalAuditTool: React.FC<DigitalAuditToolProps> = ({ audit, onUpdateFinding, onCompleteAudit }) => {
-    const [expandedArea, setExpandedArea] = useState<string | null>(null);
+    // Group standards by category
+    const groupedStandards = useMemo(() => {
+        const groups: Record<string, AuditStandard[]> = {};
+        governanceStandards.forEach(std => {
+            if (!groups[std.category]) groups[std.category] = [];
+            groups[std.category].push(std);
+        });
+        return groups;
+    }, []);
 
-    // Group findings by Area
-    const findingsByArea = audit.findings.reduce((acc, finding) => {
-        if (!acc[finding.area]) acc[finding.area] = [];
-        acc[finding.area].push(finding);
-        return acc;
-    }, {} as Record<string, AuditFinding[]>);
+    // Calculate Compliance Score
+    const complianceScore = useMemo(() => {
+        const total = governanceStandards.length;
+        if (total === 0) return 0;
 
-    const areas = Object.keys(findingsByArea);
+        const compliantCount = Object.values(results).filter(r => r.status === 'compliant').length;
+        return Math.round((compliantCount / total) * 100);
+    }, [results]);
 
-    const progress = Math.round((audit.findings.filter(f => f.evidence).length / audit.findings.length) * 100);
+    const handleAuditCheck = (standardId: string, status: AuditStatus) => {
+        setResults(prev => ({
+            ...prev,
+            [standardId]: {
+                standardId,
+                status,
+                auditorName: 'Current User', // Replace with actual user context
+                date: new Date().toISOString()
+            }
+        }));
+    };
+
+    const getStatusColor = (status?: AuditStatus) => {
+        switch (status) {
+            case 'compliant': return 'bg-green-100 text-green-700 border-green-200';
+            case 'non-compliant': return 'bg-red-100 text-red-700 border-red-200';
+            case 'partial': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
+            default: return 'bg-gray-50 text-gray-500 border-gray-200';
+        }
+    };
 
     return (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-            <div className="flex justify-between items-start mb-6">
-                <div>
-                    <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                        <FileText className="w-6 h-6 text-blue-600" />
-                        {audit.title}
+        <div className="space-y-6">
+            {/* Header & Score Card */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-2">
+                    <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                        <ShieldCheck className="w-8 h-8 text-blue-600" />
+                        وحدة التدقيق الرقمي الذاتي
                     </h2>
-                    <p className="text-sm text-gray-500 mt-1">المجال: {audit.scope} | المدقق: {audit.auditorName}</p>
+                    <p className="text-gray-600 mt-2">
+                        نظام التحقق من الامتثال لمعايير الجودة (ISO 9001) والحوكمة المؤسسية.
+                        يضمن هذا النظام "الخيط الذهبي" بين الاستراتيجية والتنفيذ.
+                    </p>
                 </div>
-                <div className="text-left">
-                    <div className="text-sm font-medium text-gray-600 mb-1">نسبة الإنجاز</div>
-                    <div className="w-32 bg-gray-200 rounded-full h-2.5">
-                        <div className="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
+
+                <Card className="p-6 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white border-blue-100">
+                    <span className="text-sm font-medium text-gray-500 mb-2">نسبة الامتثال الكلية</span>
+                    <div className="relative flex items-center justify-center">
+                        <svg className="w-24 h-24 transform -rotate-90">
+                            <circle cx="48" cy="48" r="40" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-gray-200" />
+                            <circle cx="48" cy="48" r="40" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-blue-600"
+                                strokeDasharray={251.2}
+                                strokeDashoffset={251.2 - (251.2 * complianceScore) / 100}
+                            />
+                        </svg>
+                        <span className="absolute text-2xl font-bold text-blue-700">{complianceScore}%</span>
                     </div>
-                    <div className="text-xs text-right mt-1">{progress}%</div>
-                </div>
+                    <div className="mt-3 text-xs text-center px-2 py-1 bg-white rounded-full border shadow-sm">
+                        {complianceScore >= 80 ? 'مستوى متميز (EFQM)' : complianceScore >= 50 ? 'مستوى مقبول' : 'مخاطر عالية'}
+                    </div>
+                </Card>
             </div>
 
+            {/* Audit Categories */}
             <div className="space-y-4">
-                {areas.map(area => (
-                    <div key={area} className="border rounded-lg overflow-hidden">
-                        <button
-                            className="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
-                            onClick={() => setExpandedArea(expandedArea === area ? null : area)}
+                {Object.entries(groupedStandards).map(([category, standards]) => (
+                    <Card key={category} className="overflow-hidden border shadow-sm">
+                        <div
+                            className="p-4 bg-gray-50 flex justify-between items-center cursor-pointer hover:bg-gray-100 transition-colors"
+                            onClick={() => setExpandedCategory(expandedCategory === category ? null : category)}
                         >
-                            <span className="font-bold text-gray-800">{area}</span>
-                            {expandedArea === area ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                        </button>
+                            <h3 className="font-bold text-gray-800 flex items-center gap-2">
+                                <FileText className="w-5 h-5 text-gray-500" />
+                                {category}
+                            </h3>
+                            <div className="flex items-center gap-4">
+                                <div className="text-sm text-gray-500">
+                                    {standards.filter(s => results[s.id]?.status === 'compliant').length} / {standards.length} مكتمل
+                                </div>
+                                {expandedCategory === category ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                            </div>
+                        </div>
 
-                        {expandedArea === area && (
-                            <div className="p-4 bg-white space-y-4 animate-in slide-in-from-top-2">
-                                {findingsByArea[area].map(finding => (
-                                    <div key={finding.id} className="border-b last:border-0 pb-4 last:pb-0">
-                                        <p className="font-medium text-gray-900 mb-2">{finding.criterion}</p>
-
-                                        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                                            <div className="flex gap-2">
-                                                <button
-                                                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm transition-colors ${finding.isCompliant ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-gray-100 text-gray-500 border border-transparent'}`}
-                                                    onClick={() => onUpdateFinding(finding.id, true)}
-                                                >
-                                                    <CheckCircle className="w-4 h-4" />
-                                                    مطابق
-                                                </button>
-                                                <button
-                                                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm transition-colors ${!finding.isCompliant ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-gray-100 text-gray-500 border border-transparent'}`}
-                                                    onClick={() => onUpdateFinding(finding.id, false)}
-                                                >
-                                                    <XCircle className="w-4 h-4" />
-                                                    غير مطابق
-                                                </button>
+                        {expandedCategory === category && (
+                            <div className="p-4 divide-y divide-gray-100">
+                                {standards.map(std => (
+                                    <div key={std.id} className="py-4 first:pt-0 last:pb-0">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className={`text-xs font-bold px-2 py-0.5 rounded ${std.weight === 'critical' ? 'bg-red-100 text-red-700' : 'bg-blue-50 text-blue-700'}`}>
+                                                        ISO {std.clause}
+                                                    </span>
+                                                    <h4 className="font-medium text-gray-900">{std.title}</h4>
+                                                </div>
+                                                <p className="text-sm text-gray-600 mb-2">{std.description}</p>
+                                                <div className="bg-blue-50 p-2 rounded text-xs text-blue-800 flex items-start gap-2">
+                                                    <AlertTriangle className="w-4 h-4 shrink-0" />
+                                                    <span><strong>متطلب الامتثال:</strong> {std.requirement}</span>
+                                                </div>
                                             </div>
 
-                                            <input
-                                                type="text"
-                                                placeholder="الدليل / الملاحظات (Evidence)..."
-                                                className="flex-1 text-sm border rounded px-3 py-1.5 w-full"
-                                                value={finding.evidence || ''}
-                                                onChange={(e) => onUpdateFinding(finding.id, finding.isCompliant, e.target.value)}
-                                            />
+                                            <div className="flex flex-col gap-2 shrink-0 ml-4">
+                                                <div className="flex gap-1">
+                                                    <button
+                                                        onClick={() => handleAuditCheck(std.id, 'compliant')}
+                                                        className={`p-2 rounded-lg border transition-all ${results[std.id]?.status === 'compliant' ? 'bg-green-600 text-white border-green-600' : 'hover:bg-green-50 text-gray-400'}`}
+                                                        title="ممتثل"
+                                                    >
+                                                        <CheckCircle className="w-5 h-5" />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleAuditCheck(std.id, 'non-compliant')}
+                                                        className={`p-2 rounded-lg border transition-all ${results[std.id]?.status === 'non-compliant' ? 'bg-red-600 text-white border-red-600' : 'hover:bg-red-50 text-gray-400'}`}
+                                                        title="غير ممتثل"
+                                                    >
+                                                        <XCircle className="w-5 h-5" />
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        {!finding.isCompliant && (
-                                            <div className="mt-2 text-xs text-red-600 flex items-center gap-1 bg-red-50 p-2 rounded">
-                                                <AlertCircle className="w-3 h-3" />
-                                                سيتم إنشاء إجراء تصحيحي (CAPA) تلقائياً لهذه الملاحظة.
+                                        {/* Evidence Section (Mock) */}
+                                        {results[std.id] && (
+                                            <div className="mt-2 text-xs flex justify-between items-center text-gray-500">
+                                                <span>تم التدقيق بواسطة: {results[std.id].auditorName}</span>
+                                                <button className="text-blue-600 hover:underline">إرفاق دليل +</button>
                                             </div>
                                         )}
                                     </div>
                                 ))}
                             </div>
                         )}
-                    </div>
+                    </Card>
                 ))}
-            </div>
-
-            <div className="mt-6 pt-4 border-t flex justify-end">
-                <Button onClick={onCompleteAudit} disabled={progress < 100} className={progress < 100 ? 'opacity-50 cursor-not-allowed' : ''}>
-                    إتمام التدقيق وإصدار التقرير
-                </Button>
             </div>
         </div>
     );

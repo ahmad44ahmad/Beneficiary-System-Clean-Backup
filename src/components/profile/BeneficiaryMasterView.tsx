@@ -5,6 +5,7 @@ import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { UnifiedTimeline } from './UnifiedTimeline';
 import { GlobalAlerts } from '../common/GlobalAlerts';
+import { DigitalAuditTool } from '../quality/DigitalAuditTool';
 import {
     User,
     Activity,
@@ -16,7 +17,8 @@ import {
     Heart,
     Shield,
     Users,
-    X
+    X,
+    ShieldCheck // Added ShieldCheck icon
 } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 
@@ -32,7 +34,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
     onClose
 }) => {
     const profile = useUnifiedProfile(beneficiaryId);
-    const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'medical' | 'social' | 'rehab'>('overview');
+    const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'medical' | 'social' | 'rehab' | 'quality'>('overview');
 
     if (!profile) return null;
 
@@ -109,7 +111,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
 
                 {/* Navigation Tabs */}
                 <div className="flex gap-6 mt-6 border-b border-gray-100">
-                    {['overview', 'timeline', 'medical', 'social', 'rehab'].map((tab) => (
+                    {['overview', 'timeline', 'medical', 'social', 'rehab', 'quality'].map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab as any)}
@@ -220,6 +222,12 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                     <div className="bg-white p-6 rounded-lg shadow-sm">
                         <h3 className="text-lg font-bold text-gray-900 mb-6">Beneficiary History</h3>
                         <UnifiedTimeline profile={profile} />
+                    </div>
+                )}
+
+                {activeTab === 'quality' && (
+                    <div className="bg-white p-6 rounded-lg shadow-sm">
+                        <DigitalAuditTool />
                     </div>
                 )}
 
