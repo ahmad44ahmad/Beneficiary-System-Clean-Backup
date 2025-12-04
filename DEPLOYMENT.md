@@ -30,7 +30,28 @@ This project is optimized for deployment on [Vercel](https://vercel.com). Follow
 - Vercel will build the project and assign a domain (e.g., `beneficiary-system.vercel.app`).
 - Visit the URL and verify that the **Master View** and **Dashboard** work as expected.
 
-## Local Deployment (Preview)
+## GitHub Pages Deployment (Recommended)
+
+Since this project uses client-side routing, we use a `git subtree push` strategy to deploy the `dist` folder to the `gh-pages` branch.
+
+### One-Step Deployment
+Run this command from your terminal:
+
+```bash
+git add -f dist && git commit -m "Deploy artifacts" && git subtree push --prefix dist origin gh-pages && git reset HEAD~1
+```
+
+This command does the following:
+1.  Forces the `dist` folder (normally ignored) to be staged.
+2.  Commits it temporarily.
+3.  Pushes that folder to the `gh-pages` branch on GitHub.
+4.  Resets your local history to remove the temporary commit, keeping your main branch clean.
+
+### Verification
+- Visit: [https://ahmad44ahmad.github.io/Beneficiary-System-Clean-Backup/](https://ahmad44ahmad.github.io/Beneficiary-System-Clean-Backup/)
+- Note: Updates may take 1-2 minutes to appear.
+
+## Local Preview
 
 To preview the production build locally:
 
