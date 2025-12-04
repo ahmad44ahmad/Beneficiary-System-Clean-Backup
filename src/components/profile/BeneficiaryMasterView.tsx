@@ -5,6 +5,7 @@ import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { UnifiedTimeline } from './UnifiedTimeline';
 import { GlobalAlerts } from '../common/GlobalAlerts';
+import { RiskRegister } from '../quality/RiskRegister';
 import { DigitalAuditTool } from '../quality/DigitalAuditTool';
 import { EmpowermentPlanBuilder } from '../empowerment/EmpowermentPlanBuilder';
 import {
@@ -228,8 +229,13 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 )}
 
                 {activeTab === 'quality' && (
-                    <div className="bg-white p-6 rounded-lg shadow-sm">
-                        <DigitalAuditTool />
+                    <div className="space-y-6">
+                        <div className="bg-white p-6 rounded-lg shadow-sm">
+                            <RiskRegister />
+                        </div>
+                        <div className="bg-white p-6 rounded-lg shadow-sm">
+                            <DigitalAuditTool />
+                        </div>
                     </div>
                 )}
 
