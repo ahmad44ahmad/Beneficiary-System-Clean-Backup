@@ -63,7 +63,7 @@ export const VocationalEvaluationForm: React.FC<VocationalEvaluationFormProps> =
                 min="1"
                 max="5"
                 value={formData.scores![key]}
-                onChange={e => handleScoreChange(key, parseInt(e.target.value) || 0)}
+                onChange={e => handleScoreChange(key, parseInt(e.target.value, 10) || 0)}
                 required
             />
         </div>

@@ -95,7 +95,7 @@ export const ClothingRequestForm: React.FC<ClothingRequestFormProps> = ({ benefi
                                                 <input
                                                     type="number"
                                                     value={item.quantity}
-                                                    onChange={e => handleQuantityChange(item.itemId, parseInt(e.target.value))}
+                                                    onChange={e => handleQuantityChange(item.itemId, parseInt(e.target.value, 10))}
                                                     min="1"
                                                     max={invItem?.quantity}
                                                 />

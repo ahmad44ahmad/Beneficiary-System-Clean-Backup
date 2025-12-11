@@ -163,7 +163,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     <input
                                         type="number"
                                         value={vitals.pulse || ''}
-                                        onChange={e => setVitals({ ...vitals, pulse: parseInt(e.target.value) })}
+                                        onChange={e => setVitals({ ...vitals, pulse: parseInt(e.target.value, 10) })}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -171,7 +171,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     <input
                                         type="number"
                                         value={vitals.bloodPressureSystolic || ''}
-                                        onChange={e => setVitals({ ...vitals, bloodPressureSystolic: parseInt(e.target.value) })}
+                                        onChange={e => setVitals({ ...vitals, bloodPressureSystolic: parseInt(e.target.value, 10) })}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -179,7 +179,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     <input
                                         type="number"
                                         value={vitals.bloodPressureDiastolic || ''}
-                                        onChange={e => setVitals({ ...vitals, bloodPressureDiastolic: parseInt(e.target.value) })}
+                                        onChange={e => setVitals({ ...vitals, bloodPressureDiastolic: parseInt(e.target.value, 10) })}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -187,7 +187,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     <input
                                         type="number"
                                         value={vitals.oxygenSaturation || ''}
-                                        onChange={e => setVitals({ ...vitals, oxygenSaturation: parseInt(e.target.value) })}
+                                        onChange={e => setVitals({ ...vitals, oxygenSaturation: parseInt(e.target.value, 10) })}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -195,7 +195,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     <input
                                         type="number"
                                         value={vitals.respiratoryRate || ''}
-                                        onChange={e => setVitals({ ...vitals, respiratoryRate: parseInt(e.target.value) })}
+                                        onChange={e => setVitals({ ...vitals, respiratoryRate: parseInt(e.target.value, 10) })}
                                     />
                                 </div>
                             </div>

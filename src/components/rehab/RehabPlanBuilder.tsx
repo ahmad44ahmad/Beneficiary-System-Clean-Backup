@@ -302,7 +302,7 @@ export const RehabPlanBuilder: React.FC = () => {
                                         min="0"
                                         max="100"
                                         value={goal.progress}
-                                        onChange={e => updateGoal(goal.id, { progress: parseInt(e.target.value) })}
+                                        onChange={e => updateGoal(goal.id, { progress: parseInt(e.target.value, 10) })}
                                         className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
                                     />
                                 </div>
