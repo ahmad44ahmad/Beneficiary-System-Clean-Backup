@@ -1,38 +1,99 @@
 import React from 'react';
-import { Bell, Search, User } from 'lucide-react';
+import { Bell, Search, User, Menu, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useUser } from '../../context/UserContext';
+import { useLocation } from 'react-router-dom';
 
-export const Header = () => {
+interface HeaderProps {
+    onMenuClick?: () => void;
+}
+
+// Page titles mapping
+const pageTitles: Record<string, string> = {
+    '/dashboard': 'لوحة القيادة',
+    '/beneficiaries': 'المستفيدين',
+    '/medical': 'القسم الطبي',
+    '/social': 'الخدمات الاجتماعية',
+    '/daily-follow-up': 'المتابعة اليومية',
+    '/inventory': 'المستودع',
+    '/clothing': 'الكسوة',
+    '/training': 'التأهيل والتدريب',
+    '/support': 'الخدمات المساندة',
+    '/quality': 'الجودة',
+    '/secretariat': 'السكرتارية',
+    '/structure': 'الهيكل الإداري',
+    '/basira': 'مشروع بصيرة',
+    '/settings': 'الإعدادات',
+    '/reports': 'التقارير',
+};
+
+export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     const { currentUser } = useUser();
+    const location = useLocation();
+
+    // Get current page title
+    const getPageTitle = () => {
+        const path = location.pathname;
+        // Check exact match first
+        if (pageTitles[path]) return pageTitles[path];
+        // Check if path starts with any known path
+        for (const [key, value] of Object.entries(pageTitles)) {
+            if (path.startsWith(key)) return value;
+        }
+        return 'مركز التأهيل الشامل';
+    };
 
     return (
-        <header className="h-16 bg-gradient-to-r from-accent-teal to-primary border-b-4 border-secondary px-6 sticky top-0 z-10 flex items-center justify-between shadow-soft">
-            <div className="flex items-center gap-4 w-96">
+        <header className="h-16 bg-gradient-to-l from-hrsd-navy to-hrsd-navy-dark border-b border-hrsd-teal/20 px-4 md:px-6 sticky top-0 z-30 flex items-center justify-between shadow-md" dir="rtl">
+
+            {/* Mobile: Menu Button + Title */}
+            <div className="flex items-center gap-3 md:hidden">
+                <button
+                    onClick={onMenuClick}
+                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    aria-label="فتح القائمة"
+                >
+                    <Menu className="w-5 h-5 text-white" />
+                </button>
+                <div className="flex items-center gap-2">
+                    <img
+                        src="/assets/organization-logo.jpg"
+                        alt="شعار المركز"
+                        className="w-8 h-8 rounded-lg object-contain bg-white p-0.5"
+                    />
+                    <span className="font-bold text-white text-sm">{getPageTitle()}</span>
+                </div>
+            </div>
+
+            {/* Desktop: Search */}
+            <div className="hidden md:flex items-center gap-4 flex-1 max-w-md">
                 <div className="relative w-full">
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input
                         type="text"
                         placeholder="بحث عام..."
-                        className="w-full h-10 pr-10 pl-4 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-secondary transition-all"
+                        className="w-full h-10 pr-10 pl-4 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 focus:bg-white/10 transition-all text-sm"
                     />
                 </div>
             </div>
 
-            <div className="flex items-center gap-4">
-                <Button variant="ghost" size="sm" className="relative hover:bg-white/10 text-white">
+            {/* Notifications + User */}
+            <div className="flex items-center gap-2 md:gap-4">
+                {/* Notifications */}
+                <Button variant="ghost" size="sm" className="relative hover:bg-white/10 text-white p-2">
                     <Bell className="w-5 h-5" />
-                    <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-hrsd-orange rounded-full border-2 border-hrsd-navy animate-pulse"></span>
                 </Button>
 
-                <div className="flex items-center gap-3 pl-2 border-l border-white/20">
-                    <div className="text-left hidden md:block">
-                        <p className="text-base font-bold text-white leading-tight">{currentUser?.name}</p>
-                        <p className="text-xs text-secondary-200 font-medium opacity-90">حساب تجريبي</p>
+                {/* User Info */}
+                <div className="flex items-center gap-3 pr-2 md:pr-4 md:border-r border-white/10">
+                    <div className="text-right hidden md:block">
+                        <p className="text-sm font-bold text-white leading-tight">{currentUser?.name || 'مستخدم'}</p>
+                        <p className="text-xs text-hrsd-gold font-medium">حساب تجريبي</p>
                     </div>
-                    <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white border border-white/20 shadow-sm backdrop-blur-sm">
+                    <div className="w-10 h-10 bg-gradient-to-br from-hrsd-teal to-hrsd-teal-dark rounded-xl flex items-center justify-center text-white border border-white/20 shadow-md">
                         {currentUser?.avatar ? (
-                            <img src={currentUser.avatar} alt="Profile" className="w-full h-full rounded-full object-cover" />
+                            <img src={currentUser.avatar} alt="Profile" className="w-full h-full rounded-xl object-cover" />
                         ) : (
                             <User className="w-5 h-5" />
                         )}
@@ -42,3 +103,5 @@ export const Header = () => {
         </header>
     );
 };
+
+export default Header;

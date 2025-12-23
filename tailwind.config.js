@@ -7,54 +7,103 @@ export default {
     theme: {
         extend: {
             colors: {
+                // HRSD Official Brand Colors
+                hrsd: {
+                    navy: {
+                        DEFAULT: '#1a365d',
+                        dark: '#0f2744',
+                        light: '#2d4a7c',
+                    },
+                    teal: {
+                        DEFAULT: '#0d9488',
+                        dark: '#0a7469',
+                        light: '#14b8a6',
+                    },
+                    gold: {
+                        DEFAULT: '#eab308',
+                        dark: '#ca8a04',
+                        light: '#facc15',
+                    },
+                    orange: '#f97316',
+                    green: '#22c55e',
+                    red: '#ef4444',
+                },
+                // Legacy colors (keeping for compatibility)
                 primary: {
-                    DEFAULT: 'var(--primary-color)',
-                    light: 'var(--primary-light)',
-                    dark: 'var(--primary-dark)',
-                    50: '#fff8ed',
-                    100: '#ffedd6',
-                    200: '#ffd9ad',
-                    300: '#ffbf7a',
-                    400: '#ff9e47',
-                    500: '#F5961E',
-                    600: '#d9790f',
-                    700: '#b35d0b',
-                    800: '#8f4810',
-                    900: '#753c10',
+                    DEFAULT: '#0d9488',
+                    light: '#14b8a6',
+                    dark: '#0a7469',
                 },
                 secondary: {
-                    DEFAULT: 'var(--secondary-color)',
-                    bg: 'var(--secondary-bg)',
-                    50: '#fefce8',
-                    100: '#fff9c2',
-                    200: '#fff08a',
-                    300: '#ffe047',
-                    400: '#FAB414',
-                    500: '#eab308',
-                    600: '#ca8a04',
-                    700: '#a16207',
-                    800: '#854d0e',
-                    900: '#713f12',
+                    DEFAULT: '#eab308',
+                    bg: '#fefce8',
                 },
                 accent: {
-                    DEFAULT: 'var(--accent-teal)',
-                    teal: 'var(--accent-teal)',
-                    green: 'var(--accent-green)',
-                    blue: 'var(--accent-dark-blue)',
+                    DEFAULT: '#0d9488',
+                    teal: '#0d9488',
+                    green: '#22c55e',
+                    blue: '#1a365d',
+                    'dark-blue': '#1a365d',
                 },
-                surface: 'var(--white-color)',
+                surface: '#ffffff',
             },
             boxShadow: {
-                'soft': 'var(--shadow-soft)',
-                'glass': 'var(--shadow-glass)',
+                'soft': '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                'card': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                'card-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
             },
             borderRadius: {
-                'default': 'var(--radius)',
+                'default': '0.75rem',
+                '2xl': '1rem',
+                '3xl': '1.5rem',
             },
             fontFamily: {
-                sans: ['Tajawal', 'IBM Plex Sans Arabic', 'sans-serif'],
+                sans: ['Readex Pro', 'Tajawal', 'IBM Plex Sans Arabic', 'sans-serif'],
+                readex: ['Readex Pro', 'sans-serif'],
+            },
+            screens: {
+                'xs': '375px',
+                'sm': '640px',
+                'md': '768px',
+                'lg': '1024px',
+                'xl': '1280px',
+                '2xl': '1536px',
+                // iPhone Pro Max specific
+                'iphone-pro-max': '430px',
+            },
+            spacing: {
+                'safe-bottom': 'env(safe-area-inset-bottom)',
+                'safe-top': 'env(safe-area-inset-top)',
+                'mobile-nav': '64px',
+                'sidebar': '280px',
+            },
+            animation: {
+                'fade-in': 'fadeIn 0.3s ease-out forwards',
+                'slide-up': 'slideUp 0.4s ease-out forwards',
+                'slide-right': 'slideRight 0.3s ease-out forwards',
+                'pulse-soft': 'pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0', transform: 'translateY(10px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                slideUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                slideRight: {
+                    '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                    '100%': { opacity: '1', transform: 'translateX(0)' },
+                },
+                pulseSoft: {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0.7' },
+                },
             },
         },
     },
     plugins: [],
 };
+

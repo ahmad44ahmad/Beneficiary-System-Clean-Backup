@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
     LayoutDashboard,
     Users,
@@ -14,84 +14,252 @@ import {
     Building2,
     CheckCircle2,
     Network,
-    Sparkles
+    Sparkles,
+    X,
+    ChevronDown,
+    ChevronLeft,
+    Home,
+    Bell,
+    LogOut,
+    AlertTriangle,
+    Shield,
+    Heart
 } from 'lucide-react';
-import { cn } from '../ui/Button';
 
-export const Sidebar = () => {
-    const navItems = [
-        { to: '/dashboard', icon: LayoutDashboard, label: 'لوحة القيادة' },
-        { to: '/basira', icon: Sparkles, label: 'مشروع بصيرة' },
-        { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
-        { to: '/medical', icon: Stethoscope, label: 'القسم الطبي' },
-        { to: '/social', icon: Activity, label: 'الخدمات الاجتماعية' },
-        { to: '/reports/strategic', icon: FileText, label: 'التقارير الاستراتيجية' },
-        { to: '/inventory', icon: Package, label: 'المستودع' },
-        { to: '/clothing', icon: Shirt, label: 'الكسوة' },
-        { to: '/training', icon: GraduationCap, label: 'التأهيل والتدريب' },
-        { to: '/support', icon: Building2, label: 'الخدمات المساندة' },
-        { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
-        { to: '/secretariat', icon: FileText, label: 'السكرتارية' },
-        { to: '/structure', icon: Network, label: 'الهيكل الإداري' },
-        { to: '/daily-follow-up', icon: CalendarCheck, label: 'المتابعة اليومية' },
+interface SidebarProps {
+    isOpen?: boolean;
+    onClose?: () => void;
+    isMobile?: boolean;
+}
+
+interface NavSection {
+    title: string;
+    items: NavItem[];
+}
+
+interface NavItem {
+    to: string;
+    icon: React.ElementType;
+    label: string;
+    badge?: number;
+    children?: { to: string; label: string }[];
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobile = false }) => {
+    const location = useLocation();
+    const [expandedSections, setExpandedSections] = useState<string[]>(['main']);
+
+    // Organized navigation by department
+    const navSections: NavSection[] = [
+        {
+            title: 'الرئيسية',
+            items: [
+                { to: '/dashboard', icon: LayoutDashboard, label: 'لوحة القيادة' },
+                { to: '/basira', icon: Sparkles, label: 'مشروع بصيرة' },
+                { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
+            ]
+        },
+        {
+            title: 'الخدمات الطبية',
+            items: [
+                { to: '/medical', icon: Stethoscope, label: 'الملف الطبي' },
+                { to: '/daily-follow-up', icon: CalendarCheck, label: 'المتابعة اليومية' },
+            ]
+        },
+        {
+            title: 'الخدمات الاجتماعية',
+            items: [
+                { to: '/social', icon: Heart, label: 'الرعاية الاجتماعية' },
+                { to: '/training', icon: GraduationCap, label: 'التأهيل والتدريب' },
+            ]
+        },
+        {
+            title: 'الجودة والمخاطر',
+            items: [
+                { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
+                { to: '/reports/strategic', icon: FileText, label: 'التقارير' },
+            ]
+        },
+        {
+            title: 'الخدمات المساندة',
+            items: [
+                { to: '/inventory', icon: Package, label: 'المستودع' },
+                { to: '/clothing', icon: Shirt, label: 'الكسوة' },
+                { to: '/support', icon: Building2, label: 'الخدمات المساندة' },
+            ]
+        },
+        {
+            title: 'الإدارة',
+            items: [
+                { to: '/secretariat', icon: FileText, label: 'السكرتارية' },
+                { to: '/structure', icon: Network, label: 'الهيكل الإداري' },
+            ]
+        }
     ];
 
-    return (
-        <aside className="w-80 text-white flex flex-col h-screen border-l border-accent-teal z-50 shadow-xl flex-shrink-0 bg-accent-dark-blue">
-            <div className="p-6 border-b border-accent-teal flex items-center gap-4 bg-black/20">
-                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg p-1">
-                    <img src="/assets/organization-logo.jpg" alt="Organization Logo" className="w-full h-full object-contain rounded-lg" />
-                </div>
-                <div>
-                    <h1 className="font-bold text-base leading-tight">مركز التأهيل الشامل</h1>
-                    <p className="text-secondary text-xs mt-1 font-medium">وزارة الموارد البشرية والتنمية الاجتماعية</p>
-                </div>
-            </div>
+    const toggleSection = (title: string) => {
+        setExpandedSections(prev =>
+            prev.includes(title)
+                ? prev.filter(s => s !== title)
+                : [...prev, title]
+        );
+    };
 
-            <nav className="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar">
-                {navItems.map((item) => (
+    const handleNavClick = () => {
+        if (isMobile && onClose) {
+            onClose();
+        }
+    };
+
+    const sidebarClasses = isMobile
+        ? `sidebar-drawer ${isOpen ? 'open' : ''}`
+        : 'w-72 text-white flex flex-col h-screen border-l border-hrsd-teal/20 shadow-xl flex-shrink-0 bg-hrsd-navy desktop-only';
+
+    return (
+        <>
+            {/* Overlay for mobile */}
+            {isMobile && (
+                <div
+                    className={`sidebar-overlay ${isOpen ? 'open' : ''}`}
+                    onClick={onClose}
+                />
+            )}
+
+            <aside className={sidebarClasses} dir="rtl">
+                {/* Header */}
+                <div className="p-4 border-b border-white/10 flex items-center justify-between bg-hrsd-navy-dark">
+                    <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg p-1">
+                            <img
+                                src="/assets/organization-logo.jpg"
+                                alt="شعار المركز"
+                                className="w-full h-full object-contain rounded-lg"
+                            />
+                        </div>
+                        <div>
+                            <h1 className="font-bold text-sm leading-tight text-white">مركز التأهيل الشامل</h1>
+                            <p className="text-hrsd-gold text-xs mt-0.5 font-medium">وزارة الموارد البشرية</p>
+                        </div>
+                    </div>
+
+                    {isMobile && (
+                        <button
+                            onClick={onClose}
+                            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                            aria-label="إغلاق القائمة"
+                        >
+                            <X className="w-5 h-5 text-white" />
+                        </button>
+                    )}
+                </div>
+
+                {/* User Quick Actions (Mobile) */}
+                {isMobile && (
+                    <div className="p-4 border-b border-white/10 bg-hrsd-navy-dark/50">
+                        <div className="flex items-center justify-around">
+                            <NavLink
+                                to="/dashboard"
+                                onClick={handleNavClick}
+                                className="flex flex-col items-center gap-1 p-2 hover:bg-white/10 rounded-lg transition-colors"
+                            >
+                                <Home className="w-5 h-5 text-hrsd-gold" />
+                                <span className="text-[10px] text-white/80">الرئيسية</span>
+                            </NavLink>
+                            <button className="flex flex-col items-center gap-1 p-2 hover:bg-white/10 rounded-lg transition-colors relative">
+                                <Bell className="w-5 h-5 text-white" />
+                                <span className="absolute top-1 right-1 w-2 h-2 bg-hrsd-orange rounded-full"></span>
+                                <span className="text-[10px] text-white/80">الإشعارات</span>
+                            </button>
+                            <button className="flex flex-col items-center gap-1 p-2 hover:bg-white/10 rounded-lg transition-colors">
+                                <LogOut className="w-5 h-5 text-white" />
+                                <span className="text-[10px] text-white/80">خروج</span>
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Navigation */}
+                <nav className="flex-1 p-3 overflow-y-auto hrsd-scrollbar">
+                    {navSections.map((section, idx) => (
+                        <div key={section.title} className="mb-3">
+                            {/* Section Header */}
+                            <button
+                                onClick={() => toggleSection(section.title)}
+                                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-hrsd-gold/80 uppercase tracking-wider hover:text-hrsd-gold transition-colors"
+                            >
+                                <span>{section.title}</span>
+                                <ChevronDown
+                                    className={`w-4 h-4 transition-transform ${expandedSections.includes(section.title) ? 'rotate-180' : ''
+                                        }`}
+                                />
+                            </button>
+
+                            {/* Section Items */}
+                            {expandedSections.includes(section.title) && (
+                                <div className="space-y-1 mt-1">
+                                    {section.items.map((item) => (
+                                        <NavLink
+                                            key={item.to}
+                                            to={item.to}
+                                            onClick={handleNavClick}
+                                            className={({ isActive }) =>
+                                                `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-sm font-medium group ${isActive
+                                                    ? 'bg-hrsd-teal text-white shadow-md'
+                                                    : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                                }`
+                                            }
+                                        >
+                                            {({ isActive }) => (
+                                                <>
+                                                    <item.icon className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-400 group-hover:text-white'
+                                                        }`} />
+                                                    <span>{item.label}</span>
+                                                    {item.badge && (
+                                                        <span className="mr-auto bg-hrsd-orange text-white text-xs px-2 py-0.5 rounded-full">
+                                                            {item.badge}
+                                                        </span>
+                                                    )}
+                                                </>
+                                            )}
+                                        </NavLink>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </nav>
+
+                {/* Settings */}
+                <div className="p-3 border-t border-white/10 bg-hrsd-navy-dark/50">
                     <NavLink
-                        key={item.to}
-                        to={item.to}
+                        to="/settings"
+                        onClick={handleNavClick}
                         className={({ isActive }) =>
-                            cn(
-                                'flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all text-base font-medium group',
-                                isActive
-                                    ? 'bg-accent-teal text-secondary shadow-md translate-x-[-4px]'
-                                    : 'text-gray-300 hover:text-white hover:bg-white/5 hover:translate-x-[-2px]'
-                            )
+                            `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-sm font-medium group ${isActive
+                                ? 'bg-hrsd-teal text-white shadow-md'
+                                : 'text-gray-300 hover:text-white hover:bg-white/5'
+                            }`
                         }
                     >
                         {({ isActive }) => (
                             <>
-                                <item.icon className={cn("w-5 h-5 transition-colors", isActive ? "text-secondary" : "text-gray-400 group-hover:text-white")} />
-                                {item.label}
+                                <Settings className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-400 group-hover:text-white'
+                                    }`} />
+                                <span>الإعدادات</span>
                             </>
                         )}
                     </NavLink>
-                ))}
-            </nav>
+                </div>
 
-            <div className="p-4 border-t border-accent-teal bg-black/20">
-                <NavLink
-                    to="/settings"
-                    className={({ isActive }) =>
-                        cn(
-                            'flex items-center gap-3 px-4 py-3.5 rounded-xl transition-colors text-base font-medium group',
-                            isActive
-                                ? 'bg-accent-teal text-secondary shadow-md'
-                                : 'text-gray-300 hover:text-white hover:bg-white/5'
-                        )
-                    }
-                >
-                    {({ isActive }) => (
-                        <>
-                            <Settings className={cn("w-5 h-5 transition-colors", isActive ? "text-secondary" : "text-gray-400 group-hover:text-white")} />
-                            الإعدادات
-                        </>
-                    )}
-                </NavLink>
-            </div>
-        </aside>
+                {/* Designer Credit */}
+                <div className="p-3 border-t border-white/10 text-center">
+                    <p className="text-[10px] text-gray-500">
+                        تصميم وتطوير: <span className="text-hrsd-gold">أحمد الشهري</span>
+                    </p>
+                </div>
+            </aside>
+        </>
     );
 };
+
+export default Sidebar;
