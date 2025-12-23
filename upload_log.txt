@@ -1,0 +1,11 @@
+📖 Reading beneficiaries from file...
+Could not parse with eval, using regex extraction instead
+✓ Found 147 beneficiaries
+🔄 Converting to Supabase format...
+📤 Uploading 147 records to Supabase...
+  ✗ Error uploading batch 1: {'message': 'invalid input syntax for type uuid: "1401"', 'code': '22P02', 'hint': None, 'details': None}
+  ✗ Error uploading batch 2: {'message': 'invalid input syntax for type uuid: "5512"', 'code': '22P02', 'hint': None, 'details': None}
+  ✗ Error uploading batch 3: {'message': 'invalid input syntax for type uuid: "3996"', 'code': '22P02', 'hint': None, 'details': None}
+
+✅ Upload complete! Uploaded 0 beneficiaries
+📊 Total beneficiaries in database: 6
