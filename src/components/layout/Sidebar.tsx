@@ -113,7 +113,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
 
     const sidebarClasses = isMobile
         ? `sidebar-drawer ${isOpen ? 'open' : ''}`
-        : 'w-72 text-white flex flex-col h-screen border-l border-hrsd-teal/20 shadow-xl flex-shrink-0 bg-hrsd-navy desktop-only';
+        : 'w-[300px] text-white flex flex-col h-screen border-l-4 border-[rgb(245,150,30)] shadow-xl flex-shrink-0 bg-[rgb(20,65,90)] desktop-only';
 
     return (
         <>
@@ -126,19 +126,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             )}
 
             <aside className={sidebarClasses} dir="rtl">
-                {/* Header */}
-                <div className="p-4 border-b border-white/10 flex items-center justify-between bg-hrsd-navy-dark">
-                    <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg p-1">
+                {/* Header with colored frame: Orange border, Teal accent */}
+                <div className="p-5 border-b-2 border-[rgb(245,150,30)] flex items-center justify-between bg-[rgb(10,45,65)]">
+                    <div className="flex items-center gap-4">
+                        {/* HRSD Official Logo - Larger size */}
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 border-2 border-[rgb(45,180,115)]">
                             <img
-                                src="/assets/organization-logo.jpg"
-                                alt="شعار المركز"
-                                className="w-full h-full object-contain rounded-lg"
+                                src="/assets/hrsd-logo.png"
+                                alt="شعار وزارة الموارد البشرية"
+                                className="w-full h-full object-contain"
                             />
                         </div>
                         <div>
-                            <h1 className="font-bold text-sm leading-tight text-white">مركز التأهيل الشامل</h1>
-                            <p className="text-hrsd-gold text-xs mt-0.5 font-medium">وزارة الموارد البشرية</p>
+                            <h1 className="font-bold text-lg leading-tight text-[rgb(250,180,20)]">مركز التأهيل الشامل</h1>
+                            <p className="text-[rgb(45,180,115)] text-sm mt-1 font-semibold">وزارة الموارد البشرية</p>
                         </div>
                     </div>
 
@@ -148,7 +149,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                             aria-label="إغلاق القائمة"
                         >
-                            <X className="w-5 h-5 text-white" />
+                            <X className="w-6 h-6 text-[rgb(250,180,20)]" />
                         </button>
                     )}
                 </div>
@@ -251,10 +252,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                     </NavLink>
                 </div>
 
-                {/* Designer Credit */}
-                <div className="p-3 border-t border-white/10 text-center">
-                    <p className="text-[10px] text-gray-500">
-                        تصميم وتطوير: <span className="text-hrsd-gold">أحمد الشهري</span>
+                {/* Designer Credit with Logo */}
+                <div className="p-4 border-t-2 border-[rgb(245,150,30)] bg-[rgb(10,45,65)] flex flex-col items-center gap-3">
+                    <img
+                        src="/assets/designer-logo.jpg"
+                        alt="أحمد الشهري"
+                        className="h-12 w-auto opacity-90"
+                    />
+                    <p className="text-sm text-[rgb(250,180,20)] font-semibold">
+                        تصميم وتطوير: أحمد الشهري
                     </p>
                 </div>
             </aside>

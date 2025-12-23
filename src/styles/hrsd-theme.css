@@ -2,65 +2,114 @@
  * HRSD Visual Identity Theme
  * Ministry of Human Resources and Social Development
  * Designer: أحمد الشهري
+ * Official Colors from HRSD Brand Guidelines
  */
 
 :root {
-  /* ===== HRSD Official Colors ===== */
-  --hrsd-navy: #1a365d;
-  --hrsd-navy-dark: #0f2744;
-  --hrsd-navy-light: #2d4a7c;
-  
-  --hrsd-teal: #0d9488;
-  --hrsd-teal-dark: #0a7469;
-  --hrsd-teal-light: #14b8a6;
-  
-  --hrsd-gold: #eab308;
-  --hrsd-gold-dark: #ca8a04;
-  --hrsd-gold-light: #facc15;
-  
-  --hrsd-orange: #f97316;
-  --hrsd-green: #22c55e;
-  --hrsd-red: #ef4444;
-  
+  /* ===== HRSD Official Colors (Exact RGB from Pantone) ===== */
+  /* Pantone 1375 C - Orange */
+  --hrsd-orange: rgb(245, 150, 30);
+  --hrsd-orange-light: rgb(255, 180, 80);
+
+  /* Pantone 1235 C - Gold */
+  --hrsd-gold: rgb(250, 180, 20);
+  --hrsd-gold-light: rgb(255, 200, 60);
+  --hrsd-gold-dark: rgb(200, 140, 10);
+
+  /* Pantone 3385 C - Green */
+  --hrsd-green: rgb(45, 180, 115);
+  --hrsd-green-light: rgb(80, 200, 140);
+  --hrsd-green-dark: rgb(30, 150, 90);
+
+  /* Pantone 2237 C - Teal */
+  --hrsd-teal: rgb(20, 130, 135);
+  --hrsd-teal-light: rgb(40, 160, 165);
+  --hrsd-teal-dark: rgb(10, 100, 105);
+
+  /* Pantone 3025 C - Navy Blue */
+  --hrsd-navy: rgb(20, 65, 90);
+  --hrsd-navy-light: rgb(40, 90, 120);
+  --hrsd-navy-dark: rgb(10, 45, 65);
+
   /* ===== Background Colors ===== */
   --hrsd-bg-light: #f8fafc;
   --hrsd-bg-white: #ffffff;
   --hrsd-bg-gray: #f1f5f9;
-  
-  /* ===== Text Colors ===== */
-  --hrsd-text-primary: #1e293b;
-  --hrsd-text-secondary: #64748b;
-  --hrsd-text-muted: #94a3b8;
+
+  /* ===== Text Colors (High Contrast) ===== */
+  --hrsd-text-primary: rgb(20, 65, 90);
+  --hrsd-text-secondary: rgb(60, 100, 130);
+  --hrsd-text-on-dark: rgb(250, 180, 20);
+  /* Gold on dark backgrounds */
   --hrsd-text-white: #ffffff;
-  
+
+  /* ===== Minimum Font Size ===== */
+  --hrsd-font-min: 14px;
+  --hrsd-font-base: 16px;
+  --hrsd-font-lg: 18px;
+  --hrsd-font-xl: 20px;
+  --hrsd-font-2xl: 24px;
+
   /* ===== Shadows ===== */
   --hrsd-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --hrsd-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --hrsd-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --hrsd-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
+
   /* ===== Border Radius ===== */
   --hrsd-radius-sm: 0.375rem;
   --hrsd-radius-md: 0.5rem;
   --hrsd-radius-lg: 0.75rem;
   --hrsd-radius-xl: 1rem;
   --hrsd-radius-2xl: 1.5rem;
-  
+
   /* ===== Transitions ===== */
   --hrsd-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --hrsd-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* ===== Z-Index Layers ===== */
   --z-sidebar: 40;
   --z-header: 30;
   --z-mobile-nav: 50;
   --z-modal: 100;
   --z-alert: 90;
-  
-  /* ===== Mobile Breakpoints ===== */
-  --mobile-nav-height: 64px;
-  --sidebar-width: 280px;
-  --header-height: 64px;
+
+  /* ===== Layout Sizes ===== */
+  --mobile-nav-height: 72px;
+  --sidebar-width: 300px;
+  --header-height: 72px;
+  --logo-size-sm: 48px;
+  --logo-size-md: 64px;
+  --logo-size-lg: 80px;
+}
+
+/* ===== Global Font Size Minimum ===== */
+html {
+  font-size: var(--hrsd-font-base);
+}
+
+body {
+  font-size: var(--hrsd-font-min);
+  line-height: 1.6;
+}
+
+/* Ensure no text is smaller than 14px */
+* {
+  min-height: 0;
+}
+
+p,
+span,
+a,
+li,
+td,
+th,
+label,
+input,
+select,
+textarea,
+button {
+  font-size: max(inherit, var(--hrsd-font-min));
 }
 
 /* ===== Wave Pattern Background ===== */
@@ -258,7 +307,7 @@
   .desktop-only {
     display: none !important;
   }
-  
+
   .main-content {
     padding-bottom: calc(var(--mobile-nav-height) + 1rem);
   }
@@ -268,7 +317,7 @@
   .mobile-only {
     display: none !important;
   }
-  
+
   .mobile-nav {
     display: none;
   }
@@ -280,6 +329,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -291,6 +341,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -298,9 +349,12 @@
 }
 
 @keyframes hrsd-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
