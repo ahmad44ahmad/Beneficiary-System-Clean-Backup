@@ -4,9 +4,12 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 
+import { RiskAlertSystem } from '../safety/RiskAlertSystem';
+
 export const MainLayout = () => {
     return (
         <div className="flex h-screen bg-gradient-to-br from-slate-50 to-slate-200 font-sans overflow-hidden" dir="rtl">
+            <RiskAlertSystem />
             {/* Sidebar should be fixed width or shrinkable, usually standard width */}
             <div className="shrink-0">
                 <Sidebar />

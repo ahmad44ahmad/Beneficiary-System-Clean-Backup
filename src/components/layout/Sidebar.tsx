@@ -13,13 +13,15 @@ import {
     GraduationCap,
     Building2,
     CheckCircle2,
-    Network
+    Network,
+    Sparkles
 } from 'lucide-react';
 import { cn } from '../ui/Button';
 
 export const Sidebar = () => {
     const navItems = [
         { to: '/dashboard', icon: LayoutDashboard, label: 'لوحة القيادة' },
+        { to: '/basira', icon: Sparkles, label: 'مشروع بصيرة' },
         { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
         { to: '/medical', icon: Stethoscope, label: 'القسم الطبي' },
         { to: '/social', icon: Activity, label: 'الخدمات الاجتماعية' },

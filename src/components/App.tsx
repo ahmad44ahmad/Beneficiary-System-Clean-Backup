@@ -27,6 +27,9 @@ import { QualityDashboard } from '../pages/QualityDashboard';
 import { ReportsDashboard } from './reports/ReportsDashboard';
 import { TrainingDashboard } from '../pages/TrainingDashboard';
 import { SecretariatDashboard } from './secretariat/SecretariatDashboard';
+import { ExecutiveDashboard } from './dashboard/ExecutiveDashboard';
+import { DailyCareForm } from './care/DailyCareForm';
+import { FallRiskAssessment } from './safety/FallRiskAssessment';
 
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
@@ -183,6 +186,21 @@ export const App = () => {
                     } />
 
                     <Route path="structure" element={<OrgStructurePage />} />
+                    <Route path="basira" element={<ExecutiveDashboard />} />
+                    <Route path="basira/care" element={
+                        <DailyCareForm
+                            beneficiaryName="تجربة - عبدالله صالح"
+                            beneficiaryId="demo-1"
+                            onSubmit={(data) => console.log(data)}
+                        />
+                    } />
+                    <Route path="basira/safety" element={
+                        <FallRiskAssessment
+                            beneficiaryName="تجربة - عبدالله صالح"
+                            beneficiaryId="demo-1"
+                            onSave={(data) => console.log(data)}
+                        />
+                    } />
                 </Route>
             </Routes >
 

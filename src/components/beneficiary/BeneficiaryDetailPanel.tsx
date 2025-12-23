@@ -19,7 +19,10 @@ import {
     Stethoscope,
     MessageSquare,
     Brain,
-    Smile
+    Smile,
+    Files,
+    Clipboard,
+    ShieldAlert
 } from 'lucide-react';
 import { MedicalDashboard } from '../medical/MedicalDashboard';
 
@@ -29,6 +32,9 @@ const SpeechTherapyDashboard = lazy(() => import('../medical/speech/SpeechTherap
 const PsychologyDashboard = lazy(() => import('../medical/psychology/PsychologyDashboard').then(module => ({ default: module.PsychologyDashboard })));
 const DentalDashboard = lazy(() => import('../medical/dental/DentalDashboard').then(module => ({ default: module.DentalDashboard })));
 const SocialDashboard = lazy(() => import('../social/SocialDashboard').then(module => ({ default: module.SocialDashboard })));
+const ComprehensiveMedicalProfile = lazy(() => import('../medical/ComprehensiveMedicalProfile').then(module => ({ default: module.ComprehensiveMedicalProfile })));
+const DailyCareForm = lazy(() => import('../care/DailyCareForm').then(module => ({ default: module.DailyCareForm })));
+const FallRiskAssessment = lazy(() => import('../safety/FallRiskAssessment').then(module => ({ default: module.FallRiskAssessment })));
 
 interface BeneficiaryDetailPanelProps {
     beneficiary: Beneficiary | null;
@@ -64,7 +70,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
     postCareFollowUps
 }) => {
     // Extended set of tabs
-    const [activeTab, setActiveTab] = useState<'dignity' | 'medical' | 'pt' | 'st' | 'psych' | 'dental' | 'rehab' | 'social' | 'family' | 'training'>('dignity');
+    const [activeTab, setActiveTab] = useState<'dignity' | 'basira_medical' | 'care' | 'safety' | 'medical' | 'pt' | 'st' | 'psych' | 'dental' | 'rehab' | 'social' | 'family' | 'training'>('dignity');
 
     if (!beneficiary) {
         return (
@@ -110,7 +116,10 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
 
     const tabs = [
         { id: 'dignity', label: 'راحتي (Dignity)', icon: Heart },
-        { id: 'medical', label: 'الملف الطبي', icon: HeartPulse },
+        { id: 'basira_medical', label: 'الملف الطبي الشامل', icon: Files },
+        { id: 'care', label: 'العناية اليومية', icon: Clipboard },
+        { id: 'safety', label: 'الخطر والسقوط', icon: ShieldAlert },
+        { id: 'medical', label: 'السجل الطبي', icon: HeartPulse },
         { id: 'pt', label: 'العلاج الطبيعي', icon: Stethoscope },
         { id: 'st', label: 'النطق والتخاطب', icon: MessageSquare },
         { id: 'psych', label: 'الخدمات النفسية', icon: Brain },
@@ -171,6 +180,24 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                         <MedicalDashboard
                             beneficiary={beneficiary}
                             medicalExams={relevantMedicalExams}
+                        />
+                    )}
+
+                    {activeTab === 'basira_medical' && (
+                        <ComprehensiveMedicalProfile beneficiaryId={beneficiary.id} />
+                    )}
+
+                    {activeTab === 'care' && (
+                        <DailyCareForm
+                            beneficiaryName={beneficiaryName}
+                            beneficiaryId={beneficiary.id}
+                        />
+                    )}
+
+                    {activeTab === 'safety' && (
+                        <FallRiskAssessment
+                            beneficiaryName={beneficiaryName}
+                            beneficiaryId={beneficiary.id}
                         />
                     )}
 
