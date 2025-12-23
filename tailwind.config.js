@@ -59,7 +59,8 @@ export default {
                 '3xl': '1.5rem',
             },
             fontFamily: {
-                sans: ['Readex Pro', 'Tajawal', 'IBM Plex Sans Arabic', 'sans-serif'],
+                sans: ['effra-arabic', 'effra-cc-arabic', 'Readex Pro', 'Tajawal', 'sans-serif'],
+                effra: ['effra-arabic', 'effra-cc-arabic', 'sans-serif'],
                 readex: ['Readex Pro', 'sans-serif'],
             },
             screens: {
