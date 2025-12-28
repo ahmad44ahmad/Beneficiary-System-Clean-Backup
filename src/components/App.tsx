@@ -30,6 +30,12 @@ import { SecretariatDashboard } from './secretariat/SecretariatDashboard';
 import { ExecutiveDashboard } from './dashboard/ExecutiveDashboard';
 import { DailyCareForm } from './care/DailyCareForm';
 import { FallRiskAssessment } from './safety/FallRiskAssessment';
+import { QualityControl } from '../modules/catering/QualityControl';
+import { QualityDashboard as CateringQualityDashboard } from '../modules/catering/QualityDashboard';
+import { CateringDashboard } from '../modules/catering/CateringDashboard';
+import { CateringDailyLog } from '../modules/catering/CateringDailyLog';
+import { CateringReports } from '../modules/catering/CateringReports';
+import { MonthlyInvoice } from '../modules/catering/MonthlyInvoice';
 
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
@@ -201,6 +207,15 @@ export const App = () => {
                             onSave={(data) => console.log(data)}
                         />
                     } />
+
+                    {/* Catering Module Routes */}
+                    <Route path="catering" element={<CateringDashboard />} />
+                    <Route path="catering/daily-log" element={<CateringDailyLog />} />
+                    <Route path="catering/reports" element={<CateringReports />} />
+                    <Route path="catering/quality" element={<QualityControl />} />
+                    <Route path="catering/quality-dashboard" element={<CateringQualityDashboard />} />
+                    <Route path="catering/invoice" element={<MonthlyInvoice />} />
+
                 </Route>
             </Routes >
 
