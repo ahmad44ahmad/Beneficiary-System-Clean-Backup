@@ -41,6 +41,11 @@ import { MonthlyInvoice } from '../modules/catering/MonthlyInvoice';
 import { OperationsDashboard } from '../modules/operations/OperationsDashboard';
 import { AssetRegistry } from '../modules/operations/AssetRegistry';
 import { WasteManagement } from '../modules/operations/WasteManagement';
+import { PreventiveMaintenance } from '../modules/operations/PreventiveMaintenance';
+import { MaintenanceRequests } from '../modules/operations/MaintenanceRequests';
+
+// Strategic Dashboard
+import { StrategicKPIDashboard } from './dashboard/StrategicKPIDashboard';
 
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
@@ -225,6 +230,12 @@ export const App = () => {
                     <Route path="operations" element={<OperationsDashboard />} />
                     <Route path="operations/assets" element={<AssetRegistry />} />
                     <Route path="operations/waste" element={<WasteManagement />} />
+                    <Route path="operations/preventive" element={<PreventiveMaintenance />} />
+                    <Route path="operations/maintenance" element={<MaintenanceRequests />} />
+                    <Route path="operations/maintenance/new" element={<MaintenanceRequests />} />
+
+                    {/* Strategic Dashboard */}
+                    <Route path="strategic" element={<StrategicKPIDashboard />} />
 
                 </Route>
             </Routes >
