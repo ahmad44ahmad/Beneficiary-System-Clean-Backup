@@ -37,6 +37,11 @@ import { CateringDailyLog } from '../modules/catering/CateringDailyLog';
 import { CateringReports } from '../modules/catering/CateringReports';
 import { MonthlyInvoice } from '../modules/catering/MonthlyInvoice';
 
+// Operations & Maintenance Module
+import { OperationsDashboard } from '../modules/operations/OperationsDashboard';
+import { AssetRegistry } from '../modules/operations/AssetRegistry';
+import { WasteManagement } from '../modules/operations/WasteManagement';
+
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
 
@@ -215,6 +220,11 @@ export const App = () => {
                     <Route path="catering/quality" element={<QualityControl />} />
                     <Route path="catering/quality-dashboard" element={<CateringQualityDashboard />} />
                     <Route path="catering/invoice" element={<MonthlyInvoice />} />
+
+                    {/* Operations & Maintenance Module Routes */}
+                    <Route path="operations" element={<OperationsDashboard />} />
+                    <Route path="operations/assets" element={<AssetRegistry />} />
+                    <Route path="operations/waste" element={<WasteManagement />} />
 
                 </Route>
             </Routes >

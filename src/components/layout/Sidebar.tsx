@@ -24,7 +24,8 @@ import {
     AlertTriangle,
     Shield,
     Heart,
-    Utensils
+    Utensils,
+    Wrench
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -88,6 +89,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                 { to: '/inventory', icon: Package, label: 'المستودع' },
                 { to: '/clothing', icon: Shirt, label: 'الكسوة' },
                 { to: '/support', icon: Building2, label: 'الخدمات المساندة' },
+                { to: '/operations', icon: Wrench, label: 'التشغيل والصيانة' },
             ]
         },
         {
