@@ -80,6 +80,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             title: 'الجودة والمخاطر',
             items: [
                 { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
+                { to: '/grc', icon: Shield, label: 'الحوكمة والمخاطر' },
                 { to: '/reports/strategic', icon: FileText, label: 'التقارير' },
             ]
         },

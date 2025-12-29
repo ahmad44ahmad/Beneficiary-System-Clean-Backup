@@ -47,6 +47,11 @@ import { MaintenanceRequests } from '../modules/operations/MaintenanceRequests';
 // Strategic Dashboard
 import { StrategicKPIDashboard } from './dashboard/StrategicKPIDashboard';
 
+// GRC Module (Governance, Risk, Compliance)
+import { GRCDashboard } from '../modules/grc/GRCDashboard';
+import { RiskRegister } from '../modules/grc/RiskRegister';
+import { ComplianceTracker } from '../modules/grc/ComplianceTracker';
+
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
 
@@ -236,6 +241,12 @@ export const App = () => {
 
                     {/* Strategic Dashboard */}
                     <Route path="strategic" element={<StrategicKPIDashboard />} />
+
+                    {/* GRC Module Routes */}
+                    <Route path="grc" element={<GRCDashboard />} />
+                    <Route path="grc/risks" element={<RiskRegister />} />
+                    <Route path="grc/risks/new" element={<RiskRegister />} />
+                    <Route path="grc/compliance" element={<ComplianceTracker />} />
 
                 </Route>
             </Routes >

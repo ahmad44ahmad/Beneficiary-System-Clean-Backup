@@ -1,0 +1,433 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { supabase } from '../../config/supabase';
+import {
+    AlertTriangle,
+    Plus,
+    ArrowLeft,
+    Search,
+    Filter,
+    Eye,
+    Edit,
+    CheckCircle2,
+    XCircle,
+    Clock,
+    Target,
+    Save
+} from 'lucide-react';
+
+// HRSD Colors
+const HRSD = {
+    orange: 'rgb(245, 150, 30)',
+    gold: 'rgb(250, 180, 20)',
+    green: 'rgb(45, 180, 115)',
+    teal: 'rgb(20, 130, 135)',
+    navy: 'rgb(20, 65, 90)',
+};
+
+interface Risk {
+    id: string;
+    risk_code: string;
+    title_ar: string;
+    description: string;
+    category_id: string;
+    likelihood: number;
+    impact: number;
+    risk_score: number;
+    risk_level: string;
+    risk_owner: string;
+    response_strategy: string;
+    mitigation_action: string;
+    status: string;
+    identified_date: string;
+}
+
+const RISK_CATEGORIES = [
+    { id: 'operational', name: 'تشغيلية' },
+    { id: 'financial', name: 'مالية' },
+    { id: 'compliance', name: 'امتثال' },
+    { id: 'strategic', name: 'استراتيجية' },
+    { id: 'reputational', name: 'سمعة' },
+    { id: 'safety', name: 'سلامة' },
+];
+
+export const RiskRegister: React.FC = () => {
+    const [risks, setRisks] = useState<Risk[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterLevel, setFilterLevel] = useState('all');
+    const [showForm, setShowForm] = useState(false);
+    const [formData, setFormData] = useState({
+        risk_code: `RISK-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 999)).padStart(3, '0')}`,
+        title_ar: '',
+        description: '',
+        category_id: 'operational',
+        likelihood: 3,
+        impact: 3,
+        risk_owner: '',
+        response_strategy: 'mitigate',
+        mitigation_action: '',
+        status: 'identified'
+    });
+
+    useEffect(() => {
+        fetchRisks();
+    }, []);
+
+    const fetchRisks = async () => {
+        setLoading(true);
+        const { data, error } = await supabase
+            .from('grc_risks')
+            .select('*')
+            .order('risk_score', { ascending: false });
+
+        if (!error) setRisks(data || []);
+        setLoading(false);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const { error } = await supabase
+            .from('grc_risks')
+            .insert([formData]);
+
+        if (!error) {
+            setShowForm(false);
+            fetchRisks();
+            // Reset form
+            setFormData({
+                ...formData,
+                risk_code: `RISK-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 999)).padStart(3, '0')}`,
+                title_ar: '',
+                description: '',
+                mitigation_action: ''
+            });
+        }
+    };
+
+    const getRiskLevelBadge = (level: string) => {
+        const config: Record<string, { bg: string; text: string; label: string }> = {
+            critical: { bg: 'bg-red-600', text: 'text-white', label: 'حرج' },
+            high: { bg: 'bg-orange-500', text: 'text-white', label: 'عالي' },
+            medium: { bg: 'bg-yellow-400', text: 'text-gray-800', label: 'متوسط' },
+            low: { bg: 'bg-green-500', text: 'text-white', label: 'منخفض' }
+        };
+        const { bg, text, label } = config[level] || config.low;
+        return <span className={`px-3 py-1 rounded-full text-xs font-bold ${bg} ${text}`}>{label}</span>;
+    };
+
+    const getStatusBadge = (status: string) => {
+        const labels: Record<string, string> = {
+            identified: 'تم التحديد',
+            analyzing: 'قيد التحليل',
+            mitigating: 'قيد المعالجة',
+            monitoring: 'تحت المراقبة',
+            closed: 'مغلق',
+            escalated: 'تم التصعيد'
+        };
+        const colors: Record<string, string> = {
+            identified: 'bg-blue-100 text-blue-800',
+            analyzing: 'bg-purple-100 text-purple-800',
+            mitigating: 'bg-amber-100 text-amber-800',
+            monitoring: 'bg-cyan-100 text-cyan-800',
+            closed: 'bg-green-100 text-green-800',
+            escalated: 'bg-red-100 text-red-800'
+        };
+        return <span className={`px-2 py-1 rounded text-xs ${colors[status] || 'bg-gray-100'}`}>{labels[status] || status}</span>;
+    };
+
+    const filteredRisks = risks.filter(risk => {
+        const matchesSearch = risk.title_ar.includes(searchTerm) || risk.risk_code.includes(searchTerm);
+        const matchesLevel = filterLevel === 'all' || risk.risk_level === filterLevel;
+        return matchesSearch && matchesLevel;
+    });
+
+    return (
+        <div className="space-y-6" dir="rtl">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <Link to="/grc" className="flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-2">
+                        <ArrowLeft className="w-4 h-4" />
+                        العودة للحوكمة
+                    </Link>
+                    <h1 className="text-2xl font-bold flex items-center gap-3" style={{ color: HRSD.navy }}>
+                        <AlertTriangle className="w-7 h-7" style={{ color: HRSD.orange }} />
+                        سجل المخاطر
+                    </h1>
+                    <p className="text-gray-500 mt-1">تسجيل وتتبع ومعالجة المخاطر المؤسسية</p>
+                </div>
+                <button
+                    onClick={() => setShowForm(true)}
+                    className="px-5 py-2.5 text-white rounded-xl flex items-center gap-2 shadow-lg hover:opacity-90 transition-opacity"
+                    style={{ backgroundColor: HRSD.orange }}
+                >
+                    <Plus className="w-5 h-5" />
+                    تسجيل خطر جديد
+                </button>
+            </div>
+
+            {/* Filters */}
+            <div className="bg-white rounded-xl shadow-lg p-4 flex flex-wrap gap-4 items-center">
+                <div className="flex-1 min-w-[250px] relative">
+                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                        type="text"
+                        placeholder="البحث بالعنوان أو الرمز..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pr-10 pl-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[rgb(20,130,135)]"
+                    />
+                </div>
+                <div className="flex items-center gap-2">
+                    <Filter className="w-5 h-5 text-gray-400" />
+                    <select
+                        value={filterLevel}
+                        onChange={(e) => setFilterLevel(e.target.value)}
+                        className="px-4 py-2.5 border border-gray-200 rounded-xl"
+                    >
+                        <option value="all">جميع المستويات</option>
+                        <option value="critical">حرج</option>
+                        <option value="high">عالي</option>
+                        <option value="medium">متوسط</option>
+                        <option value="low">منخفض</option>
+                    </select>
+                </div>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-5 gap-4">
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.navy }}>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.navy }}>{risks.length}</p>
+                    <p className="text-sm text-gray-500">إجمالي المخاطر</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-red-500">
+                    <p className="text-3xl font-bold text-red-600">{risks.filter(r => r.risk_level === 'critical').length}</p>
+                    <p className="text-sm text-gray-500">حرجة</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.orange }}>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.orange }}>{risks.filter(r => r.risk_level === 'high').length}</p>
+                    <p className="text-sm text-gray-500">عالية</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.gold }}>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.gold }}>{risks.filter(r => r.risk_level === 'medium').length}</p>
+                    <p className="text-sm text-gray-500">متوسطة</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.green }}>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.green }}>{risks.filter(r => r.risk_level === 'low').length}</p>
+                    <p className="text-sm text-gray-500">منخفضة</p>
+                </div>
+            </div>
+
+            {/* Risks Table */}
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                {loading ? (
+                    <div className="py-12 text-center text-gray-400">جاري التحميل...</div>
+                ) : filteredRisks.length === 0 ? (
+                    <div className="py-12 text-center text-gray-400">
+                        <AlertTriangle className="w-16 h-16 mx-auto mb-4 opacity-30" />
+                        <p>لا توجد مخاطر مسجلة</p>
+                    </div>
+                ) : (
+                    <table className="w-full">
+                        <thead className="text-gray-600 text-sm" style={{ backgroundColor: `${HRSD.navy}10` }}>
+                            <tr>
+                                <th className="p-4 text-right">الرمز</th>
+                                <th className="p-4 text-right">العنوان</th>
+                                <th className="p-4 text-center">الاحتمال × التأثير</th>
+                                <th className="p-4 text-center">المستوى</th>
+                                <th className="p-4 text-center">الحالة</th>
+                                <th className="p-4 text-right">المسؤول</th>
+                                <th className="p-4 text-center">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100">
+                            {filteredRisks.map((risk) => (
+                                <tr key={risk.id} className="hover:bg-gray-50 transition-colors">
+                                    <td className="p-4 font-mono text-sm">{risk.risk_code}</td>
+                                    <td className="p-4">
+                                        <div className="font-medium">{risk.title_ar}</div>
+                                        <div className="text-sm text-gray-500 truncate max-w-xs">{risk.description}</div>
+                                    </td>
+                                    <td className="p-4 text-center">
+                                        <span className="font-mono bg-gray-100 px-3 py-1 rounded-lg">
+                                            {risk.likelihood} × {risk.impact} = <strong>{risk.risk_score}</strong>
+                                        </span>
+                                    </td>
+                                    <td className="p-4 text-center">{getRiskLevelBadge(risk.risk_level)}</td>
+                                    <td className="p-4 text-center">{getStatusBadge(risk.status)}</td>
+                                    <td className="p-4 text-sm">{risk.risk_owner || '-'}</td>
+                                    <td className="p-4">
+                                        <div className="flex items-center justify-center gap-2">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg" style={{ color: HRSD.teal }}>
+                                                <Eye className="w-4 h-4" />
+                                            </button>
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg" style={{ color: HRSD.orange }}>
+                                                <Edit className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+
+            {/* Add Risk Modal */}
+            {showForm && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl p-8 max-w-3xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-auto">
+                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2" style={{ color: HRSD.navy }}>
+                            <AlertTriangle className="w-6 h-6" style={{ color: HRSD.orange }} />
+                            تسجيل خطر جديد
+                        </h2>
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">رمز الخطر</label>
+                                    <input
+                                        type="text"
+                                        value={formData.risk_code}
+                                        readOnly
+                                        className="w-full px-4 py-2.5 border rounded-xl bg-gray-50 font-mono"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">الفئة</label>
+                                    <select
+                                        value={formData.category_id}
+                                        onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
+                                        className="w-full px-4 py-2.5 border rounded-xl"
+                                    >
+                                        {RISK_CATEGORIES.map(cat => (
+                                            <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">عنوان الخطر *</label>
+                                <input
+                                    type="text"
+                                    value={formData.title_ar}
+                                    onChange={(e) => setFormData({ ...formData, title_ar: e.target.value })}
+                                    placeholder="مثال: تعطل نظام الإطفاء الرئيسي"
+                                    className="w-full px-4 py-2.5 border rounded-xl focus:ring-2"
+                                    style={{ '--tw-ring-color': HRSD.teal } as React.CSSProperties}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">الوصف</label>
+                                <textarea
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    className="w-full px-4 py-2.5 border rounded-xl"
+                                    rows={3}
+                                />
+                            </div>
+                            <div className="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">الاحتمالية (1-5)</label>
+                                    <select
+                                        value={formData.likelihood}
+                                        onChange={(e) => setFormData({ ...formData, likelihood: parseInt(e.target.value) })}
+                                        className="w-full px-4 py-2.5 border rounded-xl"
+                                    >
+                                        <option value={1}>1 - نادر جداً</option>
+                                        <option value={2}>2 - نادر</option>
+                                        <option value={3}>3 - ممكن</option>
+                                        <option value={4}>4 - محتمل</option>
+                                        <option value={5}>5 - مؤكد تقريباً</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">التأثير (1-5)</label>
+                                    <select
+                                        value={formData.impact}
+                                        onChange={(e) => setFormData({ ...formData, impact: parseInt(e.target.value) })}
+                                        className="w-full px-4 py-2.5 border rounded-xl"
+                                    >
+                                        <option value={1}>1 - ضئيل</option>
+                                        <option value={2}>2 - طفيف</option>
+                                        <option value={3}>3 - متوسط</option>
+                                        <option value={4}>4 - كبير</option>
+                                        <option value={5}>5 - كارثي</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">درجة الخطر</label>
+                                    <div
+                                        className="w-full px-4 py-2.5 border rounded-xl text-center font-bold text-xl"
+                                        style={{
+                                            backgroundColor: formData.likelihood * formData.impact >= 20 ? '#dc2626' :
+                                                formData.likelihood * formData.impact >= 12 ? HRSD.orange :
+                                                    formData.likelihood * formData.impact >= 6 ? HRSD.gold :
+                                                        HRSD.green,
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {formData.likelihood * formData.impact}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">استراتيجية الاستجابة</label>
+                                    <select
+                                        value={formData.response_strategy}
+                                        onChange={(e) => setFormData({ ...formData, response_strategy: e.target.value })}
+                                        className="w-full px-4 py-2.5 border rounded-xl"
+                                    >
+                                        <option value="avoid">تجنب</option>
+                                        <option value="mitigate">تخفيف</option>
+                                        <option value="transfer">نقل</option>
+                                        <option value="accept">قبول</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium mb-1">مسؤول الخطر</label>
+                                    <input
+                                        type="text"
+                                        value={formData.risk_owner}
+                                        onChange={(e) => setFormData({ ...formData, risk_owner: e.target.value })}
+                                        className="w-full px-4 py-2.5 border rounded-xl"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-1">إجراء التخفيف</label>
+                                <textarea
+                                    value={formData.mitigation_action}
+                                    onChange={(e) => setFormData({ ...formData, mitigation_action: e.target.value })}
+                                    className="w-full px-4 py-2.5 border rounded-xl"
+                                    rows={2}
+                                />
+                            </div>
+                            <div className="flex gap-3 justify-end pt-4 border-t">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowForm(false)}
+                                    className="px-6 py-2.5 bg-gray-100 rounded-xl hover:bg-gray-200"
+                                >
+                                    إلغاء
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-6 py-2.5 text-white rounded-xl flex items-center gap-2"
+                                    style={{ backgroundColor: HRSD.teal }}
+                                >
+                                    <Save className="w-4 h-4" />
+                                    حفظ الخطر
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default RiskRegister;
