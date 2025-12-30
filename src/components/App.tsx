@@ -51,6 +51,7 @@ import { StrategicKPIDashboard } from './dashboard/StrategicKPIDashboard';
 import { GRCDashboard } from '../modules/grc/GRCDashboard';
 import { RiskRegister } from '../modules/grc/RiskRegister';
 import { ComplianceTracker } from '../modules/grc/ComplianceTracker';
+import { IndependenceTracker } from '../modules/grc/IndependenceTracker';
 
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
@@ -247,6 +248,7 @@ export const App = () => {
                     <Route path="grc/risks" element={<RiskRegister />} />
                     <Route path="grc/risks/new" element={<RiskRegister />} />
                     <Route path="grc/compliance" element={<ComplianceTracker />} />
+                    <Route path="grc/independence" element={<IndependenceTracker />} />
 
                 </Route>
             </Routes >
