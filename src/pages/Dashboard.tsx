@@ -14,6 +14,7 @@ import {
     Loader2
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
+import { AccountabilityAlerts } from '../modules/grc/AccountabilityAlerts';
 
 // Helper for Arabic translations of types
 const typeTranslations: Record<string, string> = {
@@ -63,6 +64,9 @@ export const Dashboard: React.FC = () => {
                     <div className="font-mono text-lg font-bold text-gray-700">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                 </div>
             </div>
+
+            {/* Accountability Alerts - Top Priority */}
+            <AccountabilityAlerts compact={false} />
 
             {/* 1. Real-Time KPIs (The Pulse) */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
