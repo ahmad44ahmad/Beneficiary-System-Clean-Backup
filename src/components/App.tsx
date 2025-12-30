@@ -52,6 +52,7 @@ import { GRCDashboard } from '../modules/grc/GRCDashboard';
 import { RiskRegister } from '../modules/grc/RiskRegister';
 import { ComplianceTracker } from '../modules/grc/ComplianceTracker';
 import { IndependenceTracker } from '../modules/grc/IndependenceTracker';
+import { AccountabilityAnalysis } from '../modules/grc/AccountabilityAnalysis';
 
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
@@ -249,6 +250,7 @@ export const App = () => {
                     <Route path="grc/risks/new" element={<RiskRegister />} />
                     <Route path="grc/compliance" element={<ComplianceTracker />} />
                     <Route path="grc/independence" element={<IndependenceTracker />} />
+                    <Route path="grc/accountability" element={<AccountabilityAnalysis />} />
 
                 </Route>
             </Routes >
