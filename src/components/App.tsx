@@ -57,6 +57,9 @@ import { AccountabilityAnalysis } from '../modules/grc/AccountabilityAnalysis';
 import { OrgStructurePage } from '../pages/OrgStructurePage';
 import { Beneficiary } from '../types';
 
+// Integrated Reports
+import { IntegratedDashboard } from '../modules/reports/IntegratedDashboard';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -251,6 +254,9 @@ export const App = () => {
                     <Route path="grc/compliance" element={<ComplianceTracker />} />
                     <Route path="grc/independence" element={<IndependenceTracker />} />
                     <Route path="grc/accountability" element={<AccountabilityAnalysis />} />
+
+                    {/* Integrated Reports */}
+                    <Route path="integrated-reports" element={<IntegratedDashboard />} />
 
                 </Route>
             </Routes >

@@ -81,6 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             items: [
                 { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
                 { to: '/grc', icon: Shield, label: 'الحوكمة والمخاطر' },
+                { to: '/integrated-reports', icon: Activity, label: 'مؤشر الرفاهية' },
                 { to: '/reports/strategic', icon: FileText, label: 'التقارير' },
             ]
         },

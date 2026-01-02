@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useUser, UserRole } from '../../context/UserContext';
 import { useToast } from '../../context/ToastContext';
-import { useData } from '../../context/DataContext';
+import { useUnifiedData } from '../../context/UnifiedDataContext';
 import { RehabPlan, SmartGoal, GoalType } from '../../types/rehab';
 import { Beneficiary } from '../../types';
 import { Card } from '../ui/Card';
@@ -67,7 +67,7 @@ const useSmartSuggestions = (beneficiary: Beneficiary | null) => {
 export const RehabPlanBuilder: React.FC = () => {
     const { currentUser, hasPermission } = useUser();
     const { showToast } = useToast();
-    const { beneficiaries } = useData();
+    const { beneficiaries } = useUnifiedData();
 
     const [selectedBeneficiaryId, setSelectedBeneficiaryId] = useState('');
     const selectedBeneficiary = useMemo(() => beneficiaries.find(b => b.id === selectedBeneficiaryId) || null, [beneficiaries, selectedBeneficiaryId]);

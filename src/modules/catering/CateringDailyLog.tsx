@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
-import { Utensils, Calendar, Clock, AlertCircle, FileSignature, Loader2, Save, Printer, Check, X } from 'lucide-react';
+import { Utensils, Calendar, Clock, AlertCircle, FileSignature, Save, Printer, Check, X, Loader2 } from 'lucide-react';
+import { LoadingSpinner } from '../../components/common/LoadingSpinner';
+import { StatusBadge } from '../../components/common/StatusBadge';
 import { useNavigate } from 'react-router-dom';
 import { ReceivingCommittee } from './ReceivingCommittee';
 
@@ -177,7 +179,7 @@ export const CateringDailyLog: React.FC = () => {
             {/* List */}
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
                 {loading ? (
-                    <div className="p-12 flex justify-center"><Loader2 className="animate-spin text-gray-400 w-8 h-8" /></div>
+                    <div className="p-12 flex justify-center"><LoadingSpinner size="md" /></div>
                 ) : meals.length === 0 ? (
                     <div className="p-12 text-center text-gray-500">
                         لا توجد وجبات مسجلة في النظام لهذا الوقت. قم بإنشاء القائمة أولاً.
@@ -244,11 +246,4 @@ export const CateringDailyLog: React.FC = () => {
     );
 };
 
-const StatusBadge = ({ status }: { status: string }) => {
-    switch (status) {
-        case 'delivered': return <span className="flex items-center gap-1 text-blue-600 bg-blue-50 px-2 py-1 rounded-full text-xs">تم التسليم</span>;
-        case 'consumed': return <span className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs">تم الاستهلاك</span>;
-        case 'refused': return <span className="flex items-center gap-1 text-red-600 bg-red-50 px-2 py-1 rounded-full text-xs">رفض الوجبة</span>;
-        default: return <span className="flex items-center gap-1 text-gray-500 bg-gray-100 px-2 py-1 rounded-full text-xs"><Clock className="w-3 h-3" /> معلق</span>;
-    }
-}
+// StatusBadge imported from shared components

@@ -10,11 +10,11 @@ import {
     Clock,
     Activity,
     TrendingUp,
-    CheckCircle2,
-    Loader2
+    CheckCircle2
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { AccountabilityAlerts } from '../modules/grc/AccountabilityAlerts';
+import { LoadingSpinner } from '../components/common/LoadingSpinner';
 
 // Helper for Arabic translations of types
 const typeTranslations: Record<string, string> = {
@@ -39,12 +39,11 @@ export const Dashboard: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="flex h-screen w-full items-center justify-center bg-gray-50">
-                <div className="flex flex-col items-center gap-4">
-                    <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
-                    <p className="text-gray-500 font-medium">جاري تحميل البيانات...</p>
-                </div>
-            </div>
+            <LoadingSpinner
+                fullScreen={true}
+                size="lg"
+                message="جاري تحميل البيانات..."
+            />
         );
     }
 

@@ -12,50 +12,84 @@ import {
     RehabilitationPlan
 } from '../types';
 
+// Helper for consistent error logging
+const logError = (context: string, error: any) => {
+    if (import.meta.env.DEV) {
+        console.error(`[SupaService] ${context}:`, error);
+    }
+};
+
+// Helper for safe Supabase check
+const isSupabaseReady = (): boolean => {
+    if (!supabase) {
+        if (import.meta.env.DEV) {
+            console.warn('[SupaService] Supabase not configured');
+        }
+        return false;
+    }
+    return true;
+};
+
 export const supaService = {
-    // --- Beneficiaries ---
+    // ═══════════════════════════════════════════════════════════════
+    // المستفيدون (Beneficiaries)
+    // ═══════════════════════════════════════════════════════════════
+
     async getBeneficiaries(): Promise<UnifiedBeneficiaryProfile[]> {
-        if (!supabase) {
-            console.warn('Supabase not configured. Returning empty list.');
-            return [];
-        }
-        const { data, error } = await supabase
-            .from('beneficiaries')
-            .select('*');
+        if (!isSupabaseReady()) return [];
 
-        if (error) {
-            console.error('Error fetching beneficiaries:', error);
-            return [];
-        }
-
-        // In a real scenario, we would join other tables here. 
-        // For now, we return base profiles.
-        return data as UnifiedBeneficiaryProfile[];
-    },
-
-    async getBeneficiaryByNationalId(nationalId: string): Promise<UnifiedBeneficiaryProfile | null> {
-        if (!supabase) return null;
         const { data, error } = await supabase
             .from('beneficiaries')
             .select('*')
-            .eq('nationalId', nationalId)
+            .order('full_name');
+
+        if (error) {
+            logError('getBeneficiaries', error);
+            return [];
+        }
+
+        return data as UnifiedBeneficiaryProfile[];
+    },
+
+    async getBeneficiaryById(id: string): Promise<UnifiedBeneficiaryProfile | null> {
+        if (!isSupabaseReady()) return null;
+
+        const { data, error } = await supabase
+            .from('beneficiaries')
+            .select('*')
+            .eq('id', id)
             .single();
 
         if (error) {
-            console.error(`Error fetching beneficiary ${nationalId}:`, error);
+            logError(`getBeneficiaryById(${id})`, error);
+            return null;
+        }
+        return data as UnifiedBeneficiaryProfile;
+    },
+
+    async getBeneficiaryByNationalId(nationalId: string): Promise<UnifiedBeneficiaryProfile | null> {
+        if (!isSupabaseReady()) return null;
+
+        const { data, error } = await supabase
+            .from('beneficiaries')
+            .select('*')
+            .eq('national_id', nationalId)
+            .single();
+
+        if (error) {
+            logError(`getBeneficiaryByNationalId(${nationalId})`, error);
             return null;
         }
         return data as UnifiedBeneficiaryProfile;
     },
 
     async createBeneficiary(beneficiary: Partial<Beneficiary>): Promise<Beneficiary | null> {
-        // Ensure National ID logic is enforced
         if (!beneficiary.nationalId) {
-            console.error("National ID is required for unified tracking");
+            logError('createBeneficiary', 'National ID is required');
             return null;
         }
 
-        if (!supabase) return null;
+        if (!isSupabaseReady()) return null;
 
         const { data, error } = await supabase
             .from('beneficiaries')
@@ -64,78 +98,312 @@ export const supaService = {
             .single();
 
         if (error) {
-            console.error('Error creating beneficiary:', error);
+            logError('createBeneficiary', error);
             return null;
         }
         return data;
     },
 
-    async updateBeneficiary(id: string, updates: Partial<Beneficiary>): Promise<void> {
-        if (!supabase) return;
+    async updateBeneficiary(id: string, updates: Partial<Beneficiary>): Promise<boolean> {
+        if (!isSupabaseReady()) return false;
+
         const { error } = await supabase
             .from('beneficiaries')
-            .update(updates)
+            .update({ ...updates, updated_at: new Date().toISOString() })
             .eq('id', id);
 
-        if (error) throw error;
+        if (error) {
+            logError('updateBeneficiary', error);
+            return false;
+        }
+        return true;
     },
 
-    // --- Social Research ---
-    async saveSocialResearch(data: SocialResearch): Promise<void> {
-        if (!supabase) return;
+    // ═══════════════════════════════════════════════════════════════
+    // الإعاشة (Catering)
+    // ═══════════════════════════════════════════════════════════════
+
+    async getDailyMeals(date: string, mealType?: string) {
+        if (!isSupabaseReady()) return [];
+
+        let query = supabase
+            .from('daily_meals')
+            .select(`
+                *,
+                beneficiaries(id, full_name, file_number)
+            `)
+            .eq('meal_date', date);
+
+        if (mealType) {
+            query = query.eq('meal_type', mealType);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            logError('getDailyMeals', error);
+            return [];
+        }
+        return data;
+    },
+
+    async updateMealStatus(mealId: string, status: string): Promise<boolean> {
+        if (!isSupabaseReady()) return false;
+
+        const { error } = await supabase
+            .from('daily_meals')
+            .update({
+                status,
+                updated_at: new Date().toISOString(),
+                delivered_at: status === 'delivered' ? new Date().toISOString() : undefined
+            })
+            .eq('id', mealId);
+
+        if (error) {
+            logError('updateMealStatus', error);
+            return false;
+        }
+        return true;
+    },
+
+    async getDietaryPlan(beneficiaryId: string) {
+        if (!isSupabaseReady()) return null;
+
+        const { data, error } = await supabase
+            .from('dietary_plans')
+            .select('*')
+            .eq('beneficiary_id', beneficiaryId)
+            .single();
+
+        if (error) {
+            logError('getDietaryPlan', error);
+            return null;
+        }
+        return data;
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // التشغيل والصيانة (Operations & Maintenance)
+    // ═══════════════════════════════════════════════════════════════
+
+    async getMaintenanceRequests(status?: string) {
+        if (!isSupabaseReady()) return [];
+
+        let query = supabase
+            .from('om_maintenance_requests')
+            .select(`
+                *,
+                om_assets(id, name_ar, asset_code)
+            `)
+            .order('created_at', { ascending: false });
+
+        if (status) {
+            query = query.eq('status', status);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            logError('getMaintenanceRequests', error);
+            return [];
+        }
+        return data;
+    },
+
+    async createMaintenanceRequest(request: any): Promise<any | null> {
+        if (!isSupabaseReady()) return null;
+
+        // Generate request number
+        const requestNumber = `MR-${new Date().getFullYear()}-${Date.now().toString().slice(-4)}`;
+
+        const { data, error } = await supabase
+            .from('om_maintenance_requests')
+            .insert({ ...request, request_number: requestNumber })
+            .select()
+            .single();
+
+        if (error) {
+            logError('createMaintenanceRequest', error);
+            return null;
+        }
+        return data;
+    },
+
+    async getAssets(status?: string) {
+        if (!isSupabaseReady()) return [];
+
+        let query = supabase
+            .from('om_assets')
+            .select(`
+                *,
+                om_asset_categories(id, name_ar)
+            `)
+            .order('name_ar');
+
+        if (status) {
+            query = query.eq('status', status);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            logError('getAssets', error);
+            return [];
+        }
+        return data;
+    },
+
+    async getPreventiveSchedules(dueOnly: boolean = false) {
+        if (!isSupabaseReady()) return [];
+
+        let query = supabase
+            .from('om_preventive_schedules')
+            .select(`
+                *,
+                om_assets(id, name_ar, asset_code)
+            `)
+            .eq('status', 'active')
+            .order('next_due_date');
+
+        if (dueOnly) {
+            query = query.lte('next_due_date', new Date().toISOString().split('T')[0]);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            logError('getPreventiveSchedules', error);
+            return [];
+        }
+        return data;
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // الرعاية اليومية (Daily Care)
+    // ═══════════════════════════════════════════════════════════════
+
+    async getDailyCareLog(beneficiaryId: string, date: string) {
+        if (!isSupabaseReady()) return null;
+
+        const { data, error } = await supabase
+            .from('daily_care_logs')
+            .select('*')
+            .eq('beneficiary_id', beneficiaryId)
+            .eq('log_date', date)
+            .order('log_time', { ascending: false });
+
+        if (error) {
+            logError('getDailyCareLog', error);
+            return null;
+        }
+        return data;
+    },
+
+    async getFallRiskAssessments(beneficiaryId?: string) {
+        if (!isSupabaseReady()) return [];
+
+        let query = supabase
+            .from('fall_risk_assessments')
+            .select(`
+                *,
+                beneficiaries(id, full_name, file_number)
+            `)
+            .order('assessment_date', { ascending: false });
+
+        if (beneficiaryId) {
+            query = query.eq('beneficiary_id', beneficiaryId);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            logError('getFallRiskAssessments', error);
+            return [];
+        }
+        return data;
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // البحث الاجتماعي والملف الطبي
+    // ═══════════════════════════════════════════════════════════════
+
+    async saveSocialResearch(data: SocialResearch): Promise<boolean> {
+        if (!isSupabaseReady()) return false;
+
         const { error } = await supabase
             .from('social_research')
             .insert(data);
 
-        if (error) throw error;
+        if (error) {
+            logError('saveSocialResearch', error);
+            return false;
+        }
+        return true;
     },
 
-    // --- Medical ---
-    async saveMedicalProfile(data: any): Promise<void> {
-        if (!supabase) return;
+    async saveMedicalProfile(data: any): Promise<boolean> {
+        if (!isSupabaseReady()) return false;
+
         const { error } = await supabase
             .from('medical_profiles')
             .insert(data);
 
-        if (error) throw error;
+        if (error) {
+            logError('saveMedicalProfile', error);
+            return false;
+        }
+        return true;
     },
 
-    // --- Linked Modules (The "Bridge") ---
+    // ═══════════════════════════════════════════════════════════════
+    // الملف الشامل (Full Profile)
+    // ═══════════════════════════════════════════════════════════════
 
-    // Example: Fetch full profile including sub-tables
     async getFullProfile(nationalId: string): Promise<any> {
-        // This simulates a "join" or multiple fetches to build the master record
         const beneficiary = await this.getBeneficiaryByNationalId(nationalId);
         if (!beneficiary) return null;
 
-        if (!supabase) return beneficiary;
+        if (!isSupabaseReady()) return beneficiary;
 
-        const [medical, social, rehab] = await Promise.all([
+        const [medical, social, rehab, dietaryPlan] = await Promise.all([
             supabase.from('medical_records').select('*').eq('national_id', nationalId),
             supabase.from('social_research').select('*').eq('national_id', nationalId),
-            supabase.from('rehab_plans').select('*').eq('national_id', nationalId)
+            supabase.from('rehab_plans').select('*').eq('national_id', nationalId),
+            supabase.from('dietary_plans').select('*').eq('beneficiary_id', beneficiary.id).single()
         ]);
 
         return {
             ...beneficiary,
             medicalHistory: medical.data || [],
             socialResearch: social.data || [],
-            rehabPlans: rehab.data || []
+            rehabPlans: rehab.data || [],
+            dietaryPlan: dietaryPlan.data
         };
     },
 
-    // --- Dashboard Stats ---
-    async getDashboardStats() {
-        if (!supabase) return { totalBeneficiaries: 0 };
-        // Real unified analytics
-        const { count: totalBeneficiaries } = await supabase
-            .from('beneficiaries')
-            .select('*', { count: 'exact', head: true })
-            .eq('status', 'active');
+    // ═══════════════════════════════════════════════════════════════
+    // الإحصائيات
+    // ═══════════════════════════════════════════════════════════════
 
-        // Add more queries here
+    async getDashboardStats() {
+        if (!isSupabaseReady()) return {
+            totalBeneficiaries: 0,
+            activeBeneficiaries: 0,
+            pendingMaintenance: 0,
+            highRiskCases: 0
+        };
+
+        const [beneficiaries, maintenance, fallRisk] = await Promise.all([
+            supabase.from('beneficiaries').select('*', { count: 'exact', head: true }),
+            supabase.from('om_maintenance_requests').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
+            supabase.from('fall_risk_assessments').select('*', { count: 'exact', head: true }).gte('risk_score', 50)
+        ]);
+
         return {
-            totalBeneficiaries: totalBeneficiaries || 0
+            totalBeneficiaries: beneficiaries.count || 0,
+            activeBeneficiaries: beneficiaries.count || 0,
+            pendingMaintenance: maintenance.count || 0,
+            highRiskCases: fallRisk.count || 0
         };
     }
 };

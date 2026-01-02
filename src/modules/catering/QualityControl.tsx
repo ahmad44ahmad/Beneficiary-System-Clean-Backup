@@ -19,6 +19,21 @@ export const QualityControl = () => {
     const [notes, setNotes] = useState<Record<string, string>>({});
     const [generalNote, setGeneralNote] = useState('');
 
+    // Demo data fallbacks
+    const DEMO_SUPPLIERS = [
+        { id: 'demo-1', name: 'شركة الأغذية المتحدة' },
+        { id: 'demo-2', name: 'مطاعم الرياض للتموين' },
+    ];
+
+    const DEMO_CRITERIA = [
+        { id: '1', category: 'النظافة', question: 'زي العمال نظيف ومرتب', max_score: 10 },
+        { id: '2', category: 'النظافة', question: 'نظافة أدوات التقديم', max_score: 10 },
+        { id: '3', category: 'الطعام', question: 'درجة حرارة الطعام مناسبة', max_score: 10 },
+        { id: '4', category: 'الطعام', question: 'جودة المواد الخام', max_score: 10 },
+        { id: '5', category: 'الخدمة', question: 'الالتزام بمواعيد التوصيل', max_score: 10 },
+        { id: '6', category: 'الخدمة', question: 'تعامل الموظفين مع المستفيدين', max_score: 10 },
+    ];
+
     useEffect(() => {
         fetchInitialData();
     }, []);
@@ -26,14 +41,26 @@ export const QualityControl = () => {
     const fetchInitialData = async () => {
         setLoading(true);
         try {
+            if (!supabase) {
+                setSuppliers(DEMO_SUPPLIERS);
+                setCriteria(DEMO_CRITERIA);
+                setSelectedSupplier(DEMO_SUPPLIERS[0].id);
+                return;
+            }
+
             // Fetch Suppliers
             const { data: supData, error: supError } = await supabase
                 .from('catering_suppliers')
                 .select('*');
 
-            if (supError) throw supError;
-            setSuppliers(supData || []);
-            if (supData && supData.length > 0) setSelectedSupplier(supData[0].id);
+            if (supError || !supData?.length) {
+                // Use demo data
+                setSuppliers(DEMO_SUPPLIERS);
+                setSelectedSupplier(DEMO_SUPPLIERS[0].id);
+            } else {
+                setSuppliers(supData);
+                if (supData.length > 0) setSelectedSupplier(supData[0].id);
+            }
 
             // Fetch Criteria
             const { data: critData, error: critError } = await supabase
@@ -42,16 +69,19 @@ export const QualityControl = () => {
                 .eq('is_active', true)
                 .order('category');
 
-            if (critError) throw critError;
-            setCriteria(critData || []);
+            if (critError || !critData?.length) {
+                setCriteria(DEMO_CRITERIA);
+            } else {
+                setCriteria(critData);
+            }
 
         } catch (error) {
-            console.error("Error fetching QA data:", error);
-            // Fallback for demo if DB not ready
-            setCriteria([
-                { id: '1', category: 'النظافة', question: 'زي العمال نظيف', max_score: 10 },
-                { id: '2', category: 'الطعام', question: 'درجة حرارة الطعام مناسبة', max_score: 10 },
-            ]);
+            if (import.meta.env.DEV) {
+                console.log('[QualityControl] Using demo data:', error);
+            }
+            setSuppliers(DEMO_SUPPLIERS);
+            setCriteria(DEMO_CRITERIA);
+            setSelectedSupplier(DEMO_SUPPLIERS[0].id);
         } finally {
             setLoading(false);
         }
@@ -181,8 +211,8 @@ export const QualityControl = () => {
                                                 <button
                                                     onClick={() => handleResponse(item.id, 'compliant')}
                                                     className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 transition-all ${responses[item.id] === 'compliant'
-                                                            ? 'bg-green-100 text-green-700 ring-2 ring-green-500'
-                                                            : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                                                        ? 'bg-green-100 text-green-700 ring-2 ring-green-500'
+                                                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                                         }`}
                                                 >
                                                     <CheckCircle className="w-4 h-4" />
@@ -191,8 +221,8 @@ export const QualityControl = () => {
                                                 <button
                                                     onClick={() => handleResponse(item.id, 'non_compliant')}
                                                     className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 transition-all ${responses[item.id] === 'non_compliant'
-                                                            ? 'bg-red-100 text-red-700 ring-2 ring-red-500'
-                                                            : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                                                        ? 'bg-red-100 text-red-700 ring-2 ring-red-500'
+                                                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                                         }`}
                                                 >
                                                     <XCircle className="w-4 h-4" />
