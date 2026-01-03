@@ -15,6 +15,7 @@ import {
     CheckCircle2,
     Network,
     Sparkles,
+    Target,
     X,
     ChevronDown,
     ChevronLeft,
@@ -74,6 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             items: [
                 { to: '/social', icon: Heart, label: 'الرعاية الاجتماعية' },
                 { to: '/training', icon: GraduationCap, label: 'التأهيل والتدريب' },
+                { to: '/empowerment', icon: Target, label: 'محرك التمكين' },
             ]
         },
         {

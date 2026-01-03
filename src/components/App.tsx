@@ -61,7 +61,10 @@ import { Beneficiary } from '../types';
 import { IntegratedDashboard } from '../modules/reports/IntegratedDashboard';
 
 // IPC Module (Infection Prevention Control)
-import { IPCDashboard, DailyIPCInspection } from '../modules/ipc';
+import { IPCDashboard, DailyIPCInspection, IncidentReportForm, ImmunizationTracker } from '../modules/ipc';
+
+// Empowerment Module (التمكين والتأهيل)
+import { EmpowermentDashboard, SmartGoalBuilder } from '../modules/empowerment';
 
 export const App = () => {
     const {
@@ -264,6 +267,12 @@ export const App = () => {
                     {/* IPC Module Routes */}
                     <Route path="ipc" element={<IPCDashboard />} />
                     <Route path="ipc/inspection" element={<DailyIPCInspection />} />
+                    <Route path="ipc/incident/new" element={<IncidentReportForm />} />
+                    <Route path="ipc/immunizations" element={<ImmunizationTracker />} />
+
+                    {/* Empowerment Module Routes */}
+                    <Route path="empowerment" element={<EmpowermentDashboard />} />
+                    <Route path="empowerment/goal/new" element={<SmartGoalBuilder />} />
 
                 </Route>
             </Routes >
