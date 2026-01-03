@@ -4,6 +4,7 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { MobileNav } from './MobileNav';
 import { RiskAlertSystem } from '../safety/RiskAlertSystem';
+import { RealTimeAlerts } from '../common/RealTimeAlerts';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 
 // Import HRSD theme
@@ -41,6 +42,9 @@ export const MainLayout = () => {
         <div className="flex h-screen bg-hrsd-bg-light font-sans overflow-hidden" dir="rtl">
             {/* Global Risk Alert System */}
             <RiskAlertSystem />
+
+            {/* Real-Time Alerts Notification */}
+            <RealTimeAlerts />
 
             {/* Desktop Sidebar */}
             <Sidebar isMobile={false} />

@@ -66,6 +66,9 @@ import { IPCDashboard, DailyIPCInspection, IncidentReportForm, ImmunizationTrack
 // Empowerment Module (التمكين والتأهيل)
 import { EmpowermentDashboard, SmartGoalBuilder, GoalProgressTracker, DignityFile } from '../modules/empowerment';
 
+// Family Portal (بوابة الأسرة)
+import { FamilyPortal } from '../modules/family';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -276,6 +279,9 @@ export const App = () => {
                     <Route path="empowerment/goal/new" element={<SmartGoalBuilder />} />
                     <Route path="empowerment/goal/:goalId" element={<GoalProgressTracker />} />
                     <Route path="empowerment/dignity/:beneficiaryId?" element={<DignityFile />} />
+
+                    {/* Family Portal Routes */}
+                    <Route path="family" element={<FamilyPortal />} />
 
                 </Route>
             </Routes >
