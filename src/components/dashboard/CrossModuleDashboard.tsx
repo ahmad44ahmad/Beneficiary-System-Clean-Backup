@@ -17,13 +17,14 @@ interface ModuleCardProps {
     linkTo: string;
 }
 
-const ModuleCard: React.FC<ModuleCardProps> = ({ title, icon, stats, bgClass, linkTo }) => {
+const ModuleCard: React.FC<ModuleCardProps & { delay?: number }> = ({ title, icon, stats, bgClass, linkTo, delay = 0 }) => {
     const navigate = useNavigate();
 
     return (
         <div
             onClick={() => navigate(linkTo)}
-            className={`${bgClass} rounded-2xl p-5 cursor-pointer hover:shadow-lg transition-all hover:scale-[1.02]`}
+            className={`${bgClass} rounded-2xl p-5 cursor-pointer hover-lift btn-ripple animate-slide-up opacity-0`}
+            style={{ animationDelay: `${delay * 0.1}s`, animationFillMode: 'forwards' }}
         >
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -104,10 +105,26 @@ export const CrossModuleDashboard: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse">
-                {[1, 2, 3].map(i => (
-                    <div key={i} className="h-48 bg-gray-200 rounded-2xl" />
-                ))}
+            <div className="space-y-6" dir="rtl">
+                {/* Skeleton Header */}
+                <div className="flex items-center justify-between">
+                    <div className="skeleton skeleton-title w-48"></div>
+                    <div className="skeleton w-24 h-5"></div>
+                </div>
+                {/* Skeleton Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="skeleton skeleton-card h-44 rounded-2xl"></div>
+                    ))}
+                </div>
+                {/* Skeleton Alerts */}
+                <div className="skeleton h-32 rounded-2xl"></div>
+                {/* Skeleton Stats */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[1, 2, 3, 4].map(i => (
+                        <div key={i} className="skeleton h-20 rounded-xl"></div>
+                    ))}
+                </div>
             </div>
         );
     }
@@ -130,9 +147,10 @@ export const CrossModuleDashboard: React.FC = () => {
                 {/* IPC Module */}
                 <ModuleCard
                     title="درع السلامة (IPC)"
-                    icon={<Shield className="w-6 h-6 text-white" />}
+                    icon={<Shield className="w-6 h-6 text-white animate-float" />}
                     bgClass="bg-gradient-to-br from-emerald-600 to-teal-700"
                     linkTo="/ipc"
+                    delay={1}
                     stats={[
                         { label: 'معدل الامتثال', value: `${ipcStats?.avgComplianceRate || 0}%` },
                         { label: 'حالات نشطة', value: ipcStats?.activeIncidents || 0 },
@@ -144,9 +162,10 @@ export const CrossModuleDashboard: React.FC = () => {
                 {/* Empowerment Module */}
                 <ModuleCard
                     title="محرك التمكين"
-                    icon={<Target className="w-6 h-6 text-white" />}
+                    icon={<Target className="w-6 h-6 text-white animate-float" />}
                     bgClass="bg-gradient-to-br from-blue-600 to-indigo-700"
                     linkTo="/empowerment"
+                    delay={2}
                     stats={[
                         { label: 'إجمالي الأهداف', value: empowermentStats?.totalGoals || 0 },
                         { label: 'محققة', value: empowermentStats?.achievedGoals || 0 },
@@ -158,9 +177,10 @@ export const CrossModuleDashboard: React.FC = () => {
                 {/* Family Portal */}
                 <ModuleCard
                     title="بوابة الأسرة"
-                    icon={<Users className="w-6 h-6 text-white" />}
+                    icon={<Users className="w-6 h-6 text-white animate-float" />}
                     bgClass="bg-gradient-to-br from-purple-600 to-pink-700"
                     linkTo="/family"
+                    delay={3}
                     stats={[
                         { label: 'أسر مسجلة', value: 45 },
                         { label: 'زيارات هذا الشهر', value: 12 },
