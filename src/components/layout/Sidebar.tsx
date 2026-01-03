@@ -64,6 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             items: [
                 { to: '/dashboard', icon: LayoutDashboard, label: 'لوحة القيادة' },
                 { to: '/overview', icon: Activity, label: 'نظرة شاملة' },
+                { to: '/reports', icon: FileText, label: 'التقارير' },
                 { to: '/basira', icon: Sparkles, label: 'مشروع بصيرة' },
                 { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
                 { to: '/catering', icon: Utensils, label: 'الإعاشة' },
