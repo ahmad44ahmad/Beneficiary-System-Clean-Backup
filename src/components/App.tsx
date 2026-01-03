@@ -69,6 +69,9 @@ import { EmpowermentDashboard, SmartGoalBuilder, GoalProgressTracker, DignityFil
 // Family Portal (بوابة الأسرة)
 import { FamilyPortal } from '../modules/family';
 
+// Cross-Module Dashboard
+import { CrossModuleDashboard } from './dashboard/CrossModuleDashboard';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -222,6 +225,7 @@ export const App = () => {
 
                     <Route path="structure" element={<OrgStructurePage />} />
                     <Route path="basira" element={<ExecutiveDashboard />} />
+                    <Route path="overview" element={<CrossModuleDashboard />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
                             beneficiaryName="تجربة - عبدالله صالح"

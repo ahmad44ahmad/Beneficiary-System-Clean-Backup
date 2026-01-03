@@ -249,11 +249,11 @@ export const IPCDashboard: React.FC = () => {
                             <span className="font-medium">سجل التحصينات</span>
                         </button>
                         <button
-                            onClick={() => navigate('/ipc/reports')}
+                            onClick={() => navigate('/ipc/analytics')}
                             className="p-4 bg-purple-50 rounded-xl text-purple-700 hover:bg-purple-100 transition-colors flex flex-col items-center gap-2"
                         >
                             <Activity size={32} />
-                            <span className="font-medium">التقارير</span>
+                            <span className="font-medium">التحليلات</span>
                         </button>
                     </div>
                 </div>
