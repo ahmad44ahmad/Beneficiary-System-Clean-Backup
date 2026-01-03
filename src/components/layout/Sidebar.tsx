@@ -79,6 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
         {
             title: 'الجودة والمخاطر',
             items: [
+                { to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)' },
                 { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
                 { to: '/grc', icon: Shield, label: 'الحوكمة والمخاطر' },
                 { to: '/integrated-reports', icon: Activity, label: 'مؤشر الرفاهية' },

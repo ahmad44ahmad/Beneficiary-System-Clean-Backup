@@ -60,6 +60,9 @@ import { Beneficiary } from '../types';
 // Integrated Reports
 import { IntegratedDashboard } from '../modules/reports/IntegratedDashboard';
 
+// IPC Module (Infection Prevention Control)
+import { IPCDashboard, DailyIPCInspection } from '../modules/ipc';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -257,6 +260,10 @@ export const App = () => {
 
                     {/* Integrated Reports */}
                     <Route path="integrated-reports" element={<IntegratedDashboard />} />
+
+                    {/* IPC Module Routes */}
+                    <Route path="ipc" element={<IPCDashboard />} />
+                    <Route path="ipc/inspection" element={<DailyIPCInspection />} />
 
                 </Route>
             </Routes >
