@@ -73,6 +73,8 @@ export interface BeneficiaryPreferences {
     what_makes_me_happy?: string;
     what_makes_me_upset?: string;
     my_dreams?: string;
+    wake_up_time?: string;
+    sleep_time?: string;
 }
 
 // Domains with Arabic labels

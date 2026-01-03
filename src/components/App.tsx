@@ -64,7 +64,7 @@ import { IntegratedDashboard } from '../modules/reports/IntegratedDashboard';
 import { IPCDashboard, DailyIPCInspection, IncidentReportForm, ImmunizationTracker, IPCAnalytics } from '../modules/ipc';
 
 // Empowerment Module (التمكين والتأهيل)
-import { EmpowermentDashboard, SmartGoalBuilder } from '../modules/empowerment';
+import { EmpowermentDashboard, SmartGoalBuilder, GoalProgressTracker, DignityFile } from '../modules/empowerment';
 
 export const App = () => {
     const {
@@ -274,6 +274,8 @@ export const App = () => {
                     {/* Empowerment Module Routes */}
                     <Route path="empowerment" element={<EmpowermentDashboard />} />
                     <Route path="empowerment/goal/new" element={<SmartGoalBuilder />} />
+                    <Route path="empowerment/goal/:goalId" element={<GoalProgressTracker />} />
+                    <Route path="empowerment/dignity/:beneficiaryId?" element={<DignityFile />} />
 
                 </Route>
             </Routes >
