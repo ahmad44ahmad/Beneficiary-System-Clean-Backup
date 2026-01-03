@@ -26,7 +26,12 @@ import {
     Shield,
     Heart,
     Utensils,
-    Wrench
+    Wrench,
+    BarChart3,
+    Syringe,
+    ClipboardList,
+    AlertCircle,
+    Users2
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -75,13 +80,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             items: [
                 { to: '/social', icon: Heart, label: 'الرعاية الاجتماعية' },
                 { to: '/training', icon: GraduationCap, label: 'التأهيل والتدريب' },
-                { to: '/empowerment', icon: Target, label: 'محرك التمكين' },
+                {
+                    to: '/empowerment', icon: Target, label: 'محرك التمكين', children: [
+                        { to: '/empowerment/goal/new', label: 'إنشاء هدف SMART' },
+                        { to: '/empowerment/dignity', label: 'ملف الكرامة' },
+                    ]
+                },
+                { to: '/family', icon: Users2, label: 'بوابة الأسرة' },
             ]
         },
         {
             title: 'الجودة والمخاطر',
             items: [
-                { to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)' },
+                {
+                    to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)', children: [
+                        { to: '/ipc/inspection', label: 'جولة تفتيش' },
+                        { to: '/ipc/incident/new', label: 'إبلاغ عن حادثة' },
+                        { to: '/ipc/immunizations', label: 'سجل التحصينات' },
+                        { to: '/ipc/analytics', label: 'التحليلات' },
+                    ]
+                },
                 { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
                 { to: '/grc', icon: Shield, label: 'الحوكمة والمخاطر' },
                 { to: '/integrated-reports', icon: Activity, label: 'مؤشر الرفاهية' },
@@ -208,30 +226,54 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             {expandedSections.includes(section.title) && (
                                 <div className="space-y-1 mt-1">
                                     {section.items.map((item) => (
-                                        <NavLink
-                                            key={item.to}
-                                            to={item.to}
-                                            onClick={handleNavClick}
-                                            className={({ isActive }) =>
-                                                `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-sm font-medium group ${isActive
-                                                    ? 'bg-hrsd-teal text-white shadow-md'
-                                                    : 'text-gray-300 hover:text-white hover:bg-white/5'
-                                                }`
-                                            }
-                                        >
-                                            {({ isActive }) => (
-                                                <>
-                                                    <item.icon className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-400 group-hover:text-white'
-                                                        }`} />
-                                                    <span>{item.label}</span>
-                                                    {item.badge && (
-                                                        <span className="mr-auto bg-hrsd-orange text-white text-xs px-2 py-0.5 rounded-full">
-                                                            {item.badge}
-                                                        </span>
-                                                    )}
-                                                </>
+                                        <div key={item.to}>
+                                            <NavLink
+                                                to={item.to}
+                                                onClick={handleNavClick}
+                                                className={({ isActive }) =>
+                                                    `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-sm font-medium group ${isActive
+                                                        ? 'bg-hrsd-teal text-white shadow-md'
+                                                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                                    }`
+                                                }
+                                            >
+                                                {({ isActive }) => (
+                                                    <>
+                                                        <item.icon className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-400 group-hover:text-white'
+                                                            }`} />
+                                                        <span>{item.label}</span>
+                                                        {item.badge && (
+                                                            <span className="mr-auto bg-hrsd-orange text-white text-xs px-2 py-0.5 rounded-full">
+                                                                {item.badge}
+                                                            </span>
+                                                        )}
+                                                        {item.children && (
+                                                            <ChevronDown className="w-3 h-3 mr-auto text-gray-400" />
+                                                        )}
+                                                    </>
+                                                )}
+                                            </NavLink>
+                                            {/* Sub-items */}
+                                            {item.children && (
+                                                <div className="mr-6 mt-1 space-y-1 border-r-2 border-hrsd-teal/30 pr-2">
+                                                    {item.children.map((child) => (
+                                                        <NavLink
+                                                            key={child.to}
+                                                            to={child.to}
+                                                            onClick={handleNavClick}
+                                                            className={({ isActive }) =>
+                                                                `block px-3 py-1.5 rounded-lg text-xs transition-all ${isActive
+                                                                    ? 'bg-hrsd-teal/20 text-hrsd-gold'
+                                                                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                                                }`
+                                                            }
+                                                        >
+                                                            {child.label}
+                                                        </NavLink>
+                                                    ))}
+                                                </div>
                                             )}
-                                        </NavLink>
+                                        </div>
                                     ))}
                                 </div>
                             )}
