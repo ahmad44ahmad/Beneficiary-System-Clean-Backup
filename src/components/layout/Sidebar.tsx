@@ -28,6 +28,8 @@ import {
     Utensils,
     Wrench,
     BarChart3,
+    AlertOctagon,
+    Brain,
     Syringe,
     ClipboardList,
     AlertCircle,
@@ -101,6 +103,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                         { to: '/ipc/incident/new', label: 'إبلاغ عن حادثة' },
                         { to: '/ipc/immunizations', label: 'سجل التحصينات' },
                         { to: '/ipc/analytics', label: 'التحليلات' },
+                    ]
+                },
+                { to: '/liability', icon: Shield, label: 'فصل المسؤوليات 🛡️' },
+                { to: '/crisis', icon: AlertOctagon, label: 'وضع الطوارئ 🚨' },
+                {
+                    to: '/indicators', icon: Brain, label: 'المؤشرات الذكية', children: [
+                        { to: '/indicators/biological', label: 'التدقيق البيولوجي' },
+                        { to: '/indicators/behavioral', label: 'التنبؤ السلوكي' },
                     ]
                 },
                 { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
