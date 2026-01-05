@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
         for (const [key, value] of Object.entries(pageTitles)) {
             if (path.startsWith(key)) return value;
         }
-        return 'مركز التأهيل الشامل';
+        return 'مركز التأهيل الشامل بالباحة';
     };
 
     return (
@@ -88,8 +88,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 {/* User Info */}
                 <div className="flex items-center gap-3 pr-2 md:pr-4 md:border-r border-white/10">
                     <div className="text-right hidden md:block">
-                        <p className="text-sm font-bold text-white leading-tight">{currentUser?.name || 'مستخدم'}</p>
-                        <p className="text-xs text-hrsd-gold font-medium">حساب تجريبي</p>
+                        <p className="text-sm font-bold text-hrsd-gold leading-tight drop-shadow-md">{currentUser?.name || 'مستخدم'}</p>
+                        <p className="text-xs text-white/90 font-medium">حساب تجريبي</p>
                     </div>
                     <div className="w-10 h-10 bg-gradient-to-br from-hrsd-teal to-hrsd-teal-dark rounded-xl flex items-center justify-center text-white border border-white/20 shadow-md">
                         {currentUser?.avatar ? (

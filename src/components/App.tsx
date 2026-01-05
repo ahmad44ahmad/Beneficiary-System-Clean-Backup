@@ -75,6 +75,16 @@ import { CrossModuleDashboard } from './dashboard/CrossModuleDashboard';
 // Report Generator
 import { ReportGenerator } from './reports/ReportGenerator';
 
+// Liability Dashboard (Strategic Defense)
+import { LiabilityDashboard } from './dashboard/LiabilityDashboard';
+
+// Crisis Mode (Emergency Protocol)
+import { CrisisMode } from './crisis/CrisisMode';
+
+// AI Indicators
+import { BiologicalAuditIndicator } from './indicators/BiologicalAuditIndicator';
+import { BehavioralPrediction } from './indicators/BehavioralPrediction';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -229,6 +239,10 @@ export const App = () => {
                     <Route path="structure" element={<OrgStructurePage />} />
                     <Route path="basira" element={<ExecutiveDashboard />} />
                     <Route path="overview" element={<CrossModuleDashboard />} />
+                    <Route path="liability" element={<LiabilityDashboard />} />
+                    <Route path="crisis" element={<CrisisMode />} />
+                    <Route path="indicators/biological" element={<BiologicalAuditIndicator />} />
+                    <Route path="indicators/behavioral" element={<BehavioralPrediction />} />
                     <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
                         <DailyCareForm

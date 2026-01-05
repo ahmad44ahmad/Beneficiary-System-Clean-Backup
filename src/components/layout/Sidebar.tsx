@@ -64,6 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             items: [
                 { to: '/dashboard', icon: LayoutDashboard, label: 'لوحة القيادة' },
                 { to: '/overview', icon: Activity, label: 'نظرة شاملة' },
+                { to: '/liability', icon: Shield, label: 'فصل المسؤوليات' },
                 { to: '/reports', icon: FileText, label: 'التقارير' },
                 { to: '/basira', icon: Sparkles, label: 'مشروع بصيرة' },
                 { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
@@ -167,7 +168,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             />
                         </div>
                         <div>
-                            <h1 className="font-bold text-lg leading-tight text-[rgb(250,180,20)]">مركز التأهيل الشامل</h1>
+                            <h1 className="font-bold text-lg leading-tight text-[rgb(250,180,20)]">مركز التأهيل الشامل بالباحة</h1>
                             <p className="text-[rgb(45,180,115)] text-sm mt-1 font-semibold">وزارة الموارد البشرية</p>
                         </div>
                     </div>
