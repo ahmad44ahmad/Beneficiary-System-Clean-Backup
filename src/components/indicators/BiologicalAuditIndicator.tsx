@@ -90,7 +90,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-gradient-to-br from-purple-600 to-pink-700 rounded-xl">
+                    <div className="p-3 bg-gradient-to-br from-hrsd-teal to-hrsd-teal-dark rounded-xl">
                         <Scale className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -99,9 +99,9 @@ export const BiologicalAuditIndicator: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 flex items-start gap-3">
-                    <Info className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                    <div className="text-sm text-purple-900">
+                <div className="bg-hrsd-teal-light/20 border border-hrsd-teal rounded-xl p-4 flex items-start gap-3">
+                    <Info className="w-5 h-5 text-hrsd-teal flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-hrsd-navy">
                         <p className="font-bold mb-1">🧬 كيف يعمل:</p>
                         <p>يربط النظام بين <span className="font-bold">خروج الطعام من المخزن</span> و <span className="font-bold">الفحوصات الطبية للمستفيدين</span>. إذا خرجت كميات كبيرة من اللحوم لكن الوزن والهيموجلوبين منخفضان = شبهة سرقة أو تلاعب.</p>
                     </div>
@@ -111,7 +111,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
             {/* Trend Chart */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-purple-600" />
+                    <BarChart3 className="w-5 h-5 text-hrsd-teal" />
                     الاتجاه: المخزون vs الصحة
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -126,7 +126,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                             yAxisId="left"
                             type="monotone"
                             dataKey="inventory_out"
-                            stroke="#8b5cf6"
+                            stroke="rgb(20, 130, 135)" /* HRSD Teal */
                             strokeWidth={2}
                             name="خروج من المخزن (كجم)"
                         />
@@ -134,7 +134,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                             yAxisId="left"
                             type="monotone"
                             dataKey="expected"
-                            stroke="#e879f9"
+                            stroke="rgb(40, 160, 165)" /* HRSD Teal Light */
                             strokeWidth={2}
                             strokeDasharray="5 5"
                             name="المتوقع (كجم)"
@@ -143,7 +143,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                             yAxisId="right"
                             type="monotone"
                             dataKey="weight_avg"
-                            stroke="#10b981"
+                            stroke="rgb(45, 180, 115)" /* HRSD Green */
                             strokeWidth={2}
                             name="متوسط الوزن (كجم)"
                         />
@@ -188,7 +188,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
             <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <Utensils className="w-10 h-10 text-purple-600" />
+                        <Utensils className="w-10 h-10 text-hrsd-teal" />
                         <div>
                             <p className="text-2xl font-bold text-gray-900">340 كجم</p>
                             <p className="text-sm text-gray-500">خروج لحوم شهري</p>
