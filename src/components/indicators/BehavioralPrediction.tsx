@@ -64,7 +64,7 @@ export const BehavioralPrediction: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-gradient-to-br from-blue-600 to-cyan-700 rounded-xl">
+                    <div className="p-3 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-xl">
                         <Brain className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -73,9 +73,9 @@ export const BehavioralPrediction: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-                    <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <div className="text-sm text-blue-900">
+                <div className="bg-hrsd-teal-light/20 border border-hrsd-teal rounded-xl p-4 flex items-start gap-3">
+                    <Info className="w-5 h-5 text-hrsd-teal flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-hrsd-navy">
                         <p className="font-bold mb-1">🧠 كيف يعمل:</p>
                         <p>يحلل النظام <span className="font-bold">سجل الحوادث السلوكية</span> (شغب، عنف، انفعال) ويربطه بـ <span className="font-bold">درجة حرارة الغرف</span> والطقس. النمط الخفي: العنف يزيد 40% عندما تتجاوز الحرارة 26°م بسبب تعطل التكييف.</p>
                     </div>
@@ -113,7 +113,7 @@ export const BehavioralPrediction: React.FC = () => {
             {/* Correlation Chart */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-blue-600" />
+                    <BarChart3 className="w-5 h-5 text-hrsd-teal" />
                     العلاقة: درجة الحرارة vs الحوادث السلوكية
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -134,7 +134,7 @@ export const BehavioralPrediction: React.FC = () => {
                             yAxisId="right"
                             type="monotone"
                             dataKey="temperature"
-                            stroke="#3b82f6"
+                            stroke="rgb(20, 130, 135)" /* HRSD Teal */
                             strokeWidth={2}
                             name="درجة الحرارة (°م)"
                         />
@@ -248,7 +248,7 @@ export const BehavioralPrediction: React.FC = () => {
                     <p className="text-sm text-gray-600">درجة الحرارة الحالية</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm text-center">
-                    <p className="text-3xl font-bold text-blue-600">{prediction.confidence}%</p>
+                    <p className="text-3xl font-bold text-hrsd-teal">{prediction.confidence}%</p>
                     <p className="text-sm text-gray-600">دقة التنبؤ</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm text-center">

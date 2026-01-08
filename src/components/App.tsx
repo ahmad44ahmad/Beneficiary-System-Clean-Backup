@@ -85,6 +85,9 @@ import { CrisisMode } from './crisis/CrisisMode';
 import { BiologicalAuditIndicator } from './indicators/BiologicalAuditIndicator';
 import { BehavioralPrediction } from './indicators/BehavioralPrediction';
 
+// Beneficiary Management
+import { BeneficiaryListPage } from './beneficiary/BeneficiaryListPage';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -243,6 +246,7 @@ export const App = () => {
                     <Route path="crisis" element={<CrisisMode />} />
                     <Route path="indicators/biological" element={<BiologicalAuditIndicator />} />
                     <Route path="indicators/behavioral" element={<BehavioralPrediction />} />
+                    <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
                     <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
