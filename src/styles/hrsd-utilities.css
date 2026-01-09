@@ -249,3 +249,251 @@
     justify-content: center;
     border-radius: var(--hrsd-radius-xl);
 }
+
+/* ===== HRSD Gradient Presets ===== */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--hrsd-teal), var(--hrsd-navy));
+}
+
+.gradient-success {
+    background: linear-gradient(135deg, var(--hrsd-green), var(--hrsd-teal));
+}
+
+.gradient-warning {
+    background: linear-gradient(135deg, var(--hrsd-gold), var(--hrsd-orange));
+}
+
+.gradient-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.gradient-info {
+    background: linear-gradient(135deg, var(--hrsd-teal-light), var(--hrsd-teal));
+}
+
+/* ===== Module Card Gradients ===== */
+.gradient-ipc {
+    background: linear-gradient(135deg, var(--hrsd-green), var(--hrsd-teal));
+}
+
+.gradient-empowerment {
+    background: linear-gradient(135deg, var(--hrsd-teal), var(--hrsd-navy));
+}
+
+.gradient-family {
+    background: linear-gradient(135deg, var(--hrsd-gold), var(--hrsd-orange));
+}
+
+.gradient-risk {
+    background: linear-gradient(135deg, #ef4444, var(--hrsd-orange));
+}
+
+/* ===== Animations ===== */
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-soft {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(20, 130, 135, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(20, 130, 135, 0.5);
+    }
+}
+
+.animate-slide-up {
+    animation: slideInUp 0.4s ease forwards;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.4s ease forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-pulse-soft {
+    animation: pulse-soft 2s infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Staggered animation delays */
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
+}
+
+.delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* ===== Badge Danger (Fixed typo) ===== */
+.badge-danger {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--hrsd-radius-md);
+    background-color: rgb(254, 226, 226);
+    color: rgb(185, 28, 28);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ===== Hover Effects ===== */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--hrsd-shadow-lg);
+}
+
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+/* ===== Health Score Gauge ===== */
+.health-gauge {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.health-gauge-circle {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.health-gauge-bg {
+    stroke: #e5e7eb;
+}
+
+.health-gauge-fill {
+    stroke: var(--hrsd-green);
+    transition: stroke-dashoffset 1s ease;
+}
+
+/* ===== Sparkline Container ===== */
+.sparkline-container {
+    height: 40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.sparkline-bar {
+    flex: 1;
+    background: var(--hrsd-teal);
+    border-radius: 2px 2px 0 0;
+    transition: height 0.3s ease;
+    min-height: 4px;
+}
+
+/* ===== Status Indicators ===== */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot-critical {
+    background: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    animation: pulse-soft 1.5s infinite;
+}
+
+.status-dot-warning {
+    background: var(--hrsd-gold);
+    box-shadow: 0 0 0 3px rgba(250, 180, 20, 0.2);
+}
+
+.status-dot-success {
+    background: var(--hrsd-green);
+    box-shadow: 0 0 0 3px rgba(45, 180, 115, 0.2);
+}

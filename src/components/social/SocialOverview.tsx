@@ -33,50 +33,50 @@ export const SocialOverview: React.FC = () => {
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="bg-gradient-to-br from-teal-500 to-teal-600 text-white">
+                <Card className="gradient-ipc text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-teal-100 text-sm">إجمالي المستفيدين</p>
+                                <p className="text-white/80 text-sm">إجمالي المستفيدين</p>
                                 <p className="text-3xl font-bold mt-2">{totalBeneficiaries}</p>
                             </div>
-                            <Users className="w-12 h-12 text-teal-200 opacity-80" />
+                            <Users className="w-12 h-12 text-white/60" />
                         </div>
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+                <Card className="gradient-warning text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-orange-100 text-sm">خطط الأنشطة</p>
+                                <p className="text-white/80 text-sm">خطط الأنشطة</p>
                                 <p className="text-3xl font-bold mt-2">{activePlans}</p>
                             </div>
-                            <Calendar className="w-12 h-12 text-orange-200 opacity-80" />
+                            <Calendar className="w-12 h-12 text-white/60" />
                         </div>
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+                <Card className="gradient-success text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-green-100 text-sm">الأنشطة الموثقة</p>
+                                <p className="text-white/80 text-sm">الأنشطة الموثقة</p>
                                 <p className="text-3xl font-bold mt-2">{documentedActivities}</p>
                             </div>
-                            <FileText className="w-12 h-12 text-green-200 opacity-80" />
+                            <FileText className="w-12 h-12 text-white/60" />
                         </div>
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+                <Card className="gradient-primary text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-purple-100 text-sm">طلبات معلقة</p>
+                                <p className="text-white/80 text-sm">طلبات معلقة</p>
                                 <p className="text-3xl font-bold mt-2">3</p>
                             </div>
-                            <Clock className="w-12 h-12 text-purple-200 opacity-80" />
+                            <Clock className="w-12 h-12 text-white/60" />
                         </div>
                     </div>
                 </Card>

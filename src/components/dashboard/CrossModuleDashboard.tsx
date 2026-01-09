@@ -148,7 +148,7 @@ export const CrossModuleDashboard: React.FC = () => {
                 <ModuleCard
                     title="درع السلامة (IPC)"
                     icon={<Shield className="w-6 h-6 text-white animate-float" />}
-                    bgClass="bg-gradient-to-br from-emerald-600 to-teal-700"
+                    bgClass="gradient-ipc"
                     linkTo="/ipc"
                     delay={1}
                     stats={[
@@ -163,7 +163,7 @@ export const CrossModuleDashboard: React.FC = () => {
                 <ModuleCard
                     title="محرك التمكين"
                     icon={<Target className="w-6 h-6 text-white animate-float" />}
-                    bgClass="bg-gradient-to-br from-blue-600 to-indigo-700"
+                    bgClass="gradient-empowerment"
                     linkTo="/empowerment"
                     delay={2}
                     stats={[
@@ -178,7 +178,7 @@ export const CrossModuleDashboard: React.FC = () => {
                 <ModuleCard
                     title="بوابة الأسرة"
                     icon={<Users className="w-6 h-6 text-white animate-float" />}
-                    bgClass="bg-gradient-to-br from-purple-600 to-pink-700"
+                    bgClass="gradient-family"
                     linkTo="/family"
                     delay={3}
                     stats={[

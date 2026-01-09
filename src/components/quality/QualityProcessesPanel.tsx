@@ -47,30 +47,30 @@ export const QualityProcessesPanel: React.FC = () => {
                     </div>
                 </Card>
 
-                <Card className="p-6 bg-gradient-to-br from-blue-50 to-white border-blue-100">
+                <Card className="p-6 bg-gradient-to-br from-hrsd-teal/10 to-white border-hrsd-teal/20">
                     <div className="flex items-start justify-between">
                         <div>
-                            <h3 className="text-lg font-bold text-blue-900 mb-2">المسؤوليات</h3>
-                            <p className="text-sm text-blue-700">
+                            <h3 className="text-lg font-bold text-hrsd-navy mb-2">المسؤوليات</h3>
+                            <p className="text-sm text-hrsd-teal-dark">
                                 تركيز المسؤولية في القيادات لضمان جودة التطبيق وتوحيد المعايير.
                             </p>
                         </div>
-                        <div className="p-3 bg-blue-100 rounded-lg">
-                            <Users className="w-6 h-6 text-blue-600" />
+                        <div className="p-3 bg-hrsd-teal/10 rounded-lg">
+                            <Users className="w-6 h-6 text-hrsd-teal" />
                         </div>
                     </div>
                 </Card>
 
-                <Card className="p-6 bg-gradient-to-br from-purple-50 to-white border-purple-100">
+                <Card className="p-6 bg-gradient-to-br from-hrsd-gold/10 to-white border-hrsd-gold/20">
                     <div className="flex items-start justify-between">
                         <div>
-                            <h3 className="text-lg font-bold text-purple-900 mb-2">طبيعة العمليات</h3>
-                            <p className="text-sm text-purple-700">
+                            <h3 className="text-lg font-bold text-hrsd-navy mb-2">طبيعة العمليات</h3>
+                            <p className="text-sm text-hrsd-gold-dark">
                                 48 عملية (38%) هي عمليات يومية ومستمرة، مما يعكس النشاط التشغيلي المكثف.
                             </p>
                         </div>
-                        <div className="p-3 bg-purple-100 rounded-lg">
-                            <Clock className="w-6 h-6 text-purple-600" />
+                        <div className="p-3 bg-hrsd-gold/10 rounded-lg">
+                            <Clock className="w-6 h-6 text-hrsd-gold-dark" />
                         </div>
                     </div>
                 </Card>
@@ -147,8 +147,8 @@ export const QualityProcessesPanel: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{process.responsible}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${process.frequency === 'يومي' || process.frequency === 'مستمر'
-                                                ? 'bg-blue-100 text-blue-800'
-                                                : 'bg-gray-100 text-gray-800'
+                                            ? 'bg-blue-100 text-blue-800'
+                                            : 'bg-gray-100 text-gray-800'
                                             }`}>
                                             {process.frequency}
                                         </span>
