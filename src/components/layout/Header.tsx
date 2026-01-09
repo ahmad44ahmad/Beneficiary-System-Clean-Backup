@@ -91,12 +91,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                         <p className="text-sm font-bold text-hrsd-gold leading-tight drop-shadow-md">{currentUser?.name || 'مستخدم'}</p>
                         <p className="text-xs text-hrsd-green font-medium">حساب تجريبي</p>
                     </div>
-                    <div className="w-10 h-10 bg-gradient-to-br from-hrsd-teal to-hrsd-teal-dark rounded-xl flex items-center justify-center text-white border border-white/20 shadow-md">
-                        {currentUser?.avatar ? (
-                            <img src={currentUser.avatar} alt="Profile" className="w-full h-full rounded-xl object-cover" />
-                        ) : (
-                            <User className="w-5 h-5" />
-                        )}
+                    <div className="w-10 h-10 bg-gradient-to-br from-hrsd-gold to-hrsd-orange rounded-xl flex items-center justify-center text-white border border-white/20 shadow-md">
+                        <User className="w-5 h-5" />
                     </div>
                 </div>
             </div>
