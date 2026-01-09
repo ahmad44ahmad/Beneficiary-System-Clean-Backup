@@ -84,6 +84,7 @@ import { CrisisMode } from './crisis/CrisisMode';
 // AI Indicators
 import { BiologicalAuditIndicator } from './indicators/BiologicalAuditIndicator';
 import { BehavioralPrediction } from './indicators/BehavioralPrediction';
+import { SmartIndicatorsHub } from './indicators/SmartIndicatorsHub';
 
 // Beneficiary Management
 import { BeneficiaryListPage } from './beneficiary/BeneficiaryListPage';
@@ -244,6 +245,7 @@ export const App = () => {
                     <Route path="overview" element={<CrossModuleDashboard />} />
                     <Route path="liability" element={<LiabilityDashboard />} />
                     <Route path="crisis" element={<CrisisMode />} />
+                    <Route path="indicators" element={<SmartIndicatorsHub />} />
                     <Route path="indicators/biological" element={<BiologicalAuditIndicator />} />
                     <Route path="indicators/behavioral" element={<BehavioralPrediction />} />
                     <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
