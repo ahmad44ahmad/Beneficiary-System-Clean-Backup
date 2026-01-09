@@ -80,8 +80,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* Notifications + User */}
             <div className="flex items-center gap-2 md:gap-4">
                 {/* Notifications */}
-                <Button variant="ghost" size="sm" className="relative hover:bg-white/10 text-white p-2">
-                    <Bell className="w-5 h-5" />
+                <Button variant="ghost" size="sm" className="relative hover:bg-white/10 p-2">
+                    <Bell className="w-5 h-5 text-hrsd-gold" />
                     <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-hrsd-orange rounded-full border-2 border-hrsd-navy animate-pulse"></span>
                 </Button>
 
@@ -89,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 <div className="flex items-center gap-3 pr-2 md:pr-4 md:border-r border-white/10">
                     <div className="text-right hidden md:block">
                         <p className="text-sm font-bold text-hrsd-gold leading-tight drop-shadow-md">{currentUser?.name || 'مستخدم'}</p>
-                        <p className="text-xs text-white/90 font-medium">حساب تجريبي</p>
+                        <p className="text-xs text-hrsd-green font-medium">حساب تجريبي</p>
                     </div>
                     <div className="w-10 h-10 bg-gradient-to-br from-hrsd-teal to-hrsd-teal-dark rounded-xl flex items-center justify-center text-white border border-white/20 shadow-md">
                         {currentUser?.avatar ? (

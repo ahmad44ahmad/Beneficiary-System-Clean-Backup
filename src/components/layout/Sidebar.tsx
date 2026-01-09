@@ -179,7 +179,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                         </div>
                         <div>
                             <h1 className="font-bold text-lg leading-tight text-[rgb(250,180,20)]">مركز التأهيل الشامل بالباحة</h1>
-                            <p className="text-[rgb(45,180,115)] text-sm mt-1 font-semibold">وزارة الموارد البشرية</p>
+                            <p className="text-[rgb(45,180,115)] text-sm mt-1 font-semibold">وزارة الموارد البشرية والتنمية الاجتماعية</p>
                         </div>
                     </div>
 
