@@ -85,6 +85,12 @@ import { CrisisMode } from './crisis/CrisisMode';
 import { BiologicalAuditIndicator } from './indicators/BiologicalAuditIndicator';
 import { BehavioralPrediction } from './indicators/BehavioralPrediction';
 import { SmartIndicatorsHub } from './indicators/SmartIndicatorsHub';
+import { EarlyWarningSystem } from './indicators/EarlyWarningSystem';
+import { SatisfactionPulse } from './indicators/SatisfactionPulse';
+import { CostPerBeneficiary } from './indicators/CostPerBeneficiary';
+import { BenchmarkDashboard } from './indicators/BenchmarkDashboard';
+import { ISOComplianceTracker } from './indicators/ISOComplianceTracker';
+import { HRImpactIndicator } from './indicators/HRImpactIndicator';
 
 // Beneficiary Management
 import { BeneficiaryListPage } from './beneficiary/BeneficiaryListPage';
@@ -248,6 +254,12 @@ export const App = () => {
                     <Route path="indicators" element={<SmartIndicatorsHub />} />
                     <Route path="indicators/biological" element={<BiologicalAuditIndicator />} />
                     <Route path="indicators/behavioral" element={<BehavioralPrediction />} />
+                    <Route path="indicators/early-warning" element={<EarlyWarningSystem />} />
+                    <Route path="indicators/satisfaction" element={<SatisfactionPulse />} />
+                    <Route path="indicators/cost" element={<CostPerBeneficiary />} />
+                    <Route path="indicators/hr" element={<HRImpactIndicator />} />
+                    <Route path="indicators/benchmark" element={<BenchmarkDashboard />} />
+                    <Route path="indicators/iso" element={<ISOComplianceTracker />} />
                     <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
                     <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
