@@ -319,13 +319,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                 {/* Designer Credit with Logo */}
                 <div className="p-4 border-t-2 border-[rgb(245,150,30)] bg-[rgb(10,45,65)] flex flex-col items-center gap-3">
                     <img
-                        src="/assets/designer-logo.jpg"
-                        alt="أحمد الشهري"
-                        className="h-12 w-auto opacity-90"
+                        src="/assets/designer-credit.jpg"
+                        alt="تصميم وتطوير: سعيد بن علي الغامدي و أحمد بن عبدالله الشهري"
+                        className="h-20 w-auto rounded-lg shadow-lg opacity-95 hover:opacity-100 transition-opacity"
                     />
-                    <p className="text-sm text-[rgb(250,180,20)] font-semibold">
-                        تصميم وتطوير: أحمد الشهري
-                    </p>
                 </div>
             </aside>
         </>

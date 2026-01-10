@@ -18,10 +18,10 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const MOCK_USERS: Record<UserRole, User> = {
-    director: { id: 'u1', name: 'د. عبدالله (المدير)', role: 'director', avatar: 'https://i.pravatar.cc/150?u=director' },
-    doctor: { id: 'u2', name: 'د. محمد (طبيب)', role: 'doctor', avatar: 'https://i.pravatar.cc/150?u=doctor' },
-    social_worker: { id: 'u3', name: 'أ. علي (أخصائي اجتماعي)', role: 'social_worker', avatar: 'https://i.pravatar.cc/150?u=social' },
-    nurse: { id: 'u4', name: 'سعيد (ممرض)', role: 'nurse', avatar: 'https://i.pravatar.cc/150?u=nurse' },
+    director: { id: 'u1', name: 'خالد بن مطر الزهراني (المدير)', role: 'director', avatar: 'https://i.pravatar.cc/150?u=director' },
+    doctor: { id: 'u2', name: 'د. محمد بلال (طبيب)', role: 'doctor', avatar: 'https://i.pravatar.cc/150?u=doctor' },
+    social_worker: { id: 'u3', name: 'أ. سعيد بن علي الغامدي (أخصائي اجتماعي)', role: 'social_worker', avatar: 'https://i.pravatar.cc/150?u=social' },
+    nurse: { id: 'u4', name: 'نايف بن عبدالله الغامدي (ممرض)', role: 'nurse', avatar: 'https://i.pravatar.cc/150?u=nurse' },
     admin: { id: 'u5', name: 'أحمد بن عبدالله الشهري', role: 'admin', avatar: 'https://i.pravatar.cc/150?u=admin' },
 };
 

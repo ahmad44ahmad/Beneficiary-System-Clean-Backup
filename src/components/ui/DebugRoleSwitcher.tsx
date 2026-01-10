@@ -8,7 +8,7 @@ export const DebugRoleSwitcher: React.FC = () => {
     if (!import.meta.env.DEV) return null;
 
     return (
-        <div className="fixed bottom-4 right-4 z-50 bg-gray-900 text-white p-3 rounded-lg shadow-xl opacity-90 hover:opacity-100 transition-opacity">
+        <div className="fixed bottom-28 right-4 z-50 bg-gray-900 text-white p-3 rounded-lg shadow-xl opacity-90 hover:opacity-100 transition-opacity">
             <div className="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-wider text-gray-400">
                 <Shield className="w-3 h-3" />
                 Debug: Role Switcher
