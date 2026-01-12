@@ -101,6 +101,17 @@ import { WelcomePage } from '../pages/WelcomePage';
 // Executive Report
 import { ExecutiveReport } from '../pages/ExecutiveReport';
 
+// New Basira Components
+import { MorningPulse } from './pulse/MorningPulse';
+import { WellbeingHeatmap } from './pulse/WellbeingHeatmap';
+import { SmartAlertsPanel } from './alerts/SmartAlertsPanel';
+import { MedicationAdministration } from './medication/MedicationAdministration';
+import { BeneficiaryTimeline } from './beneficiary/BeneficiaryTimeline';
+import { ShiftHandover } from './shift/ShiftHandover';
+import { EmergencyDashboard } from './emergency/EmergencyDashboard';
+import { SchedulingSystem } from './scheduling/SchedulingSystem';
+import { StaffProfile } from './staff/StaffProfile';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -198,6 +209,19 @@ export const App = () => {
                     <Route path="social" element={<SocialOverview />} />
                     <Route path="social/leaves" element={<LeaveRequestFlow />} />
                     <Route path="social/research/new" element={<SocialResearchWizard />} />
+
+                    {/* Basira Advanced Components */}
+                    <Route path="pulse" element={<MorningPulse />} />
+                    <Route path="wellbeing" element={<WellbeingHeatmap />} />
+                    <Route path="smart-alerts" element={<SmartAlertsPanel />} />
+                    <Route path="medication-admin" element={<MedicationAdministration />} />
+                    <Route path="timeline/:id" element={<BeneficiaryTimeline />} />
+                    <Route path="timeline" element={<BeneficiaryTimeline />} />
+                    <Route path="handover" element={<ShiftHandover />} />
+                    <Route path="emergency" element={<EmergencyDashboard />} />
+                    <Route path="scheduling" element={<SchedulingSystem />} />
+                    <Route path="staff-profile/:id" element={<StaffProfile />} />
+                    <Route path="staff-profile" element={<StaffProfile />} />
                     <Route path="social/activities" element={
                         <SocialActivitiesPanel
                             plans={socialActivityPlans}
