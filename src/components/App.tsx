@@ -111,6 +111,7 @@ import { ShiftHandover } from './shift/ShiftHandover';
 import { EmergencyDashboard } from './emergency/EmergencyDashboard';
 import { SchedulingSystem } from './scheduling/SchedulingSystem';
 import { StaffProfile } from './staff/StaffProfile';
+import { LoginPage } from '../pages/LoginPage';
 
 export const App = () => {
     const {
@@ -162,6 +163,9 @@ export const App = () => {
     return (
         <>
             <Routes>
+                {/* Login Page */}
+                <Route path="/login" element={<LoginPage />} />
+
                 {/* Welcome Page - Landing */}
                 <Route path="/" element={<WelcomePage />} />
 

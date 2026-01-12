@@ -129,6 +129,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             ]
         },
         {
+            title: 'بصيرة المتقدم',
+            items: [
+                { to: '/pulse', icon: Activity, label: '🌅 نبض المركز' },
+                { to: '/wellbeing', icon: Heart, label: '🗺️ خريطة الرفاهية' },
+                { to: '/smart-alerts', icon: Bell, label: '🚨 التنبيهات الذكية' },
+                { to: '/medication-admin', icon: Syringe, label: '💊 إعطاء الأدوية' },
+                { to: '/timeline', icon: ClipboardList, label: '📅 الجدول الزمني' },
+                { to: '/handover', icon: Users2, label: '🔄 تسليم الوردية' },
+                { to: '/emergency', icon: AlertCircle, label: '🆘 لوحة الطوارئ' },
+                { to: '/scheduling', icon: CalendarCheck, label: '📆 نظام المواعيد' },
+                { to: '/staff-profile', icon: Users, label: '👤 ملف الموظف' },
+            ]
+        },
+        {
             title: 'الإدارة',
             items: [
                 { to: '/secretariat', icon: FileText, label: 'السكرتارية' },
