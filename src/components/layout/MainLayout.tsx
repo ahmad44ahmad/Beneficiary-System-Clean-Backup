@@ -43,8 +43,9 @@ export const MainLayout = () => {
             {/* Global Risk Alert System */}
             <RiskAlertSystem />
 
-            {/* Real-Time Alerts Notification */}
-            <RealTimeAlerts />
+            {/* Real-Time Alerts Notification - Temporarily disabled for presentation */}
+            {/* TODO: Re-enable after demo - uncomment the line below */}
+            {/* <RealTimeAlerts /> */}
 
             {/* Desktop Sidebar */}
             <Sidebar isMobile={false} />
