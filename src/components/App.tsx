@@ -95,6 +95,9 @@ import { HRImpactIndicator } from './indicators/HRImpactIndicator';
 // Beneficiary Management
 import { BeneficiaryListPage } from './beneficiary/BeneficiaryListPage';
 
+// Welcome Page
+import { WelcomePage } from '../pages/WelcomePage';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -145,9 +148,11 @@ export const App = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<MainLayout />}>
-                    <Route index element={<Navigate to="/dashboard" replace />} />
+                {/* Welcome Page - Landing */}
+                <Route path="/" element={<WelcomePage />} />
 
+                {/* Main Application with Layout */}
+                <Route path="/*" element={<MainLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
 
                     <Route path="beneficiaries" element={
