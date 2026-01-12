@@ -98,6 +98,9 @@ import { BeneficiaryListPage } from './beneficiary/BeneficiaryListPage';
 // Welcome Page
 import { WelcomePage } from '../pages/WelcomePage';
 
+// Executive Report
+import { ExecutiveReport } from '../pages/ExecutiveReport';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -154,6 +157,7 @@ export const App = () => {
                 {/* Main Application with Layout */}
                 <Route path="/*" element={<MainLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="executive-report" element={<ExecutiveReport />} />
 
                     <Route path="beneficiaries" element={
                         <div className="flex gap-4 h-[calc(100vh-8rem)]">
