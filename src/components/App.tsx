@@ -118,6 +118,10 @@ import { GRCDashboardEnhanced } from '../modules/grc/GRCDashboardEnhanced';
 import { QualityManualEnhanced } from './quality/QualityManualEnhanced';
 import { QualityDashboardEnhanced } from '../pages/QualityDashboardEnhanced';
 
+// GRC Pro and Quality Manual Pro (with real data)
+import GRCDashboardPro from '../modules/grc-pro/21_GRCDashboardPro';
+import QualityManualPro from '../modules/grc-pro/22_QualityManualPro';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -236,6 +240,10 @@ export const App = () => {
                     <Route path="grc-enhanced" element={<GRCDashboardEnhanced />} />
                     <Route path="quality-enhanced" element={<QualityDashboardEnhanced />} />
                     <Route path="quality/manual" element={<QualityManualEnhanced />} />
+
+                    {/* GRC Pro Routes (with real data) */}
+                    <Route path="grc-pro" element={<GRCDashboardPro />} />
+                    <Route path="quality-manual-pro" element={<QualityManualPro />} />
 
                     <Route path="social/activities" element={
                         <SocialActivitiesPanel
