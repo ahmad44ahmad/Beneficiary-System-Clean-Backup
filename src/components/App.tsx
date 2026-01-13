@@ -113,6 +113,11 @@ import { SchedulingSystem } from './scheduling/SchedulingSystem';
 import { StaffProfile } from './staff/StaffProfile';
 import { LoginPage } from '../pages/LoginPage';
 
+// Enhanced GRC and Quality Components
+import { GRCDashboardEnhanced } from '../modules/grc/GRCDashboardEnhanced';
+import { QualityManualEnhanced } from './quality/QualityManualEnhanced';
+import { QualityDashboardEnhanced } from '../pages/QualityDashboardEnhanced';
+
 export const App = () => {
     const {
         activeBeneficiary: selectedBeneficiary,
@@ -226,6 +231,12 @@ export const App = () => {
                     <Route path="scheduling" element={<SchedulingSystem />} />
                     <Route path="staff-profile/:id" element={<StaffProfile />} />
                     <Route path="staff-profile" element={<StaffProfile />} />
+
+                    {/* Enhanced GRC and Quality Routes */}
+                    <Route path="grc-enhanced" element={<GRCDashboardEnhanced />} />
+                    <Route path="quality-enhanced" element={<QualityDashboardEnhanced />} />
+                    <Route path="quality/manual" element={<QualityManualEnhanced />} />
+
                     <Route path="social/activities" element={
                         <SocialActivitiesPanel
                             plans={socialActivityPlans}
