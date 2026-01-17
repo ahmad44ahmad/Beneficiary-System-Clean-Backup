@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#1a365d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="مركز التأهيل">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- SEO -->
+  <meta name="description"
+    content="نظام إدارة بيانات المستفيدين - مركز التأهيل الشامل - وزارة الموارد البشرية والتنمية الاجتماعية">
+  <meta name="author" content="أحمد الشهري">
+
+  <title>مركز التأهيل الشامل | إدارة المستفيدين</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/assets/organization-logo.jpg">
+  <link rel="icon" type="image/jpeg" href="/assets/organization-logo.jpg">
+
+  <!-- Fonts - Adobe Typekit (Effra Arabic - Official HRSD Font) -->
+  <link rel="stylesheet" href="https://use.typekit.net/jpg0lev.css">
+  <link rel="stylesheet" href="https://use.typekit.net/wzu4cvp.css">
+
+  <!-- Fallback Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+
+  <!-- iOS Safe Area Styles -->
+  <style>
+    html,
+    body {
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+
+    /* Prevent pull-to-refresh on iOS */
+    body {
+      overscroll-behavior-y: contain;
+    }
+
+    /* Loading screen */
+    #root:empty::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #1a365d 0%, #0f2744 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #root:empty::before {
+      content: 'جاري التحميل...';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #eab308;
+      font-family: 'effra-arabic', 'effra-cc-arabic', 'Readex Pro', 'Tajawal', sans-serif;
+      font-size: 1.25rem;
+      z-index: 1;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-BOMQ6ZnB.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BlwhP3s4.css">
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>
