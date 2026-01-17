@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Print Styles for Basira System Reports
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+
+    /* Hide non-essential elements during print */
+    .no-print,
+    nav,
+    aside,
+    header,
+    footer,
+    .sidebar,
+    .mobile-nav,
+    .debug-role-switcher,
+    .command-menu,
+    button:not(.print-include),
+    .toast-container,
+    [role="navigation"],
+    [data-no-print="true"] {
+        display: none !important;
+    }
+
+    /* Reset background colors for print */
+    body,
+    main,
+    .main-content,
+    .card,
+    .panel,
+    [class*="bg-"] {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Full width for print content */
+    main,
+    .main-content,
+    .content-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure text is readable */
+    body {
+        font-size: 12pt !important;
+        line-height: 1.5 !important;
+        direction: rtl !important;
+        font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+    }
+
+    /* Headers */
+    h1 {
+        font-size: 18pt !important;
+        margin-bottom: 12pt !important;
+    }
+
+    h2 {
+        font-size: 16pt !important;
+        margin-bottom: 10pt !important;
+    }
+
+    h3 {
+        font-size: 14pt !important;
+        margin-bottom: 8pt !important;
+    }
+
+    /* Tables - ensure proper borders and spacing */
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        page-break-inside: auto !important;
+    }
+
+    thead {
+        display: table-header-group !important;
+    }
+
+    tr {
+        page-break-inside: avoid !important;
+        page-break-after: auto !important;
+    }
+
+    th,
+    td {
+        border: 1px solid #333 !important;
+        padding: 6pt 8pt !important;
+        text-align: right !important;
+    }
+
+    th {
+        background-color: #f0f0f0 !important;
+        font-weight: bold !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Cards and panels */
+    .card,
+    .panel,
+    .stat-card {
+        border: 1px solid #ddd !important;
+        padding: 12pt !important;
+        margin-bottom: 12pt !important;
+        page-break-inside: avoid !important;
+        box-shadow: none !important;
+    }
+
+    /* Links - show URL */
+    a[href]:after {
+        content: " (" attr(href) ")" !important;
+        font-size: 10pt !important;
+        color: #666 !important;
+    }
+
+    /* Don't show URL for internal links */
+    a[href^="#"]:after,
+    a[href^="/"]:after {
+        content: "" !important;
+    }
+
+    /* Charts - ensure they print */
+    svg,
+    canvas,
+    .chart-container {
+        max-height: 300pt !important;
+        width: 100% !important;
+    }
+
+    /* Page breaks */
+    .page-break-before {
+        page-break-before: always !important;
+    }
+
+    .page-break-after {
+        page-break-after: always !important;
+    }
+
+    .avoid-break {
+        page-break-inside: avoid !important;
+    }
+
+    /* Print header */
+    .print-header {
+        display: block !important;
+        text-align: center !important;
+        margin-bottom: 20pt !important;
+        border-bottom: 2pt solid #333 !important;
+        padding-bottom: 10pt !important;
+    }
+
+    .print-header h1 {
+        font-size: 20pt !important;
+        margin: 0 !important;
+    }
+
+    .print-header .subtitle {
+        font-size: 12pt !important;
+        color: #666 !important;
+    }
+
+    /* Print footer with page numbers */
+    @page {
+        size: A4;
+        margin: 2cm;
+    }
+
+    /* Status badges - ensure colors print */
+    .badge,
+    .status-badge,
+    [class*="badge-"] {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        border: 1px solid currentColor !important;
+    }
+
+    /* Risk levels */
+    .risk-high,
+    .bg-red-100 {
+        background-color: #fee2e2 !important;
+    }
+
+    .risk-medium,
+    .bg-yellow-100 {
+        background-color: #fef3c7 !important;
+    }
+
+    .risk-low,
+    .bg-green-100 {
+        background-color: #dcfce7 !important;
+    }
+
+    /* Scrollable areas - show all content */
+    .overflow-auto,
+    .overflow-y-auto,
+    .overflow-x-auto,
+    [class*="overflow-"] {
+        overflow: visible !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    /* Animations - disable for print */
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Print-specific utility classes (for use in components)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Hide element on screen, show on print */
+.print-only {
+    display: none !important;
+}
+
+@media print {
+    .print-only {
+        display: block !important;
+    }
+}
+
+/* Show on screen, hide on print */
+.screen-only {
+    display: block;
+}
+
+@media print {
+    .screen-only {
+        display: none !important;
+    }
+}

@@ -772,3 +772,6 @@ button {
   width: auto;
   opacity: 0.7;
 }
+
+/* ===== Import Print Styles ===== */
+@import url('./print.css');
