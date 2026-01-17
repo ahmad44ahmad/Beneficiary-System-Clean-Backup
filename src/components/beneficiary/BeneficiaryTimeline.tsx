@@ -138,7 +138,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
 
             {/* Timeline */}
             <div className="space-y-8">
-                {Object.entries(groupedEvents).map(([date, dateEvents]) => (
+                {Object.entries(groupedEvents).map(([date, dateEvents]: [string, TimelineEvent[]]) => (
                     <div key={date}>
                         {/* Date Header */}
                         <div className="flex items-center gap-3 mb-4">

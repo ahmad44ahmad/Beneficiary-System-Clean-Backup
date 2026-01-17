@@ -86,7 +86,7 @@ const useAlertSound = () => {
                 oscillator.start(audioContext.currentTime);
                 oscillator.stop(audioContext.currentTime + 0.5);
             } catch (e) {
-                console.log('Audio not supported');
+                // Audio not supported in this browser
             }
         }
     }, [soundEnabled]);
@@ -117,9 +117,9 @@ const AlertCard: React.FC<{
                         <div className="flex items-center gap-2">
                             <h4 className="font-bold text-gray-800">{alert.title}</h4>
                             <span className={`px-2 py-0.5 rounded text-xs font-medium ${alert.severity === 'critical' ? 'bg-red-500 text-white' :
-                                    alert.severity === 'high' ? 'bg-orange-500 text-white' :
-                                        alert.severity === 'medium' ? 'bg-yellow-500 text-white' :
-                                            'bg-blue-500 text-white'
+                                alert.severity === 'high' ? 'bg-orange-500 text-white' :
+                                    alert.severity === 'medium' ? 'bg-yellow-500 text-white' :
+                                        'bg-blue-500 text-white'
                                 }`}>
                                 {alert.severity === 'critical' ? 'حرج' :
                                     alert.severity === 'high' ? 'مرتفع' :

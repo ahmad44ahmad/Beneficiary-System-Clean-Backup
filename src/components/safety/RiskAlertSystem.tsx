@@ -15,7 +15,7 @@ export const RiskAlertSystem: React.FC = () => {
     const [alerts, setAlerts] = useState<RiskAlert[]>([]);
 
     useEffect(() => {
-        console.log('Initializing Risk Alert System...');
+        // Initializing Risk Alert System
 
         const channel = supabase
             .channel('risk-alerts')
@@ -23,7 +23,7 @@ export const RiskAlertSystem: React.FC = () => {
                 'postgres_changes',
                 { event: 'INSERT', schema: 'public', table: 'fall_risk_assessments' },
                 async (payload) => {
-                    console.log('New Risk Assessment Received:', payload);
+                    // New risk assessment received
                     const newRecord = payload.new;
 
                     // Only alert for High Risk (Score >= 45)
@@ -80,7 +80,7 @@ export const RiskAlertSystem: React.FC = () => {
             )
             .subscribe((status) => {
                 if (status === 'SUBSCRIBED') {
-                    console.log('Risk Alert System: Connected to Realtime');
+                    // Connected to Realtime
                 }
             });
 

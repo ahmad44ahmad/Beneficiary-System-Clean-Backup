@@ -72,7 +72,7 @@ export const CostPerBeneficiary: React.FC = () => {
     const dailyCostPerBeneficiary = latestData.total / latestData.beneficiaries / 30;
 
     // Prepare chart data
-    const barChartData = Object.entries(monthlyTotals).map(([month, data]) => ({
+    const barChartData = Object.entries(monthlyTotals).map(([month, data]: [string, { total: number; beneficiaries: number; categories: Record<string, number> }]) => ({
         month: new Date(month).toLocaleDateString('ar-SA', { month: 'short' }),
         total: Math.round(data.total / data.beneficiaries / 30),
         beneficiaries: data.beneficiaries,
@@ -203,7 +203,7 @@ export const CostPerBeneficiary: React.FC = () => {
                     <div className="hrsd-card">
                         <h3 className="text-hierarchy-subheading text-gray-800 mb-4">تفصيل التكاليف حسب الفئة</h3>
                         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                            {Object.entries(latestData.categories).map(([category, amount], idx) => (
+                            {Object.entries(latestData.categories).map(([category, amount]: [string, number], idx) => (
                                 <div key={idx} className="p-4 bg-gray-50 rounded-xl text-center">
                                     <div className="w-10 h-10 mx-auto mb-2 rounded-full flex items-center justify-center" style={{ backgroundColor: COLORS[idx % COLORS.length] + '20', color: COLORS[idx % COLORS.length] }}>
                                         {categoryIcons[category] || <DollarSign className="w-5 h-5" />}

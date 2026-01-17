@@ -70,7 +70,7 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
     };
 
     const handleSave = () => {
-        console.log('Saving Assessment:', formData);
+        // Save assessment data
         onSave(formData); // In a real app, pass formData here
     };
 

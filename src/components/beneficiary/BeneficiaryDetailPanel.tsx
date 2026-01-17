@@ -88,7 +88,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
 
     // Handles updates from sub-components (placeholder)
     const handleUpdate = (data: any) => {
-        console.log('Data updated:', data);
+        // Data updated successfully
     };
 
     // Try to find a dignity profile, or fall back to the mock one for demo

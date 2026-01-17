@@ -71,10 +71,10 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary, o
                     <div className="space-y-4">
                         <p className="text-gray-600 text-sm">Manage inventory and distribution of clothing for the beneficiary.</p>
                         <div className="flex space-x-2">
-                            <Button variant="outline" size="sm" onClick={() => console.log('Request Clothing')}>
+                            <Button variant="outline" size="sm">
                                 <Shirt size={16} className="mr-2" /> New Request
                             </Button>
-                            <Button variant="outline" size="sm" onClick={() => console.log('View Inventory')}>
+                            <Button variant="outline" size="sm">
                                 View Inventory
                             </Button>
                         </div>
@@ -84,7 +84,7 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary, o
                 <Card title="Activity Participation">
                     <div className="space-y-4">
                         <p className="text-gray-600 text-sm">Log participation in center activities (Sports, Art, Social).</p>
-                        <Button variant="outline" size="sm" onClick={() => console.log('Log Activity')}>
+                        <Button variant="outline" size="sm">
                             <Calendar size={16} className="mr-2" /> Log Activity
                         </Button>
                     </div>

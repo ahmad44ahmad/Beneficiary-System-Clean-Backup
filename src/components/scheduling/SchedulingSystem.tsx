@@ -148,7 +148,7 @@ export const SchedulingSystem: React.FC = () => {
                 className="flex items-center justify-between mb-6"
             >
                 <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-14 h-14 bg-gradient-to-br from-[rgb(20,130,135)] to-[rgb(20,65,90)] rounded-2xl flex items-center justify-center shadow-lg">
                         <Calendar className="w-7 h-7 text-white" />
                     </div>
                     <div>
@@ -156,7 +156,7 @@ export const SchedulingSystem: React.FC = () => {
                         <p className="text-slate-400 text-sm">إدارة جدولة العلاج والزيارات والفحوصات</p>
                     </div>
                 </div>
-                <button className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+                <button className="px-6 py-3 bg-gradient-to-r from-[rgb(20,130,135)] to-[rgb(45,180,115)] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <Plus className="w-5 h-5" />
                     موعد جديد
                 </button>
@@ -176,28 +176,28 @@ export const SchedulingSystem: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-green-500/20 rounded-xl p-4 text-center border border-green-500/30"
+                    className="bg-[rgb(45,180,115)]/20 rounded-xl p-4 text-center border border-[rgb(45,180,115)]/30"
                 >
-                    <p className="text-3xl font-bold text-green-400">{stats.completed}</p>
-                    <p className="text-green-300/70 text-sm">مكتملة</p>
+                    <p className="text-3xl font-bold text-[rgb(45,180,115)]">{stats.completed}</p>
+                    <p className="text-[rgb(45,180,115)]/70 text-sm">مكتملة</p>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-yellow-500/20 rounded-xl p-4 text-center border border-yellow-500/30"
+                    className="bg-[rgb(245,150,30)]/20 rounded-xl p-4 text-center border border-[rgb(245,150,30)]/30"
                 >
-                    <p className="text-3xl font-bold text-yellow-400">{stats.inProgress}</p>
-                    <p className="text-yellow-300/70 text-sm">جارية</p>
+                    <p className="text-3xl font-bold text-[rgb(245,150,30)]">{stats.inProgress}</p>
+                    <p className="text-[rgb(245,150,30)]/70 text-sm">جارية</p>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-blue-500/20 rounded-xl p-4 text-center border border-blue-500/30"
+                    className="bg-[rgb(20,130,135)]/20 rounded-xl p-4 text-center border border-[rgb(20,130,135)]/30"
                 >
-                    <p className="text-3xl font-bold text-blue-400">{stats.upcoming}</p>
-                    <p className="text-blue-300/70 text-sm">قادمة</p>
+                    <p className="text-3xl font-bold text-[rgb(20,130,135)]">{stats.upcoming}</p>
+                    <p className="text-[rgb(20,130,135)]/70 text-sm">قادمة</p>
                 </motion.div>
             </div>
 
@@ -211,7 +211,7 @@ export const SchedulingSystem: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-3">تصفية حسب النوع</p>
                         <button
                             onClick={() => setFilterType('all')}
-                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors text-right ${filterType === 'all' ? 'bg-blue-500 text-white' : 'bg-slate-700 text-slate-400 hover:bg-slate-600'}`}
+                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors text-right ${filterType === 'all' ? 'bg-[rgb(20,130,135)] text-white' : 'bg-slate-700 text-slate-400 hover:bg-slate-600'}`}
                         >
                             جميع المواعيد
                         </button>
@@ -239,7 +239,7 @@ export const SchedulingSystem: React.FC = () => {
                             <input
                                 type="text"
                                 placeholder="بحث..."
-                                className="bg-slate-800 border border-slate-700 rounded-lg pr-9 pl-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-indigo-500"
+                                className="bg-slate-800 border border-slate-700 rounded-lg pr-9 pl-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[rgb(20,130,135)]"
                             />
                         </div>
                     </div>
@@ -256,7 +256,7 @@ export const SchedulingSystem: React.FC = () => {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className={`flex gap-4 p-4 rounded-xl border ${apt.status === 'in_progress' ? 'bg-yellow-500/10 border-yellow-500/30' : 'bg-slate-800/50 border-slate-700'}`}
+                                    className={`flex gap-4 p-4 rounded-xl border ${apt.status === 'in_progress' ? 'bg-[rgb(245,150,30)]/10 border-[rgb(245,150,30)]/30' : 'bg-slate-800/50 border-slate-700'}`}
                                 >
                                     {/* Time */}
                                     <div className="text-center w-20 flex-shrink-0">
