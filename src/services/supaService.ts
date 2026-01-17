@@ -48,7 +48,41 @@ export const supaService = {
             return [];
         }
 
-        return data as UnifiedBeneficiaryProfile[];
+        // Transform Supabase snake_case to camelCase for TypeScript interface
+        return (data || []).map((b: any) => ({
+            id: b.id,
+            nationalId: b.national_id,
+            fullName: b.full_name || b.name || '',
+            roomNumber: b.room_number,
+            bedNumber: b.bed_number,
+            nationality: b.nationality,
+            gender: b.gender,
+            dob: b.dob || b.date_of_birth,
+            age: b.age,
+            enrollmentDate: b.enrollment_date,
+            guardianName: b.guardian_name,
+            guardianRelation: b.guardian_relation,
+            guardianPhone: b.guardian_phone,
+            guardianResidence: b.guardian_residence,
+            visitFrequency: b.visit_frequency,
+            lastVisitDate: b.last_visit_date,
+            socialStatus: b.social_status,
+            medicalDiagnosis: b.medical_diagnosis,
+            psychiatricDiagnosis: b.psychiatric_diagnosis,
+            iqLevel: b.iq_level,
+            iqScore: b.iq_score,
+            notes: b.notes,
+            status: b.status || 'active',
+            // Extended unified fields
+            visitLogs: [],
+            incidents: [],
+            medicalHistory: [],
+            smartTags: [],
+            riskLevel: 'low',
+            isOrphan: false,
+            hasChronicCondition: false,
+            requiresIsolation: false,
+        } as UnifiedBeneficiaryProfile));
     },
 
     async getBeneficiaryById(id: string): Promise<UnifiedBeneficiaryProfile | null> {

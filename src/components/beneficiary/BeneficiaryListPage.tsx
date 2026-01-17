@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import {
     Users, Plus, RefreshCw, Grid, List,
     ChevronLeft, Activity
@@ -7,6 +8,7 @@ import {
 import { supabase } from '../../config/supabase';
 import { BeneficiaryCard } from './BeneficiaryCard';
 import { BeneficiaryFilters, FilterState } from './BeneficiaryFilters';
+import { SkeletonCard, SkeletonStatCard } from '../ui/Skeleton';
 
 interface Beneficiary {
     id: string;
@@ -23,65 +25,25 @@ interface Beneficiary {
 
 export const BeneficiaryListPage: React.FC = () => {
     const navigate = useNavigate();
-    const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>([]);
-    const [filteredBeneficiaries, setFilteredBeneficiaries] = useState<Beneficiary[]>([]);
-    const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState<FilterState>({});
 
-    // Demo data - Replace with actual Supabase fetch
-    useEffect(() => {
-        const fetchBeneficiaries = async () => {
-            setLoading(true);
-
-            // Try to fetch from Supabase first
-            const { data, error } = await supabase
-                .from('beneficiaries')
-                .select('*')
-                .order('name', { ascending: true });
-
-            if (error || !data || data.length === 0) {
-                // Use demo data if no Supabase data
-                const demoData: Beneficiary[] = [
-                    { id: '1', name: 'عبدالله محمد المالكي', age: 34, room: '101', wing: 'east', admission_date: '2024-01-15', status: 'stable', ipc_status: 'safe', latest_goal: 'تعلم الوضوء بشكل مستقل' },
-                    { id: '2', name: 'فاطمة أحمد الغامدي', age: 28, room: '102', wing: 'east', admission_date: '2024-02-20', status: 'needs_attention', ipc_status: 'monitor', latest_goal: 'المشاركة في الأنشطة الجماعية' },
-                    { id: '3', name: 'محمد علي الزهراني', age: 45, room: '105', wing: 'west', admission_date: '2023-06-10', status: 'stable', ipc_status: 'safe', latest_goal: 'تحسين مهارات التواصل' },
-                    { id: '4', name: 'نورة سعيد العمري', age: 31, room: '201', wing: 'north', admission_date: '2024-03-05', status: 'critical', ipc_status: 'alert', latest_goal: 'متابعة الحالة الصحية' },
-                    { id: '5', name: 'سعيد خالد القحطاني', age: 52, room: '202', wing: 'north', admission_date: '2023-09-12', status: 'stable', ipc_status: 'safe', latest_goal: 'الاعتماد على النفس في الأكل' },
-                    { id: '6', name: 'خالد عبدالله الشهري', age: 29, room: '301', wing: 'south', admission_date: '2024-01-28', status: 'needs_attention', ipc_status: 'monitor', latest_goal: 'تقليل السلوكيات العدوانية' },
-                    { id: '7', name: 'مريم ناصر البيشي', age: 35, room: '302', wing: 'south', admission_date: '2023-11-03', status: 'stable', ipc_status: 'safe', latest_goal: 'تحسين النوم الليلي' },
-                    { id: '8', name: 'أحمد يوسف الحارثي', age: 41, room: '103', wing: 'east', admission_date: '2024-04-10', status: 'stable', ipc_status: 'safe', latest_goal: 'المشي بدون مساعدة' },
-                    { id: '9', name: 'سارة محمد العتيبي', age: 26, room: '203', wing: 'north', admission_date: '2024-02-14', status: 'stable', ipc_status: 'safe', latest_goal: 'تعلم القراءة الأساسية' },
-                    { id: '10', name: 'علي حسن الدوسري', age: 38, room: '104', wing: 'east', admission_date: '2023-08-22', status: 'needs_attention', ipc_status: 'monitor', latest_goal: 'إدارة نوبات القلق' },
-                    { id: '11', name: 'هند عبدالرحمن السلمي', age: 33, room: '303', wing: 'south', admission_date: '2024-03-18', status: 'stable', ipc_status: 'safe', latest_goal: 'تحسين التفاعل الاجتماعي' },
-                    { id: '12', name: 'عمر فهد المطيري', age: 47, room: '106', wing: 'west', admission_date: '2023-05-07', status: 'stable', ipc_status: 'safe', latest_goal: 'الحفاظ على الوزن المثالي' },
-                ];
-                setBeneficiaries(demoData);
-                setFilteredBeneficiaries(demoData);
-            } else {
-                // Transform Supabase data to match our interface
-                const transformed = data.map(b => ({
-                    id: b.id,
-                    name: b.name || 'غير معروف',
-                    age: b.age || calculateAge(b.date_of_birth),
-                    room: b.room_number || 'N/A',
-                    wing: b.wing || 'east',
-                    admission_date: b.admission_date || b.created_at,
-                    status: b.health_status || 'stable',
-                    ipc_status: b.ipc_status || 'safe',
-                    latest_goal: b.latest_goal,
-                    avatar_url: b.avatar_url
-                }));
-                setBeneficiaries(transformed);
-                setFilteredBeneficiaries(transformed);
-            }
-
-            setLoading(false);
-        };
-
-        fetchBeneficiaries();
-    }, []);
+    // Demo data for fallback
+    const demoData: Beneficiary[] = [
+        { id: '1', name: 'عبدالله محمد المالكي', age: 34, room: '101', wing: 'east', admission_date: '2024-01-15', status: 'stable', ipc_status: 'safe', latest_goal: 'تعلم الوضوء بشكل مستقل' },
+        { id: '2', name: 'فاطمة أحمد الغامدي', age: 28, room: '102', wing: 'east', admission_date: '2024-02-20', status: 'needs_attention', ipc_status: 'monitor', latest_goal: 'المشاركة في الأنشطة الجماعية' },
+        { id: '3', name: 'محمد علي الزهراني', age: 45, room: '105', wing: 'west', admission_date: '2023-06-10', status: 'stable', ipc_status: 'safe', latest_goal: 'تحسين مهارات التواصل' },
+        { id: '4', name: 'نورة سعيد العمري', age: 31, room: '201', wing: 'north', admission_date: '2024-03-05', status: 'critical', ipc_status: 'alert', latest_goal: 'متابعة الحالة الصحية' },
+        { id: '5', name: 'سعيد خالد القحطاني', age: 52, room: '202', wing: 'north', admission_date: '2023-09-12', status: 'stable', ipc_status: 'safe', latest_goal: 'الاعتماد على النفس في الأكل' },
+        { id: '6', name: 'خالد عبدالله الشهري', age: 29, room: '301', wing: 'south', admission_date: '2024-01-28', status: 'needs_attention', ipc_status: 'monitor', latest_goal: 'تقليل السلوكيات العدوانية' },
+        { id: '7', name: 'مريم ناصر البيشي', age: 35, room: '302', wing: 'south', admission_date: '2023-11-03', status: 'stable', ipc_status: 'safe', latest_goal: 'تحسين النوم الليلي' },
+        { id: '8', name: 'أحمد يوسف الحارثي', age: 41, room: '103', wing: 'east', admission_date: '2024-04-10', status: 'stable', ipc_status: 'safe', latest_goal: 'المشي بدون مساعدة' },
+        { id: '9', name: 'سارة محمد العتيبي', age: 26, room: '203', wing: 'north', admission_date: '2024-02-14', status: 'stable', ipc_status: 'safe', latest_goal: 'تعلم القراءة الأساسية' },
+        { id: '10', name: 'علي حسن الدوسري', age: 38, room: '104', wing: 'east', admission_date: '2023-08-22', status: 'needs_attention', ipc_status: 'monitor', latest_goal: 'إدارة نوبات القلق' },
+        { id: '11', name: 'هند عبدالرحمن السلمي', age: 33, room: '303', wing: 'south', admission_date: '2024-03-18', status: 'stable', ipc_status: 'safe', latest_goal: 'تحسين التفاعل الاجتماعي' },
+        { id: '12', name: 'عمر فهد المطيري', age: 47, room: '106', wing: 'west', admission_date: '2023-05-07', status: 'stable', ipc_status: 'safe', latest_goal: 'الحفاظ على الوزن المثالي' },
+    ];
 
     const calculateAge = (dateOfBirth: string | null): number => {
         if (!dateOfBirth) return 0;
@@ -95,8 +57,37 @@ export const BeneficiaryListPage: React.FC = () => {
         return age;
     };
 
-    // Apply filters and search
-    useEffect(() => {
+    // Use TanStack Query for data fetching with caching
+    const { data: beneficiaries = [], isLoading, refetch } = useQuery<Beneficiary[]>({
+        queryKey: ['beneficiaries', 'list'],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from('beneficiaries')
+                .select('*')
+                .order('full_name', { ascending: true });
+
+            if (error || !data || data.length === 0) {
+                return demoData;
+            }
+
+            return data.map(b => ({
+                id: b.id,
+                name: b.full_name || b.name || 'غير معروف',
+                age: b.age || calculateAge(b.date_of_birth),
+                room: b.room_number || 'N/A',
+                wing: b.wing || 'east',
+                admission_date: b.admission_date || b.created_at,
+                status: b.health_status || 'stable',
+                ipc_status: b.ipc_status || 'safe',
+                latest_goal: b.latest_goal,
+                avatar_url: b.avatar_url
+            }));
+        },
+        staleTime: 5 * 60 * 1000, // 5 minutes
+    });
+
+    // Apply filters and search using useMemo for performance
+    const filteredBeneficiaries = useMemo(() => {
         let result = [...beneficiaries];
 
         // Apply search
@@ -117,7 +108,7 @@ export const BeneficiaryListPage: React.FC = () => {
             result = result.filter(b => b.ipc_status === filters.ipc_status);
         }
 
-        setFilteredBeneficiaries(result);
+        return result;
     }, [beneficiaries, searchQuery, filters]);
 
     const handleSearch = (query: string) => {
@@ -167,11 +158,11 @@ export const BeneficiaryListPage: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2">
                         <button
-                            onClick={() => window.location.reload()}
+                            onClick={() => refetch()}
                             className="p-2 hover:bg-gray-100 rounded-lg text-gray-600"
                             title="تحديث"
                         >
-                            <RefreshCw className="w-5 h-5" />
+                            <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
                         </button>
                         <div className="flex bg-gray-100 rounded-lg p-1">
                             <button
@@ -251,15 +242,17 @@ export const BeneficiaryListPage: React.FC = () => {
                 </p>
             </div>
 
-            {/* Loading State */}
-            {loading && (
-                <div className="flex items-center justify-center py-12">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-hrsd-teal"></div>
+            {/* Loading State - Skeleton */}
+            {isLoading && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <SkeletonCard key={i} />
+                    ))}
                 </div>
             )}
 
             {/* Empty State */}
-            {!loading && filteredBeneficiaries.length === 0 && (
+            {!isLoading && filteredBeneficiaries.length === 0 && (
                 <div className="text-center py-12">
                     <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-hierarchy-heading text-gray-500 mb-2">لا توجد نتائج</h3>
@@ -270,7 +263,7 @@ export const BeneficiaryListPage: React.FC = () => {
             )}
 
             {/* Beneficiary Grid/List */}
-            {!loading && filteredBeneficiaries.length > 0 && (
+            {!isLoading && filteredBeneficiaries.length > 0 && (
                 <div className={
                     viewMode === 'grid'
                         ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'

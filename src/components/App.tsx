@@ -23,7 +23,7 @@ import { SocialResearchWizard } from './social/SocialResearchWizard';
 import { RehabPlanBuilder } from './rehab/RehabPlanBuilder';
 import { StrategicDashboard } from './reports/StrategicDashboard';
 import { SupportDashboard } from '../pages/SupportDashboard';
-import { QualityDashboard } from '../pages/QualityDashboard';
+import { QualityManual as QualityDashboard } from './quality/QualityManual';
 import { ReportsDashboard } from './reports/ReportsDashboard';
 import { TrainingDashboard } from '../pages/TrainingDashboard';
 import { SecretariatDashboard } from './secretariat/SecretariatDashboard';
@@ -113,14 +113,8 @@ import { SchedulingSystem } from './scheduling/SchedulingSystem';
 import { StaffProfile } from './staff/StaffProfile';
 import { LoginPage } from '../pages/LoginPage';
 
-// Enhanced GRC and Quality Components
-import { GRCDashboardEnhanced } from '../modules/grc/GRCDashboardEnhanced';
-import { QualityManualEnhanced } from './quality/QualityManualEnhanced';
-import { QualityDashboardEnhanced } from '../pages/QualityDashboardEnhanced';
-
-// GRC Pro and Quality Manual Pro (with real data)
-import GRCDashboardPro from '../modules/grc-pro/21_GRCDashboardPro';
-import QualityManualPro from '../modules/grc-pro/22_QualityManualPro';
+// Quality Manual (Pro version with real data)
+import { QualityManual } from './quality/QualityManual';
 
 export const App = () => {
     const {
@@ -236,14 +230,8 @@ export const App = () => {
                     <Route path="staff-profile/:id" element={<StaffProfile />} />
                     <Route path="staff-profile" element={<StaffProfile />} />
 
-                    {/* Enhanced GRC and Quality Routes */}
-                    <Route path="grc-enhanced" element={<GRCDashboardEnhanced />} />
-                    <Route path="quality-enhanced" element={<QualityDashboardEnhanced />} />
-                    <Route path="quality/manual" element={<QualityManualEnhanced />} />
-
-                    {/* GRC Pro Routes (with real data) */}
-                    <Route path="grc-pro" element={<GRCDashboardPro />} />
-                    <Route path="quality-manual-pro" element={<QualityManualPro />} />
+                    {/* Quality Manual Route */}
+                    <Route path="quality/manual" element={<QualityManual />} />
 
                     <Route path="social/activities" element={
                         <SocialActivitiesPanel

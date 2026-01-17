@@ -1,6 +1,7 @@
 import React from 'react';
-import { Bell, Search, User, Menu, ChevronRight } from 'lucide-react';
+import { Bell, User, Menu } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { CommandMenu } from '../ui/CommandMenu';
 import { useUser } from '../../context/UserContext';
 import { useLocation } from 'react-router-dom';
 
@@ -65,16 +66,9 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </div>
             </div>
 
-            {/* Desktop: Search */}
+            {/* Desktop: Command Menu Search */}
             <div className="hidden md:flex items-center gap-4 flex-1 max-w-md">
-                <div className="relative w-full">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                        type="text"
-                        placeholder="بحث عام..."
-                        className="w-full h-10 pr-10 pl-4 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 focus:bg-white/10 transition-all text-sm"
-                    />
-                </div>
+                <CommandMenu />
             </div>
 
             {/* Notifications + User */}

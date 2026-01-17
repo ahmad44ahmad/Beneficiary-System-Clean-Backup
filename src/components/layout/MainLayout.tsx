@@ -6,11 +6,15 @@ import { MobileNav } from './MobileNav';
 import { RiskAlertSystem } from '../safety/RiskAlertSystem';
 import { RealTimeAlerts } from '../common/RealTimeAlerts';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
+import { useRealtimeSubscription } from '../../hooks/useRealtimeSubscription';
 
 // Import HRSD theme
 import '../../styles/hrsd-theme.css';
 
 export const MainLayout = () => {
+    // Enable real-time Supabase subscription for critical data
+    useRealtimeSubscription();
+
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
