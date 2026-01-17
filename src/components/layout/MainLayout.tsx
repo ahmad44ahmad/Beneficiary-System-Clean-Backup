@@ -7,6 +7,7 @@ import { RiskAlertSystem } from '../safety/RiskAlertSystem';
 import { RealTimeAlerts } from '../common/RealTimeAlerts';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 import { useRealtimeSubscription } from '../../hooks/useRealtimeSubscription';
+import { Breadcrumb } from '../navigation/Breadcrumb';
 
 // Import HRSD theme
 import '../../styles/hrsd-theme.css';
@@ -69,6 +70,7 @@ export const MainLayout = () => {
                 {/* Page Content */}
                 <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 hrsd-scrollbar bg-gradient-to-br from-slate-50 to-slate-100">
                     <div className="max-w-7xl mx-auto animate-fade-in">
+                        <Breadcrumb className="mb-4" />
                         <Outlet />
                     </div>
                 </main>
