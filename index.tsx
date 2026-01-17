@@ -16,6 +16,10 @@ import { ToastProvider } from './src/context/ToastContext';
 import { ErrorBoundary } from './src/components/common/ErrorBoundary';
 import { ThemeProvider } from './src/config/theme';
 
+// Start audit service for tracking user actions
+import { startAuditService } from './src/services/auditService';
+startAuditService();
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <React.StrictMode>
