@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
-import { Calendar, FileText, Printer, ChevronLeft, Download, Users, Layers, Scale } from 'lucide-react';
+import { Calendar, FileText, Printer, ChevronLeft, Download, Users, Layers, Scale, FileSpreadsheet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { TabButton } from '../../components/common/TabButton';
+import { usePrint } from '../../hooks/usePrint';
+import { useExport } from '../../hooks/useExport';
+import { useToast } from '../../context/ToastContext';
 
 type Gender = 'male' | 'female';
 type DayOfWeek = 'السبت' | 'الأحد' | 'الإثنين' | 'الثلاثاء' | 'الأربعاء' | 'الخميس' | 'الجمعة';
@@ -45,6 +48,10 @@ const generateDemoAttendance = () => {
 
 export const CateringReports: React.FC = () => {
     const navigate = useNavigate();
+    const { printTable, isPrinting } = usePrint();
+    const { exportToExcel, isExporting } = useExport();
+    const { showToast } = useToast();
+
     const [activeTab, setActiveTab] = useState<'attendance' | 'daily_log' | 'summary'>('attendance');
     const [selectedGender, setSelectedGender] = useState<Gender>('male');
     const [selectedDay, setSelectedDay] = useState<DayOfWeek>('السبت');
@@ -53,6 +60,43 @@ export const CateringReports: React.FC = () => {
     // State for Attendance
     const [attendanceData, setAttendanceData] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
+
+    // Column definitions for export
+    const ATTENDANCE_COLUMNS = [
+        { key: 'id', header: 'م' },
+        { key: 'name', header: 'الاسم' },
+        { key: 'totalDays', header: 'أيام الحضور' }
+    ];
+
+    // Prepare export data with attendance summary
+    const getExportData = () => attendanceData.map(row => ({
+        ...row,
+        totalDays: row.days.filter((d: boolean) => d).length
+    }));
+
+    // Export handlers
+    const handlePrint = () => {
+        if (attendanceData.length === 0) {
+            showToast('لا توجد بيانات للطباعة', 'error');
+            return;
+        }
+        printTable(getExportData(), ATTENDANCE_COLUMNS, {
+            title: `تقرير حضور الإعاشة - ${selectedGender === 'male' ? 'ذكور' : 'إناث'}`,
+            subtitle: `التاريخ: ${new Date().toLocaleDateString('ar-SA')}`
+        });
+        showToast('تم فتح نافذة الطباعة', 'success');
+    };
+
+    const handleExportExcel = () => {
+        if (attendanceData.length === 0) {
+            showToast('لا توجد بيانات للتصدير', 'error');
+            return;
+        }
+        exportToExcel(getExportData(), ATTENDANCE_COLUMNS, {
+            filename: `حضور_الإعاشة_${selectedGender === 'male' ? 'ذكور' : 'إناث'}`
+        });
+        showToast(`تم تصدير ${attendanceData.length} سجل إلى Excel`, 'success');
+    };
 
     // Fetch Attendance Data
     useEffect(() => {
@@ -216,12 +260,22 @@ export const CateringReports: React.FC = () => {
                         <ChevronLeft className="w-5 h-5" />
                         عودة
                     </button>
-                    <button className="px-4 py-2 bg-[#148287] text-white rounded-lg hover:bg-[#0e6b6f] flex items-center gap-2">
+                    <button
+                        onClick={handlePrint}
+                        disabled={isPrinting || attendanceData.length === 0}
+                        className="px-4 py-2 bg-[#148287] text-white rounded-lg hover:bg-[#0e6b6f] flex items-center gap-2 disabled:opacity-50"
+                        aria-label="طباعة التقرير"
+                    >
                         <Printer className="w-5 h-5" />
                         طباعة
                     </button>
-                    <button className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg flex items-center gap-2">
-                        <Download className="w-5 h-5" />
+                    <button
+                        onClick={handleExportExcel}
+                        disabled={isExporting || attendanceData.length === 0}
+                        className="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 flex items-center gap-2 disabled:opacity-50"
+                        aria-label="تصدير إلى Excel"
+                    >
+                        <FileSpreadsheet className="w-5 h-5" />
                         تصدير Excel
                     </button>
                 </div>

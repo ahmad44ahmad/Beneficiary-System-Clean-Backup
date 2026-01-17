@@ -5,6 +5,10 @@ import { Header } from './Header';
 import { MobileNav } from './MobileNav';
 import { RiskAlertSystem } from '../safety/RiskAlertSystem';
 import { RealTimeAlerts } from '../common/RealTimeAlerts';
+import { FallRiskAlertBanner } from '../alerts/FallRiskAlertBanner';
+import { MedicationReminderAlert } from '../alerts/MedicationReminderAlert';
+import { ShiftHandoverAlert } from '../alerts/ShiftHandoverAlert';
+import { IncidentNotificationAlert } from '../alerts/IncidentNotificationAlert';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 import { useRealtimeSubscription } from '../../hooks/useRealtimeSubscription';
 import { Breadcrumb } from '../navigation/Breadcrumb';
@@ -47,6 +51,12 @@ export const MainLayout = () => {
         <div className="flex h-screen bg-hrsd-bg-light font-sans overflow-hidden" dir="rtl">
             {/* Global Risk Alert System */}
             <RiskAlertSystem />
+
+            {/* Realtime Alert Components */}
+            <FallRiskAlertBanner />
+            <MedicationReminderAlert />
+            <ShiftHandoverAlert />
+            <IncidentNotificationAlert />
 
             {/* Real-Time Alerts Notification - Temporarily disabled for presentation */}
             {/* TODO: Re-enable after demo - uncomment the line below */}

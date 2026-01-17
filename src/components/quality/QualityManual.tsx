@@ -475,8 +475,8 @@ const SectionCard = ({
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       className={`p-4 rounded-xl cursor-pointer transition-all ${isActive
-          ? `bg-gradient-to-r ${section.gradient} shadow-lg`
-          : 'bg-white/5 hover:bg-white/10'
+        ? `bg-gradient-to-r ${section.gradient} shadow-lg`
+        : 'bg-white/5 hover:bg-white/10'
         }`}
     >
       <div className="flex items-center gap-3">
@@ -489,8 +489,8 @@ const SectionCard = ({
               {section.number}
             </span>
             <span className={`px-2 py-0.5 rounded-full text-xs ${section.status === 'complete' ? 'bg-emerald-500/20 text-emerald-400' :
-                section.status === 'partial' ? 'bg-amber-500/20 text-amber-400' :
-                  'bg-red-500/20 text-red-400'
+              section.status === 'partial' ? 'bg-amber-500/20 text-amber-400' :
+                'bg-red-500/20 text-red-400'
               }`}>
               {section.status === 'complete' ? 'مكتمل' : section.status === 'partial' ? 'جزئي' : 'معلق'}
             </span>
@@ -740,12 +740,13 @@ export default function QualityManualPro() {
             {/* قائمة الأقسام */}
             <div className="space-y-2">
               {filteredSections.map((section) => (
-                <SectionCard
-                  key={section.id}
-                  section={section}
-                  isActive={activeSection === section.id}
-                  onClick={() => setActiveSection(section.id)}
-                />
+                <div key={section.id}>
+                  <SectionCard
+                    section={section}
+                    isActive={activeSection === section.id}
+                    onClick={() => setActiveSection(section.id)}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -771,8 +772,8 @@ export default function QualityManualPro() {
                         <div className="flex items-center gap-3 mb-1">
                           <span className="text-white/80 font-mono text-lg">البند {currentSection.number}</span>
                           <span className={`px-3 py-1 rounded-full text-sm ${currentSection.status === 'complete' ? 'bg-white/20 text-white' :
-                              currentSection.status === 'partial' ? 'bg-amber-400/20 text-amber-100' :
-                                'bg-red-400/20 text-red-100'
+                            currentSection.status === 'partial' ? 'bg-amber-400/20 text-amber-100' :
+                              'bg-red-400/20 text-red-100'
                             }`}>
                             {currentSection.status === 'complete' ? '✓ مكتمل' :
                               currentSection.status === 'partial' ? '⚠ جزئي' : '✗ معلق'}
@@ -794,7 +795,9 @@ export default function QualityManualPro() {
                   {currentSection.subsections && currentSection.subsections.length > 0 && (
                     <div className="space-y-4">
                       {currentSection.subsections.map((subsection, index) => (
-                        <SubsectionContent key={subsection.id} subsection={subsection} index={index} />
+                        <div key={subsection.id}>
+                          <SubsectionContent subsection={subsection} index={index} />
+                        </div>
                       ))}
                     </div>
                   )}

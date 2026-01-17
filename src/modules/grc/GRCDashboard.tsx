@@ -1124,8 +1124,8 @@ export default function GRCDashboardPro() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all whitespace-nowrap ${activeTab === key
-                ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-lg shadow-teal-500/30'
-                : 'bg-white/5 text-gray-400 hover:bg-white/10'
+              ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-lg shadow-teal-500/30'
+              : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >
             <Icon className="w-5 h-5" />
@@ -1175,7 +1175,9 @@ export default function GRCDashboardPro() {
                 {/* قائمة المخاطر */}
                 <div className="space-y-3">
                   {filteredRisks.map((risk, index) => (
-                    <RiskCardPro key={risk.id} risk={risk} index={index} />
+                    <div key={risk.id}>
+                      <RiskCardPro risk={risk} index={index} />
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -1196,10 +1198,10 @@ export default function GRCDashboardPro() {
                     { status: 'non_compliant', label: 'غير متوافق', count: REAL_COMPLIANCE.filter(c => c.status === 'non_compliant').length },
                   ].map(({ status, label, count }) => (
                     <div key={status} className={`p-3 rounded-xl text-center ${status === 'compliant' ? 'bg-emerald-500/20' :
-                        status === 'partial' ? 'bg-amber-500/20' : 'bg-red-500/20'
+                      status === 'partial' ? 'bg-amber-500/20' : 'bg-red-500/20'
                       }`}>
                       <div className={`text-2xl font-bold ${status === 'compliant' ? 'text-emerald-400' :
-                          status === 'partial' ? 'text-amber-400' : 'text-red-400'
+                        status === 'partial' ? 'text-amber-400' : 'text-red-400'
                         }`}>{count}</div>
                       <div className="text-gray-400 text-sm">{label}</div>
                     </div>
@@ -1208,7 +1210,9 @@ export default function GRCDashboardPro() {
 
                 <div className="space-y-2">
                   {REAL_COMPLIANCE.map((req, index) => (
-                    <ComplianceCard key={req.id} req={req} index={index} />
+                    <div key={req.id}>
+                      <ComplianceCard req={req} index={index} />
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -1234,7 +1238,9 @@ export default function GRCDashboardPro() {
 
                 <div className="space-y-4">
                   {REAL_NCRS.map((ncr, index) => (
-                    <NCRCard key={ncr.id} ncr={ncr} index={index} />
+                    <div key={ncr.id}>
+                      <NCRCard ncr={ncr} index={index} />
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -1260,7 +1266,9 @@ export default function GRCDashboardPro() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {BCP_SCENARIOS.map((scenario, index) => (
-                    <BCPScenarioCard key={scenario.id} scenario={scenario} index={index} />
+                    <div key={scenario.id}>
+                      <BCPScenarioCard scenario={scenario} index={index} />
+                    </div>
                   ))}
                 </div>
               </motion.div>

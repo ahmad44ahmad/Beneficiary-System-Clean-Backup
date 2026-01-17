@@ -13,8 +13,13 @@ import {
     AlertTriangle,
     CheckCircle2,
     Wrench,
-    XCircle
+    XCircle,
+    Printer,
+    FileSpreadsheet
 } from 'lucide-react';
+import { usePrint } from '../../hooks/usePrint';
+import { useExport } from '../../hooks/useExport';
+import { useToast } from '../../context/ToastContext';
 
 interface Asset {
     id: string;
@@ -29,11 +34,47 @@ interface Asset {
 }
 
 export const AssetRegistry: React.FC = () => {
+    const { printTable, isPrinting } = usePrint();
+    const { exportToExcel, isExporting } = useExport();
+    const { showToast } = useToast();
+
     const [assets, setAssets] = useState<Asset[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterStatus, setFilterStatus] = useState('all');
     const [showAddModal, setShowAddModal] = useState(false);
+
+    // Column definitions for export
+    const ASSET_COLUMNS = [
+        { key: 'asset_code', header: 'رمز الأصل' },
+        { key: 'name_ar', header: 'اسم الأصل' },
+        { key: 'building', header: 'الموقع' },
+        { key: 'status', header: 'الحالة' },
+        { key: 'condition', header: 'الحالة الفنية' },
+        { key: 'current_book_value', header: 'القيمة الدفترية' }
+    ];
+
+    // Export handlers
+    const handlePrint = () => {
+        if (filteredAssets.length === 0) {
+            showToast('لا توجد بيانات للطباعة', 'error');
+            return;
+        }
+        printTable(filteredAssets, ASSET_COLUMNS, {
+            title: 'سجل الأصول',
+            subtitle: `التاريخ: ${new Date().toLocaleDateString('ar-SA')}`
+        });
+        showToast('تم فتح نافذة الطباعة', 'success');
+    };
+
+    const handleExportExcel = () => {
+        if (filteredAssets.length === 0) {
+            showToast('لا توجد بيانات للتصدير', 'error');
+            return;
+        }
+        exportToExcel(filteredAssets, ASSET_COLUMNS, { filename: 'سجل_الأصول' });
+        showToast(`تم تصدير ${filteredAssets.length} أصل إلى Excel`, 'success');
+    };
 
     useEffect(() => {
         fetchAssets();
@@ -153,6 +194,27 @@ export const AssetRegistry: React.FC = () => {
                         <option value="out_of_service">خارج الخدمة</option>
                         <option value="disposed">تم التخلص منه</option>
                     </select>
+                </div>
+                {/* Export Toolbar */}
+                <div className="flex items-center gap-2 border-r pr-3">
+                    <button
+                        onClick={handleExportExcel}
+                        disabled={isExporting || filteredAssets.length === 0}
+                        className="px-3 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 text-sm disabled:opacity-50"
+                        aria-label="تصدير إلى Excel"
+                    >
+                        <FileSpreadsheet className="w-4 h-4" />
+                        Excel
+                    </button>
+                    <button
+                        onClick={handlePrint}
+                        disabled={isPrinting || filteredAssets.length === 0}
+                        className="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 flex items-center gap-2 text-sm disabled:opacity-50"
+                        aria-label="طباعة"
+                    >
+                        <Printer className="w-4 h-4" />
+                        طباعة
+                    </button>
                 </div>
             </div>
 

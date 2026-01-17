@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
-import { Utensils, Calendar, Clock, AlertCircle, FileSignature, Save, Printer, Check, X, Loader2 } from 'lucide-react';
+import { Utensils, Calendar, Clock, AlertCircle, FileSignature, Save, Printer, Check, X, Loader2, FileSpreadsheet, Download } from 'lucide-react';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { useNavigate } from 'react-router-dom';
 import { ReceivingCommittee } from './ReceivingCommittee';
-
+import { usePrint } from '../../hooks/usePrint';
+import { useExport } from '../../hooks/useExport';
+import { useToast } from '../../context/ToastContext';
 interface MealItem {
     id: string;
     beneficiary_name: string;
@@ -16,10 +18,44 @@ interface MealItem {
 
 export const CateringDailyLog: React.FC = () => {
     const navigate = useNavigate();
+    const { printTable, isPrinting } = usePrint();
+    const { exportToExcel, exportToCsv, isExporting } = useExport();
+    const { showToast } = useToast();
+
     const [loading, setLoading] = useState(false);
     const [generating, setGenerating] = useState(false);
     const [meals, setMeals] = useState<MealItem[]>([]);
     const [selectedMealType, setSelectedMealType] = useState('غداء');
+
+    // Column definitions for export
+    const MEAL_COLUMNS = [
+        { key: 'beneficiary_name', header: 'المستفيد' },
+        { key: 'plan_type', header: 'النظام الغذائي' },
+        { key: 'status', header: 'الحالة' },
+        { key: 'meal_type', header: 'نوع الوجبة' }
+    ];
+
+    // Export handlers
+    const handlePrint = () => {
+        if (meals.length === 0) {
+            showToast('لا توجد بيانات للطباعة', 'error');
+            return;
+        }
+        printTable(meals, MEAL_COLUMNS, {
+            title: `سجل وجبات ${selectedMealType}`,
+            subtitle: `التاريخ: ${new Date().toLocaleDateString('ar-SA')}`
+        });
+        showToast('تم فتح نافذة الطباعة', 'success');
+    };
+
+    const handleExportExcel = async () => {
+        if (meals.length === 0) {
+            showToast('لا توجد بيانات للتصدير', 'error');
+            return;
+        }
+        exportToExcel(meals, MEAL_COLUMNS, { filename: `سجل_وجبات_${selectedMealType}` });
+        showToast(`تم تصدير ${meals.length} سجل إلى Excel`, 'success');
+    };
 
     useEffect(() => {
         fetchMeals();
@@ -169,7 +205,21 @@ export const CateringDailyLog: React.FC = () => {
                             تسجيل الكل "تم التسليم"
                         </button>
                     )}
-                    <button className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 flex items-center gap-2">
+                    <button
+                        onClick={handleExportExcel}
+                        disabled={isExporting || meals.length === 0}
+                        className="px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 disabled:opacity-50"
+                        aria-label="تصدير إلى Excel"
+                    >
+                        <FileSpreadsheet className="w-4 h-4" />
+                        Excel
+                    </button>
+                    <button
+                        onClick={handlePrint}
+                        disabled={isPrinting || meals.length === 0}
+                        className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 flex items-center gap-2 disabled:opacity-50"
+                        aria-label="طباعة"
+                    >
                         <Printer className="w-4 h-4" />
                         طباعة
                     </button>

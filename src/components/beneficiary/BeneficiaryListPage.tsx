@@ -1,14 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { motion } from 'framer-motion';
 import {
     Users, Plus, RefreshCw, Grid, List,
-    ChevronLeft, Activity
+    ChevronLeft, Activity, Printer, Download,
+    FileSpreadsheet, ChevronDown, CheckSquare
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { BeneficiaryCard } from './BeneficiaryCard';
 import { BeneficiaryFilters, FilterState } from './BeneficiaryFilters';
 import { SkeletonCard, SkeletonStatCard } from '../ui/Skeleton';
+import { usePrint } from '../../hooks/usePrint';
+import { useExport, BENEFICIARY_COLUMNS } from '../../hooks/useExport';
+import { useToast } from '../../context/ToastContext';
 
 interface Beneficiary {
     id: string;
@@ -28,6 +33,13 @@ export const BeneficiaryListPage: React.FC = () => {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState<FilterState>({});
+    const [showBulkMenu, setShowBulkMenu] = useState(false);
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
+    // Hooks for print, export, and notifications
+    const { printTable, isPrinting } = usePrint();
+    const { exportToExcel, exportToCsv, isExporting } = useExport();
+    const { showToast } = useToast();
 
     // Demo data for fallback
     const demoData: Beneficiary[] = [
@@ -137,6 +149,72 @@ export const BeneficiaryListPage: React.FC = () => {
         critical: beneficiaries.filter(b => b.status === 'critical').length,
     };
 
+    // ═══════════════════════════════════════════════════════════════════════════
+    // Action Handlers
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    const handlePrint = () => {
+        const dataToExport = selectedIds.size > 0
+            ? filteredBeneficiaries.filter(b => selectedIds.has(b.id))
+            : filteredBeneficiaries;
+
+        printTable(dataToExport, [
+            { key: 'name', header: 'الاسم' },
+            { key: 'age', header: 'العمر' },
+            { key: 'room', header: 'الغرفة' },
+            { key: 'wing', header: 'الجناح' },
+            { key: 'status', header: 'الحالة' },
+        ], {
+            title: 'قائمة المستفيدين',
+            subtitle: `مركز التأهيل الشامل بالباحة - ${new Date().toLocaleDateString('ar-SA')}`,
+        });
+        showToast('جاري فتح نافذة الطباعة...', 'info');
+    };
+
+    const handleExportExcel = () => {
+        const dataToExport = selectedIds.size > 0
+            ? filteredBeneficiaries.filter(b => selectedIds.has(b.id))
+            : filteredBeneficiaries;
+
+        exportToExcel(dataToExport, BENEFICIARY_COLUMNS, {
+            filename: 'قائمة_المستفيدين',
+            title: 'قائمة المستفيدين - مركز التأهيل الشامل بالباحة',
+        });
+        showToast(`تم تصدير ${dataToExport.length} سجل إلى Excel`, 'success');
+    };
+
+    const handleExportCsv = () => {
+        const dataToExport = selectedIds.size > 0
+            ? filteredBeneficiaries.filter(b => selectedIds.has(b.id))
+            : filteredBeneficiaries;
+
+        exportToCsv(dataToExport, BENEFICIARY_COLUMNS, {
+            filename: 'قائمة_المستفيدين',
+            title: 'قائمة المستفيدين',
+        });
+        showToast(`تم تصدير ${dataToExport.length} سجل إلى CSV`, 'success');
+    };
+
+    const handleSelectAll = () => {
+        if (selectedIds.size === filteredBeneficiaries.length) {
+            setSelectedIds(new Set());
+            showToast('تم إلغاء تحديد الكل', 'info');
+        } else {
+            setSelectedIds(new Set(filteredBeneficiaries.map(b => b.id)));
+            showToast(`تم تحديد ${filteredBeneficiaries.length} مستفيد`, 'info');
+        }
+    };
+
+    const handleToggleSelect = (id: string) => {
+        const newSelected = new Set(selectedIds);
+        if (newSelected.has(id)) {
+            newSelected.delete(id);
+        } else {
+            newSelected.add(id);
+        }
+        setSelectedIds(newSelected);
+    };
+
     return (
         <div className="min-h-screen bg-gray-50 p-6" dir="rtl">
             {/* Header */}
@@ -228,6 +306,84 @@ export const BeneficiaryListPage: React.FC = () => {
                     </div>
                 </div>
 
+                {/* ═══════════════════════════════════════════════════════════════════ */}
+                {/* Toolbar - Print, Export, Bulk Actions */}
+                {/* ═══════════════════════════════════════════════════════════════════ */}
+                <div className="flex flex-wrap items-center gap-3 mb-6 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                    {/* Selection indicator */}
+                    {selectedIds.size > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="px-3 py-1.5 bg-hrsd-teal/10 text-hrsd-teal rounded-lg text-sm font-medium"
+                        >
+                            {selectedIds.size} محدد
+                        </motion.div>
+                    )}
+
+                    {/* Select All Button */}
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleSelectAll}
+                        className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
+                        aria-label="تحديد الكل"
+                    >
+                        <CheckSquare className="w-4 h-4" />
+                        <span className="hidden sm:inline">
+                            {selectedIds.size === filteredBeneficiaries.length ? 'إلغاء التحديد' : 'تحديد الكل'}
+                        </span>
+                    </motion.button>
+
+                    <div className="h-6 w-px bg-gray-200 hidden sm:block" />
+
+                    {/* Print Button */}
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handlePrint}
+                        disabled={isPrinting}
+                        className="flex items-center gap-2 px-4 py-2 bg-hrsd-teal hover:bg-hrsd-teal-dark text-white rounded-lg transition-colors disabled:opacity-50"
+                        aria-label="طباعة قائمة المستفيدين"
+                    >
+                        <Printer className={`w-4 h-4 ${isPrinting ? 'animate-pulse' : ''}`} />
+                        <span className="hidden sm:inline">طباعة</span>
+                    </motion.button>
+
+                    {/* Export Excel Button */}
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleExportExcel}
+                        disabled={isExporting}
+                        className="flex items-center gap-2 px-4 py-2 bg-hrsd-green hover:bg-hrsd-green-dark text-white rounded-lg transition-colors disabled:opacity-50"
+                        aria-label="تصدير إلى Excel"
+                    >
+                        <FileSpreadsheet className={`w-4 h-4 ${isExporting ? 'animate-pulse' : ''}`} />
+                        <span className="hidden sm:inline">Excel</span>
+                    </motion.button>
+
+                    {/* Export CSV Button */}
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={handleExportCsv}
+                        disabled={isExporting}
+                        className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                        aria-label="تصدير إلى CSV"
+                    >
+                        <Download className={`w-4 h-4 ${isExporting ? 'animate-pulse' : ''}`} />
+                        <span className="hidden sm:inline">CSV</span>
+                    </motion.button>
+
+                    {/* Results count moved here */}
+                    <div className="flex-1 text-left">
+                        <p className="text-hierarchy-small text-gray-500">
+                            عرض {filteredBeneficiaries.length} من أصل {beneficiaries.length}
+                        </p>
+                    </div>
+                </div>
+
                 {/* Filters */}
                 <BeneficiaryFilters
                     onSearch={handleSearch}
@@ -235,18 +391,13 @@ export const BeneficiaryListPage: React.FC = () => {
                 />
             </div>
 
-            {/* Results Count */}
-            <div className="mb-4 flex items-center justify-between">
-                <p className="text-hierarchy-small text-gray-600">
-                    عرض {filteredBeneficiaries.length} من أصل {beneficiaries.length} مستفيد
-                </p>
-            </div>
-
             {/* Loading State - Skeleton */}
             {isLoading && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {Array.from({ length: 6 }).map((_, i) => (
-                        <SkeletonCard key={i} />
+                        <div key={i}>
+                            <SkeletonCard />
+                        </div>
                     ))}
                 </div>
             )}

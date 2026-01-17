@@ -60,11 +60,12 @@ export function SkeletonText({ lines = 3, className = '' }: { lines?: number; cl
     return (
         <div className={`space-y-2 ${className}`}>
             {Array.from({ length: lines }).map((_, i) => (
-                <Skeleton
-                    key={i}
-                    variant="text"
-                    width={i === lines - 1 ? '75%' : '100%'}
-                />
+                <div key={i}>
+                    <Skeleton
+                        variant="text"
+                        width={i === lines - 1 ? '75%' : '100%'}
+                    />
+                </div>
             ))}
         </div>
     );
@@ -97,12 +98,12 @@ export function SkeletonTableRow({ columns = 4, className = '' }: { columns?: nu
     return (
         <div className={`flex items-center gap-4 p-4 border-b border-white/5 ${className}`}>
             {Array.from({ length: columns }).map((_, i) => (
-                <Skeleton
-                    key={i}
-                    variant="text"
-                    width={i === 0 ? 40 : '100%'}
-                    className="flex-1"
-                />
+                <div key={i} className="flex-1">
+                    <Skeleton
+                        variant="text"
+                        width={i === 0 ? 40 : '100%'}
+                    />
+                </div>
             ))}
         </div>
     );
@@ -117,12 +118,16 @@ export function SkeletonTable({ rows = 5, columns = 4, className = '' }: { rows?
             {/* Header */}
             <div className="flex items-center gap-4 p-4 bg-white/5 border-b border-white/10">
                 {Array.from({ length: columns }).map((_, i) => (
-                    <Skeleton key={i} variant="text" width={i === 0 ? 40 : '100%'} className="flex-1" />
+                    <div key={i} className="flex-1">
+                        <Skeleton variant="text" width={i === 0 ? 40 : '100%'} />
+                    </div>
                 ))}
             </div>
             {/* Rows */}
             {Array.from({ length: rows }).map((_, i) => (
-                <SkeletonTableRow key={i} columns={columns} />
+                <div key={i}>
+                    <SkeletonTableRow columns={columns} />
+                </div>
             ))}
         </div>
     );
@@ -163,17 +168,19 @@ export function SkeletonChart({ className = '' }: { className?: string }) {
             </div>
             <div className="flex items-end gap-2 h-40">
                 {Array.from({ length: 7 }).map((_, i) => (
-                    <Skeleton
-                        key={i}
-                        variant="rectangular"
-                        className="flex-1"
-                        height={`${30 + Math.random() * 70}%`}
-                    />
+                    <div key={i} className="flex-1">
+                        <Skeleton
+                            variant="rectangular"
+                            height={`${30 + Math.random() * 70}%`}
+                        />
+                    </div>
                 ))}
             </div>
             <div className="flex justify-between mt-4">
                 {Array.from({ length: 7 }).map((_, i) => (
-                    <Skeleton key={i} variant="text" width={30} height={12} />
+                    <div key={i}>
+                        <Skeleton variant="text" width={30} height={12} />
+                    </div>
                 ))}
             </div>
         </div>
@@ -217,7 +224,9 @@ export function SkeletonPage({ className = '' }: { className?: string }) {
             {/* Stats row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {Array.from({ length: 4 }).map((_, i) => (
-                    <SkeletonStatCard key={i} />
+                    <div key={i}>
+                        <SkeletonStatCard />
+                    </div>
                 ))}
             </div>
 
@@ -226,7 +235,9 @@ export function SkeletonPage({ className = '' }: { className?: string }) {
                 <SkeletonChart className="lg:col-span-2" />
                 <div className="space-y-4">
                     {Array.from({ length: 3 }).map((_, i) => (
-                        <SkeletonCard key={i} />
+                        <div key={i}>
+                            <SkeletonCard />
+                        </div>
                     ))}
                 </div>
             </div>

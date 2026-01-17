@@ -136,6 +136,9 @@ const HRImpactIndicator = lazy(() => import('./indicators/HRImpactIndicator').th
 const BeneficiaryListPage = lazy(() => import('./beneficiary/BeneficiaryListPage').then(m => ({ default: m.BeneficiaryListPage })));
 const BeneficiaryTimeline = lazy(() => import('./beneficiary/BeneficiaryTimeline').then(m => ({ default: m.BeneficiaryTimeline })));
 
+// Admin Components
+const AuditLogViewer = lazy(() => import('./admin/AuditLogViewer').then(m => ({ default: m.AuditLogViewer })));
+
 // Basira Components
 const MorningPulse = lazy(() => import('./pulse/MorningPulse').then(m => ({ default: m.MorningPulse })));
 const WellbeingHeatmap = lazy(() => import('./pulse/WellbeingHeatmap').then(m => ({ default: m.WellbeingHeatmap })));
@@ -237,6 +240,12 @@ export const App = () => {
                         </div>
                     } />
 
+                    {/* Beneficiary List Page (Enhanced) */}
+                    <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
+
+                    {/* Individual Beneficiary Profile - Full Page View */}
+                    <Route path="beneficiaries/:id" element={<BeneficiaryTimeline />} />
+
                     <Route path="medical" element={
                         <div className="p-6">
                             <MedicalOverview vaccinations={vaccinations} isolationStats={isolationStats} />
@@ -262,6 +271,9 @@ export const App = () => {
 
                     {/* Quality Manual Route */}
                     <Route path="quality/manual" element={<QualityManual />} />
+
+                    {/* Admin Routes */}
+                    <Route path="admin/audit-logs" element={<AuditLogViewer />} />
 
                     <Route path="social/activities" element={
                         <SocialActivitiesPanel

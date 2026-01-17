@@ -11,8 +11,13 @@ import {
     Filter,
     Search,
     Eye,
-    Edit
+    Edit,
+    Printer,
+    FileSpreadsheet
 } from 'lucide-react';
+import { usePrint } from '../../hooks/usePrint';
+import { useExport } from '../../hooks/useExport';
+import { useToast } from '../../context/ToastContext';
 
 interface MaintenanceRequest {
     id: string;
@@ -30,6 +35,10 @@ interface MaintenanceRequest {
 }
 
 export const MaintenanceRequests: React.FC = () => {
+    const { printTable, isPrinting } = usePrint();
+    const { exportToExcel, isExporting } = useExport();
+    const { showToast } = useToast();
+
     const [requests, setRequests] = useState<MaintenanceRequest[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -44,6 +53,38 @@ export const MaintenanceRequests: React.FC = () => {
         target_completion: '',
         estimated_cost: 0
     });
+
+    // Column definitions for export
+    const REQUEST_COLUMNS = [
+        { key: 'request_number', header: 'رقم الطلب' },
+        { key: 'title', header: 'العنوان' },
+        { key: 'request_type', header: 'النوع' },
+        { key: 'priority', header: 'الأولوية' },
+        { key: 'status', header: 'الحالة' },
+        { key: 'reported_date', header: 'التاريخ' }
+    ];
+
+    // Export handlers
+    const handlePrint = () => {
+        if (requests.length === 0) {
+            showToast('لا توجد بيانات للطباعة', 'error');
+            return;
+        }
+        printTable(requests, REQUEST_COLUMNS, {
+            title: 'طلبات الصيانة',
+            subtitle: `التاريخ: ${new Date().toLocaleDateString('ar-SA')}`
+        });
+        showToast('تم فتح نافذة الطباعة', 'success');
+    };
+
+    const handleExportExcel = () => {
+        if (requests.length === 0) {
+            showToast('لا توجد بيانات للتصدير', 'error');
+            return;
+        }
+        exportToExcel(requests, REQUEST_COLUMNS, { filename: 'طلبات_الصيانة' });
+        showToast(`تم تصدير ${requests.length} طلب إلى Excel`, 'success');
+    };
 
     useEffect(() => {
         fetchRequests();
@@ -175,6 +216,27 @@ export const MaintenanceRequests: React.FC = () => {
                         <option value="in_progress">قيد التنفيذ</option>
                         <option value="completed">مكتمل</option>
                     </select>
+                </div>
+                {/* Export Toolbar */}
+                <div className="flex items-center gap-2 border-r pr-3">
+                    <button
+                        onClick={handleExportExcel}
+                        disabled={isExporting || requests.length === 0}
+                        className="px-3 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 text-sm disabled:opacity-50"
+                        aria-label="تصدير إلى Excel"
+                    >
+                        <FileSpreadsheet className="w-4 h-4" />
+                        Excel
+                    </button>
+                    <button
+                        onClick={handlePrint}
+                        disabled={isPrinting || requests.length === 0}
+                        className="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 flex items-center gap-2 text-sm disabled:opacity-50"
+                        aria-label="طباعة"
+                    >
+                        <Printer className="w-4 h-4" />
+                        طباعة
+                    </button>
                 </div>
             </div>
 

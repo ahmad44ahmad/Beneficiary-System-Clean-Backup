@@ -421,6 +421,57 @@ button {
     display: none;
   }
 
+  /* ===== GRC Dashboard Mobile Fixes ===== */
+  /* Risk Matrix - Make scrollable on mobile */
+  .risk-matrix-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+  }
+
+  .risk-matrix-container::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .risk-matrix-container::-webkit-scrollbar-thumb {
+    background: var(--hrsd-teal);
+    border-radius: 2px;
+  }
+
+  /* GRC Stats Cards - Stack on mobile */
+  .grc-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* GRC Risk Cards - Full width */
+  .grc-risk-card {
+    min-width: 280px;
+  }
+
+  /* GRC Tabs - Scrollable horizontal */
+  .grc-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+
+  .grc-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Compliance Table - Horizontal scroll */
+  .compliance-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .compliance-table {
+    min-width: 600px;
+  }
+
   /* Touch Feedback */
   .touch-feedback:active {
     opacity: 0.7;
