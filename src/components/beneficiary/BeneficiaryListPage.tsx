@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Users, Plus, RefreshCw, Grid, List,
     ChevronLeft, Activity, Printer, Download,
-    FileSpreadsheet, ChevronDown, CheckSquare
+    FileSpreadsheet, ChevronDown, CheckSquare,
+    Search, Archive, Trash, X
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { BeneficiaryCard } from './BeneficiaryCard';
@@ -14,6 +15,9 @@ import { SkeletonCard, SkeletonStatCard } from '../ui/Skeleton';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport, BENEFICIARY_COLUMNS } from '../../hooks/useExport';
 import { useToast } from '../../context/ToastContext';
+import { useAdvancedSearch } from '../../hooks/useAdvancedSearch';
+import { useBatchOperations } from '../../hooks/useBatchOperations';
+import { useAudit } from '../../hooks/useAudit';
 
 interface Beneficiary {
     id: string;
@@ -31,15 +35,15 @@ interface Beneficiary {
 export const BeneficiaryListPage: React.FC = () => {
     const navigate = useNavigate();
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-    const [searchQuery, setSearchQuery] = useState('');
     const [filters, setFilters] = useState<FilterState>({});
-    const [showBulkMenu, setShowBulkMenu] = useState(false);
-    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
     // Hooks for print, export, and notifications
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, exportToCsv, isExporting } = useExport();
     const { showToast } = useToast();
+
+    // Advanced audit logging
+    const { audit } = useAudit('beneficiaries');
 
     // Demo data for fallback
     const demoData: Beneficiary[] = [
@@ -98,18 +102,27 @@ export const BeneficiaryListPage: React.FC = () => {
         staleTime: 5 * 60 * 1000, // 5 minutes
     });
 
-    // Apply filters and search using useMemo for performance
+    // ═══════════════════════════════════════════════════════════════════════════
+    // Advanced Search with Multi-field Support
+    // ═══════════════════════════════════════════════════════════════════════════
+    const {
+        query: searchQuery,
+        setQuery: setSearchQuery,
+        results: searchResults,
+        isSearching,
+        resultCount,
+        hasActiveFilters: hasActiveSearch
+    } = useAdvancedSearch(beneficiaries, {
+        searchFields: ['name', 'id', 'room'],
+        debounceMs: 300,
+        caseSensitive: false
+    });
+
+    // Apply additional filters on top of search results
     const filteredBeneficiaries = useMemo(() => {
-        let result = [...beneficiaries];
+        let result = [...searchResults];
 
-        // Apply search
-        if (searchQuery) {
-            result = result.filter(b =>
-                b.name.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-        }
-
-        // Apply filters
+        // Apply dropdown filters
         if (filters.wing && filters.wing !== 'all') {
             result = result.filter(b => b.wing === filters.wing);
         }
@@ -121,7 +134,45 @@ export const BeneficiaryListPage: React.FC = () => {
         }
 
         return result;
-    }, [beneficiaries, searchQuery, filters]);
+    }, [searchResults, filters]);
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // Batch Operations for Multi-select
+    // ═══════════════════════════════════════════════════════════════════════════
+    const {
+        selectedIds,
+        selectedItems,
+        toggle: toggleSelect,
+        selectAll,
+        deselectAll,
+        isSelected,
+        selectionCount,
+        isAllSelected,
+        isPartiallySelected,
+        executeAction,
+        isExecuting
+    } = useBatchOperations({
+        data: filteredBeneficiaries,
+        idField: 'id',
+        module: 'beneficiaries',
+        onExecute: async (action, items, payload) => {
+            switch (action) {
+                case 'archive':
+                    await audit.update('batch', 'beneficiary', `أرشفة ${items.length} مستفيد`);
+                    showToast(`تمت أرشفة ${items.length} مستفيد`, 'success');
+                    break;
+                case 'delete':
+                    await audit.delete('batch', 'beneficiary', `حذف ${items.length} مستفيد`);
+                    showToast(`تم حذف ${items.length} مستفيد`, 'success');
+                    break;
+                case 'export':
+                    exportToExcel(items, BENEFICIARY_COLUMNS, { filename: 'المحددين' });
+                    await audit.export(`تصدير ${items.length} مستفيد محدد`);
+                    showToast(`تم تصدير ${items.length} مستفيد`, 'success');
+                    break;
+            }
+        }
+    });
 
     const handleSearch = (query: string) => {
         setSearchQuery(query);
@@ -153,9 +204,9 @@ export const BeneficiaryListPage: React.FC = () => {
     // Action Handlers
     // ═══════════════════════════════════════════════════════════════════════════
 
-    const handlePrint = () => {
-        const dataToExport = selectedIds.size > 0
-            ? filteredBeneficiaries.filter(b => selectedIds.has(b.id))
+    const handlePrint = async () => {
+        const dataToExport = selectionCount > 0
+            ? selectedItems
             : filteredBeneficiaries;
 
         printTable(dataToExport, [
@@ -168,51 +219,44 @@ export const BeneficiaryListPage: React.FC = () => {
             title: 'قائمة المستفيدين',
             subtitle: `مركز التأهيل الشامل بالباحة - ${new Date().toLocaleDateString('ar-SA')}`,
         });
+        await audit.print(`طباعة ${dataToExport.length} مستفيد`);
         showToast('جاري فتح نافذة الطباعة...', 'info');
     };
 
-    const handleExportExcel = () => {
-        const dataToExport = selectedIds.size > 0
-            ? filteredBeneficiaries.filter(b => selectedIds.has(b.id))
+    const handleExportExcel = async () => {
+        const dataToExport = selectionCount > 0
+            ? selectedItems
             : filteredBeneficiaries;
 
         exportToExcel(dataToExport, BENEFICIARY_COLUMNS, {
             filename: 'قائمة_المستفيدين',
             title: 'قائمة المستفيدين - مركز التأهيل الشامل بالباحة',
         });
+        await audit.export(`تصدير ${dataToExport.length} مستفيد إلى Excel`);
         showToast(`تم تصدير ${dataToExport.length} سجل إلى Excel`, 'success');
     };
 
-    const handleExportCsv = () => {
-        const dataToExport = selectedIds.size > 0
-            ? filteredBeneficiaries.filter(b => selectedIds.has(b.id))
+    const handleExportCsv = async () => {
+        const dataToExport = selectionCount > 0
+            ? selectedItems
             : filteredBeneficiaries;
 
         exportToCsv(dataToExport, BENEFICIARY_COLUMNS, {
             filename: 'قائمة_المستفيدين',
             title: 'قائمة المستفيدين',
         });
+        await audit.export(`تصدير ${dataToExport.length} مستفيد إلى CSV`);
         showToast(`تم تصدير ${dataToExport.length} سجل إلى CSV`, 'success');
     };
 
     const handleSelectAll = () => {
-        if (selectedIds.size === filteredBeneficiaries.length) {
-            setSelectedIds(new Set());
+        if (isAllSelected) {
+            deselectAll();
             showToast('تم إلغاء تحديد الكل', 'info');
         } else {
-            setSelectedIds(new Set(filteredBeneficiaries.map(b => b.id)));
+            selectAll();
             showToast(`تم تحديد ${filteredBeneficiaries.length} مستفيد`, 'info');
         }
-    };
-
-    const handleToggleSelect = (id: string) => {
-        const newSelected = new Set(selectedIds);
-        if (newSelected.has(id)) {
-            newSelected.delete(id);
-        } else {
-            newSelected.add(id);
-        }
-        setSelectedIds(newSelected);
     };
 
     return (
@@ -311,13 +355,13 @@ export const BeneficiaryListPage: React.FC = () => {
                 {/* ═══════════════════════════════════════════════════════════════════ */}
                 <div className="flex flex-wrap items-center gap-3 mb-6 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
                     {/* Selection indicator */}
-                    {selectedIds.size > 0 && (
+                    {selectionCount > 0 && (
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             className="px-3 py-1.5 bg-hrsd-teal/10 text-hrsd-teal rounded-lg text-sm font-medium"
                         >
-                            {selectedIds.size} محدد
+                            {selectionCount} محدد
                         </motion.div>
                     )}
 
@@ -329,9 +373,9 @@ export const BeneficiaryListPage: React.FC = () => {
                         className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
                         aria-label="تحديد الكل"
                     >
-                        <CheckSquare className="w-4 h-4" />
+                        <CheckSquare className={`w-4 h-4 ${isAllSelected ? 'text-hrsd-teal' : ''}`} />
                         <span className="hidden sm:inline">
-                            {selectedIds.size === filteredBeneficiaries.length ? 'إلغاء التحديد' : 'تحديد الكل'}
+                            {isAllSelected ? 'إلغاء التحديد' : 'تحديد الكل'}
                         </span>
                     </motion.button>
 
@@ -437,6 +481,117 @@ export const BeneficiaryListPage: React.FC = () => {
                     ))}
                 </div>
             )}
+
+            {/* ═══════════════════════════════════════════════════════════════════ */}
+            {/* Floating Batch Action Bar */}
+            {/* ═══════════════════════════════════════════════════════════════════ */}
+            <AnimatePresence>
+                {selectionCount > 0 && (
+                    <motion.div
+                        initial={{ y: 100, opacity: 0, scale: 0.9 }}
+                        animate={{ y: 0, opacity: 1, scale: 1 }}
+                        exit={{ y: 100, opacity: 0, scale: 0.9 }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
+                        style={{ minWidth: '400px', maxWidth: '90vw' }}
+                    >
+                        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 
+                                        text-white rounded-2xl shadow-2xl border border-white/10 
+                                        backdrop-blur-xl p-4 flex items-center gap-4">
+
+                            {/* Selection Info */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-hrsd-teal/20 border-2 border-hrsd-teal 
+                                                rounded-xl flex items-center justify-center">
+                                    <CheckSquare className="w-5 h-5 text-hrsd-teal" />
+                                </div>
+                                <div>
+                                    <p className="font-bold text-lg leading-tight">
+                                        {selectionCount} مستفيد
+                                    </p>
+                                    <p className="text-xs text-gray-400">
+                                        من أصل {filteredBeneficiaries.length}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Divider */}
+                            <div className="h-10 w-px bg-white/10" />
+
+                            {/* Actions */}
+                            <div className="flex gap-2 flex-1">
+                                {/* Export Selected */}
+                                <button
+                                    onClick={() => executeAction('export')}
+                                    disabled={isExecuting}
+                                    className="flex items-center gap-2 px-3 py-2 bg-emerald-600 
+                                               hover:bg-emerald-700 rounded-lg transition-all 
+                                               active:scale-95 disabled:opacity-50 text-sm font-medium"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    <span className="hidden sm:inline">تصدير</span>
+                                </button>
+
+                                {/* Archive Selected */}
+                                <button
+                                    onClick={() => {
+                                        if (confirm(`هل تريد أرشفة ${selectionCount} مستفيد؟`)) {
+                                            executeAction('archive');
+                                        }
+                                    }}
+                                    disabled={isExecuting}
+                                    className="flex items-center gap-2 px-3 py-2 bg-amber-600 
+                                               hover:bg-amber-700 rounded-lg transition-all 
+                                               active:scale-95 disabled:opacity-50 text-sm font-medium"
+                                >
+                                    <Archive className="w-4 h-4" />
+                                    <span className="hidden sm:inline">أرشفة</span>
+                                </button>
+
+                                {/* Delete Selected */}
+                                <button
+                                    onClick={() => {
+                                        if (confirm(`⚠️ تحذير!\n\nهل تريد حذف ${selectionCount} مستفيد؟\nلا يمكن التراجع عن هذا الإجراء!`)) {
+                                            executeAction('delete');
+                                        }
+                                    }}
+                                    disabled={isExecuting}
+                                    className="flex items-center gap-2 px-3 py-2 bg-red-600 
+                                               hover:bg-red-700 rounded-lg transition-all 
+                                               active:scale-95 disabled:opacity-50 text-sm font-medium"
+                                >
+                                    <Trash className="w-4 h-4" />
+                                    <span className="hidden sm:inline">حذف</span>
+                                </button>
+                            </div>
+
+                            {/* Cancel */}
+                            <button
+                                onClick={deselectAll}
+                                className="p-2 bg-white/10 hover:bg-white/20 rounded-lg 
+                                           transition-all active:scale-95"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+
+                            {/* Loading Overlay */}
+                            {isExecuting && (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="absolute inset-0 bg-black/60 rounded-2xl backdrop-blur-sm 
+                                               flex items-center justify-center"
+                                >
+                                    <div className="flex flex-col items-center gap-2">
+                                        <RefreshCw className="w-6 h-6 animate-spin text-white" />
+                                        <p className="text-sm font-medium">جاري التنفيذ...</p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
