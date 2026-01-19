@@ -46,21 +46,21 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 
     return (
         <div className={`flex flex-col items-center justify-center text-center ${s.padding} ${className}`} dir="rtl">
-            <div className="mb-4 text-gray-300">
-                <Icon className={s.icon} />
+            <div className={`mb-4 p-4 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full`}>
+                <Icon className={`${s.icon} text-gray-400`} />
             </div>
-            <h3 className={`font-medium text-gray-600 mb-2 ${s.title}`}>
+            <h3 className={`font-semibold text-gray-700 mb-2 ${s.title}`}>
                 {title}
             </h3>
             {description && (
-                <p className={`text-gray-400 max-w-xs ${s.desc}`}>
+                <p className={`text-gray-500 max-w-sm ${s.desc}`}>
                     {description}
                 </p>
             )}
             {actionText && onAction && (
                 <button
                     onClick={onAction}
-                    className="mt-4 px-4 py-2 bg-hrsd-primary text-white rounded-lg hover:bg-hrsd-primary/90 transition-colors"
+                    className="mt-4 px-5 py-2.5 gradient-primary text-white rounded-lg hover-lift font-medium shadow-sm transition-all"
                 >
                     {actionText}
                 </button>

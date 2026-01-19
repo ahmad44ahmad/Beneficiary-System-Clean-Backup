@@ -43,23 +43,23 @@ export const StatCard: React.FC<StatCardProps> = ({
 
     return (
         <div
-            className={`hrsd-card-stat ${onClick ? 'cursor-pointer hover:shadow-md' : ''} ${className}`}
+            className={`hrsd-card-stat ${onClick ? 'cursor-pointer hover:shadow-lg' : ''} ${className}`}
             onClick={onClick}
         >
             <div className="flex items-center gap-3">
-                <div className={`p-2 ${iconBgColor} rounded-lg`}>
-                    <Icon className={`w-5 h-5 ${iconColor}`} />
+                <div className={`p-3 ${iconBgColor} rounded-xl shadow-sm`}>
+                    <Icon className={`w-6 h-6 ${iconColor}`} />
                 </div>
                 <div className="flex-1">
                     <div className="flex items-end gap-2">
                         <p className="text-2xl font-bold text-gray-800">{value}</p>
                         {trend && (
-                            <span className={`text-sm font-medium ${getTrendColor(trend.direction)}`}>
+                            <span className={`text-sm font-semibold ${getTrendColor(trend.direction)}`}>
                                 {getTrendIcon(trend.direction)} {trend.value}
                             </span>
                         )}
                     </div>
-                    <p className="text-xs text-gray-500">{label}</p>
+                    <p className="text-xs text-gray-500 font-medium mt-0.5">{label}</p>
                 </div>
             </div>
         </div>
