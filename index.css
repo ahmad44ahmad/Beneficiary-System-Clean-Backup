@@ -2,19 +2,23 @@
 
 :root {
     /* HRSD Brand Identity - Official Colors */
-    --primary-color: #F5961E; /* Energy */
+    --primary-color: #F5961E;
+    /* Energy */
     --primary-light: #FFB75E;
     --primary-dark: #D48200;
 
-    --secondary-color: #FAB414; /* Clarity */
-    --secondary-bg: #F3F4F6; /* Lighter Gray for better contrast */
+    --secondary-color: #FAB414;
+    /* Clarity */
+    --secondary-bg: #F3F4F6;
+    /* Lighter Gray for better contrast */
 
     /* Balancing Colors */
     --accent-teal: #148287;
     --accent-green: #2DB473;
     --accent-dark-blue: #14415A;
 
-    --text-color: #111827; /* Darker for better readability */
+    --text-color: #111827;
+    /* Darker for better readability */
     --light-text-color: #4B5563;
     --white-color: #ffffff;
     --border-color: #E5E7EB;
@@ -26,8 +30,22 @@
     --font-family: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
 
     /* Layout - Comfort */
-    --radius: 12px; /* Softer corners */
+    --radius: 12px;
+    /* Softer corners */
     --sidebar-width: 320px;
+
+    /* Premium Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --shadow-glow: 0 0 20px rgba(20, 130, 135, 0.3);
+
+    /* Animations */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -40,19 +58,358 @@ body {
     font-family: var(--font-family);
     background-color: var(--secondary-bg);
     color: var(--text-color);
-    line-height: 1.7; /* Increased from 1.6 */
-    font-size: 18px; /* Increased from 16px */
+    line-height: 1.7;
+    /* Increased from 1.6 */
+    font-size: 18px;
+    /* Increased from 16px */
     font-weight: 500;
 }
 
-/* Glassmorphism Utilities */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* PREMIUM GRADIENTS - HRSD Brand Identity */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.gradient-primary {
+    background: linear-gradient(135deg, #148287 0%, #0d9488 100%);
+}
+
+.gradient-secondary {
+    background: linear-gradient(135deg, #eab308 0%, #facc15 100%);
+}
+
+.gradient-navy-teal {
+    background: linear-gradient(135deg, #1a365d 0%, #148287 50%, #0d9488 100%);
+}
+
+.gradient-teal-green {
+    background: linear-gradient(135deg, #0d9488 0%, #22c55e 100%);
+}
+
+.gradient-ipc {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f97316 100%);
+}
+
+.gradient-empowerment {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c026d3 100%);
+}
+
+.gradient-family {
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #14b8a6 100%);
+}
+
+.gradient-soft {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* GLASSMORPHISM UTILITIES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
 .glass-panel {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: var(--shadow-glass);
 }
+
+.glass-dark {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* CARD UTILITIES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.hrsd-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+}
+
+.hrsd-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.hrsd-card-stat {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--accent-teal);
+    transition: all var(--transition-base);
+}
+
+.hrsd-card-stat:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(-4px);
+}
+
+.border-l-hrsd-teal {
+    border-left-color: #0d9488;
+}
+
+.border-l-hrsd-green {
+    border-left-color: #22c55e;
+}
+
+.border-l-hrsd-gold {
+    border-left-color: #eab308;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* STATUS BADGES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.badge-success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-info {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-primary {
+    background: #ccfbf1;
+    color: #134e4a;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* BUTTON ENHANCEMENTS */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-hover-lift {
+    transition: all var(--transition-base);
+}
+
+.btn-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* ANIMATIONS & KEYFRAMES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+    animation: slideRight 0.5s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.hover-lift {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* LOADING STATES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.skeleton {
+    background: linear-gradient(90deg,
+            #f3f4f6 0%,
+            #e5e7eb 50%,
+            #f3f4f6 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.5rem;
+}
+
+.skeleton-title {
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+
+.skeleton-card {
+    height: 10rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* TYPOGRAPHY UTILITIES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.text-hierarchy-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.text-hierarchy-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.text-hierarchy-subheading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.text-hierarchy-body {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.text-hierarchy-small {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.text-hierarchy-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* APP STRUCTURE */
+/* ═══════════════════════════════════════════════════════════════════════════ */
 
 #root {
     display: flex;
@@ -64,9 +421,16 @@ body {
     background: linear-gradient(135deg, var(--accent-dark-blue), var(--accent-teal));
     color: var(--white-color);
     padding: 1.2rem 2rem;
-    box-shadow: var(--shadow-soft);
-    border-bottom: none; /* Removing harsh border */
+    box-shadow: var(--shadow-lg);
+    border-bottom: none;
 }
+
+.main-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
 
 /* Nav Improvements */
 .main-nav {
@@ -78,7 +442,8 @@ body {
 }
 
 .main-nav button {
-    padding: 0.75rem 1.5rem; /* Larger touch targets */
+    padding: 0.75rem 1.5rem;
+    /* Larger touch targets */
     font-size: 1.1rem;
 }
 

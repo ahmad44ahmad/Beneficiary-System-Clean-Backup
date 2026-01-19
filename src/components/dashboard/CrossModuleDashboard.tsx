@@ -23,24 +23,24 @@ const ModuleCard: React.FC<ModuleCardProps & { delay?: number }> = ({ title, ico
     return (
         <div
             onClick={() => navigate(linkTo)}
-            className={`${bgClass} rounded-2xl p-5 cursor-pointer hover-lift btn-ripple animate-slide-up opacity-0`}
+            className={`${bgClass} rounded-2xl p-6 cursor-pointer hover-lift btn-ripple animate-slide-up opacity-0 shadow-lg`}
             style={{ animationDelay: `${delay * 0.1}s`, animationFillMode: 'forwards' }}
         >
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-white/20 rounded-xl">
+                    <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm shadow-md">
                         {icon}
                     </div>
-                    <h3 className="font-bold text-white">{title}</h3>
+                    <h3 className="font-bold text-white text-lg">{title}</h3>
                 </div>
-                <ChevronRight className="w-5 h-5 text-white/70" />
+                <ChevronRight className="w-6 h-6 text-white/70" />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
                 {stats.map((stat, idx) => (
-                    <div key={idx} className="bg-white/10 rounded-lg p-2 text-center">
+                    <div key={idx} className="bg-white/15 backdrop-blur-sm rounded-xl p-3 text-center border border-white/20 hover:bg-white/25 transition-all">
                         <p className="text-2xl font-bold text-white">{stat.value}</p>
-                        <p className="text-xs text-white/80">{stat.label}</p>
+                        <p className="text-xs text-white/90 mt-1">{stat.label}</p>
                     </div>
                 ))}
             </div>
@@ -54,27 +54,27 @@ const AlertItem: React.FC<{
     title: string;
     severity: 'high' | 'medium' | 'low';
     time: string;
-}> = ({ type, title, severity, time }) => {
+}> = ({ type, severity, title, time }) => {
     const severityColors = {
-        high: 'border-red-400 bg-red-50',
-        medium: 'border-yellow-400 bg-yellow-50',
-        low: 'border-blue-400 bg-blue-50',
+        high: 'border-r-red-500 bg-gradient-to-l from-red-50 to-transparent',
+        medium: 'border-r-yellow-500 bg-gradient-to-l from-yellow-50 to-transparent',
+        low: 'border-r-blue-500 bg-gradient-to-l from-blue-50 to-transparent',
     };
 
     const icons = {
-        infection: <Shield className="w-4 h-4 text-red-500" />,
-        fall: <AlertCircle className="w-4 h-4 text-orange-500" />,
-        goal: <Target className="w-4 h-4 text-green-500" />,
+        infection: <Shield className="w-5 h-5 text-red-600" />,
+        fall: <AlertCircle className="w-5 h-5 text-orange-600" />,
+        goal: <Target className="w-5 h-5 text-green-600" />,
     };
 
     return (
-        <div className={`flex items-center gap-3 p-3 rounded-lg border-r-4 ${severityColors[severity]}`}>
-            <div className="p-1.5 bg-white rounded-lg shadow-sm">
+        <div className={`flex items-center gap-3 p-4 rounded-xl border-r-4 ${severityColors[severity]} hover-lift`}>
+            <div className="p-2 bg-white rounded-xl shadow-sm">
                 {icons[type]}
             </div>
             <div className="flex-1">
-                <p className="font-medium text-gray-800 text-sm">{title}</p>
-                <p className="text-xs text-gray-500">{time}</p>
+                <p className="font-semibold text-gray-800 text-sm">{title}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{time}</p>
             </div>
         </div>
     );
@@ -133,11 +133,13 @@ export const CrossModuleDashboard: React.FC = () => {
         <div className="space-y-6" dir="rtl">
             {/* Section Title */}
             <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    <Activity className="w-6 h-6 text-emerald-600" />
+                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl">
+                        <Activity className="w-7 h-7 text-emerald-600" />
+                    </div>
                     نظرة شاملة على الوحدات
                 </h2>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full">
                     آخر تحديث: {new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
                 </span>
             </div>
@@ -191,21 +193,21 @@ export const CrossModuleDashboard: React.FC = () => {
             </div>
 
             {/* Recent Alerts Row */}
-            <div className="bg-white rounded-2xl p-5 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-bold text-gray-800 flex items-center gap-2">
-                        <AlertCircle className="w-5 h-5 text-red-500" />
+            <div className="hrsd-card">
+                <div className="flex items-center justify-between mb-5">
+                    <h3 className="font-bold text-gray-800 flex items-center gap-2 text-lg">
+                        <AlertCircle className="w-6 h-6 text-red-500" />
                         التنبيهات الأخيرة
                     </h3>
                     <button
                         onClick={() => {/* Open alerts panel */ }}
-                        className="text-sm text-emerald-600 hover:underline"
+                        className="text-sm text-emerald-600 hover:text-emerald-700 font-semibold hover:underline transition-colors"
                     >
                         عرض الكل
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <AlertItem
                         type="infection"
                         title="حالة عدوى تنفسية - جناح الإناث"
@@ -229,46 +231,46 @@ export const CrossModuleDashboard: React.FC = () => {
 
             {/* Quick Stats Summary */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                        <CheckCircle className="w-5 h-5 text-green-600" />
+                <div className="hrsd-card p-4 flex items-center gap-3">
+                    <div className="p-3 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl">
+                        <CheckCircle className="w-6 h-6 text-green-600" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">
                             {(empowermentStats?.achievedGoals || 0) + Math.floor((ipcStats?.avgComplianceRate || 0) / 10)}
                         </p>
-                        <p className="text-xs text-gray-500">إنجازات اليوم</p>
+                        <p className="text-xs text-gray-500 font-medium">إنجازات اليوم</p>
                     </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
-                    <div className="p-2 bg-yellow-100 rounded-lg">
-                        <Clock className="w-5 h-5 text-yellow-600" />
+                <div className="hrsd-card p-4 flex items-center gap-3">
+                    <div className="p-3 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-xl">
+                        <Clock className="w-6 h-6 text-yellow-600" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">
                             {(ipcStats?.pendingFollowups || 0) + (empowermentStats?.inProgressGoals || 0)}
                         </p>
-                        <p className="text-xs text-gray-500">مهام معلقة</p>
+                        <p className="text-xs text-gray-500 font-medium">مهام معلقة</p>
                     </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
-                    <div className="p-2 bg-red-100 rounded-lg">
-                        <AlertCircle className="w-5 h-5 text-red-600" />
+                <div className="hrsd-card p-4 flex items-center gap-3">
+                    <div className="p-3 bg-gradient-to-br from-red-100 to-pink-100 rounded-xl">
+                        <AlertCircle className="w-6 h-6 text-red-600" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">{ipcStats?.activeIncidents || 0}</p>
-                        <p className="text-xs text-gray-500">تنبيهات حرجة</p>
+                        <p className="text-xs text-gray-500 font-medium">تنبيهات حرجة</p>
                     </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                        <TrendingUp className="w-5 h-5 text-blue-600" />
+                <div className="hrsd-card p-4 flex items-center gap-3">
+                    <div className="p-3 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-xl">
+                        <TrendingUp className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">
                             {Math.round(((ipcStats?.avgComplianceRate || 0) + (empowermentStats?.avgProgress || 0)) / 2)}%
                         </p>
-                        <p className="text-xs text-gray-500">مؤشر الأداء</p>
+                        <p className="text-xs text-gray-500 font-medium">مؤشر الأداء</p>
                     </div>
                 </div>
             </div>
