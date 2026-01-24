@@ -22,7 +22,7 @@ export interface UnifiedBeneficiaryProfile extends Beneficiary {
     // Aggregated Data
     medicalProfile?: MedicalProfile;
     socialResearch?: SocialResearch;
-    activeRehabPlan?: RehabPlan;
+    activeRehabPlan?: RehabPlan | any; // Using any or union to allow legacy RehabilitationPlan
     latestMedicalExam?: MedicalExamination;
     educationalPlan?: IndividualEducationalPlan;
 

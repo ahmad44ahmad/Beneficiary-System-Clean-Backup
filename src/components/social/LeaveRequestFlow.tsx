@@ -24,7 +24,7 @@ export const LeaveRequestFlow: React.FC = () => {
             beneficiaryId: '1',
             beneficiaryName: 'أحمد محمد',
             requestDate: '2023-11-28',
-            type: 'home_visit',
+            type: 'HomeVisit',
             startDate: '2023-12-01',
             endDate: '2023-12-03',
             durationDays: 2,
@@ -51,7 +51,7 @@ export const LeaveRequestFlow: React.FC = () => {
 
     // Form State
     const [newRequestData, setNewRequestData] = useState<Partial<LeaveRequest>>({
-        type: 'home_visit',
+        type: 'HomeVisit',
         startDate: '',
         endDate: '',
         reason: '',
@@ -219,7 +219,7 @@ export const LeaveRequestFlow: React.FC = () => {
                             <div>
                                 <h3 className="font-bold text-gray-900">{request.beneficiaryName}</h3>
                                 <div className="text-sm text-gray-500 flex gap-2">
-                                    <span>{request.type === 'home_visit' ? 'زيارة منزلية' : request.type}</span>
+                                    <span>{request.type === 'HomeVisit' ? 'زيارة منزلية' : request.type}</span>
                                     <span>•</span>
                                     <span>{request.durationDays} أيام</span>
                                 </div>

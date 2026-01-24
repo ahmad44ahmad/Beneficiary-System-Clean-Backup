@@ -119,16 +119,20 @@ export const AssetRegistry: React.FC = () => {
     const getConditionBadge = (condition: string) => {
         const styles: Record<string, string> = {
             excellent: 'bg-green-100 text-green-800',
+            new: 'bg-emerald-100 text-emerald-800',
             good: 'bg-blue-100 text-blue-800',
             fair: 'bg-yellow-100 text-yellow-800',
             poor: 'bg-orange-100 text-orange-800',
-            unusable: 'bg-red-100 text-red-800'
+            damaged: 'bg-red-100 text-red-800',
+            unusable: 'bg-gray-100 text-gray-800'
         };
         const labels: Record<string, string> = {
             excellent: 'ممتاز',
+            new: 'جديد',
             good: 'جيد',
-            fair: 'مقبول',
+            fair: 'متوسط',
             poor: 'ضعيف',
+            damaged: 'تالف',
             unusable: 'غير صالح'
         };
         return (

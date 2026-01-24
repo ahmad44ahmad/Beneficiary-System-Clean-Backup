@@ -11,7 +11,7 @@ interface WardrobeInventoryFormProps {
 export const WardrobeInventoryForm: React.FC<WardrobeInventoryFormProps> = ({ beneficiaries, onSave, onCancel }) => {
     const [formData, setFormData] = useState<Partial<WardrobeInventory>>({
         beneficiaryId: '',
-        year: new Date().getFullYear().toString(),
+        year: new Date().getFullYear(),
         season: 'summer',
         items: [],
         date: new Date().toISOString().split('T')[0],
@@ -53,9 +53,9 @@ export const WardrobeInventoryForm: React.FC<WardrobeInventoryFormProps> = ({ be
                         <div className="form-group">
                             <label>العام</label>
                             <input
-                                type="text"
+                                type="number"
                                 value={formData.year}
-                                onChange={e => setFormData({ ...formData, year: e.target.value })}
+                                onChange={e => setFormData({ ...formData, year: parseInt(e.target.value) || new Date().getFullYear() })}
                                 required
                             />
                         </div>
@@ -79,7 +79,7 @@ export const WardrobeInventoryForm: React.FC<WardrobeInventoryFormProps> = ({ be
                             items={formData.items || []}
                             onChange={items => setFormData({ ...formData, items })}
                             columns={[
-                                { key: 'itemName', label: 'الصنف' },
+                                { key: 'itemId', label: 'الصنف' },
                                 { key: 'size', label: 'المقاس', width: '80px' },
                                 { key: 'quantity', label: 'العدد في الخزانة', type: 'number', width: '100px' },
                                 { key: 'damagedCount', label: 'التالف', type: 'number', width: '80px' },

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { DemoBanner } from '../DemoBanner';
 import { MobileNav } from './MobileNav';
 import { RiskAlertSystem } from '../safety/RiskAlertSystem';
 import { RealTimeAlerts } from '../common/RealTimeAlerts';
@@ -74,6 +75,7 @@ export const MainLayout = () => {
 
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                <DemoBanner />
                 {/* Header */}
                 <Header onMenuClick={handleMenuToggle} />
 

@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useUnifiedData } from '../../context/UnifiedDataContext';
 import {
     Search, Home, Users, Settings, Activity, FileText,
     Shield, Heart, Calendar, X, ArrowRight, Command,
@@ -51,9 +52,28 @@ export function CommandMenu() {
     const inputRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
 
+    // Dynamic data
+    const { beneficiaries } = useUnifiedData();
+
+    // Dynamically add beneficiaries to commands
+    const dynamicCommands = [
+        ...COMMANDS,
+        ...(query ? beneficiaries
+            .filter(b => b.fullName.includes(query) || b.id.includes(query))
+            .map(b => ({
+                id: `ben-${b.id}`,
+                label: b.fullName,
+                labelEn: b.id,
+                icon: Users,
+                path: `/beneficiaries/${b.id}`, // Assuming this route exists or opens modal
+                keywords: [b.id, 'beneficiary', 'مستفيد'],
+                category: 'main' as const
+            })) : [])
+    ];
+
     // Filter commands based on query
     const filteredCommands = query
-        ? COMMANDS.filter(cmd =>
+        ? dynamicCommands.filter(cmd =>
             cmd.label.includes(query) ||
             cmd.labelEn.toLowerCase().includes(query.toLowerCase()) ||
             cmd.keywords.some(k => k.includes(query.toLowerCase()))
@@ -203,8 +223,8 @@ export function CommandMenu() {
                                                     onClick={() => handleSelect(cmd.path)}
                                                     onMouseEnter={() => setSelectedIndex(globalIndex)}
                                                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${globalIndex === selectedIndex
-                                                            ? 'bg-teal-500/20 text-white'
-                                                            : 'text-gray-400 hover:bg-white/5'
+                                                        ? 'bg-teal-500/20 text-white'
+                                                        : 'text-gray-400 hover:bg-white/5'
                                                         }`}
                                                 >
                                                     <Icon className="w-5 h-5" />

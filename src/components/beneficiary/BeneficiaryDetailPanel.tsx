@@ -138,7 +138,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                         <DetailItem label="الاسم الكامل" value={beneficiary.fullName} />
                         <DetailItem label="رقم المستفيد" value={beneficiary.id} />
                         <DetailItem label="العمر" value={beneficiary.age} />
-                        <DetailItem label="الحالة" value={beneficiary.status === 'active' ? 'نشط' : beneficiary.status === 'exit' ? 'خروج' : '-'} />
+                        <DetailItem label="الحالة" value={beneficiary.status === 'active' ? 'نشط' : beneficiary.status === 'discharged' ? 'خروج' : '-'} />
                     </div>
                 </div>
             </Card>
@@ -275,6 +275,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                             <VisitLogPanel
                                 beneficiary={beneficiary}
                                 logs={visitLogs}
+                                onAddLog={(log) => console.log('Log added:', log)} // Placeholder or wire to handleUpdate
                             />
 
                             <DetailCard title="سجل الإصابات والحوادث">
@@ -379,7 +380,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                                 <br />
                                                 <strong>الأهداف:</strong> {[
                                                     tr.goals.educationalIntegration && 'دمج تعليمي',
-                                                    tr.goals.socialIntegration && 'دمج مجتمعي',
+                                                    tr.goals.communityIntegration && 'دمج مجتمعي',
                                                     tr.goals.returnToFamily && 'عودة للأسرة',
                                                     tr.goals.vocationalPrep && 'تهيئة مهنية',
                                                     tr.goals.skillDevelopment && 'تطوير مهارات',

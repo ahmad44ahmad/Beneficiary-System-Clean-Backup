@@ -22,7 +22,7 @@ export const useUnifiedProfile = (beneficiaryId: string): UnifiedBeneficiaryProf
         // 1. Aggregate Related Data
         const relatedMedicalProfile = medicalProfiles.find(p => p.beneficiaryId === beneficiaryId);
         const relatedSocialResearch = socialResearchForms.find(s => s.beneficiaryId === beneficiaryId);
-        const activeRehabPlan = rehabilitationPlans.find(p => p.beneficiaryId === beneficiaryId && p.status === 'active');
+        const activeRehabPlan = rehabilitationPlans.find(p => p.beneficiaryId === beneficiaryId && (p as any).status === 'active');
         const relatedEducationalPlan = educationalPlans.find(p => p.beneficiaryId === beneficiaryId);
 
         // Collections

@@ -37,6 +37,7 @@ export interface MedicalProfile {
     // Diagnosis
     primaryDiagnosis: string; // Was strict union, relaxed for integration
     secondaryDiagnoses: string[];
+    bloodType?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-'; // Added
     isEpileptic: boolean;
 
     // Current State
@@ -114,6 +115,8 @@ export interface MedicalExamination {
         temperature: string;
         respiration: string;
     };
+    symptoms?: string;
+    treatment?: string;
     physicalExamNotes: string;
     recommendations: string;
 }

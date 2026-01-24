@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export type UserRole = 'director' | 'doctor' | 'social_worker' | 'nurse' | 'admin';
+export type UserRole = 'director' | 'doctor' | 'social_worker' | 'nurse' | 'admin' | 'specialist' | 'secretary';
 
 interface User {
     id: string;
@@ -23,10 +23,14 @@ const MOCK_USERS: Record<UserRole, User> = {
     social_worker: { id: 'u3', name: 'أ. سعيد بن علي الغامدي (أخصائي اجتماعي)', role: 'social_worker', avatar: 'https://i.pravatar.cc/150?u=social' },
     nurse: { id: 'u4', name: 'نايف بن عبدالله الغامدي (ممرض)', role: 'nurse', avatar: 'https://i.pravatar.cc/150?u=nurse' },
     admin: { id: 'u5', name: 'أحمد بن عبدالله الشهري', role: 'admin', avatar: 'https://i.pravatar.cc/150?u=admin' },
+    specialist: { id: 'u6', name: 'أ. فهد (أخصائي)', role: 'specialist', avatar: 'https://i.pravatar.cc/150?u=specialist' },
+    secretary: { id: 'u7', name: 'أ. سكرتير (سكرتارية)', role: 'secretary', avatar: 'https://i.pravatar.cc/150?u=secretary' },
 };
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState<User>(MOCK_USERS.admin);
+    // Demo Mode: Auto-login as Admin
+    const isDemo = import.meta.env.VITE_APP_MODE === 'demo';
+    const [currentUser, setCurrentUser] = useState<User>(isDemo ? MOCK_USERS.admin : MOCK_USERS.admin); // Defaulting to admin for now, but explicit for demo logic
 
     const switchRole = (role: UserRole) => {
         setCurrentUser(MOCK_USERS[role]);

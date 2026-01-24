@@ -203,7 +203,7 @@ export const QualityControl = () => {
                                 <h3 className="font-bold">{category}</h3>
                             </div>
                             <div className="p-4 space-y-4">
-                                {items.map((item: any) => (
+                                {(items as any[]).map((item: any) => (
                                     <div key={item.id} className="border-b last:border-0 pb-4 last:pb-0">
                                         <div className="flex justify-between items-start mb-3">
                                             <p className="font-medium text-gray-800 w-2/3">{item.question}</p>

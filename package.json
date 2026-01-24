@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "setup:demo": "node scripts/setup-demo.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -23,11 +24,11 @@
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
-    "dotenv": "^17.2.3",
+    "dotenv": "^16.4.5",
     "express": "^5.2.1",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.555.0",
-    "pg": "^8.16.3",
+    "pg": "^8.11.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.13.0",

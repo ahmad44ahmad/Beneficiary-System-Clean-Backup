@@ -54,7 +54,7 @@ export const RiskRegister: React.FC<RiskRegisterProps> = ({ profile }) => {
                         <div>
                             <span className="text-xs font-bold text-orange-400 uppercase">Allergies</span>
                             <div className="text-lg font-bold text-orange-700">
-                                {profile.medicalProfile?.allergies?.length ? profile.medicalProfile.allergies.join(', ') : 'None'}
+                                {profile.medicalProfile?.history?.allergies?.length ? profile.medicalProfile.history.allergies.join(', ') : 'None'}
                             </div>
                         </div>
                     </div>

@@ -352,7 +352,7 @@ export const App = () => {
                         <DailyCareForm
                             beneficiaryName="تجربة - عبدالله صالح"
                             beneficiaryId="demo-1"
-                            onSubmit={(data) => console.log(data)}
+                            onSuccess={() => console.log('Required success callback')}
                         />
                     } />
                     <Route path="basira/safety" element={

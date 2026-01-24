@@ -342,7 +342,7 @@ export const RehabPlanBuilder: React.FC = () => {
                                     <Button
                                         className="w-full text-xs"
                                         size="sm"
-                                        variant={approval.role === 'director' ? 'default' : 'outline'}
+                                        variant={approval.role === 'director' ? 'primary' : 'outline'}
                                         onClick={() => handleApprove(approval.role)}
                                         disabled={approval.role === 'director' && plan.approvals?.some(a => a.role !== 'director' && a.status !== 'approved')}
                                     >

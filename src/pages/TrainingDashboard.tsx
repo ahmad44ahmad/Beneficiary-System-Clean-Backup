@@ -63,7 +63,7 @@ export const TrainingDashboard = () => {
                             const types = [];
                             if (referral.goals.educationalIntegration) types.push('تعليمي');
                             if (referral.goals.vocationalPrep) types.push('مهني');
-                            if (referral.goals.socialIntegration) types.push('مجتمعي');
+                            if (referral.goals.communityIntegration) types.push('مجتمعي');
 
                             return (
                                 <tr key={referral.id} className="hover:bg-gray-50">

@@ -77,12 +77,12 @@ export const WelcomePage: React.FC = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[rgb(20,65,90)] via-[rgb(15,55,80)] to-[rgb(10,45,65)] overflow-hidden" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-br from-[#14415A] via-[#148287] to-[#2DB473] overflow-hidden" dir="rtl">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 right-20 w-72 h-72 bg-[rgb(45,180,115)] rounded-full opacity-10 blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 left-20 w-96 h-96 bg-[rgb(245,150,30)] rounded-full opacity-10 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[rgb(250,180,20)] rounded-full opacity-5 blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5" />
+                <div className="absolute top-20 right-20 w-72 h-72 bg-[#2DB473] rounded-full opacity-10 blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#F5961E] rounded-full opacity-10 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
 
             {/* Main Content */}
@@ -247,11 +247,7 @@ export const WelcomePage: React.FC = () => {
                             © 2026 مركز التأهيل الشامل بالباحة | وزارة الموارد البشرية والتنمية الاجتماعية
                         </div>
                         <div className="flex items-center gap-4">
-                            <img
-                                src="/assets/designer-credit.jpg"
-                                alt="تصميم وتطوير"
-                                className="h-12 rounded-lg opacity-80 hover:opacity-100 transition-opacity"
-                            />
+                            <span className="text-white/40 text-xs">V 5.0</span>
                         </div>
                     </div>
                 </footer>

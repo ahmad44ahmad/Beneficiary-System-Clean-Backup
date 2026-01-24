@@ -59,9 +59,9 @@ export default {
                 '3xl': '1.5rem',
             },
             fontFamily: {
-                sans: ['effra-arabic', 'effra-cc-arabic', 'Readex Pro', 'Tajawal', 'sans-serif'],
-                effra: ['effra-arabic', 'effra-cc-arabic', 'sans-serif'],
-                readex: ['Readex Pro', 'sans-serif'],
+                'hrsd': ['HRSD Font', 'Tajawal', 'sans-serif'],
+                'arabic': ['Tajawal', 'Cairo', 'sans-serif'],
+                sans: ['Tajawal', 'effra-arabic', 'sans-serif'],
             },
             screens: {
                 'xs': '375px',

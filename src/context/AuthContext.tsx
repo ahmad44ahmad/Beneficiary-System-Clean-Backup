@@ -4,7 +4,7 @@ import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../config/supabase';
 
 // Toggle this to force demo mode if needed, or use an environment variable
-const FORCE_DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
+const FORCE_DEMO_MODE = import.meta.env.VITE_APP_MODE === 'demo';
 
 interface AuthContextType {
     user: User | null;
@@ -12,6 +12,7 @@ interface AuthContextType {
     loading: boolean;
     signIn: (email: string, pass: string) => Promise<void>;
     signUp: (email: string, pass: string) => Promise<void>;
+    signInWithGoogle: () => Promise<void>;
     signOut: () => Promise<void>;
     isDemoMode: boolean;
 }
@@ -22,6 +23,7 @@ const AuthContext = createContext<AuthContextType>({
     loading: true,
     signIn: async () => { },
     signUp: async () => { },
+    signInWithGoogle: async () => { },
     signOut: async () => { },
     isDemoMode: false,
 });
@@ -109,6 +111,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (error) throw error;
     };
 
+    const signInWithGoogle = async () => {
+        if (isDemoMode) {
+            console.log('Auth: Demo Google Sign In');
+            setUser(mockUser);
+            return;
+        }
+        if (!supabase) return;
+
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+        });
+        if (error) throw error;
+    };
+
     const signOut = async () => {
         if (isDemoMode) {
             console.log('Auth: Demo Sign Out');
@@ -122,7 +138,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     return (
-        <AuthContext.Provider value={{ user, session, loading, signIn, signUp, signOut, isDemoMode }}>
+        <AuthContext.Provider value={{ user, session, loading, signIn, signUp, signInWithGoogle, signOut, isDemoMode }}>
             {children}
         </AuthContext.Provider>
     );

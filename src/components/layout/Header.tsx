@@ -4,6 +4,8 @@ import { Button } from '../ui/Button';
 import { CommandMenu } from '../ui/CommandMenu';
 import { useUser } from '../../context/UserContext';
 import { useLocation } from 'react-router-dom';
+import { useViewMode } from '../../context/ViewModeContext';
+import { Eye } from 'lucide-react';
 
 interface HeaderProps {
     onMenuClick?: () => void;
@@ -31,6 +33,7 @@ const pageTitles: Record<string, string> = {
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     const { currentUser } = useUser();
     const location = useLocation();
+    const { currentView, setView } = useViewMode();
 
     // Get current page title
     const getPageTitle = () => {
@@ -69,6 +72,24 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* Desktop: Command Menu Search */}
             <div className="hidden md:flex items-center gap-4 flex-1 max-w-md">
                 <CommandMenu />
+            </div>
+
+            {/* View Mode Switcher */}
+            <div className="hidden lg:block relative group">
+                <select
+                    value={currentView}
+                    onChange={(e) => setView(e.target.value as any)}
+                    className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg pl-8 pr-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
+                    title="تغيير واجهة العرض"
+                >
+                    <option value="ADMIN" className="text-gray-900">👁️ انظر كـ: مدير النظام</option>
+                    <option value="DIRECTOR" className="text-gray-900">👔 انظر كـ: مدير المركز</option>
+                    <option value="DEPARTMENT_HEAD" className="text-gray-900">📋 انظر كـ: رئيس قسم</option>
+                    <option value="STAFF" className="text-gray-900">👤 انظر كـ: موظف</option>
+                </select>
+                <div className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <Eye className="w-3.5 h-3.5 text-hrsd-gold" />
+                </div>
             </div>
 
             {/* Notifications + User */}

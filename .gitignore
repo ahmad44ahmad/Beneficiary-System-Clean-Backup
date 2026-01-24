@@ -25,3 +25,11 @@ dist-ssr
 .env
 upload_to_supabase.py
 perfect_supabase_setup.sql
+
+# OS Files
+Thumbs.db
+Desktop.ini
+
+# Testing
+coverage
+

@@ -10,7 +10,7 @@ interface ClothingNeedsFormProps {
 export const ClothingNeedsForm: React.FC<ClothingNeedsFormProps> = ({ onSave, onCancel }) => {
     const [formData, setFormData] = useState<Partial<ClothingNeeds>>({
         gender: 'male',
-        year: new Date().getFullYear().toString(),
+        year: new Date().getFullYear(),
         season: 'summer',
         items: [],
         notes: '',
@@ -31,7 +31,7 @@ export const ClothingNeedsForm: React.FC<ClothingNeedsFormProps> = ({ onSave, on
         const femaleItems = ['قميص بيت', 'جلابية', 'عباية', 'بلوزة', 'تنورة', 'نقاب', 'بنطلون', 'شال', 'فستان', 'جزمة', 'فنيلة داخلية', 'شبشب', 'سروال قصير', 'بدلة رياضية', 'سروال طويل', 'صدرية خاصة', 'سنتيانة', 'جاكيت', 'بجامة شتوية', 'منشفة كبيرة', 'منشفة صغيرة', 'قبعة / قفاز', 'روب حمام', 'شرابات'];
 
         const items = (gender === 'male' ? maleItems : femaleItems).map(name => ({
-            itemName: name,
+            itemId: name, // Using standard key
             quantity: 0,
             size: '',
             notes: ''
@@ -62,9 +62,9 @@ export const ClothingNeedsForm: React.FC<ClothingNeedsFormProps> = ({ onSave, on
                         <div className="form-group">
                             <label>العام</label>
                             <input
-                                type="text"
+                                type="number"
                                 value={formData.year}
-                                onChange={e => setFormData({ ...formData, year: e.target.value })}
+                                onChange={e => setFormData({ ...formData, year: parseInt(e.target.value) || new Date().getFullYear() })}
                                 required
                             />
                         </div>
@@ -91,7 +91,7 @@ export const ClothingNeedsForm: React.FC<ClothingNeedsFormProps> = ({ onSave, on
                             items={formData.items || []}
                             onChange={items => setFormData({ ...formData, items })}
                             columns={[
-                                { key: 'itemName', label: 'الصنف' },
+                                { key: 'itemId', label: 'الصنف' },
                                 { key: 'quantity', label: 'العدد', type: 'number', width: '80px' },
                                 { key: 'size', label: 'المقاسات', width: '150px' },
                                 { key: 'notes', label: 'ملاحظات' }

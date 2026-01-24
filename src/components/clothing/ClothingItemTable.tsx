@@ -14,7 +14,7 @@ interface ClothingItemTableProps {
 
 export const ClothingItemTable: React.FC<ClothingItemTableProps> = ({ items, onChange, columns }) => {
     const handleAddRow = () => {
-        onChange([...items, { itemName: '', quantity: 1 }]);
+        onChange([...items, { itemId: '', quantity: 1 }]);
     };
 
     const handleChange = (index: number, field: keyof ClothingItemEntry, value: any) => {

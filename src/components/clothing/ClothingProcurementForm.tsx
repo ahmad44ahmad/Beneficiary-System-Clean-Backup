@@ -15,14 +15,14 @@ export const ClothingProcurementForm: React.FC<ClothingProcurementFormProps> = (
         committeeMembers: []
     });
 
-    const [currentItem, setCurrentItem] = useState({ item: '', quantity: 0, invoiceNo: '', amount: 0 });
+    const [currentItem, setCurrentItem] = useState({ itemId: '', quantity: 0, invoiceNo: '', amount: 0 });
 
     const addItem = () => {
-        if (!currentItem.item) return;
+        if (!currentItem.itemId) return;
         const newItems = [...(formData.items || []), currentItem];
         const total = newItems.reduce((sum, item) => sum + Number(item.amount), 0);
-        setFormData({ ...formData, items: newItems, totalAmount: total });
-        setCurrentItem({ item: '', quantity: 0, invoiceNo: '', amount: 0 });
+        setFormData({ ...formData, items: newItems as any, totalAmount: total }); // Cast to any to avoid partial compatibility issues during transition
+        setCurrentItem({ itemId: '', quantity: 0, invoiceNo: '', amount: 0 });
     };
 
     const removeItem = (index: number) => {
@@ -71,8 +71,8 @@ export const ClothingProcurementForm: React.FC<ClothingProcurementFormProps> = (
                                 <label>الصنف</label>
                                 <input
                                     type="text"
-                                    value={currentItem.item}
-                                    onChange={e => setCurrentItem({ ...currentItem, item: e.target.value })}
+                                    value={currentItem.itemId}
+                                    onChange={e => setCurrentItem({ ...currentItem, itemId: e.target.value })}
                                 />
                             </div>
                             <div className="form-group">
@@ -115,7 +115,7 @@ export const ClothingProcurementForm: React.FC<ClothingProcurementFormProps> = (
                             <tbody>
                                 {formData.items?.map((item, index) => (
                                     <tr key={index}>
-                                        <td>{item.item}</td>
+                                        <td>{item.itemId}</td>
                                         <td>{item.quantity}</td>
                                         <td>{item.invoiceNo}</td>
                                         <td>{item.amount}</td>

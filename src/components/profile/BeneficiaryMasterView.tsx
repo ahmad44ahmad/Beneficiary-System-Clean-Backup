@@ -113,14 +113,14 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {/* Navigation Tabs */}
                 <div className="flex gap-6 mt-6 border-b overflow-x-auto">
                     {[
-                        { id: 'overview', label: 'Overview', icon: Activity },
-                        { id: 'timeline', label: 'Timeline', icon: Clock },
-                        { id: 'medical', label: 'Medical File', icon: Heart },
-                        { id: 'social', label: 'Social', icon: Users },
-                        { id: 'rehab', label: 'Rehab Plan', icon: CheckCircle },
-                        { id: 'empowerment', label: 'Empowerment', icon: Zap },
-                        { id: 'support', label: 'Support Services', icon: Shirt },
-                        { id: 'quality', label: 'Quality & Risk', icon: ShieldCheck },
+                        { id: 'overview', label: 'نظرة عامة', icon: Activity },
+                        { id: 'timeline', label: 'الخط الزمني', icon: Clock },
+                        { id: 'medical', label: 'الملف الطبي', icon: Heart },
+                        { id: 'social', label: 'الاجتماعي', icon: Users },
+                        { id: 'rehab', label: 'خطة التأهيل', icon: CheckCircle },
+                        { id: 'empowerment', label: 'التمكين', icon: Zap },
+                        { id: 'support', label: 'خدمات الدعم', icon: Shirt },
+                        { id: 'quality', label: 'الجودة والمخاطر', icon: ShieldCheck },
                     ].map(tab => (
                         <button
                             key={tab.id}
@@ -189,12 +189,15 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {activeTab === 'quality' && (
                     <div className="space-y-6">
                         <RiskRegister profile={profile} />
-                        <DigitalAuditTool profile={profile} />
+                        <DigitalAuditTool />
                     </div>
                 )}
 
                 {activeTab === 'empowerment' && (
-                    <EmpowermentPlanBuilder profile={profile} />
+                    <EmpowermentPlanBuilder
+                        initialProfile={profile.empowermentProfile}
+                        onSave={(p) => console.log('Saved:', p)}
+                    />
                 )}
 
                 {activeTab === 'support' && (
@@ -267,10 +270,68 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 )}
 
                 {/* Placeholders for other tabs */}
-                {(activeTab === 'medical' || activeTab === 'social' || activeTab === 'rehab') && (
+                {activeTab === 'medical' && (
+                    <div className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Card title="التشخيصات">
+                                <ul className="space-y-2">
+                                    <li className="p-3 bg-red-50 rounded-lg border border-red-100 flex justify-between">
+                                        <span className="font-bold text-gray-800">{profile.medicalProfile?.primaryDiagnosis || 'غير محدد'}</span>
+                                        <span className="text-xs bg-red-200 text-red-800 px-2 py-0.5 rounded-full">تشخيص أساسي</span>
+                                    </li>
+                                    {profile.medicalProfile?.secondaryDiagnoses?.map((d, i) => (
+                                        <li key={i} className="p-3 bg-gray-50 rounded-lg border border-gray-100 text-gray-700">
+                                            {d}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Card>
+                            <Card title="الأدوية الحالية">
+                                {profile.medicalProfile?.currentMedications?.length ? (
+                                    <div className="space-y-2">
+                                        {profile.medicalProfile.currentMedications.map((m, i) => (
+                                            <div key={i} className="p-3 bg-blue-50 rounded-lg border border-blue-100 flex justify-between items-center">
+                                                <div>
+                                                    <div className="font-bold text-blue-900">{m.name}</div>
+                                                    <div className="text-xs text-blue-700">{m.dosage} - {m.frequency}</div>
+                                                </div>
+                                                <Activity className="w-5 h-5 text-blue-400" />
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-gray-400 text-center py-4">لا توجد أدوية مسجلة</p>
+                                )}
+                            </Card>
+                        </div>
+                        <Card title="العلامات الحيوية">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                <div className="p-4 bg-gray-50 rounded-lg">
+                                    <div className="text-2xl font-bold text-gray-800">{profile.latestMedicalExam?.vitalSigns?.temperature || '-'}</div>
+                                    <div className="text-xs text-gray-500">درجة الحرارة</div>
+                                </div>
+                                <div className="p-4 bg-gray-50 rounded-lg">
+                                    <div className="text-2xl font-bold text-gray-800">{profile.latestMedicalExam?.vitalSigns?.bloodPressure || '-'}</div>
+                                    <div className="text-xs text-gray-500">ضغط الدم</div>
+                                </div>
+                                <div className="p-4 bg-gray-50 rounded-lg">
+                                    <div className="text-2xl font-bold text-gray-800">{profile.latestMedicalExam?.vitalSigns?.pulse || '-'}</div>
+                                    <div className="text-xs text-gray-500">النبض</div>
+                                </div>
+                                <div className="p-4 bg-gray-50 rounded-lg">
+                                    <div className="text-2xl font-bold text-gray-800">{profile.latestMedicalExam?.vitalSigns?.respiration || '-'}</div>
+                                    <div className="text-xs text-gray-500">معدل التنفس</div>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+                )}
+
+                {/* Placeholders for other tabs */}
+                {(activeTab === 'social' || activeTab === 'rehab') && (
                     <div className="text-center py-12 text-gray-400">
                         <Activity className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                        <p>Detailed view for {activeTab} is under construction for this demo.</p>
+                        <p>Detailed view for {activeTab} is under construction that for this demo.</p>
                         <p className="text-sm">Please check the "Overview", "Quality", "Empowerment", or "Support" tabs.</p>
                     </div>
                 )}

@@ -232,8 +232,10 @@ export function useBatchOperations<T extends Record<string, any>>(
 
         try {
             // Log the batch action
-            await audit.log?.('BATCH_' + action.toUpperCase() as any,
+            await audit.create('batch_operation', 'BATCH_ACTION',
                 `تنفيذ عملية ${action} على ${selectedIds.size} عناصر`, {
+                action,
+                count: selectedIds.size,
                 success: true,
             });
 

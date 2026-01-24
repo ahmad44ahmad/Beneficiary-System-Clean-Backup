@@ -59,94 +59,68 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
     const location = useLocation();
     const [expandedSections, setExpandedSections] = useState<string[]>(['main']);
 
-    // Organized navigation by department
+    // Basira 5.0 Navigation Structure
     const navSections: NavSection[] = [
         {
             title: 'الرئيسية',
             items: [
-                { to: '/dashboard', icon: LayoutDashboard, label: 'لوحة القيادة' },
-                { to: '/overview', icon: Activity, label: 'نظرة شاملة' },
-                { to: '/liability', icon: Shield, label: 'فصل المسؤوليات' },
-                { to: '/reports', icon: FileText, label: 'التقارير' },
-                { to: '/basira', icon: Sparkles, label: 'مشروع بصيرة' },
-                { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
-                { to: '/catering', icon: Utensils, label: 'الإعاشة' },
+                { to: '/', icon: Home, label: 'الرئيسية' },
+                { to: '/beneficiaries', icon: Users, label: 'المستفيدون' },
             ]
         },
         {
             title: 'الخدمات الطبية',
             items: [
-                { to: '/medical', icon: Stethoscope, label: 'الملف الطبي' },
-                { to: '/daily-follow-up', icon: CalendarCheck, label: 'المتابعة اليومية' },
+                { to: '/medical', icon: Heart, label: 'الملف الطبي' },
+                { to: '/daily-care', icon: ClipboardList, label: 'المتابعة اليومية' },
+                { to: '/medications', icon: Syringe, label: 'الأدوية' },
             ]
         },
         {
             title: 'الخدمات الاجتماعية',
             items: [
-                { to: '/social', icon: Heart, label: 'الرعاية الاجتماعية' },
-                { to: '/training', icon: GraduationCap, label: 'التأهيل والتدريب' },
-                {
-                    to: '/empowerment', icon: Target, label: 'محرك التمكين', children: [
-                        { to: '/empowerment/goal/new', label: 'إنشاء هدف SMART' },
-                        { to: '/empowerment/dignity', label: 'ملف الكرامة' },
-                    ]
-                },
-                { to: '/family', icon: Users2, label: 'بوابة الأسرة' },
+                { to: '/dignity', icon: Heart, label: 'ملف الكرامة' },
+                { to: '/empowerment', icon: Target, label: 'محرك التمكين' },
+                { to: '/family-portal', icon: Users2, label: 'بوابة الأسرة' },
+                { to: '/social-research', icon: FileText, label: 'البحث الاجتماعي' },
             ]
         },
         {
-            title: 'الجودة والمخاطر',
+            title: 'الحوكمة والجودة',
             items: [
-                {
-                    to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)', children: [
-                        { to: '/ipc/inspection', label: 'جولة تفتيش' },
-                        { to: '/ipc/incident/new', label: 'إبلاغ عن حادثة' },
-                        { to: '/ipc/immunizations', label: 'سجل التحصينات' },
-                        { to: '/ipc/analytics', label: 'التحليلات' },
-                    ]
-                },
-                { to: '/liability', icon: Shield, label: 'فصل المسؤوليات 🛡️' },
-                { to: '/crisis', icon: AlertOctagon, label: 'وضع الطوارئ 🚨' },
-                {
-                    to: '/indicators', icon: Brain, label: 'المؤشرات الذكية', children: [
-                        { to: '/indicators/biological', label: 'التدقيق البيولوجي' },
-                        { to: '/indicators/behavioral', label: 'التنبؤ السلوكي' },
-                    ]
-                },
-                { to: '/quality', icon: CheckCircle2, label: 'الجودة' },
-                { to: '/grc', icon: Shield, label: 'الحوكمة والمخاطر' },
-                { to: '/integrated-reports', icon: Activity, label: 'مؤشر الرفاهية' },
-                { to: '/reports/strategic', icon: FileText, label: 'التقارير' },
+                { to: '/risks', icon: AlertTriangle, label: 'سجل المخاطر' },
+                { to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)' },
+                { to: '/compliance', icon: CheckCircle2, label: 'الامتثال ISO' },
             ]
         },
         {
-            title: 'الخدمات المساندة',
+            title: 'العمليات',
             items: [
-                { to: '/inventory', icon: Package, label: 'المستودع' },
-                { to: '/clothing', icon: Shirt, label: 'الكسوة' },
-                { to: '/support', icon: Building2, label: 'الخدمات المساندة' },
-                { to: '/operations', icon: Wrench, label: 'التشغيل والصيانة' },
+                { to: '/catering', icon: Utensils, label: 'الإعاشة' },
+                { to: '/assets', icon: Wrench, label: 'الأصول والصيانة' },
+                { to: '/inventory', icon: Package, label: 'المخزون والكسوة' },
             ]
         },
         {
-            title: 'بصيرة المتقدم',
+            title: 'الذكاء والتنبؤ',
             items: [
-                { to: '/pulse', icon: Activity, label: '🌅 نبض المركز' },
-                { to: '/wellbeing', icon: Heart, label: '🗺️ خريطة الرفاهية' },
-                { to: '/smart-alerts', icon: Bell, label: '🚨 التنبيهات الذكية' },
-                { to: '/medication-admin', icon: Syringe, label: '💊 إعطاء الأدوية' },
-                { to: '/timeline', icon: ClipboardList, label: '📅 الجدول الزمني' },
-                { to: '/handover', icon: Users2, label: '🔄 تسليم الوردية' },
-                { to: '/emergency', icon: AlertCircle, label: '🆘 لوحة الطوارئ' },
-                { to: '/scheduling', icon: CalendarCheck, label: '📆 نظام المواعيد' },
-                { to: '/staff-profile', icon: Users, label: '👤 ملف الموظف' },
+                { to: '/pulse', icon: Activity, label: 'نبض المركز' },
+                { to: '/alerts', icon: Bell, label: 'التنبيهات الذكية' },
+                { to: '/wisdom', icon: Brain, label: 'الحكمة الحية' },
+            ]
+        },
+        {
+            title: 'التقارير',
+            items: [
+                { to: '/reports', icon: BarChart3, label: 'التقارير' },
             ]
         },
         {
             title: 'الإدارة',
             items: [
-                { to: '/secretariat', icon: FileText, label: 'السكرتارية' },
-                { to: '/structure', icon: Network, label: 'الهيكل الإداري' },
+                { to: '/org-structure', icon: Network, label: 'الهيكل التنظيمي' },
+                { to: '/staff', icon: Users, label: 'الموظفون' },
+                { to: '/permissions', icon: Settings, label: 'الصلاحيات' },
             ]
         }
     ];
@@ -330,13 +304,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                     </NavLink>
                 </div>
 
-                {/* Designer Credit with Logo */}
+                {/* Footer Cleanup (Phase 0.1) */}
                 <div className="p-4 border-t-2 border-[rgb(245,150,30)] bg-[rgb(10,45,65)] flex flex-col items-center gap-3">
-                    <img
-                        src="/assets/designer-credit.jpg"
-                        alt="تصميم وتطوير: سعيد بن علي الغامدي و أحمد بن عبدالله الشهري"
-                        className="h-20 w-auto rounded-lg shadow-lg opacity-95 hover:opacity-100 transition-opacity"
-                    />
+                    <p className="text-white/60 text-xs text-center">
+                        نظام بصيرة - وزارة الموارد البشرية والتنمية الاجتماعية
+                    </p>
                 </div>
             </aside>
         </>

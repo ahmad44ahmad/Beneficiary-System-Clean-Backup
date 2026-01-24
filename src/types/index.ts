@@ -9,6 +9,7 @@ export * from './dignity-profile'; // Export Dignity Profile types
 export * from './support'; // Export Support types
 
 import { SocialResearch } from './social';
+import { MedicalExamination } from './medical';
 
 // Core Types
 export interface Beneficiary {
@@ -79,6 +80,13 @@ export interface ClothingItemEntry {
     itemId: string;
     quantity: number;
     notes?: string;
+    // Extended fields for specific forms
+    size?: string;
+    amount?: number;
+    invoiceNo?: string;
+    damagedCount?: number;
+    replacementCount?: number;
+    reason?: string;
 }
 
 export interface WardrobeInventory {
@@ -89,6 +97,8 @@ export interface WardrobeInventory {
     season: ClothingSeason;
     items: ClothingItemEntry[];
     notes?: string;
+    socialSupervisor?: string;
+    servicesSupervisor?: string;
 }
 
 export interface ClothingNeeds {
@@ -118,6 +128,7 @@ export interface ClothingProcurement {
     items: ClothingItemEntry[];
     totalAmount: number;
     notes?: string;
+    committeeMembers?: string[];
 }
 
 // ... (Keep other shared types if any, or move them to specific domains later)
@@ -178,6 +189,7 @@ export interface RehabilitationPlan {
         plan: TherapyPlanItem[];
         therapistName: string;
     };
+    status?: 'active' | 'completed' | 'draft'; // Added for compatibility
 }
 
 export interface IndividualEducationalPlan {
@@ -475,7 +487,7 @@ export interface CaseStudy {
 export interface VisitLog {
     id: string;
     beneficiaryId: string;
-    type: 'internal' | 'behavioral' | 'emergency';
+    type: 'internal' | 'behavioral' | 'emergency' | 'external' | 'phone';
     date: string;
     time: string;
     visitorName?: string;
@@ -484,22 +496,7 @@ export interface VisitLog {
     employeeName: string;
 }
 
-export interface MedicalExamination {
-    id: string;
-    beneficiaryId: string;
-    date: string;
-    doctorName: string;
-    diagnosis: string;
-    vitalSigns: {
-        bp: string;
-        pulse: string;
-        temp: string;
-        resp: string;
-    };
-    symptoms: string;
-    treatment: string;
-    recommendations: string;
-}
+
 
 export interface FamilyCaseStudy {
     id: string;
@@ -510,11 +507,16 @@ export interface FamilyCaseStudy {
     socialWorkerName?: string; // New
 
     familyComposition?: string;
+    familyStructure?: string; // Added
+    familyRelationships?: string; // Added
+    attitudeTowardsBeneficiary?: string; // Added
     economicStatus?: string;
     housingStatus?: string;
+    housingCondition?: string; // Added
     socialStatus?: string;
     healthStatus?: string;
     problems?: string;
+    challenges?: string; // Added
     goals?: string;
     plan?: string;
     recommendations?: string;

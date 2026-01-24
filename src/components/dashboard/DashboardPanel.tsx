@@ -11,7 +11,7 @@ interface DashboardPanelProps {
 export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, inventory }) => {
     // 1. KPI Calculations
     const totalBeneficiaries = beneficiaries.length;
-    const activeCases = beneficiaries.filter(b => b.status !== 'exit').length;
+    const activeCases = beneficiaries.filter(b => b.status === 'active').length;
     const lowStockItems = inventory.filter(item => item.quantity < 10).length;
     const externalVisits = 3; // Mock data
 

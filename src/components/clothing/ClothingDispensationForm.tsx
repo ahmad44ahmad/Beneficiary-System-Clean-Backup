@@ -9,10 +9,10 @@ interface ClothingDispensationFormProps {
 }
 
 export const ClothingDispensationForm: React.FC<ClothingDispensationFormProps> = ({ beneficiaries, onSave, onCancel }) => {
+    const [year, setYear] = useState(new Date().getFullYear().toString());
     const [formData, setFormData] = useState<Partial<ClothingDispensation>>({
         beneficiaryId: '',
         date: new Date().toISOString().split('T')[0],
-        year: new Date().getFullYear().toString(),
         season: 'summer',
         items: [],
         receiverName: '',
@@ -65,8 +65,8 @@ export const ClothingDispensationForm: React.FC<ClothingDispensationFormProps> =
                             <label>العام</label>
                             <input
                                 type="text"
-                                value={formData.year}
-                                onChange={e => setFormData({ ...formData, year: e.target.value })}
+                                value={year}
+                                onChange={e => setYear(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -89,7 +89,7 @@ export const ClothingDispensationForm: React.FC<ClothingDispensationFormProps> =
                             items={formData.items || []}
                             onChange={items => setFormData({ ...formData, items })}
                             columns={[
-                                { key: 'itemName', label: 'الصنف' },
+                                { key: 'itemId', label: 'الصنف' },
                                 { key: 'quantity', label: 'العدد', type: 'number', width: '80px' },
                                 { key: 'notes', label: 'ملاحظات' }
                             ]}

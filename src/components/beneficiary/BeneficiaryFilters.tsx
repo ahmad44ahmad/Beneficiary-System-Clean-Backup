@@ -33,7 +33,7 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
     };
 
     const handleFilterChange = (key: keyof FilterState, value: string) => {
-        const newFilters = { ...filters, [key]: value };
+        const newFilters = { ...filters, [key]: value } as FilterState;
         setFilters(newFilters);
         onFilterChange(newFilters);
     };
@@ -44,7 +44,7 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
             health_status: 'all',
             ipc_status: 'all',
             empowerment_status: 'all'
-        };
+        } as FilterState;
         setFilters(defaultFilters);
         onFilterChange(defaultFilters);
     };
@@ -68,8 +68,8 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
                 <button
                     onClick={() => setShowFilters(!showFilters)}
                     className={`px-4 py-3 rounded-xl flex items-center gap-2 transition-colors ${showFilters || activeFiltersCount > 0
-                            ? 'bg-hrsd-teal text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-hrsd-teal text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                 >
                     <SlidersHorizontal className="w-5 h-5" />

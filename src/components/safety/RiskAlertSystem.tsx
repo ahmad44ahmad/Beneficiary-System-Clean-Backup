@@ -54,24 +54,30 @@ export const RiskAlertSystem: React.FC = () => {
                         setAlerts(prev => [newAlert, ...prev]);
 
                         // Play Alert Sound (Data URI for simple beep)
+                        // Play Alert Sound
                         try {
-                            // Simple high-pitch beep
-                            const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-                            const oscillator = audioCtx.createOscillator();
-                            const gainNode = audioCtx.createGain();
+                            const playSound = () => {
+                                const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+                                if (!AudioContext) return;
 
-                            oscillator.connect(gainNode);
-                            gainNode.connect(audioCtx.destination);
+                                const audioCtx = new AudioContext();
+                                const oscillator = audioCtx.createOscillator();
+                                const gainNode = audioCtx.createGain();
 
-                            oscillator.type = 'sine';
-                            oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
-                            oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+                                oscillator.connect(gainNode);
+                                gainNode.connect(audioCtx.destination);
 
-                            gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
-                            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                                oscillator.type = 'sine';
+                                oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
+                                oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
 
-                            oscillator.start();
-                            oscillator.stop(audioCtx.currentTime + 0.5);
+                                gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+                                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+
+                                oscillator.start();
+                                oscillator.stop(audioCtx.currentTime + 0.5);
+                            };
+                            playSound();
                         } catch (e) {
                             console.error('Audio play failed', e);
                         }
