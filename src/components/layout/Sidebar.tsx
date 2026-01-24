@@ -106,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             items: [
                 { to: '/pulse', icon: Activity, label: 'نبض المركز' },
                 { to: '/alerts', icon: Bell, label: 'التنبيهات الذكية' },
-                { to: '/wisdom', icon: Brain, label: 'الحكمة الحية' },
+                { to: '/knowledge', icon: Brain, label: 'المكتبة الرقمية' },
             ]
         },
         {

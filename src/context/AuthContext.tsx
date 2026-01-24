@@ -62,10 +62,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             return;
         }
 
-        // Check active session
+        // Check active session with timeout fallback
+        const AUTH_TIMEOUT_MS = 5000; // 5 seconds max wait
+        let didTimeout = false;
+
+        const timeoutId = setTimeout(() => {
+            didTimeout = true;
+            console.warn('Auth: Session check timed out. Falling back to Demo Mode.');
+            setIsDemoMode(true);
+            setUser(mockUser);
+            setLoading(false);
+        }, AUTH_TIMEOUT_MS);
+
         supabase.auth.getSession().then(({ data: { session } }) => {
+            if (didTimeout) return; // Ignore if already timed out
+            clearTimeout(timeoutId);
             setSession(session);
             setUser(session?.user ?? null);
+            setLoading(false);
+        }).catch((err) => {
+            if (didTimeout) return;
+            clearTimeout(timeoutId);
+            console.error('Auth: Session check failed', err);
+            console.warn('Auth: Falling back to Demo Mode due to error.');
+            setIsDemoMode(true);
+            setUser(mockUser);
             setLoading(false);
         });
 

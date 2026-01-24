@@ -1,50 +1,48 @@
-# 🎭 Basira 5.0 Demo Environment
+# 🎭 Basira Demo Environment
 
-This document explains how to set up and run the Basira Demo Environment.
+> "Clean as a car from the port."
+
+This is the **Basira Demo Version** designed for presentations and scenarios. It is pre-loaded with rich, realistic mock data and scenarios.
 
 ## 🚀 Quick Start
 
-1. **Install Dependencies**
+1. **Run the App**:
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm run dev
+    ```
 
-2. **Configure Environment**
-   Ensure your `.env` file has the following set:
+2. **Access**:
+    - **URL**: `http://localhost:5173`
+    - **Login**: (Auto-bypassed in Demo Mode)
 
-   ```env
-   VITE_APP_MODE=demo
-   VITE_SUPABASE_URL=YOUR_DEMO_PROJECT_URL
-   VITE_SUPABASE_ANON_KEY=YOUR_DEMO_PROJECT_KEY
-   ```
+## 🌟 Key Features
 
-3. **Database Setup**
-   Run the migration script in your Supabase Dashboard SQL Editor:
-   - File: `supabase/migrations/03_demo_full_schema_and_data.sql`
+### 1. 📚 Digital Library (Google Drive)
 
-4. **Run Application**
+- A "Stupid Simple" integration to view your Google Drive files directly.
+- **Setup**:
+    1. Share your Drive file/folder as "Anyone with the link".
+    2. Add the link to `.env`: `VITE_KNOWLEDGE_BASE_URL=...`
+    3. View it in the "المكتبة الرقمية" tab.
 
-   ```bash
-   npm run dev
-   ```
+### 2. 👥 Rich Beneficiary Data
 
-## 🧪 Demo Features
+- **50 Beneficiaries**: Pre-loaded with diverse cases (Intellectual, Physical, Multiple).
+- **Scenarios**: Look for tags like `⚠️ سيناريو` or `⭐ سيناريو` for interactive demos.
 
-- **Auto-Login**: Automatically logs in as an Admin in Demo Mode.
-- **Rich Data**: Includes 50 beneficiaries, medical records, and social history.
-- **Scenarios**:
-  - **Medical Emergency**: Alert for beneficiary `RC-2024-047`.
-  - **Behavioral Alert**: Alert for beneficiary `RC-2024-041`.
+### 3. 🔄 One-Click Reset
 
-## 🛠 Project Structure
+- To reset the demo to its original state (e.g., after a presentation):
 
-- `src/components/DemoBanner.tsx`: Top banner shown only in demo mode.
-- `src/context/AuthContext.tsx`: Handles authentication bypass.
-- `src/hooks/useCatering.ts`: Connects to real Catering tables.
-- `src/modules/wisdom`: Institutional Memory module.
+    ```bash
+    # (Optional) Future script can go here
+    ```
 
-## ⚠️ Notes
+## 🛠 Troubleshooting
 
-- This is a **read-write** demo. Any changes made will persist until the database is reset.
-- To reset data, simply re-run the `03_demo_full_schema_and_data.sql` script (it drops and recreates tables).
+- **Supabase Connection**: Checked via `.env`.
+- **Missing Data?**: Ensure the migration `03_demo_full_schema_and_data.sql` was applied.
+
+---
+*Basira System - Ministry of Human Resources and Social Development*

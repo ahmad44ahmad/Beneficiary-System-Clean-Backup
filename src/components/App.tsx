@@ -22,6 +22,7 @@ const LoadingFallback = () => (
 // ESSENTIAL PAGES (Static Imports - Load Immediately)
 // ═══════════════════════════════════════════════════════════════════════════
 import { Dashboard } from '../pages/Dashboard';
+const ExternalKnowledgeBase = lazy(() => import('./knowledge/ExternalKnowledgeBase').then(m => ({ default: m.ExternalKnowledgeBase })));
 import { WelcomePage } from '../pages/WelcomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { BeneficiaryListPanel } from './beneficiary/BeneficiaryListPanel';
@@ -208,6 +209,11 @@ export const App = () => {
                 {/* Main Application with Layout */}
                 <Route path="/*" element={<MainLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="knowledge" element={
+                        <Suspense fallback={<LoadingFallback />}>
+                            <ExternalKnowledgeBase />
+                        </Suspense>
+                    } />
                     <Route path="executive-report" element={<ExecutiveReport />} />
 
                     <Route path="beneficiaries" element={
