@@ -97,6 +97,103 @@ body {
     background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #14b8a6 100%);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* HRSD BRAND COLOR UTILITIES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Text Colors */
+.text-hrsd-navy {
+    color: #14415A !important;
+}
+
+.text-hrsd-teal {
+    color: #148287 !important;
+}
+
+.text-hrsd-green {
+    color: #2DB473 !important;
+}
+
+.text-hrsd-gold {
+    color: #DEBA43 !important;
+}
+
+.text-hrsd-orange {
+    color: #F5961E !important;
+}
+
+/* Background Colors */
+.bg-hrsd-navy {
+    background-color: #14415A !important;
+}
+
+.bg-hrsd-teal {
+    background-color: #148287 !important;
+}
+
+.bg-hrsd-green {
+    background-color: #2DB473 !important;
+}
+
+.bg-hrsd-gold {
+    background-color: #DEBA43 !important;
+}
+
+.bg-hrsd-orange {
+    background-color: #F5961E !important;
+}
+
+/* Border Colors */
+.border-hrsd-navy {
+    border-color: #14415A !important;
+}
+
+.border-hrsd-teal {
+    border-color: #148287 !important;
+}
+
+.border-hrsd-green {
+    border-color: #2DB473 !important;
+}
+
+.border-hrsd-gold {
+    border-color: #DEBA43 !important;
+}
+
+.border-hrsd-orange {
+    border-color: #F5961E !important;
+}
+
+/* Border Right Accent Utilities */
+.border-r-hrsd-navy {
+    border-right: 4px solid #14415A !important;
+}
+
+.border-r-hrsd-teal {
+    border-right: 4px solid #148287 !important;
+}
+
+.border-r-hrsd-green {
+    border-right: 4px solid #2DB473 !important;
+}
+
+.border-r-hrsd-gold {
+    border-right: 4px solid #DEBA43 !important;
+}
+
+.border-r-hrsd-orange {
+    border-right: 4px solid #F5961E !important;
+}
+
+/* Ring/Focus Colors */
+.ring-hrsd-teal {
+    --tw-ring-color: #148287 !important;
+}
+
+.focus-hrsd-teal:focus {
+    outline-color: #148287 !important;
+}
+
 .gradient-soft {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
@@ -107,16 +204,16 @@ body {
 
 .glass-panel {
     background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: var(--shadow-glass);
 }
 
 .glass-dark {
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -660,8 +757,8 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
-    /* Added backdrop blur */
     display: flex;
     align-items: center;
     justify-content: center;

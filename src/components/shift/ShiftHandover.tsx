@@ -1,36 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowLeftRight, Clock, AlertTriangle, CheckCircle, Pill,
     Heart, MessageSquare, Mic, Plus, X, ChevronDown, ChevronUp,
     User, Shield, Utensils, Activity, FileText, Send
 } from 'lucide-react';
-
-type HandoverItemCategory = 'critical' | 'medication' | 'care' | 'pending';
-
-interface HandoverItem {
-    id: string;
-    category: HandoverItemCategory;
-    title: string;
-    description: string;
-    beneficiaryName?: string;
-    beneficiaryId?: string;
-    priority: 'high' | 'medium' | 'low';
-    createdAt: string;
-    createdBy: string;
-    isVoiceNote?: boolean;
-}
-
-interface ShiftSummary {
-    shiftType: 'morning' | 'evening' | 'night';
-    startTime: string;
-    endTime: string;
-    staffName: string;
-    totalBeneficiaries: number;
-    medicationsGiven: number;
-    incidentsReported: number;
-    assessmentsCompleted: number;
-}
+import { shiftService } from '../../services/shiftService';
+import { ShiftHandoverItem, ShiftCategory, ShiftSummary } from '../../types/shift';
 
 const CATEGORY_CONFIG = {
     critical: { icon: AlertTriangle, color: 'text-red-400', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', label: 'حرج' },
@@ -39,33 +15,46 @@ const CATEGORY_CONFIG = {
     pending: { icon: Clock, color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-500/50', label: 'معلق' },
 };
 
-const mockShiftSummary: ShiftSummary = {
+const initialSummary: ShiftSummary = {
     shiftType: 'morning',
-    startTime: '07:00',
-    endTime: '15:00',
-    staffName: 'نايف الغامدي',
-    totalBeneficiaries: 145,
-    medicationsGiven: 48,
-    incidentsReported: 1,
-    assessmentsCompleted: 32,
+    startTime: '--:--',
+    endTime: '--:--',
+    staffName: 'جاري التحميل...',
+    totalBeneficiaries: 0,
+    medicationsGiven: 0,
+    incidentsReported: 0,
+    assessmentsCompleted: 0,
 };
 
-const mockHandoverItems: HandoverItem[] = [
-    { id: '1', category: 'critical', title: 'مستفيد بحالة غير مستقرة', description: 'محمد العمري - حرارة مرتفعة 38.5، يحتاج مراقبة كل ساعة', beneficiaryName: 'محمد العمري', beneficiaryId: 'B001', priority: 'high', createdAt: '14:30', createdBy: 'نايف الغامدي' },
-    { id: '2', category: 'medication', title: 'تأجيل دواء', description: 'دواء الضغط لفاطمة سعيد - أُجل لموعد المساء بسبب الإجراء الطبي', beneficiaryName: 'فاطمة سعيد', beneficiaryId: 'B002', priority: 'medium', createdAt: '13:45', createdBy: 'نايف الغامدي' },
-    { id: '3', category: 'care', title: 'طلب خاص للتغذية', description: 'خالد الدوسري طلب تغيير نوع الوجبة - تم التنسيق مع المطبخ', beneficiaryName: 'خالد الدوسري', beneficiaryId: 'B003', priority: 'low', createdAt: '12:00', createdBy: 'نايف الغامدي' },
-    { id: '4', category: 'pending', title: 'فحص مخبري معلق', description: 'نتائج فحص الدم لنورة محمد - متوقع وصولها قبل المغرب', beneficiaryName: 'نورة محمد', beneficiaryId: 'B004', priority: 'medium', createdAt: '11:30', createdBy: 'نايف الغامدي' },
-    { id: '5', category: 'critical', title: 'سقوط بسيط - مراقبة', description: 'سعود العتيبي سقط صباحاً - فحص طبي تم ولا توجد إصابات، يحتاج مراقبة 24 ساعة', beneficiaryName: 'سعود العتيبي', beneficiaryId: 'B005', priority: 'high', createdAt: '10:15', createdBy: 'نايف الغامدي' },
-];
-
 export const ShiftHandover: React.FC = () => {
-    const [items, setItems] = useState<HandoverItem[]>(mockHandoverItems);
-    const [summary] = useState<ShiftSummary>(mockShiftSummary);
-    const [selectedCategory, setSelectedCategory] = useState<HandoverItemCategory | 'all'>('all');
+    const [items, setItems] = useState<ShiftHandoverItem[]>([]);
+    const [summary, setSummary] = useState<ShiftSummary>(initialSummary);
+    const [selectedCategory, setSelectedCategory] = useState<ShiftCategory | 'all'>('all');
     const [isAddingItem, setIsAddingItem] = useState(false);
-    const [newItem, setNewItem] = useState({ category: 'care' as HandoverItemCategory, title: '', description: '', beneficiaryName: '' });
+    const [newItem, setNewItem] = useState({ category: 'care' as ShiftCategory, title: '', description: '', beneficiaryName: '' });
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [expandedItem, setExpandedItem] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const loadData = async () => {
+        setIsLoading(true);
+        try {
+            const [fetchedItems, fetchedSummary] = await Promise.all([
+                shiftService.getShiftItems('morning'), // Defaulting to morning for now
+                shiftService.getShiftSummary('morning')
+            ]);
+            setItems(fetchedItems);
+            setSummary(fetchedSummary);
+        } catch (error) {
+            console.error('Failed to load shift data', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const filteredItems = items.filter(item =>
         selectedCategory === 'all' || item.category === selectedCategory
@@ -78,22 +67,33 @@ export const ShiftHandover: React.FC = () => {
         pending: items.filter(i => i.category === 'pending').length,
     };
 
-    const handleAddItem = () => {
+    const handleAddItem = async () => {
         if (!newItem.title || !newItem.description) return;
-        const item: HandoverItem = {
-            id: Date.now().toString(),
-            ...newItem,
-            priority: 'medium',
-            createdAt: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-            createdBy: 'المستخدم الحالي',
-        };
-        setItems(prev => [item, ...prev]);
-        setNewItem({ category: 'care', title: '', description: '', beneficiaryName: '' });
-        setIsAddingItem(false);
+
+        try {
+            const addedItem = await shiftService.addShiftItem({
+                ...newItem,
+                priority: 'medium',
+                shift_type: summary.shiftType,
+                status: 'active',
+                created_by: 'المستخدم الحالي' // In a real app, get from auth context
+            });
+
+            setItems(prev => [addedItem, ...prev]);
+            setNewItem({ category: 'care', title: '', description: '', beneficiaryName: '' });
+            setIsAddingItem(false);
+        } catch (error) {
+            console.error('Failed to add item', error);
+        }
     };
 
-    const handleRemoveItem = (id: string) => {
-        setItems(prev => prev.filter(item => item.id !== id));
+    const handleRemoveItem = async (id: string) => {
+        try {
+            await shiftService.deleteShiftItem(id);
+            setItems(prev => prev.filter(item => item.id !== id));
+        } catch (error) {
+            console.error('Failed to delete item', error);
+        }
     };
 
     const getShiftLabel = (type: string) => {
@@ -104,6 +104,10 @@ export const ShiftHandover: React.FC = () => {
             default: return '';
         }
     };
+
+    if (isLoading) {
+        return <div className="min-h-screen flex items-center justify-center text-white">جاري التحميل...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6" dir="rtl">
@@ -123,7 +127,7 @@ export const ShiftHandover: React.FC = () => {
                             <p className="text-slate-400 text-sm">{getShiftLabel(summary.shiftType)} • {summary.startTime} - {summary.endTime}</p>
                         </div>
                     </div>
-                    {!isConfirmed && (
+                    {!isConfirmed ? (
                         <button
                             onClick={() => setIsConfirmed(true)}
                             className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
@@ -131,6 +135,11 @@ export const ShiftHandover: React.FC = () => {
                             <CheckCircle className="w-5 h-5" />
                             تأكيد الاستلام
                         </button>
+                    ) : (
+                        <div className="px-6 py-3 bg-green-500/20 text-green-400 border border-green-500/50 rounded-xl font-bold flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5" />
+                            تم تأكيد الاستلام
+                        </div>
                     )}
                 </div>
             </motion.div>
@@ -183,11 +192,11 @@ export const ShiftHandover: React.FC = () => {
                 {Object.entries(CATEGORY_CONFIG).map(([key, config]) => (
                     <button
                         key={key}
-                        onClick={() => setSelectedCategory(key as HandoverItemCategory)}
+                        onClick={() => setSelectedCategory(key as ShiftCategory)}
                         className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${selectedCategory === key ? `${config.bgColor} ${config.color}` : 'bg-slate-800 text-slate-400'}`}
                     >
                         <config.icon className="w-4 h-4" />
-                        {config.label} ({categoryCounts[key as HandoverItemCategory]})
+                        {config.label} ({categoryCounts[key as ShiftCategory]})
                     </button>
                 ))}
                 <button
@@ -210,7 +219,7 @@ export const ShiftHandover: React.FC = () => {
                     >
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="font-bold">إضافة بند جديد</h3>
-                            <button onClick={() => setIsAddingItem(false)} className="p-2 hover:bg-slate-700 rounded-lg">
+                            <button onClick={() => setIsAddingItem(false)} className="p-2 hover:bg-slate-700 rounded-lg" title="إغلاق" aria-label="إغلاق">
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
@@ -219,7 +228,7 @@ export const ShiftHandover: React.FC = () => {
                                 {Object.entries(CATEGORY_CONFIG).map(([key, config]) => (
                                     <button
                                         key={key}
-                                        onClick={() => setNewItem(prev => ({ ...prev, category: key as HandoverItemCategory }))}
+                                        onClick={() => setNewItem(prev => ({ ...prev, category: key as ShiftCategory }))}
                                         className={`px-3 py-2 rounded-lg flex items-center gap-2 transition-colors ${newItem.category === key ? `${config.bgColor} ${config.color} border ${config.borderColor}` : 'bg-slate-700 text-slate-400'}`}
                                     >
                                         <config.icon className="w-4 h-4" />
@@ -262,6 +271,8 @@ export const ShiftHandover: React.FC = () => {
                 {filteredItems.map((item, index) => {
                     const config = CATEGORY_CONFIG[item.category];
                     const isExpanded = expandedItem === item.id;
+                    // Provide defaults for created_at and created_by if missing
+                    const timeString = item.created_at ? new Date(item.created_at).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : '--:--';
 
                     return (
                         <motion.div
@@ -294,9 +305,9 @@ export const ShiftHandover: React.FC = () => {
                                             <div className="flex items-center gap-3 mt-2 text-slate-500 text-xs">
                                                 <span className="flex items-center gap-1">
                                                     <Clock className="w-3 h-3" />
-                                                    {item.createdAt}
+                                                    {timeString}
                                                 </span>
-                                                <span>بواسطة: {item.createdBy}</span>
+                                                <span>بواسطة: {item.created_by}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -304,6 +315,8 @@ export const ShiftHandover: React.FC = () => {
                                         <button
                                             onClick={(e) => { e.stopPropagation(); handleRemoveItem(item.id); }}
                                             className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors text-slate-500 hover:text-red-400"
+                                            title="حذف البند"
+                                            aria-label="حذف البند"
                                         >
                                             <X className="w-4 h-4" />
                                         </button>

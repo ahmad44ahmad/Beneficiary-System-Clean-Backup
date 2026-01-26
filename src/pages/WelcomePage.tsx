@@ -14,13 +14,16 @@ import {
     BarChart3,
     Clock,
     Award,
-    Leaf
+    Leaf,
+    AlertTriangle
 } from 'lucide-react';
+import { useWelcomeStats } from '../hooks/useWelcomeStats';
 
 export const WelcomePage: React.FC = () => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
     const [activeFeature, setActiveFeature] = useState(0);
+    const liveStats = useWelcomeStats();
 
     useEffect(() => {
         setIsVisible(true);
@@ -69,10 +72,11 @@ export const WelcomePage: React.FC = () => {
         }
     ];
 
+    // Dynamic stats from Supabase
     const stats = [
-        { value: '145+', label: 'مستفيد نشط', icon: Users },
-        { value: '94%', label: 'نسبة الامتثال', icon: CheckCircle2 },
-        { value: '24/7', label: 'مراقبة مستمرة', icon: Clock },
+        { value: liveStats.loading ? '...' : `${liveStats.beneficiariesCount}+`, label: 'مستفيد نشط', icon: Users },
+        { value: liveStats.loading ? '...' : `${liveStats.complianceRate}%`, label: 'نسبة الامتثال', icon: CheckCircle2 },
+        { value: liveStats.loading ? '...' : `${liveStats.activeRisksCount}`, label: 'مخاطر نشطة', icon: AlertTriangle },
         { value: 'ISO', label: 'معايير عالمية', icon: Award }
     ];
 

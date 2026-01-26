@@ -27,20 +27,27 @@ const HRSD = {
 
 interface Risk {
     id: string;
-    risk_code: string;
-    title_ar: string;
+    title: string;
     description: string;
-    category_id: string;
-    likelihood: number;
+    category: string;
+    probability: number;
     impact: number;
     risk_score: number;
-    risk_level: string;
-    risk_owner: string;
-    response_strategy: string;
-    mitigation_action: string;
     status: string;
-    identified_date: string;
+    owner: string;
+    mitigation_plan: string;
+    review_date: string;
+    created_at: string;
+    updated_at: string;
 }
+
+// Helper to calculate risk level from score
+const getRiskLevel = (score: number): string => {
+    if (score >= 20) return 'critical';
+    if (score >= 12) return 'high';
+    if (score >= 6) return 'medium';
+    return 'low';
+};
 
 const RISK_CATEGORIES = [
     { id: 'operational', name: 'تشغيلية' },
@@ -137,8 +144,8 @@ export const RiskRegister: React.FC = () => {
     };
 
     const filteredRisks = risks.filter(risk => {
-        const matchesSearch = risk.title_ar.includes(searchTerm) || risk.risk_code.includes(searchTerm);
-        const matchesLevel = filterLevel === 'all' || risk.risk_level === filterLevel;
+        const matchesSearch = risk.title?.includes(searchTerm) || risk.id?.includes(searchTerm);
+        const matchesLevel = filterLevel === 'all' || getRiskLevel(risk.risk_score) === filterLevel;
         return matchesSearch && matchesLevel;
     });
 
@@ -185,6 +192,8 @@ export const RiskRegister: React.FC = () => {
                         value={filterLevel}
                         onChange={(e) => setFilterLevel(e.target.value)}
                         className="px-4 py-2.5 border border-gray-200 rounded-xl"
+                        title="فلتر مستوى الخطر"
+                        aria-label="فلتر مستوى الخطر"
                     >
                         <option value="all">جميع المستويات</option>
                         <option value="critical">حرج</option>
@@ -202,19 +211,19 @@ export const RiskRegister: React.FC = () => {
                     <p className="text-sm text-gray-500">إجمالي المخاطر</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-red-500">
-                    <p className="text-3xl font-bold text-red-600">{risks.filter(r => r.risk_level === 'critical').length}</p>
+                    <p className="text-3xl font-bold text-red-600">{risks.filter(r => getRiskLevel(r.risk_score) === 'critical').length}</p>
                     <p className="text-sm text-gray-500">حرجة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.orange }}>
-                    <p className="text-3xl font-bold" style={{ color: HRSD.orange }}>{risks.filter(r => r.risk_level === 'high').length}</p>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.orange }}>{risks.filter(r => getRiskLevel(r.risk_score) === 'high').length}</p>
                     <p className="text-sm text-gray-500">عالية</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.gold }}>
-                    <p className="text-3xl font-bold" style={{ color: HRSD.gold }}>{risks.filter(r => r.risk_level === 'medium').length}</p>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.gold }}>{risks.filter(r => getRiskLevel(r.risk_score) === 'medium').length}</p>
                     <p className="text-sm text-gray-500">متوسطة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4" style={{ borderRightColor: HRSD.green }}>
-                    <p className="text-3xl font-bold" style={{ color: HRSD.green }}>{risks.filter(r => r.risk_level === 'low').length}</p>
+                    <p className="text-3xl font-bold" style={{ color: HRSD.green }}>{risks.filter(r => getRiskLevel(r.risk_score) === 'low').length}</p>
                     <p className="text-sm text-gray-500">منخفضة</p>
                 </div>
             </div>
@@ -244,25 +253,25 @@ export const RiskRegister: React.FC = () => {
                         <tbody className="divide-y divide-gray-100">
                             {filteredRisks.map((risk) => (
                                 <tr key={risk.id} className="hover:bg-gray-50 transition-colors">
-                                    <td className="p-4 font-mono text-sm">{risk.risk_code}</td>
+                                    <td className="p-4 font-mono text-sm">{risk.id?.slice(0, 8) || 'N/A'}</td>
                                     <td className="p-4">
-                                        <div className="font-medium">{risk.title_ar}</div>
+                                        <div className="font-medium">{risk.title}</div>
                                         <div className="text-sm text-gray-500 truncate max-w-xs">{risk.description}</div>
                                     </td>
                                     <td className="p-4 text-center">
                                         <span className="font-mono bg-gray-100 px-3 py-1 rounded-lg">
-                                            {risk.likelihood} × {risk.impact} = <strong>{risk.risk_score}</strong>
+                                            {risk.probability} × {risk.impact} = <strong>{risk.risk_score}</strong>
                                         </span>
                                     </td>
-                                    <td className="p-4 text-center">{getRiskLevelBadge(risk.risk_level)}</td>
+                                    <td className="p-4 text-center">{getRiskLevelBadge(getRiskLevel(risk.risk_score))}</td>
                                     <td className="p-4 text-center">{getStatusBadge(risk.status)}</td>
-                                    <td className="p-4 text-sm">{risk.risk_owner || '-'}</td>
+                                    <td className="p-4 text-sm">{risk.owner || '-'}</td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-center gap-2">
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg" style={{ color: HRSD.teal }}>
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg" style={{ color: HRSD.teal }} title="عرض">
                                                 <Eye className="w-4 h-4" />
                                             </button>
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg" style={{ color: HRSD.orange }}>
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg" style={{ color: HRSD.orange }} title="تعديل">
                                                 <Edit className="w-4 h-4" />
                                             </button>
                                         </div>
@@ -299,6 +308,8 @@ export const RiskRegister: React.FC = () => {
                                         value={formData.category_id}
                                         onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
                                         className="w-full px-4 py-2.5 border rounded-xl"
+                                        title="فئة الخطر"
+                                        aria-label="فئة الخطر"
                                     >
                                         {RISK_CATEGORIES.map(cat => (
                                             <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -334,6 +345,8 @@ export const RiskRegister: React.FC = () => {
                                         value={formData.likelihood}
                                         onChange={(e) => setFormData({ ...formData, likelihood: parseInt(e.target.value) })}
                                         className="w-full px-4 py-2.5 border rounded-xl"
+                                        title="احتمالية حدوث الخطر"
+                                        aria-label="احتمالية حدوث الخطر"
                                     >
                                         <option value={1}>1 - نادر جداً</option>
                                         <option value={2}>2 - نادر</option>
@@ -348,6 +361,8 @@ export const RiskRegister: React.FC = () => {
                                         value={formData.impact}
                                         onChange={(e) => setFormData({ ...formData, impact: parseInt(e.target.value) })}
                                         className="w-full px-4 py-2.5 border rounded-xl"
+                                        title="تأثير الخطر"
+                                        aria-label="تأثير الخطر"
                                     >
                                         <option value={1}>1 - ضئيل</option>
                                         <option value={2}>2 - طفيف</option>
@@ -379,6 +394,8 @@ export const RiskRegister: React.FC = () => {
                                         value={formData.response_strategy}
                                         onChange={(e) => setFormData({ ...formData, response_strategy: e.target.value })}
                                         className="w-full px-4 py-2.5 border rounded-xl"
+                                        title="استراتيجية الاستجابة للخطر"
+                                        aria-label="استراتيجية الاستجابة للخطر"
                                     >
                                         <option value="avoid">تجنب</option>
                                         <option value="mitigate">تخفيف</option>

@@ -1,0 +1,122 @@
+// Supabase Data Seeder - Uses Supabase JS Client
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://ruesovrbhcjphmfdcpsa.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ1ZXNvdnJiaGNqcGhtZmRjcHNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUyODM0MTksImV4cCI6MjA4MDg1OTQxOX0.kJY_k7YE19qPXmhtLL4ohrET6hFXec4QLmbg0s2OuGc';
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+console.log('🔧 Basira Data Seeder (Supabase JS Client)');
+console.log('==========================================');
+
+// GRC Risks Data
+const grcRisks = [
+    { title: 'مخاطر السقوط للمستفيدين', description: 'خطر سقوط المستفيدين ذوي الإعاقة الحركية', category: 'safety', risk_score: 15, probability: 3, impact: 5, status: 'mitigating', owner: 'مدير الرعاية', mitigation_plan: 'تركيب قضبان أمان في جميع الممرات' },
+    { title: 'عدوى الجهاز التنفسي', description: 'خطر انتشار العدوى التنفسية بين المستفيدين', category: 'clinical', risk_score: 16, probability: 4, impact: 4, status: 'mitigating', owner: 'مدير الخدمات الطبية', mitigation_plan: 'بروتوكول عزل وتطعيم' },
+    { title: 'نقص الكوادر التمريضية', description: 'عدم كفاية عدد الممرضين لتغطية الورديات', category: 'operational', risk_score: 12, probability: 3, impact: 4, status: 'open', owner: 'مدير الموارد البشرية', mitigation_plan: 'التعاقد مع شركة توظيف' },
+    { title: 'تأخر صيانة المعدات الطبية', description: 'تأخر في صيانة أجهزة الأكسجين والمراقبة', category: 'infrastructure', risk_score: 12, probability: 3, impact: 4, status: 'mitigating', owner: 'مدير الصيانة', mitigation_plan: 'عقد صيانة سنوي' },
+    { title: 'مخاطر الحريق', description: 'احتمال نشوب حريق في المبنى القديم', category: 'safety', risk_score: 14, probability: 2, impact: 5, status: 'mitigating', owner: 'مسؤول السلامة', mitigation_plan: 'تحديث نظام الإنذار' },
+    { title: 'انقطاع التواصل مع الأسر', description: 'عدم متابعة بعض الأسر لأبنائهم', category: 'social', risk_score: 10, probability: 4, impact: 3, status: 'open', owner: 'مدير الخدمات الاجتماعية', mitigation_plan: 'برنامج تواصل شهري' },
+    { title: 'مخاطر الإعاشة', description: 'جودة الطعام والنظافة', category: 'clinical', risk_score: 9, probability: 3, impact: 3, status: 'mitigating', owner: 'مشرف الإعاشة', mitigation_plan: 'فحوصات يومية' },
+    { title: 'تسريب بيانات', description: 'خطر تسريب البيانات الشخصية للمستفيدين', category: 'operational', risk_score: 15, probability: 2, impact: 5, status: 'mitigating', owner: 'مسؤول تقنية المعلومات', mitigation_plan: 'تشفير البيانات وتدريب الموظفين' },
+    { title: 'نقص الأدوية', description: 'احتمال نفاد بعض الأدوية الأساسية', category: 'clinical', risk_score: 12, probability: 3, impact: 4, status: 'open', owner: 'مدير الصيدلية', mitigation_plan: 'نظام إنذار مبكر للمخزون' },
+    { title: 'حوادث العنف', description: 'سلوك عدواني بين بعض المستفيدين', category: 'safety', risk_score: 14, probability: 3, impact: 4, status: 'mitigating', owner: 'الأخصائي النفسي', mitigation_plan: 'خطط تدخل سلوكي' },
+    { title: 'عدم الامتثال لمعايير الجودة', description: 'فجوات في الامتثال لمعايير ISO', category: 'operational', risk_score: 8, probability: 2, impact: 4, status: 'mitigating', owner: 'منسق الجودة', mitigation_plan: 'مراجعات دورية' },
+    { title: 'مخاطر الإخلاء الطارئ', description: 'صعوبة إخلاء المستفيدين في حالات الطوارئ', category: 'safety', risk_score: 15, probability: 2, impact: 5, status: 'open', owner: 'مسؤول السلامة', mitigation_plan: 'تدريبات إخلاء ربع سنوية' },
+];
+
+// GRC NCRs Data
+const grcNcrs = [
+    { title: 'توثيق غير مكتمل للخطط التأهيلية', description: 'وجود خطط تأهيلية بدون توقيع المدير', category: 'documentation', severity: 'major', status: 'corrective_action', progress: 60, due_date: '2024-02-15', assigned_to: 'منسق الجودة' },
+    { title: 'تأخر في تحديث السجلات الطبية', description: 'سجلات 5 مستفيدين لم تُحدث منذ 3 أشهر', category: 'medical', severity: 'major', status: 'investigating', progress: 30, due_date: '2024-02-20', assigned_to: 'مدير الخدمات الطبية' },
+    { title: 'مخالفة نظافة في المطبخ', description: 'وجود مخالفة نظافة خلال الفحص الدوري', category: 'catering', severity: 'minor', status: 'corrective_action', progress: 80, due_date: '2024-02-10', assigned_to: 'مشرف الإعاشة' },
+];
+
+// GRC Compliance Data
+const grcCompliance = [
+    { requirement: 'توثيق جميع الحوادث خلال 24 ساعة', standard: 'ISO 9001:2015', category: 'documentation', status: 'compliant', notes: 'نظام إلكتروني مفعل', last_audit_date: '2024-01-15', next_audit_date: '2024-04-15' },
+    { requirement: 'خطة تأهيلية لكل مستفيد', standard: 'معايير الوزارة', category: 'care', status: 'partial', notes: '85% من المستفيدين لديهم خطط', last_audit_date: '2024-01-10', next_audit_date: '2024-04-10' },
+    { requirement: 'تدريب الموظفين على السلامة', standard: 'OSHA', category: 'safety', status: 'compliant', notes: 'تم تدريب جميع الموظفين', last_audit_date: '2024-01-20', next_audit_date: '2024-07-20' },
+    { requirement: 'فحص معدات الإطفاء', standard: 'كود البناء السعودي', category: 'safety', status: 'compliant', notes: 'فحص شهري', last_audit_date: '2024-01-25', next_audit_date: '2024-02-25' },
+    { requirement: 'سرية البيانات الشخصية', standard: 'نظام حماية البيانات', category: 'privacy', status: 'partial', notes: 'جاري تحديث السياسات', last_audit_date: '2024-01-05', next_audit_date: '2024-04-05' },
+    { requirement: 'فحص جودة الطعام', standard: 'هيئة الغذاء والدواء', category: 'catering', status: 'compliant', notes: 'فحوصات أسبوعية', last_audit_date: '2024-01-28', next_audit_date: '2024-02-28' },
+    { requirement: 'إجراءات العزل الصحي', standard: 'CDC Guidelines', category: 'medical', status: 'in_progress', notes: 'جاري تحديث البروتوكول', last_audit_date: '2024-01-12', next_audit_date: '2024-03-12' },
+    { requirement: 'تقييم المخاطر السنوي', standard: 'ISO 31000', category: 'risk', status: 'partial', notes: 'تم تقييم 70% من المخاطر', last_audit_date: '2024-01-08', next_audit_date: '2025-01-08' },
+    { requirement: 'خطة الاستجابة للطوارئ', standard: 'الدفاع المدني', category: 'emergency', status: 'compliant', notes: 'خطة معتمدة ومفعلة', last_audit_date: '2024-01-18', next_audit_date: '2024-07-18' },
+];
+
+async function seedData() {
+    try {
+        // Check if GRC tables exist by trying to select
+        console.log('\n📋 Checking GRC tables...');
+
+        // Seed GRC Risks
+        console.log('\n📊 Seeding GRC Risks...');
+        const { data: existingRisks, error: risksCheckError } = await supabase.from('grc_risks').select('id').limit(1);
+
+        if (risksCheckError) {
+            console.log('   ⚠️  GRC Risks table may not exist:', risksCheckError.message);
+            console.log('   ℹ️  Please run the SQL migration in Supabase dashboard');
+        } else {
+            // Delete existing and insert new
+            await supabase.from('grc_risks').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+            const { data: risksData, error: risksError } = await supabase.from('grc_risks').insert(grcRisks).select();
+            if (risksError) {
+                console.log('   ❌ Failed to seed risks:', risksError.message);
+            } else {
+                console.log(`   ✅ Seeded ${risksData?.length || 0} risks`);
+            }
+        }
+
+        // Seed GRC NCRs
+        console.log('\n📊 Seeding GRC NCRs...');
+        const { error: ncrsCheckError } = await supabase.from('grc_ncrs').select('id').limit(1);
+
+        if (ncrsCheckError) {
+            console.log('   ⚠️  GRC NCRs table may not exist:', ncrsCheckError.message);
+        } else {
+            await supabase.from('grc_ncrs').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+            const { data: ncrsData, error: ncrsError } = await supabase.from('grc_ncrs').insert(grcNcrs).select();
+            if (ncrsError) {
+                console.log('   ❌ Failed to seed NCRs:', ncrsError.message);
+            } else {
+                console.log(`   ✅ Seeded ${ncrsData?.length || 0} NCRs`);
+            }
+        }
+
+        // Seed GRC Compliance
+        console.log('\n📊 Seeding GRC Compliance...');
+        const { error: complianceCheckError } = await supabase.from('grc_compliance').select('id').limit(1);
+
+        if (complianceCheckError) {
+            console.log('   ⚠️  GRC Compliance table may not exist:', complianceCheckError.message);
+        } else {
+            await supabase.from('grc_compliance').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+            const { data: complianceData, error: complianceError } = await supabase.from('grc_compliance').insert(grcCompliance).select();
+            if (complianceError) {
+                console.log('   ❌ Failed to seed compliance:', complianceError.message);
+            } else {
+                console.log(`   ✅ Seeded ${complianceData?.length || 0} compliance records`);
+            }
+        }
+
+        // Check beneficiaries
+        console.log('\n📊 Checking Beneficiaries...');
+        const { data: beneficiaries, error: beneficiariesError } = await supabase.from('beneficiaries').select('id').limit(1);
+        if (beneficiariesError) {
+            console.log('   ⚠️  Beneficiaries table issue:', beneficiariesError.message);
+        } else {
+            const { count } = await supabase.from('beneficiaries').select('*', { count: 'exact', head: true });
+            console.log(`   ✅ Beneficiaries in database: ${count || 0}`);
+        }
+
+        console.log('\n✨ Seeding Complete!');
+        console.log('\nℹ️  If GRC tables don\'t exist, please run this SQL in Supabase Dashboard:');
+        console.log('   supabase/migrations/04_grc_tables.sql');
+
+    } catch (err) {
+        console.error('❌ Error:', err.message);
+    }
+}
+
+seedData();

@@ -33,3 +33,9 @@ Desktop.ini
 # Testing
 coverage
 
+
+# Google Drive Credentials (CRITICAL SECURITY)
+google_drive_credentials.json
+credentials.json
+token.json
+client_secret*.json

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDashboardMetrics } from '../hooks/useDashboardMetrics';
+import { useGRCStats } from '../hooks/useGrcStats';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import {
     LayoutDashboard,
@@ -10,7 +11,9 @@ import {
     Clock,
     Activity,
     TrendingUp,
-    CheckCircle2
+    CheckCircle2,
+    Shield,
+    FileWarning
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { AccountabilityAlerts } from '../modules/grc/AccountabilityAlerts';
