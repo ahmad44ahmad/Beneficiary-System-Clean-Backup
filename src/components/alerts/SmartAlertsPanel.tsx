@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     AlertTriangle, Bell, CheckCircle, Clock, Heart,
@@ -55,6 +56,7 @@ const TYPE_CONFIG: Record<string, { icon: any; label: string }> = {
 };
 
 export const SmartAlertsPanel: React.FC = () => {
+    const location = useLocation();
     const [alerts, setAlerts] = useState<SmartAlert[]>(defaultAlerts);
     const [loading, setLoading] = useState(true);
     const [selectedAlert, setSelectedAlert] = useState<string | null>(null);
@@ -109,7 +111,7 @@ export const SmartAlertsPanel: React.FC = () => {
         };
 
         fetchAlerts();
-    }, []);
+    }, [location.key]);
 
     const filteredAlerts = alerts.filter(alert => {
         const matchesSeverity = filterSeverity === 'all' || alert.severity === filterSeverity;

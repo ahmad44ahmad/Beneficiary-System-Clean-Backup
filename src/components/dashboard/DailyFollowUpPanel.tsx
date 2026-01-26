@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { DailyShiftRecord, IncidentReport, GenderSection } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { DailyShiftForm } from './DailyShiftForm';
@@ -18,6 +19,7 @@ const demoIncidentReports: any[] = [
 ];
 
 export const DailyFollowUpPanel: React.FC = () => {
+    const location = useLocation();
     const [activeSection, setActiveSection] = useState<GenderSection>('male');
     const [activeTab, setActiveTab] = useState<'shifts' | 'incidents'>('shifts');
 
@@ -69,7 +71,7 @@ export const DailyFollowUpPanel: React.FC = () => {
         };
 
         fetchData();
-    }, []);
+    }, [location.key]);
 
     const filteredShifts = shiftRecords.filter(r => r.section === activeSection);
     const filteredIncidents = incidentReports;

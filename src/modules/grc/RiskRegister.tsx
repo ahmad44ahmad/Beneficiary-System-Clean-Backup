@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { supabase } from '../../config/supabase';
 import {
     AlertTriangle,
@@ -59,6 +59,7 @@ const RISK_CATEGORIES = [
 ];
 
 export const RiskRegister: React.FC = () => {
+    const location = useLocation();
     const [risks, setRisks] = useState<Risk[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -77,9 +78,10 @@ export const RiskRegister: React.FC = () => {
         status: 'identified'
     });
 
+    // Refetch when navigating to this page (location.key changes)
     useEffect(() => {
         fetchRisks();
-    }, []);
+    }, [location.key]);
 
     const fetchRisks = async () => {
         setLoading(true);
