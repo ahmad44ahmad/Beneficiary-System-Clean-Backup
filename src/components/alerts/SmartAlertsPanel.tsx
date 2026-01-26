@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     AlertTriangle, Bell, CheckCircle, Clock, Heart,
     Pill, Shield, Activity, X, ChevronDown, ChevronUp,
     Filter, Search, Volume2, VolumeX, Eye, MessageSquare
 } from 'lucide-react';
+import { supabase } from '../../config/supabase';
 
 type AlertSeverity = 'critical' | 'high' | 'medium' | 'low';
-type AlertType = 'vitals' | 'medication' | 'fall' | 'behavior' | 'infection';
+type AlertType = 'vitals' | 'medication' | 'fall' | 'behavior' | 'infection' | 'medical' | 'safety' | 'behavioral' | 'nutrition';
 
 interface SmartAlert {
     id: string;
@@ -25,7 +26,8 @@ interface SmartAlert {
     suggestedAction: string;
 }
 
-const mockAlerts: SmartAlert[] = [
+// Fallback mock alerts if database is empty
+const defaultAlerts: SmartAlert[] = [
     { id: '1', type: 'vitals', severity: 'critical', title: 'ارتفاع حاد في الحرارة', message: 'درجة الحرارة 39.5°C - تجاوز الحد الأعلى', beneficiaryName: 'محمد العمري', beneficiaryId: 'B001', location: 'غرفة 101', timestamp: '10:45', acknowledged: false, suggestedAction: 'قياس العلامات الحيوية فوراً وإبلاغ الطبيب' },
     { id: '2', type: 'fall', severity: 'high', title: 'خطر سقوط مرتفع', message: 'درجة خطر السقوط 52/60', beneficiaryName: 'فاطمة سعيد', beneficiaryId: 'B002', location: 'غرفة 102', timestamp: '10:30', acknowledged: false, suggestedAction: 'تفعيل بروتوكول منع السقوط والمراقبة المستمرة' },
     { id: '3', type: 'medication', severity: 'high', title: 'تأخر في إعطاء الدواء', message: 'دواء الأنسولين متأخر 45 دقيقة', beneficiaryName: 'خالد الدوسري', beneficiaryId: 'B003', location: 'غرفة 107', timestamp: '10:15', acknowledged: true, acknowledgedBy: 'نايف الغامدي', suggestedAction: 'إعطاء الدواء فوراً مع قياس السكر' },
@@ -40,21 +42,74 @@ const SEVERITY_CONFIG = {
     low: { color: 'blue', bgColor: 'bg-blue-500/20', borderColor: 'border-blue-500/50', textColor: 'text-blue-400', label: 'منخفض' },
 };
 
-const TYPE_CONFIG = {
+const TYPE_CONFIG: Record<string, { icon: any; label: string }> = {
     vitals: { icon: Heart, label: 'علامات حيوية' },
     medication: { icon: Pill, label: 'أدوية' },
     fall: { icon: AlertTriangle, label: 'سقوط' },
     behavior: { icon: Activity, label: 'سلوك' },
+    behavioral: { icon: Activity, label: 'سلوك' },
     infection: { icon: Shield, label: 'عدوى' },
+    medical: { icon: Heart, label: 'طبي' },
+    safety: { icon: AlertTriangle, label: 'سلامة' },
+    nutrition: { icon: Pill, label: 'تغذية' },
 };
 
 export const SmartAlertsPanel: React.FC = () => {
-    const [alerts, setAlerts] = useState<SmartAlert[]>(mockAlerts);
+    const [alerts, setAlerts] = useState<SmartAlert[]>(defaultAlerts);
+    const [loading, setLoading] = useState(true);
     const [selectedAlert, setSelectedAlert] = useState<string | null>(null);
     const [filterSeverity, setFilterSeverity] = useState<AlertSeverity | 'all'>('all');
     const [filterType, setFilterType] = useState<AlertType | 'all'>('all');
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [resolveNote, setResolveNote] = useState('');
+
+    // Fetch alerts from Supabase
+    useEffect(() => {
+        const fetchAlerts = async () => {
+            if (!supabase) {
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('alerts')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.warn('Failed to fetch alerts:', error.message);
+                    setLoading(false);
+                    return;
+                }
+
+                if (data && data.length > 0) {
+                    // Transform database alerts to component format
+                    const transformedAlerts: SmartAlert[] = data.map((a: any) => ({
+                        id: a.id,
+                        type: a.alert_type || 'vitals',
+                        severity: a.severity || 'medium',
+                        title: a.title || 'تنبيه',
+                        message: a.message || a.description || '',
+                        beneficiaryName: a.beneficiary_name || 'غير محدد',
+                        beneficiaryId: a.beneficiary_id || '',
+                        location: a.location || 'غير محدد',
+                        timestamp: a.created_at ? new Date(a.created_at).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : '',
+                        acknowledged: a.status === 'acknowledged' || a.status === 'resolved',
+                        acknowledgedBy: a.acknowledged_by,
+                        suggestedAction: a.suggested_action || 'يرجى التحقق من الحالة'
+                    }));
+                    setAlerts(transformedAlerts);
+                }
+            } catch (err) {
+                console.warn('Error fetching alerts:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAlerts();
+    }, []);
 
     const filteredAlerts = alerts.filter(alert => {
         const matchesSeverity = filterSeverity === 'all' || alert.severity === filterSeverity;
