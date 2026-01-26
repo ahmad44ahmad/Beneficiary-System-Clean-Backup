@@ -49,7 +49,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
 
     const fetchGaps = async () => {
         try {
-            const { data } = await supabase
+            const { data, error } = await supabase
                 .from('accountability_gaps')
                 .select('*')
                 .eq('requires_attention', true)
@@ -57,9 +57,16 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
                 .order('severity', { ascending: true })
                 .order('days_pending', { ascending: false });
 
-            if (data) setGaps(data);
+            if (error) {
+                // Table may not exist - ignore silently
+                console.warn('AccountabilityAlerts: Table not available', error.message);
+                setGaps([]);
+            } else if (data) {
+                setGaps(data);
+            }
         } catch (error) {
-            console.error('Error fetching accountability gaps:', error);
+            console.warn('AccountabilityAlerts: Error fetching data', error);
+            setGaps([]);
         } finally {
             setLoading(false);
         }
