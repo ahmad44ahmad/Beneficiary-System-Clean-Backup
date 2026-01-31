@@ -520,3 +520,8 @@
 .progress-bar-purple {
     background-color: #8b5cf6;
 }
+
+/* Modal Sizes */
+.modal-max-width-900 {
+    max-width: 900px;
+}

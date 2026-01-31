@@ -4,49 +4,22 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import { supabase } from '../config/supabase';
+import { SEED_BENEFICIARIES, type SeedBeneficiary } from '../data/domain-assets';
 
-// Demo beneficiaries data
-const DEMO_BENEFICIARIES = [
-    {
-        full_name: 'محمد أحمد الشهري',
-        national_id: '1234567890',
-        date_of_birth: '1985-03-15',
-        gender: 'male',
-        blood_type: 'A+',
-        admission_date: '2024-01-15',
-        status: 'active',
-        room_number: '101',
-        disability_type: 'حركية',
-        emergency_contact_name: 'أحمد الشهري',
-        emergency_contact_phone: '0501234567'
-    },
-    {
-        full_name: 'فاطمة عبدالله القحطاني',
-        national_id: '1234567891',
-        date_of_birth: '1990-07-20',
-        gender: 'female',
-        blood_type: 'O+',
-        admission_date: '2024-02-01',
-        status: 'active',
-        room_number: '102',
-        disability_type: 'ذهنية',
-        emergency_contact_name: 'عبدالله القحطاني',
-        emergency_contact_phone: '0507654321'
-    },
-    {
-        full_name: 'خالد سعد المنصوري',
-        national_id: '1234567892',
-        date_of_birth: '1978-11-08',
-        gender: 'male',
-        blood_type: 'B+',
-        admission_date: '2023-12-01',
-        status: 'active',
-        room_number: '103',
-        disability_type: 'سمعية',
-        emergency_contact_name: 'سعد المنصوري',
-        emergency_contact_phone: '0509876543'
-    }
-];
+// Transform SEED_BENEFICIARIES to database format
+const DEMO_BENEFICIARIES = SEED_BENEFICIARIES.map((b: SeedBeneficiary) => ({
+    full_name: b.fullName,
+    national_id: b.nationalId,
+    date_of_birth: b.birthDate,
+    gender: b.gender,
+    blood_type: 'O+',
+    admission_date: b.admissionDate,
+    status: b.status,
+    room_number: b.room || '',
+    disability_type: b.diagnosis.arabic,
+    emergency_contact_name: b.guardian.name,
+    emergency_contact_phone: b.guardian.phone
+}));
 
 // Demo risks data for GRC
 const DEMO_RISKS = [

@@ -83,7 +83,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content large" style={{ maxWidth: '900px' }}>
+            <div className="modal-content large modal-max-width-900">
                 <div className="modal-header">
                     <h2>نموذج التقييم الطبي عند القبول (Admission Evaluation)</h2>
                     <div className="steps-indicator flex gap-4 mt-2">
@@ -105,6 +105,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     onChange={e => setSelectedBeneficiaryId(e.target.value)}
                                     className="w-full p-2 border rounded"
                                     required
+                                    title="اختيار المستفيد"
+                                    aria-label="اختيار المستفيد"
                                 >
                                     <option value="">-- اختر من القائمة --</option>
                                     {beneficiaries.map(b => (
@@ -120,6 +122,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         value={diagnosis}
                                         onChange={e => setDiagnosis(e.target.value)}
                                         className="w-full p-2 border rounded"
+                                        title="التشخيص الأساسي"
+                                        aria-label="التشخيص الأساسي"
                                     >
                                         <option value="CP">الشلل الدماغي (CP)</option>
                                         <option value="Downs">متلازمة داون</option>
@@ -169,6 +173,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         value={vitals.temperature || ''}
                                         onChange={e => setVitals({ ...vitals, temperature: parseFloat(e.target.value) })}
                                         className={vitals.temperature && vitals.temperature > 38 ? 'border-red-500 bg-red-50' : ''}
+                                        title="درجة الحرارة"
+                                        placeholder="37.0"
                                     />
                                 </div>
                                 <div className="form-group">
@@ -177,6 +183,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         type="number"
                                         value={vitals.pulse || ''}
                                         onChange={e => setVitals({ ...vitals, pulse: parseInt(e.target.value) })}
+                                        title="النبض"
+                                        placeholder="70"
                                     />
                                 </div>
                                 <div className="form-group">
@@ -185,6 +193,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         type="number"
                                         value={vitals.bloodPressureSystolic || ''}
                                         onChange={e => setVitals({ ...vitals, bloodPressureSystolic: parseInt(e.target.value) })}
+                                        title="ضغط الدم الانقباضي"
+                                        placeholder="120"
                                     />
                                 </div>
                                 <div className="form-group">
@@ -193,6 +203,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         type="number"
                                         value={vitals.bloodPressureDiastolic || ''}
                                         onChange={e => setVitals({ ...vitals, bloodPressureDiastolic: parseInt(e.target.value) })}
+                                        title="ضغط الدم الانبساطي"
+                                        placeholder="80"
                                     />
                                 </div>
                                 <div className="form-group">
@@ -201,6 +213,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         type="number"
                                         value={vitals.oxygenSaturation || ''}
                                         onChange={e => setVitals({ ...vitals, oxygenSaturation: parseInt(e.target.value) })}
+                                        title="تشبع الأكسجين"
+                                        placeholder="98"
                                     />
                                 </div>
                                 <div className="form-group">
@@ -209,6 +223,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         type="number"
                                         value={vitals.respiratoryRate || ''}
                                         onChange={e => setVitals({ ...vitals, respiratoryRate: parseInt(e.target.value) })}
+                                        title="معدل التنفس"
+                                        placeholder="16"
                                     />
                                 </div>
                             </div>
@@ -246,6 +262,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                                     seizureHistory: { ...history.seizureHistory!, lastSeizureDate: e.target.value }
                                                 })}
                                                 required
+                                                title="تاريخ آخر نوبة"
                                             />
                                         </div>
                                         <div className="form-group">
@@ -257,6 +274,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                                     ...history,
                                                     seizureHistory: { ...history.seizureHistory!, frequency: e.target.value }
                                                 })}
+                                                title="تكرار النوبات"
+                                                placeholder="مرة شهرياً"
                                             />
                                         </div>
                                     </div>
@@ -281,6 +300,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     className="large-textarea"
                                     value={history.surgeries?.join('\n')}
                                     onChange={e => setHistory({ ...history, surgeries: e.target.value.split('\n') })}
+                                    title="العمليات الجراحية"
+                                    placeholder="اكتب كل عملية في سطر..."
                                 />
                             </div>
                             <div className="form-group">
@@ -289,6 +310,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     className="large-textarea"
                                     value={history.allergies?.join('\n')}
                                     onChange={e => setHistory({ ...history, allergies: e.target.value.split('\n') })}
+                                    title="الحساسية"
+                                    placeholder="اكتب كل نوع حساسية في سطر..."
                                 />
                             </div>
                         </div>
