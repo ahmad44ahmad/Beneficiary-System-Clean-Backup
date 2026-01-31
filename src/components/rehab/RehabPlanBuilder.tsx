@@ -190,6 +190,8 @@ export const RehabPlanBuilder: React.FC = () => {
                         className="w-full border rounded-md p-2 bg-gray-50 text-sm"
                         value={selectedBeneficiaryId}
                         onChange={(e) => setSelectedBeneficiaryId(e.target.value)}
+                        title="اختر مستفيد"
+                        aria-label="اختر مستفيد لبدء الخطة التأهيلية"
                     >
                         <option value="">اختر مستفيد لبدء الخطة...</option>
                         {beneficiaries.map(b => (
@@ -279,6 +281,8 @@ export const RehabPlanBuilder: React.FC = () => {
                                                 className="text-xs border rounded p-1 bg-gray-50"
                                                 value={goal.type}
                                                 onChange={e => updateGoal(goal.id, { type: e.target.value as any })}
+                                                title="نوع الهدف"
+                                                aria-label="اختر نوع الهدف التأهيلي"
                                             >
                                                 <option value="medical">طبي</option>
                                                 <option value="physiotherapy">علاج طبيعي</option>
@@ -309,6 +313,8 @@ export const RehabPlanBuilder: React.FC = () => {
                                         value={goal.progress}
                                         onChange={e => updateGoal(goal.id, { progress: parseInt(e.target.value) })}
                                         className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                                        title={`نسبة التقدم: ${goal.progress}%`}
+                                        aria-label="مؤشر التقدم"
                                     />
                                 </div>
                             </Card>

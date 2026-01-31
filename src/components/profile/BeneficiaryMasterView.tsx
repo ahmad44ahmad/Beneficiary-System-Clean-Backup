@@ -8,6 +8,8 @@ import { GlobalAlerts } from '../common/GlobalAlerts';
 import { RiskRegister } from '../quality/RiskRegister';
 import { DigitalAuditTool } from '../quality/DigitalAuditTool';
 import { EmpowermentPlanBuilder } from '../empowerment/EmpowermentPlanBuilder';
+import { RehabPlanBuilder } from '../rehab/RehabPlanBuilder';
+import { SocialResearchWizard } from '../social/SocialResearchWizard';
 import {
     User,
     Activity,
@@ -327,13 +329,16 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                     </div>
                 )}
 
-                {/* Placeholders for other tabs */}
-                {(activeTab === 'social' || activeTab === 'rehab') && (
-                    <div className="text-center py-12 text-gray-400">
-                        <Activity className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                        <p>Detailed view for {activeTab} is under construction that for this demo.</p>
-                        <p className="text-sm">Please check the "Overview", "Quality", "Empowerment", or "Support" tabs.</p>
+                {/* Social Tab */}
+                {activeTab === 'social' && (
+                    <div className="space-y-6">
+                        <SocialResearchWizard />
                     </div>
+                )}
+
+                {/* Rehab Tab */}
+                {activeTab === 'rehab' && (
+                    <RehabPlanBuilder />
                 )}
             </div>
         </Modal>

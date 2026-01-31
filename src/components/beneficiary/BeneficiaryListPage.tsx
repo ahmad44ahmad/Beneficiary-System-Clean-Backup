@@ -30,6 +30,7 @@ interface Beneficiary {
     ipc_status: 'safe' | 'monitor' | 'alert';
     latest_goal?: string;
     avatar_url?: string;
+    alerts?: string[]; // Alert tag IDs from domain-assets
 }
 
 export const BeneficiaryListPage: React.FC = () => {
@@ -477,6 +478,7 @@ export const BeneficiaryListPage: React.FC = () => {
                             ipc_status={beneficiary.ipc_status}
                             latest_goal={beneficiary.latest_goal}
                             avatar_url={beneficiary.avatar_url}
+                            alerts={beneficiary.alerts || []}
                         />
                     ))}
                 </div>
