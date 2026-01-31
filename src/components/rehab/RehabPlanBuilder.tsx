@@ -7,6 +7,7 @@ import { Beneficiary } from '../../types';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { ICFGoalSelector, type SelectedICFGoal } from './ICFGoalSelector';
 import {
     Brain,
     Target,
@@ -15,7 +16,8 @@ import {
     Activity,
     Save,
     FileText,
-    ShieldAlert
+    ShieldAlert,
+    Crosshair
 } from 'lucide-react';
 
 // --- Hook: useSmartSuggestions ---
@@ -82,6 +84,9 @@ export const RehabPlanBuilder: React.FC = () => {
             { role: 'director', status: 'pending' },
         ]
     });
+
+    // ICF Goals State
+    const [icfGoals, setIcfGoals] = useState<SelectedICFGoal[]>([]);
 
     const suggestions = useSmartSuggestions(selectedBeneficiary);
 
@@ -315,6 +320,21 @@ export const RehabPlanBuilder: React.FC = () => {
                                 <p className="text-sm text-gray-400 mt-1">اسحب المقترحات من اليمين أو أضف هدفاً يدوياً</p>
                             </div>
                         )}
+                    </div>
+
+                    {/* ICF Goals Section */}
+                    <div className="mt-8 pt-6 border-t border-gray-200">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+                                <Crosshair className="w-5 h-5 text-purple-600" />
+                                أهداف ICF (التصنيف الدولي للأداء)
+                            </h2>
+                        </div>
+                        <ICFGoalSelector
+                            selectedGoals={icfGoals}
+                            onChange={setIcfGoals}
+                            maxGoals={8}
+                        />
                     </div>
                 </div>
 

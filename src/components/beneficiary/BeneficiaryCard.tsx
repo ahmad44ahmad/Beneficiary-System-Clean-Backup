@@ -2,8 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     User, MapPin, Calendar, Activity,
-    TrendingUp, ChevronRight, Heart
+    TrendingUp, ChevronRight, Heart, AlertTriangle
 } from 'lucide-react';
+import { ALERT_TAGS } from '../../data/domain-assets';
 
 interface BeneficiaryCardProps {
     id: string;
@@ -16,6 +17,7 @@ interface BeneficiaryCardProps {
     ipc_status: 'safe' | 'monitor' | 'alert';
     latest_goal?: string;
     avatar_url?: string;
+    alerts?: string[]; // Alert tag IDs from domain-assets
 }
 
 export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
@@ -28,7 +30,8 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
     status,
     ipc_status,
     latest_goal,
-    avatar_url
+    avatar_url,
+    alerts = []
 }) => {
     const navigate = useNavigate();
 
@@ -90,7 +93,7 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
             </div>
 
             {/* Status Badges */}
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
                 <span className={`badge-${status === 'stable' ? 'success' : status === 'needs_attention' ? 'warning' : 'danger'}`}>
                     <Heart className="w-3 h-3 ml-1" />
                     {status === 'stable' ? 'مستقر' : status === 'needs_attention' ? 'يحتاج متابعة' : 'حرج'}
@@ -100,6 +103,27 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
                     IPC: {ipc_status === 'safe' ? 'آمن' : ipc_status === 'monitor' ? 'مراقبة' : 'تنبيه'}
                 </span>
             </div>
+
+            {/* Alert Tags */}
+            {alerts.length > 0 && (
+                <div className="flex gap-2 mb-3 flex-wrap">
+                    {alerts.map((alertId) => {
+                        const alert = ALERT_TAGS.find(t => t.id === alertId);
+                        if (!alert) return null;
+                        return (
+                            <span
+                                key={alertId}
+                                className="px-2 py-1 rounded-full text-xs text-white flex items-center gap-1"
+                                style={{ backgroundColor: alert.color }}
+                                title={alert.label}
+                            >
+                                <span>{alert.icon}</span>
+                                <span>{alert.label}</span>
+                            </span>
+                        );
+                    })}
+                </div>
+            )}
 
             {/* Latest Goal */}
             {latest_goal && (
