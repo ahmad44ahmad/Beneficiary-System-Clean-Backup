@@ -119,9 +119,10 @@ export const Dashboard: React.FC = () => {
                     </div>
                     <div className="mt-4 w-full bg-gray-100 rounded-full h-1.5">
                         <div
-                            className="bg-purple-500 h-1.5 rounded-full transition-all duration-1000"
-                            style={{ width: `${kpis.overallGoalAchievementRate}%` }}
-                        ></div>
+                            className="progress-bar progress-bar-purple rounded-full"
+                            // eslint-disable-next-line react/forbid-component-props
+                            style={{ '--progress-width': `${kpis.overallGoalAchievementRate}%` } as React.CSSProperties}
+                        />
                     </div>
                 </Card>
 
@@ -159,9 +160,10 @@ export const Dashboard: React.FC = () => {
                                     </div>
                                     <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
                                         <div
-                                            className={`h-full rounded-full transition-all duration-1000 ${typeColors[dept.type] || 'bg-gray-500'}`}
-                                            style={{ width: `${dept.avgProgress}%` }}
-                                        ></div>
+                                            className={`progress-bar rounded-full ${typeColors[dept.type] || 'bg-gray-500'}`}
+                                            // eslint-disable-next-line react/forbid-component-props
+                                            style={{ '--progress-width': `${dept.avgProgress}%` } as React.CSSProperties}
+                                        />
                                     </div>
                                 </div>
                             ))}

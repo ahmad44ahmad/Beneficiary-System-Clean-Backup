@@ -189,6 +189,12 @@ const isSupabaseReady = (): boolean => !!supabase;
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const empowermentService = {
+    // Helper to find a default beneficiary
+    async getBeneficiariesLimit1() {
+        if (!isSupabaseReady()) return { data: [] };
+        return supabase.from('beneficiaries').select('id, full_name').limit(1);
+    },
+
     // الأهداف التأهيلية
     async getGoals(beneficiaryId?: string): Promise<RehabGoal[]> {
         if (!isSupabaseReady()) return DEMO_GOALS;

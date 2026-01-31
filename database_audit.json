@@ -1,0 +1,1723 @@
+{
+  "timestamp": "2026-01-31T13:46:15.452Z",
+  "summary": {
+    "totalTablesInDb": 75,
+    "expectedTables": 53,
+    "foundTables": 49,
+    "missingTables": 4,
+    "extraTables": 26,
+    "tablesWithRls": 61,
+    "viewsCount": 9
+  },
+  "tables": {
+    "beneficiaries": {
+      "exists": true,
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "gen_random_uuid()"
+        },
+        {
+          "name": "national_id",
+          "type": "character varying",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "full_name",
+          "type": "character varying",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "full_name_en",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "birth_date",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "gender",
+          "type": "USER-DEFINED",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "photo_url",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'ACTIVE'::beneficiary_status"
+        },
+        {
+          "name": "admission_date",
+          "type": "date",
+          "nullable": true,
+          "default": "CURRENT_DATE"
+        },
+        {
+          "name": "discharge_date",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "building",
+          "type": "character varying",
+          "nullable": true,
+          "default": "'A'::character varying"
+        },
+        {
+          "name": "wing",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "room_number",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "bed_number",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "floor",
+          "type": "integer",
+          "nullable": true,
+          "default": "1"
+        },
+        {
+          "name": "current_location",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "mobility_level",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'INDEPENDENT'::mobility_level"
+        },
+        {
+          "name": "mobility_equipment",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": "'{}'::text[]"
+        },
+        {
+          "name": "hearing_level",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'NORMAL'::hearing_level"
+        },
+        {
+          "name": "vision_level",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'NORMAL'::vision_level"
+        },
+        {
+          "name": "cognitive_level",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'NORMAL'::cognitive_level"
+        },
+        {
+          "name": "alert_method",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'AUDIO'::alert_method"
+        },
+        {
+          "name": "evacuation_priority",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'STANDARD'::evacuation_priority"
+        },
+        {
+          "name": "evacuation_notes",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "oxygen_dependent",
+          "type": "boolean",
+          "nullable": true,
+          "default": "false"
+        },
+        {
+          "name": "panic_risk",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'LOW'::risk_level"
+        },
+        {
+          "name": "calming_technique",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "special_instructions",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": "'{}'::text[]"
+        },
+        {
+          "name": "wellbeing_score",
+          "type": "double precision",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "autonomy_level",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "last_mood_log",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ihsan_tokens",
+          "type": "double precision",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "productive_skills",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": "'{}'::text[]"
+        },
+        {
+          "name": "blood_type",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "allergies",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": "'{}'::text[]"
+        },
+        {
+          "name": "chronic_conditions",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": "'{}'::text[]"
+        },
+        {
+          "name": "current_medications",
+          "type": "jsonb",
+          "nullable": true,
+          "default": "'[]'::jsonb"
+        },
+        {
+          "name": "emergency_contact_name",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "emergency_contact_phone",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "emergency_contact_relationship",
+          "type": "character varying",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "tenant_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "section",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "file_number",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "evacuation_category",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "priority_order",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "rowCount": 156
+    },
+    "daily_care_logs": {
+      "exists": true,
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "gen_random_uuid()"
+        },
+        {
+          "name": "beneficiary_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "recorded_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "shift",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "log_date",
+          "type": "date",
+          "nullable": true,
+          "default": "CURRENT_DATE"
+        },
+        {
+          "name": "log_time",
+          "type": "time without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIME"
+        },
+        {
+          "name": "temperature",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "pulse",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "blood_pressure_systolic",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "blood_pressure_diastolic",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "oxygen_saturation",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "blood_sugar",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "weight",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "mobility_today",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "mood",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "incidents",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "requires_followup",
+          "type": "boolean",
+          "nullable": true,
+          "default": "false"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "sleep_quality",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "medications_given",
+          "type": "boolean",
+          "nullable": true,
+          "default": "false"
+        },
+        {
+          "name": "bathing_done",
+          "type": "boolean",
+          "nullable": true,
+          "default": "false"
+        },
+        {
+          "name": "concerns",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "rowCount": 0
+    },
+    "grc_risks": {
+      "exists": true,
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "gen_random_uuid()"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "category",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "risk_score",
+          "type": "integer",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "probability",
+          "type": "integer",
+          "nullable": true,
+          "default": "1"
+        },
+        {
+          "name": "impact",
+          "type": "integer",
+          "nullable": true,
+          "default": "1"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "nullable": true,
+          "default": "'open'::text"
+        },
+        {
+          "name": "owner",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "mitigation_plan",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "review_date",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "rowCount": 27
+    },
+    "medication_schedules": {
+      "exists": true,
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "gen_random_uuid()"
+        },
+        {
+          "name": "beneficiary_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "medication_name",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "dosage",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "frequency",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "times",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "scheduled_time",
+          "type": "time without time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": false,
+          "default": "CURRENT_DATE"
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "notes",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "nullable": true,
+          "default": "'pending'::text"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": false,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "rowCount": 0
+    },
+    "rehab_goals": {
+      "exists": true,
+      "type": "BASE TABLE",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "gen_random_uuid()"
+        },
+        {
+          "name": "beneficiary_id",
+          "type": "uuid",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "domain",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "goal_title",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "goal_description",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "measurement_type",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "measurement_unit",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "baseline_value",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "target_value",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "current_value",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "quality_of_life_dimension",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": false,
+          "default": "CURRENT_DATE"
+        },
+        {
+          "name": "target_date",
+          "type": "date",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "assigned_to",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "assigned_department",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "nullable": true,
+          "default": "'planned'::text"
+        },
+        {
+          "name": "progress_percentage",
+          "type": "integer",
+          "nullable": true,
+          "default": "0"
+        },
+        {
+          "name": "achievement_evidence",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "barriers_notes",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "family_involvement",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "linked_national_goal",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "linked_kpi",
+          "type": "text",
+          "nullable": true,
+          "default": "'goal_achievement_rate'::text"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "created_by",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "rowCount": 0
+    }
+  },
+  "views": [
+    "critical_low_stock",
+    "daily_compliance_summary",
+    "evacuation_list",
+    "v_daily_health_summary",
+    "v_early_warning_report",
+    "v_nutrition_summary",
+    "v_safety_summary",
+    "v_wellbeing_index",
+    "v_wellbeing_stats"
+  ],
+  "missing": [
+    "om_preventive_schedules",
+    "social_research",
+    "rehab_plans",
+    "evacuate_list"
+  ],
+  "found": [
+    "beneficiaries",
+    "daily_meals",
+    "dietary_plans",
+    "om_maintenance_requests",
+    "om_assets",
+    "om_asset_categories",
+    "daily_care_logs",
+    "fall_risk_assessments",
+    "medical_profiles",
+    "medical_records",
+    "rehab_goals",
+    "goal_progress_logs",
+    "goal_templates",
+    "beneficiary_preferences",
+    "locations",
+    "ipc_checklist_templates",
+    "ipc_inspections",
+    "ipc_incidents",
+    "immunizations",
+    "v_wellbeing_index",
+    "v_wellbeing_stats",
+    "v_early_warning_report",
+    "grc_compliance",
+    "grc_risks",
+    "grc_ncrs",
+    "grc_standards",
+    "grc_compliance_requirements",
+    "grc_risk_categories",
+    "grc_bcp_scenarios",
+    "grc_safety_incidents",
+    "catering_items",
+    "catering_categories",
+    "catering_units",
+    "catering_daily_inventory",
+    "catering_daily_reports",
+    "catering_violations",
+    "catering_raw_materials",
+    "meals",
+    "medication_schedules",
+    "medication_administrations",
+    "medications",
+    "vital_signs",
+    "medical_alerts",
+    "shift_handover_notes",
+    "staff",
+    "employees",
+    "alerts",
+    "audit_logs",
+    "emergency_alerts"
+  ],
+  "extras": [
+    "accountability_gaps",
+    "benchmark_standards",
+    "beneficiaries_staging",
+    "capas",
+    "catering_inventory_transactions",
+    "compliance_logs",
+    "cost_tracking",
+    "critical_low_stock",
+    "daily_compliance_summary",
+    "evacuation_list",
+    "evacuation_logs",
+    "hr_attendance",
+    "human_rights_compliance",
+    "independence_budget_analysis",
+    "iso_compliance_checklist",
+    "om_waste_records",
+    "process_executions",
+    "processes",
+    "risk_alerts",
+    "risk_score_log",
+    "services_gap_analysis",
+    "stock_alerts",
+    "strategic_kpis",
+    "v_daily_health_summary",
+    "v_nutrition_summary",
+    "v_safety_summary"
+  ],
+  "rlsPolicies": {
+    "accountability_gaps": [
+      {
+        "name": "employees_manage_accountability",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "alerts": [
+      {
+        "name": "public_read_alerts",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "audit_logs": [
+      {
+        "name": "employees_audit_insert",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "authenticated_insert_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "employees_audit_read",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "authenticated_read_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      }
+    ],
+    "benchmark_standards": [
+      {
+        "name": "employees_manage_benchmarks",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "beneficiaries": [
+      {
+        "name": "employees_beneficiaries",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "beneficiaries_insert_all",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "beneficiaries_insert_by_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "beneficiaries_insert_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "beneficiaries_public_read",
+        "permissive": "PERMISSIVE",
+        "roles": "{anon}",
+        "command": "SELECT"
+      },
+      {
+        "name": "beneficiaries_read_all",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "beneficiaries_read_auth",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "beneficiaries_read_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "beneficiaries_select_all",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "beneficiaries_select_by_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "beneficiaries_update_all",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "beneficiaries_update_by_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "beneficiaries_update_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "dev_auth_all_beneficiaries",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "employees_insert_beneficiaries",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "employees_read_beneficiaries",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "employees_update_beneficiaries",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "Public Access",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      },
+      {
+        "name": "admin_delete_beneficiaries",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      },
+      {
+        "name": "allow_all_delete",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      },
+      {
+        "name": "allow_all_read",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "allow_all_update",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "allow_all_write",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "beneficiaries_delete_all",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      },
+      {
+        "name": "beneficiaries_delete_by_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      },
+      {
+        "name": "beneficiaries_delete_tenant",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      }
+    ],
+    "beneficiaries_staging": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "beneficiary_preferences": [
+      {
+        "name": "employees_beneficiary_prefs",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "capas": [
+      {
+        "name": "capas_insert_own",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "capas_delete_own",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      },
+      {
+        "name": "Users can insert own capas",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "INSERT"
+      },
+      {
+        "name": "Users can view own capas",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "Users can delete own capas",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "DELETE"
+      },
+      {
+        "name": "Users can update own capas",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "capas_update_own",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "capas_public_read",
+        "permissive": "PERMISSIVE",
+        "roles": "{anon,authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "capas_select_own",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      }
+    ],
+    "catering_categories": [
+      {
+        "name": "employees_catering_categories",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "catering_daily_inventory": [
+      {
+        "name": "employees_catering_daily_inventory",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "catering_daily_reports": [
+      {
+        "name": "Allow authenticated full access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "catering_inventory_transactions": [
+      {
+        "name": "employees_catering_inventory_trans",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "catering_items": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "catering_raw_materials": [
+      {
+        "name": "employees_catering_raw_materials",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "catering_violations": [
+      {
+        "name": "public_read_violations",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "compliance_logs": [
+      {
+        "name": "Enable read access for all users",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "SELECT"
+      }
+    ],
+    "daily_care_logs": [
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "Public Access Logs",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "daily_meals": [
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "dietary_plans": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "emergency_alerts": [
+      {
+        "name": "employees_emergency_alerts",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "employees": [
+      {
+        "name": "auth_read_employees",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "admin_manage_employees",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "employees_read_authenticated",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      }
+    ],
+    "evacuation_logs": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "fall_risk_assessments": [
+      {
+        "name": "authenticated_can_read_fall_risk_assessments",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      },
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "goal_progress_logs": [
+      {
+        "name": "employees_goal_progress",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "goal_templates": [
+      {
+        "name": "employees_goal_templates",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "grc_bcp_scenarios": [
+      {
+        "name": "employees_grc_bcp",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "grc_compliance": [
+      {
+        "name": "anon_insert_grc_compliance",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "INSERT"
+      },
+      {
+        "name": "public_read_grc_compliance",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      },
+      {
+        "name": "anon_update_grc_compliance",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "UPDATE"
+      }
+    ],
+    "grc_compliance_requirements": [
+      {
+        "name": "employees_grc_compliance_req",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "grc_ncrs": [
+      {
+        "name": "anon_update_grc_ncrs",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "public_read_grc_ncrs",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      },
+      {
+        "name": "anon_insert_grc_ncrs",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "INSERT"
+      }
+    ],
+    "grc_risk_categories": [
+      {
+        "name": "employees_grc_risk_cat",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "grc_risks": [
+      {
+        "name": "anon_insert_grc_risks",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "INSERT"
+      },
+      {
+        "name": "anon_update_grc_risks",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "UPDATE"
+      },
+      {
+        "name": "public_read_grc_risks",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "hr_attendance": [
+      {
+        "name": "employees_manage_attendance",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "human_rights_compliance": [
+      {
+        "name": "employees_manage_compliance",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "immunizations": [
+      {
+        "name": "medical_staff_immunizations",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "independence_budget_analysis": [
+      {
+        "name": "employees_manage_budget",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "ipc_checklist_templates": [
+      {
+        "name": "employees_ipc_templates",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "ipc_incidents": [
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "employees_ipc_incidents",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "ipc_inspections": [
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "employees_ipc_inspections",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "iso_compliance_checklist": [
+      {
+        "name": "employees_iso_compliance",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "meals": [
+      {
+        "name": "public_read_meals",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "medical_alerts": [
+      {
+        "name": "replace_with_policy_name",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "SELECT"
+      }
+    ],
+    "medical_profiles": [
+      {
+        "name": "Public Access Medical",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      },
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "medical_records": [
+      {
+        "name": "public_read_medical",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "medication_administrations": [
+      {
+        "name": "medical_staff_med_admin",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "auth_access_med_admin",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "medication_schedules": [
+      {
+        "name": "medical_staff_med_schedules",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "auth_access_med_schedules",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "medical_access_medications",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "om_asset_categories": [
+      {
+        "name": "employees_om_asset_categories",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "om_assets": [
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "employees_om_assets",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "om_maintenance_requests": [
+      {
+        "name": "authenticated_full_access",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "employees_om_maintenance",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "om_waste_records": [
+      {
+        "name": "employees_om_waste",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "process_executions": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "processes": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "rehab_goals": [
+      {
+        "name": "medical_staff_rehab_goals",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "risk_alerts": [
+      {
+        "name": "authenticated_all",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "risk_score_log": [
+      {
+        "name": "employees_manage_risk_log",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "services_gap_analysis": [
+      {
+        "name": "employees_manage_services_gap",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "shift_handover_notes": [
+      {
+        "name": "employees_shift_notes",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "auth_access_handover",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "staff": [
+      {
+        "name": "public_read_staff",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "command": "ALL"
+      }
+    ],
+    "stock_alerts": [
+      {
+        "name": "Enable all access for authenticated users",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ],
+    "strategic_kpis": [
+      {
+        "name": "kpis_public_read",
+        "permissive": "PERMISSIVE",
+        "roles": "{anon,authenticated}",
+        "command": "SELECT"
+      }
+    ],
+    "vital_signs": [
+      {
+        "name": "medical_staff_vital_signs",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      },
+      {
+        "name": "medical_access_vital_signs",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated}",
+        "command": "ALL"
+      }
+    ]
+  },
+  "foreignKeys": {},
+  "indexes": {}
+}

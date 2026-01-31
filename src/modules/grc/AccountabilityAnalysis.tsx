@@ -28,7 +28,8 @@ const evasionPatterns = {
             'بانتظار قرار الإدارة',
             'تحت الإجراء والمتابعة',
             'سيتم إحاطتكم لاحقاً'
-        ]
+        ],
+        widthClass: 'w-[52.9%]'
     },
     misdirection: {
         label: 'تحويل لجهة أخرى',
@@ -39,7 +40,8 @@ const evasionPatterns = {
             'هذا من اختصاص جهة أخرى',
             'تم تحويله للجهة المختصة',
             'حسب كود البناء لا يلزم'
-        ]
+        ],
+        widthClass: 'w-[17.6%]'
     },
     false_promise: {
         label: 'وعد كاذب',
@@ -49,7 +51,8 @@ const evasionPatterns = {
         phrases: [
             'تم الحل مؤقتاً',
             'معالجة مؤقتة'
-        ]
+        ],
+        widthClass: 'w-[5.9%]'
     },
     silence: {
         label: 'صمت وتجاهل',
@@ -59,7 +62,8 @@ const evasionPatterns = {
         phrases: [
             'لم يرد رد',
             'تم تقديم إيضاح فقط'
-        ]
+        ],
+        widthClass: 'w-[11.8%]'
     }
 };
 
@@ -145,7 +149,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             {/* Header */}
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                    <FileSearch className="w-8 h-8" style={{ color: HRSD.teal }} />
+                    <FileSearch className="w-8 h-8 text-[#148287]" />
                     تحليل فجوة المساءلة الشامل
                 </h1>
                 <p className="text-gray-500 mt-1 mr-11">
@@ -184,8 +188,8 @@ export const AccountabilityAnalysis: React.FC = () => {
                     onClick={() => toggleSection('patterns')}
                 >
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${HRSD.orange}20` }}>
-                            <BarChart3 className="w-6 h-6" style={{ color: HRSD.orange }} />
+                        <div className="p-2 rounded-lg bg-[#20655A]/20">
+                            <BarChart3 className="w-6 h-6 text-[#F5961E]" />
                         </div>
                         <div>
                             <h3 className="font-bold text-lg text-gray-800">تحليل أنماط التنصل</h3>
@@ -213,8 +217,7 @@ export const AccountabilityAnalysis: React.FC = () => {
                                     <div className="mb-3">
                                         <div className="w-full bg-gray-100 rounded-full h-2">
                                             <div
-                                                className={`h-2 rounded-full ${pattern.color}`}
-                                                style={{ width: `${pattern.percentage}%` }}
+                                                className={`h-2 rounded-full ${pattern.color} ${(pattern as any).widthClass}`}
                                             ></div>
                                         </div>
                                     </div>
@@ -241,8 +244,8 @@ export const AccountabilityAnalysis: React.FC = () => {
                     onClick={() => toggleSection('albaha')}
                 >
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${HRSD.teal}20` }}>
-                            <MapPin className="w-6 h-6" style={{ color: HRSD.teal }} />
+                        <div className="p-2 rounded-lg bg-[#148287]/20">
+                            <MapPin className="w-6 h-6 text-[#148287]" />
                         </div>
                         <div>
                             <h3 className="font-bold text-lg text-gray-800">خصوصية الباحة</h3>

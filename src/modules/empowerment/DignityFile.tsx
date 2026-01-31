@@ -111,8 +111,20 @@ export const DignityFile: React.FC = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const prefs = beneficiaryId
-                ? await empowermentService.getPreferences(beneficiaryId)
+            let targetId = beneficiaryId;
+
+            // If no ID provided, try to find the first active beneficiary
+            if (!targetId) {
+                const { data: beneficiaries } = await empowermentService.getBeneficiariesLimit1();
+                if (beneficiaries && beneficiaries.length > 0) {
+                    targetId = beneficiaries[0].id;
+                    // Optionally navigate to the URL with ID to persist state
+                    // navigate(/empowerment/dignity/${targetId}, { replace: true });
+                }
+            }
+
+            const prefs = targetId
+                ? await empowermentService.getPreferences(targetId)
                 : null;
 
             if (prefs) {
@@ -127,10 +139,17 @@ export const DignityFile: React.FC = () => {
                 setWhatMakesMeUpset(prefs.what_makes_me_upset || '');
                 setMyDreams(prefs.my_dreams || '');
                 setFavoriteFoods(prefs.favorite_foods || []);
+                setWakeUpTime(prefs.wake_up_time || '06:30');
+                setSleepTime(prefs.sleep_time || '21:00');
             }
+        } catch (error) {
+            console.error('Error fetching dignity file:', error);
         } finally {
             setLoading(false);
-            setEditMode(!beneficiaryId); // New file starts in edit mode
+            // If we found a targetId but didn't have one in params, we are viewing an existing file
+            // If we still don't have a targetId, we are in strictly new mode
+            // BUT here we want to default to edit mode if we just loaded blank
+            setEditMode(!beneficiaryId);
         }
     };
 
@@ -170,7 +189,7 @@ export const DignityFile: React.FC = () => {
             <div className="bg-gradient-to-l from-pink-500 via-rose-500 to-red-500 rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <button onClick={() => navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg">
+                        <button onClick={() => navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg" title="رجوع" aria-label="رجوع">
                             <ChevronLeft className="w-5 h-5" />
                         </button>
                         <Heart className="w-10 h-10" />
@@ -264,6 +283,8 @@ export const DignityFile: React.FC = () => {
                             onChange={e => setWakeUpTime(e.target.value)}
                             disabled={!editMode}
                             className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50"
+                            title="وقت الاستيقاظ"
+                            aria-label="وقت الاستيقاظ"
                         />
                     </div>
                     <div>
@@ -277,6 +298,8 @@ export const DignityFile: React.FC = () => {
                             onChange={e => setSleepTime(e.target.value)}
                             disabled={!editMode}
                             className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50"
+                            title="وقت النوم"
+                            aria-label="وقت النوم"
                         />
                     </div>
                 </div>

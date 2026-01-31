@@ -1,0 +1,106 @@
+{
+  "empty": [
+    "accountability_gaps",
+    "audit_logs",
+    "benchmark_standards",
+    "beneficiaries_staging",
+    "beneficiary_preferences",
+    "capas",
+    "catering_categories",
+    "catering_daily_inventory",
+    "catering_daily_reports",
+    "catering_inventory_transactions",
+    "catering_items",
+    "catering_raw_materials",
+    "catering_units",
+    "catering_violations",
+    "compliance_logs",
+    "cost_tracking",
+    "daily_meals",
+    "dietary_plans",
+    "emergency_alerts",
+    "employees",
+    "evacuation_logs",
+    "fall_risk_assessments",
+    "goal_progress_logs",
+    "goal_templates",
+    "grc_bcp_scenarios",
+    "grc_compliance_requirements",
+    "grc_risk_categories",
+    "grc_safety_incidents",
+    "grc_standards",
+    "hr_attendance",
+    "human_rights_compliance",
+    "immunizations",
+    "independence_budget_analysis",
+    "ipc_checklist_templates",
+    "ipc_incidents",
+    "ipc_inspections",
+    "iso_compliance_checklist",
+    "locations",
+    "medical_alerts",
+    "medical_profiles",
+    "medical_records",
+    "medication_administrations",
+    "medication_schedules",
+    "medications",
+    "om_asset_categories",
+    "om_assets",
+    "om_maintenance_requests",
+    "om_preventive_schedules",
+    "om_waste_records",
+    "process_executions",
+    "processes",
+    "rehab_goals",
+    "risk_alerts",
+    "risk_score_log",
+    "services_gap_analysis",
+    "shift_handover_notes",
+    "stock_alerts",
+    "strategic_kpis",
+    "vital_signs"
+  ],
+  "populated": [
+    {
+      "name": "beneficiaries",
+      "count": 156
+    },
+    {
+      "name": "grc_risks",
+      "count": 27
+    },
+    {
+      "name": "daily_care_logs",
+      "count": 20
+    },
+    {
+      "name": "grc_compliance",
+      "count": 18
+    },
+    {
+      "name": "social_research",
+      "count": 15
+    },
+    {
+      "name": "rehab_plans",
+      "count": 12
+    },
+    {
+      "name": "grc_ncrs",
+      "count": 9
+    },
+    {
+      "name": "staff",
+      "count": 8
+    },
+    {
+      "name": "alerts",
+      "count": 5
+    },
+    {
+      "name": "meals",
+      "count": 5
+    }
+  ],
+  "errors": []
+}

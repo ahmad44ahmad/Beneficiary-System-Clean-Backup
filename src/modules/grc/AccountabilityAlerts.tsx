@@ -133,6 +133,8 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
                         <button
                             onClick={(e) => { e.stopPropagation(); onDismiss(); }}
                             className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                            title="إخفاء التنبيهات"
+                            aria-label="إخفاء التنبيهات"
                         >
                             <EyeOff className="w-5 h-5 text-white" />
                         </button>

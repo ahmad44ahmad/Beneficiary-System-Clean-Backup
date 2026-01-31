@@ -1,0 +1,82 @@
+
+📋 TABLES IN PUBLIC SCHEMA
+
+Table Name                              Type           Columns
+------------------------------------------------------------
+accountability_gaps                     BASE TABLE     18
+alerts                                  BASE TABLE     11
+audit_logs                              BASE TABLE     18
+benchmark_standards                     BASE TABLE     12
+beneficiaries                           BASE TABLE     47
+beneficiaries_staging                   BASE TABLE     2
+beneficiary_preferences                 BASE TABLE     38
+capas                                   BASE TABLE     21
+catering_categories                     BASE TABLE     6
+catering_daily_inventory                BASE TABLE     11
+catering_daily_reports                  BASE TABLE     7
+catering_inventory_transactions         BASE TABLE     11
+catering_items                          BASE TABLE     12
+catering_raw_materials                  BASE TABLE     12
+catering_units                          BASE TABLE     5
+catering_violations                     BASE TABLE     10
+compliance_logs                         BASE TABLE     14
+cost_tracking                           BASE TABLE     9
+critical_low_stock                      VIEW           8
+daily_care_logs                         BASE TABLE     23
+daily_compliance_summary                VIEW           5
+daily_meals                             BASE TABLE     13
+dietary_plans                           BASE TABLE     10
+emergency_alerts                        BASE TABLE     19
+employees                               BASE TABLE     12
+evacuation_list                         VIEW           8
+evacuation_logs                         BASE TABLE     13
+fall_risk_assessments                   BASE TABLE     13
+goal_progress_logs                      BASE TABLE     11
+goal_templates                          BASE TABLE     14
+grc_bcp_scenarios                       BASE TABLE     6
+grc_compliance                          BASE TABLE     10
+grc_compliance_requirements             BASE TABLE     10
+grc_ncrs                                BASE TABLE     13
+grc_risk_categories                     BASE TABLE     7
+grc_risks                               BASE TABLE     13
+grc_safety_incidents                    BASE TABLE     8
+grc_standards                           BASE TABLE     7
+hr_attendance                           BASE TABLE     9
+human_rights_compliance                 BASE TABLE     8
+immunizations                           BASE TABLE     24
+independence_budget_analysis            BASE TABLE     9
+ipc_checklist_templates                 BASE TABLE     9
+ipc_incidents                           BASE TABLE     28
+ipc_inspections                         BASE TABLE     19
+iso_compliance_checklist                BASE TABLE     17
+locations                               BASE TABLE     9
+meals                                   BASE TABLE     11
+medical_alerts                          BASE TABLE     11
+medical_profiles                        BASE TABLE     19
+medical_records                         BASE TABLE     10
+medication_administrations              BASE TABLE     8
+medication_schedules                    BASE TABLE     13
+medications                             BASE TABLE     17
+om_asset_categories                     BASE TABLE     8
+om_assets                               BASE TABLE     29
+om_maintenance_requests                 BASE TABLE     22
+om_waste_records                        BASE TABLE     17
+process_executions                      BASE TABLE     11
+processes                               BASE TABLE     15
+rehab_goals                             BASE TABLE     25
+risk_alerts                             BASE TABLE     7
+risk_score_log                          BASE TABLE     11
+services_gap_analysis                   BASE TABLE     11
+shift_handover_notes                    BASE TABLE     9
+staff                                   BASE TABLE     11
+stock_alerts                            BASE TABLE     11
+strategic_kpis                          BASE TABLE     7
+v_daily_health_summary                  VIEW           5
+v_early_warning_report                  VIEW           0
+v_nutrition_summary                     VIEW           7
+v_safety_summary                        VIEW           7
+v_wellbeing_index                       VIEW           10
+v_wellbeing_stats                       VIEW           9
+vital_signs                             BASE TABLE     15
+
+Total: 75 tables

@@ -1,0 +1,374 @@
+{
+  "connection": {
+    "user": "antigravity_admin",
+    "database": "postgres",
+    "status": "CONNECTED"
+  },
+  "publicTables": [
+    {
+      "table_name": "accountability_gaps",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "alerts",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "audit_logs",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "benchmark_standards",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "beneficiaries",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "beneficiaries_staging",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "beneficiary_preferences",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "capas",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_categories",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_daily_inventory",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_daily_reports",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_inventory_transactions",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_items",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_raw_materials",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_units",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "catering_violations",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "compliance_logs",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "cost_tracking",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "critical_low_stock",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "daily_care_logs",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "daily_compliance_summary",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "daily_meals",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "dietary_plans",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "emergency_alerts",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "employees",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "evacuation_list",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "evacuation_logs",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "fall_risk_assessments",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "goal_progress_logs",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "goal_templates",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_bcp_scenarios",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_compliance",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_compliance_requirements",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_ncrs",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_risk_categories",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_risks",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_safety_incidents",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "grc_standards",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "hr_attendance",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "human_rights_compliance",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "immunizations",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "independence_budget_analysis",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "ipc_checklist_templates",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "ipc_incidents",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "ipc_inspections",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "iso_compliance_checklist",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "locations",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "meals",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "medical_alerts",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "medical_profiles",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "medical_records",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "medication_administrations",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "medication_schedules",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "medications",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "om_asset_categories",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "om_assets",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "om_maintenance_requests",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "om_waste_records",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "process_executions",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "processes",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "rehab_goals",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "risk_alerts",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "risk_score_log",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "services_gap_analysis",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "shift_handover_notes",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "staff",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "stock_alerts",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "strategic_kpis",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "table_name": "v_daily_health_summary",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "v_early_warning_report",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "v_nutrition_summary",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "v_safety_summary",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "v_wellbeing_index",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "v_wellbeing_stats",
+      "table_type": "VIEW"
+    },
+    {
+      "table_name": "vital_signs",
+      "table_type": "BASE TABLE"
+    }
+  ],
+  "authTables": [
+    {
+      "table_name": "audit_log_entries"
+    },
+    {
+      "table_name": "flow_state"
+    },
+    {
+      "table_name": "identities"
+    },
+    {
+      "table_name": "instances"
+    },
+    {
+      "table_name": "mfa_amr_claims"
+    },
+    {
+      "table_name": "mfa_challenges"
+    },
+    {
+      "table_name": "mfa_factors"
+    },
+    {
+      "table_name": "one_time_tokens"
+    },
+    {
+      "table_name": "refresh_tokens"
+    },
+    {
+      "table_name": "saml_providers"
+    },
+    {
+      "table_name": "saml_relay_states"
+    },
+    {
+      "table_name": "schema_migrations"
+    },
+    {
+      "table_name": "sessions"
+    },
+    {
+      "table_name": "sso_domains"
+    },
+    {
+      "table_name": "sso_providers"
+    },
+    {
+      "table_name": "users"
+    }
+  ],
+  "storageTables": [
+    {
+      "table_name": "buckets"
+    },
+    {
+      "table_name": "objects"
+    }
+  ],
+  "rowCounts": {
+    "beneficiaries": 156,
+    "users": "not found",
+    "daily_follow_ups": "not found",
+    "health_records": "not found",
+    "incidents": "not found"
+  }
+}

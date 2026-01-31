@@ -86,7 +86,7 @@ export const WelcomePage: React.FC = () => {
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5" />
                 <div className="absolute top-20 right-20 w-72 h-72 bg-[#2DB473] rounded-full opacity-10 blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#F5961E] rounded-full opacity-10 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#F5961E] rounded-full opacity-10 blur-3xl animate-pulse delay-1000"></div>
             </div>
 
             {/* Main Content */}
@@ -153,8 +153,7 @@ export const WelcomePage: React.FC = () => {
                             {stats.map((stat, index) => (
                                 <div
                                     key={index}
-                                    className={`bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                                    style={{ transitionDelay: `${index * 100}ms` }}
+                                    className={`bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${['delay-0', 'delay-100', 'delay-200', 'delay-300'][index] || 'delay-0'}`}
                                 >
                                     <stat.icon className="w-8 h-8 text-[rgb(45,180,115)] mx-auto mb-3" />
                                     <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>

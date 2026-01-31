@@ -1,0 +1,22 @@
+FINAL SEEDING RESULTS:
+
+OK     beneficiaries                  156
+EMPTY  locations                      0
+EMPTY  employees                      0
+EMPTY  medication_schedules           0
+EMPTY  vital_signs                    0
+EMPTY  beneficiary_preferences        0
+EMPTY  rehab_goals                    0
+EMPTY  om_asset_categories            0
+EMPTY  om_assets                      0
+EMPTY  om_maintenance_requests        0
+EMPTY  shift_handover_notes           0
+EMPTY  ipc_inspections                0
+EMPTY  grc_standards                  0
+OK     grc_risks                      27
+OK     grc_compliance                 18
+OK     daily_care_logs                20
+OK     social_research                15
+OK     rehab_plans                    12
+
+SUMMARY: 6 populated, 12 empty

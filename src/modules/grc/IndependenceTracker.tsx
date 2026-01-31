@@ -113,8 +113,7 @@ export const IndependenceTracker: React.FC = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-96">
-                <div className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent"
-                    style={{ borderColor: `${HRSD.teal} transparent ${HRSD.teal} ${HRSD.teal}` }} />
+                <div className="animate-spin rounded-full h-12 w-12 border-4 border-t-transparent border-[#148287]" />
             </div>
         );
     }
@@ -127,6 +126,8 @@ export const IndependenceTracker: React.FC = () => {
                     <button
                         onClick={() => window.history.back()}
                         className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        title="رجوع"
+                        aria-label="رجوع"
                     >
                         <ArrowRight className="w-5 h-5" />
                     </button>
@@ -191,8 +192,8 @@ export const IndependenceTracker: React.FC = () => {
 
             {/* Services Gap */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="p-4 border-b flex items-center gap-2" style={{ backgroundColor: `${HRSD.navy}10` }}>
-                    <Building2 className="w-5 h-5" style={{ color: HRSD.navy }} />
+                <div className="p-4 border-b flex items-center gap-2 bg-[#14415A]/10">
+                    <Building2 className="w-5 h-5 text-[#14415A]" />
                     <h2 className="font-bold text-gray-800">فجوة الخدمات بالباحة</h2>
                 </div>
 
@@ -200,7 +201,7 @@ export const IndependenceTracker: React.FC = () => {
                     {servicesGap.map((gap) => (
                         <div key={gap.id} className="p-4 hover:bg-gray-50 transition-colors">
                             <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-xl" style={{ backgroundColor: `${HRSD.orange}20` }}>
+                                <div className="p-3 rounded-xl bg-[#F5961E]/20">
                                     {getServiceIcon(gap.service_type)}
                                 </div>
 
@@ -246,8 +247,8 @@ export const IndependenceTracker: React.FC = () => {
 
             {/* Human Rights Compliance */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="p-4 border-b flex items-center gap-2" style={{ backgroundColor: `${HRSD.teal}10` }}>
-                    <Scale className="w-5 h-5" style={{ color: HRSD.teal }} />
+                <div className="p-4 border-b flex items-center gap-2 bg-[#148287]/10">
+                    <Scale className="w-5 h-5 text-[#148287]" />
                     <h2 className="font-bold text-gray-800">حقوق الإنسان vs رغبات اختيارية</h2>
                 </div>
 

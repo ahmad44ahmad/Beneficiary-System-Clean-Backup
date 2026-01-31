@@ -497,3 +497,26 @@
     background: var(--hrsd-green);
     box-shadow: 0 0 0 3px rgba(45, 180, 115, 0.2);
 }
+
+/* ===== Progress Bar Component ===== */
+.progress-bar {
+    height: 100%;
+    transition: all 0.3s ease;
+    width: var(--progress-width, 0%);
+}
+
+.progress-bar-success {
+    background-color: #2DB473;
+}
+
+.progress-bar-warning {
+    background-color: #FAB414;
+}
+
+.progress-bar-danger {
+    background-color: #ef4444;
+}
+
+.progress-bar-purple {
+    background-color: #8b5cf6;
+}

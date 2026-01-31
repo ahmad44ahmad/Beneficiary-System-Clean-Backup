@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
 import { DailyShiftRecord, IncidentReport, GenderSection } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { DailyShiftForm } from './DailyShiftForm';
@@ -20,6 +21,7 @@ const demoIncidentReports: any[] = [
 
 export const DailyFollowUpPanel: React.FC = () => {
     const location = useLocation();
+    const { showToast } = useToast();
     const [activeSection, setActiveSection] = useState<GenderSection>('male');
     const [activeTab, setActiveTab] = useState<'shifts' | 'incidents'>('shifts');
 
@@ -33,52 +35,146 @@ export const DailyFollowUpPanel: React.FC = () => {
     const [isCreatingIncident, setIsCreatingIncident] = useState(false);
 
     // Fetch data from Supabase
-    useEffect(() => {
-        const fetchData = async () => {
-            if (!supabase) {
-                console.warn('Supabase not available, using demo data');
-                setLoading(false);
-                return;
-            }
-
-            try {
-                // Fetch shift records
-                const { data: shifts } = await supabase
-                    .from('daily_care_logs')
-                    .select('*')
-                    .order('created_at', { ascending: false })
-                    .limit(20);
-
-                if (shifts && shifts.length > 0) {
-                    // Transform to component format
-                    const transformedShifts = shifts.map((s: any) => ({
-                        id: s.id,
-                        date: s.log_date,
-                        day: new Date(s.log_date).toLocaleDateString('ar-SA', { weekday: 'long' }),
-                        shift: 'first',
-                        section: 'male',
-                        supervisorName: s.staff_name || 'غير محدد',
-                        beneficiaryStats: { total: 15, present: 14, absent: 1, leave: 0, hospital: 0 },
-                        centerDirectorApproval: true
-                    }));
-                    setShiftRecords(transformedShifts.length > 0 ? transformedShifts : demoShiftRecords);
-                }
-            } catch (err) {
-                console.warn('Error fetching data:', err);
-            }
-
+    const fetchData = async () => {
+        if (!supabase) {
+            console.warn('Supabase not available, using demo data');
             setLoading(false);
-        };
+            return;
+        }
 
+        try {
+            // Fetch shift records
+            const { data: shifts, error: shiftsError } = await supabase
+                .from('daily_care_logs')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(20);
+
+            if (shifts && shifts.length > 0) {
+                const transformedShifts: DailyShiftRecord[] = shifts.map((s: any) => ({
+                    id: s.id,
+                    date: s.log_date,
+                    day: new Date(s.log_date).toLocaleDateString('ar-SA', { weekday: 'long' }),
+                    shift: s.shift || 'first',
+                    section: s.section || 'male',
+                    supervisorName: s.staff_name || 'غير محدد',
+                    startTime: '08:00', // Default
+                    endTime: '16:00', // Default
+                    beneficiaryStats: { total: 15, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '', present: 14, absent: 1, leave: 0, hospital: 0 },
+                    staffAttendance: [],
+                    serviceStats: [],
+                    meals: [],
+                    cleaningMaintenance: [],
+                    psychologicalStatus: 'stable',
+                    socialStatus: 'stable',
+                    healthStatus: 'stable',
+                    nursingCare: 'routine',
+                    handoverTime: '16:00',
+                    receivingSupervisor: '',
+                    handingOverSupervisor: '',
+                    centerDirectorApproval: true
+                }));
+                setShiftRecords(transformedShifts);
+            }
+
+            // Fetch incident reports
+            const { data: incidents, error: incidentsError } = await supabase
+                .from('incident_reports')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(20);
+
+            if (incidents && incidents.length > 0) {
+                const transformedIncidents: IncidentReport[] = incidents.map((i: any) => ({
+                    id: i.id,
+                    date: i.date,
+                    time: '12:00', // Default
+                    beneficiaryId: i.beneficiary_id,
+                    location: 'غير محدد', // Default
+                    type: i.type,
+                    shift: i.shift,
+                    description: i.description,
+                    actionTaken: i.action_taken,
+                    witnesses: i.witnesses,
+                    staffWitnesses: [], // Default
+                    cameraRecordingKept: false, // Default
+                    supervisorName: 'المشرف المناوب'
+                }));
+                setIncidentReports(transformedIncidents);
+            } else if (incidentsError) {
+                // If table doesn't exist or other error, fallback to demo but log warning
+                console.warn('Could not fetch incidents, defaulting to demo data:', incidentsError.message);
+                showToast('تعذر تحميل الحوادث من قاعدة البيانات', 'info');
+            }
+
+        } catch (err) {
+            console.warn('Error fetching data:', err);
+        }
+
+        setLoading(false);
+    };
+
+    useEffect(() => {
         fetchData();
     }, [location.key]);
+
+    const handleSaveShift = async (data: any) => {
+        try {
+            if (supabase) {
+                const { error } = await supabase.from('daily_care_logs').insert([{
+                    log_date: data.date,
+                    shift: data.shift,
+                    section: data.section,
+                    staff_name: data.supervisorName,
+                    notes: JSON.stringify(data.beneficiaryStats) // storing stats in notes for now
+                }]);
+
+                if (error) throw error;
+                fetchData(); // Refresh data
+            } else {
+                setShiftRecords([data, ...shiftRecords]);
+            }
+            setIsCreatingShift(false);
+        } catch (error) {
+            console.error('Error saving shift:', error);
+            alert('حدث خطأ أثناء حفظ السجل');
+        }
+    };
+
+    const handleSaveIncident = async (data: any) => {
+        try {
+            if (supabase) {
+                const { error } = await supabase.from('incident_reports').insert([{
+                    date: data.date,
+                    beneficiary_id: data.beneficiaryId,
+                    type: data.type,
+                    shift: data.shift,
+                    description: data.description,
+                    action_taken: data.actionTaken,
+                    witnesses: data.witnesses
+                }]);
+
+                if (error) throw error;
+                fetchData(); // Refresh data
+            } else {
+                setIncidentReports([data, ...incidentReports]);
+            }
+            setIsCreatingIncident(false);
+        } catch (error) {
+            console.error('Error saving incident:', error);
+            // Fallback for demo/development if table missing
+            setIncidentReports([data, ...incidentReports]);
+            setIsCreatingIncident(false);
+            alert('تم الحفظ محلياً (تعذر الحفظ في قاعدة البيانات)');
+        }
+    };
 
     const filteredShifts = shiftRecords.filter(r => r.section === activeSection);
     const filteredIncidents = incidentReports;
 
     const handleExport = (data: any[], filename: string) => {
         if (!data.length) {
-            alert('لا توجد بيانات للتصدير');
+            showToast('لا توجد بيانات للتصدير', 'info');
             return;
         }
         const csvRows = [];
@@ -109,7 +205,7 @@ export const DailyFollowUpPanel: React.FC = () => {
             <div className="panel-header">
                 <h2>سجل المتابعة اليومية للخدمات</h2>
 
-                <div className="form-row" style={{ justifyContent: 'center', marginBottom: '1rem' }}>
+                <div className="form-row flex justify-center mb-4">
                     <div className="tabs">
                         <button
                             className={activeSection === 'male' ? 'active' : ''}
@@ -216,10 +312,7 @@ export const DailyFollowUpPanel: React.FC = () => {
                 <DailyShiftForm
                     beneficiaries={beneficiaries}
                     initialData={{ section: activeSection }}
-                    onSave={(data) => {
-                        setShiftRecords([...shiftRecords, data]);
-                        setIsCreatingShift(false);
-                    }}
+                    onSave={handleSaveShift}
                     onCancel={() => setIsCreatingShift(false)}
                 />
             )}
@@ -227,10 +320,7 @@ export const DailyFollowUpPanel: React.FC = () => {
             {isCreatingIncident && (
                 <IncidentReportForm
                     beneficiaries={beneficiaries}
-                    onSave={(data) => {
-                        setIncidentReports([...incidentReports, data]);
-                        setIsCreatingIncident(false);
-                    }}
+                    onSave={handleSaveIncident}
                     onCancel={() => setIsCreatingIncident(false)}
                 />
             )}

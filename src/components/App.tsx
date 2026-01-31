@@ -30,6 +30,10 @@ import { BeneficiaryDetailPanel } from './beneficiary/BeneficiaryDetailPanel';
 import { BeneficiaryMasterView } from './profile/BeneficiaryMasterView';
 import { NewAdmissionForm } from './beneficiary/NewAdmissionForm';
 
+// Settings & Permissions Pages
+const SettingsPage = lazy(() => import('../pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
+const PermissionsPage = lazy(() => import('../pages/PermissionsPage').then(m => ({ default: m.PermissionsPage })));
+
 // ═══════════════════════════════════════════════════════════════════════════
 // LAZY LOADED MODULES (Dynamic Imports - Load On-Demand)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -261,6 +265,7 @@ export const App = () => {
                     <Route path="social" element={<SocialOverview />} />
                     <Route path="social/leaves" element={<LeaveRequestFlow />} />
                     <Route path="social/research/new" element={<SocialResearchWizard />} />
+                    <Route path="social-research" element={<SocialResearchWizard />} />
 
                     {/* Basira Advanced Components */}
                     <Route path="pulse" element={<MorningPulse />} />
@@ -356,16 +361,16 @@ export const App = () => {
                     <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
-                            beneficiaryName="تجربة - عبدالله صالح"
-                            beneficiaryId="demo-1"
-                            onSuccess={() => console.log('Required success callback')}
+                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
+                            onSuccess={() => console.log('Care form saved')}
                         />
                     } />
                     <Route path="basira/safety" element={
                         <FallRiskAssessment
-                            beneficiaryName="تجربة - عبدالله صالح"
-                            beneficiaryId="demo-1"
-                            onSave={(data) => console.log(data)}
+                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
+                            onSave={(data) => console.log('Safety assessment saved', data)}
                         />
                     } />
 
@@ -414,6 +419,20 @@ export const App = () => {
 
                     {/* Family Portal Routes */}
                     <Route path="family" element={<FamilyPortal />} />
+                    <Route path="family-portal" element={<FamilyPortal />} />
+
+                    {/* Missing Sidebar Routes - Added to fix empty pages */}
+                    <Route path="daily-care" element={<DailyFollowUpPanel />} />
+                    <Route path="medications" element={<MedicationAdministration />} />
+                    <Route path="dignity" element={<DignityFile />} />
+                    <Route path="risks" element={<RiskRegister />} />
+                    <Route path="compliance" element={<ComplianceTracker />} />
+                    <Route path="assets" element={<AssetRegistry />} />
+                    <Route path="alerts" element={<SmartAlertsPanel />} />
+                    <Route path="org-structure" element={<OrgStructurePage />} />
+                    <Route path="staff" element={<StaffProfile />} />
+                    <Route path="permissions" element={<PermissionsPage />} />
+                    <Route path="settings" element={<SettingsPage />} />
 
                 </Route>
             </Routes >
