@@ -255,7 +255,7 @@ export const BeneficiaryListPage: React.FC = () => {
             <div className="mb-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
+                        <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg" title="رجوع">
                             <ChevronLeft className="w-5 h-5" />
                         </button>
                         <div className="p-3 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-xl">
@@ -280,12 +280,14 @@ export const BeneficiaryListPage: React.FC = () => {
                             <button
                                 onClick={() => setViewMode('grid')}
                                 className={`p-2 rounded ${viewMode === 'grid' ? 'bg-white shadow-sm' : ''}`}
+                                title="عرض شبكي"
                             >
                                 <Grid className="w-5 h-5" />
                             </button>
                             <button
                                 onClick={() => setViewMode('list')}
                                 className={`p-2 rounded ${viewMode === 'list' ? 'bg-white shadow-sm' : ''}`}
+                                title="عرض قائمة"
                             >
                                 <List className="w-5 h-5" />
                             </button>
@@ -562,6 +564,7 @@ export const BeneficiaryListPage: React.FC = () => {
                                 onClick={deselectAll}
                                 className="p-2 bg-white/10 hover:bg-white/20 rounded-lg 
                                            transition-all active:scale-95"
+                                title="إلغاء التحديد"
                             >
                                 <X className="w-5 h-5" />
                             </button>

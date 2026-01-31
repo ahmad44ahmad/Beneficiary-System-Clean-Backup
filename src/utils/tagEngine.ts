@@ -1,7 +1,25 @@
 import { UnifiedBeneficiaryProfile, SmartTag } from '../types/unified';
+import { ALERT_TAGS } from '../data/domain-assets';
 
 export const deriveSmartTags = (profile: UnifiedBeneficiaryProfile): SmartTag[] => {
     const tags: SmartTag[] = [];
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // 0. Database Alerts - Include any alerts stored directly in the database
+    // ═══════════════════════════════════════════════════════════════════════════
+    if ((profile as any).alerts && Array.isArray((profile as any).alerts)) {
+        for (const alertId of (profile as any).alerts) {
+            const alertDef = ALERT_TAGS.find(t => t.id === alertId);
+            if (alertDef) {
+                tags.push({
+                    id: alertDef.id,
+                    label: alertDef.label,
+                    color: alertDef.color as any,
+                    icon: alertDef.icon
+                });
+            }
+        }
+    }
 
     // 1. Social Status Tags
     if (
