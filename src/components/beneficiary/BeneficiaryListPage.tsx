@@ -237,18 +237,6 @@ export const BeneficiaryListPage: React.FC = () => {
         showToast(`تم تصدير ${dataToExport.length} سجل إلى Excel`, 'success');
     };
 
-    const handleExportCsv = async () => {
-        const dataToExport = selectionCount > 0
-            ? selectedItems
-            : filteredBeneficiaries;
-
-        exportToCsv(dataToExport, BENEFICIARY_COLUMNS, {
-            filename: 'قائمة_المستفيدين',
-            title: 'قائمة المستفيدين',
-        });
-        await audit.export(`تصدير ${dataToExport.length} مستفيد إلى CSV`);
-        showToast(`تم تصدير ${dataToExport.length} سجل إلى CSV`, 'success');
-    };
 
     const handleSelectAll = () => {
         if (isAllSelected) {
@@ -408,17 +396,18 @@ export const BeneficiaryListPage: React.FC = () => {
                         <span className="hidden sm:inline">Excel</span>
                     </motion.button>
 
-                    {/* Export CSV Button */}
+                    {/* Export Excel Button */}
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={handleExportCsv}
+                        onClick={handleExportExcel}
                         disabled={isExporting}
-                        className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors disabled:opacity-50"
-                        aria-label="تصدير إلى CSV"
+                        className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors disabled:opacity-50"
+                        aria-label="تصدير إلى Excel"
+                        title="تصدير إلى Excel"
                     >
                         <Download className={`w-4 h-4 ${isExporting ? 'animate-pulse' : ''}`} />
-                        <span className="hidden sm:inline">CSV</span>
+                        <span className="hidden sm:inline">Excel</span>
                     </motion.button>
 
                     {/* Results count moved here */}
