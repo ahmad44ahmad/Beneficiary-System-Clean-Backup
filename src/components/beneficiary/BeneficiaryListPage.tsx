@@ -97,7 +97,8 @@ export const BeneficiaryListPage: React.FC = () => {
                 status: b.health_status || 'stable',
                 ipc_status: b.ipc_status || 'safe',
                 latest_goal: b.latest_goal,
-                avatar_url: b.avatar_url
+                avatar_url: b.avatar_url,
+                alerts: b.alerts || []  // ← تم إضافة هذا السطر لعرض Alert Tags
             }));
         },
         staleTime: 5 * 60 * 1000, // 5 minutes
