@@ -48,7 +48,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-500">Diagnosis</p>
                             <p className="text-lg font-semibold text-gray-900 truncate w-40">
-                                {latestAssessment?.diagnosis || 'Pending'}
+                                {latestAssessment?.diagnosis || 'قيد التقييم'}
                             </p>
                         </div>
                     </div>
