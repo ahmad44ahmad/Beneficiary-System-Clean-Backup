@@ -14,28 +14,110 @@ import { MedicalExamination } from './medical';
 // Core Types
 export interface Beneficiary {
     id: string; // UUID from Supabase
-    nationalId?: string; // The "Golden Key" for unification - Optional for legacy data
+    nationalId?: string; // The "Golden Key" for unification
+    fileId?: string; // رقم الملف
     fullName: string;
+    name?: string; // Alias for fullName
     roomNumber?: string;
     bedNumber?: string;
     nationality?: string;
-    gender?: string;
+    gender?: 'male' | 'female' | string;
     dob?: string;
+    dateOfBirth?: string;
+    hijriBirthDate?: string; // تاريخ الميلاد الهجري
     age?: number;
     enrollmentDate?: string;
+    admissionDate?: string;
+    hijriAdmissionDate?: string; // تاريخ الالتحاق الهجري
+    section?: string; // القسم (ذكور/إناث)
+    status?: 'active' | 'discharged' | 'deceased' | 'transferred';
+
+    // Medical Info
+    medicalDiagnosis?: string;
+    psychiatricDiagnosis?: string;
+    disabilityType?: string; // نوع الإعاقة (23 أ / 23 ب)
+    iqLevel?: string;
+    iqScore?: string;
+    bedridden?: boolean; // طريح فراش
+
+    // Guardian Info
     guardianName?: string;
     guardianRelation?: string;
     guardianPhone?: string;
+    guardianAddress?: string; // عنوان ولي الأمر
     guardianResidence?: string;
+
+    // Social Info
+    socialStatus?: string;
     visitFrequency?: string;
     lastVisitDate?: string;
-    socialStatus?: string;
-    medicalDiagnosis?: string;
-    psychiatricDiagnosis?: string;
-    iqLevel?: string;
-    iqScore?: string;
+    hijriLastVisitDate?: string; // تاريخ آخر زيارة الهجري
+
+    // Alerts & Notes
+    alerts?: string[]; // ['epilepsy', 'diabetic', 'fallRisk', etc.]
     notes?: string;
-    status?: 'active' | 'discharged' | 'deceased' | 'transferred';
+
+    // Feature 1: Ehsan Algorithm (Dignity Profile)
+    dignity_profile?: DignityProfile;
+}
+
+// Ehsan Algorithm Types
+export interface DignityProfile {
+    id?: string;
+    beneficiaryId?: string;
+
+    // Identity
+    preferredName?: string;
+    nickname?: string; // Alias for preferredName
+    personalityType?: 'introvert' | 'extrovert' | 'ambivert' | 'social' | 'energetic' | 'calm' | 'observer';
+    personalityDescription?: string;
+
+    // Senses
+    sensoryPreferences?: {
+        lighting?: 'dim' | 'bright' | 'natural' | 'any';
+        noise?: 'quiet' | 'moderate' | 'loud' | 'lively' | 'any';
+        temperature?: 'cool' | 'warm' | 'normal';
+        smells?: string[];
+    };
+
+    // Micro Preferences & Joys
+    microPreferences?: {
+        favoriteColor?: string;
+        favoriteCup?: string;
+        dislikes?: string[];
+        wakeupTime?: string;
+        sleepTime?: string;
+    };
+
+    // Legacy/Card Support
+    favorites?: {
+        food: string[];
+        activities: string[];
+        places: string[];
+        people: string[];
+        colors: string[];
+    };
+    dislikes?: {
+        food: string[];
+        triggers: string[];
+        fears: string[];
+    };
+    deeds?: {
+        id: string;
+        date: string;
+        title: string;
+        description: string;
+        category: 'spiritual' | 'social' | 'personal' | 'creative' | 'helping_others';
+        impactLevel: 'high' | 'medium' | 'low';
+        verifiedBy?: string;
+    }[];
+
+    // Communication
+    communicationStyle?: 'verbal' | 'gestures' | 'visual_cards' | 'touch' | 'sign_language' | 'pictures' | 'mixed';
+    bestWayToEngage?: string;
+    empathyAlerts?: string[];
+
+    lastUpdated?: string;
 }
 
 // [NEW] The Unified "Master Record" that bridges all islands

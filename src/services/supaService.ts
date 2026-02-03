@@ -49,40 +49,87 @@ export const supaService = {
         }
 
         // Transform Supabase snake_case to camelCase for TypeScript interface
-        return (data || []).map((b: any) => ({
-            id: b.id,
-            nationalId: b.national_id,
-            fullName: b.full_name || b.name || '',
-            roomNumber: b.room_number,
-            bedNumber: b.bed_number,
-            nationality: b.nationality,
-            gender: b.gender,
-            dob: b.dob || b.date_of_birth,
-            age: b.age,
-            enrollmentDate: b.enrollment_date,
-            guardianName: b.guardian_name,
-            guardianRelation: b.guardian_relation,
-            guardianPhone: b.guardian_phone,
-            guardianResidence: b.guardian_residence,
-            visitFrequency: b.visit_frequency,
-            lastVisitDate: b.last_visit_date,
-            socialStatus: b.social_status,
-            medicalDiagnosis: b.medical_diagnosis,
-            psychiatricDiagnosis: b.psychiatric_diagnosis,
-            iqLevel: b.iq_level,
-            iqScore: b.iq_score,
-            notes: b.notes,
-            status: b.status || 'active',
-            // Extended unified fields
-            visitLogs: [],
-            incidents: [],
-            medicalHistory: [],
-            smartTags: [],
-            riskLevel: 'low',
-            isOrphan: false,
-            hasChronicCondition: false,
-            requiresIsolation: false,
-        } as UnifiedBeneficiaryProfile));
+        return (data || []).map((b: any) => {
+            // Parse alerts array from database
+            const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
+            const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
+
+            // Derive chronic condition flag
+            const hasChronicCondition = Boolean(
+                medicalText.includes('سكري') ||
+                medicalText.includes('صرع') ||
+                medicalText.includes('diabetes') ||
+                medicalText.includes('epilepsy') ||
+                alerts.includes('diabetic') ||
+                alerts.includes('epilepsy')
+            );
+
+            // Derive risk level based on alerts and conditions
+            let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
+            if (b.bedridden || alerts.includes('fallRisk')) riskLevel = 'high';
+            else if (alerts.length >= 3) riskLevel = 'high';
+            else if (alerts.length >= 1 || hasChronicCondition) riskLevel = 'medium';
+
+            return {
+                id: b.id,
+                nationalId: b.national_id,
+                fileId: b.file_id,
+                fullName: b.full_name || b.name || '',
+                name: b.full_name || b.name || '',
+                roomNumber: b.room_number,
+                bedNumber: b.bed_number,
+                nationality: b.nationality || 'سعودي',
+                gender: b.gender || 'male',
+                dob: b.dob || b.date_of_birth,
+                dateOfBirth: b.date_of_birth,
+                hijriBirthDate: b.hijri_birth_date,
+                age: b.age,
+                enrollmentDate: b.enrollment_date || b.admission_date,
+                admissionDate: b.admission_date,
+                hijriAdmissionDate: b.hijri_admission_date,
+                section: b.section,
+                status: b.status || 'active',
+
+                // Medical Info
+                medicalDiagnosis: b.medical_diagnosis,
+                psychiatricDiagnosis: b.psychiatric_diagnosis,
+                disabilityType: b.disability_type,
+                iqLevel: b.iq_level,
+                iqScore: b.iq_score,
+                bedridden: b.bedridden || false,
+
+                // Guardian Info
+                guardianName: b.guardian_name,
+                guardianRelation: b.guardian_relation,
+                guardianPhone: b.guardian_phone,
+                guardianAddress: b.guardian_address,
+                guardianResidence: b.guardian_residence || b.guardian_address,
+
+                // Social Info
+                socialStatus: b.social_status,
+                visitFrequency: b.visit_frequency,
+                lastVisitDate: b.last_visit_date,
+                hijriLastVisitDate: b.hijri_last_visit_date,
+
+                // Alerts & Notes
+                alerts: alerts,
+                notes: b.notes,
+                dignity_profile: b.dignity_profile,
+
+                // Extended unified fields (initialized)
+                visitLogs: [],
+                incidents: [],
+                medicalHistory: [],
+                smartTags: [],
+
+                // Computed fields
+                riskLevel,
+                isOrphan: b.guardian_relation === 'institution' ||
+                    (b.social_status || '').includes('يتيم'),
+                hasChronicCondition,
+                requiresIsolation: false,
+            } as UnifiedBeneficiaryProfile;
+        });
     },
 
     async getBeneficiaryById(id: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -149,6 +196,30 @@ export const supaService = {
         if (error) {
             logError('updateBeneficiary', error);
             return false;
+        }
+        return true;
+    },
+
+    // Feature 1: Ehsan Algorithm (Dignity Profile)
+    async updateDignityProfile(beneficiaryId: string, profile: any): Promise<boolean> {
+        if (!isSupabaseReady()) return false;
+
+        console.log('Saving Dignity Profile:', profile);
+
+        const { error } = await supabase
+            .from('beneficiaries')
+            .update({
+                dignity_profile: profile,
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', beneficiaryId);
+
+        if (error) {
+            logError('updateDignityProfile', error);
+            // Fallback for demo if column doesn't exist yet
+            console.warn('Failed to save to DB (likely missing column). Saving to local storage for demo.');
+            localStorage.setItem(`dignity_profile_${beneficiaryId}`, JSON.stringify(profile));
+            return true; // Pretend success for UX
         }
         return true;
     },

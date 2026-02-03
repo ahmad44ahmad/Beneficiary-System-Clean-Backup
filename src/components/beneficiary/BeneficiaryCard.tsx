@@ -107,13 +107,31 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
             {/* Alert Tags */}
             {alerts.length > 0 && (
                 <div className="flex gap-2 mb-3 flex-wrap">
-                    {alerts.map((alertId) => {
-                        const alert = ALERT_TAGS.find(t => t.id === alertId);
-                        if (!alert) return null;
+                    {alerts.slice(0, 3).map((alertId, idx) => {
+                        // Match by ID or Arabic label
+                        const alert = ALERT_TAGS.find(t =>
+                            t.id === alertId ||
+                            t.label === alertId ||
+                            t.id.toLowerCase() === alertId.toLowerCase()
+                        );
+                        if (!alert) {
+                            // Fallback for unknown alerts - show as gray badge
+                            return (
+                                <span
+                                    key={idx}
+                                    className="px-2 py-1 rounded-full text-xs bg-gray-500 text-white flex items-center gap-1"
+                                    title={alertId}
+                                >
+                                    <span>⚠️</span>
+                                    <span>{alertId}</span>
+                                </span>
+                            );
+                        }
                         return (
                             <span
                                 key={alertId}
-                                className="px-2 py-1 rounded-full text-xs text-white flex items-center gap-1"
+                                className="alert-badge px-2 py-1 rounded-full text-xs text-white flex items-center gap-1"
+                                // eslint-disable-next-line react/forbid-component-props
                                 style={{ backgroundColor: alert.color }}
                                 title={alert.label}
                             >
@@ -122,6 +140,11 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
                             </span>
                         );
                     })}
+                    {alerts.length > 3 && (
+                        <span className="px-2 py-1 rounded-full text-xs bg-gray-400 text-white">
+                            +{alerts.length - 3}
+                        </span>
+                    )}
                 </div>
             )}
 

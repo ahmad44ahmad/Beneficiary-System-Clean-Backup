@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DignityProfile } from '../../types';
 import { Card } from '../ui/Card';
+import { DignityProfileForm } from './DignityProfileForm';
 import {
     Smile,
     Zap,
@@ -15,21 +16,56 @@ import {
     Star,
     Award,
     HandHeart,
-    Palette,
+    Edit2,
     Users
 } from 'lucide-react';
 
 interface DignityProfileCardProps {
     profile?: DignityProfile | null;
+    onUpdate?: (updatedProfile: DignityProfile) => void;
 }
 
-export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile }) => {
+export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile, onUpdate }) => {
+    const [isEditing, setIsEditing] = useState(false);
+
     // Handle missing profile
     if (!profile) {
         return (
             <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                <p className="text-gray-500 font-medium">لا توجد بيانات ملف الكرامة لهذا المستفيد</p>
+                <p className="text-gray-500 font-medium mb-4">لا توجد بيانات ملف الكرامة لهذا المستفيد</p>
+                {onUpdate && (
+                    <button
+                        onClick={() => setIsEditing(true)}
+                        className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium text-sm flex items-center gap-2"
+                    >
+                        + إنشاء ملف الكرامة
+                    </button>
+                )}
+                {isEditing && (
+                    <div className="w-full mt-4">
+                        <DignityProfileForm
+                            onSave={(data) => {
+                                onUpdate?.(data);
+                                setIsEditing(false);
+                            }}
+                            onCancel={() => setIsEditing(false)}
+                        />
+                    </div>
+                )}
             </div>
+        );
+    }
+
+    if (isEditing) {
+        return (
+            <DignityProfileForm
+                initialData={profile}
+                onSave={(data) => {
+                    onUpdate?.(data);
+                    setIsEditing(false);
+                }}
+                onCancel={() => setIsEditing(false)}
+            />
         );
     }
 
@@ -60,7 +96,17 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile 
     return (
         <div className="space-y-6" dir="rtl">
             {/* Header / Identity Section */}
-            <div className="bg-gradient-to-l from-indigo-50 to-white p-6 rounded-xl border border-indigo-100 flex flex-col md:flex-row gap-6 items-start">
+            <div className="bg-gradient-to-l from-indigo-50 to-white p-6 rounded-xl border border-indigo-100 flex flex-col md:flex-row gap-6 items-start relative group">
+                {onUpdate && (
+                    <button
+                        onClick={() => setIsEditing(true)}
+                        className="absolute top-4 left-4 p-2 bg-white rounded-full shadow-sm text-gray-400 hover:text-indigo-600 transition-colors opacity-0 group-hover:opacity-100"
+                        title="تعديل الملف"
+                    >
+                        <Edit2 className="w-4 h-4" />
+                    </button>
+                )}
+
                 <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center shrink-0 border-4 border-white shadow-sm">
                     {getPersonalityIcon(profile.personalityType)}
                 </div>
@@ -75,7 +121,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile 
                         </span>
                     </div>
                     <p className="text-gray-600 leading-relaxed italic">
-                        "{profile.personalityDescription}"
+                        "{profile.personalityDescription || 'لا يوجد وصف للشخصية مسجل'}"
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2 text-sm text-gray-500">
@@ -89,7 +135,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile 
                         </span>
                         <span className="flex items-center gap-1 bg-white px-2 py-1 rounded border">
                             <Heart className="w-4 h-4 text-rose-400" />
-                            كيف تسعده: {profile.bestWayToEngage}
+                            كيف تسعده: {profile.bestWayToEngage || 'غير محدد'}
                         </span>
                     </div>
                 </div>
@@ -162,6 +208,14 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile 
                                     {item}
                                 </span>
                             ))}
+                            {favorites.colors.map((item, i) => (
+                                <span key={i} className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-full border border-green-200">
+                                    {item}
+                                </span>
+                            ))}
+                            {!favorites.food.length && !favorites.activities.length && !favorites.colors.length && (
+                                <span className="text-xs text-gray-400 italic">لا توجد تفضيلات مسجلة</span>
+                            )}
                         </div>
                     </div>
 
@@ -176,6 +230,9 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile 
                                     {item}
                                 </span>
                             ))}
+                            {!dislikes.triggers.length && (
+                                <span className="text-xs text-gray-400 italic">لا توجد انزعاجات مسجلة</span>
+                            )}
                         </div>
                     </div>
                 </Card>

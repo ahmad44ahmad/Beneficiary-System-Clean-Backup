@@ -33,7 +33,8 @@ import {
     Syringe,
     ClipboardList,
     AlertCircle,
-    Users2
+    Users2,
+    TrendingUp
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -88,6 +89,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
         {
             title: 'الحوكمة والجودة',
             items: [
+                { to: '/governance', icon: Network, label: 'الخيط الذهبي (الحوكمة)' },
                 { to: '/risks', icon: AlertTriangle, label: 'سجل المخاطر' },
                 { to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)' },
                 { to: '/compliance', icon: CheckCircle2, label: 'الامتثال ISO' },
@@ -96,6 +98,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
         {
             title: 'العمليات',
             items: [
+                { to: '/operations', icon: Settings, label: 'لوحة التشغيل' },
                 { to: '/catering', icon: Utensils, label: 'الإعاشة' },
                 { to: '/assets', icon: Wrench, label: 'الأصول والصيانة' },
                 { to: '/inventory', icon: Package, label: 'المخزون والكسوة' },
@@ -113,6 +116,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
             title: 'التقارير',
             items: [
                 { to: '/reports', icon: BarChart3, label: 'التقارير' },
+                { to: '/sroi', icon: TrendingUp, label: 'العائد الاجتماعي (SROI)' },
             ]
         },
         {

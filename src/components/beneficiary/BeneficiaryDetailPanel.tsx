@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useState, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
+import { supaService } from '../../services/supaService';
 import { Beneficiary, CaseStudy, SocialResearch, RehabilitationPlan, VisitLog, MedicalExamination, IndividualEducationalPlan, InjuryReport, FamilyCaseStudy, TrainingReferral, TrainingPlanFollowUp, VocationalEvaluation, FamilyGuidanceReferral, PostCareFollowUp } from '../../types';
 import { UnifiedBeneficiaryProfile } from '../../types/unified';
 import { MOCK_DIGNITY_PROFILES } from '../../types/dignity-profile';
@@ -91,14 +92,39 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
         // Data updated successfully
     };
 
+    const beneficiaryName = beneficiary.fullName || (beneficiary as any).full_name || '';
+
     // Try to find a dignity profile, or fall back to the mock one for demo
     // Handle both camelCase (fullName) and snake_case (full_name) from Supabase
-    const beneficiaryName = beneficiary.fullName || (beneficiary as any).full_name || '';
-    const dignityProfile = MOCK_DIGNITY_PROFILES.find(dp => dp.beneficiaryId === beneficiary.id) || {
-        ...MOCK_DIGNITY_PROFILES[0],
-        id: `dp_${beneficiary.id}`,
-        beneficiaryId: beneficiary.id,
-        nickname: beneficiaryName.split(' ')[0] || 'غير محدد' // Use first name as nickname
+    // Feature 1: Ehsan Algorithm - Data Logic
+    const [dignityProfile, setDignityProfile] = useState<any>(null);
+
+    useEffect(() => {
+        if (beneficiary) {
+            const existingProfile = beneficiary.dignity_profile ||
+                // Fallback to mock if not in DB yet
+                MOCK_DIGNITY_PROFILES.find(dp => dp.beneficiaryId === beneficiary.id);
+
+            if (existingProfile) {
+                setDignityProfile(existingProfile);
+            } else {
+                // Default template
+                setDignityProfile({
+                    beneficiaryId: beneficiary.id,
+                    nickname: beneficiaryName.split(' ')[0] || 'غير محدد',
+                    personalityType: 'social',
+                    sensoryPreferences: { lighting: 'natural', noise: 'moderate', temperature: 'normal' },
+                    microPreferences: { dislikes: [], favoriteColor: '' }
+                });
+            }
+        }
+    }, [beneficiary]);
+
+    const handleDignitySave = async (updatedData: any) => {
+        setDignityProfile(updatedData);
+        if (beneficiary) {
+            await supaService.updateDignityProfile(beneficiary.id, updatedData);
+        }
     };
 
     const relevantCaseStudies = caseStudies.filter(cs => cs.beneficiaryId === beneficiary.id);
@@ -173,7 +199,10 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                     </div>
                 }>
                     {activeTab === 'dignity' && (
-                        <DignityProfileCard profile={dignityProfile} />
+                        <DignityProfileCard
+                            profile={dignityProfile}
+                            onUpdate={handleDignitySave}
+                        />
                     )}
 
                     {activeTab === 'medical' && (

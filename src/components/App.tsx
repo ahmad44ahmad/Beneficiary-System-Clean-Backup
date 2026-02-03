@@ -50,7 +50,6 @@ const SocialResearchWizard = lazy(() => import('./social/SocialResearchWizard').
 
 // Quality Module
 const QualityManual = lazy(() => import('./quality/QualityManual').then(m => ({ default: m.QualityManual })));
-const QualityDashboard = QualityManual; // Alias for backward compatibility
 
 // Reports Module
 const StrategicDashboard = lazy(() => import('./reports/StrategicDashboard').then(m => ({ default: m.StrategicDashboard })));
@@ -65,6 +64,10 @@ const ExecutiveDashboard = lazy(() => import('./dashboard/ExecutiveDashboard').t
 const CrossModuleDashboard = lazy(() => import('./dashboard/CrossModuleDashboard').then(m => ({ default: m.CrossModuleDashboard })));
 const LiabilityDashboard = lazy(() => import('./dashboard/LiabilityDashboard').then(m => ({ default: m.LiabilityDashboard })));
 const StrategicKPIDashboard = lazy(() => import('./dashboard/StrategicKPIDashboard').then(m => ({ default: m.StrategicKPIDashboard })));
+const SroiDashboard = lazy(() => import('./dashboard/SroiDashboard').then(m => ({ default: m.SroiDashboard })));
+const GoldenThreadView = lazy(() => import('./dashboard/GoldenThreadView').then(m => ({ default: m.GoldenThreadView })));
+const QualityDashboard = lazy(() => import('./dashboard/QualityDashboard').then(m => ({ default: m.QualityDashboard })));
+const OvrReportForm = lazy(() => import('./quality/OvrReportForm').then(m => ({ default: m.OvrReportForm })));
 
 // Support & Training
 const SupportDashboard = lazy(() => import('../pages/SupportDashboard').then(m => ({ default: m.SupportDashboard })));
@@ -303,6 +306,9 @@ export const App = () => {
                         </ProtectedRoute>
                     } />
 
+                    {/* /rehab redirects to empowerment dashboard */}
+                    <Route path="rehab" element={<Navigate to="/empowerment" replace />} />
+
                     <Route path="reports/strategic" element={
                         <ProtectedRoute allowedRoles={['director', 'admin']}>
                             <StrategicDashboard />
@@ -392,6 +398,16 @@ export const App = () => {
 
                     {/* Strategic Dashboard */}
                     <Route path="strategic" element={<StrategicKPIDashboard />} />
+
+                    {/* Feature 2: SROI Dashboard */}
+                    <Route path="sroi" element={<SroiDashboard />} />
+
+                    {/* Feature 4: Governance */}
+                    <Route path="governance" element={<GoldenThreadView />} />
+
+                    {/* Feature 5: Just Culture & OVR */}
+                    <Route path="quality" element={<QualityDashboard />} />
+                    <Route path="ovr/new" element={<OvrReportForm />} />
 
                     {/* GRC Module Routes */}
                     <Route path="grc" element={<GRCDashboard />} />

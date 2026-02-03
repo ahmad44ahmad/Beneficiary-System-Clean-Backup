@@ -18,6 +18,7 @@ import {
 import { Card } from '../components/ui/Card';
 import { AccountabilityAlerts } from '../modules/grc/AccountabilityAlerts';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
+import { RiskPredictionCard } from '../components/dashboard/RiskPredictionCard';
 
 // Helper for Arabic translations of types
 const typeTranslations: Record<string, string> = {
@@ -197,6 +198,11 @@ export const Dashboard: React.FC = () => {
 
                 {/* 3. Operational Alerts (Risk Management) */}
                 <div className="space-y-6">
+                    {/* RISK PREDICTION ENGINE (Feature 3) */}
+                    <div className="h-96">
+                        <RiskPredictionCard beneficiaries={Object.values(useUnifiedData().beneficiaries)} />
+                    </div>
+
                     <Card className="p-0 bg-white shadow-sm overflow-hidden">
                         <div className="p-4 border-b bg-gray-50 flex justify-between items-center">
                             <h3 className="font-bold text-gray-800 flex items-center gap-2">

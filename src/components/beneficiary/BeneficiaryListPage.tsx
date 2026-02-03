@@ -87,21 +87,35 @@ export const BeneficiaryListPage: React.FC = () => {
                 return demoData;
             }
 
-            return data.map(b => ({
-                id: b.id,
-                name: b.full_name || b.name || 'غير معروف',
-                age: b.age || calculateAge(b.date_of_birth),
-                room: b.room_number || 'N/A',
-                wing: b.wing || 'east',
-                admission_date: b.admission_date || b.created_at,
-                status: b.health_status || 'stable',
-                ipc_status: b.ipc_status || 'safe',
-                latest_goal: b.latest_goal,
-                avatar_url: b.avatar_url,
-                alerts: b.alerts || []  // ← تم إضافة هذا السطر لعرض Alert Tags
-            }));
+            // DEBUG: Log total count and first 3 records with their alerts field
+            console.log('📊 [BeneficiaryListPage] Total records from Supabase:', data.length);
+            const withAlerts = data.filter(b => b.alerts && Array.isArray(b.alerts) && b.alerts.length > 0);
+            console.log('📊 [BeneficiaryListPage] Records with alerts:', withAlerts.length);
+            if (withAlerts.length > 0) {
+                console.log('📊 [BeneficiaryListPage] Sample alerts:', withAlerts.slice(0, 3).map(b => ({ name: b.full_name, alerts: b.alerts })));
+            }
+            if (data.length > 0) {
+                console.log('📊 [BeneficiaryListPage] First record alerts field:', data[0].alerts, 'type:', typeof data[0].alerts);
+            }
+
+            return data.map(b => {
+                return {
+                    id: b.id,
+                    name: b.full_name || b.name || 'غير معروف',
+                    age: b.age || calculateAge(b.date_of_birth),
+                    room: b.room_number || 'N/A',
+                    wing: b.wing || 'east',
+                    admission_date: b.admission_date || b.created_at,
+                    status: b.health_status || 'stable',
+                    ipc_status: b.ipc_status || 'safe',
+                    latest_goal: b.latest_goal,
+                    avatar_url: b.avatar_url,
+                    alerts: b.alerts || []
+                };
+            });
         },
-        staleTime: 5 * 60 * 1000, // 5 minutes
+        staleTime: 0, // Force fresh data (alerts were added after initial cache)
+        refetchOnMount: 'always',
     });
 
     // ═══════════════════════════════════════════════════════════════════════════
