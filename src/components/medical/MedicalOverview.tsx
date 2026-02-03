@@ -1,4 +1,5 @@
 import React from 'react';
+import { VitalsMonitorCard } from './VitalsMonitorCard';
 import { Card } from '../ui/Card';
 import { useUnifiedData } from '../../context/UnifiedDataContext';
 import { HeartPulse, Activity, Syringe, AlertTriangle, Users, FileText, TrendingUp } from 'lucide-react';
@@ -20,6 +21,22 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
 
     return (
         <div className="space-y-6 animate-in fade-in">
+            {/* IoT Smart Vitals Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-1">
+                    <VitalsMonitorCard beneficiaryId="CURRENT_USER" />
+                </div>
+                <div className="md:col-span-2">
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 h-full flex flex-col justify-center border border-blue-100">
+                        <h3 className="text-blue-900 font-bold text-lg mb-2">الذكاء الاصطناعي الطبي</h3>
+                        <p className="text-blue-700 text-sm">
+                            يتم تحليل المؤشرات الحيوية لحظياً عبر خوارزميات الذكاء الاصطناعي للكشف المبكر عن أي تدهور في الحالة الصحية.
+                            النظام متصل الآن بأجهزة (IoMT) للمراقبة المستمرة.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>

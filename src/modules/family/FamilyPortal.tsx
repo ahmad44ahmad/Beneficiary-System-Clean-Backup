@@ -4,8 +4,9 @@ import {
     Home, Users, Target, Calendar, Activity,
     Heart, ChevronLeft, MessageCircle, Phone,
     Image, FileText, Star, Bell, Settings,
-    TrendingUp, Clock, Smile
+    TrendingUp, Clock, Smile, Video, Headphones
 } from 'lucide-react';
+import { FamilyMediaFeed } from '../../components/family/FamilyMediaFeed';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { empowermentService, RehabGoal, REHAB_DOMAINS } from '../../services/empowermentService';
 
@@ -139,6 +140,28 @@ export const FamilyPortal: React.FC = () => {
                 </div>
             </div>
 
+            {/* NEW: Quick Action & Media Feed Section */}
+            <div className="px-4 mt-6">
+                <div className="flex gap-3 mb-6">
+                    <button className="flex-1 py-3 bg-purple-600 text-white rounded-xl shadow-lg shadow-purple-200 flex items-center justify-center gap-2 hover:bg-purple-700 transition-colors">
+                        <Video className="w-5 h-5" />
+                        <span className="font-bold">حجز مكالمة فيديو</span>
+                    </button>
+                    <button className="flex-1 py-3 bg-white text-gray-700 border rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
+                        <Headphones className="w-5 h-5 text-gray-400" />
+                        <span>طلب دعم</span>
+                    </button>
+                </div>
+
+                <div className="mb-6">
+                    <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
+                        <Heart className="w-5 h-5 text-red-500 fill-current" />
+                        يوميات {FAMILY_MEMBER.beneficiary_name.split(' ')[0]}
+                    </h3>
+                    <FamilyMediaFeed />
+                </div>
+            </div>
+
             {/* Tabs */}
             <div className="flex gap-2 px-4 mt-6 overflow-x-auto pb-2">
                 {[
@@ -151,8 +174,8 @@ export const FamilyPortal: React.FC = () => {
                         key={tab.key}
                         onClick={() => setActiveTab(tab.key as any)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${activeTab === tab.key
-                                ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-white text-gray-600 border hover:border-blue-300'
+                            ? 'bg-blue-600 text-white shadow-md'
+                            : 'bg-white text-gray-600 border hover:border-blue-300'
                             }`}
                     >
                         <tab.icon className="w-4 h-4" />

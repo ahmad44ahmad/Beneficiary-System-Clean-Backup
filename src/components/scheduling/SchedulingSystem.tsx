@@ -5,6 +5,7 @@ import {
     Users, ChevronLeft, ChevronRight, Plus, Filter, Search,
     CheckCircle, XCircle, AlertCircle, MoreHorizontal
 } from 'lucide-react';
+import { ShiftRecommendationCard } from '../staff/ShiftRecommendationCard';
 
 type AppointmentType = 'therapy' | 'checkup' | 'visit';
 type AppointmentStatus = 'scheduled' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled' | 'no_show';
@@ -199,6 +200,11 @@ export const SchedulingSystem: React.FC = () => {
                     <p className="text-3xl font-bold text-[rgb(20,130,135)]">{stats.upcoming}</p>
                     <p className="text-[rgb(20,130,135)]/70 text-sm">قادمة</p>
                 </motion.div>
+            </div>
+
+            {/* AI Staffing Recommendation */}
+            <div className="mb-6">
+                <ShiftRecommendationCard />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
