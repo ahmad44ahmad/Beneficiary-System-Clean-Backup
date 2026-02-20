@@ -34,9 +34,9 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                         <div className="p-3 rounded-full bg-indigo-100 text-indigo-600">
                             <MessageCircle size={24} />
                         </div>
-                        <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-500">Communication Mode</p>
-                            <p className="text-lg font-semibold text-gray-900">Verbal (Sentences)</p>
+                        <div className="mr-4">
+                            <p className="text-sm font-medium text-gray-500">نمط التواصل</p>
+                            <p className="text-lg font-semibold text-gray-900">لفظي (جمل)</p>
                         </div>
                     </div>
                 </Card>
@@ -45,8 +45,8 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                         <div className="p-3 rounded-full bg-pink-100 text-pink-600">
                             <Mic size={24} />
                         </div>
-                        <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-500">Intelligibility</p>
+                        <div className="mr-4">
+                            <p className="text-sm font-medium text-gray-500">وضوح الكلام</p>
                             <p className="text-2xl font-semibold text-gray-900">
                                 {latestAssessment?.intelligibility || 100}%
                             </p>
@@ -58,10 +58,10 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                         <div className="p-3 rounded-full bg-orange-100 text-orange-600">
                             <AlertTriangle size={24} />
                         </div>
-                        <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-500">Swallowing Risk</p>
+                        <div className="mr-4">
+                            <p className="text-sm font-medium text-gray-500">خطر البلع</p>
                             <p className="text-lg font-semibold text-gray-900">
-                                {latestAssessment?.swallowing?.aspirationRisk ? 'High Risk' : 'Low Risk'}
+                                {latestAssessment?.swallowing?.aspirationRisk ? 'خطر عالي' : 'خطر منخفض'}
                             </p>
                         </div>
                     </div>
