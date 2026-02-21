@@ -5,7 +5,7 @@ import { VisitLog, Beneficiary } from '../../types';
 interface VisitLogPanelProps {
     beneficiary: Beneficiary;
     logs: VisitLog[];
-    onAddLog: (log: VisitLog) => void;
+    onAddLog?: (log: VisitLog) => void;
 }
 
 export const VisitLogPanel: React.FC<VisitLogPanelProps> = ({ beneficiary, logs, onAddLog }) => {
@@ -36,7 +36,7 @@ export const VisitLogPanel: React.FC<VisitLogPanelProps> = ({ beneficiary, logs,
                 notes: newLog.notes,
                 employeeName: newLog.employeeName
             };
-            onAddLog(log);
+            onAddLog?.(log);
             setIsAdding(false);
             setNewLog({
                 type: 'internal',

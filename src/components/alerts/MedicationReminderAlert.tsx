@@ -91,10 +91,11 @@ export const MedicationReminderAlert: React.FC = () => {
     }, [isMinimized]);
 
     const handleDismissAlert = (id: string) => {
-        setOverdueAlerts(prev => prev.filter(a => a.id !== id));
-        if (overdueAlerts.length <= 1) {
-            setIsVisible(false);
-        }
+        setOverdueAlerts(prev => {
+            const remaining = prev.filter(a => a.id !== id);
+            if (remaining.length === 0) setIsVisible(false);
+            return remaining;
+        });
     };
 
     const handleDismissAll = () => {

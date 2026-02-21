@@ -363,14 +363,12 @@ export const App = () => {
                         <DailyCareForm
                             beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
                             beneficiaryId={selectedBeneficiary?.id || ''}
-                            onSuccess={() => {}}
                         />
                     } />
                     <Route path="basira/safety" element={
                         <FallRiskAssessment
                             beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
                             beneficiaryId={selectedBeneficiary?.id || ''}
-                            onSave={() => {}}
                         />
                     } />
 

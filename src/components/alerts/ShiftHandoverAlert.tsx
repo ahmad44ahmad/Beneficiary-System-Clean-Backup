@@ -3,7 +3,7 @@
 // Alerts staff when a new shift handover report is submitted
 // ═══════════════════════════════════════════════════════════════════════════
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Clock, X, ChevronRight, Bell } from 'lucide-react';
 import { supabase } from '../../config/supabase';
@@ -28,6 +28,7 @@ const SHIFT_LABELS = {
 export const ShiftHandoverAlert: React.FC = () => {
     const [alert, setAlert] = useState<ShiftHandover | null>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const autoHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const { showToast } = useToast();
     const navigate = useNavigate();
 
@@ -73,14 +74,16 @@ export const ShiftHandoverAlert: React.FC = () => {
 
                     showToast(`📋 تسليم فترة جديد من ${alertData.handover_by}`, 'info');
 
-                    // Auto-hide after 10 seconds
-                    setTimeout(() => setIsVisible(false), 10000);
+                    // Auto-hide after 10 seconds (clear previous timer if any)
+                    if (autoHideTimerRef.current) clearTimeout(autoHideTimerRef.current);
+                    autoHideTimerRef.current = setTimeout(() => setIsVisible(false), 10000);
                 }
             )
             .subscribe();
 
         return () => {
             supabase.removeChannel(channel);
+            if (autoHideTimerRef.current) clearTimeout(autoHideTimerRef.current);
         };
     }, [showToast]);
 

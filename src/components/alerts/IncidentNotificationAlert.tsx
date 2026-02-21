@@ -99,10 +99,11 @@ export const IncidentNotificationAlert: React.FC = () => {
     }, [showToast]);
 
     const handleDismiss = (id: string) => {
-        setIncidents(prev => prev.filter(i => i.id !== id));
-        if (incidents.length <= 1) {
-            setIsVisible(false);
-        }
+        setIncidents(prev => {
+            const remaining = prev.filter(i => i.id !== id);
+            if (remaining.length === 0) setIsVisible(false);
+            return remaining;
+        });
     };
 
     const handleDismissAll = () => {
