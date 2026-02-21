@@ -123,15 +123,15 @@ export const StaffProfile: React.FC = () => {
                 <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700">
                     <div className="flex items-center gap-3 mb-6"><Target className="w-5 h-5 text-amber-400" /><h3 className="font-bold">إحصائيات</h3></div>
                     <div className="space-y-4">
-                        {[{ icon: Clock, color: 'blue', label: 'ورديات', value: staff.stats.shiftsCompleted },
-                        { icon: Pill, color: 'purple', label: 'أدوية', value: staff.stats.medicationsGiven },
-                        { icon: CheckCircle, color: 'green', label: 'تقييمات', value: staff.stats.assessmentsDone },
-                        { icon: Shield, color: 'orange', label: 'حوادث', value: staff.stats.incidentsReported }].map((s, i) => (
-                            <div key={i} className={`bg-${s.color}-500/20 rounded-xl p-4 flex items-center gap-4`}>
-                                <div className={`w-12 h-12 bg-${s.color}-500/30 rounded-xl flex items-center justify-center`}>
-                                    <s.icon className={`w-6 h-6 text-${s.color}-400`} />
+                        {[{ icon: Clock, bgClass: 'bg-blue-500/20', bgIconClass: 'bg-blue-500/30', textClass: 'text-blue-400', label: 'ورديات', value: staff.stats.shiftsCompleted },
+                        { icon: Pill, bgClass: 'bg-purple-500/20', bgIconClass: 'bg-purple-500/30', textClass: 'text-purple-400', label: 'أدوية', value: staff.stats.medicationsGiven },
+                        { icon: CheckCircle, bgClass: 'bg-green-500/20', bgIconClass: 'bg-green-500/30', textClass: 'text-green-400', label: 'تقييمات', value: staff.stats.assessmentsDone },
+                        { icon: Shield, bgClass: 'bg-orange-500/20', bgIconClass: 'bg-orange-500/30', textClass: 'text-orange-400', label: 'حوادث', value: staff.stats.incidentsReported }].map((s, i) => (
+                            <div key={i} className={`${s.bgClass} rounded-xl p-4 flex items-center gap-4`}>
+                                <div className={`w-12 h-12 ${s.bgIconClass} rounded-xl flex items-center justify-center`}>
+                                    <s.icon className={`w-6 h-6 ${s.textClass}`} />
                                 </div>
-                                <div><p className="text-slate-400 text-sm">{s.label}</p><p className={`text-2xl font-bold text-${s.color}-400`}>{s.value}</p></div>
+                                <div><p className="text-slate-400 text-sm">{s.label}</p><p className={`text-2xl font-bold ${s.textClass}`}>{s.value}</p></div>
                             </div>
                         ))}
                     </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDashboardMetrics } from '../hooks/useDashboardMetrics';
-import { useGRCStats } from '../hooks/useGrcStats';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import {
     LayoutDashboard,

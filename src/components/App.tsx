@@ -27,7 +27,6 @@ const PermissionsPage = lazy(() => import('../pages/PermissionsPage').then(m => 
 // ═══════════════════════════════════════════════════════════════════════════
 
 // Medical Module
-const MedicalDashboard = lazy(() => import('./medical/MedicalDashboard').then(m => ({ default: m.MedicalDashboard })));
 const MedicalOverview = lazy(() => import('./medical/MedicalOverview').then(m => ({ default: m.MedicalOverview })));
 
 // Social Module
@@ -43,7 +42,6 @@ const NcrCapaTracker = lazy(() => import('./quality/NcrCapaTracker').then(m => (
 // Reports Module
 const StrategicDashboard = lazy(() => import('./reports/StrategicDashboard').then(m => ({ default: m.StrategicDashboard })));
 const ReportsDashboard = lazy(() => import('./reports/ReportsDashboard').then(m => ({ default: m.ReportsDashboard })));
-const ReportGenerator = lazy(() => import('./reports/ReportGenerator').then(m => ({ default: m.ReportGenerator })));
 const ExecutiveReport = lazy(() => import('../pages/ExecutiveReport').then(m => ({ default: m.ExecutiveReport })));
 
 // Dashboard Components

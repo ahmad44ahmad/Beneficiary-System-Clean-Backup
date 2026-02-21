@@ -20,15 +20,15 @@ interface TimelineEvent {
     staffName?: string;
 }
 
-const EVENT_CONFIG: Record<EventType, { icon: React.ElementType; color: string; bgColor: string; label: string }> = {
-    admission: { icon: Users, color: 'text-blue-400', bgColor: 'bg-blue-500/20', label: 'دخول' },
-    medication: { icon: Pill, color: 'text-purple-400', bgColor: 'bg-purple-500/20', label: 'دواء' },
-    therapy: { icon: Activity, color: 'text-green-400', bgColor: 'bg-green-500/20', label: 'علاج' },
-    meal: { icon: Utensils, color: 'text-orange-400', bgColor: 'bg-orange-500/20', label: 'وجبة' },
-    incident: { icon: AlertTriangle, color: 'text-red-400', bgColor: 'bg-red-500/20', label: 'حادث' },
-    assessment: { icon: FileText, color: 'text-cyan-400', bgColor: 'bg-cyan-500/20', label: 'تقييم' },
-    visit: { icon: Heart, color: 'text-pink-400', bgColor: 'bg-pink-500/20', label: 'زيارة' },
-    achievement: { icon: Award, color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', label: 'إنجاز' },
+const EVENT_CONFIG: Record<EventType, { icon: React.ElementType; color: string; bgColor: string; borderColor: string; label: string }> = {
+    admission: { icon: Users, color: 'text-blue-400', bgColor: 'bg-blue-500/20', borderColor: 'border-blue-400', label: 'دخول' },
+    medication: { icon: Pill, color: 'text-purple-400', bgColor: 'bg-purple-500/20', borderColor: 'border-purple-400', label: 'دواء' },
+    therapy: { icon: Activity, color: 'text-green-400', bgColor: 'bg-green-500/20', borderColor: 'border-green-400', label: 'علاج' },
+    meal: { icon: Utensils, color: 'text-orange-400', bgColor: 'bg-orange-500/20', borderColor: 'border-orange-400', label: 'وجبة' },
+    incident: { icon: AlertTriangle, color: 'text-red-400', bgColor: 'bg-red-500/20', borderColor: 'border-red-400', label: 'حادث' },
+    assessment: { icon: FileText, color: 'text-cyan-400', bgColor: 'bg-cyan-500/20', borderColor: 'border-cyan-400', label: 'تقييم' },
+    visit: { icon: Heart, color: 'text-pink-400', bgColor: 'bg-pink-500/20', borderColor: 'border-pink-400', label: 'زيارة' },
+    achievement: { icon: Award, color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-400', label: 'إنجاز' },
 };
 
 const mockEvents: TimelineEvent[] = [
@@ -105,7 +105,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                             <button
                                 key={type}
                                 onClick={() => setFilterType(filterType === type ? 'all' : type as EventType)}
-                                className={`p-3 rounded-xl border transition-colors ${filterType === type ? `${config.bgColor} border-${config.color.replace('text-', '')}` : 'bg-slate-800/50 border-slate-700 hover:bg-slate-700'}`}
+                                className={`p-3 rounded-xl border transition-colors ${filterType === type ? `${config.bgColor} ${config.borderColor}` : 'bg-slate-800/50 border-slate-700 hover:bg-slate-700'}`}
                             >
                                 <config.icon className={`w-5 h-5 ${config.color} mx-auto mb-1`} />
                                 <p className="text-lg font-bold">{count}</p>
