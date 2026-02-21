@@ -29,6 +29,9 @@ export default defineConfig(({ mode }) => {
             'vendor-charts': ['recharts'],
             'vendor-query': ['@tanstack/react-query'],
             'vendor-motion': ['framer-motion'],
+            'vendor-supabase': ['@supabase/supabase-js'],
+            'vendor-forms': ['react-hook-form', 'zod'],
+            'vendor-icons': ['lucide-react'],
           }
         }
       }

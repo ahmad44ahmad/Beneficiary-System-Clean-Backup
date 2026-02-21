@@ -1,22 +1,10 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
 import { useApp } from '../context/AppContext';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// LOADING FALLBACK COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════
-const LoadingFallback = () => (
-    <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-hrsd-teal border-t-transparent rounded-full animate-spin" />
-            <span className="text-slate-500 text-sm">جاري التحميل...</span>
-        </div>
-    </div>
-);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // ESSENTIAL PAGES (Static Imports - Load Immediately)
@@ -229,11 +217,7 @@ export const App = () => {
                 {/* Main Application with Layout */}
                 <Route path="/*" element={<MainLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="knowledge" element={
-                        <Suspense fallback={<LoadingFallback />}>
-                            <ExternalKnowledgeBase />
-                        </Suspense>
-                    } />
+                    <Route path="knowledge" element={<ExternalKnowledgeBase />} />
                     <Route path="executive-report" element={<ExecutiveReport />} />
 
                     <Route path="beneficiaries" element={
@@ -379,15 +363,15 @@ export const App = () => {
                     <Route path="indicators/iso" element={<ISOComplianceTracker />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
-                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
-                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
+                            beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={selectedBeneficiary?.id || ''}
                             onSuccess={() => {}}
                         />
                     } />
                     <Route path="basira/safety" element={
                         <FallRiskAssessment
-                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
-                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
+                            beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={selectedBeneficiary?.id || ''}
                             onSave={() => {}}
                         />
                     } />

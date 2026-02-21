@@ -68,8 +68,8 @@ export const ShiftHandoverAlert: React.FC = () => {
                     try {
                         const audio = new Audio('/notification.mp3');
                         audio.volume = 0.3;
-                        audio.play().catch(() => { });
-                    } catch (e) { }
+                        audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
+                    } catch (_) { /* Audio not supported */ }
 
                     showToast(`📋 تسليم فترة جديد من ${alertData.handover_by}`, 'info');
 
