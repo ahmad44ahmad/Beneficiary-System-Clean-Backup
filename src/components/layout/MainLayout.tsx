@@ -6,7 +6,6 @@ import { Header } from './Header';
 import { DemoBanner } from '../DemoBanner';
 import { MobileNav } from './MobileNav';
 import { RiskAlertSystem } from '../safety/RiskAlertSystem';
-import { RealTimeAlerts } from '../common/RealTimeAlerts';
 import { FallRiskAlertBanner } from '../alerts/FallRiskAlertBanner';
 import { MedicationReminderAlert } from '../alerts/MedicationReminderAlert';
 import { ShiftHandoverAlert } from '../alerts/ShiftHandoverAlert';
@@ -70,10 +69,6 @@ export const MainLayout = () => {
             <MedicationReminderAlert />
             <ShiftHandoverAlert />
             <IncidentNotificationAlert />
-
-            {/* Real-Time Alerts Notification - Temporarily disabled for presentation */}
-            {/* TODO: Re-enable after demo - uncomment the line below */}
-            {/* <RealTimeAlerts /> */}
 
             {/* Desktop Sidebar */}
             <Sidebar isMobile={false} />
