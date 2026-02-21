@@ -50,6 +50,7 @@ const SocialResearchWizard = lazy(() => import('./social/SocialResearchWizard').
 
 // Quality Module
 const QualityManual = lazy(() => import('./quality/QualityManual').then(m => ({ default: m.QualityManual })));
+const NcrCapaTracker = lazy(() => import('./quality/NcrCapaTracker').then(m => ({ default: m.NcrCapaTracker })));
 
 // Reports Module
 const StrategicDashboard = lazy(() => import('./reports/StrategicDashboard').then(m => ({ default: m.StrategicDashboard })));
@@ -285,6 +286,7 @@ export const App = () => {
 
                     {/* Quality Manual Route */}
                     <Route path="quality/manual" element={<QualityManual />} />
+                    <Route path="quality/ncr-capa" element={<NcrCapaTracker />} />
 
                     {/* Admin Routes */}
                     <Route path="admin/audit-logs" element={<AuditLogViewer />} />

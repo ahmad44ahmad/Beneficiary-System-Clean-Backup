@@ -3,13 +3,15 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../config/supabase';
 
-// Toggle this to force demo mode if needed, or use an environment variable
-const FORCE_DEMO_MODE = import.meta.env.VITE_APP_MODE === 'demo';
+// Demo mode ONLY activates when explicitly set via environment variable.
+// It will NEVER activate as a silent fallback for auth failures.
+const EXPLICIT_DEMO_MODE = import.meta.env.VITE_APP_MODE === 'demo';
 
 interface AuthContextType {
     user: User | null;
     session: Session | null;
     loading: boolean;
+    authError: string | null;
     signIn: (email: string, pass: string) => Promise<void>;
     signUp: (email: string, pass: string) => Promise<void>;
     signInWithGoogle: () => Promise<void>;
@@ -21,6 +23,7 @@ const AuthContext = createContext<AuthContextType>({
     user: null,
     session: null,
     loading: true,
+    authError: null,
     signIn: async () => { },
     signUp: async () => { },
     signInWithGoogle: async () => { },
@@ -31,7 +34,6 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    // MOCK USER FOR DEMO MODE
     const mockUser = {
         id: 'demo-user-123',
         email: 'demo@example.com',
@@ -44,38 +46,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [user, setUser] = useState<User | null>(null);
     const [session, setSession] = useState<Session | null>(null);
     const [loading, setLoading] = useState(true);
-    const [isDemoMode, setIsDemoMode] = useState(FORCE_DEMO_MODE);
+    const [authError, setAuthError] = useState<string | null>(null);
+    const isDemoMode = EXPLICIT_DEMO_MODE;
 
     useEffect(() => {
-        if (FORCE_DEMO_MODE) {
-            console.log('Auth: Running in FORCED DEMO MODE');
+        // Demo mode: only when VITE_APP_MODE is explicitly set to "demo"
+        if (EXPLICIT_DEMO_MODE) {
+            console.log('Auth: Running in EXPLICIT DEMO MODE (VITE_APP_MODE=demo)');
             setUser(mockUser);
             setLoading(false);
             return;
         }
 
+        // If Supabase is not configured, show an error instead of silently granting access
         if (!supabase) {
-            console.warn('Auth: Supabase client not initialized. Falling back to Demo Mode.');
-            setIsDemoMode(true);
-            setUser(mockUser);
+            console.error('Auth: Supabase client not initialized. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
+            setAuthError('Authentication service is not configured. Please contact the administrator.');
+            setUser(null);
             setLoading(false);
             return;
         }
 
-        // Check active session with timeout fallback
-        const AUTH_TIMEOUT_MS = 5000; // 5 seconds max wait
+        // Check active session with a generous timeout
+        const AUTH_TIMEOUT_MS = 15000; // 15 seconds
         let didTimeout = false;
 
         const timeoutId = setTimeout(() => {
             didTimeout = true;
-            console.warn('Auth: Session check timed out. Falling back to Demo Mode.');
-            setIsDemoMode(true);
-            setUser(mockUser);
+            console.error('Auth: Session check timed out after 15s.');
+            setAuthError('Authentication service is not responding. Please try again later.');
+            setUser(null);
             setLoading(false);
         }, AUTH_TIMEOUT_MS);
 
         supabase.auth.getSession().then(({ data: { session } }) => {
-            if (didTimeout) return; // Ignore if already timed out
+            if (didTimeout) return;
             clearTimeout(timeoutId);
             setSession(session);
             setUser(session?.user ?? null);
@@ -84,18 +89,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             if (didTimeout) return;
             clearTimeout(timeoutId);
             console.error('Auth: Session check failed', err);
-            console.warn('Auth: Falling back to Demo Mode due to error.');
-            setIsDemoMode(true);
-            setUser(mockUser);
+            setAuthError('Authentication failed. Please try again or contact the administrator.');
+            setUser(null);
             setLoading(false);
         });
 
-        // Listen for changes
+        // Listen for auth state changes
         const {
             data: { subscription },
         } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
             setUser(session?.user ?? null);
+            setAuthError(null);
             setLoading(false);
         });
 
@@ -104,11 +109,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const signIn = async (email: string, pass: string) => {
         if (isDemoMode) {
-            console.log('Auth: Demo Sign In');
             setUser(mockUser);
             return;
         }
-        if (!supabase) return;
+        if (!supabase) throw new Error('Authentication service is not configured.');
 
         const { error } = await supabase.auth.signInWithPassword({
             email,
@@ -119,11 +123,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const signUp = async (email: string, pass: string) => {
         if (isDemoMode) {
-            console.log('Auth: Demo Sign Up');
             setUser(mockUser);
             return;
         }
-        if (!supabase) return;
+        if (!supabase) throw new Error('Authentication service is not configured.');
 
         const { error } = await supabase.auth.signUp({
             email,
@@ -134,11 +137,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const signInWithGoogle = async () => {
         if (isDemoMode) {
-            console.log('Auth: Demo Google Sign In');
             setUser(mockUser);
             return;
         }
-        if (!supabase) return;
+        if (!supabase) throw new Error('Authentication service is not configured.');
 
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
@@ -148,18 +150,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const signOut = async () => {
         if (isDemoMode) {
-            console.log('Auth: Demo Sign Out');
             setUser(null);
             return;
         }
-        if (!supabase) return;
+        if (!supabase) throw new Error('Authentication service is not configured.');
 
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
     };
 
     return (
-        <AuthContext.Provider value={{ user, session, loading, signIn, signUp, signInWithGoogle, signOut, isDemoMode }}>
+        <AuthContext.Provider value={{ user, session, loading, authError, signIn, signUp, signInWithGoogle, signOut, isDemoMode }}>
             {children}
         </AuthContext.Provider>
     );

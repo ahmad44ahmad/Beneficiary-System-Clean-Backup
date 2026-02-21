@@ -46,13 +46,22 @@ export const QualityDashboard: React.FC = () => {
                     </h1>
                     <p className="text-gray-500 mt-1">مراقبة مؤشرات الأداء (KPIs) وتقارير الحوادث (OVR)</p>
                 </div>
-                <Link
-                    to="/ovr/new"
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2 shadow-sm"
-                >
-                    <AlertTriangle className="w-4 h-4" />
-                    تبليغ عن حادث جديد
-                </Link>
+                <div className="flex gap-2">
+                    <Link
+                        to="/quality/ncr-capa"
+                        className="bg-[#14415A] text-white px-4 py-2 rounded-lg hover:bg-[#1a5270] transition-colors flex items-center gap-2 shadow-sm"
+                    >
+                        <CheckCircle2 className="w-4 h-4" />
+                        سجل NCR/CAPA
+                    </Link>
+                    <Link
+                        to="/ovr/new"
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2 shadow-sm"
+                    >
+                        <AlertTriangle className="w-4 h-4" />
+                        تبليغ عن حادث جديد
+                    </Link>
+                </div>
             </div>
 
             {/* Stats Cards */}

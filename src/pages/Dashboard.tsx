@@ -57,10 +57,12 @@ export const Dashboard: React.FC = () => {
             <div className="mb-8 flex justify-between items-center">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                        <LayoutDashboard className="w-8 h-8 text-blue-600" />
+                        <div className="p-3 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-xl">
+                            <LayoutDashboard className="w-8 h-8 text-white" />
+                        </div>
                         لوحة القياس التنفيذية (Executive Dashboard)
                     </h1>
-                    <p className="text-gray-500 mt-1 mr-11">نظرة شاملة على الأداء التشغيلي ومؤشرات الجودة (ISO 9001)</p>
+                    <p className="text-gray-500 mt-1 mr-16">نظرة شاملة على الأداء التشغيلي ومؤشرات الجودة (ISO 9001)</p>
                 </div>
                 <div className="text-left">
                     <div className="text-sm text-gray-400">آخر تحديث</div>
@@ -74,14 +76,14 @@ export const Dashboard: React.FC = () => {
             {/* 1. Real-Time KPIs (The Pulse) */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 {/* Active Beneficiaries */}
-                <Card className="p-6 border-r-4 border-r-blue-500 shadow-sm hover:shadow-md transition-shadow bg-white">
+                <Card className="p-6 border-r-4 border-r-[#148287] shadow-sm hover:shadow-md transition-shadow bg-white">
                     <div className="flex justify-between items-start">
                         <div>
                             <p className="text-sm font-medium text-gray-500 mb-1">المستفيدين النشطين</p>
                             <h3 className="text-3xl font-bold text-gray-900">{kpis.totalBeneficiaries}</h3>
                         </div>
-                        <div className="p-2 bg-blue-50 rounded-lg">
-                            <Users className="w-6 h-6 text-blue-600" />
+                        <div className="p-2 bg-teal-50 rounded-lg">
+                            <Users className="w-6 h-6 text-[#148287]" />
                         </div>
                     </div>
                     <div className="mt-4 flex items-center text-xs text-green-600">
@@ -199,7 +201,7 @@ export const Dashboard: React.FC = () => {
                 {/* 3. Operational Alerts (Risk Management) */}
                 <div className="space-y-6">
                     {/* RISK PREDICTION ENGINE (Feature 3) */}
-                    <div className="h-96">
+                    <div className="min-h-[24rem]">
                         <RiskPredictionCard beneficiaries={Object.values(useUnifiedData().beneficiaries)} />
                     </div>
 
