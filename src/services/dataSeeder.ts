@@ -7,18 +7,20 @@ import { supabase } from '../config/supabase';
 import { SEED_BENEFICIARIES, type SeedBeneficiary } from '../data/domain-assets';
 
 // Transform SEED_BENEFICIARIES to database format
+// Uses columns that match the unified schema
 const DEMO_BENEFICIARIES = SEED_BENEFICIARIES.map((b: SeedBeneficiary) => ({
     full_name: b.fullName,
     national_id: b.nationalId,
     date_of_birth: b.birthDate,
     gender: b.gender,
-    blood_type: 'O+',
     admission_date: b.admissionDate,
     status: b.status,
     room_number: b.room || '',
-    disability_type: b.diagnosis.arabic,
-    emergency_contact_name: b.guardian.name,
-    emergency_contact_phone: b.guardian.phone
+    disability_type: b.diagnosis?.arabic || '',
+    medical_diagnosis: b.diagnosis?.arabic || '',
+    guardian_name: b.guardian?.name || '',
+    guardian_phone: b.guardian?.phone || '',
+    nationality: 'سعودي'
 }));
 
 // Demo risks data for GRC

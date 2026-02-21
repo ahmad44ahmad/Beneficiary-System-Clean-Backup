@@ -73,7 +73,7 @@ export const supaService = {
             return {
                 id: b.id,
                 nationalId: b.national_id,
-                fileId: b.file_id,
+                fileId: b.file_id || b.file_number,
                 fullName: b.full_name || b.name || '',
                 name: b.full_name || b.name || '',
                 roomNumber: b.room_number,
@@ -145,7 +145,10 @@ export const supaService = {
             logError(`getBeneficiaryById(${id})`, error);
             return null;
         }
-        return data as UnifiedBeneficiaryProfile;
+        if (!data) return null;
+        // Re-use the same transformation as getBeneficiaries
+        const all = await this.getBeneficiaries();
+        return all.find(b => b.id === id) || null;
     },
 
     async getBeneficiaryByNationalId(nationalId: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -161,7 +164,10 @@ export const supaService = {
             logError(`getBeneficiaryByNationalId(${nationalId})`, error);
             return null;
         }
-        return data as UnifiedBeneficiaryProfile;
+        if (!data) return null;
+        // Re-use the same transformation as getBeneficiaries
+        const all = await this.getBeneficiaries();
+        return all.find(b => b.nationalId === nationalId) || null;
     },
 
     async createBeneficiary(beneficiary: Partial<Beneficiary>): Promise<Beneficiary | null> {
@@ -172,9 +178,43 @@ export const supaService = {
 
         if (!isSupabaseReady()) return null;
 
+        // Transform camelCase to snake_case for Supabase
+        const dbRecord: Record<string, any> = {
+            national_id: beneficiary.nationalId,
+            file_id: beneficiary.fileId,
+            full_name: beneficiary.fullName || beneficiary.name,
+            room_number: beneficiary.roomNumber,
+            bed_number: beneficiary.bedNumber,
+            nationality: beneficiary.nationality,
+            gender: beneficiary.gender,
+            date_of_birth: beneficiary.dob || beneficiary.dateOfBirth,
+            admission_date: beneficiary.admissionDate || beneficiary.enrollmentDate,
+            section: beneficiary.section,
+            status: beneficiary.status || 'active',
+            medical_diagnosis: beneficiary.medicalDiagnosis,
+            psychiatric_diagnosis: beneficiary.psychiatricDiagnosis,
+            disability_type: beneficiary.disabilityType,
+            iq_level: beneficiary.iqLevel,
+            iq_score: beneficiary.iqScore,
+            bedridden: beneficiary.bedridden,
+            guardian_name: beneficiary.guardianName,
+            guardian_relation: beneficiary.guardianRelation,
+            guardian_phone: beneficiary.guardianPhone,
+            guardian_address: beneficiary.guardianAddress,
+            social_status: beneficiary.socialStatus,
+            visit_frequency: beneficiary.visitFrequency,
+            alerts: beneficiary.alerts,
+            notes: beneficiary.notes,
+        };
+
+        // Remove undefined values
+        Object.keys(dbRecord).forEach(key => {
+            if (dbRecord[key] === undefined) delete dbRecord[key];
+        });
+
         const { data, error } = await supabase
             .from('beneficiaries')
-            .insert(beneficiary)
+            .insert(dbRecord)
             .select()
             .single();
 
@@ -188,9 +228,38 @@ export const supaService = {
     async updateBeneficiary(id: string, updates: Partial<Beneficiary>): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
+        // Transform camelCase to snake_case for Supabase
+        const dbUpdates: Record<string, any> = { updated_at: new Date().toISOString() };
+        if (updates.fullName !== undefined) dbUpdates.full_name = updates.fullName;
+        if (updates.nationalId !== undefined) dbUpdates.national_id = updates.nationalId;
+        if (updates.fileId !== undefined) dbUpdates.file_id = updates.fileId;
+        if (updates.roomNumber !== undefined) dbUpdates.room_number = updates.roomNumber;
+        if (updates.bedNumber !== undefined) dbUpdates.bed_number = updates.bedNumber;
+        if (updates.nationality !== undefined) dbUpdates.nationality = updates.nationality;
+        if (updates.gender !== undefined) dbUpdates.gender = updates.gender;
+        if (updates.dob !== undefined) dbUpdates.date_of_birth = updates.dob;
+        if (updates.dateOfBirth !== undefined) dbUpdates.date_of_birth = updates.dateOfBirth;
+        if (updates.section !== undefined) dbUpdates.section = updates.section;
+        if (updates.status !== undefined) dbUpdates.status = updates.status;
+        if (updates.medicalDiagnosis !== undefined) dbUpdates.medical_diagnosis = updates.medicalDiagnosis;
+        if (updates.psychiatricDiagnosis !== undefined) dbUpdates.psychiatric_diagnosis = updates.psychiatricDiagnosis;
+        if (updates.disabilityType !== undefined) dbUpdates.disability_type = updates.disabilityType;
+        if (updates.iqLevel !== undefined) dbUpdates.iq_level = updates.iqLevel;
+        if (updates.iqScore !== undefined) dbUpdates.iq_score = updates.iqScore;
+        if (updates.bedridden !== undefined) dbUpdates.bedridden = updates.bedridden;
+        if (updates.guardianName !== undefined) dbUpdates.guardian_name = updates.guardianName;
+        if (updates.guardianRelation !== undefined) dbUpdates.guardian_relation = updates.guardianRelation;
+        if (updates.guardianPhone !== undefined) dbUpdates.guardian_phone = updates.guardianPhone;
+        if (updates.guardianAddress !== undefined) dbUpdates.guardian_address = updates.guardianAddress;
+        if (updates.socialStatus !== undefined) dbUpdates.social_status = updates.socialStatus;
+        if (updates.visitFrequency !== undefined) dbUpdates.visit_frequency = updates.visitFrequency;
+        if (updates.alerts !== undefined) dbUpdates.alerts = updates.alerts;
+        if (updates.notes !== undefined) dbUpdates.notes = updates.notes;
+        if (updates.dignity_profile !== undefined) dbUpdates.dignity_profile = updates.dignity_profile;
+
         const { error } = await supabase
             .from('beneficiaries')
-            .update({ ...updates, updated_at: new Date().toISOString() })
+            .update(dbUpdates)
             .eq('id', id);
 
         if (error) {

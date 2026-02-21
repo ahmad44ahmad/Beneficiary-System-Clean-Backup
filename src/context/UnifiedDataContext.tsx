@@ -100,85 +100,76 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
     // Medical Data
     const [medicalProfiles, setMedicalProfiles] = useState<MedicalProfile[]>([]);
-    const [vaccinations, setVaccinations] = useState<VaccinationRecord[]>([
-        { id: '1', beneficiaryId: '101', vaccineName: 'Influenza', dueDate: '2023-11-01', status: 'Overdue' },
-        { id: '2', beneficiaryId: '102', vaccineName: 'Hepatitis B', dueDate: '2023-12-15', status: 'Pending' }
-    ]);
-    const isolationStats = {
+    const [vaccinations, setVaccinations] = useState<VaccinationRecord[]>([]);
+    const [isolationStats] = useState({
         totalBeds: 10,
-        occupiedBeds: 2,
-        patients: [
-            { name: 'محمد علي', reason: 'اشتباه عدوى تنفسية' },
-            { name: 'خالد أحمد', reason: 'جدري مائي' }
-        ]
-    };
+        occupiedBeds: 0,
+        patients: [] as { name: string; reason: string }[]
+    });
+
+    const isDemoMode = import.meta.env.VITE_APP_MODE === 'demo';
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    // Helper to convert local beneficiaries to unified profiles
+    const toUnifiedProfiles = (source: typeof localBeneficiaries): UnifiedBeneficiaryProfile[] => {
+        return source.map(b => ({
+            ...b,
+            visitLogs: [],
+            incidents: [],
+            medicalHistory: [],
+            smartTags: [],
+            riskLevel: 'low' as const,
+            isOrphan: b.guardianRelation?.toLowerCase().includes('يتيم') || b.guardianRelation === 'State Ward',
+            hasChronicCondition: Boolean(b.medicalDiagnosis && (
+                b.medicalDiagnosis.includes('سكري') ||
+                b.medicalDiagnosis.includes('صرع') ||
+                b.medicalDiagnosis.includes('diabetes') ||
+                b.medicalDiagnosis.includes('epilepsy')
+            )),
+            requiresIsolation: false
+        } as UnifiedBeneficiaryProfile));
+    };
 
     const fetchData = async () => {
         setLoading(true);
         setError(null);
         try {
+            // Demo mode: use local data directly
+            if (isDemoMode) {
+                const enrichedData = toUnifiedProfiles(localBeneficiaries).map(b => ({
+                    ...b,
+                    smartTags: deriveSmartTags(b)
+                }));
+                setBeneficiaries(enrichedData);
+                setError(null);
+                return;
+            }
+
+            // Production mode: fetch from Supabase
             const data = await supaService.getBeneficiaries();
 
-            // Fallback to local data if Supabase returns empty or unavailable
-            // OR if local data has MORE records (to preserve existing data)
             let dataSource: UnifiedBeneficiaryProfile[];
 
-            // Use Supabase data if available
             if (data && data.length > 0) {
                 dataSource = data;
             } else {
-                // Fallback to local data only if Supabase is empty
-                dataSource = localBeneficiaries.map(b => ({
-                    ...b,
-                    visitLogs: [],
-                    incidents: [],
-                    medicalHistory: [],
-                    smartTags: [],
-                    riskLevel: 'low' as const,
-                    isOrphan: b.guardianRelation?.toLowerCase().includes('يتيم') || b.guardianRelation === 'State Ward',
-                    hasChronicCondition: Boolean(b.medicalDiagnosis && (
-                        b.medicalDiagnosis.includes('سكري') ||
-                        b.medicalDiagnosis.includes('صرع') ||
-                        b.medicalDiagnosis.includes('diabetes') ||
-                        b.medicalDiagnosis.includes('epilepsy')
-                    )),
-                    requiresIsolation: false
-                } as UnifiedBeneficiaryProfile));
+                // Fallback to local data only if Supabase returns empty
+                dataSource = toUnifiedProfiles(localBeneficiaries);
+                setError('Supabase returned empty — using local fallback data');
             }
 
-            // Enrich with smart tags
             const enrichedData = dataSource.map(b => ({
                 ...b,
                 smartTags: deriveSmartTags(b)
             }));
 
             setBeneficiaries(enrichedData);
-            // In a real app, we would fetch other entities here too
-            // setVisitLogs(initialVisitLogs); 
         } catch (err: any) {
             console.error("Data fetch error:", err);
             // Use local data as fallback on error
-            const dataSource = localBeneficiaries.map(b => ({
-                ...b,
-                visitLogs: [],
-                incidents: [],
-                medicalHistory: [],
-                smartTags: [],
-                riskLevel: 'low' as const,
-                isOrphan: b.guardianRelation?.toLowerCase().includes('يتيم') || b.guardianRelation === 'State Ward',
-                hasChronicCondition: Boolean(b.medicalDiagnosis && (
-                    b.medicalDiagnosis.includes('سكري') ||
-                    b.medicalDiagnosis.includes('صرع') ||
-                    b.medicalDiagnosis.includes('diabetes') ||
-                    b.medicalDiagnosis.includes('epilepsy')
-                )),
-                requiresIsolation: false
-            } as UnifiedBeneficiaryProfile));
-
-            const enrichedData = dataSource.map(b => ({
+            const enrichedData = toUnifiedProfiles(localBeneficiaries).map(b => ({
                 ...b,
                 smartTags: deriveSmartTags(b)
             }));
