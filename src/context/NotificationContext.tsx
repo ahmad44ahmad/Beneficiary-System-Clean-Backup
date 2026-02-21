@@ -138,7 +138,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
     const add = useCallback((notification: Omit<Notification, 'id' | 'timestamp' | 'read'>) => {
         const newNotification: Notification = {
             ...notification,
-            id: `notif_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+            id: `notif_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
             timestamp: new Date().toISOString(),
             read: false,
             dismissable: notification.dismissable ?? true,
