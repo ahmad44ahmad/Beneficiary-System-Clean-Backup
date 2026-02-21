@@ -145,7 +145,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
             <div className="min-h-[400px] bg-gray-50 p-4 rounded-lg">
                 {activeTab === 'overview' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Card title="Quick Summary">
+                        <Card title="ملخص سريع">
                             <div className="space-y-4">
                                 <div>
                                     <label className="text-xs text-gray-500 uppercase">Medical Diagnosis</label>
@@ -164,7 +164,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                             </div>
                         </Card>
 
-                        <Card title="Active Status">
+                        <Card title="الحالة النشطة">
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center p-3 bg-white rounded border">
                                     <span className="text-sm text-gray-600">Rehab Plan</span>
@@ -205,7 +205,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {activeTab === 'support' && (
                     <div className="space-y-6">
                         {/* Nutrition Plan */}
-                        <Card title="Nutrition Plan" className="border-l-4 border-l-green-500">
+                        <Card title="خطة التغذية" className="border-l-4 border-l-green-500">
                             {profile.nutritionPlan ? (
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
@@ -229,12 +229,12 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                     </div>
                                 </div>
                             ) : (
-                                <p className="text-gray-400 italic">No nutrition plan assigned.</p>
+                                <p className="text-gray-400 italic">لا توجد خطة تغذية مسندة</p>
                             )}
                         </Card>
 
                         {/* Clothing Requests */}
-                        <Card title="Clothing & Personal Items" className="border-l-4 border-l-blue-500">
+                        <Card title="الملابس والمتعلقات الشخصية" className="border-l-4 border-l-blue-500">
                             {profile.clothingRequests && profile.clothingRequests.length > 0 ? (
                                 <div className="space-y-3">
                                     {profile.clothingRequests.map(req => (
@@ -261,7 +261,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                             ) : (
                                 <div className="text-center py-6 text-gray-400">
                                     <Shirt className="w-8 h-8 mx-auto mb-2 opacity-20" />
-                                    <p>No active clothing requests</p>
+                                    <p>لا توجد طلبات ملابس نشطة</p>
                                 </div>
                             )}
                             <div className="mt-4 pt-4 border-t flex justify-end">

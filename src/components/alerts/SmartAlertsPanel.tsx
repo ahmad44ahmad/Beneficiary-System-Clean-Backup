@@ -63,7 +63,7 @@ export const SmartAlertsPanel: React.FC = () => {
     const [filterSeverity, setFilterSeverity] = useState<AlertSeverity | 'all'>('all');
     const [filterType, setFilterType] = useState<AlertType | 'all'>('all');
     const [soundEnabled, setSoundEnabled] = useState(true);
-    const [resolveNote, setResolveNote] = useState('');
+    const [resolveNotes, setResolveNotes] = useState<Record<string, string>>({});
 
     // Fetch alerts from Supabase
     useEffect(() => {
@@ -127,7 +127,11 @@ export const SmartAlertsPanel: React.FC = () => {
     const handleResolve = (alertId: string) => {
         setAlerts(prev => prev.filter(a => a.id !== alertId));
         setSelectedAlert(null);
-        setResolveNote('');
+        setResolveNotes(prev => {
+            const next = { ...prev };
+            delete next[alertId];
+            return next;
+        });
     };
 
     const unacknowledgedCount = alerts.filter(a => !a.acknowledged).length;
@@ -297,8 +301,8 @@ export const SmartAlertsPanel: React.FC = () => {
                                                 <div>
                                                     <label className="text-slate-400 text-sm mb-2 block">ملاحظات الحل:</label>
                                                     <textarea
-                                                        value={resolveNote}
-                                                        onChange={(e) => setResolveNote(e.target.value)}
+                                                        value={resolveNotes[alert.id] || ''}
+                                                        onChange={(e) => setResolveNotes(prev => ({ ...prev, [alert.id]: e.target.value }))}
                                                         placeholder="أضف ملاحظات حول الإجراء المتخذ..."
                                                         className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white placeholder-slate-500 resize-none h-20 focus:outline-none focus:border-blue-500"
                                                     />
