@@ -67,7 +67,7 @@ export const internalAuditService = {
     async getCycles(): Promise<AuditCycle[]> {
         if (!isSupabaseReady()) return [];
         try {
-            const { data, error } = await supabase!
+            const { data, error } = await supabase
                 .from('internal_audit_cycles')
                 .select('*')
                 .order('cycle_year', { ascending: false });
@@ -79,7 +79,7 @@ export const internalAuditService = {
     async getAudits(cycleId?: string): Promise<InternalAudit[]> {
         if (!isSupabaseReady()) return [];
         try {
-            let query = supabase!.from('internal_audits').select('*');
+            let query = supabase.from('internal_audits').select('*');
             if (cycleId) query = query.eq('cycle_id', cycleId);
             const { data, error } = await query.order('planned_date');
             if (error) { logError('getAudits', error); return []; }
@@ -90,7 +90,7 @@ export const internalAuditService = {
     async getFindings(auditId?: string): Promise<AuditFinding[]> {
         if (!isSupabaseReady()) return [];
         try {
-            let query = supabase!.from('audit_findings').select('*');
+            let query = supabase.from('audit_findings').select('*');
             if (auditId) query = query.eq('audit_id', auditId);
             const { data, error } = await query.order('created_at', { ascending: false });
             if (error) { logError('getFindings', error); return []; }
@@ -101,7 +101,7 @@ export const internalAuditService = {
     async saveCycle(cycle: Partial<AuditCycle>): Promise<{ success: boolean; id?: string }> {
         if (!isSupabaseReady()) return { success: true, id: 'demo-' + Date.now() };
         try {
-            const { data, error } = await supabase!
+            const { data, error } = await supabase
                 .from('internal_audit_cycles')
                 .insert(cycle)
                 .select('id')
@@ -114,7 +114,7 @@ export const internalAuditService = {
     async saveAudit(audit: Partial<InternalAudit>): Promise<{ success: boolean; id?: string }> {
         if (!isSupabaseReady()) return { success: true, id: 'demo-' + Date.now() };
         try {
-            const { data, error } = await supabase!
+            const { data, error } = await supabase
                 .from('internal_audits')
                 .insert(audit)
                 .select('id')
@@ -127,7 +127,7 @@ export const internalAuditService = {
     async saveFinding(finding: Partial<AuditFinding>): Promise<{ success: boolean; id?: string }> {
         if (!isSupabaseReady()) return { success: true, id: 'demo-' + Date.now() };
         try {
-            const { data, error } = await supabase!
+            const { data, error } = await supabase
                 .from('audit_findings')
                 .insert(finding)
                 .select('id')
@@ -140,7 +140,7 @@ export const internalAuditService = {
     async updateFindingStatus(id: string, status: string): Promise<boolean> {
         if (!isSupabaseReady()) return true;
         try {
-            const { error } = await supabase!
+            const { error } = await supabase
                 .from('audit_findings')
                 .update({ status, updated_at: new Date().toISOString() })
                 .eq('id', id);

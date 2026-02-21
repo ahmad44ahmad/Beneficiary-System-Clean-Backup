@@ -114,6 +114,8 @@ export const EmpowermentDashboard: React.FC = () => {
         try {
             const data = await empowermentService.getGoals();
             setGoals(data);
+        } catch (err) {
+            console.error('EmpowermentDashboard fetch error:', err);
         } finally {
             setLoading(false);
         }

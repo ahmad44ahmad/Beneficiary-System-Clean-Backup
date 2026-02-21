@@ -76,7 +76,8 @@ const KPICard: React.FC<{
 
 // Weekly Chart Component (Simple)
 const WeeklyChart: React.FC<{ data: Array<{ week: string; compliance: number }> }> = ({ data }) => {
-    const maxValue = Math.max(...data.map(d => d.compliance));
+    if (!data.length) return <div className="flex items-center justify-center h-40 text-gray-400">لا توجد بيانات</div>;
+    const maxValue = Math.max(...data.map(d => d.compliance)) || 1;
 
     return (
         <div className="flex items-end justify-between gap-2 h-40 px-2">
