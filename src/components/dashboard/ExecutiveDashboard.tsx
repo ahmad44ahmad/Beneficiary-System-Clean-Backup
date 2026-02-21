@@ -23,6 +23,7 @@ export const ExecutiveDashboard: React.FC = () => {
     });
 
     const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState<string | null>(null);
 
     // Mock Data for Charts (Using CSS for bars to avoid heavy chart libraries for now)
     const chartData = [65, 78, 85, 92, 88, 95]; // Weekly compliance trend
@@ -30,6 +31,7 @@ export const ExecutiveDashboard: React.FC = () => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
+                setFetchError(null);
                 // 1. Get Active Beneficiaries Count
                 const { count: occupancyCount } = await supabase
                     .from('beneficiaries')
@@ -107,6 +109,7 @@ export const ExecutiveDashboard: React.FC = () => {
 
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
+                setFetchError('تعذر تحميل بيانات لوحة القيادة. يتم عرض البيانات المحلية.');
             } finally {
                 setLoading(false);
             }
@@ -123,6 +126,14 @@ export const ExecutiveDashboard: React.FC = () => {
 
     return (
         <div className="space-y-6 font-readex animate-fade-in pb-12" dir="rtl">
+            {/* Error Banner */}
+            {fetchError && (
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center gap-3">
+                    <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
+                    <p className="text-amber-800 text-sm">{fetchError}</p>
+                </div>
+            )}
+
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                 <div>

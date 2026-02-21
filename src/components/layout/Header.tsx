@@ -1,11 +1,10 @@
 import React from 'react';
-import { Bell, User, Menu } from 'lucide-react';
+import { Bell, User, Menu, Eye } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { CommandMenu } from '../ui/CommandMenu';
 import { useUser } from '../../context/UserContext';
 import { useLocation } from 'react-router-dom';
 import { useViewMode } from '../../context/ViewModeContext';
-import { Eye } from 'lucide-react';
 
 interface HeaderProps {
     onMenuClick?: () => void;

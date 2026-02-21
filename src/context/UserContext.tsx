@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useMemo, useCallback, ReactNode } from 'react';
 
 export type UserRole = 'director' | 'doctor' | 'social_worker' | 'nurse' | 'admin' | 'specialist' | 'secretary';
 
@@ -32,19 +32,23 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const isDemo = import.meta.env.VITE_APP_MODE === 'demo';
     const [currentUser, setCurrentUser] = useState<User>(isDemo ? MOCK_USERS.admin : MOCK_USERS.admin); // Defaulting to admin for now, but explicit for demo logic
 
-    const switchRole = (role: UserRole) => {
+    const switchRole = useCallback((role: UserRole) => {
         setCurrentUser(MOCK_USERS[role]);
-    };
+    }, []);
 
-    const hasPermission = (requiredRole: UserRole | UserRole[]) => {
+    const hasPermission = useCallback((requiredRole: UserRole | UserRole[]) => {
         if (Array.isArray(requiredRole)) {
             return requiredRole.includes(currentUser.role);
         }
         return currentUser.role === requiredRole;
-    };
+    }, [currentUser.role]);
+
+    const value = useMemo(() => ({
+        currentUser, switchRole, hasPermission
+    }), [currentUser, switchRole, hasPermission]);
 
     return (
-        <UserContext.Provider value={{ currentUser, switchRole, hasPermission }}>
+        <UserContext.Provider value={value}>
             {children}
         </UserContext.Provider>
     );

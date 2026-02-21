@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import {
     Beneficiary,
     VisitLog,
@@ -185,17 +185,17 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         fetchData();
     }, []);
 
-    const getBeneficiaryById = (id: string) => {
+    const getBeneficiaryById = useCallback((id: string) => {
         return beneficiaries.find(b => b.id === id);
-    };
+    }, [beneficiaries]);
 
-    const getBeneficiaryByNationalId = async (nid: string) => {
+    const getBeneficiaryByNationalId = useCallback(async (nid: string) => {
         const local = beneficiaries.find(b => b.nationalId === nid);
         if (local) return local;
         return await supaService.getBeneficiaryByNationalId(nid);
-    };
+    }, [beneficiaries]);
 
-    const updateBeneficiary = async (id: string, data: Partial<Beneficiary>) => {
+    const updateBeneficiary = useCallback(async (id: string, data: Partial<Beneficiary>) => {
         try {
             await supaService.updateBeneficiary(id, data);
             setBeneficiaries(prev => prev.map(b => b.id === id ? { ...b, ...data } : b));
@@ -203,57 +203,68 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             console.error("Update failed:", err);
             throw err;
         }
-    };
+    }, []);
 
-    const refreshData = async () => {
+    const refreshData = useCallback(async () => {
         await fetchData();
-    };
+    }, []);
 
     // Simple setters for migration
-    const addVisitLog = (log: VisitLog) => setVisitLogs(prev => [log, ...prev]);
-    const addSocialActivityPlan = (plan: SocialActivityPlan) => setSocialActivityPlans(prev => [plan, ...prev]);
-    const addSocialActivityDoc = (doc: SocialActivityDocumentation) => setSocialActivityDocs(prev => [doc, ...prev]);
-    const addSocialActivityFollowUp = (followUp: SocialActivityFollowUp) => setSocialActivityFollowUps(prev => [followUp, ...prev]);
-    const addMedicalProfile = (profile: MedicalProfile) => setMedicalProfiles(prev => [...prev, profile]);
+    const addVisitLog = useCallback((log: VisitLog) => setVisitLogs(prev => [log, ...prev]), []);
+    const addSocialActivityPlan = useCallback((plan: SocialActivityPlan) => setSocialActivityPlans(prev => [plan, ...prev]), []);
+    const addSocialActivityDoc = useCallback((doc: SocialActivityDocumentation) => setSocialActivityDocs(prev => [doc, ...prev]), []);
+    const addSocialActivityFollowUp = useCallback((followUp: SocialActivityFollowUp) => setSocialActivityFollowUps(prev => [followUp, ...prev]), []);
+    const addMedicalProfile = useCallback((profile: MedicalProfile) => setMedicalProfiles(prev => [...prev, profile]), []);
+
+    const value = useMemo(() => ({
+        beneficiaries,
+        visitLogs,
+        inventory,
+        medicalProfiles,
+        caseStudies,
+        socialResearchForms,
+        rehabilitationPlans,
+        incidents,
+        clothingRequests,
+        medicalExaminations,
+        educationalPlans,
+        injuryReports,
+        familyCaseStudies,
+        socialActivityPlans,
+        socialActivityDocs,
+        socialActivityFollowUps,
+        trainingReferrals,
+        trainingPlanFollowUps,
+        vocationalEvaluations,
+        familyGuidanceReferrals,
+        postCareFollowUps,
+        vaccinations,
+        isolationStats,
+        loading,
+        error,
+        getBeneficiaryById,
+        getBeneficiaryByNationalId,
+        updateBeneficiary,
+        refreshData,
+        addVisitLog,
+        addSocialActivityPlan,
+        addSocialActivityDoc,
+        addSocialActivityFollowUp,
+        addMedicalProfile
+    }), [
+        beneficiaries, visitLogs, inventory, medicalProfiles, caseStudies,
+        socialResearchForms, rehabilitationPlans, incidents, clothingRequests,
+        medicalExaminations, educationalPlans, injuryReports, familyCaseStudies,
+        socialActivityPlans, socialActivityDocs, socialActivityFollowUps,
+        trainingReferrals, trainingPlanFollowUps, vocationalEvaluations,
+        familyGuidanceReferrals, postCareFollowUps, vaccinations, isolationStats,
+        loading, error, getBeneficiaryById, getBeneficiaryByNationalId,
+        updateBeneficiary, refreshData, addVisitLog, addSocialActivityPlan,
+        addSocialActivityDoc, addSocialActivityFollowUp, addMedicalProfile
+    ]);
 
     return (
-        <UnifiedDataContext.Provider value={{
-            beneficiaries,
-            visitLogs,
-            inventory,
-            medicalProfiles,
-            caseStudies,
-            socialResearchForms,
-            rehabilitationPlans,
-            incidents,
-            clothingRequests,
-            medicalExaminations,
-            educationalPlans,
-            injuryReports,
-            familyCaseStudies,
-            socialActivityPlans,
-            socialActivityDocs,
-            socialActivityFollowUps,
-            trainingReferrals,
-            trainingPlanFollowUps,
-            vocationalEvaluations,
-            familyGuidanceReferrals,
-            postCareFollowUps,
-            vaccinations,
-            isolationStats,
-            loading,
-            error,
-            getBeneficiaryById,
-            getBeneficiaryByNationalId,
-            updateBeneficiary,
-            refreshData,
-
-            addVisitLog,
-            addSocialActivityPlan,
-            addSocialActivityDoc,
-            addSocialActivityFollowUp,
-            addMedicalProfile
-        }}>
+        <UnifiedDataContext.Provider value={value}>
             {children}
         </UnifiedDataContext.Provider>
     );

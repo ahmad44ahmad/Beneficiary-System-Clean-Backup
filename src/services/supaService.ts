@@ -30,6 +30,74 @@ const isSupabaseReady = (): boolean => {
     return true;
 };
 
+// Shared transformation from Supabase snake_case to camelCase
+const transformBeneficiary = (b: any): UnifiedBeneficiaryProfile => {
+    const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
+    const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
+
+    const hasChronicCondition = Boolean(
+        medicalText.includes('سكري') ||
+        medicalText.includes('صرع') ||
+        medicalText.includes('diabetes') ||
+        medicalText.includes('epilepsy') ||
+        alerts.includes('diabetic') ||
+        alerts.includes('epilepsy')
+    );
+
+    let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
+    if (b.bedridden || alerts.includes('fallRisk')) riskLevel = 'high';
+    else if (alerts.length >= 3) riskLevel = 'high';
+    else if (alerts.length >= 1 || hasChronicCondition) riskLevel = 'medium';
+
+    return {
+        id: b.id,
+        nationalId: b.national_id,
+        fileId: b.file_id || b.file_number,
+        fullName: b.full_name || b.name || '',
+        name: b.full_name || b.name || '',
+        roomNumber: b.room_number,
+        bedNumber: b.bed_number,
+        nationality: b.nationality || 'سعودي',
+        gender: b.gender || 'male',
+        dob: b.dob || b.date_of_birth,
+        dateOfBirth: b.date_of_birth,
+        hijriBirthDate: b.hijri_birth_date,
+        age: b.age,
+        enrollmentDate: b.enrollment_date || b.admission_date,
+        admissionDate: b.admission_date,
+        hijriAdmissionDate: b.hijri_admission_date,
+        section: b.section,
+        status: b.status || 'active',
+        medicalDiagnosis: b.medical_diagnosis,
+        psychiatricDiagnosis: b.psychiatric_diagnosis,
+        disabilityType: b.disability_type,
+        iqLevel: b.iq_level,
+        iqScore: b.iq_score,
+        bedridden: b.bedridden || false,
+        guardianName: b.guardian_name,
+        guardianRelation: b.guardian_relation,
+        guardianPhone: b.guardian_phone,
+        guardianAddress: b.guardian_address,
+        guardianResidence: b.guardian_residence || b.guardian_address,
+        socialStatus: b.social_status,
+        visitFrequency: b.visit_frequency,
+        lastVisitDate: b.last_visit_date,
+        hijriLastVisitDate: b.hijri_last_visit_date,
+        alerts: alerts,
+        notes: b.notes,
+        dignity_profile: b.dignity_profile,
+        visitLogs: [],
+        incidents: [],
+        medicalHistory: [],
+        smartTags: [],
+        riskLevel,
+        isOrphan: b.guardian_relation === 'institution' ||
+            (b.social_status || '').includes('يتيم'),
+        hasChronicCondition,
+        requiresIsolation: false,
+    } as UnifiedBeneficiaryProfile;
+};
+
 export const supaService = {
     // ═══════════════════════════════════════════════════════════════
     // المستفيدون (Beneficiaries)
@@ -48,88 +116,7 @@ export const supaService = {
             return [];
         }
 
-        // Transform Supabase snake_case to camelCase for TypeScript interface
-        return (data || []).map((b: any) => {
-            // Parse alerts array from database
-            const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
-            const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
-
-            // Derive chronic condition flag
-            const hasChronicCondition = Boolean(
-                medicalText.includes('سكري') ||
-                medicalText.includes('صرع') ||
-                medicalText.includes('diabetes') ||
-                medicalText.includes('epilepsy') ||
-                alerts.includes('diabetic') ||
-                alerts.includes('epilepsy')
-            );
-
-            // Derive risk level based on alerts and conditions
-            let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
-            if (b.bedridden || alerts.includes('fallRisk')) riskLevel = 'high';
-            else if (alerts.length >= 3) riskLevel = 'high';
-            else if (alerts.length >= 1 || hasChronicCondition) riskLevel = 'medium';
-
-            return {
-                id: b.id,
-                nationalId: b.national_id,
-                fileId: b.file_id || b.file_number,
-                fullName: b.full_name || b.name || '',
-                name: b.full_name || b.name || '',
-                roomNumber: b.room_number,
-                bedNumber: b.bed_number,
-                nationality: b.nationality || 'سعودي',
-                gender: b.gender || 'male',
-                dob: b.dob || b.date_of_birth,
-                dateOfBirth: b.date_of_birth,
-                hijriBirthDate: b.hijri_birth_date,
-                age: b.age,
-                enrollmentDate: b.enrollment_date || b.admission_date,
-                admissionDate: b.admission_date,
-                hijriAdmissionDate: b.hijri_admission_date,
-                section: b.section,
-                status: b.status || 'active',
-
-                // Medical Info
-                medicalDiagnosis: b.medical_diagnosis,
-                psychiatricDiagnosis: b.psychiatric_diagnosis,
-                disabilityType: b.disability_type,
-                iqLevel: b.iq_level,
-                iqScore: b.iq_score,
-                bedridden: b.bedridden || false,
-
-                // Guardian Info
-                guardianName: b.guardian_name,
-                guardianRelation: b.guardian_relation,
-                guardianPhone: b.guardian_phone,
-                guardianAddress: b.guardian_address,
-                guardianResidence: b.guardian_residence || b.guardian_address,
-
-                // Social Info
-                socialStatus: b.social_status,
-                visitFrequency: b.visit_frequency,
-                lastVisitDate: b.last_visit_date,
-                hijriLastVisitDate: b.hijri_last_visit_date,
-
-                // Alerts & Notes
-                alerts: alerts,
-                notes: b.notes,
-                dignity_profile: b.dignity_profile,
-
-                // Extended unified fields (initialized)
-                visitLogs: [],
-                incidents: [],
-                medicalHistory: [],
-                smartTags: [],
-
-                // Computed fields
-                riskLevel,
-                isOrphan: b.guardian_relation === 'institution' ||
-                    (b.social_status || '').includes('يتيم'),
-                hasChronicCondition,
-                requiresIsolation: false,
-            } as UnifiedBeneficiaryProfile;
-        });
+        return (data || []).map(transformBeneficiary);
     },
 
     async getBeneficiaryById(id: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -146,9 +133,7 @@ export const supaService = {
             return null;
         }
         if (!data) return null;
-        // Re-use the same transformation as getBeneficiaries
-        const all = await this.getBeneficiaries();
-        return all.find(b => b.id === id) || null;
+        return transformBeneficiary(data);
     },
 
     async getBeneficiaryByNationalId(nationalId: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -165,9 +150,7 @@ export const supaService = {
             return null;
         }
         if (!data) return null;
-        // Re-use the same transformation as getBeneficiaries
-        const all = await this.getBeneficiaries();
-        return all.find(b => b.nationalId === nationalId) || null;
+        return transformBeneficiary(data);
     },
 
     async createBeneficiary(beneficiary: Partial<Beneficiary>): Promise<Beneficiary | null> {
@@ -283,9 +266,9 @@ export const supaService = {
 
         if (error) {
             logError('updateDignityProfile', error);
-            // Fallback for demo if column doesn't exist yet
+            // Fallback to localStorage if column doesn't exist yet
             localStorage.setItem(`dignity_profile_${beneficiaryId}`, JSON.stringify(profile));
-            return true; // Pretend success for UX
+            return false;
         }
         return true;
     },
@@ -536,20 +519,25 @@ export const supaService = {
 
         if (!isSupabaseReady()) return beneficiary;
 
-        const [medical, social, rehab, dietaryPlan] = await Promise.all([
-            supabase.from('medical_records').select('*').eq('national_id', nationalId),
-            supabase.from('social_research').select('*').eq('national_id', nationalId),
-            supabase.from('rehab_plans').select('*').eq('national_id', nationalId),
-            supabase.from('dietary_plans').select('*').eq('beneficiary_id', beneficiary.id).single()
-        ]);
+        try {
+            const [medical, social, rehab, dietaryPlan] = await Promise.all([
+                supabase.from('medical_records').select('*').eq('national_id', nationalId),
+                supabase.from('social_research').select('*').eq('national_id', nationalId),
+                supabase.from('rehab_plans').select('*').eq('national_id', nationalId),
+                supabase.from('dietary_plans').select('*').eq('beneficiary_id', beneficiary.id).single()
+            ]);
 
-        return {
-            ...beneficiary,
-            medicalHistory: medical.data || [],
-            socialResearch: social.data || [],
-            rehabPlans: rehab.data || [],
-            dietaryPlan: dietaryPlan.data
-        };
+            return {
+                ...beneficiary,
+                medicalHistory: medical.data || [],
+                socialResearch: social.data || [],
+                rehabPlans: rehab.data || [],
+                dietaryPlan: dietaryPlan.data
+            };
+        } catch (err) {
+            logError('getFullProfile', err);
+            return beneficiary;
+        }
     },
 
     // ═══════════════════════════════════════════════════════════════

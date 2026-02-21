@@ -10,9 +10,7 @@ import {
     Clock,
     Activity,
     TrendingUp,
-    CheckCircle2,
-    Shield,
-    FileWarning
+    CheckCircle2
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { AccountabilityAlerts } from '../modules/grc/AccountabilityAlerts';
@@ -38,7 +36,7 @@ const typeColors: Record<string, string> = {
 
 export const Dashboard: React.FC = () => {
     const { kpis, departmentPerformance, alerts } = useDashboardMetrics();
-    const { loading } = useUnifiedData();
+    const { beneficiaries, loading } = useUnifiedData();
 
     if (loading) {
         return (
@@ -201,7 +199,7 @@ export const Dashboard: React.FC = () => {
                 <div className="space-y-6">
                     {/* RISK PREDICTION ENGINE (Feature 3) */}
                     <div className="min-h-[24rem]">
-                        <RiskPredictionCard beneficiaries={Object.values(useUnifiedData().beneficiaries)} />
+                        <RiskPredictionCard beneficiaries={beneficiaries} />
                     </div>
 
                     <Card className="p-0 bg-white shadow-sm overflow-hidden">

@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-    LayoutDashboard,
     Users,
-    Stethoscope,
     Package,
-    Shirt,
-    CalendarCheck,
     Activity,
     Settings,
     FileText,
-    GraduationCap,
-    Building2,
     CheckCircle2,
     Network,
     Sparkles,
     Target,
     X,
     ChevronDown,
-    ChevronLeft,
     Home,
     Bell,
     LogOut,
@@ -32,7 +25,6 @@ import {
     Brain,
     Syringe,
     ClipboardList,
-    AlertCircle,
     Users2,
     TrendingUp
 } from 'lucide-react';
