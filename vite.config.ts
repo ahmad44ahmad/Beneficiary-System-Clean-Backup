@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/Beneficiary-System-Clean-Backup/',
+    base: env.VITE_BASE_URL || '/',
     envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
     server: {
       port: 5173,
