@@ -16,7 +16,7 @@ export const SocialOverview: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#148287] to-[#14415A] rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-14 h-14 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-2xl flex items-center justify-center shadow-lg">
                         <Users className="w-7 h-7 text-white" />
                     </div>
                     <div>
@@ -137,8 +137,8 @@ export const SocialOverview: React.FC = () => {
 
                 <Card title="التواصل والمتابعة">
                     <div className="p-4 space-y-3">
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-blue-50">
-                            <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
+                        <div className="flex items-center gap-3 p-3 rounded-lg bg-teal-50">
+                            <div className="p-2 rounded-lg bg-teal-100 text-hrsd-teal">
                                 <MessageSquare className="w-5 h-5" />
                             </div>
                             <div>
@@ -163,7 +163,7 @@ export const SocialOverview: React.FC = () => {
             <Card title="آخر النشاطات الاجتماعية">
                 <div className="p-4">
                     <div className="space-y-3">
-                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-[#148287]">
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-hrsd-teal">
                             <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center">
                                 <Calendar className="w-5 h-5 text-teal-600" />
                             </div>
@@ -173,7 +173,7 @@ export const SocialOverview: React.FC = () => {
                             </div>
                             <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">قيد المراجعة</span>
                         </div>
-                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-[#148287]">
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-hrsd-teal">
                             <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                                 <Heart className="w-5 h-5 text-green-600" />
                             </div>
@@ -183,7 +183,7 @@ export const SocialOverview: React.FC = () => {
                             </div>
                             <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">مكتمل</span>
                         </div>
-                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-[#148287]">
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-hrsd-teal">
                             <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
                                 <FileText className="w-5 h-5 text-orange-600" />
                             </div>
@@ -191,7 +191,7 @@ export const SocialOverview: React.FC = () => {
                                 <p className="font-medium text-gray-900">بحث اجتماعي</p>
                                 <p className="text-sm text-gray-500">خالد ناصر العتيبي - مكتمل</p>
                             </div>
-                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">موثق</span>
+                            <span className="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full">موثق</span>
                         </div>
                     </div>
                 </div>

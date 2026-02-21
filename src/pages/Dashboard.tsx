@@ -76,14 +76,14 @@ export const Dashboard: React.FC = () => {
             {/* 1. Real-Time KPIs (The Pulse) */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 {/* Active Beneficiaries */}
-                <Card className="p-6 border-r-4 border-r-[#148287] shadow-sm hover:shadow-md transition-shadow bg-white">
+                <Card className="p-6 border-r-4 border-r-hrsd-teal shadow-sm hover:shadow-md transition-shadow bg-white">
                     <div className="flex justify-between items-start">
                         <div>
                             <p className="text-sm font-medium text-gray-500 mb-1">المستفيدين النشطين</p>
                             <h3 className="text-3xl font-bold text-gray-900">{kpis.totalBeneficiaries}</h3>
                         </div>
                         <div className="p-2 bg-teal-50 rounded-lg">
-                            <Users className="w-6 h-6 text-[#148287]" />
+                            <Users className="w-6 h-6 text-hrsd-teal" />
                         </div>
                     </div>
                     <div className="mt-4 flex items-center text-xs text-green-600">
@@ -178,14 +178,14 @@ export const Dashboard: React.FC = () => {
 
                     {/* Quick Actions / Recent Activity Placeholder */}
                     <div className="grid grid-cols-2 gap-4">
-                        <Card className="p-4 bg-blue-50 border border-blue-100 flex items-center justify-between cursor-pointer hover:bg-blue-100 transition-colors">
+                        <Card className="p-4 bg-teal-50 border border-teal-100 flex items-center justify-between cursor-pointer hover:bg-teal-100 transition-colors">
                             <div className="flex items-center gap-3">
                                 <div className="bg-white p-2 rounded-full shadow-sm">
-                                    <FileCheck className="w-5 h-5 text-blue-600" />
+                                    <FileCheck className="w-5 h-5 text-hrsd-teal" />
                                 </div>
-                                <span className="font-medium text-blue-900">اعتماد الخطط الجديدة</span>
+                                <span className="font-medium text-teal-900">اعتماد الخطط الجديدة</span>
                             </div>
-                            <span className="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded-full">{kpis.draftPlansCount}</span>
+                            <span className="bg-teal-200 text-teal-800 text-xs font-bold px-2 py-1 rounded-full">{kpis.draftPlansCount}</span>
                         </Card>
                         <Card className="p-4 bg-purple-50 border border-purple-100 flex items-center justify-between cursor-pointer hover:bg-purple-100 transition-colors">
                             <div className="flex items-center gap-3">
@@ -224,7 +224,7 @@ export const Dashboard: React.FC = () => {
                                     </div>
                                     <p className="text-xs text-gray-500 mb-2">المستفيد: لاحق يحيى (1401)</p>
                                     <div className="flex gap-2">
-                                        <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">طبي</span>
+                                        <span className="text-[10px] bg-teal-100 text-teal-700 px-1.5 py-0.5 rounded">طبي</span>
                                         <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded">اجتماعي</span>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@ export const Dashboard: React.FC = () => {
                             </div>
                         </div>
                         <div className="p-3 bg-gray-50 text-center border-t">
-                            <button className="text-xs text-blue-600 font-medium hover:underline">عرض كل المهام</button>
+                            <button className="text-xs text-hrsd-teal font-medium hover:underline">عرض كل المهام</button>
                         </div>
                     </Card>
 
