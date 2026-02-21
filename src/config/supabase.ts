@@ -12,7 +12,7 @@ if (supabaseUrl && supabaseAnonKey) {
             autoRefreshToken: true,
         },
     });
-} else if (import.meta.env.DEV && import.meta.env.VITE_APP_MODE !== 'demo') {
+} else if (import.meta.env.VITE_APP_MODE !== 'demo') {
     console.error(
         '[Supabase] Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. ' +
         'Copy .env.example to .env and configure your Supabase credentials.'

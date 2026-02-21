@@ -18,13 +18,13 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const MOCK_USERS: Record<UserRole, User> = {
-    director: { id: 'u1', name: 'خالد بن مطر الزهراني (المدير)', role: 'director', avatar: 'https://i.pravatar.cc/150?u=director' },
-    doctor: { id: 'u2', name: 'د. محمد بلال (طبيب)', role: 'doctor', avatar: 'https://i.pravatar.cc/150?u=doctor' },
-    social_worker: { id: 'u3', name: 'أ. سعيد بن علي الغامدي (أخصائي اجتماعي)', role: 'social_worker', avatar: 'https://i.pravatar.cc/150?u=social' },
-    nurse: { id: 'u4', name: 'نايف بن عبدالله الغامدي (ممرض)', role: 'nurse', avatar: 'https://i.pravatar.cc/150?u=nurse' },
-    admin: { id: 'u5', name: 'أحمد بن عبدالله الشهري', role: 'admin', avatar: 'https://i.pravatar.cc/150?u=admin' },
-    specialist: { id: 'u6', name: 'أ. فهد (أخصائي)', role: 'specialist', avatar: 'https://i.pravatar.cc/150?u=specialist' },
-    secretary: { id: 'u7', name: 'أ. سكرتير (سكرتارية)', role: 'secretary', avatar: 'https://i.pravatar.cc/150?u=secretary' },
+    director: { id: 'u1', name: 'خالد بن مطر الزهراني (المدير)', role: 'director' },
+    doctor: { id: 'u2', name: 'د. محمد بلال (طبيب)', role: 'doctor' },
+    social_worker: { id: 'u3', name: 'أ. سعيد بن علي الغامدي (أخصائي اجتماعي)', role: 'social_worker' },
+    nurse: { id: 'u4', name: 'نايف بن عبدالله الغامدي (ممرض)', role: 'nurse' },
+    admin: { id: 'u5', name: 'أحمد بن عبدالله الشهري', role: 'admin' },
+    specialist: { id: 'u6', name: 'أ. فهد (أخصائي)', role: 'specialist' },
+    secretary: { id: 'u7', name: 'أ. سكرتير (سكرتارية)', role: 'secretary' },
 };
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
