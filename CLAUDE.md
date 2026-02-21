@@ -104,8 +104,8 @@ Gemini API key is loaded via `GEMINI_API_KEY` env var (exposed as `process.env.A
 ## Database
 
 - Backend is **Supabase** (PostgreSQL)
-- SQL migration files are in the project root (`001_core_schema.sql` through `011_shift_handover.sql`)
-- Additional migrations in `supabase/migrations/`
+- SQL schema files in `supabase/sql/` (`001_core_schema.sql` through `011_shift_handover.sql` and more)
+- Migrations in `supabase/migrations/`
 - Seed scripts in `scripts/` (`.mjs` and `.sql` files)
 - Supabase edge functions in `supabase/functions/`
 
@@ -117,3 +117,10 @@ Gemini API key is loaded via `GEMINI_API_KEY` env var (exposed as `process.env.A
 - **TypeScript**: Strict-ish config (ES2022 target, bundler module resolution, no emit)
 - **No ESLint/Prettier** configured — no automated linting or formatting rules
 - **Excluded from compilation**: `src/server/`, `src/_archive/` (see `tsconfig.json`)
+
+## Git Workflow Rules
+
+- Always work directly on the `main` branch unless explicitly asked to create a new branch
+- After each group of changes: `git add -A && git commit -m "..." && git push origin main`
+- Vercel auto-deploys from main — push = live update
+- Never create feature branches without explicit permission
