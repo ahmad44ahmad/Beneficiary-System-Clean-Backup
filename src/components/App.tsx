@@ -112,6 +112,17 @@ const DailyIPCInspection = lazy(() => import('../modules/ipc').then(m => ({ defa
 const IncidentReportForm = lazy(() => import('../modules/ipc').then(m => ({ default: m.IncidentReportForm })));
 const ImmunizationTracker = lazy(() => import('../modules/ipc').then(m => ({ default: m.ImmunizationTracker })));
 const IPCAnalytics = lazy(() => import('../modules/ipc').then(m => ({ default: m.IPCAnalytics })));
+const PPEProtocols = lazy(() => import('../modules/ipc').then(m => ({ default: m.PPEProtocols })));
+const BICLSCertification = lazy(() => import('../modules/ipc').then(m => ({ default: m.BICLSCertification })));
+const OccupationalExposure = lazy(() => import('../modules/ipc').then(m => ({ default: m.OccupationalExposure })));
+const OutbreakManagement = lazy(() => import('../modules/ipc').then(m => ({ default: m.OutbreakManagement })));
+const IsolationGuide = lazy(() => import('../modules/ipc').then(m => ({ default: m.IsolationGuide })));
+
+// Quality Module (Internal Audit)
+const InternalAuditSystem = lazy(() => import('../modules/quality').then(m => ({ default: m.InternalAuditSystem })));
+
+// Strategic KPI Targets
+const StrategicKPITargets = lazy(() => import('./indicators/StrategicKPITargets').then(m => ({ default: m.StrategicKPITargets })));
 
 // Empowerment Module
 const EmpowermentDashboard = lazy(() => import('../modules/empowerment').then(m => ({ default: m.EmpowermentDashboard })));
@@ -429,6 +440,17 @@ export const App = () => {
                     <Route path="ipc/incident/new" element={<IncidentReportForm />} />
                     <Route path="ipc/immunizations" element={<ImmunizationTracker />} />
                     <Route path="ipc/analytics" element={<IPCAnalytics />} />
+                    <Route path="ipc/ppe" element={<PPEProtocols />} />
+                    <Route path="ipc/bicsl" element={<BICLSCertification />} />
+                    <Route path="ipc/exposure/new" element={<OccupationalExposure />} />
+                    <Route path="ipc/outbreak" element={<OutbreakManagement />} />
+                    <Route path="ipc/isolation" element={<IsolationGuide />} />
+
+                    {/* Quality Internal Audit */}
+                    <Route path="quality/audit" element={<InternalAuditSystem />} />
+
+                    {/* Strategic KPI Targets */}
+                    <Route path="indicators/strategic" element={<StrategicKPITargets />} />
 
                     {/* Empowerment Module Routes */}
                     <Route path="empowerment" element={<EmpowermentDashboard />} />
