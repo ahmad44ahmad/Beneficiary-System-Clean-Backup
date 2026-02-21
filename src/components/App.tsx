@@ -104,6 +104,7 @@ const RiskRegister = lazy(() => import('../modules/grc/RiskRegister').then(m => 
 const ComplianceTracker = lazy(() => import('../modules/grc/ComplianceTracker').then(m => ({ default: m.ComplianceTracker })));
 const IndependenceTracker = lazy(() => import('../modules/grc/IndependenceTracker').then(m => ({ default: m.IndependenceTracker })));
 const AccountabilityAnalysis = lazy(() => import('../modules/grc/AccountabilityAnalysis').then(m => ({ default: m.AccountabilityAnalysis })));
+const QualityExcellenceHub = lazy(() => import('../modules/grc/QualityExcellenceHub').then(m => ({ default: m.QualityExcellenceHub })));
 
 // IPC Module
 const IPCDashboard = lazy(() => import('../modules/ipc').then(m => ({ default: m.IPCDashboard })));
@@ -408,7 +409,6 @@ export const App = () => {
                     <Route path="governance" element={<GoldenThreadView />} />
 
                     {/* Feature 5: Just Culture & OVR */}
-                    <Route path="quality" element={<QualityDashboard />} />
                     <Route path="ovr/new" element={<OvrReportForm />} />
 
                     {/* GRC Module Routes */}
@@ -418,6 +418,7 @@ export const App = () => {
                     <Route path="grc/compliance" element={<ComplianceTracker />} />
                     <Route path="grc/independence" element={<IndependenceTracker />} />
                     <Route path="grc/accountability" element={<AccountabilityAnalysis />} />
+                    <Route path="grc/excellence" element={<QualityExcellenceHub />} />
 
                     {/* Integrated Reports */}
                     <Route path="integrated-reports" element={<IntegratedDashboard />} />
