@@ -95,7 +95,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                 { to: '/compliance', icon: CheckCircle2, label: 'الامتثال ISO' },
                 { to: '/quality/manual', icon: FileText, label: 'دليل الجودة ISO' },
                 { to: '/quality/ncr-capa', icon: AlertOctagon, label: 'سجل NCR/CAPA', badge: 3 },
-                { to: '/quality-dashboard', icon: BarChart3, label: 'لوحة الجودة' },
+                { to: '/quality', icon: BarChart3, label: 'لوحة الجودة' },
                 { to: '/grc/excellence', icon: Sparkles, label: 'مركز التميز' },
             ]
         },
