@@ -88,7 +88,6 @@ async function isTableEmpty(tableName: string): Promise<boolean> {
             .limit(1);
 
         if (error) {
-            console.log(`[DataSeeder] Table ${tableName} check error:`, error.message);
             return true;
         }
 
@@ -105,7 +104,6 @@ async function seedBeneficiaries(): Promise<number> {
     if (!supabase) return 0;
 
     if (!(await isTableEmpty('beneficiaries'))) {
-        console.log('[DataSeeder] Beneficiaries table not empty, skipping...');
         return 0;
     }
 
@@ -119,7 +117,6 @@ async function seedBeneficiaries(): Promise<number> {
         return 0;
     }
 
-    console.log(`[DataSeeder] Seeded ${data?.length || 0} beneficiaries`);
     return data?.length || 0;
 }
 
@@ -130,7 +127,6 @@ async function seedRisks(): Promise<number> {
     if (!supabase) return 0;
 
     if (!(await isTableEmpty('grc_risks'))) {
-        console.log('[DataSeeder] Risks table not empty, skipping...');
         return 0;
     }
 
@@ -144,7 +140,6 @@ async function seedRisks(): Promise<number> {
         return 0;
     }
 
-    console.log(`[DataSeeder] Seeded ${data?.length || 0} risks`);
     return data?.length || 0;
 }
 
@@ -155,7 +150,6 @@ async function seedAuditLogs(): Promise<number> {
     if (!supabase) return 0;
 
     if (!(await isTableEmpty('audit_logs'))) {
-        console.log('[DataSeeder] Audit logs table not empty, skipping...');
         return 0;
     }
 
@@ -169,7 +163,6 @@ async function seedAuditLogs(): Promise<number> {
         return 0;
     }
 
-    console.log(`[DataSeeder] Seeded ${data?.length || 0} audit logs`);
     return data?.length || 0;
 }
 
@@ -182,8 +175,6 @@ export async function seedDemoData(): Promise<{
     auditLogs: number;
     success: boolean;
 }> {
-    console.log('[DataSeeder] Starting demo data seeding...');
-
     const results = {
         beneficiaries: 0,
         risks: 0,
@@ -192,7 +183,6 @@ export async function seedDemoData(): Promise<{
     };
 
     if (!supabase) {
-        console.log('[DataSeeder] No Supabase connection, skipping seeding');
         return results;
     }
 
@@ -201,8 +191,6 @@ export async function seedDemoData(): Promise<{
         results.risks = await seedRisks();
         results.auditLogs = await seedAuditLogs();
         results.success = true;
-
-        console.log('[DataSeeder] Seeding complete:', results);
     } catch (err) {
         console.error('[DataSeeder] Seeding failed:', err);
     }

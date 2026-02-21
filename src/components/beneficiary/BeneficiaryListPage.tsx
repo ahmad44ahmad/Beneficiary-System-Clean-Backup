@@ -87,17 +87,6 @@ export const BeneficiaryListPage: React.FC = () => {
                 return demoData;
             }
 
-            // DEBUG: Log total count and first 3 records with their alerts field
-            console.log('📊 [BeneficiaryListPage] Total records from Supabase:', data.length);
-            const withAlerts = data.filter(b => b.alerts && Array.isArray(b.alerts) && b.alerts.length > 0);
-            console.log('📊 [BeneficiaryListPage] Records with alerts:', withAlerts.length);
-            if (withAlerts.length > 0) {
-                console.log('📊 [BeneficiaryListPage] Sample alerts:', withAlerts.slice(0, 3).map(b => ({ name: b.full_name, alerts: b.alerts })));
-            }
-            if (data.length > 0) {
-                console.log('📊 [BeneficiaryListPage] First record alerts field:', data[0].alerts, 'type:', typeof data[0].alerts);
-            }
-
             return data.map(b => {
                 return {
                     id: b.id,

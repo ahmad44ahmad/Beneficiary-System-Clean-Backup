@@ -52,7 +52,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         // Demo mode: only when VITE_APP_MODE is explicitly set to "demo"
         if (EXPLICIT_DEMO_MODE) {
-            console.log('Auth: Running in EXPLICIT DEMO MODE (VITE_APP_MODE=demo)');
             setUser(mockUser);
             setLoading(false);
             return;

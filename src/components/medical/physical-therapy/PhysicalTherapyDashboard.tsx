@@ -93,12 +93,12 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                 {activeTab === 'assessment' ? (
                     <PTAssessmentForm
                         initialData={ptData.assessments[0]}
-                        onSubmit={(data) => console.log('Update PT Assessment', data)}
+                        onSubmit={() => {}}
                     />
                 ) : (
                     <PTProgressNoteManager
                         notes={[]} // Pass actual notes array here
-                        onAddNote={(note) => console.log('Add Note', note)}
+                        onAddNote={() => {}}
                     />
                 )}
             </div>

@@ -59,13 +59,11 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
 
             if (error) {
                 // Table may not exist - ignore silently
-                console.warn('AccountabilityAlerts: Table not available', error.message);
                 setGaps([]);
             } else if (data) {
                 setGaps(data);
             }
         } catch (error) {
-            console.warn('AccountabilityAlerts: Error fetching data', error);
             setGaps([]);
         } finally {
             setLoading(false);

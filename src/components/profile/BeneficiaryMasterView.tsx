@@ -198,7 +198,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {activeTab === 'empowerment' && (
                     <EmpowermentPlanBuilder
                         initialProfile={profile.empowermentProfile}
-                        onSave={(p) => console.log('Saved:', p)}
+                        onSave={() => {}}
                     />
                 )}
 

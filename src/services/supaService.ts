@@ -204,8 +204,6 @@ export const supaService = {
     async updateDignityProfile(beneficiaryId: string, profile: any): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
-        console.log('Saving Dignity Profile:', profile);
-
         const { error } = await supabase
             .from('beneficiaries')
             .update({
@@ -217,7 +215,6 @@ export const supaService = {
         if (error) {
             logError('updateDignityProfile', error);
             // Fallback for demo if column doesn't exist yet
-            console.warn('Failed to save to DB (likely missing column). Saving to local storage for demo.');
             localStorage.setItem(`dignity_profile_${beneficiaryId}`, JSON.stringify(profile));
             return true; // Pretend success for UX
         }

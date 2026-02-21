@@ -148,7 +148,6 @@ export const AuditLogViewer: React.FC = () => {
                 .limit(500);
 
             if (error) {
-                console.log('[AuditLogViewer] Using demo data:', error.message);
                 setLogs(DEMO_LOGS);
                 setUsingDemo(true);
                 return;

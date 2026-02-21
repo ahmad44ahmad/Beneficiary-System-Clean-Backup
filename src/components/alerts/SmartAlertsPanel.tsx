@@ -80,7 +80,6 @@ export const SmartAlertsPanel: React.FC = () => {
                     .order('created_at', { ascending: false });
 
                 if (error) {
-                    console.warn('Failed to fetch alerts:', error.message);
                     setLoading(false);
                     return;
                 }
@@ -104,7 +103,7 @@ export const SmartAlertsPanel: React.FC = () => {
                     setAlerts(transformedAlerts);
                 }
             } catch (err) {
-                console.warn('Error fetching alerts:', err);
+                // Silently fall back to default alerts
             } finally {
                 setLoading(false);
             }

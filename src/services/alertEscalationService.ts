@@ -41,11 +41,9 @@ export async function checkAndEscalate(alert: Alert) {
 
 // Mock implementation of escalation side-effects
 async function escalateAlert(alertId: string, newRole: string) {
-    console.log(`[ESCALATION] Alert ${alertId} escalated to ${newRole}`);
     // In real app: await supabase.from('alerts').update({ escalated: true, assigned_role: newRole }).eq('id', alertId);
 }
 
 async function notifyUser(email: string, alert: Alert) {
-    console.log(`[NOTIFICATION] Sending email to ${email} regarding alert ${alert.id}`);
     // In real app: await sendEmailService.send(...)
 }

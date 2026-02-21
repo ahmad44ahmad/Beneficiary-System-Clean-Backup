@@ -56,13 +56,6 @@ export const useGRCStats = (): GRCStats => {
                     complianceRate,
                     loading: false,
                 });
-
-                console.log('✅ GRC Dashboard stats loaded:', {
-                    totalRisks,
-                    criticalRisks,
-                    openNCRs,
-                    complianceRate
-                });
             } catch (error) {
                 console.error('Error fetching GRC stats:', error);
                 setStats({

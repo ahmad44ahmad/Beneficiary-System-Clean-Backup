@@ -129,7 +129,6 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             // Use Supabase data if available
             if (data && data.length > 0) {
                 dataSource = data;
-                console.log(`✓ Loaded ${data.length} beneficiaries from Supabase`);
             } else {
                 // Fallback to local data only if Supabase is empty
                 dataSource = localBeneficiaries.map(b => ({
@@ -148,7 +147,6 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
                     )),
                     requiresIsolation: false
                 } as UnifiedBeneficiaryProfile));
-                console.log(`ℹ Supabase returned empty, using local fallback: ${localBeneficiaries.length} beneficiaries`);
             }
 
             // Enrich with smart tags
@@ -186,7 +184,6 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             }));
 
             setBeneficiaries(enrichedData);
-            console.warn(`⚠ Error occurred, using local data: ${localBeneficiaries.length} beneficiaries`);
             setError('Using local data (Supabase unavailable)');
         } finally {
             setLoading(false);

@@ -65,8 +65,7 @@ export const useBeneficiaryMutations = () => {
     };
 
     const remove = async (id: string) => {
-        // Implement delete in supaService if needed, for now throw error or just log
-        console.warn("Delete not implemented in supaService yet");
+        // Implement delete in supaService if needed
         // setLoading(true);
         // try {
         //     await deleteBeneficiary(id);

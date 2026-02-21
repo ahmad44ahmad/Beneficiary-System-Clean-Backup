@@ -104,7 +104,6 @@ export const ComplianceTracker: React.FC = () => {
 
             // Fallback to demo data if empty or error
             if (error || !data || data.length === 0) {
-                console.log('Using demo compliance data due to:', error || 'Empty data');
                 finalData = DEMO_REQUIREMENTS;
             }
 

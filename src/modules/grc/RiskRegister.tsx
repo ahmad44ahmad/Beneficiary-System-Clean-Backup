@@ -91,7 +91,6 @@ export const RiskRegister: React.FC = () => {
         ];
 
         if (!supabase) {
-            console.warn('Supabase not available, using demo data');
             setRisks(demoRisks);
             setLoading(false);
             return;
@@ -104,13 +103,11 @@ export const RiskRegister: React.FC = () => {
                 .order('risk_score', { ascending: false });
 
             if (error) {
-                console.warn('Error fetching risks:', error.message);
                 setRisks(demoRisks);
             } else {
                 setRisks(data && data.length > 0 ? data : demoRisks);
             }
         } catch (err) {
-            console.warn('Failed to fetch risks:', err);
             setRisks(demoRisks);
         }
 

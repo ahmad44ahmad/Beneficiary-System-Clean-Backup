@@ -377,20 +377,18 @@ export const App = () => {
                     <Route path="indicators/hr" element={<HRImpactIndicator />} />
                     <Route path="indicators/benchmark" element={<BenchmarkDashboard />} />
                     <Route path="indicators/iso" element={<ISOComplianceTracker />} />
-                    <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
-                    <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
                             beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
                             beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
-                            onSuccess={() => console.log('Care form saved')}
+                            onSuccess={() => {}}
                         />
                     } />
                     <Route path="basira/safety" element={
                         <FallRiskAssessment
                             beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
                             beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
-                            onSave={(data) => console.log('Safety assessment saved', data)}
+                            onSave={() => {}}
                         />
                     } />
 

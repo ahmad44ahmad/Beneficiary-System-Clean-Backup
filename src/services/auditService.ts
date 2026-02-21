@@ -134,7 +134,6 @@ async function flushAuditQueue(): Promise<void> {
                 })));
 
             if (error) {
-                console.warn('[Audit] Failed to persist logs:', error.message);
                 // Store in localStorage as fallback
                 storeOfflineLogs(entries);
             }

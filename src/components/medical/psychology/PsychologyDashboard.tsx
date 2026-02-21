@@ -71,7 +71,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
             <div className="mt-6">
                 <PsychProfileForm
                     initialData={latestAssessment}
-                    onSubmit={(data) => console.log('Update Psych Assessment', data)}
+                    onSubmit={() => {}}
                 />
             </div>
         </div>

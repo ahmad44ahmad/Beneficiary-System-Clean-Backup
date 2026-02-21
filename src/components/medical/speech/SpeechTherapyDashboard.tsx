@@ -71,7 +71,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
             <div className="mt-6">
                 <SpeechAssessmentForm
                     initialData={latestAssessment}
-                    onSubmit={(data) => console.log('Update Speech Assessment', data)}
+                    onSubmit={() => {}}
                 />
             </div>
         </div>

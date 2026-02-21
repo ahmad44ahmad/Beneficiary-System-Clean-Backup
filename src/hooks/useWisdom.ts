@@ -36,11 +36,6 @@ export function useWisdom() {
         if (data) setResults(data as WisdomEntry[]);
         if (error) {
             console.error('Error searching wisdom:', error);
-            // Fallback for demo when table is empty or missing
-            if (error.code === '42P01') {
-                console.warn('Wisdom table missing, returning mock data');
-                // Mock data fallback could go here
-            }
         }
         setLoading(false);
         return data || [];
