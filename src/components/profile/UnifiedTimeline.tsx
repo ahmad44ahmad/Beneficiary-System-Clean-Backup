@@ -88,7 +88,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
         return (
             <div className="flex flex-col items-center justify-center py-12 text-gray-400">
                 <Clock className="w-12 h-12 mb-3 opacity-20" />
-                <p>No history events recorded.</p>
+                <p>لا توجد أحداث مسجلة في السجل</p>
             </div>
         );
     }

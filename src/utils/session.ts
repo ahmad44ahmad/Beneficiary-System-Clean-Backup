@@ -20,6 +20,7 @@ let sessionTimeoutId: ReturnType<typeof setTimeout> | null = null;
 let warningTimeoutId: ReturnType<typeof setTimeout> | null = null;
 let onSessionWarning: (() => void) | null = null;
 let onSessionTimeout: (() => void) | null = null;
+let storageHandler: ((e: StorageEvent) => void) | null = null;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Session ID Management
@@ -127,9 +128,8 @@ export function startSessionManager(config: SessionConfig = {}): void {
     resetTimeouts();
 
     // Sync session across tabs
-    window.addEventListener('storage', (e) => {
+    storageHandler = (e: StorageEvent) => {
         if (e.key === 'basira_session_sync') {
-            // Another tab indicated activity or logout
             const data = JSON.parse(e.newValue || '{}');
             if (data.type === 'activity') {
                 updateLastActivity();
@@ -139,7 +139,8 @@ export function startSessionManager(config: SessionConfig = {}): void {
                 }
             }
         }
-    });
+    };
+    window.addEventListener('storage', storageHandler);
 }
 
 /**
@@ -150,6 +151,12 @@ export function stopSessionManager(): void {
     ACTIVITY_EVENTS.forEach(event => {
         document.removeEventListener(event, updateLastActivity);
     });
+
+    // Remove storage listener
+    if (storageHandler) {
+        window.removeEventListener('storage', storageHandler);
+        storageHandler = null;
+    }
 
     // Clear timeouts
     if (warningTimeoutId) {

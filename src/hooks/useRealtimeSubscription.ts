@@ -22,7 +22,6 @@ export const useRealtimeSubscription = () => {
     useEffect(() => {
         // Skip if Supabase is not configured
         if (!supabase) {
-            console.warn('[Realtime] Supabase not configured, skipping subscription');
             return;
         }
 
@@ -32,8 +31,7 @@ export const useRealtimeSubscription = () => {
             .on(
                 'postgres_changes',
                 { event: '*', schema: 'public', table: 'vital_signs' },
-                (payload) => {
-                    console.log('[Realtime] vital_signs change:', payload.eventType);
+                () => {
                     queryClient.invalidateQueries({ queryKey: queryKeys.medical.all });
                 }
             )
@@ -41,8 +39,7 @@ export const useRealtimeSubscription = () => {
             .on(
                 'postgres_changes',
                 { event: '*', schema: 'public', table: 'medications' },
-                (payload) => {
-                    console.log('[Realtime] medications change:', payload.eventType);
+                () => {
                     queryClient.invalidateQueries({ queryKey: queryKeys.medical.medications() });
                 }
             )
@@ -50,8 +47,7 @@ export const useRealtimeSubscription = () => {
             .on(
                 'postgres_changes',
                 { event: '*', schema: 'public', table: 'incidents' },
-                (payload) => {
-                    console.log('[Realtime] incidents change:', payload.eventType);
+                () => {
                     queryClient.invalidateQueries({ queryKey: queryKeys.incidents.all });
                 }
             )
@@ -59,8 +55,7 @@ export const useRealtimeSubscription = () => {
             .on(
                 'postgres_changes',
                 { event: '*', schema: 'public', table: 'grc_risks' },
-                (payload) => {
-                    console.log('[Realtime] grc_risks change:', payload.eventType);
+                () => {
                     queryClient.invalidateQueries({ queryKey: queryKeys.grc.risks() });
                     queryClient.invalidateQueries({ queryKey: queryKeys.grc.stats() });
                 }
@@ -69,8 +64,7 @@ export const useRealtimeSubscription = () => {
             .on(
                 'postgres_changes',
                 { event: '*', schema: 'public', table: 'fall_risk_assessments' },
-                (payload) => {
-                    console.log('[Realtime] fall_risk_assessments change:', payload.eventType);
+                () => {
                     queryClient.invalidateQueries({ queryKey: queryKeys.beneficiaries.all });
                     queryClient.invalidateQueries({ queryKey: queryKeys.stats.dashboard() });
                 }
@@ -79,17 +73,13 @@ export const useRealtimeSubscription = () => {
             .on(
                 'postgres_changes',
                 { event: '*', schema: 'public', table: 'beneficiaries' },
-                (payload) => {
-                    console.log('[Realtime] beneficiaries change:', payload.eventType);
+                () => {
                     queryClient.invalidateQueries({ queryKey: queryKeys.beneficiaries.all });
                 }
             )
-            .subscribe((status) => {
-                console.log('[Realtime] Subscription status:', status);
-            });
+            .subscribe();
 
         return () => {
-            console.log('[Realtime] Cleaning up subscription');
             supabase.removeChannel(channel);
         };
     }, [queryClient]);

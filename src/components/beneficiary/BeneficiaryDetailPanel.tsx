@@ -304,7 +304,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                             <VisitLogPanel
                                 beneficiary={beneficiary}
                                 logs={visitLogs}
-                                onAddLog={(log) => console.log('Log added:', log)} // Placeholder or wire to handleUpdate
+                                onAddLog={handleUpdate}
                             />
 
                             <DetailCard title="سجل الإصابات والحوادث">

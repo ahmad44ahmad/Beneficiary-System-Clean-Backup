@@ -1,10 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-    LayoutDashboard,
     Users,
-    Heart,
-    Bell,
     Menu,
     Home,
     Stethoscope,

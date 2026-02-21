@@ -3,7 +3,7 @@
 // Shows notifications when medications are overdue for administration
 // ═══════════════════════════════════════════════════════════════════════════
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Pill, Clock, X, ChevronRight, AlertCircle } from 'lucide-react';
 import { supabase } from '../../config/supabase';
@@ -23,6 +23,8 @@ export const MedicationReminderAlert: React.FC = () => {
     const [overdueAlerts, setOverdueAlerts] = useState<OverdueMedication[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
+    const isMinimizedRef = useRef(isMinimized);
+    isMinimizedRef.current = isMinimized;
     const { showToast } = useToast();
     const navigate = useNavigate();
 
@@ -72,7 +74,7 @@ export const MedicationReminderAlert: React.FC = () => {
                     });
 
                     setOverdueAlerts(alerts);
-                    if (alerts.length > 0 && !isMinimized) {
+                    if (alerts.length > 0 && !isMinimizedRef.current) {
                         setIsVisible(true);
                     }
                 }
@@ -88,13 +90,14 @@ export const MedicationReminderAlert: React.FC = () => {
         const interval = setInterval(checkOverdue, 60000);
 
         return () => clearInterval(interval);
-    }, [isMinimized]);
+    }, []);
 
     const handleDismissAlert = (id: string) => {
-        setOverdueAlerts(prev => prev.filter(a => a.id !== id));
-        if (overdueAlerts.length <= 1) {
-            setIsVisible(false);
-        }
+        setOverdueAlerts(prev => {
+            const remaining = prev.filter(a => a.id !== id);
+            if (remaining.length === 0) setIsVisible(false);
+            return remaining;
+        });
     };
 
     const handleDismissAll = () => {

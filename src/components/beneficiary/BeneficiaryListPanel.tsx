@@ -62,7 +62,7 @@ export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ bene
                     تصدير القائمة (Excel)
                 </button>
                 <div className="text-xs text-gray-500 text-center">
-                    {loading ? 'Updating...' : `Showing ${paginatedBeneficiaries.length} of ${filteredBeneficiaries.length} beneficiaries`}
+                    {loading ? 'جاري التحديث...' : `عرض ${paginatedBeneficiaries.length} من ${filteredBeneficiaries.length} مستفيد`}
                 </div>
             </div>
 
@@ -90,7 +90,7 @@ export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ bene
 
                 {!loading && filteredBeneficiaries.length === 0 && (
                     <div className="p-8 text-center text-gray-500">
-                        No beneficiaries found matching "{searchTerm}"
+                        لم يتم العثور على مستفيدين مطابقين لـ "{searchTerm}"
                     </div>
                 )}
             </div>
@@ -103,17 +103,17 @@ export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ bene
                         disabled={currentPage === 1}
                         className="px-3 py-1 text-sm bg-white border rounded disabled:opacity-50 hover:bg-gray-50"
                     >
-                        Previous
+                        السابق
                     </button>
                     <span className="text-sm text-gray-600">
-                        Page {currentPage} of {totalPages}
+                        صفحة {currentPage} من {totalPages}
                     </span>
                     <button
                         onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                         disabled={currentPage === totalPages}
                         className="px-3 py-1 text-sm bg-white border rounded disabled:opacity-50 hover:bg-gray-50"
                     >
-                        Next
+                        التالي
                     </button>
                 </div>
             )}

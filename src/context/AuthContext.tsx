@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../config/supabase';
 
@@ -52,7 +52,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         // Demo mode: only when VITE_APP_MODE is explicitly set to "demo"
         if (EXPLICIT_DEMO_MODE) {
-            console.log('Auth: Running in EXPLICIT DEMO MODE (VITE_APP_MODE=demo)');
             setUser(mockUser);
             setLoading(false);
             return;
@@ -107,7 +106,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return () => subscription.unsubscribe();
     }, []);
 
-    const signIn = async (email: string, pass: string) => {
+    const signIn = useCallback(async (email: string, pass: string) => {
         if (isDemoMode) {
             setUser(mockUser);
             return;
@@ -119,9 +118,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             password: pass,
         });
         if (error) throw error;
-    };
+    }, [isDemoMode]);
 
-    const signUp = async (email: string, pass: string) => {
+    const signUp = useCallback(async (email: string, pass: string) => {
         if (isDemoMode) {
             setUser(mockUser);
             return;
@@ -133,9 +132,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             password: pass,
         });
         if (error) throw error;
-    };
+    }, [isDemoMode]);
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = useCallback(async () => {
         if (isDemoMode) {
             setUser(mockUser);
             return;
@@ -146,9 +145,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             provider: 'google',
         });
         if (error) throw error;
-    };
+    }, [isDemoMode]);
 
-    const signOut = async () => {
+    const signOut = useCallback(async () => {
         if (isDemoMode) {
             setUser(null);
             return;
@@ -157,10 +156,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
-    };
+    }, [isDemoMode]);
+
+    const value = useMemo(() => ({
+        user, session, loading, authError, signIn, signUp, signInWithGoogle, signOut, isDemoMode
+    }), [user, session, loading, authError, signIn, signUp, signInWithGoogle, signOut, isDemoMode]);
 
     return (
-        <AuthContext.Provider value={{ user, session, loading, authError, signIn, signUp, signInWithGoogle, signOut, isDemoMode }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );

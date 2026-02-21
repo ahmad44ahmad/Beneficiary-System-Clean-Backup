@@ -13,6 +13,7 @@ import { UnifiedDataProvider } from './src/context/UnifiedDataContext';
 import { AuthProvider } from './src/context/AuthContext';
 import { UserProvider } from './src/context/UserContext';
 import { ToastProvider } from './src/context/ToastContext';
+import { ViewModeProvider } from './src/context/ViewModeContext';
 import { ErrorBoundary } from './src/components/common/ErrorBoundary';
 import { ThemeProvider } from './src/config/theme';
 
@@ -32,7 +33,9 @@ root.render(
                                 <AuthProvider>
                                     <UserProvider>
                                         <ToastProvider>
-                                            <App />
+                                            <ViewModeProvider>
+                                                <App />
+                                            </ViewModeProvider>
                                         </ToastProvider>
                                     </UserProvider>
                                 </AuthProvider>

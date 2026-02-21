@@ -1,22 +1,10 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
 import { useApp } from '../context/AppContext';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// LOADING FALLBACK COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════
-const LoadingFallback = () => (
-    <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-hrsd-teal border-t-transparent rounded-full animate-spin" />
-            <span className="text-slate-500 text-sm">جاري التحميل...</span>
-        </div>
-    </div>
-);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // ESSENTIAL PAGES (Static Imports - Load Immediately)
@@ -39,7 +27,6 @@ const PermissionsPage = lazy(() => import('../pages/PermissionsPage').then(m => 
 // ═══════════════════════════════════════════════════════════════════════════
 
 // Medical Module
-const MedicalDashboard = lazy(() => import('./medical/MedicalDashboard').then(m => ({ default: m.MedicalDashboard })));
 const MedicalOverview = lazy(() => import('./medical/MedicalOverview').then(m => ({ default: m.MedicalOverview })));
 
 // Social Module
@@ -55,7 +42,6 @@ const NcrCapaTracker = lazy(() => import('./quality/NcrCapaTracker').then(m => (
 // Reports Module
 const StrategicDashboard = lazy(() => import('./reports/StrategicDashboard').then(m => ({ default: m.StrategicDashboard })));
 const ReportsDashboard = lazy(() => import('./reports/ReportsDashboard').then(m => ({ default: m.ReportsDashboard })));
-const ReportGenerator = lazy(() => import('./reports/ReportGenerator').then(m => ({ default: m.ReportGenerator })));
 const ExecutiveReport = lazy(() => import('../pages/ExecutiveReport').then(m => ({ default: m.ExecutiveReport })));
 
 // Dashboard Components
@@ -229,11 +215,7 @@ export const App = () => {
                 {/* Main Application with Layout */}
                 <Route path="/*" element={<MainLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="knowledge" element={
-                        <Suspense fallback={<LoadingFallback />}>
-                            <ExternalKnowledgeBase />
-                        </Suspense>
-                    } />
+                    <Route path="knowledge" element={<ExternalKnowledgeBase />} />
                     <Route path="executive-report" element={<ExecutiveReport />} />
 
                     <Route path="beneficiaries" element={
@@ -377,20 +359,16 @@ export const App = () => {
                     <Route path="indicators/hr" element={<HRImpactIndicator />} />
                     <Route path="indicators/benchmark" element={<BenchmarkDashboard />} />
                     <Route path="indicators/iso" element={<ISOComplianceTracker />} />
-                    <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
-                    <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
-                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
-                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
-                            onSuccess={() => console.log('Care form saved')}
+                            beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={selectedBeneficiary?.id || ''}
                         />
                     } />
                     <Route path="basira/safety" element={
                         <FallRiskAssessment
-                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
-                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
-                            onSave={(data) => console.log('Safety assessment saved', data)}
+                            beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={selectedBeneficiary?.id || ''}
                         />
                     } />
 

@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertTriangle, X, ChevronRight, MapPin, Clock } from 'lucide-react';
+import { AlertTriangle, X, ChevronRight, MapPin } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
@@ -79,8 +79,8 @@ export const IncidentNotificationAlert: React.FC = () => {
                             try {
                                 const audio = new Audio('/alert.mp3');
                                 audio.volume = 0.5;
-                                audio.play().catch(() => { });
-                            } catch (e) { }
+                                audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
+                            } catch (_) { /* Audio not supported */ }
                         }
 
                         const severityLabel = SEVERITY_CONFIG[incident.severity as keyof typeof SEVERITY_CONFIG]?.label || '';
@@ -99,10 +99,11 @@ export const IncidentNotificationAlert: React.FC = () => {
     }, [showToast]);
 
     const handleDismiss = (id: string) => {
-        setIncidents(prev => prev.filter(i => i.id !== id));
-        if (incidents.length <= 1) {
-            setIsVisible(false);
-        }
+        setIncidents(prev => {
+            const remaining = prev.filter(i => i.id !== id);
+            if (remaining.length === 0) setIsVisible(false);
+            return remaining;
+        });
     };
 
     const handleDismissAll = () => {
@@ -163,7 +164,7 @@ export const IncidentNotificationAlert: React.FC = () => {
                                     key={incident.id}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className={`flex items-start justify-between p-3 ${config.bgLight} rounded-xl border border-${incident.severity === 'critical' ? 'red' : 'orange'}-200`}
+                                    className={`flex items-start justify-between p-3 ${config.bgLight} rounded-xl border ${incident.severity === 'critical' ? 'border-red-200' : 'border-orange-200'}`}
                                 >
                                     <div className="flex items-start gap-3">
                                         <div className={`p-2 ${config.color} rounded-lg`}>

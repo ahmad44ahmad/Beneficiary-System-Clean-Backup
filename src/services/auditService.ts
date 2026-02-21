@@ -134,7 +134,6 @@ async function flushAuditQueue(): Promise<void> {
                 })));
 
             if (error) {
-                console.warn('[Audit] Failed to persist logs:', error.message);
                 // Store in localStorage as fallback
                 storeOfflineLogs(entries);
             }
@@ -183,6 +182,8 @@ export async function syncOfflineLogs(): Promise<void> {
 // Auto-flush timer
 // ═══════════════════════════════════════════════════════════════════════════
 
+let beforeUnloadHandler: (() => void) | null = null;
+
 export function startAuditService(): void {
     if (flushTimer) return;
 
@@ -192,10 +193,9 @@ export function startAuditService(): void {
     syncOfflineLogs();
 
     // Flush on page unload
-    if (typeof window !== 'undefined') {
-        window.addEventListener('beforeunload', () => {
-            flushAuditQueue();
-        });
+    if (typeof window !== 'undefined' && !beforeUnloadHandler) {
+        beforeUnloadHandler = () => { flushAuditQueue(); };
+        window.addEventListener('beforeunload', beforeUnloadHandler);
     }
 }
 
@@ -203,6 +203,10 @@ export function stopAuditService(): void {
     if (flushTimer) {
         clearInterval(flushTimer);
         flushTimer = null;
+    }
+    if (typeof window !== 'undefined' && beforeUnloadHandler) {
+        window.removeEventListener('beforeunload', beforeUnloadHandler);
+        beforeUnloadHandler = null;
     }
     flushAuditQueue();
 }

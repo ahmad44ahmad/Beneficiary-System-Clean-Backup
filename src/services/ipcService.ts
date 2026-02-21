@@ -212,7 +212,6 @@ export const ipcService = {
 
     async saveInspection(inspection: Partial<IPCInspection>): Promise<{ success: boolean; id?: string }> {
         if (!isSupabaseReady()) {
-            console.log('[IPCService] Demo mode - inspection not saved:', inspection);
             return { success: true, id: 'demo-' + Date.now() };
         }
 
@@ -263,7 +262,6 @@ export const ipcService = {
 
     async saveIncident(incident: Partial<IPCIncident>): Promise<{ success: boolean; id?: string }> {
         if (!isSupabaseReady()) {
-            console.log('[IPCService] Demo mode - incident not saved:', incident);
             return { success: true, id: 'demo-' + Date.now() };
         }
 

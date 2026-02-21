@@ -32,11 +32,11 @@ const mockMedications: Medication[] = [
 ];
 
 const STATUS_CONFIG = {
-    pending: { color: 'blue', bgColor: 'bg-blue-500/20', borderColor: 'border-blue-500/50', label: 'قيد الانتظار' },
-    overdue: { color: 'red', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', label: 'متأخر' },
-    administered: { color: 'green', bgColor: 'bg-green-500/20', borderColor: 'border-green-500/50', label: 'تم الإعطاء' },
-    skipped: { color: 'yellow', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-500/50', label: 'تم التخطي' },
-    refused: { color: 'orange', bgColor: 'bg-orange-500/20', borderColor: 'border-orange-500/50', label: 'رفض' },
+    pending: { color: 'blue', bgColor: 'bg-blue-500/20', borderColor: 'border-blue-500/50', textColor: 'text-blue-400', label: 'قيد الانتظار' },
+    overdue: { color: 'red', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', textColor: 'text-red-400', label: 'متأخر' },
+    administered: { color: 'green', bgColor: 'bg-green-500/20', borderColor: 'border-green-500/50', textColor: 'text-green-400', label: 'تم الإعطاء' },
+    skipped: { color: 'yellow', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-500/50', textColor: 'text-yellow-400', label: 'تم التخطي' },
+    refused: { color: 'orange', bgColor: 'bg-orange-500/20', borderColor: 'border-orange-500/50', textColor: 'text-orange-400', label: 'رفض' },
 };
 
 export const MedicationAdministration: React.FC = () => {
@@ -169,7 +169,7 @@ export const MedicationAdministration: React.FC = () => {
                                         <div>
                                             <div className="flex items-center gap-2">
                                                 <h3 className="font-bold text-white text-lg">{med.name}</h3>
-                                                <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusConfig.bgColor} text-${statusConfig.color}-400`}>
+                                                <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusConfig.bgColor} ${statusConfig.textColor}`}>
                                                     {statusConfig.label}
                                                 </span>
                                                 {med.delayMinutes && (

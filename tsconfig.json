@@ -31,8 +31,6 @@
   ],
   "exclude": [
     "node_modules",
-    "outputs",
-    "src/server",
-    "src/_archive"
+    "outputs"
   ]
 }

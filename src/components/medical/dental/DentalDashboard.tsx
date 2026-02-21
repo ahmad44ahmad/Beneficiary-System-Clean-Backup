@@ -71,7 +71,7 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary, o
             <div className="mt-6">
                 <DentalOdontogram
                     initialData={latestAssessment}
-                    onSubmit={(data) => console.log('Update Dental Assessment', data)}
+                    onSubmit={() => {}}
                 />
             </div>
         </div>

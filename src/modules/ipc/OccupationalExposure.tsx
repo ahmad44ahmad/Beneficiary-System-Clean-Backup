@@ -206,7 +206,6 @@ export const OccupationalExposure: React.FC = () => {
 
   const handleSubmit = async () => {
     // In production this would save to Supabase
-    console.log('Submitting exposure report:', formData);
     alert('تم إرسال البلاغ بنجاح');
     setActiveTab('registry');
     setCurrentStep(1);

@@ -30,6 +30,74 @@ const isSupabaseReady = (): boolean => {
     return true;
 };
 
+// Shared transformation from Supabase snake_case to camelCase
+const transformBeneficiary = (b: any): UnifiedBeneficiaryProfile => {
+    const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
+    const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
+
+    const hasChronicCondition = Boolean(
+        medicalText.includes('سكري') ||
+        medicalText.includes('صرع') ||
+        medicalText.includes('diabetes') ||
+        medicalText.includes('epilepsy') ||
+        alerts.includes('diabetic') ||
+        alerts.includes('epilepsy')
+    );
+
+    let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
+    if (b.bedridden || alerts.includes('fallRisk')) riskLevel = 'high';
+    else if (alerts.length >= 3) riskLevel = 'high';
+    else if (alerts.length >= 1 || hasChronicCondition) riskLevel = 'medium';
+
+    return {
+        id: b.id,
+        nationalId: b.national_id,
+        fileId: b.file_id || b.file_number,
+        fullName: b.full_name || b.name || '',
+        name: b.full_name || b.name || '',
+        roomNumber: b.room_number,
+        bedNumber: b.bed_number,
+        nationality: b.nationality || 'سعودي',
+        gender: b.gender || 'male',
+        dob: b.dob || b.date_of_birth,
+        dateOfBirth: b.date_of_birth,
+        hijriBirthDate: b.hijri_birth_date,
+        age: b.age,
+        enrollmentDate: b.enrollment_date || b.admission_date,
+        admissionDate: b.admission_date,
+        hijriAdmissionDate: b.hijri_admission_date,
+        section: b.section,
+        status: b.status || 'active',
+        medicalDiagnosis: b.medical_diagnosis,
+        psychiatricDiagnosis: b.psychiatric_diagnosis,
+        disabilityType: b.disability_type,
+        iqLevel: b.iq_level,
+        iqScore: b.iq_score,
+        bedridden: b.bedridden || false,
+        guardianName: b.guardian_name,
+        guardianRelation: b.guardian_relation,
+        guardianPhone: b.guardian_phone,
+        guardianAddress: b.guardian_address,
+        guardianResidence: b.guardian_residence || b.guardian_address,
+        socialStatus: b.social_status,
+        visitFrequency: b.visit_frequency,
+        lastVisitDate: b.last_visit_date,
+        hijriLastVisitDate: b.hijri_last_visit_date,
+        alerts: alerts,
+        notes: b.notes,
+        dignity_profile: b.dignity_profile,
+        visitLogs: [],
+        incidents: [],
+        medicalHistory: [],
+        smartTags: [],
+        riskLevel,
+        isOrphan: b.guardian_relation === 'institution' ||
+            (b.social_status || '').includes('يتيم'),
+        hasChronicCondition,
+        requiresIsolation: false,
+    } as UnifiedBeneficiaryProfile;
+};
+
 export const supaService = {
     // ═══════════════════════════════════════════════════════════════
     // المستفيدون (Beneficiaries)
@@ -48,88 +116,7 @@ export const supaService = {
             return [];
         }
 
-        // Transform Supabase snake_case to camelCase for TypeScript interface
-        return (data || []).map((b: any) => {
-            // Parse alerts array from database
-            const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
-            const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
-
-            // Derive chronic condition flag
-            const hasChronicCondition = Boolean(
-                medicalText.includes('سكري') ||
-                medicalText.includes('صرع') ||
-                medicalText.includes('diabetes') ||
-                medicalText.includes('epilepsy') ||
-                alerts.includes('diabetic') ||
-                alerts.includes('epilepsy')
-            );
-
-            // Derive risk level based on alerts and conditions
-            let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
-            if (b.bedridden || alerts.includes('fallRisk')) riskLevel = 'high';
-            else if (alerts.length >= 3) riskLevel = 'high';
-            else if (alerts.length >= 1 || hasChronicCondition) riskLevel = 'medium';
-
-            return {
-                id: b.id,
-                nationalId: b.national_id,
-                fileId: b.file_id,
-                fullName: b.full_name || b.name || '',
-                name: b.full_name || b.name || '',
-                roomNumber: b.room_number,
-                bedNumber: b.bed_number,
-                nationality: b.nationality || 'سعودي',
-                gender: b.gender || 'male',
-                dob: b.dob || b.date_of_birth,
-                dateOfBirth: b.date_of_birth,
-                hijriBirthDate: b.hijri_birth_date,
-                age: b.age,
-                enrollmentDate: b.enrollment_date || b.admission_date,
-                admissionDate: b.admission_date,
-                hijriAdmissionDate: b.hijri_admission_date,
-                section: b.section,
-                status: b.status || 'active',
-
-                // Medical Info
-                medicalDiagnosis: b.medical_diagnosis,
-                psychiatricDiagnosis: b.psychiatric_diagnosis,
-                disabilityType: b.disability_type,
-                iqLevel: b.iq_level,
-                iqScore: b.iq_score,
-                bedridden: b.bedridden || false,
-
-                // Guardian Info
-                guardianName: b.guardian_name,
-                guardianRelation: b.guardian_relation,
-                guardianPhone: b.guardian_phone,
-                guardianAddress: b.guardian_address,
-                guardianResidence: b.guardian_residence || b.guardian_address,
-
-                // Social Info
-                socialStatus: b.social_status,
-                visitFrequency: b.visit_frequency,
-                lastVisitDate: b.last_visit_date,
-                hijriLastVisitDate: b.hijri_last_visit_date,
-
-                // Alerts & Notes
-                alerts: alerts,
-                notes: b.notes,
-                dignity_profile: b.dignity_profile,
-
-                // Extended unified fields (initialized)
-                visitLogs: [],
-                incidents: [],
-                medicalHistory: [],
-                smartTags: [],
-
-                // Computed fields
-                riskLevel,
-                isOrphan: b.guardian_relation === 'institution' ||
-                    (b.social_status || '').includes('يتيم'),
-                hasChronicCondition,
-                requiresIsolation: false,
-            } as UnifiedBeneficiaryProfile;
-        });
+        return (data || []).map(transformBeneficiary);
     },
 
     async getBeneficiaryById(id: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -145,7 +132,8 @@ export const supaService = {
             logError(`getBeneficiaryById(${id})`, error);
             return null;
         }
-        return data as UnifiedBeneficiaryProfile;
+        if (!data) return null;
+        return transformBeneficiary(data);
     },
 
     async getBeneficiaryByNationalId(nationalId: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -161,7 +149,8 @@ export const supaService = {
             logError(`getBeneficiaryByNationalId(${nationalId})`, error);
             return null;
         }
-        return data as UnifiedBeneficiaryProfile;
+        if (!data) return null;
+        return transformBeneficiary(data);
     },
 
     async createBeneficiary(beneficiary: Partial<Beneficiary>): Promise<Beneficiary | null> {
@@ -172,9 +161,43 @@ export const supaService = {
 
         if (!isSupabaseReady()) return null;
 
+        // Transform camelCase to snake_case for Supabase
+        const dbRecord: Record<string, any> = {
+            national_id: beneficiary.nationalId,
+            file_id: beneficiary.fileId,
+            full_name: beneficiary.fullName || beneficiary.name,
+            room_number: beneficiary.roomNumber,
+            bed_number: beneficiary.bedNumber,
+            nationality: beneficiary.nationality,
+            gender: beneficiary.gender,
+            date_of_birth: beneficiary.dob || beneficiary.dateOfBirth,
+            admission_date: beneficiary.admissionDate || beneficiary.enrollmentDate,
+            section: beneficiary.section,
+            status: beneficiary.status || 'active',
+            medical_diagnosis: beneficiary.medicalDiagnosis,
+            psychiatric_diagnosis: beneficiary.psychiatricDiagnosis,
+            disability_type: beneficiary.disabilityType,
+            iq_level: beneficiary.iqLevel,
+            iq_score: beneficiary.iqScore,
+            bedridden: beneficiary.bedridden,
+            guardian_name: beneficiary.guardianName,
+            guardian_relation: beneficiary.guardianRelation,
+            guardian_phone: beneficiary.guardianPhone,
+            guardian_address: beneficiary.guardianAddress,
+            social_status: beneficiary.socialStatus,
+            visit_frequency: beneficiary.visitFrequency,
+            alerts: beneficiary.alerts,
+            notes: beneficiary.notes,
+        };
+
+        // Remove undefined values
+        Object.keys(dbRecord).forEach(key => {
+            if (dbRecord[key] === undefined) delete dbRecord[key];
+        });
+
         const { data, error } = await supabase
             .from('beneficiaries')
-            .insert(beneficiary)
+            .insert(dbRecord)
             .select()
             .single();
 
@@ -188,9 +211,38 @@ export const supaService = {
     async updateBeneficiary(id: string, updates: Partial<Beneficiary>): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
+        // Transform camelCase to snake_case for Supabase
+        const dbUpdates: Record<string, any> = { updated_at: new Date().toISOString() };
+        if (updates.fullName !== undefined) dbUpdates.full_name = updates.fullName;
+        if (updates.nationalId !== undefined) dbUpdates.national_id = updates.nationalId;
+        if (updates.fileId !== undefined) dbUpdates.file_id = updates.fileId;
+        if (updates.roomNumber !== undefined) dbUpdates.room_number = updates.roomNumber;
+        if (updates.bedNumber !== undefined) dbUpdates.bed_number = updates.bedNumber;
+        if (updates.nationality !== undefined) dbUpdates.nationality = updates.nationality;
+        if (updates.gender !== undefined) dbUpdates.gender = updates.gender;
+        if (updates.dob !== undefined) dbUpdates.date_of_birth = updates.dob;
+        if (updates.dateOfBirth !== undefined) dbUpdates.date_of_birth = updates.dateOfBirth;
+        if (updates.section !== undefined) dbUpdates.section = updates.section;
+        if (updates.status !== undefined) dbUpdates.status = updates.status;
+        if (updates.medicalDiagnosis !== undefined) dbUpdates.medical_diagnosis = updates.medicalDiagnosis;
+        if (updates.psychiatricDiagnosis !== undefined) dbUpdates.psychiatric_diagnosis = updates.psychiatricDiagnosis;
+        if (updates.disabilityType !== undefined) dbUpdates.disability_type = updates.disabilityType;
+        if (updates.iqLevel !== undefined) dbUpdates.iq_level = updates.iqLevel;
+        if (updates.iqScore !== undefined) dbUpdates.iq_score = updates.iqScore;
+        if (updates.bedridden !== undefined) dbUpdates.bedridden = updates.bedridden;
+        if (updates.guardianName !== undefined) dbUpdates.guardian_name = updates.guardianName;
+        if (updates.guardianRelation !== undefined) dbUpdates.guardian_relation = updates.guardianRelation;
+        if (updates.guardianPhone !== undefined) dbUpdates.guardian_phone = updates.guardianPhone;
+        if (updates.guardianAddress !== undefined) dbUpdates.guardian_address = updates.guardianAddress;
+        if (updates.socialStatus !== undefined) dbUpdates.social_status = updates.socialStatus;
+        if (updates.visitFrequency !== undefined) dbUpdates.visit_frequency = updates.visitFrequency;
+        if (updates.alerts !== undefined) dbUpdates.alerts = updates.alerts;
+        if (updates.notes !== undefined) dbUpdates.notes = updates.notes;
+        if (updates.dignity_profile !== undefined) dbUpdates.dignity_profile = updates.dignity_profile;
+
         const { error } = await supabase
             .from('beneficiaries')
-            .update({ ...updates, updated_at: new Date().toISOString() })
+            .update(dbUpdates)
             .eq('id', id);
 
         if (error) {
@@ -204,8 +256,6 @@ export const supaService = {
     async updateDignityProfile(beneficiaryId: string, profile: any): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
-        console.log('Saving Dignity Profile:', profile);
-
         const { error } = await supabase
             .from('beneficiaries')
             .update({
@@ -216,10 +266,9 @@ export const supaService = {
 
         if (error) {
             logError('updateDignityProfile', error);
-            // Fallback for demo if column doesn't exist yet
-            console.warn('Failed to save to DB (likely missing column). Saving to local storage for demo.');
+            // Fallback to localStorage if column doesn't exist yet
             localStorage.setItem(`dignity_profile_${beneficiaryId}`, JSON.stringify(profile));
-            return true; // Pretend success for UX
+            return false;
         }
         return true;
     },
@@ -470,20 +519,25 @@ export const supaService = {
 
         if (!isSupabaseReady()) return beneficiary;
 
-        const [medical, social, rehab, dietaryPlan] = await Promise.all([
-            supabase.from('medical_records').select('*').eq('national_id', nationalId),
-            supabase.from('social_research').select('*').eq('national_id', nationalId),
-            supabase.from('rehab_plans').select('*').eq('national_id', nationalId),
-            supabase.from('dietary_plans').select('*').eq('beneficiary_id', beneficiary.id).single()
-        ]);
+        try {
+            const [medical, social, rehab, dietaryPlan] = await Promise.all([
+                supabase.from('medical_records').select('*').eq('national_id', nationalId),
+                supabase.from('social_research').select('*').eq('national_id', nationalId),
+                supabase.from('rehab_plans').select('*').eq('national_id', nationalId),
+                supabase.from('dietary_plans').select('*').eq('beneficiary_id', beneficiary.id).single()
+            ]);
 
-        return {
-            ...beneficiary,
-            medicalHistory: medical.data || [],
-            socialResearch: social.data || [],
-            rehabPlans: rehab.data || [],
-            dietaryPlan: dietaryPlan.data
-        };
+            return {
+                ...beneficiary,
+                medicalHistory: medical.data || [],
+                socialResearch: social.data || [],
+                rehabPlans: rehab.data || [],
+                dietaryPlan: dietaryPlan.data
+            };
+        } catch (err) {
+            logError('getFullProfile', err);
+            return beneficiary;
+        }
     },
 
     // ═══════════════════════════════════════════════════════════════
