@@ -634,126 +634,254 @@ const RiskManagementContent = () => (
 );
 
 const ChampionsLeagueView = () => {
+    const [selectedMonth, setSelectedMonth] = useState('فبراير');
+
     const teams = [
-        { id: 1, name: 'فريق التميز (الإدارة والخدمات)', score: 1250, badge: '👑', color: 'bg-yellow-100 text-yellow-700' },
-        { id: 2, name: 'فريق الرعاية (الصحة والتأهيل)', score: 980, badge: '🥈', color: 'bg-gray-100 text-gray-700' },
-        { id: 3, name: 'فريق الأمان (السلامة والصيانة)', score: 850, badge: '🥉', color: 'bg-orange-100 text-orange-700' },
+        { id: 1, name: 'فريق التميز (الإدارة والخدمات)', score: 1250, badge: '👑', color: 'bg-yellow-100 text-yellow-700', members: 12, streak: 3 },
+        { id: 2, name: 'فريق الرعاية (الصحة والتأهيل)', score: 980, badge: '🥈', color: 'bg-gray-100 text-gray-700', members: 15, streak: 0 },
+        { id: 3, name: 'فريق الأمان (السلامة والصيانة)', score: 850, badge: '🥉', color: 'bg-orange-100 text-orange-700', members: 8, streak: 1 },
+        { id: 4, name: 'فريق التمكين (التأهيل والبرامج)', score: 720, badge: '4️⃣', color: 'bg-blue-100 text-blue-700', members: 10, streak: 0 },
+        { id: 5, name: 'فريق الابتكار (تقنية المعلومات)', score: 680, badge: '5️⃣', color: 'bg-purple-100 text-purple-700', members: 6, streak: 2 },
     ];
 
     const topPerformers = [
-        { name: 'أحمد محمد', role: 'مشرف تمريض', points: 350, achievement: 'Zero Missing (3 أسابيع)' },
-        { name: 'سارة العلي', role: 'أخصائية اجتماعية', points: 310, achievement: 'اقتراح Kaizen منفذ' },
-        { name: 'خالد الزهراني', role: 'مسؤول سلامة', points: 280, achievement: '3 بلاغات Near-Miss' },
+        { name: 'أحمد محمد', role: 'مشرف تمريض', points: 350, achievement: 'Zero Missing (3 أسابيع)', badge: '🏆' },
+        { name: 'سارة العلي', role: 'أخصائية اجتماعية', points: 310, achievement: 'اقتراح Kaizen منفذ', badge: '💡' },
+        { name: 'خالد الزهراني', role: 'مسؤول سلامة', points: 280, achievement: '3 بلاغات Near-Miss', badge: '🛡️' },
+        { name: 'نورة القحطاني', role: 'أخصائية تمريض', points: 250, achievement: '100% التزام بنظافة الأيدي', badge: '🧤' },
+        { name: 'محمد العتيبي', role: 'أخصائي علاج طبيعي', points: 230, achievement: 'تحسين خطط التأهيل', badge: '⭐' },
+        { name: 'فاطمة الغامدي', role: 'مسؤولة جودة', points: 210, achievement: 'إغلاق 5 NCRs في شهر', badge: '📋' },
+    ];
+
+    const badges = [
+        { name: 'حارس القلعة', icon: '🏰', desc: 'الالتزام 100% بسجلات السلامة لمدة شهر كامل', count: 5, color: 'bg-[#14415A]', points: 50 },
+        { name: 'صانع التغيير', icon: '💡', desc: 'تقديم فكرة Kaizen تم اعتمادها وتنفيذها', count: 2, color: 'bg-[#1E6B5C]', points: 100 },
+        { name: 'صقر المراقبة', icon: '🦅', desc: 'الإبلاغ عن 3+ أحداث Near-Miss في شهر', count: 3, color: 'bg-amber-700', points: 75 },
+        { name: 'بطل النظافة', icon: '🧤', desc: 'امتثال 100% في جولات نظافة الأيدي', count: 8, color: 'bg-blue-700', points: 40 },
+        { name: 'نجم التوثيق', icon: '📝', desc: 'إكمال جميع السجلات بدون ملاحظات لمدة شهر', count: 4, color: 'bg-purple-700', points: 60 },
+    ];
+
+    const monthlyChallenges = [
+        { title: 'تحدي صفر عدوى', desc: 'لا حالات عدوى مكتسبة في القسم', reward: 200, icon: '🦠', status: 'active', progress: 85 },
+        { title: 'تحدي التوثيق الكامل', desc: 'إكمال 100% من السجلات اليومية', reward: 150, icon: '📊', status: 'active', progress: 72 },
+        { title: 'تحدي الإبلاغ الاستباقي', desc: 'الإبلاغ عن 5 ملاحظات Near-Miss على الأقل', reward: 100, icon: '👁️', status: 'active', progress: 60 },
+    ];
+
+    const scoringCriteria = [
+        { action: 'تسليم تقرير التفتيش اليومي بدون ملاحظات', points: 10 },
+        { action: 'الإبلاغ عن حدث Near-Miss', points: 25 },
+        { action: 'اقتراح Kaizen مقبول', points: 100 },
+        { action: 'إكمال تدريب IPC', points: 30 },
+        { action: 'مشاركة في جولة تفتيش', points: 15 },
+        { action: 'إغلاق NCR/CAPA في الموعد', points: 50 },
+        { action: 'امتثال 100% في نظافة الأيدي (أسبوعي)', points: 20 },
     ];
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* Leaderboard */}
-            <div className="lg:col-span-2 space-y-6">
-                <Card className="p-6 bg-gradient-to-br from-white to-gray-50">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-xl font-bold flex items-center gap-2 text-[#14415A]">
-                            <Trophy className="w-6 h-6 text-yellow-500" />
-                            ترتيب الفرق - شهر فبراير
-                        </h3>
-                        <span className="text-sm text-gray-500">يتصدر الفريق الفائز لشهر يناير: فريق التميز</span>
-                    </div>
-
-                    <div className="space-y-4">
-                        {teams.map((team, idx) => (
-                            <div key={team.id} className="relative group">
-                                <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm transition-all hover:shadow-md hover:scale-[1.01]">
-                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${team.color} font-bold`}>
-                                        {team.badge}
-                                    </div>
-                                    <div className="flex-1">
-                                        <div className="flex justify-between items-center mb-1">
-                                            <h4 className="font-bold text-gray-800">{team.name}</h4>
-                                            <span className="font-bold text-[#14415A]">{team.score} نقطة</span>
-                                        </div>
-                                        <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
-                                            <div
-                                                className="bg-[#148287] h-full rounded-full transition-all duration-1000"
-                                                style={{ width: `${(team.score / 1500) * 100}%` }}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                {idx === 0 && (
-                                    <div className="absolute -top-3 -right-3 rotate-12">
-                                        <span className="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded shadow-lg transform">
-                                            المتصدر!
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </Card>
-
-                <div className="grid grid-cols-2 gap-4">
-                    <Card className="p-6 bg-[#14415A] text-white">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="p-2 bg-white/10 rounded-lg">
-                                <Award className="w-6 h-6 text-yellow-400" />
-                            </div>
-                            <div>
-                                <h4 className="font-bold">وسام "حارس القلعة"</h4>
-                                <p className="text-xs text-gray-300">للالتزام 100% بسجلات السلامة</p>
-                            </div>
-                        </div>
-                        <div className="text-2xl font-bold mb-1">5</div>
-                        <div className="text-sm opacity-70">موظفين حصلوا عليه هذا الشهر</div>
-                    </Card>
-                    <Card className="p-6 bg-[#1E6B5C] text-white">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="p-2 bg-white/10 rounded-lg">
-                                <TrendingUp className="w-6 h-6 text-yellow-400" />
-                            </div>
-                            <div>
-                                <h4 className="font-bold">وسام "صانع التغيير"</h4>
-                                <p className="text-xs text-gray-300">لتقديم أفكار ابتكارية (Kaizen)</p>
-                            </div>
-                        </div>
-                        <div className="text-2xl font-bold mb-1">2</div>
-                        <div className="text-sm opacity-70">أفكار تم اعتمادها</div>
-                    </Card>
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* Month Selector */}
+            <div className="flex items-center gap-3 justify-between">
+                <div className="flex gap-2">
+                    {['يناير', 'فبراير'].map(month => (
+                        <button
+                            key={month}
+                            onClick={() => setSelectedMonth(month)}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                                selectedMonth === month ? 'bg-[#14415A] text-white shadow-md' : 'bg-white border text-gray-600 hover:bg-gray-50'
+                            }`}
+                        >
+                            {month} 2026
+                        </button>
+                    ))}
+                </div>
+                <div className="text-sm text-gray-500 bg-yellow-50 border border-yellow-200 px-3 py-1.5 rounded-lg">
+                    🏆 بطل يناير: <strong className="text-[#14415A]">فريق التميز</strong>
                 </div>
             </div>
 
-            {/* Top Performers Sidebar */}
-            <Card className="p-6 border-t-4 border-t-yellow-400">
-                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                    <Users className="w-5 h-5 text-gray-500" />
-                    نجوم الجودة
-                </h3>
-                <div className="space-y-4">
-                    {topPerformers.map((person, idx) => (
-                        <div key={idx} className="flex items-start gap-3 pb-4 border-b border-gray-50 last:border-0 last:pb-0">
-                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-600">
-                                {person.name.charAt(0)}
-                            </div>
-                            <div>
-                                <h5 className="font-bold text-gray-800 text-sm">{person.name}</h5>
-                                <p className="text-xs text-gray-500 mb-1">{person.role}</p>
-                                <div className="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium border border-green-100">
-                                    <Star className="w-3 h-3 fill-green-700" />
-                                    {person.achievement}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Leaderboard */}
+                <div className="lg:col-span-2 space-y-6">
+                    <Card className="p-6 bg-gradient-to-br from-white to-gray-50">
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-[#14415A]">
+                                <Trophy className="w-6 h-6 text-yellow-500" />
+                                ترتيب الفرق - شهر {selectedMonth}
+                            </h3>
+                        </div>
+
+                        <div className="space-y-3">
+                            {teams.map((team, idx) => (
+                                <div key={team.id} className="relative group">
+                                    <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm transition-all hover:shadow-md hover:scale-[1.01]">
+                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${team.color} font-bold`}>
+                                            {team.badge}
+                                        </div>
+                                        <div className="flex-1">
+                                            <div className="flex justify-between items-center mb-1">
+                                                <div className="flex items-center gap-2">
+                                                    <h4 className="font-bold text-gray-800">{team.name}</h4>
+                                                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded">{team.members} عضو</span>
+                                                    {team.streak > 0 && (
+                                                        <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded">🔥 {team.streak} أشهر متتالية</span>
+                                                    )}
+                                                </div>
+                                                <span className="font-bold text-[#14415A]">{team.score.toLocaleString()} نقطة</span>
+                                            </div>
+                                            <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                                <div
+                                                    className={`h-full rounded-full transition-all duration-1000 ${idx === 0 ? 'bg-yellow-500' : idx === 1 ? 'bg-gray-400' : 'bg-[#148287]'}`}
+                                                    style={{ width: `${(team.score / 1500) * 100}%` }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {idx === 0 && (
+                                        <div className="absolute -top-3 -right-3 rotate-12">
+                                            <span className="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded shadow-lg">المتصدر!</span>
+                                        </div>
+                                    )}
                                 </div>
+                            ))}
+                        </div>
+                    </Card>
+
+                    {/* Monthly Challenges */}
+                    <Card className="p-6">
+                        <h3 className="text-lg font-bold flex items-center gap-2 text-[#14415A] mb-4">
+                            <Target className="w-5 h-5 text-orange-500" />
+                            تحديات شهر {selectedMonth}
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {monthlyChallenges.map((challenge, idx) => (
+                                <div key={idx} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-100 hover:shadow-md transition-all">
+                                    <div className="text-2xl mb-2">{challenge.icon}</div>
+                                    <h4 className="font-bold text-gray-800 text-sm mb-1">{challenge.title}</h4>
+                                    <p className="text-xs text-gray-500 mb-3">{challenge.desc}</p>
+                                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2 overflow-hidden">
+                                        <div
+                                            className="h-full bg-[#148287] rounded-full transition-all duration-500"
+                                            style={{ width: `${challenge.progress}%` }}
+                                        />
+                                    </div>
+                                    <div className="flex justify-between items-center text-xs">
+                                        <span className="text-gray-500">{challenge.progress}% مكتمل</span>
+                                        <span className="font-bold text-yellow-600">🏅 {challenge.reward} نقطة</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
+
+                    {/* Badges Gallery */}
+                    <Card className="p-6">
+                        <h3 className="text-lg font-bold flex items-center gap-2 text-[#14415A] mb-4">
+                            <Award className="w-5 h-5 text-yellow-500" />
+                            أوسمة التميز
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {badges.map((badge, idx) => (
+                                <div key={idx} className={`${badge.color} text-white rounded-xl p-4 hover:scale-[1.02] transition-all`}>
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="p-2 bg-white/10 rounded-lg text-2xl">{badge.icon}</div>
+                                        <div>
+                                            <h4 className="font-bold text-sm">وسام "{badge.name}"</h4>
+                                            <p className="text-xs opacity-70">{badge.desc}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm opacity-80">{badge.count} حاصلين عليه</span>
+                                        <span className="bg-white/20 px-2 py-0.5 rounded text-xs font-bold">+{badge.points} نقطة</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
+
+                    {/* Scoring Criteria */}
+                    <Card className="p-6">
+                        <h3 className="text-lg font-bold flex items-center gap-2 text-[#14415A] mb-4">
+                            <ClipboardCheck className="w-5 h-5 text-green-600" />
+                            نظام احتساب النقاط
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {scoringCriteria.map((item, idx) => (
+                                <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 hover:bg-green-50 transition-colors">
+                                    <span className="text-sm text-gray-700">{item.action}</span>
+                                    <span className="font-bold text-[#148287] text-sm whitespace-nowrap mr-3">+{item.points} نقطة</span>
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
+                </div>
+
+                {/* Top Performers Sidebar */}
+                <div className="space-y-6">
+                    <Card className="p-6 border-t-4 border-t-yellow-400">
+                        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                            <Users className="w-5 h-5 text-gray-500" />
+                            نجوم الجودة
+                        </h3>
+                        <div className="space-y-3">
+                            {topPerformers.map((person, idx) => (
+                                <div key={idx} className="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0 last:pb-0">
+                                    <div className="relative">
+                                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-600">
+                                            {person.name.charAt(0)}
+                                        </div>
+                                        {idx < 3 && (
+                                            <span className="absolute -top-1 -right-1 text-xs">
+                                                {idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <h5 className="font-bold text-gray-800 text-sm">{person.name}</h5>
+                                        <p className="text-xs text-gray-500 mb-1">{person.role}</p>
+                                        <div className="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium border border-green-100">
+                                            <span>{person.badge}</span>
+                                            {person.achievement}
+                                        </div>
+                                    </div>
+                                    <div className="font-bold text-[#148287] text-sm">
+                                        +{person.points}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </Card>
+
+                    {/* Quick Stats */}
+                    <Card className="p-6 bg-gradient-to-br from-[#14415A] to-[#1E6B5C] text-white">
+                        <h3 className="font-bold mb-4 flex items-center gap-2">
+                            <TrendingUp className="w-5 h-5 text-yellow-400" />
+                            إحصائيات الشهر
+                        </h3>
+                        <div className="space-y-3">
+                            <div className="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                                <span className="text-sm opacity-80">إجمالي النقاط الموزعة</span>
+                                <span className="font-bold text-yellow-400">4,480</span>
                             </div>
-                            <div className="mr-auto font-bold text-[#148287] text-sm">
-                                +{person.points}
+                            <div className="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                                <span className="text-sm opacity-80">أوسمة ممنوحة</span>
+                                <span className="font-bold text-yellow-400">22</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                                <span className="text-sm opacity-80">أفكار Kaizen مقدمة</span>
+                                <span className="font-bold text-yellow-400">7</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                                <span className="text-sm opacity-80">بلاغات Near-Miss</span>
+                                <span className="font-bold text-yellow-400">12</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-white/10 rounded-lg p-3">
+                                <span className="text-sm opacity-80">نسبة المشاركة</span>
+                                <span className="font-bold text-yellow-400">78%</span>
                             </div>
                         </div>
-                    ))}
+                    </Card>
                 </div>
-                <div className="mt-6 pt-4 border-t border-gray-100 text-center">
-                    <button className="text-sm text-[#148287] font-medium hover:underline flex items-center justify-center gap-1 mx-auto">
-                        عرض لوحة الشرف الكاملة
-                        <ArrowRight className="w-4 h-4" />
-                    </button>
-                </div>
-            </Card>
+            </div>
         </div>
     );
 };
@@ -761,6 +889,9 @@ const ChampionsLeagueView = () => {
 const SopLibraryView = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDept, setSelectedDept] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [expandedId, setExpandedId] = useState<string | null>(null);
+    const PAGE_SIZE = 20;
 
     // Get unique departments
     const departments = useMemo(() => {
@@ -774,86 +905,219 @@ const SopLibraryView = () => {
             const matchesSearch = searchTerm === '' ||
                 p.name.includes(searchTerm) ||
                 p.department.includes(searchTerm) ||
-                p.responsible.includes(searchTerm);
+                p.responsible.includes(searchTerm) ||
+                p.kpi.includes(searchTerm);
             const matchesDept = selectedDept === null || p.department === selectedDept;
             return matchesSearch && matchesDept;
         });
     }, [searchTerm, selectedDept]);
 
-    return (
-        <Card className="p-0 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* Search Header */}
-            <div className="p-6 border-b border-gray-100 bg-gray-50/50">
-                <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-                    <div>
-                        <h3 className="text-xl font-bold flex items-center gap-2 text-[#14415A]">
-                            <BookOpen className="w-5 h-5 text-[#148287]" />
-                            مكتبة الإجراءات القياسية (SOPs)
-                        </h3>
-                        <p className="text-sm text-gray-500 mt-1">{qualityProcesses.length} عملية موثقة ومعتمدة</p>
-                    </div>
-                    <div className="flex gap-2 w-full md:w-auto">
-                        <div className="relative flex-1 md:w-64">
-                            <Search className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input
-                                type="text"
-                                placeholder="بحث في العمليات..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-4 pr-10 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#148287] text-sm bg-white"
-                            />
-                        </div>
-                        <select
-                            title="اختر القسم"
-                            value={selectedDept || ''}
-                            onChange={(e) => setSelectedDept(e.target.value || null)}
-                            className="px-3 py-2 rounded-lg border border-gray-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#148287]"
-                        >
-                            <option value="">كل الأقسام</option>
-                            {departments.map((dept, idx) => (
-                                <option key={idx} value={dept}>{dept}</option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-            </div>
+    // Pagination
+    const totalPages = Math.ceil(filteredProcesses.length / PAGE_SIZE);
+    const paginatedProcesses = filteredProcesses.slice(
+        (currentPage - 1) * PAGE_SIZE,
+        currentPage * PAGE_SIZE
+    );
 
-            {/* SOP List */}
-            <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
-                {filteredProcesses.slice(0, 15).map((process, idx) => (
-                    <div key={process.id} className="p-4 hover:bg-gray-50 transition-colors flex items-center justify-between group cursor-pointer">
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
-                                <FileText className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <div className="flex items-center gap-2">
-                                    <h4 className="font-bold text-gray-800 text-sm group-hover:text-[#148287] transition-colors">{process.name}</h4>
-                                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-mono">SOP-{process.id.padStart(3, '0')}</span>
-                                </div>
-                                <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
-                                    <span>القسم: {process.department}</span>
-                                    <span>•</span>
-                                    <span>المسؤول: {process.responsible}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <span className="px-2 py-1 rounded text-xs font-medium bg-green-50 text-green-700">
-                                {process.frequency}
-                            </span>
-                            <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                                عرض
-                            </Button>
-                        </div>
-                    </div>
+    // Reset page when filters change
+    const handleSearchChange = (val: string) => {
+        setSearchTerm(val);
+        setCurrentPage(1);
+    };
+    const handleDeptChange = (val: string | null) => {
+        setSelectedDept(val);
+        setCurrentPage(1);
+    };
+
+    // Department stats
+    const deptStats = useMemo(() => {
+        const stats: Record<string, number> = {};
+        qualityProcesses.forEach(p => {
+            stats[p.department] = (stats[p.department] || 0) + 1;
+        });
+        return stats;
+    }, []);
+
+    return (
+        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* Department Overview Cards */}
+            <div className="flex gap-2 overflow-x-auto pb-2">
+                <button
+                    onClick={() => handleDeptChange(null)}
+                    className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                        selectedDept === null ? 'bg-[#148287] text-white shadow-md' : 'bg-white text-gray-600 border hover:bg-gray-50'
+                    }`}
+                >
+                    الكل ({qualityProcesses.length})
+                </button>
+                {departments.map((dept, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => handleDeptChange(selectedDept === dept ? null : dept)}
+                        className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                            selectedDept === dept ? 'bg-[#148287] text-white shadow-md' : 'bg-white text-gray-600 border hover:bg-gray-50'
+                        }`}
+                    >
+                        {dept} ({deptStats[dept] || 0})
+                    </button>
                 ))}
             </div>
-            <div className="p-4 bg-gray-50 text-center border-t border-gray-100">
-                <button className="text-sm text-gray-500 hover:text-[#148287] font-medium">
-                    عرض المزيد من العمليات ({filteredProcesses.length > 15 ? filteredProcesses.length - 15 : 0}+)
-                </button>
-            </div>
-        </Card>
+
+            <Card className="p-0 overflow-hidden">
+                {/* Search Header */}
+                <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+                    <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
+                        <div>
+                            <h3 className="text-xl font-bold flex items-center gap-2 text-[#14415A]">
+                                <BookOpen className="w-5 h-5 text-[#148287]" />
+                                مكتبة الإجراءات القياسية (SOPs)
+                            </h3>
+                            <p className="text-sm text-gray-500 mt-1">
+                                {filteredProcesses.length} عملية {selectedDept ? `في ${selectedDept}` : 'موثقة ومعتمدة'} — عرض {(currentPage - 1) * PAGE_SIZE + 1}-{Math.min(currentPage * PAGE_SIZE, filteredProcesses.length)}
+                            </p>
+                        </div>
+                        <div className="flex gap-2 w-full md:w-auto">
+                            <div className="relative flex-1 md:w-72">
+                                <Search className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="بحث بالاسم، القسم، المسؤول، أو المؤشر..."
+                                    value={searchTerm}
+                                    onChange={(e) => handleSearchChange(e.target.value)}
+                                    className="w-full pl-4 pr-10 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#148287] text-sm bg-white"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* SOP List */}
+                <div className="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
+                    {paginatedProcesses.map((process) => (
+                        <div key={process.id}>
+                            <div
+                                onClick={() => setExpandedId(expandedId === process.id ? null : process.id)}
+                                className="p-4 hover:bg-gray-50 transition-colors flex items-center justify-between group cursor-pointer"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
+                                        <FileText className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <div className="flex items-center gap-2">
+                                            <h4 className="font-bold text-gray-800 text-sm group-hover:text-[#148287] transition-colors">{process.name}</h4>
+                                            <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-mono">SOP-{process.id.padStart(3, '0')}</span>
+                                        </div>
+                                        <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                            <span>القسم: {process.department}</span>
+                                            <span>•</span>
+                                            <span>المسؤول: {process.responsible}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="px-2 py-1 rounded text-xs font-medium bg-green-50 text-green-700">
+                                        {process.frequency}
+                                    </span>
+                                    <span className="px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700">
+                                        {process.duration}
+                                    </span>
+                                    {expandedId === process.id ? (
+                                        <ChevronUp className="w-4 h-4 text-gray-400" />
+                                    ) : (
+                                        <ChevronDown className="w-4 h-4 text-gray-400" />
+                                    )}
+                                </div>
+                            </div>
+                            {/* Expanded Details */}
+                            {expandedId === process.id && (
+                                <div className="px-4 pb-4 bg-blue-50/30 border-t border-blue-100 animate-in fade-in duration-200">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+                                        <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                            <div className="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1">
+                                                <ArrowRight className="w-3 h-3 text-green-500" />
+                                                المدخلات
+                                            </div>
+                                            <p className="text-sm text-gray-700">{process.inputs}</p>
+                                        </div>
+                                        <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                            <div className="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1">
+                                                <CheckCircle2 className="w-3 h-3 text-blue-500" />
+                                                المخرجات
+                                            </div>
+                                            <p className="text-sm text-gray-700">{process.outputs}</p>
+                                        </div>
+                                        <div className="bg-white rounded-lg p-3 border border-gray-100 md:col-span-2">
+                                            <div className="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1">
+                                                <Target className="w-3 h-3 text-purple-500" />
+                                                مؤشر الأداء (KPI)
+                                            </div>
+                                            <p className="text-sm text-gray-700">{process.kpi}</p>
+                                        </div>
+                                        <div className="flex gap-4">
+                                            <div className="bg-white rounded-lg p-3 border border-gray-100 flex-1">
+                                                <div className="text-xs font-bold text-gray-500 mb-1">التكرار</div>
+                                                <p className="text-sm font-medium text-green-700">{process.frequency}</p>
+                                            </div>
+                                            <div className="bg-white rounded-lg p-3 border border-gray-100 flex-1">
+                                                <div className="text-xs font-bold text-gray-500 mb-1">المدة</div>
+                                                <p className="text-sm font-medium text-blue-700">{process.duration}</p>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                            <div className="text-xs font-bold text-gray-500 mb-1">المسؤول</div>
+                                            <p className="text-sm font-medium text-[#14415A]">{process.responsible}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                        <button
+                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 bg-white border rounded-lg text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                        >
+                            السابق
+                        </button>
+                        <div className="flex items-center gap-1">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                <button
+                                    key={page}
+                                    onClick={() => setCurrentPage(page)}
+                                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-all ${
+                                        currentPage === page
+                                            ? 'bg-[#148287] text-white shadow-md'
+                                            : 'bg-white text-gray-600 hover:bg-gray-100'
+                                    }`}
+                                >
+                                    {page}
+                                </button>
+                            ))}
+                        </div>
+                        <button
+                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 bg-white border rounded-lg text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                        >
+                            التالي
+                        </button>
+                    </div>
+                )}
+
+                {/* Empty State */}
+                {filteredProcesses.length === 0 && (
+                    <div className="text-center py-12 text-gray-500">
+                        <FileText className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                        <p>لا توجد عمليات مطابقة لمعايير البحث</p>
+                    </div>
+                )}
+            </Card>
+        </div>
     );
 };
