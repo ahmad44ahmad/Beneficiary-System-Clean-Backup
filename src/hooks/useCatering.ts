@@ -9,6 +9,10 @@ export function useCatering() {
     const [loading, setLoading] = useState(true);
 
     const fetchData = useCallback(async function fetchData() {
+        if (!supabase) {
+            setLoading(false);
+            return;
+        }
         setLoading(true);
         try {
             await Promise.all([fetchMeals(), fetchViolations(), fetchChecks()]);
@@ -20,6 +24,7 @@ export function useCatering() {
     }, []);
 
     async function fetchMeals() {
+        if (!supabase) return;
         const { data } = await supabase
             .from('meals')
             .select('*')
@@ -28,6 +33,7 @@ export function useCatering() {
     }
 
     async function fetchViolations() {
+        if (!supabase) return;
         const { data } = await supabase
             .from('catering_violations')
             .select('*')
@@ -37,6 +43,8 @@ export function useCatering() {
 
     useEffect(() => {
         fetchData();
+
+        if (!supabase) return;
 
         // Realtime subscription
         const mealsChannel = supabase
@@ -58,6 +66,7 @@ export function useCatering() {
     }, [fetchData]);
 
     async function fetchChecks() {
+        if (!supabase) return;
         const { data } = await supabase
             .from('quality_checks')
             .select('*')
@@ -66,18 +75,21 @@ export function useCatering() {
     }
 
     async function addMeal(meal: Omit<Meal, 'id' | 'created_at'>) {
+        if (!supabase) throw new Error('Supabase not configured');
         const { data, error } = await supabase.from('meals').insert(meal).select().single();
         if (error) throw error;
         return data;
     }
 
     async function reportViolation(violation: Omit<CateringViolation, 'id' | 'reported_at'>) {
+        if (!supabase) throw new Error('Supabase not configured');
         const { data, error } = await supabase.from('catering_violations').insert(violation).select().single();
         if (error) throw error;
         return data;
     }
 
     async function submitQualityCheck(check: Omit<QualityCheck, 'id' | 'created_at'>) {
+        if (!supabase) throw new Error('Supabase not configured');
         const { data, error } = await supabase.from('quality_checks').insert(check).select().single();
         if (error) throw error;
         return data;

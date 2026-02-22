@@ -6,7 +6,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Pill, Clock, X, ChevronRight } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { useNavigate } from 'react-router-dom';
 
 interface OverdueMedication {
@@ -22,9 +22,15 @@ export const MedicationReminderAlert: React.FC = () => {
     const [overdueAlerts, setOverdueAlerts] = useState<OverdueMedication[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
+    const isMinimizedRef = useRef(false);
     const navigate = useNavigate();
 
     useEffect(() => {
+        isMinimizedRef.current = isMinimized;
+    }, [isMinimized]);
+
+    useEffect(() => {
+        const supabase = getSupabaseClient();
         if (!supabase) return;
 
         // Check for overdue medications every minute

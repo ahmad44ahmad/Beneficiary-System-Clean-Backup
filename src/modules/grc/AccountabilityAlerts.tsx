@@ -4,7 +4,7 @@ import {
     Clock, Building2, CheckCircle2,
     ArrowRight, EyeOff
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 
 interface AccountabilityGap {
@@ -40,6 +40,8 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
     }, []);
 
     const fetchGaps = async () => {
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         try {
             const { data, error } = await supabase
                 .from('accountability_gaps')
@@ -55,7 +57,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
             } else if (data) {
                 setGaps(data);
             }
-        } catch (error) {
+        } catch {
             setGaps([]);
         } finally {
             setLoading(false);
@@ -63,6 +65,8 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
     };
 
     const acknowledgeGap = async (id: string) => {
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
         await supabase
             .from('accountability_gaps')
             .update({ acknowledged: true, acknowledged_at: new Date().toISOString() })

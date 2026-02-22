@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card } from '../ui/Card';
-import { useUnifiedData } from '../../context/UnifiedDataContext';
+import { useBeneficiaries } from '../../hooks/useBeneficiaries';
+import { useLocalDataStore } from '../../stores/useLocalDataStore';
 import { Users, Shirt, Calendar, Heart, FileText, MessageSquare, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const SocialOverview: React.FC = () => {
-    const { beneficiaries, socialActivityPlans, socialActivityDocs } = useUnifiedData();
+    const { data: beneficiaries = [] } = useBeneficiaries();
+    const socialActivityPlans = useLocalDataStore((s) => s.socialActivityPlans);
+    const socialActivityDocs = useLocalDataStore((s) => s.socialActivityDocs);
 
     const totalBeneficiaries = beneficiaries.length;
     const activePlans = socialActivityPlans?.length || 0;

@@ -8,14 +8,10 @@ import { App } from './src/components/App';
 
 import { BrowserRouter } from 'react-router-dom';
 import { QueryProvider } from './src/context/QueryProvider';
-import { AppProvider } from './src/context/AppContext';
-import { UnifiedDataProvider } from './src/context/UnifiedDataContext';
 import { AuthProvider } from './src/context/AuthContext';
-import { UserProvider } from './src/context/UserContext';
-import { ToastProvider } from './src/context/ToastContext';
-import { ViewModeProvider } from './src/context/ViewModeContext';
 import { ErrorBoundary } from './src/components/common/ErrorBoundary';
 import { ThemeProvider } from './src/config/theme';
+import { ToastRenderer } from './src/components/common/ToastRenderer';
 
 // Start audit service for tracking user actions
 import { startAuditService } from './src/services/auditService';
@@ -28,19 +24,10 @@ root.render(
             <ThemeProvider defaultMode="dark">
                 <QueryProvider>
                     <BrowserRouter>
-                        <AppProvider>
-                            <UnifiedDataProvider>
-                                <AuthProvider>
-                                    <UserProvider>
-                                        <ToastProvider>
-                                            <ViewModeProvider>
-                                                <App />
-                                            </ViewModeProvider>
-                                        </ToastProvider>
-                                    </UserProvider>
-                                </AuthProvider>
-                            </UnifiedDataProvider>
-                        </AppProvider>
+                        <AuthProvider>
+                            <App />
+                            <ToastRenderer />
+                        </AuthProvider>
                     </BrowserRouter>
                 </QueryProvider>
             </ThemeProvider>

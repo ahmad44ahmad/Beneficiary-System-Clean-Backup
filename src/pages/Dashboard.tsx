@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDashboardMetrics } from '../hooks/useDashboardMetrics';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useBeneficiaries } from '../hooks/useBeneficiaries';
 import {
     LayoutDashboard,
     Users,
@@ -36,7 +36,7 @@ const typeColors: Record<string, string> = {
 
 export const Dashboard: React.FC = () => {
     const { kpis, departmentPerformance, alerts } = useDashboardMetrics();
-    const { loading, beneficiaries } = useUnifiedData();
+    const { data: beneficiaries = [], isLoading: loading } = useBeneficiaries();
 
     if (loading) {
         return (
@@ -49,21 +49,21 @@ export const Dashboard: React.FC = () => {
     }
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen font-sans" dir="rtl">
+        <div className="p-6 bg-gray-50 dark:bg-transparent min-h-screen font-sans" dir="rtl">
             {/* Header */}
             <div className="mb-8 flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
                         <div className="p-3 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-xl">
                             <LayoutDashboard className="w-8 h-8 text-white" />
                         </div>
                         لوحة القياس التنفيذية (Executive Dashboard)
                     </h1>
-                    <p className="text-gray-500 mt-1 mr-16">نظرة شاملة على الأداء التشغيلي ومؤشرات الجودة (ISO 9001)</p>
+                    <p className="text-gray-500 dark:text-slate-400 mt-1 mr-16">نظرة شاملة على الأداء التشغيلي ومؤشرات الجودة (ISO 9001)</p>
                 </div>
                 <div className="text-left">
-                    <div className="text-sm text-gray-400">آخر تحديث</div>
-                    <div className="font-mono text-lg font-bold text-gray-700">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                    <div className="text-sm text-gray-400 dark:text-slate-500">آخر تحديث</div>
+                    <div className="font-mono text-lg font-bold text-gray-700 dark:text-slate-300">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                 </div>
             </div>
 
@@ -73,13 +73,13 @@ export const Dashboard: React.FC = () => {
             {/* 1. Real-Time KPIs (The Pulse) */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 {/* Active Beneficiaries */}
-                <Card className="p-6 border-r-4 border-r-hrsd-teal shadow-sm hover:shadow-md transition-shadow bg-white">
+                <Card className="p-6 border-r-4 border-r-hrsd-teal shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-slate-800">
                     <div className="flex justify-between items-start">
                         <div>
-                            <p className="text-sm font-medium text-gray-500 mb-1">المستفيدين النشطين</p>
-                            <h3 className="text-3xl font-bold text-gray-900">{kpis.totalBeneficiaries}</h3>
+                            <p className="text-sm font-medium text-gray-500 dark:text-slate-400 mb-1">المستفيدين النشطين</p>
+                            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{kpis.totalBeneficiaries}</h3>
                         </div>
-                        <div className="p-2 bg-teal-50 rounded-lg">
+                        <div className="p-2 bg-teal-50 dark:bg-teal-900/30 rounded-lg">
                             <Users className="w-6 h-6 text-hrsd-teal" />
                         </div>
                     </div>
@@ -91,13 +91,13 @@ export const Dashboard: React.FC = () => {
                 </Card>
 
                 {/* Plan Compliance */}
-                <Card className="p-6 border-r-4 border-r-green-500 shadow-sm hover:shadow-md transition-shadow bg-white">
+                <Card className="p-6 border-r-4 border-r-green-500 shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-slate-800">
                     <div className="flex justify-between items-start">
                         <div>
-                            <p className="text-sm font-medium text-gray-500 mb-1">نسبة تغطية الخطط</p>
-                            <h3 className="text-3xl font-bold text-gray-900">{kpis.planComplianceRate}%</h3>
+                            <p className="text-sm font-medium text-gray-500 dark:text-slate-400 mb-1">نسبة تغطية الخطط</p>
+                            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{kpis.planComplianceRate}%</h3>
                         </div>
-                        <div className="p-2 bg-green-50 rounded-lg">
+                        <div className="p-2 bg-green-50 dark:bg-green-900/30 rounded-lg">
                             <FileCheck className="w-6 h-6 text-green-600" />
                         </div>
                     </div>
@@ -107,17 +107,17 @@ export const Dashboard: React.FC = () => {
                 </Card>
 
                 {/* Goal Achievement */}
-                <Card className="p-6 border-r-4 border-r-purple-500 shadow-sm hover:shadow-md transition-shadow bg-white">
+                <Card className="p-6 border-r-4 border-r-purple-500 shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-slate-800">
                     <div className="flex justify-between items-start">
                         <div>
-                            <p className="text-sm font-medium text-gray-500 mb-1">متوسط إنجاز الأهداف</p>
-                            <h3 className="text-3xl font-bold text-gray-900">{kpis.overallGoalAchievementRate}%</h3>
+                            <p className="text-sm font-medium text-gray-500 dark:text-slate-400 mb-1">متوسط إنجاز الأهداف</p>
+                            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{kpis.overallGoalAchievementRate}%</h3>
                         </div>
-                        <div className="p-2 bg-purple-50 rounded-lg">
+                        <div className="p-2 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
                             <Target className="w-6 h-6 text-purple-600" />
                         </div>
                     </div>
-                    <div className="mt-4 w-full bg-gray-100 rounded-full h-1.5">
+                    <div className="mt-4 w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5">
                         <div
                             className="progress-bar progress-bar-purple rounded-full"
 
@@ -127,13 +127,13 @@ export const Dashboard: React.FC = () => {
                 </Card>
 
                 {/* Critical Alerts */}
-                <Card className="p-6 border-r-4 border-r-red-500 shadow-sm hover:shadow-md transition-shadow bg-white">
+                <Card className="p-6 border-r-4 border-r-red-500 shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-slate-800">
                     <div className="flex justify-between items-start">
                         <div>
-                            <p className="text-sm font-medium text-gray-500 mb-1">حالات حرجة (High Risk)</p>
+                            <p className="text-sm font-medium text-gray-500 dark:text-slate-400 mb-1">حالات حرجة (High Risk)</p>
                             <h3 className="text-3xl font-bold text-red-600">{alerts.criticalCasesCount}</h3>
                         </div>
-                        <div className="p-2 bg-red-50 rounded-lg">
+                        <div className="p-2 bg-red-50 dark:bg-red-900/30 rounded-lg">
                             <AlertTriangle className="w-6 h-6 text-red-600" />
                         </div>
                     </div>
@@ -146,19 +146,19 @@ export const Dashboard: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* 2. Department Performance (The Analysis) */}
                 <div className="lg:col-span-2 space-y-6">
-                    <Card className="p-6 bg-white shadow-sm">
-                        <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
-                            <Activity className="w-5 h-5 text-gray-500" />
+                    <Card className="p-6 bg-white dark:bg-slate-800 shadow-sm">
+                        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+                            <Activity className="w-5 h-5 text-gray-500 dark:text-slate-400" />
                             أداء الأقسام (معدل إنجاز الأهداف)
                         </h3>
                         <div className="space-y-6">
                             {departmentPerformance.map((dept) => (
                                 <div key={dept.type}>
                                     <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium text-gray-700">{typeTranslations[dept.type] || dept.type}</span>
-                                        <span className="text-sm font-bold text-gray-900">{dept.avgProgress}%</span>
+                                        <span className="text-sm font-medium text-gray-700 dark:text-slate-300">{typeTranslations[dept.type] || dept.type}</span>
+                                        <span className="text-sm font-bold text-gray-900 dark:text-white">{dept.avgProgress}%</span>
                                     </div>
-                                    <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                                    <div className="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
                                         <div
                                             className={`progress-bar rounded-full ${typeColors[dept.type] || 'bg-gray-500'}`}
                 
@@ -175,21 +175,21 @@ export const Dashboard: React.FC = () => {
 
                     {/* Quick Actions / Recent Activity Placeholder */}
                     <div className="grid grid-cols-2 gap-4">
-                        <Card className="p-4 bg-teal-50 border border-teal-100 flex items-center justify-between cursor-pointer hover:bg-teal-100 transition-colors">
+                        <Card className="p-4 bg-teal-50 dark:bg-teal-900/20 border border-teal-100 dark:border-teal-800 flex items-center justify-between cursor-pointer hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors">
                             <div className="flex items-center gap-3">
-                                <div className="bg-white p-2 rounded-full shadow-sm">
+                                <div className="bg-white dark:bg-slate-700 p-2 rounded-full shadow-sm">
                                     <FileCheck className="w-5 h-5 text-hrsd-teal" />
                                 </div>
-                                <span className="font-medium text-teal-900">اعتماد الخطط الجديدة</span>
+                                <span className="font-medium text-teal-900 dark:text-teal-200">اعتماد الخطط الجديدة</span>
                             </div>
                             <span className="bg-teal-200 text-teal-800 text-xs font-bold px-2 py-1 rounded-full">{kpis.draftPlansCount}</span>
                         </Card>
-                        <Card className="p-4 bg-purple-50 border border-purple-100 flex items-center justify-between cursor-pointer hover:bg-purple-100 transition-colors">
+                        <Card className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 flex items-center justify-between cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors">
                             <div className="flex items-center gap-3">
-                                <div className="bg-white p-2 rounded-full shadow-sm">
+                                <div className="bg-white dark:bg-slate-700 p-2 rounded-full shadow-sm">
                                     <Target className="w-5 h-5 text-purple-600" />
                                 </div>
-                                <span className="font-medium text-purple-900">مراجعة الأهداف المتعثرة</span>
+                                <span className="font-medium text-purple-900 dark:text-purple-200">مراجعة الأهداف المتعثرة</span>
                             </div>
                         </Card>
                     </div>
@@ -202,9 +202,9 @@ export const Dashboard: React.FC = () => {
                         <RiskPredictionCard beneficiaries={Object.values(beneficiaries)} />
                     </div>
 
-                    <Card className="p-0 bg-white shadow-sm overflow-hidden">
-                        <div className="p-4 border-b bg-gray-50 flex justify-between items-center">
-                            <h3 className="font-bold text-gray-800 flex items-center gap-2">
+                    <Card className="p-0 bg-white dark:bg-slate-800 shadow-sm overflow-hidden">
+                        <div className="p-4 border-b dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 flex justify-between items-center">
+                            <h3 className="font-bold text-gray-800 dark:text-white flex items-center gap-2">
                                 <Clock className="w-5 h-5 text-orange-500" />
                                 المهام المعلقة
                             </h3>
@@ -214,9 +214,9 @@ export const Dashboard: React.FC = () => {
                         </div>
                         <div className="divide-y">
                             {alerts.pendingDirectorApprovals > 0 ? (
-                                <div className="p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                <div className="p-4 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors cursor-pointer">
                                     <div className="flex justify-between items-start mb-1">
-                                        <span className="font-medium text-sm text-gray-900">اعتماد الخطة التأهيلية</span>
+                                        <span className="font-medium text-sm text-gray-900 dark:text-white">اعتماد الخطة التأهيلية</span>
                                         <span className="text-xs text-gray-400">منذ يومين</span>
                                     </div>
                                     <p className="text-xs text-gray-500 mb-2">المستفيد: لاحق يحيى (1401)</p>
@@ -233,15 +233,15 @@ export const Dashboard: React.FC = () => {
                             )}
 
                             {/* Static Example for "System Health" or other alerts */}
-                            <div className="p-4 hover:bg-gray-50 transition-colors cursor-pointer border-l-4 border-l-yellow-400">
+                            <div className="p-4 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors cursor-pointer border-l-4 border-l-yellow-400">
                                 <div className="flex justify-between items-start mb-1">
-                                    <span className="font-medium text-sm text-gray-900">تحديث بيانات الضمان الاجتماعي</span>
+                                    <span className="font-medium text-sm text-gray-900 dark:text-white">تحديث بيانات الضمان الاجتماعي</span>
                                     <span className="text-xs text-gray-400">مجدول</span>
                                 </div>
                                 <p className="text-xs text-gray-500">مطلوب تحديث بيانات 5 مستفيدين</p>
                             </div>
                         </div>
-                        <div className="p-3 bg-gray-50 text-center border-t">
+                        <div className="p-3 bg-gray-50 dark:bg-slate-800/50 text-center border-t dark:border-slate-700">
                             <button className="text-xs text-hrsd-teal font-medium hover:underline">عرض كل المهام</button>
                         </div>
                     </Card>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     AlertTriangle, Bell, CheckCircle, Clock, Heart,
     Pill, Shield, Activity, ChevronDown, ChevronUp,
     Volume2, VolumeX, Eye
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { useRealtimeTableSubscription, queryKeys } from '../../hooks/queries';
 
 type AlertSeverity = 'critical' | 'high' | 'medium' | 'low';
 type AlertType = 'vitals' | 'medication' | 'fall' | 'behavior' | 'infection' | 'medical' | 'safety' | 'behavioral' | 'nutrition';
@@ -65,52 +66,49 @@ export const SmartAlertsPanel: React.FC = () => {
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [resolveNotes, setResolveNotes] = useState<Record<string, string>>({});
 
-    // Fetch alerts from Supabase
+    // Fetch alerts using TanStack Query
+    const { data: fetchedAlerts } = useQuery<SmartAlert[]>({
+        queryKey: [...queryKeys.alerts.list(), location.key],
+        queryFn: async () => {
+            const { getSupabaseClient } = await import('../../hooks/queries');
+            const supabase = getSupabaseClient();
+            if (!supabase) return defaultAlerts;
+
+            const { data, error } = await supabase
+                .from('alerts')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error || !data || data.length === 0) return defaultAlerts;
+
+            return data.map((a: Record<string, unknown>) => ({
+                id: a.id as string,
+                type: (a.alert_type as AlertType) || 'vitals',
+                severity: (a.severity as AlertSeverity) || 'medium',
+                title: (a.title as string) || 'تنبيه',
+                message: (a.message as string) || (a.description as string) || '',
+                beneficiaryName: (a.beneficiary_name as string) || 'غير محدد',
+                beneficiaryId: (a.beneficiary_id as string) || '',
+                location: (a.location as string) || 'غير محدد',
+                timestamp: a.created_at ? new Date(a.created_at as string).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : '',
+                acknowledged: a.status === 'acknowledged' || a.status === 'resolved',
+                acknowledgedBy: a.acknowledged_by as string | undefined,
+                suggestedAction: (a.suggested_action as string) || 'يرجى التحقق من الحالة'
+            }));
+        },
+        staleTime: 0,
+    });
+
+    // Sync fetched alerts into local state
     useEffect(() => {
-        const fetchAlerts = async () => {
-            if (!supabase) {
-                setLoading(false);
-                return;
-            }
+        if (fetchedAlerts) {
+            setAlerts(fetchedAlerts);
+            setLoading(false);
+        }
+    }, [fetchedAlerts]);
 
-            try {
-                const { data, error } = await supabase
-                    .from('alerts')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) {
-                    setLoading(false);
-                    return;
-                }
-
-                if (data && data.length > 0) {
-                    // Transform database alerts to component format
-                    const transformedAlerts: SmartAlert[] = data.map((a: Record<string, unknown>) => ({
-                        id: a.id as string,
-                        type: (a.alert_type as AlertType) || 'vitals',
-                        severity: (a.severity as AlertSeverity) || 'medium',
-                        title: (a.title as string) || 'تنبيه',
-                        message: (a.message as string) || (a.description as string) || '',
-                        beneficiaryName: (a.beneficiary_name as string) || 'غير محدد',
-                        beneficiaryId: (a.beneficiary_id as string) || '',
-                        location: (a.location as string) || 'غير محدد',
-                        timestamp: a.created_at ? new Date(a.created_at as string).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : '',
-                        acknowledged: a.status === 'acknowledged' || a.status === 'resolved',
-                        acknowledgedBy: a.acknowledged_by as string | undefined,
-                        suggestedAction: (a.suggested_action as string) || 'يرجى التحقق من الحالة'
-                    }));
-                    setAlerts(transformedAlerts);
-                }
-            } catch (err) {
-                // Silently fall back to default alerts
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAlerts();
-    }, [location.key]);
+    // Subscribe to realtime changes on alerts table
+    useRealtimeTableSubscription('alerts', queryKeys.alerts.list());
 
     const filteredAlerts = alerts.filter(alert => {
         const matchesSeverity = filterSeverity === 'all' || alert.severity === filterSeverity;

@@ -2,12 +2,12 @@
 // FallRiskAlertBanner - Real-time alert for high fall risk assessments
 // ═══════════════════════════════════════════════════════════════════════════
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, X, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useRealtimeCallback, getSupabaseClient } from '../../hooks/queries';
+import { useToastStore } from '../../stores/useToastStore';
 
 interface FallRiskAlert {
     id: string;
@@ -19,85 +19,70 @@ interface FallRiskAlert {
 
 /**
  * Shows a notification banner when high-risk fall assessments are detected
- * Integrates with Supabase realtime subscriptions
+ * Uses useRealtimeCallback hook for Supabase realtime subscriptions
  */
 export const FallRiskAlertBanner: React.FC = () => {
     const [alerts, setAlerts] = useState<FallRiskAlert[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
-    useEffect(() => {
-        // Skip if Supabase is not configured
+    const handleFallRiskInsert = useCallback(async (payload: { new: Record<string, unknown> }) => {
+        const supabase = getSupabaseClient();
         if (!supabase) return;
 
-        const channel = supabase
-            .channel('fall-risk-alerts')
-            .on(
-                'postgres_changes',
-                {
-                    event: 'INSERT',
-                    schema: 'public',
-                    table: 'fall_risk_assessments'
-                },
-                async (payload) => {
-                    const assessment = payload.new as {
-                        id: string;
-                        beneficiary_id: string;
-                        risk_score: number;
-                        created_at: string | null;
-                    };
-
-                    // Only alert for high risk (score >= 45)
-                    if (assessment.risk_score >= 45) {
-                        // Fetch beneficiary name
-                        let beneficiaryName = 'مستفيد';
-                        try {
-                            const { data } = await supabase
-                                .from('beneficiaries')
-                                .select('full_name')
-                                .eq('id', assessment.beneficiary_id)
-                                .single();
-
-                            if (data?.full_name) {
-                                beneficiaryName = data.full_name;
-                            }
-                        } catch {
-                            // Use default name
-                        }
-
-                        const newAlert: FallRiskAlert = {
-                            id: assessment.id,
-                            beneficiaryId: assessment.beneficiary_id,
-                            beneficiaryName,
-                            score: assessment.risk_score,
-                            timestamp: assessment.created_at || new Date().toISOString(),
-                        };
-
-                        setAlerts(prev => [newAlert, ...prev].slice(0, 5)); // Keep last 5
-                        setIsVisible(true);
-
-                        // Play alert sound (if available)
-                        try {
-                            const audio = new Audio('/alert.mp3');
-                            audio.volume = 0.3;
-                            audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
-                        } catch (_) { /* Audio not supported */ }
-
-                        // Show toast notification
-                        showToast(
-                            `⚠️ تنبيه: خطر سقوط مرتفع - ${beneficiaryName}`,
-                            'error'
-                        );
-                    }
-                }
-            )
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(channel);
+        const assessment = payload.new as {
+            id: string;
+            beneficiary_id: string;
+            risk_score: number;
+            created_at: string | null;
         };
+
+        // Only alert for high risk (score >= 45)
+        if (assessment.risk_score >= 45) {
+            // Fetch beneficiary name
+            let beneficiaryName = 'مستفيد';
+            try {
+                const { data } = await supabase
+                    .from('beneficiaries')
+                    .select('full_name')
+                    .eq('id', assessment.beneficiary_id)
+                    .single();
+
+                if (data?.full_name) {
+                    beneficiaryName = data.full_name;
+                }
+            } catch {
+                // Use default name
+            }
+
+            const newAlert: FallRiskAlert = {
+                id: assessment.id,
+                beneficiaryId: assessment.beneficiary_id,
+                beneficiaryName,
+                score: assessment.risk_score,
+                timestamp: assessment.created_at || new Date().toISOString(),
+            };
+
+            setAlerts(prev => [newAlert, ...prev].slice(0, 5)); // Keep last 5
+            setIsVisible(true);
+
+            // Play alert sound (if available)
+            try {
+                const audio = new Audio('/alert.mp3');
+                audio.volume = 0.3;
+                audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
+            } catch { /* Audio not supported */ }
+
+            // Show toast notification
+            showToast(
+                `تنبيه: خطر سقوط مرتفع - ${beneficiaryName}`,
+                'error'
+            );
+        }
     }, [showToast]);
+
+    useRealtimeCallback('fall_risk_assessments', 'INSERT', handleFallRiskInsert, 'fall-risk-alerts');
 
     const dismissAlert = (id: string) => {
         setAlerts(prev => {

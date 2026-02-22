@@ -24,7 +24,9 @@ import {
     Syringe,
     ClipboardList,
     Users2,
-    TrendingUp
+    TrendingUp,
+    AlertOctagon,
+    Sparkles
 } from 'lucide-react';
 
 interface SidebarProps {

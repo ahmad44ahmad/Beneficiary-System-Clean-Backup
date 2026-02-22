@@ -4,7 +4,7 @@ import {
     BarChart3, ChevronLeft, CheckCircle, AlertCircle,
     XCircle, RefreshCw, Target
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 interface BenchmarkStandard {
     indicator_name: string;
@@ -39,6 +39,12 @@ export const BenchmarkDashboard: React.FC = () => {
     useEffect(() => {
         const fetchBenchmarks = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setBenchmarks(demoData);
+                setLoading(false);
+                return;
+            }
             const { data, error } = await supabase
                 .from('benchmark_standards')
                 .select('*');

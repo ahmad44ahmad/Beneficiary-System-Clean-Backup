@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    ChevronLeft, RefreshCw, Calendar, TrendingUp,
+    ChevronLeft, Calendar, TrendingUp,
     AlertTriangle, MapPin, BarChart3, PieChart as PieChartIcon,
-    Download, FileSpreadsheet, Printer
+    Download, Printer
 } from 'lucide-react';
 import {
     LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
@@ -11,6 +11,7 @@ import {
     AreaChart, Area
 } from 'recharts';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
+import { ipcService } from '../../services/ipcService';
 
 // Demo data for charts
 const WEEKLY_COMPLIANCE_DATA = [
@@ -89,7 +90,7 @@ export const IPCAnalytics: React.FC = () => {
                     totalInspections: inspections.length || 86,
                     totalIncidents: incidents.length || 13,
                     avgCompliance: 87,
-                    openIncidents: incidents.filter((i: any) => i.status === 'open').length || 3,
+                    openIncidents: incidents.filter((i) => i.status === 'open').length || 3,
                 });
             } catch {
                 setStats({ totalInspections: 86, totalIncidents: 13, avgCompliance: 87, openIncidents: 3 });
@@ -100,7 +101,7 @@ export const IPCAnalytics: React.FC = () => {
         loadData();
     }, [dateRange]);
 
-    const exportToCSV = useCallback((data: any[], filename: string) => {
+    const exportToCSV = useCallback((data: Record<string, unknown>[], filename: string) => {
         if (!data.length) return;
         const headers = Object.keys(data[0]).join(',');
         const rows = data.map(row => Object.values(row).join(',')).join('\n');

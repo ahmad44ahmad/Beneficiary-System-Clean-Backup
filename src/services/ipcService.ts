@@ -37,6 +37,11 @@ export interface IPCIncident {
     assigned_to?: string;
     investigation_notes?: string;
     root_cause?: string;
+    rca_category?: string;
+    rca_why_chain?: string[];
+    rca_root_cause?: string;
+    rca_corrective_action?: string;
+    rca_preventive_action?: string;
     outcome?: string;
     created_at: string;
 }
@@ -49,6 +54,7 @@ export interface IPCInspection {
     inspector_name: string;
     location_id: string;
     location?: Location;
+    location_name?: string;
     checklist_template_id?: string;
     checklist_data: Record<string, boolean>;
     total_items: number;

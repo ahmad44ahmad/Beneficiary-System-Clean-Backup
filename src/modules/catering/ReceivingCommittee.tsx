@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { UserCheck, FileSignature, CheckCircle2, ShieldCheck, Loader2 } from 'lucide-react';
 
 interface Signature {
@@ -33,6 +33,8 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
 
     const fetchReport = useCallback(async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         // Try to find the report for this day
         const { data, error } = await supabase
             .from('catering_daily_reports')
@@ -59,6 +61,8 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
 
     const handleSign = async () => {
         setIsSigning(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setIsSigning(false); return; }
         try {
             const currentSignature: Signature = {
                 name: activeRole === 'nutritionist' ? 'د. أحمد (تشبيه)' : activeRole === 'supervisor' ? 'مشرف 1' : 'المدير العام',

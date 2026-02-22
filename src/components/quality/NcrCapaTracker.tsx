@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import {
   AlertTriangle, CheckCircle2, Clock, FileText, Filter,
-  Plus, Search, ChevronDown, ChevronUp, ArrowRight,
+  Plus, Search, ChevronDown, ChevronUp,
   AlertCircle, XCircle, Shield, TrendingUp, Calendar,
   User, ClipboardCheck, Eye
 } from 'lucide-react';

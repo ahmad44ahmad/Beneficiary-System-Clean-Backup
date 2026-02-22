@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { SROICard } from './SROICard';
 import {
     Activity, Users, AlertTriangle,
@@ -32,6 +32,12 @@ export const ExecutiveDashboard: React.FC = () => {
         const fetchDashboardData = async () => {
             try {
                 setFetchError(null);
+                const supabase = getSupabaseClient();
+                if (!supabase) {
+                    setFetchError('تعذر تحميل بيانات لوحة القيادة. يتم عرض البيانات المحلية.');
+                    setLoading(false);
+                    return;
+                }
                 // 1. Get Active Beneficiaries Count
                 const { count: occupancyCount } = await supabase
                     .from('beneficiaries')

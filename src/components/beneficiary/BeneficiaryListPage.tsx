@@ -8,13 +8,13 @@ import {
     FileSpreadsheet, CheckSquare,
     Archive, Trash, X
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { BeneficiaryCard } from './BeneficiaryCard';
 import { BeneficiaryFilters, FilterState } from './BeneficiaryFilters';
 import { SkeletonCard } from '../ui/Skeleton';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport, BENEFICIARY_COLUMNS } from '../../hooks/useExport';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 import { useAdvancedSearch } from '../../hooks/useAdvancedSearch';
 import { useBatchOperations } from '../../hooks/useBatchOperations';
 import { useAudit } from '../../hooks/useAudit';
@@ -42,7 +42,7 @@ export const BeneficiaryListPage: React.FC = () => {
     // Hooks for print, export, and notifications
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     // Advanced audit logging
     const { audit } = useAudit('beneficiaries');
@@ -79,6 +79,9 @@ export const BeneficiaryListPage: React.FC = () => {
     const { data: beneficiaries = [], isLoading, refetch } = useQuery<Beneficiary[]>({
         queryKey: ['beneficiaries', 'list'],
         queryFn: async () => {
+            const supabase = getSupabaseClient();
+            if (!supabase) return demoData;
+
             const { data, error } = await supabase
                 .from('beneficiaries')
                 .select('*')

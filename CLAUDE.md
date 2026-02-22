@@ -77,17 +77,21 @@ function MyForm() {
 - Both `postgres` and `authenticator` roles have `pgaudit.role = 'pdpl_auditor'`.
 - View audit logs in Supabase Dashboard > Logs > Postgres Logs (filter: `AUDIT`).
 
-#### Views Strategy (pg_ivm NOT available on Supabase)
-- `pg_ivm` is **NOT available** in Supabase's extension catalog.
-- Instead, use **regular views** with `security_invoker = true` (already implemented for wellbeing views).
-- Regular views auto-refresh on every query — no manual refresh needed.
-- For heavy aggregations, consider Supabase Edge Functions with caching.
-- **DO NOT** use `pg_cron` for view refreshes.
+#### Views Strategy — Materialized Views + pg_cron
+- Use **Materialized Views** for heavy analytical queries (wellbeing index, dashboard stats).
+- Use **`pg_cron`** to schedule periodic `REFRESH MATERIALIZED VIEW CONCURRENTLY` every 5 minutes.
+- Lightweight views remain as **regular views** with `security_invoker = true`.
+- All materialized views must have a **UNIQUE INDEX** to support `CONCURRENTLY` refresh.
+- **DO NOT** use `pg_ivm` — it is not available on Supabase.
+
+#### Table Partitioning Strategy
+- Use **Declarative Range Partitioning** (by month) for high-volume tables: `incident_reports`.
+- Partitions are auto-created for the current and next 6 months.
+- Application queries must include partition key (`date`) in WHERE clauses for partition pruning.
 
 #### BANNED Database Patterns
 - **DO NOT** use `pgsodium` Transparent Column Encryption (TCE). Use Supabase Vault or application-level encryption instead.
-- **DO NOT** use `pg_cron` for materialized view refreshes.
-- **DO NOT** use `pg_ivm` — it is not available on Supabase. Use regular views instead.
+- **DO NOT** use `pg_ivm` — it is not available on Supabase.
 
 ### 4. Agentic Loop — Mandatory Post-Modification Checks
 

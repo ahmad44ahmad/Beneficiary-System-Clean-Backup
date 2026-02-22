@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     ClipboardCheck,
     Plus,
@@ -85,6 +85,12 @@ export const ComplianceTracker: React.FC = () => {
 
         const fetchRequirements = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setRequirements(DEMO_REQUIREMENTS);
+                setLoading(false);
+                return;
+            }
             try {
                 const { data, error } = await supabase
                     .from('grc_compliance_requirements')

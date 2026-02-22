@@ -1,8 +1,9 @@
 import React, { useState, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
-import { useApp } from '../context/AppContext';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useAppStore } from '../stores/useAppStore';
+import { useBeneficiaries } from '../hooks/useBeneficiaries';
+import { useLocalDataStore } from '../stores/useLocalDataStore';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
 
@@ -157,39 +158,38 @@ const SchedulingSystem = lazy(() => import('./scheduling/SchedulingSystem').then
 const StaffProfile = lazy(() => import('./staff/StaffProfile').then(m => ({ default: m.StaffProfile })));
 
 export const App = () => {
-    const {
-        activeBeneficiary: selectedBeneficiary,
-        setActiveBeneficiary: setSelectedBeneficiary,
-        isMasterViewOpen,
-        setIsMasterViewOpen
-    } = useApp();
+    const selectedBeneficiary = useAppStore((s) => s.activeBeneficiary);
+    const setSelectedBeneficiary = useAppStore((s) => s.setActiveBeneficiary);
+    const isMasterViewOpen = useAppStore((s) => s.isMasterViewOpen);
+    const setIsMasterViewOpen = useAppStore((s) => s.setIsMasterViewOpen);
 
-    const {
-        beneficiaries: unifiedBeneficiaries,
-        visitLogs,
-        inventory,
-        caseStudies,
-        socialResearchForms,
-        rehabilitationPlans,
-        medicalExaminations,
-        educationalPlans,
-        injuryReports,
-        familyCaseStudies,
-        trainingReferrals,
-        trainingPlanFollowUps,
-        vocationalEvaluations,
-        familyGuidanceReferrals,
-        postCareFollowUps,
-        socialActivityPlans,
-        socialActivityDocs,
-        socialActivityFollowUps,
-        vaccinations,
-        isolationStats,
-        addSocialActivityPlan,
-        addSocialActivityDoc,
-        addSocialActivityFollowUp,
-        addMedicalProfile
-    } = useUnifiedData();
+    // Server data via TanStack Query
+    const { data: unifiedBeneficiaries = [] } = useBeneficiaries();
+
+    // Local-only data via Zustand
+    const visitLogs = useLocalDataStore((s) => s.visitLogs);
+    const inventory = useLocalDataStore((s) => s.inventory);
+    const caseStudies = useLocalDataStore((s) => s.caseStudies);
+    const socialResearchForms = useLocalDataStore((s) => s.socialResearchForms);
+    const rehabilitationPlans = useLocalDataStore((s) => s.rehabilitationPlans);
+    const medicalExaminations = useLocalDataStore((s) => s.medicalExaminations);
+    const educationalPlans = useLocalDataStore((s) => s.educationalPlans);
+    const injuryReports = useLocalDataStore((s) => s.injuryReports);
+    const familyCaseStudies = useLocalDataStore((s) => s.familyCaseStudies);
+    const trainingReferrals = useLocalDataStore((s) => s.trainingReferrals);
+    const trainingPlanFollowUps = useLocalDataStore((s) => s.trainingPlanFollowUps);
+    const vocationalEvaluations = useLocalDataStore((s) => s.vocationalEvaluations);
+    const familyGuidanceReferrals = useLocalDataStore((s) => s.familyGuidanceReferrals);
+    const postCareFollowUps = useLocalDataStore((s) => s.postCareFollowUps);
+    const socialActivityPlans = useLocalDataStore((s) => s.socialActivityPlans);
+    const socialActivityDocs = useLocalDataStore((s) => s.socialActivityDocs);
+    const socialActivityFollowUps = useLocalDataStore((s) => s.socialActivityFollowUps);
+    const vaccinations = useLocalDataStore((s) => s.vaccinations);
+    const isolationStats = useLocalDataStore((s) => s.isolationStats);
+    const addSocialActivityPlan = useLocalDataStore((s) => s.addSocialActivityPlan);
+    const addSocialActivityDoc = useLocalDataStore((s) => s.addSocialActivityDoc);
+    const addSocialActivityFollowUp = useLocalDataStore((s) => s.addSocialActivityFollowUp);
+    const addMedicalProfile = useLocalDataStore((s) => s.addMedicalProfile);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isCreatingMedicalProfile, setIsCreatingMedicalProfile] = useState(false);

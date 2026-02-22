@@ -11,7 +11,6 @@ import {
   FileText,
   Calendar,
   User,
-  MapPin,
   Droplets,
   Heart,
   Search,
@@ -19,7 +18,7 @@ import {
   Plus,
   Eye,
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+// Supabase access via getSupabaseClient() from hooks/queries when needed
 
 // --- Types ---
 
@@ -184,7 +183,7 @@ export const OccupationalExposure: React.FC = () => {
       inc.type.includes(searchQuery)
   );
 
-  const updateFormField = (field: keyof FormData, value: any) => {
+  const updateFormField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

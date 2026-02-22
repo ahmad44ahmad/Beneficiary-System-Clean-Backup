@@ -3,11 +3,11 @@
 // Alerts staff when a new shift handover report is submitted
 // ═══════════════════════════════════════════════════════════════════════════
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, X, ChevronRight, Bell } from 'lucide-react';
-import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useRealtimeCallback, getSupabaseClient } from '../../hooks/queries';
+import { useToastStore } from '../../stores/useToastStore';
 import { useNavigate } from 'react-router-dom';
 
 interface ShiftHandover {
@@ -29,69 +29,54 @@ export const ShiftHandoverAlert: React.FC = () => {
     const [alert, setAlert] = useState<ShiftHandover | null>(null);
     const [isVisible, setIsVisible] = useState(false);
     const autoHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const handleShiftInsert = useCallback(async (payload: { new: Record<string, unknown> }) => {
+        const supabase = getSupabaseClient();
         if (!supabase) return;
 
-        // Subscribe to new shift handovers
-        const channel = supabase.channel('shift-handovers')
-            .on(
-                'postgres_changes',
-                {
-                    event: 'INSERT',
-                    schema: 'public',
-                    table: 'shift_handovers'
-                },
-                async (payload) => {
-                    const handover = payload.new as {
-                        id: string;
-                        shift_type: 'morning' | 'evening' | 'night' | null;
-                        handover_by_name: string | null;
-                        handover_to_name: string | null;
-                        created_at: string;
-                    };
-
-                    // Fetch handover details
-                    const { data } = await supabase
-                        .from('shift_handover_notes')
-                        .select('id')
-                        .eq('handover_id', handover.id);
-
-                    const alertData: ShiftHandover = {
-                        id: handover.id,
-                        shift_type: handover.shift_type || 'morning',
-                        handover_by: handover.handover_by_name || 'موظف',
-                        handover_to: handover.handover_to_name || 'الفريق',
-                        created_at: handover.created_at,
-                        notes_count: data?.length || 0
-                    };
-
-                    setAlert(alertData);
-                    setIsVisible(true);
-
-                    // Play notification sound
-                    try {
-                        const audio = new Audio('/notification.mp3');
-                        audio.volume = 0.3;
-                        audio.play().catch(() => { });
-                    } catch { /* ignored */ }
-
-                    showToast(`📋 تسليم فترة جديد من ${alertData.handover_by}`, 'info');
-
-                    // Auto-hide after 10 seconds (clear previous timer if any)
-                    if (autoHideTimerRef.current) clearTimeout(autoHideTimerRef.current);
-                    autoHideTimerRef.current = setTimeout(() => setIsVisible(false), 10000);
-                }
-            )
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(channel);
-            if (autoHideTimerRef.current) clearTimeout(autoHideTimerRef.current);
+        const handover = payload.new as {
+            id: string;
+            shift_type: 'morning' | 'evening' | 'night' | null;
+            handover_by_name: string | null;
+            handover_to_name: string | null;
+            created_at: string;
         };
+
+        // Fetch handover details
+        const { data } = await supabase
+            .from('shift_handover_notes')
+            .select('id')
+            .eq('handover_id', handover.id);
+
+        const alertData: ShiftHandover = {
+            id: handover.id,
+            shift_type: handover.shift_type || 'morning',
+            handover_by: handover.handover_by_name || 'موظف',
+            handover_to: handover.handover_to_name || 'الفريق',
+            created_at: handover.created_at,
+            notes_count: data?.length || 0
+        };
+
+        setAlert(alertData);
+        setIsVisible(true);
+
+        // Play notification sound
+        try {
+            const audio = new Audio('/notification.mp3');
+            audio.volume = 0.3;
+            audio.play().catch(() => { });
+        } catch { /* ignored */ }
+
+        showToast(`تسليم فترة جديد من ${alertData.handover_by}`, 'info');
+
+        // Auto-hide after 10 seconds (clear previous timer if any)
+        if (autoHideTimerRef.current) clearTimeout(autoHideTimerRef.current);
+        autoHideTimerRef.current = setTimeout(() => setIsVisible(false), 10000);
     }, [showToast]);
+
+    useRealtimeCallback('shift_handovers', 'INSERT', handleShiftInsert, 'shift-handovers');
 
     const handleDismiss = () => {
         setIsVisible(false);

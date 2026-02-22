@@ -885,13 +885,13 @@ const ChampionsLeagueView = () => {
 
 const SopLibraryView = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedDept, setSelectedDept] = useState<string | null>(null);
+    const [selectedDept, _setSelectedDept] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedId, setExpandedId] = useState<string | null>(null);
     const PAGE_SIZE = 20;
 
     // Get unique departments
-    const departments = useMemo(() => {
+    const _departments = useMemo(() => {
         const depts = new Set(qualityProcesses.map(p => p.department));
         return Array.from(depts);
     }, []);
@@ -916,38 +916,13 @@ const SopLibraryView = () => {
         currentPage * PAGE_SIZE
     );
 
-            {/* SOP List */}
-            <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
-                {filteredProcesses.slice(0, 15).map((process, _idx) => (
-                    <div key={process.id} className="p-4 hover:bg-gray-50 transition-colors flex items-center justify-between group cursor-pointer">
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
-                                <FileText className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <div className="flex items-center gap-2">
-                                    <h4 className="font-bold text-gray-800 text-sm group-hover:text-[#148287] transition-colors">{process.name}</h4>
-                                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-mono">SOP-{process.id.padStart(3, '0')}</span>
-                                </div>
-                                <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
-                                    <span>القسم: {process.department}</span>
-                                    <span>•</span>
-                                    <span>المسؤول: {process.responsible}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <span className="px-2 py-1 rounded text-xs font-medium bg-green-50 text-green-700">
-                                {process.frequency}
-                            </span>
-                            <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                                عرض
-                            </Button>
-                        </div>
-                    </div>
-                ))}
-            </div>
+    const handleSearchChange = (value: string) => {
+        setSearchTerm(value);
+        setCurrentPage(1);
+    };
 
+    return (
+        <div>
             <Card className="p-0 overflow-hidden">
                 {/* Search Header */}
                 <div className="p-6 border-b border-gray-100 bg-gray-50/50">

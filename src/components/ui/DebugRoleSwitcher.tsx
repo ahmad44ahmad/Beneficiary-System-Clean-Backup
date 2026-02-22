@@ -1,9 +1,9 @@
 import React from 'react';
-import { useUser, UserRole } from '../../context/UserContext';
+import { useUserStore, UserRole } from '../../stores/useUserStore';
 import { Shield } from 'lucide-react';
 
 export const DebugRoleSwitcher: React.FC = () => {
-    const { currentUser, switchRole } = useUser();
+    const { currentUser, switchRole } = useUserStore();
 
     if (!import.meta.env.DEV) return null;
 

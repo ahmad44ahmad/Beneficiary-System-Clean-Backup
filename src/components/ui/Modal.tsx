@@ -53,14 +53,14 @@ export const Modal: React.FC<ModalProps> = ({
             <div
                 ref={overlayRef}
                 className={cn(
-                    'relative w-full bg-white rounded-lg shadow-lg flex flex-col max-h-[90vh]',
+                    'relative w-full bg-white rounded-lg shadow-lg flex flex-col max-h-[90vh] dark:bg-slate-800 dark:shadow-2xl',
                     sizes[size],
                     className
                 )}
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="flex items-center justify-between p-4 border-b border-gray-100 shrink-0">
-                    {title && <h2 className="text-lg font-semibold">{title}</h2>}
+                <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-slate-700 shrink-0">
+                    {title && <h2 className="text-lg font-semibold dark:text-white">{title}</h2>}
                     <Button
                         variant="ghost"
                         size="sm"

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { Printer, ChevronLeft, Users, Layers, Scale, FileSpreadsheet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { TabButton } from '../../components/common/TabButton';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 
 type Gender = 'male' | 'female';
 type DayOfWeek = 'السبت' | 'الأحد' | 'الإثنين' | 'الثلاثاء' | 'الأربعاء' | 'الخميس' | 'الجمعة';
@@ -50,7 +50,7 @@ export const CateringReports: React.FC = () => {
     const navigate = useNavigate();
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     const [activeTab, setActiveTab] = useState<'attendance' | 'daily_log' | 'summary'>('attendance');
     const [selectedGender, setSelectedGender] = useState<Gender>('male');
@@ -100,6 +100,7 @@ export const CateringReports: React.FC = () => {
 
     const fetchAttendance = useCallback(async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
         try {
             if (!supabase) {
                 setAttendanceData(generateDemoAttendance());

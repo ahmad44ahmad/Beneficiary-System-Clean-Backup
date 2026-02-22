@@ -1,5 +1,97 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* TAILWIND v4 CSS-FIRST CONFIGURATION                                       */
+/* Migrated from tailwind.config.js — DO NOT recreate the JS config file     */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+@source "./src/**/*.{js,ts,jsx,tsx}";
+@source "./index.html";
+@source "./index.tsx";
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* DARK MODE — Class-based variant (ThemeProvider adds .dark to <html>)      */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* ===== Colors: HRSD Official Brand ===== */
+    --color-hrsd-navy: #1a365d;
+    --color-hrsd-navy-dark: #0f2744;
+    --color-hrsd-navy-light: #2d4a7c;
+
+    --color-hrsd-teal: #0d9488;
+    --color-hrsd-teal-dark: #0a7469;
+    --color-hrsd-teal-light: #14b8a6;
+
+    --color-hrsd-gold: #eab308;
+    --color-hrsd-gold-dark: #ca8a04;
+    --color-hrsd-gold-light: #facc15;
+
+    --color-hrsd-orange: #f97316;
+    --color-hrsd-green: #22c55e;
+    --color-hrsd-red: #ef4444;
+
+    /* ===== Colors: Legacy / Compatibility ===== */
+    --color-primary: #0d9488;
+    --color-primary-light: #14b8a6;
+    --color-primary-dark: #0a7469;
+
+    --color-secondary: #eab308;
+    --color-secondary-bg: #fefce8;
+
+    --color-accent: #0d9488;
+    --color-accent-teal: #0d9488;
+    --color-accent-green: #22c55e;
+    --color-accent-blue: #1a365d;
+    --color-accent-dark-blue: #1a365d;
+
+    --color-surface: #ffffff;
+
+    /* ===== Box Shadows ===== */
+    --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    /* ===== Border Radius ===== */
+    --radius-default: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+
+    /* ===== Font Families ===== */
+    --font-hrsd: 'HRSD Font', 'Tajawal', sans-serif;
+    --font-arabic: 'Tajawal', 'Cairo', sans-serif;
+    --font-sans: 'Tajawal', 'effra-arabic', sans-serif;
+
+    /* ===== Breakpoints ===== */
+    --breakpoint-xs: 375px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+    --breakpoint-iphone-pro-max: 430px;
+
+    /* ===== Spacing ===== */
+    --spacing-safe-bottom: env(safe-area-inset-bottom);
+    --spacing-safe-top: env(safe-area-inset-top);
+    --spacing-mobile-nav: 64px;
+    --spacing-sidebar: 280px;
+
+    /* ===== Animations ===== */
+    --animate-fade-in: fadeIn 0.3s ease-out forwards;
+    --animate-slide-up: slideUp 0.4s ease-out forwards;
+    --animate-slide-right: slideRight 0.3s ease-out forwards;
+    --animate-pulse-soft: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ===== Keyframes for Tailwind v4 @theme animations ===== */
+@keyframes pulseSoft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
 :root {
     /* HRSD Brand Identity - Official Colors */
     --primary-color: #F5961E;
@@ -59,10 +151,90 @@ body {
     background-color: var(--secondary-bg);
     color: var(--text-color);
     line-height: 1.7;
-    /* Increased from 1.6 */
     font-size: 18px;
-    /* Increased from 16px */
     font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* DARK MODE OVERRIDES                                                        */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+.dark body,
+.dark {
+    --secondary-bg: #0f172a;
+    --text-color: #f8fafc;
+    --light-text-color: #94a3b8;
+    --white-color: #1e293b;
+    --border-color: #334155;
+    --accent-dark-blue: #0f2744;
+    color-scheme: dark;
+}
+
+.dark .hrsd-card,
+.dark .hrsd-card-stat {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+.dark .dashboard-panel,
+.dark .dashboard-section {
+    background-color: #1e293b;
+}
+
+.dark .data-table th {
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+
+.dark .data-table tr:hover {
+    background-color: #334155;
+}
+
+.dark .modal-content {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+.dark .modal-header {
+    border-color: #334155;
+}
+
+.dark .modal-footer {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+.dark .form-group input,
+.dark .form-group select,
+.dark .form-group textarea {
+    background-color: #0f172a;
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+.dark .form-group label {
+    color: #e2e8f0;
+}
+
+.dark .glass-panel {
+    background: rgba(15, 23, 42, 0.75);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .skeleton {
+    background: linear-gradient(90deg,
+            #1e293b 0%,
+            #334155 50%,
+            #1e293b 100%);
+    background-size: 200% 100%;
+}
+
+.dark .kpi-card {
+    background: #1e293b;
+}
+
+.dark .clothing-panel {
+    background: #1e293b;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */

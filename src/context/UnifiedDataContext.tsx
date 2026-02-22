@@ -77,6 +77,13 @@ interface UnifiedDataContextType {
 
 const UnifiedDataContext = createContext<UnifiedDataContextType | undefined>(undefined);
 
+// Static isolation stats — moved outside component to avoid re-creating every render
+const ISOLATION_STATS = {
+    totalBeds: 10,
+    occupiedBeds: 0,
+    patients: [] as { name: string; reason: string }[]
+};
+
 export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     // Core Data
     const [beneficiaries, setBeneficiaries] = useState<UnifiedBeneficiaryProfile[]>([]);
@@ -108,12 +115,6 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         { id: '1', beneficiaryId: '101', vaccineName: 'Influenza', dueDate: '2023-11-01', status: 'Overdue' },
         { id: '2', beneficiaryId: '102', vaccineName: 'Hepatitis B', dueDate: '2023-12-15', status: 'Pending' }
     ]);
-    const isolationStats = {
-        totalBeds: 10,
-        occupiedBeds: 0,
-        patients: [] as { name: string; reason: string }[]
-    });
-
     const isDemoMode = import.meta.env.VITE_APP_MODE === 'demo';
 
     const [loading, setLoading] = useState(true);
@@ -139,7 +140,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         } as UnifiedBeneficiaryProfile));
     };
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
@@ -174,7 +175,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
             setBeneficiaries(enrichedData);
             // In a real app, we would fetch other entities here too
-            // setVisitLogs(initialVisitLogs); 
+            // setVisitLogs(initialVisitLogs);
         } catch (err: unknown) {
             console.error("Data fetch error:", err);
             // Use local data as fallback on error
@@ -188,11 +189,11 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         } finally {
             setLoading(false);
         }
-    };
+    }, [isDemoMode]);
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     const getBeneficiaryById = useCallback((id: string) => {
         return beneficiaries.find(b => b.id === id);
@@ -216,7 +217,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
     const refreshData = useCallback(async () => {
         await fetchData();
-    }, []);
+    }, [fetchData]);
 
     // Simple setters for migration
     const addVisitLog = useCallback((log: VisitLog) => setVisitLogs(prev => [log, ...prev]), []);
@@ -248,7 +249,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         familyGuidanceReferrals,
         postCareFollowUps,
         vaccinations,
-        isolationStats,
+        isolationStats: ISOLATION_STATS,
         loading,
         error,
         getBeneficiaryById,
@@ -266,7 +267,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         medicalExaminations, educationalPlans, injuryReports, familyCaseStudies,
         socialActivityPlans, socialActivityDocs, socialActivityFollowUps,
         trainingReferrals, trainingPlanFollowUps, vocationalEvaluations,
-        familyGuidanceReferrals, postCareFollowUps, vaccinations, isolationStats,
+        familyGuidanceReferrals, postCareFollowUps, vaccinations,
         loading, error, getBeneficiaryById, getBeneficiaryByNationalId,
         updateBeneficiary, refreshData, addVisitLog, addSocialActivityPlan,
         addSocialActivityDoc, addSocialActivityFollowUp, addMedicalProfile

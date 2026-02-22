@@ -13,20 +13,20 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             <div
                 ref={ref}
                 className={cn(
-                    'rounded-xl border border-gray-200 bg-white text-gray-950 shadow-sm',
+                    'rounded-xl border border-gray-200 bg-white text-gray-950 shadow-sm dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700',
                     className
                 )}
                 {...props}
             >
                 {(title || description) && (
-                    <div className="flex flex-col space-y-1.5 p-6 pb-4 border-b border-gray-100">
+                    <div className="flex flex-col space-y-1.5 p-6 pb-4 border-b border-gray-100 dark:border-slate-700">
                         {title && (
                             <h3 className="font-semibold leading-none tracking-tight text-lg">
                                 {title}
                             </h3>
                         )}
                         {description && (
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-500 dark:text-slate-400">
                                 {description}
                             </p>
                         )}

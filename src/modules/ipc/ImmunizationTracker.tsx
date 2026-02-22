@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     Syringe, ChevronLeft, Plus, Search,
     Calendar,
-    User, Users, RefreshCw
+    User, Users, RefreshCw, X, Loader2, Save
 } from 'lucide-react';
 import { ipcService, Immunization } from '../../services/ipcService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
@@ -16,6 +16,16 @@ const DEMO_IMMUNIZATIONS: Immunization[] = [
     { id: '4', person_type: 'beneficiary', beneficiary_id: 'b1', vaccine_code: 'COVID', vaccine_name: 'كوفيد-19', dose_number: 2, total_doses: 2, date_administered: '2025-04-20', immunity_status: 'immune', adverse_reaction: false },
     { id: '5', person_type: 'staff', staff_name: 'نورة أحمد', vaccine_code: 'HBV', vaccine_name: 'التهاب الكبد B', dose_number: 1, total_doses: 3, date_administered: '2025-11-01', next_due_date: '2026-01-01', immunity_status: 'pending', adverse_reaction: false },
     { id: '6', person_type: 'staff', staff_name: 'محمد العتيبي', vaccine_code: 'TDAP', vaccine_name: 'الكزاز', dose_number: 1, total_doses: 1, date_administered: '2024-06-01', immunity_status: 'expired', adverse_reaction: false },
+];
+
+// Vaccine type definitions
+const VACCINE_TYPES = [
+    { code: 'HBV', name: 'التهاب الكبد B', name_ar: 'التهاب الكبد B', doses: 3 },
+    { code: 'FLU', name: 'الإنفلونزا', name_ar: 'الإنفلونزا', doses: 1 },
+    { code: 'COVID', name: 'كوفيد-19', name_ar: 'كوفيد-19', doses: 2 },
+    { code: 'TDAP', name: 'الكزاز', name_ar: 'الكزاز', doses: 1 },
+    { code: 'MMR', name: 'الحصبة والنكاف والحميراء', name_ar: 'الحصبة والنكاف والحميراء', doses: 2 },
+    { code: 'VAR', name: 'الجدري المائي', name_ar: 'الجدري المائي', doses: 2 },
 ];
 
 // Status Badge Component
@@ -260,7 +270,7 @@ export const ImmunizationTracker: React.FC = () => {
     const [filterType, setFilterType] = useState<'all' | 'staff' | 'beneficiary'>('all');
     const [filterStatus, setFilterStatus] = useState<string>('all');
     const [searchTerm, setSearchTerm] = useState('');
-    const [_showAddModal, setShowAddModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);
 
     useEffect(() => {
         fetchData();

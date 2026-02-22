@@ -4,7 +4,7 @@ import {
     Shield, ChevronLeft, CheckCircle, Clock,
     AlertCircle, XCircle, RefreshCw, FileCheck
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface ISOClause {
@@ -42,6 +42,12 @@ export const ISOComplianceTracker: React.FC = () => {
     useEffect(() => {
         const fetchClauses = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setClauses(demoData);
+                setLoading(false);
+                return;
+            }
             const { data, error } = await supabase
                 .from('iso_compliance_checklist')
                 .select('*')

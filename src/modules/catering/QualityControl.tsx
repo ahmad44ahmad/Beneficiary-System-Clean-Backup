@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { ClipboardCheck, Save, Loader2, DollarSign, CheckCircle, XCircle } from 'lucide-react';
 
 export const QualityControl = () => {
@@ -35,6 +35,7 @@ export const QualityControl = () => {
 
         const fetchInitialData = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
             try {
                 if (!supabase) {
                     setSuppliers(DEMO_SUPPLIERS);
@@ -107,6 +108,8 @@ export const QualityControl = () => {
 
     const handleSubmit = async () => {
         setSubmitting(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setSubmitting(false); return; }
         try {
             const totalPenalty = calculateTotalDeduction();
 

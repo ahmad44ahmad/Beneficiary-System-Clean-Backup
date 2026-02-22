@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Activity,
     Brain,
@@ -77,6 +77,11 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
     const fetchProfile = useCallback(async () => {
         try {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setLoading(false);
+                return;
+            }
             const { data, error } = await supabase
                 .from('medical_profiles')
                 .select('*')
@@ -111,6 +116,8 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
     const handleSave = async () => {
         try {
             setSaving(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) throw new Error('Supabase not configured');
 
             const payload = {
                 beneficiary_id: beneficiaryId,

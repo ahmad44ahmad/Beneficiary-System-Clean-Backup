@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { FileText, AlertTriangle, Sparkles, BrainCircuit, Loader2, X } from 'lucide-react';
 
 export const MonthlyInvoice: React.FC = () => {
@@ -17,6 +17,9 @@ export const MonthlyInvoice: React.FC = () => {
     useEffect(() => {
         const calculateInvoice = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) { setLoading(false); return; }
+
             const startDate = `${month}-01`;
             const endDate = `${month}-31`; // Simplified
 

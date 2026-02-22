@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
+import { useUserStore } from '../../stores/useUserStore';
 import { SocialResearch } from '../../types/social';
 import { beneficiaries as initialBeneficiaries } from '../../data/beneficiaries';
 import { Button } from '../ui/Button';
@@ -18,7 +18,7 @@ const STEPS = [
 
 export const SocialResearchWizard: React.FC = () => {
     const navigate = useNavigate();
-    const { currentUser: _currentUser } = useUser();
+    const { currentUser: _currentUser } = useUserStore();
     const [currentStep, setCurrentStep] = useState(1);
     const [selectedBeneficiaryId, setSelectedBeneficiaryId] = useState('');
 
@@ -55,7 +55,7 @@ export const SocialResearchWizard: React.FC = () => {
 
     const inputClasses = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#148287]/20 focus:border-[#148287] transition-all duration-200";
 
-    const renderRadioGroup = (name: string, value: string | undefined, onChange: (val: string) => void) => (
+    const _renderRadioGroup = (name: string, value: string | undefined, onChange: (val: string) => void) => (
         <div className="flex gap-3 flex-wrap">
             {['yes', 'no', 'unknown'].map(opt => (
                 <label
