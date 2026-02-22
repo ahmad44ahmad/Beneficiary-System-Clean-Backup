@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Target, ChevronLeft, Save, Loader2,
-    Calendar, User, Building, Sparkles,
+    Calendar, User, Sparkles,
     CheckCircle, ArrowRight, BookOpen
 } from 'lucide-react';
 import { empowermentService, GoalTemplate, REHAB_DOMAINS, QOL_DIMENSIONS } from '../../services/empowermentService';
@@ -44,16 +44,16 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
     // Fetch templates when domain changes
     useEffect(() => {
         if (domain) {
+            const fetchTemplates = async () => {
+                setLoading(true);
+                const temps = await empowermentService.getGoalTemplates(domain);
+                setTemplates(temps);
+                setLoading(false);
+            };
+
             fetchTemplates();
         }
     }, [domain]);
-
-    const fetchTemplates = async () => {
-        setLoading(true);
-        const temps = await empowermentService.getGoalTemplates(domain);
-        setTemplates(temps);
-        setLoading(false);
-    };
 
     const applyTemplate = (template: GoalTemplate) => {
         setSelectedTemplate(template);

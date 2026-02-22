@@ -41,8 +41,8 @@ export function useAudit(module: AuditModule) {
         (action: AuditAction, description: string, options?: {
             resourceId?: string;
             resourceType?: string;
-            previousValue?: any;
-            newValue?: any;
+            previousValue?: unknown;
+            newValue?: unknown;
             success?: boolean;
             errorMessage?: string;
         }) => {

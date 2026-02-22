@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Clock, Calendar, Pill, Heart, Utensils, AlertTriangle,
-    CheckCircle, FileText, Users, Activity, Camera, MessageSquare,
-    ChevronDown, ChevronUp, Filter, Search, Award, Target
+    FileText, Users, Activity, Camera,
+    ChevronDown, ChevronUp, Award
 } from 'lucide-react';
 
 type EventType = 'admission' | 'medication' | 'therapy' | 'meal' | 'incident' | 'assessment' | 'visit' | 'achievement';
@@ -53,7 +53,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
     const [events] = useState<TimelineEvent[]>(mockEvents);
     const [expandedEvent, setExpandedEvent] = useState<string | null>(null);
     const [filterType, setFilterType] = useState<EventType | 'all'>('all');
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, _setSearchTerm] = useState('');
 
     const filteredEvents = events.filter(event => {
         const matchesType = filterType === 'all' || event.type === filterType;

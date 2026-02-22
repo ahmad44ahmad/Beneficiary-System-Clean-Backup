@@ -17,7 +17,7 @@ export const ClothingItemTable: React.FC<ClothingItemTableProps> = ({ items, onC
         onChange([...items, { itemId: '', quantity: 1 }]);
     };
 
-    const handleChange = (index: number, field: keyof ClothingItemEntry, value: any) => {
+    const handleChange = (index: number, field: keyof ClothingItemEntry, value: string | number) => {
         const newItems = [...items];
         newItems[index] = { ...newItems[index], [field]: value };
         onChange(newItems);
@@ -44,7 +44,7 @@ export const ClothingItemTable: React.FC<ClothingItemTableProps> = ({ items, onC
                                     <input
                                         className="table-input"
                                         type={col.type || 'text'}
-                                        value={(item as any)[col.key] || ''}
+                                        value={item[col.key] as string | number || ''}
                                         onChange={e => handleChange(index, col.key, e.target.value)}
                                     />
                                 </td>

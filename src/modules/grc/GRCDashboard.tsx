@@ -8,13 +8,13 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield, AlertTriangle, CheckCircle, XCircle, Clock,
-  TrendingUp, TrendingDown, FileText, Target, Eye,
-  Calendar, ChevronRight, ChevronDown, Filter, Download,
-  RefreshCw, Plus, AlertOctagon, Award, Lock, Users,
-  Activity, BarChart3, PieChart, Zap, Heart, Building2,
-  Flame, Droplets, Pill, Stethoscope, UserX, Camera,
-  Scale, Gavel, FileCheck, ClipboardList, Siren, Gauge,
-  ArrowUpRight, ArrowDownRight, Minus, Timer, MapPin
+  FileText, Target, Eye,
+  Calendar, ChevronDown, Download,
+  RefreshCw, AlertOctagon, Users,
+  PieChart, Zap, Heart, Building2,
+  Flame, Droplets, Stethoscope,
+  Scale, FileCheck, Siren,
+  ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -976,7 +976,7 @@ const BCPScenarioCard = ({ scenario, index }: { scenario: BCPScenario; index: nu
 export default function GRCDashboardPro() {
   const [activeTab, setActiveTab] = useState<'risks' | 'compliance' | 'ncr' | 'bcp'>('risks');
   const [filterCategory, setFilterCategory] = useState<RiskCategory | 'all'>('all');
-  const [filterStatus, setFilterStatus] = useState<RiskStatus | 'all'>('all');
+  const [filterStatus, _setFilterStatus] = useState<RiskStatus | 'all'>('all');
 
   // الإحصائيات المحسوبة
   const stats = useMemo(() => {
@@ -1360,7 +1360,7 @@ export default function GRCDashboardPro() {
                 { month: 'أبريل', task: 'تجربة إخلاء + تدقيق جزئي', status: 'pending' },
                 { month: 'مايو', task: 'تدقيق داخلي شامل', status: 'pending' },
                 { month: 'يونيو', task: 'مراجعة الإدارة + الجاهزية النهائية', status: 'pending' },
-              ].map(({ month, task, status }, i) => (
+              ].map(({ month, task, status }, _i) => (
                 <div key={month} className="flex items-start gap-3">
                   <div className={`w-3 h-3 rounded-full mt-1.5 ${status === 'current' ? 'bg-teal-500 animate-pulse' : 'bg-white/20'
                     }`} />

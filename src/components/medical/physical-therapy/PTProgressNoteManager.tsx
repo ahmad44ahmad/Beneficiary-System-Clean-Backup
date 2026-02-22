@@ -36,7 +36,7 @@ export const PTProgressNoteManager: React.FC<{
                         <label className="block text-sm font-medium text-gray-700">Session Type</label>
                         <select
                             value={newNote.sessionType}
-                            onChange={(e) => setNewNote(prev => ({ ...prev, sessionType: e.target.value as any }))}
+                            onChange={(e) => setNewNote(prev => ({ ...prev, sessionType: e.target.value as PTProgressNote['sessionType'] }))}
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
                         >
                             <option value="Individual">Individual</option>
@@ -47,7 +47,7 @@ export const PTProgressNoteManager: React.FC<{
                         <label className="block text-sm font-medium text-gray-700">Patient Response</label>
                         <select
                             value={newNote.response}
-                            onChange={(e) => setNewNote(prev => ({ ...prev, response: e.target.value as any }))}
+                            onChange={(e) => setNewNote(prev => ({ ...prev, response: e.target.value as PTProgressNote['response'] }))}
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
                         >
                             <option value="Cooperative">Cooperative</option>

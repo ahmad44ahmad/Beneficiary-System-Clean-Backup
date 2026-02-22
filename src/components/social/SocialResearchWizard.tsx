@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
-import { Beneficiary } from '../../types';
 import { SocialResearch } from '../../types/social';
 import { beneficiaries as initialBeneficiaries } from '../../data/beneficiaries';
 import { Button } from '../ui/Button';
@@ -19,7 +18,7 @@ const STEPS = [
 
 export const SocialResearchWizard: React.FC = () => {
     const navigate = useNavigate();
-    const { currentUser } = useUser();
+    const { currentUser: _currentUser } = useUser();
     const [currentStep, setCurrentStep] = useState(1);
     const [selectedBeneficiaryId, setSelectedBeneficiaryId] = useState('');
 
@@ -121,15 +120,39 @@ export const SocialResearchWizard: React.FC = () => {
                 );
             case 2:
                 return (
-                    <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-3">
-                                <label className="block text-sm font-medium text-gray-700">حالة الأب</label>
-                                {renderRadioGroup('isFatherAlive', formData.isFatherAlive, (val) => setFormData({ ...formData, isFatherAlive: val as any }))}
+                    <div className="space-y-4 animate-in fade-in slide-in-from-right-4">
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="block text-sm font-medium">حالة الأب</label>
+                                <div className="flex gap-4">
+                                    {['yes', 'no', 'unknown'].map(opt => (
+                                        <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="isFatherAlive"
+                                                checked={formData.isFatherAlive === opt}
+                                                onChange={() => setFormData({ ...formData, isFatherAlive: opt })}
+                                            />
+                                            <span>{opt === 'yes' ? 'على قيد الحياة' : opt === 'no' ? 'متوفى' : 'مجهول'}</span>
+                                        </label>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="space-y-3">
-                                <label className="block text-sm font-medium text-gray-700">حالة الأم</label>
-                                {renderRadioGroup('isMotherAlive', formData.isMotherAlive, (val) => setFormData({ ...formData, isMotherAlive: val as any }))}
+                            <div className="space-y-2">
+                                <label className="block text-sm font-medium">حالة الأم</label>
+                                <div className="flex gap-4">
+                                    {['yes', 'no', 'unknown'].map(opt => (
+                                        <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="isMotherAlive"
+                                                checked={formData.isMotherAlive === opt}
+                                                onChange={() => setFormData({ ...formData, isMotherAlive: opt })}
+                                            />
+                                            <span>{opt === 'yes' ? 'على قيد الحياة' : opt === 'no' ? 'متوفى' : 'مجهول'}</span>
+                                        </label>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 

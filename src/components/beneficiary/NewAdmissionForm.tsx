@@ -24,7 +24,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
         familyHistory: [],
         seizureHistory: { hasSeizures: false }
     });
-    const [diagnosis, setDiagnosis] = useState<any>('Other');
+    const [diagnosis, setDiagnosis] = useState<string>('Other');
     const [isEpileptic, setIsEpileptic] = useState(false);
     const [checkupComment, setCheckupComment] = useState('');
 
@@ -43,7 +43,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
         if (step > 1) setStep(step - 1);
     };
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -71,7 +71,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
         };
 
         try {
-            await supaService.saveMedicalProfile(newProfile);
+            await supaService.saveMedicalProfile(newProfile as unknown as Record<string, unknown>);
             onSave(newProfile); // Update local state for immediate feedback
         } catch (error) {
             console.error("Failed to save medical profile:", error);

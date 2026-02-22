@@ -1,18 +1,13 @@
 
 import React, { useState } from 'react';
 import { supabase } from '../../config/supabase';
-import { generateShiftSummary } from '../../utils/shiftReportGenerator';
 import {
     Save,
     AlertCircle,
     Thermometer,
     Activity,
     User,
-    Clipboard,
     CheckCircle2,
-    Droplet,
-    FileText,
-    X
 } from 'lucide-react';
 
 interface DailyCareFormProps {
@@ -25,11 +20,6 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
     const [saving, setSaving] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [error, setError] = useState('');
-
-    // Report State
-    const [showReport, setShowReport] = useState(false);
-    const [reportText, setReportText] = useState('');
-    const [loadingReport, setLoadingReport] = useState(false);
 
     const [formData, setFormData] = useState({
         shift: 'صباحي',
@@ -66,30 +56,6 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
     };
 
 
-
-    const handleGenerateReport = async () => {
-        setLoadingReport(true);
-        try {
-            const today = new Date().toISOString().split('T')[0];
-            const { data, error } = await supabase
-                .from('daily_care_logs')
-                .select('*')
-                .eq('beneficiary_id', beneficiaryId)
-                .eq('log_date', today)
-                .order('created_at', { ascending: true });
-
-            if (error) throw error;
-
-            const summary = generateShiftSummary(data || [], beneficiaryName);
-            setReportText(summary);
-            setShowReport(true);
-        } catch (err) {
-            console.error('Error generating report:', err);
-            alert('حدث خطأ أثناء إنشاء التقرير');
-        } finally {
-            setLoadingReport(false);
-        }
-    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -133,9 +99,9 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
 
             if (onSuccess) onSuccess();
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Error saving daily log:', err);
-            setError(err.message || 'حدث خطأ أثناء الحفظ');
+            setError(err instanceof Error ? err.message : 'حدث خطأ أثناء الحفظ');
         } finally {
             setSaving(false);
         }

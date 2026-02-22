@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { Loader2, TrendingDown, AlertTriangle, CheckCircle, Award } from 'lucide-react';
+import { Loader2, TrendingDown, CheckCircle, Award } from 'lucide-react';
 
 export const QualityDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState({
         totalDeductions: 0,
         compliantPercentage: 0,
-        topViolations: [] as any[],
-        recentEvals: [] as any[]
+        topViolations: [] as { name: string; count: number }[],
+        recentEvals: [] as { id: string; evaluation_date: string; total_penalty_amount: number; supplier?: { name: string } }[]
     });
 
     useEffect(() => {
@@ -38,8 +38,9 @@ export const QualityDashboard = () => {
 
             // Mock aggregation (since supabase simplified query doesn't do GROUP BY easily without RPC)
             const violationCounts: Record<string, number> = {};
-            answers?.forEach((a: any) => {
-                const cat = a.criteria?.category || 'General';
+            answers?.forEach((a) => {
+                const criteria = a.criteria as { category?: string } | null;
+                const cat = criteria?.category || 'General';
                 violationCounts[cat] = (violationCounts[cat] || 0) + 1;
             });
 
@@ -54,7 +55,7 @@ export const QualityDashboard = () => {
                 topViolations: topChartData.length > 0 ? topChartData : [
                     { name: 'النظافة', count: 5 }, { name: 'الطعام', count: 3 } // Mock fallback
                 ],
-                recentEvals: evals?.slice(0, 5) || []
+                recentEvals: (evals?.slice(0, 5) || []) as unknown as { id: string; evaluation_date: string; total_penalty_amount: number; supplier?: { name: string } }[]
             });
 
         } catch (error) {
@@ -138,7 +139,7 @@ export const QualityDashboard = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y">
-                            {stats.recentEvals.map((ev: any) => (
+                            {stats.recentEvals.map((ev) => (
                                 <tr key={ev.id}>
                                     <td className="p-3">{new Date(ev.evaluation_date).toLocaleDateString('ar-SA')}</td>
                                     <td className="p-3 font-medium">{ev.supplier?.name}</td>

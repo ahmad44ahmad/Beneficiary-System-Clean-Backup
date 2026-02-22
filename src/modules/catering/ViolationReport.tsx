@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
-import { AlertTriangle, Upload, Camera } from 'lucide-react';
+import { AlertTriangle, Camera } from 'lucide-react';
 
 export const ViolationReport: React.FC = () => {
     const [audit, setAudit] = useState({ type: 'hygiene', description: '', severity: 'low' });

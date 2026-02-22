@@ -5,7 +5,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Clock, X, ChevronRight, Bell } from 'lucide-react';
+import { Users, X, ChevronRight, Bell } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
@@ -45,7 +45,13 @@ export const ShiftHandoverAlert: React.FC = () => {
                     table: 'shift_handovers'
                 },
                 async (payload) => {
-                    const handover = payload.new as any;
+                    const handover = payload.new as {
+                        id: string;
+                        shift_type: 'morning' | 'evening' | 'night' | null;
+                        handover_by_name: string | null;
+                        handover_to_name: string | null;
+                        created_at: string;
+                    };
 
                     // Fetch handover details
                     const { data } = await supabase
@@ -69,8 +75,8 @@ export const ShiftHandoverAlert: React.FC = () => {
                     try {
                         const audio = new Audio('/notification.mp3');
                         audio.volume = 0.3;
-                        audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
-                    } catch (_) { /* Audio not supported */ }
+                        audio.play().catch(() => { });
+                    } catch { /* ignored */ }
 
                     showToast(`📋 تسليم فترة جديد من ${alertData.handover_by}`, 'info');
 

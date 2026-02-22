@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, AlertCircle, BookOpen } from 'lucide-react';
+import { ExternalLink, BookOpen } from 'lucide-react';
 
 export const ExternalKnowledgeBase: React.FC = () => {
     const [url, setUrl] = useState(import.meta.env.VITE_KNOWLEDGE_BASE_URL || '');

@@ -24,4 +24,5 @@ export const ViewModeProvider: React.FC<{ children: ReactNode }> = ({ children }
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useViewMode = () => useContext(ViewModeContext);

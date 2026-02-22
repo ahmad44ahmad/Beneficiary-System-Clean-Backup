@@ -30,7 +30,7 @@ export const DailyIPCInspection: React.FC = () => {
 
     // State
     const [locations, setLocations] = useState<Location[]>([]);
-    const [templates, setTemplates] = useState<ChecklistTemplate[]>([]);
+    const [_templates, setTemplates] = useState<ChecklistTemplate[]>([]);
     const [selectedLocation, setSelectedLocation] = useState<string>('');
     const [selectedShift, setSelectedShift] = useState<string>('صباحي');
     const [checklist, setChecklist] = useState<ChecklistItem[]>([]);

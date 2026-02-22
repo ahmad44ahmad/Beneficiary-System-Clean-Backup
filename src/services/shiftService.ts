@@ -25,10 +25,10 @@ export const shiftService = {
             throw error;
         }
 
-        return data.map((item: any) => ({
+        return data.map((item: Record<string, unknown>) => ({
             ...item,
-            beneficiaryName: item.beneficiaries?.full_name
-        }));
+            beneficiaryName: (item.beneficiaries as { full_name?: string } | null)?.full_name
+        } as ShiftHandoverItem));
     },
 
     async addShiftItem(item: Omit<ShiftHandoverItem, 'id' | 'created_at'>): Promise<ShiftHandoverItem> {

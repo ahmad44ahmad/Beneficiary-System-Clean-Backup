@@ -5,9 +5,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Pill, Clock, X, ChevronRight, AlertCircle } from 'lucide-react';
+import { Pill, Clock, X, ChevronRight } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
 
 interface OverdueMedication {
@@ -23,9 +22,6 @@ export const MedicationReminderAlert: React.FC = () => {
     const [overdueAlerts, setOverdueAlerts] = useState<OverdueMedication[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
-    const isMinimizedRef = useRef(isMinimized);
-    isMinimizedRef.current = isMinimized;
-    const { showToast } = useToast();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -66,7 +62,7 @@ export const MedicationReminderAlert: React.FC = () => {
                         return {
                             id: item.id,
                             beneficiary_id: item.beneficiary_id,
-                            beneficiary_name: (item as any).beneficiaries?.full_name || 'مستفيد',
+                            beneficiary_name: (item as unknown as { beneficiaries?: { full_name?: string } }).beneficiaries?.full_name || 'مستفيد',
                             medication_name: item.medication_name,
                             scheduled_time: item.scheduled_time,
                             minutes_overdue: minutesOverdue

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Home, Users, Target, Calendar, Activity,
+    Home, Target, Calendar, Activity,
     Heart, ChevronLeft, MessageCircle, Phone,
-    Image, FileText, Star, Bell, Settings,
-    TrendingUp, Clock, Smile, Video, Headphones
+    Image, Star, Bell, Settings,
+    TrendingUp, Smile, Video, Headphones
 } from 'lucide-react';
 import { FamilyMediaFeed } from '../../components/family/FamilyMediaFeed';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
@@ -179,7 +179,7 @@ export const FamilyPortal: React.FC = () => {
                 ].map(tab => (
                     <button
                         key={tab.key}
-                        onClick={() => setActiveTab(tab.key as any)}
+                        onClick={() => setActiveTab(tab.key as typeof activeTab)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${activeTab === tab.key
                             ? 'bg-blue-600 text-white shadow-md'
                             : 'bg-white text-gray-600 border hover:border-blue-300'

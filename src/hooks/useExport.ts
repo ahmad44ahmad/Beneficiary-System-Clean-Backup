@@ -7,9 +7,9 @@ import { useState, useCallback } from 'react';
 import { exportToCSV, exportToExcel, exportToPDF, ExportOptions, ExportColumn } from '../utils/export';
 
 interface UseExportResult {
-    exportToExcel: (data: any[], columns: ExportColumn[], options?: Partial<ExportOptions>) => void;
-    exportToCsv: (data: any[], columns: ExportColumn[], options?: Partial<ExportOptions>) => void;
-    exportToPdf: (data: any[], columns: ExportColumn[], options?: Partial<ExportOptions>) => void;
+    exportToExcel: (data: object[], columns: ExportColumn[], options?: Partial<ExportOptions>) => void;
+    exportToCsv: (data: object[], columns: ExportColumn[], options?: Partial<ExportOptions>) => void;
+    exportToPdf: (data: object[], columns: ExportColumn[], options?: Partial<ExportOptions>) => void;
     isExporting: boolean;
 }
 
@@ -21,7 +21,7 @@ export function useExport(): UseExportResult {
     const [isExporting, setIsExporting] = useState(false);
 
     const handleExportToExcel = useCallback((
-        data: any[],
+        data: object[],
         columns: ExportColumn[],
         options: Partial<ExportOptions> = {}
     ) => {
@@ -33,7 +33,7 @@ export function useExport(): UseExportResult {
                 title: options.title,
                 subtitle: options.subtitle,
                 columns,
-                data,
+                data: data as Record<string, unknown>[],
                 includeTimestamp: options.includeTimestamp ?? true,
                 orientation: options.orientation || 'portrait',
             };
@@ -45,7 +45,7 @@ export function useExport(): UseExportResult {
     }, []);
 
     const handleExportToCsv = useCallback((
-        data: any[],
+        data: object[],
         columns: ExportColumn[],
         options: Partial<ExportOptions> = {}
     ) => {
@@ -57,7 +57,7 @@ export function useExport(): UseExportResult {
                 title: options.title,
                 subtitle: options.subtitle,
                 columns,
-                data,
+                data: data as Record<string, unknown>[],
                 includeTimestamp: options.includeTimestamp ?? true,
                 orientation: options.orientation || 'portrait',
             };
@@ -69,7 +69,7 @@ export function useExport(): UseExportResult {
     }, []);
 
     const handleExportToPdf = useCallback((
-        data: any[],
+        data: object[],
         columns: ExportColumn[],
         options: Partial<ExportOptions> = {}
     ) => {
@@ -81,7 +81,7 @@ export function useExport(): UseExportResult {
                 title: options.title,
                 subtitle: options.subtitle,
                 columns,
-                data,
+                data: data as Record<string, unknown>[],
                 includeTimestamp: options.includeTimestamp ?? true,
                 orientation: options.orientation || 'portrait',
             };
@@ -113,22 +113,22 @@ export const BENEFICIARY_COLUMNS: ExportColumn[] = [
     { key: 'room', header: 'رقم الغرفة' },
     { key: 'wing', header: 'الجناح' },
     {
-        key: 'status', header: 'الحالة الصحية', format: (v) => {
+        key: 'status', header: 'الحالة الصحية', format: (v: unknown) => {
             switch (v) {
                 case 'stable': return 'مستقر';
                 case 'needs_attention': return 'يحتاج متابعة';
                 case 'critical': return 'حرج';
-                default: return v || '-';
+                default: return String(v || '-');
             }
         }
     },
     {
-        key: 'ipc_status', header: 'حالة IPC', format: (v) => {
+        key: 'ipc_status', header: 'حالة IPC', format: (v: unknown) => {
             switch (v) {
                 case 'safe': return 'آمن';
                 case 'monitor': return 'تحت المراقبة';
                 case 'alert': return 'تنبيه';
-                default: return v || '-';
+                default: return String(v || '-');
             }
         }
     },

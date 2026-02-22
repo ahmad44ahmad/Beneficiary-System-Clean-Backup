@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SpeechAssessmentForm } from './SpeechAssessmentForm';
 import { UnifiedBeneficiaryProfile } from '../../../types/unified';
 import { Card } from '../../ui/Card';
@@ -6,11 +6,10 @@ import { Mic, MessageCircle, AlertTriangle } from 'lucide-react';
 
 interface SpeechTherapyDashboardProps {
     beneficiary?: UnifiedBeneficiaryProfile | null;
-    onUpdate?: (data: any) => void;
+    onUpdate?: (data: Record<string, unknown>) => void;
 }
 
-export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ beneficiary, onUpdate }) => {
-    const [activeTab, setActiveTab] = useState<'assessment' | 'plans'>('assessment');
+export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ beneficiary }) => {
 
     // Handle case where beneficiary is not provided
     if (!beneficiary) {

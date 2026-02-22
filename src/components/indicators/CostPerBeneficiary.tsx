@@ -6,7 +6,7 @@ import {
     Shirt, Stethoscope, Bus, Package, Sparkles
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, ReferenceLine } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 interface CostData {
     cost_month: string;
@@ -15,16 +15,8 @@ interface CostData {
     beneficiary_count: number;
 }
 
-export const CostPerBeneficiary: React.FC = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [costData, setCostData] = useState<CostData[]>([]);
-
-    const TARGET_DAILY_COST = 350; // Ministry target: 350 SAR/beneficiary/day
-
-    // Demo data with 10 cost categories
-    const demoCostData: CostData[] = [
-        // October 2025
+// Demo data (module-level constant to avoid recreating on each render)
+const demoCostData: CostData[] = [
         { cost_month: '2025-10-01', cost_category: 'رواتب', amount: 450000, beneficiary_count: 120 },
         { cost_month: '2025-10-01', cost_category: 'تغذية', amount: 85000, beneficiary_count: 120 },
         { cost_month: '2025-10-01', cost_category: 'كهرباء', amount: 35000, beneficiary_count: 120 },
@@ -51,24 +43,13 @@ export const CostPerBeneficiary: React.FC = () => {
         { cost_month: '2025-12-01', cost_category: 'تغذية', amount: 88000, beneficiary_count: 122 },
         { cost_month: '2025-12-01', cost_category: 'كهرباء', amount: 32000, beneficiary_count: 122 },
         { cost_month: '2025-12-01', cost_category: 'مياه', amount: 8500, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'صيانة', amount: 18000, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'مستلزمات نظافة', amount: 13000, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'ملابس', amount: 10000, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'طبي', amount: 42000, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'مواصلات', amount: 17000, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'أخرى', amount: 8000, beneficiary_count: 122 },
-        // January 2026
-        { cost_month: '2026-01-01', cost_category: 'رواتب', amount: 455000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'تغذية', amount: 86000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'كهرباء', amount: 30000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'مياه', amount: 7800, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'صيانة', amount: 20000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'مستلزمات نظافة', amount: 11500, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'ملابس', amount: 9000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'طبي', amount: 40000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'مواصلات', amount: 15000, beneficiary_count: 125 },
-        { cost_month: '2026-01-01', cost_category: 'أخرى', amount: 7200, beneficiary_count: 125 },
-    ];
+    { cost_month: '2025-12-01', cost_category: 'صيانة', amount: 18000, beneficiary_count: 122 },
+];
+
+export const CostPerBeneficiary: React.FC = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [costData, setCostData] = useState<CostData[]>([]);
 
     useEffect(() => {
         const fetchCosts = async () => {

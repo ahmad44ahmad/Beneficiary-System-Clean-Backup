@@ -12,7 +12,7 @@ interface PrintOptions {
 
 interface UsePrintResult {
     print: (options?: PrintOptions) => void;
-    printTable: (data: any[], columns: { key: string; header: string }[], options?: PrintOptions) => void;
+    printTable: (data: object[], columns: { key: string; header: string }[], options?: PrintOptions) => void;
     isPrinting: boolean;
 }
 
@@ -23,7 +23,7 @@ interface UsePrintResult {
 export function usePrint(): UsePrintResult {
     const [isPrinting, setIsPrinting] = useState(false);
 
-    const print = useCallback((options: PrintOptions = {}) => {
+    const print = useCallback((_options: PrintOptions = {}) => {
         setIsPrinting(true);
 
         // Trigger browser print dialog for current content
@@ -34,7 +34,7 @@ export function usePrint(): UsePrintResult {
     }, []);
 
     const printTable = useCallback((
-        data: any[],
+        data: object[],
         columns: { key: string; header: string }[],
         options: PrintOptions = {}
     ) => {
@@ -137,7 +137,7 @@ export function usePrint(): UsePrintResult {
         <tbody>
             ${data.map(row => `
                 <tr>
-                    ${columns.map(col => `<td>${row[col.key] ?? '-'}</td>`).join('')}
+                    ${columns.map(col => `<td>${(row as Record<string, unknown>)[col.key] ?? '-'}</td>`).join('')}
                 </tr>
             `).join('')}
         </tbody>

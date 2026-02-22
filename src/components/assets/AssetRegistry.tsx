@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { FixedAsset, AssetCategory, AssetCondition } from '../../types/assets';
-import { Search, Filter, AlertTriangle, Wrench, CheckCircle, FileText, MoreVertical } from 'lucide-react';
+import { Search, AlertTriangle, Wrench, FileText, MoreVertical } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
 import { Input } from '../ui/Input';
 
 interface AssetRegistryProps {
@@ -60,7 +59,7 @@ export const AssetRegistry: React.FC<AssetRegistryProps> = ({ assets, onReportFa
                     <select
                         className="border rounded-md p-2 text-sm bg-gray-50"
                         value={categoryFilter}
-                        onChange={(e) => setCategoryFilter(e.target.value as any)}
+                        onChange={(e) => setCategoryFilter(e.target.value as AssetCategory | 'all')}
                     >
                         <option value="all">كل التصنيفات</option>
                         {Object.entries(categoryLabels).map(([key, label]) => (
@@ -70,7 +69,7 @@ export const AssetRegistry: React.FC<AssetRegistryProps> = ({ assets, onReportFa
                     <select
                         className="border rounded-md p-2 text-sm bg-gray-50"
                         value={conditionFilter}
-                        onChange={(e) => setConditionFilter(e.target.value as any)}
+                        onChange={(e) => setConditionFilter(e.target.value as AssetCondition | 'all')}
                     >
                         <option value="all">كل الحالات</option>
                         <option value="new">جديد</option>

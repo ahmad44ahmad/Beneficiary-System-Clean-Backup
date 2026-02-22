@@ -24,10 +24,7 @@ export const useMedicalWorkflow = (
     });
 
     useEffect(() => {
-        validateWorkflow();
-    }, [profile, currentVitals, checkupComment]);
-
-    const validateWorkflow = () => {
+        const validateWorkflow = () => {
         const errors: Record<string, string> = {};
         const warnings: string[] = [];
         let recommendIsolation = false;
@@ -71,7 +68,10 @@ export const useMedicalWorkflow = (
                 requireSeizureHistory
             }
         });
-    };
+        };
+
+        validateWorkflow();
+    }, [profile, currentVitals, checkupComment]);
 
     return validation;
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     BarChart3, ChevronLeft, CheckCircle, AlertCircle,
-    XCircle, TrendingUp, RefreshCw, Target
+    XCircle, RefreshCw, Target
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 
@@ -19,13 +19,8 @@ interface BenchmarkStandard {
     current_value?: number;
 }
 
-export const BenchmarkDashboard: React.FC = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [benchmarks, setBenchmarks] = useState<BenchmarkStandard[]>([]);
-
-    // Demo data with current values
-    const demoData: BenchmarkStandard[] = [
+// Demo data with current values (module-level constant to avoid recreating on each render)
+const demoData: BenchmarkStandard[] = [
         { indicator_name: 'نسبة إكمال العناية اليومية', indicator_code: 'CARE_COMPLETION', ministry_target: 95, excellent_threshold: 95, good_threshold: 85, acceptable_threshold: 75, unit: 'نسبة', category: 'جودة', is_higher_better: true, current_value: 88 },
         { indicator_name: 'معدل حوادث السقوط/1000 يوم', indicator_code: 'FALL_RATE', ministry_target: 2, excellent_threshold: 1, good_threshold: 3, acceptable_threshold: 5, unit: 'معدل', category: 'سلامة', is_higher_better: false, current_value: 2.5 },
         { indicator_name: 'نسبة الامتثال لنظافة اليدين', indicator_code: 'HAND_HYGIENE', ministry_target: 90, excellent_threshold: 95, good_threshold: 85, acceptable_threshold: 75, unit: 'نسبة', category: 'IPC', is_higher_better: true, current_value: 82 },
@@ -33,8 +28,13 @@ export const BenchmarkDashboard: React.FC = () => {
         { indicator_name: 'نسبة رضا الأسر', indicator_code: 'FAMILY_SATISFACTION', ministry_target: 85, excellent_threshold: 90, good_threshold: 80, acceptable_threshold: 70, unit: 'نسبة', category: 'رضا', is_higher_better: true, current_value: 72 },
         { indicator_name: 'تكلفة المستفيد اليومية', indicator_code: 'DAILY_COST', ministry_target: 350, excellent_threshold: 300, good_threshold: 400, acceptable_threshold: 500, unit: 'ريال', category: 'مالي', is_higher_better: false, current_value: 380 },
         { indicator_name: 'نسبة التسليم في الوقت', indicator_code: 'ON_TIME_HANDOVER', ministry_target: 95, excellent_threshold: 98, good_threshold: 90, acceptable_threshold: 80, unit: 'نسبة', category: 'جودة', is_higher_better: true, current_value: 92 },
-        { indicator_name: 'نسبة الصيانة الوقائية المنجزة', indicator_code: 'PREVENTIVE_MAINTENANCE', ministry_target: 90, excellent_threshold: 95, good_threshold: 85, acceptable_threshold: 75, unit: 'نسبة', category: 'سلامة', is_higher_better: true, current_value: 78 },
-    ];
+    { indicator_name: 'نسبة الصيانة الوقائية المنجزة', indicator_code: 'PREVENTIVE_MAINTENANCE', ministry_target: 90, excellent_threshold: 95, good_threshold: 85, acceptable_threshold: 75, unit: 'نسبة', category: 'سلامة', is_higher_better: true, current_value: 78 },
+];
+
+export const BenchmarkDashboard: React.FC = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [benchmarks, setBenchmarks] = useState<BenchmarkStandard[]>([]);
 
     useEffect(() => {
         const fetchBenchmarks = async () => {

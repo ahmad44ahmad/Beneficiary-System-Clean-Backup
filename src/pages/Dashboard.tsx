@@ -36,7 +36,7 @@ const typeColors: Record<string, string> = {
 
 export const Dashboard: React.FC = () => {
     const { kpis, departmentPerformance, alerts } = useDashboardMetrics();
-    const { beneficiaries, loading } = useUnifiedData();
+    const { loading, beneficiaries } = useUnifiedData();
 
     if (loading) {
         return (
@@ -120,7 +120,7 @@ export const Dashboard: React.FC = () => {
                     <div className="mt-4 w-full bg-gray-100 rounded-full h-1.5">
                         <div
                             className="progress-bar progress-bar-purple rounded-full"
-                            // eslint-disable-next-line react/forbid-component-props
+
                             style={{ '--progress-width': `${kpis.overallGoalAchievementRate}%` } as React.CSSProperties}
                         />
                     </div>
@@ -161,7 +161,7 @@ export const Dashboard: React.FC = () => {
                                     <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
                                         <div
                                             className={`progress-bar rounded-full ${typeColors[dept.type] || 'bg-gray-500'}`}
-                                            // eslint-disable-next-line react/forbid-component-props
+                
                                             style={{ '--progress-width': `${dept.avgProgress}%` } as React.CSSProperties}
                                         />
                                     </div>
@@ -198,8 +198,8 @@ export const Dashboard: React.FC = () => {
                 {/* 3. Operational Alerts (Risk Management) */}
                 <div className="space-y-6">
                     {/* RISK PREDICTION ENGINE (Feature 3) */}
-                    <div className="min-h-[24rem]">
-                        <RiskPredictionCard beneficiaries={beneficiaries} />
+                    <div className="h-96">
+                        <RiskPredictionCard beneficiaries={Object.values(beneficiaries)} />
                     </div>
 
                     <Card className="p-0 bg-white shadow-sm overflow-hidden">

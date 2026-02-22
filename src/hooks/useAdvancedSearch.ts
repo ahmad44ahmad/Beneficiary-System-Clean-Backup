@@ -24,7 +24,7 @@ export type FilterOperator =
 export interface SearchFilter {
     field: string;
     operator: FilterOperator;
-    value: any;
+    value: string | number | boolean | string[] | [number, number];
     label?: string; // Arabic label for display
 }
 
@@ -62,7 +62,7 @@ export interface UseSearchResult<T> {
  * );
  * ```
  */
-export function useAdvancedSearch<T extends Record<string, any>>(
+export function useAdvancedSearch<T extends object>(
     data: T[],
     config: SearchConfig
 ): UseSearchResult<T> {
@@ -167,16 +167,19 @@ export function useAdvancedSearch<T extends Record<string, any>>(
 /**
  * Get nested object value using dot notation
  */
-function getNestedValue(obj: any, path: string): any {
-    return path.split('.').reduce((current, key) => {
-        return current?.[key];
+function getNestedValue(obj: object, path: string): unknown {
+    return path.split('.').reduce<unknown>((current, key) => {
+        if (current != null && typeof current === 'object') {
+            return (current as Record<string, unknown>)[key];
+        }
+        return undefined;
     }, obj);
 }
 
 /**
  * Check if a value matches a filter
  */
-function matchesFilter(value: any, filter: SearchFilter): boolean {
+function matchesFilter(value: unknown, filter: SearchFilter): boolean {
     const { operator, value: filterValue } = filter;
 
     if (value == null) return false;
@@ -215,7 +218,7 @@ function matchesFilter(value: any, filter: SearchFilter): boolean {
 
         case 'in':
             if (Array.isArray(filterValue)) {
-                return filterValue.includes(value);
+                return (filterValue as string[]).includes(String(value));
             }
             return false;
 

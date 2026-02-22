@@ -1,15 +1,13 @@
 import React from 'react';
 import {
     Activity,
-    Wifi,
     WifiOff,
     Battery,
     Smartphone,
-    Heart,
-    Thermometer
+    Heart
 } from 'lucide-react';
 import { Card } from '../ui/Card';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { LineChart, Line, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { useIoTDevice } from '../../services/iotService';
 
 export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ beneficiaryId }) => {

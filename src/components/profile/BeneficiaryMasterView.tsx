@@ -19,13 +19,10 @@ import {
     CheckCircle,
     Clock,
     Heart,
-    Shield,
     Users,
-    X,
     ShieldCheck,
     Zap,
-    Shirt,
-    Utensils
+    Shirt
 } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 
@@ -48,7 +45,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
     // Helper to render dynamic icons
     const renderIcon = (iconName?: string, className?: string) => {
         if (!iconName) return null;
-        const Icon = (LucideIcons as any)[iconName];
+        const Icon = (LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[iconName];
         return Icon ? <Icon className={className} /> : null;
     };
 
@@ -126,7 +123,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                     ].map(tab => (
                         <button
                             key={tab.id}
-                            onClick={() => setActiveTab(tab.id as any)}
+                            onClick={() => setActiveTab(tab.id as typeof activeTab)}
                             className={`
                                 pb-3 px-1 text-sm font-medium flex items-center gap-2 border-b-2 transition-colors whitespace-nowrap
                                 ${activeTab === tab.id

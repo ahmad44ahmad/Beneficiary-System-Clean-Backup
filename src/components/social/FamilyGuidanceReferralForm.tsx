@@ -118,7 +118,7 @@ export const FamilyGuidanceReferralForm: React.FC<FamilyGuidanceReferralFormProp
                         <label>تفاعل المستفيد ومشاركته</label>
                         <select
                             value={formData.familyInteraction}
-                            onChange={e => setFormData({ ...formData, familyInteraction: e.target.value as any })}
+                            onChange={e => setFormData({ ...formData, familyInteraction: e.target.value as FamilyGuidanceReferral['familyInteraction'] })}
                         >
                             <option value="interactive">متفاعل</option>
                             <option value="somewhat">نوعاً ما</option>

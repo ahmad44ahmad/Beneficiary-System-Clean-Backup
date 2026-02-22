@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Beneficiary, NursingAdmissionAssessment } from '../../types';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
 import { ChevronRight, ChevronLeft, Save } from 'lucide-react';
 
 interface AdmissionAssessmentFormProps {

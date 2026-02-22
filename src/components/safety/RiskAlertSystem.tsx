@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../config/supabase';
-import { AlertTriangle, X, ShieldAlert } from 'lucide-react';
+import { X, ShieldAlert } from 'lucide-react';
 
 interface RiskAlert {
     id: string;
@@ -57,7 +57,7 @@ export const RiskAlertSystem: React.FC = () => {
                         // Play Alert Sound
                         try {
                             const playSound = () => {
-                                const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+                                const AudioContext = window.AudioContext || (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
                                 if (!AudioContext) return;
 
                                 const audioCtx = new AudioContext();

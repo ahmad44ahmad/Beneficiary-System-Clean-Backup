@@ -18,14 +18,8 @@ interface RiskScoreData {
     risk_level: string;
 }
 
-export const EarlyWarningSystem: React.FC = () => {
-    const navigate = useNavigate();
-    const [riskData, setRiskData] = useState<RiskScoreData[]>([]);
-    const [currentRisk, setCurrentRisk] = useState<RiskScoreData | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    // Demo data
-    const demoData: RiskScoreData[] = [
+// Demo data (module-level constant to avoid recreating on each render)
+const demoData: RiskScoreData[] = [
         { score_date: '2026-01-01', overdue_maintenance_count: 3, fall_incidents_week: 1, active_critical_alerts: 2, critical_accountability_gaps: 4, poor_condition_assets: 5, total_risk_score: 125, risk_level: 'أحمر' },
         { score_date: '2026-01-02', overdue_maintenance_count: 4, fall_incidents_week: 0, active_critical_alerts: 2, critical_accountability_gaps: 4, poor_condition_assets: 5, total_risk_score: 115, risk_level: 'أحمر' },
         { score_date: '2026-01-03', overdue_maintenance_count: 4, fall_incidents_week: 1, active_critical_alerts: 3, critical_accountability_gaps: 4, poor_condition_assets: 5, total_risk_score: 140, risk_level: 'أحمر' },
@@ -34,8 +28,14 @@ export const EarlyWarningSystem: React.FC = () => {
         { score_date: '2026-01-06', overdue_maintenance_count: 6, fall_incidents_week: 2, active_critical_alerts: 4, critical_accountability_gaps: 4, poor_condition_assets: 6, total_risk_score: 188, risk_level: 'أحمر' },
         { score_date: '2026-01-07', overdue_maintenance_count: 6, fall_incidents_week: 0, active_critical_alerts: 3, critical_accountability_gaps: 4, poor_condition_assets: 6, total_risk_score: 143, risk_level: 'أحمر' },
         { score_date: '2026-01-08', overdue_maintenance_count: 5, fall_incidents_week: 0, active_critical_alerts: 2, critical_accountability_gaps: 3, poor_condition_assets: 6, total_risk_score: 103, risk_level: 'أحمر' },
-        { score_date: '2026-01-09', overdue_maintenance_count: 4, fall_incidents_week: 1, active_critical_alerts: 2, critical_accountability_gaps: 3, poor_condition_assets: 5, total_risk_score: 105, risk_level: 'أحمر' },
-    ];
+    { score_date: '2026-01-09', overdue_maintenance_count: 4, fall_incidents_week: 1, active_critical_alerts: 2, critical_accountability_gaps: 3, poor_condition_assets: 5, total_risk_score: 105, risk_level: 'أحمر' },
+];
+
+export const EarlyWarningSystem: React.FC = () => {
+    const navigate = useNavigate();
+    const [riskData, setRiskData] = useState<RiskScoreData[]>([]);
+    const [currentRisk, setCurrentRisk] = useState<RiskScoreData | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchRiskData = async () => {
@@ -64,15 +64,6 @@ export const EarlyWarningSystem: React.FC = () => {
             case 'برتقالي': return 'from-orange-500 to-orange-600';
             case 'أصفر': return 'from-yellow-500 to-yellow-600';
             default: return 'from-hrsd-green to-hrsd-green-dark';
-        }
-    };
-
-    const getRiskTextColor = (level: string) => {
-        switch (level) {
-            case 'أحمر': return 'text-red-600';
-            case 'برتقالي': return 'text-orange-500';
-            case 'أصفر': return 'text-yellow-600';
-            default: return 'text-hrsd-green';
         }
     };
 

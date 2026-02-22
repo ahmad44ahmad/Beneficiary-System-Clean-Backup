@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useToast } from '../../context/ToastContext';
 import { DailyShiftRecord, IncidentReport, GenderSection } from '../../types';
@@ -7,16 +7,16 @@ import { DailyShiftForm } from './DailyShiftForm';
 import { IncidentReportForm } from '../medical/IncidentReportForm';
 import { supabase } from '../../config/supabase';
 
-// Demo data for when Supabase is unavailable (cast as any to avoid complex type requirements)
-const demoShiftRecords: any[] = [
-    { id: '1', date: new Date().toISOString().split('T')[0], day: 'الأحد', shift: 'first', section: 'male', supervisorName: 'أحمد محمد', beneficiaryStats: { total: 15, present: 14, absent: 1, leave: 0, hospital: 0 }, centerDirectorApproval: true },
-    { id: '2', date: new Date().toISOString().split('T')[0], day: 'الأحد', shift: 'second', section: 'male', supervisorName: 'خالد سعود', beneficiaryStats: { total: 15, present: 13, absent: 1, leave: 1, hospital: 0 }, centerDirectorApproval: false },
-    { id: '3', date: new Date().toISOString().split('T')[0], day: 'الأحد', shift: 'first', section: 'female', supervisorName: 'نورة أحمد', beneficiaryStats: { total: 12, present: 12, absent: 0, leave: 0, hospital: 0 }, centerDirectorApproval: true },
+// Demo data for when Supabase is unavailable
+const demoShiftRecords: DailyShiftRecord[] = [
+    { id: '1', date: new Date().toISOString().split('T')[0], day: 'الأحد', shift: 'first', section: 'male', supervisorName: 'أحمد محمد', startTime: '08:00', endTime: '16:00', beneficiaryStats: { total: 15, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '' }, staffAttendance: [], serviceStats: [], meals: [], cleaningMaintenance: [], psychologicalStatus: 'stable', socialStatus: 'stable', healthStatus: 'stable', nursingCare: 'routine', handoverTime: '16:00', receivingSupervisor: '', handingOverSupervisor: '', centerDirectorApproval: true },
+    { id: '2', date: new Date().toISOString().split('T')[0], day: 'الأحد', shift: 'second', section: 'male', supervisorName: 'خالد سعود', startTime: '16:00', endTime: '00:00', beneficiaryStats: { total: 15, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '' }, staffAttendance: [], serviceStats: [], meals: [], cleaningMaintenance: [], psychologicalStatus: 'stable', socialStatus: 'stable', healthStatus: 'stable', nursingCare: 'routine', handoverTime: '00:00', receivingSupervisor: '', handingOverSupervisor: '', centerDirectorApproval: false },
+    { id: '3', date: new Date().toISOString().split('T')[0], day: 'الأحد', shift: 'first', section: 'female', supervisorName: 'نورة أحمد', startTime: '08:00', endTime: '16:00', beneficiaryStats: { total: 12, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '' }, staffAttendance: [], serviceStats: [], meals: [], cleaningMaintenance: [], psychologicalStatus: 'stable', socialStatus: 'stable', healthStatus: 'stable', nursingCare: 'routine', handoverTime: '16:00', receivingSupervisor: '', handingOverSupervisor: '', centerDirectorApproval: true },
 ];
 
-const demoIncidentReports: any[] = [
-    { id: '1', date: new Date().toISOString().split('T')[0], beneficiaryId: 'B001', type: 'injury', shift: 'first', description: 'إصابة طفيفة', actionTaken: 'تم معالجة الإصابة وإبلاغ الطبيب', witnesses: 'الممرض أحمد', supervisorName: 'خالد' },
-    { id: '2', date: new Date().toISOString().split('T')[0], beneficiaryId: 'B002', type: 'assault', shift: 'second', description: 'مشادة كلامية', actionTaken: 'تم فصل الطرفين وإبلاغ الإدارة', witnesses: 'العامل محمد', supervisorName: 'سعود' },
+const demoIncidentReports: IncidentReport[] = [
+    { id: '1', date: new Date().toISOString().split('T')[0], time: '10:00', beneficiaryId: 'B001', location: 'غرفة 101', type: 'injury', shift: 'first', description: 'إصابة طفيفة', actionTaken: 'تم معالجة الإصابة وإبلاغ الطبيب', cameraRecordingKept: false, staffWitnesses: [{ name: 'الممرض أحمد', role: 'ممرض' }] },
+    { id: '2', date: new Date().toISOString().split('T')[0], time: '14:00', beneficiaryId: 'B002', location: 'غرفة 102', type: 'assault', shift: 'second', description: 'مشادة كلامية', actionTaken: 'تم فصل الطرفين وإبلاغ الإدارة', cameraRecordingKept: false, staffWitnesses: [{ name: 'العامل محمد', role: 'عامل' }] },
 ];
 
 export const DailyFollowUpPanel: React.FC = () => {
@@ -28,14 +28,14 @@ export const DailyFollowUpPanel: React.FC = () => {
     // Data State - Initialize with demo data
     const [shiftRecords, setShiftRecords] = useState<DailyShiftRecord[]>(demoShiftRecords);
     const [incidentReports, setIncidentReports] = useState<IncidentReport[]>(demoIncidentReports);
-    const [loading, setLoading] = useState(true);
+    const [_loading, setLoading] = useState(true);
 
     // Modal State
     const [isCreatingShift, setIsCreatingShift] = useState(false);
     const [isCreatingIncident, setIsCreatingIncident] = useState(false);
 
     // Fetch data from Supabase
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         if (!supabase) {
             setLoading(false);
             return;
@@ -43,23 +43,23 @@ export const DailyFollowUpPanel: React.FC = () => {
 
         try {
             // Fetch shift records
-            const { data: shifts, error: shiftsError } = await supabase
+            const { data: shifts } = await supabase
                 .from('daily_care_logs')
                 .select('*')
                 .order('created_at', { ascending: false })
                 .limit(20);
 
             if (shifts && shifts.length > 0) {
-                const transformedShifts: DailyShiftRecord[] = shifts.map((s: any) => ({
+                const transformedShifts: DailyShiftRecord[] = shifts.map((s: { id: string; log_date: string; shift?: string; section?: string; staff_name?: string }) => ({
                     id: s.id,
                     date: s.log_date,
                     day: new Date(s.log_date).toLocaleDateString('ar-SA', { weekday: 'long' }),
-                    shift: s.shift || 'first',
-                    section: s.section || 'male',
+                    shift: (s.shift || 'first') as DailyShiftRecord['shift'],
+                    section: (s.section || 'male') as DailyShiftRecord['section'],
                     supervisorName: s.staff_name || 'غير محدد',
                     startTime: '08:00', // Default
                     endTime: '16:00', // Default
-                    beneficiaryStats: { total: 15, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '', present: 14, absent: 1, leave: 0, hospital: 0 },
+                    beneficiaryStats: { total: 15, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '' },
                     staffAttendance: [],
                     serviceStats: [],
                     meals: [],
@@ -84,20 +84,18 @@ export const DailyFollowUpPanel: React.FC = () => {
                 .limit(20);
 
             if (incidents && incidents.length > 0) {
-                const transformedIncidents: IncidentReport[] = incidents.map((i: any) => ({
+                const transformedIncidents: IncidentReport[] = incidents.map((i: { id: string; date: string; beneficiary_id: string; type: string; shift: string; description: string; action_taken: string; witnesses?: string }) => ({
                     id: i.id,
                     date: i.date,
                     time: '12:00', // Default
                     beneficiaryId: i.beneficiary_id,
                     location: 'غير محدد', // Default
-                    type: i.type,
-                    shift: i.shift,
+                    type: i.type as IncidentReport['type'],
+                    shift: i.shift as IncidentReport['shift'],
                     description: i.description,
                     actionTaken: i.action_taken,
-                    witnesses: i.witnesses,
-                    staffWitnesses: [], // Default
+                    staffWitnesses: i.witnesses ? [{ name: i.witnesses, role: 'شاهد' }] : [],
                     cameraRecordingKept: false, // Default
-                    supervisorName: 'المشرف المناوب'
                 }));
                 setIncidentReports(transformedIncidents);
             } else if (incidentsError) {
@@ -110,13 +108,13 @@ export const DailyFollowUpPanel: React.FC = () => {
         }
 
         setLoading(false);
-    };
+    }, [showToast]);
 
     useEffect(() => {
         fetchData();
-    }, [location.key]);
+    }, [location.key, fetchData]);
 
-    const handleSaveShift = async (data: any) => {
+    const handleSaveShift = async (data: DailyShiftRecord) => {
         try {
             if (supabase) {
                 const { error } = await supabase.from('daily_care_logs').insert([{
@@ -139,7 +137,7 @@ export const DailyFollowUpPanel: React.FC = () => {
         }
     };
 
-    const handleSaveIncident = async (data: any) => {
+    const handleSaveIncident = async (data: IncidentReport) => {
         try {
             if (supabase) {
                 const { error } = await supabase.from('incident_reports').insert([{
@@ -149,7 +147,7 @@ export const DailyFollowUpPanel: React.FC = () => {
                     shift: data.shift,
                     description: data.description,
                     action_taken: data.actionTaken,
-                    witnesses: data.witnesses
+                    witnesses: data.staffWitnesses?.join(', ')
                 }]);
 
                 if (error) throw error;
@@ -170,7 +168,7 @@ export const DailyFollowUpPanel: React.FC = () => {
     const filteredShifts = shiftRecords.filter(r => r.section === activeSection);
     const filteredIncidents = incidentReports;
 
-    const handleExport = (data: any[], filename: string) => {
+    const handleExport = (data: Record<string, unknown>[], filename: string) => {
         if (!data.length) {
             showToast('لا توجد بيانات للتصدير', 'info');
             return;
@@ -181,7 +179,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
         for (const row of data) {
             const values = headers.map(header => {
-                const val = (row as any)[header];
+                const val = row[header];
                 if (typeof val === 'object') return `"${JSON.stringify(val).replace(/"/g, '""')}"`;
                 return `"${val}"`;
             });
@@ -231,7 +229,7 @@ export const DailyFollowUpPanel: React.FC = () => {
                     <div className="tab-section">
                         <div className="actions">
                             <button className="btn-primary" onClick={() => setIsCreatingShift(true)}>إضافة سجل فترة جديد</button>
-                            <button className="btn-secondary" onClick={() => handleExport(filteredShifts, `daily_shifts_${activeSection}`)}>تصدير CSV</button>
+                            <button className="btn-secondary" onClick={() => handleExport(filteredShifts as unknown as Record<string, unknown>[], `daily_shifts_${activeSection}`)}>تصدير CSV</button>
                         </div>
                         <table className="data-table">
                             <thead>
@@ -269,7 +267,7 @@ export const DailyFollowUpPanel: React.FC = () => {
                     <div className="tab-section">
                         <div className="actions">
                             <button className="btn-primary" onClick={() => setIsCreatingIncident(true)}>إضافة محضر واقعة</button>
-                            <button className="btn-secondary" onClick={() => handleExport(filteredIncidents, 'incident_reports')}>تصدير CSV</button>
+                            <button className="btn-secondary" onClick={() => handleExport(filteredIncidents as unknown as Record<string, unknown>[], 'incident_reports')}>تصدير CSV</button>
                         </div>
                         <table className="data-table">
                             <thead>

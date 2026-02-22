@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Shield, AlertCircle, Users, Activity,
+    Shield, AlertCircle, Activity,
     TrendingUp, TrendingDown, Syringe, ClipboardCheck,
     ChevronLeft, Plus, RefreshCw, Calendar,
     ShieldCheck, Biohazard, HardHat, BedDouble, AlertTriangle
@@ -9,17 +9,6 @@ import {
 import { ipcService, IPCStats } from '../../services/ipcService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 
-// HRSD 2025 Colors
-const COLORS = {
-    primary: '#007E4E',
-    primaryLight: '#EAF5F0',
-    gold: '#D4AF37',
-    navy: '#003D5B',
-    success: '#22C55E',
-    warning: '#F59E0B',
-    error: '#DC2626',
-    info: '#0EA5E9',
-};
 
 // KPI Card Component
 const KPICard: React.FC<{
@@ -31,14 +20,6 @@ const KPICard: React.FC<{
     color: 'success' | 'warning' | 'error' | 'info' | 'primary';
     onClick?: () => void;
 }> = ({ title, value, unit = '%', trend, icon, color, onClick }) => {
-    const colorClasses = {
-        success: 'bg-green-50 text-green-600 border-green-200',
-        warning: 'bg-yellow-50 text-yellow-600 border-yellow-200',
-        error: 'bg-red-50 text-red-600 border-red-200',
-        info: 'bg-blue-50 text-blue-600 border-blue-200',
-        primary: 'bg-emerald-50 text-emerald-600 border-emerald-200',
-    };
-
     const iconBgClasses = {
         success: 'bg-green-100',
         warning: 'bg-yellow-100',

@@ -1,12 +1,26 @@
 
 import React, { useState } from 'react';
-import { ShieldAlert, Brain, Activity, CheckCircle, AlertTriangle, Save, History } from 'lucide-react';
+import { ShieldAlert, Activity, CheckCircle, AlertTriangle, Save, History } from 'lucide-react';
 import { supabase } from '../../config/supabase';
+
+interface FallRiskPayload {
+    beneficiary_id: string;
+    assessment_date: string;
+    risk_score: number;
+    risk_level: string;
+    history_of_falls: boolean;
+    secondary_diagnosis: boolean;
+    ambulatory_aid: string;
+    iv_therapy: boolean;
+    gait: string;
+    mental_status: string;
+    assessed_by: string | null;
+}
 
 interface FallRiskAssessmentProps {
     beneficiaryName: string;
     beneficiaryId: string;
-    onSave?: (data: any) => void;
+    onSave?: (data: FallRiskPayload) => void;
 }
 
 export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ beneficiaryName, beneficiaryId, onSave }) => {
@@ -82,9 +96,9 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
             setSuccessMessage('تم حفظ تقييم المخاطر بنجاح');
             if (onSave) onSave(payload);
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Error saving assessment:', err);
-            setError(err.message || 'حدث خطأ أثناء الحفظ');
+            setError(err instanceof Error ? err.message : 'حدث خطأ أثناء الحفظ');
         } finally {
             setSaving(false);
         }

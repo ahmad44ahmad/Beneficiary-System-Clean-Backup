@@ -1,26 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     TrendingDown, AlertTriangle, Utensils, Heart,
-    Scale, Activity, ChevronLeft, Info, BarChart3
+    Scale, ChevronLeft, Info, BarChart3
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-
-// Types
-interface FoodInventoryRecord {
-    date: string;
-    meat_kg: number;
-    fruits_kg: number;
-    vegetables_kg: number;
-}
-
-interface MedicalRecord {
-    beneficiary_id: string;
-    beneficiary_name: string;
-    date: string;
-    weight_kg: number;
-    hemoglobin_level: number;
-}
 
 interface DiscrepancyAlert {
     id: string;

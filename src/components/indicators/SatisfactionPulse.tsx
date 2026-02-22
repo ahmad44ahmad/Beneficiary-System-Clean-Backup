@@ -4,7 +4,6 @@ import {
     Heart, ChevronLeft, TrendingUp, TrendingDown,
     MessageCircle, AlertTriangle, ThumbsUp, ThumbsDown, RefreshCw
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 interface SatisfactionData {
@@ -17,8 +16,8 @@ interface SatisfactionData {
 export const SatisfactionPulse: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const [currentScore, setCurrentScore] = useState(72);
-    const [trend, setTrend] = useState<'up' | 'down' | 'stable'>('down');
+    const [currentScore] = useState(72);
+    const [trend] = useState<'up' | 'down' | 'stable'>('down');
 
     // Demo data
     const monthlyData: SatisfactionData[] = [
@@ -46,12 +45,6 @@ export const SatisfactionPulse: React.FC = () => {
         // Simulate loading
         setTimeout(() => setLoading(false), 500);
     }, []);
-
-    const getScoreColor = (score: number) => {
-        if (score >= 80) return 'text-hrsd-green';
-        if (score >= 60) return 'text-hrsd-gold';
-        return 'text-red-600';
-    };
 
     const getScoreBg = (score: number) => {
         if (score >= 80) return 'from-hrsd-green to-hrsd-green-dark';
@@ -168,7 +161,7 @@ export const SatisfactionPulse: React.FC = () => {
                             <LineChart data={monthlyData}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="month" tickFormatter={(v) => {
-                                    const [year, month] = v.split('-');
+                                    const [, month] = v.split('-');
                                     const months = ['', 'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
                                     return months[parseInt(month)];
                                 }} />

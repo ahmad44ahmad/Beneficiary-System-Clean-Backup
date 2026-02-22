@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-    AlertTriangle, XCircle, ChevronDown, ChevronUp,
-    Clock, Building2, FileWarning, CheckCircle2,
-    ArrowRight, Eye, EyeOff
+    AlertTriangle, ChevronDown, ChevronUp,
+    Clock, Building2, CheckCircle2,
+    ArrowRight, EyeOff
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 
-// HRSD Colors
-const HRSD = {
-    orange: 'rgb(245, 150, 30)',
-    gold: 'rgb(250, 180, 20)',
-    green: 'rgb(45, 180, 115)',
-    teal: 'rgb(20, 130, 135)',
-    navy: 'rgb(20, 65, 90)',
-};
 
 interface AccountabilityGap {
     id: string;

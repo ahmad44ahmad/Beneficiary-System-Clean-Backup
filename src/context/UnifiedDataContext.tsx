@@ -52,7 +52,11 @@ interface UnifiedDataContextType {
     familyGuidanceReferrals: FamilyGuidanceReferral[];
     postCareFollowUps: PostCareFollowUp[];
     vaccinations: VaccinationRecord[];
-    isolationStats: any;
+    isolationStats: {
+        totalBeds: number;
+        occupiedBeds: number;
+        patients: { name: string; reason: string }[];
+    };
 
     loading: boolean;
     error: string | null;
@@ -77,31 +81,34 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     // Core Data
     const [beneficiaries, setBeneficiaries] = useState<UnifiedBeneficiaryProfile[]>([]);
     const [visitLogs, setVisitLogs] = useState<VisitLog[]>(initialVisitLogs);
-    const [inventory, setInventory] = useState<InventoryItem[]>(initialInventory);
+    const [inventory, _setInventory] = useState<InventoryItem[]>(initialInventory);
 
     // Domain Data
-    const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
-    const [socialResearchForms, setSocialResearchForms] = useState<SocialResearch[]>([]);
-    const [rehabilitationPlans, setRehabilitationPlans] = useState<RehabilitationPlan[]>([]);
-    const [incidents, setIncidents] = useState<IncidentReport[]>([]);
-    const [clothingRequests, setClothingRequests] = useState<ClothingRequest[]>([]);
-    const [medicalExaminations, setMedicalExaminations] = useState<MedicalExamination[]>([]);
-    const [educationalPlans, setEducationalPlans] = useState<IndividualEducationalPlan[]>([]);
-    const [injuryReports, setInjuryReports] = useState<InjuryReport[]>([]);
-    const [familyCaseStudies, setFamilyCaseStudies] = useState<FamilyCaseStudy[]>([]);
+    const [caseStudies, _setCaseStudies] = useState<CaseStudy[]>([]);
+    const [socialResearchForms, _setSocialResearchForms] = useState<SocialResearch[]>([]);
+    const [rehabilitationPlans, _setRehabilitationPlans] = useState<RehabilitationPlan[]>([]);
+    const [incidents, _setIncidents] = useState<IncidentReport[]>([]);
+    const [clothingRequests, _setClothingRequests] = useState<ClothingRequest[]>([]);
+    const [medicalExaminations, _setMedicalExaminations] = useState<MedicalExamination[]>([]);
+    const [educationalPlans, _setEducationalPlans] = useState<IndividualEducationalPlan[]>([]);
+    const [injuryReports, _setInjuryReports] = useState<InjuryReport[]>([]);
+    const [familyCaseStudies, _setFamilyCaseStudies] = useState<FamilyCaseStudy[]>([]);
     const [socialActivityPlans, setSocialActivityPlans] = useState<SocialActivityPlan[]>([]);
     const [socialActivityDocs, setSocialActivityDocs] = useState<SocialActivityDocumentation[]>([]);
     const [socialActivityFollowUps, setSocialActivityFollowUps] = useState<SocialActivityFollowUp[]>([]);
-    const [trainingReferrals, setTrainingReferrals] = useState<TrainingReferral[]>([]);
-    const [trainingPlanFollowUps, setTrainingPlanFollowUps] = useState<TrainingPlanFollowUp[]>([]);
-    const [vocationalEvaluations, setVocationalEvaluations] = useState<VocationalEvaluation[]>([]);
-    const [familyGuidanceReferrals, setFamilyGuidanceReferrals] = useState<FamilyGuidanceReferral[]>([]);
-    const [postCareFollowUps, setPostCareFollowUps] = useState<PostCareFollowUp[]>([]);
+    const [trainingReferrals, _setTrainingReferrals] = useState<TrainingReferral[]>([]);
+    const [trainingPlanFollowUps, _setTrainingPlanFollowUps] = useState<TrainingPlanFollowUp[]>([]);
+    const [vocationalEvaluations, _setVocationalEvaluations] = useState<VocationalEvaluation[]>([]);
+    const [familyGuidanceReferrals, _setFamilyGuidanceReferrals] = useState<FamilyGuidanceReferral[]>([]);
+    const [postCareFollowUps, _setPostCareFollowUps] = useState<PostCareFollowUp[]>([]);
 
     // Medical Data
     const [medicalProfiles, setMedicalProfiles] = useState<MedicalProfile[]>([]);
-    const [vaccinations, setVaccinations] = useState<VaccinationRecord[]>([]);
-    const [isolationStats] = useState({
+    const [vaccinations, _setVaccinations] = useState<VaccinationRecord[]>([
+        { id: '1', beneficiaryId: '101', vaccineName: 'Influenza', dueDate: '2023-11-01', status: 'Overdue' },
+        { id: '2', beneficiaryId: '102', vaccineName: 'Hepatitis B', dueDate: '2023-12-15', status: 'Pending' }
+    ]);
+    const isolationStats = {
         totalBeds: 10,
         occupiedBeds: 0,
         patients: [] as { name: string; reason: string }[]
@@ -166,7 +173,9 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             }));
 
             setBeneficiaries(enrichedData);
-        } catch (err: any) {
+            // In a real app, we would fetch other entities here too
+            // setVisitLogs(initialVisitLogs); 
+        } catch (err: unknown) {
             console.error("Data fetch error:", err);
             // Use local data as fallback on error
             const enrichedData = toUnifiedProfiles(localBeneficiaries).map(b => ({
@@ -199,7 +208,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         try {
             await supaService.updateBeneficiary(id, data);
             setBeneficiaries(prev => prev.map(b => b.id === id ? { ...b, ...data } : b));
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Update failed:", err);
             throw err;
         }
@@ -270,6 +279,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUnifiedData = () => {
     const context = useContext(UnifiedDataContext);
     if (!context) {

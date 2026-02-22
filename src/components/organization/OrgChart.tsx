@@ -1,6 +1,6 @@
 import React from 'react';
 import { OrgNode, CENTER_STRUCTURE } from '../../data/organization';
-import { Network, Users, Stethoscope, Calculator, HeartHandshake, ShieldCheck, FileText, Settings, Activity } from 'lucide-react';
+import { Network, Users, Stethoscope, Calculator, HeartHandshake, ShieldCheck, FileText, Activity } from 'lucide-react';
 
 // Helper to get icon based on ID/Label
 const getIcon = (id: string) => {
@@ -56,7 +56,7 @@ const OrgNodeCard: React.FC<{ node: OrgNode; level: number }> = ({ node, level }
                         {/* Adjust horizontal line to not overflow first/last child */}
                         {/* We use negative margins or pseudo elements usually, but flex gap works for simple trees */}
 
-                        {node.children.map((child, idx) => (
+                        {node.children.map((child, _idx) => (
                             <div key={child.id} className="relative flex flex-col items-center">
                                 {/* Vertical Line from Horizontal Bar to Child */}
                                 <div className="absolute -top-8 w-0.5 h-8 bg-gray-300 left-1/2 -translate-x-1/2"></div>

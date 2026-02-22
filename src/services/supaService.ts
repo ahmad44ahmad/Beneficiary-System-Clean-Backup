@@ -3,17 +3,11 @@ import { supabase } from '../config/supabase';
 import {
     Beneficiary,
     UnifiedBeneficiaryProfile,
-    VisitLog,
-    InventoryItem,
     SocialResearch,
-    CaseStudy,
-    MedicalExamination,
-    IncidentReport,
-    RehabilitationPlan
 } from '../types';
 
 // Helper for consistent error logging
-const logError = (context: string, error: any) => {
+const logError = (context: string, error: unknown) => {
     if (import.meta.env.DEV) {
         console.error(`[SupaService] ${context}:`, error);
     }
@@ -116,7 +110,88 @@ export const supaService = {
             return [];
         }
 
-        return (data || []).map(transformBeneficiary);
+        // Transform Supabase snake_case to camelCase for TypeScript interface
+        return (data || []).map((b: Record<string, unknown>) => {
+            // Parse alerts array from database
+            const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
+            const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
+
+            // Derive chronic condition flag
+            const hasChronicCondition = Boolean(
+                medicalText.includes('سكري') ||
+                medicalText.includes('صرع') ||
+                medicalText.includes('diabetes') ||
+                medicalText.includes('epilepsy') ||
+                alerts.includes('diabetic') ||
+                alerts.includes('epilepsy')
+            );
+
+            // Derive risk level based on alerts and conditions
+            let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
+            if (b.bedridden || alerts.includes('fallRisk')) riskLevel = 'high';
+            else if (alerts.length >= 3) riskLevel = 'high';
+            else if (alerts.length >= 1 || hasChronicCondition) riskLevel = 'medium';
+
+            return {
+                id: b.id,
+                nationalId: b.national_id,
+                fileId: b.file_id,
+                fullName: b.full_name || b.name || '',
+                name: b.full_name || b.name || '',
+                roomNumber: b.room_number,
+                bedNumber: b.bed_number,
+                nationality: b.nationality || 'سعودي',
+                gender: b.gender || 'male',
+                dob: b.dob || b.date_of_birth,
+                dateOfBirth: b.date_of_birth,
+                hijriBirthDate: b.hijri_birth_date,
+                age: b.age,
+                enrollmentDate: b.enrollment_date || b.admission_date,
+                admissionDate: b.admission_date,
+                hijriAdmissionDate: b.hijri_admission_date,
+                section: b.section,
+                status: b.status || 'active',
+
+                // Medical Info
+                medicalDiagnosis: b.medical_diagnosis,
+                psychiatricDiagnosis: b.psychiatric_diagnosis,
+                disabilityType: b.disability_type,
+                iqLevel: b.iq_level,
+                iqScore: b.iq_score,
+                bedridden: b.bedridden || false,
+
+                // Guardian Info
+                guardianName: b.guardian_name,
+                guardianRelation: b.guardian_relation,
+                guardianPhone: b.guardian_phone,
+                guardianAddress: b.guardian_address,
+                guardianResidence: b.guardian_residence || b.guardian_address,
+
+                // Social Info
+                socialStatus: b.social_status,
+                visitFrequency: b.visit_frequency,
+                lastVisitDate: b.last_visit_date,
+                hijriLastVisitDate: b.hijri_last_visit_date,
+
+                // Alerts & Notes
+                alerts: alerts,
+                notes: b.notes,
+                dignity_profile: b.dignity_profile,
+
+                // Extended unified fields (initialized)
+                visitLogs: [],
+                incidents: [],
+                medicalHistory: [],
+                smartTags: [],
+
+                // Computed fields
+                riskLevel,
+                isOrphan: b.guardian_relation === 'institution' ||
+                    ((b.social_status as string) || '').includes('يتيم'),
+                hasChronicCondition,
+                requiresIsolation: false,
+            } as UnifiedBeneficiaryProfile;
+        });
     },
 
     async getBeneficiaryById(id: string): Promise<UnifiedBeneficiaryProfile | null> {
@@ -253,7 +328,7 @@ export const supaService = {
     },
 
     // Feature 1: Ehsan Algorithm (Dignity Profile)
-    async updateDignityProfile(beneficiaryId: string, profile: any): Promise<boolean> {
+    async updateDignityProfile(beneficiaryId: string, profile: Record<string, unknown>): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
         const { error } = await supabase
@@ -364,7 +439,7 @@ export const supaService = {
         return data;
     },
 
-    async createMaintenanceRequest(request: any): Promise<any | null> {
+    async createMaintenanceRequest(request: Record<string, unknown>): Promise<Record<string, unknown> | null> {
         if (!isSupabaseReady()) return null;
 
         // Generate request number
@@ -495,7 +570,7 @@ export const supaService = {
         return true;
     },
 
-    async saveMedicalProfile(data: any): Promise<boolean> {
+    async saveMedicalProfile(data: Record<string, unknown>): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
         const { error } = await supabase
@@ -513,7 +588,7 @@ export const supaService = {
     // الملف الشامل (Full Profile)
     // ═══════════════════════════════════════════════════════════════
 
-    async getFullProfile(nationalId: string): Promise<any> {
+    async getFullProfile(nationalId: string): Promise<Record<string, unknown> | null> {
         const beneficiary = await this.getBeneficiaryByNationalId(nationalId);
         if (!beneficiary) return null;
 

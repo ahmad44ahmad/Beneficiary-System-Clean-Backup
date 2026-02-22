@@ -51,7 +51,7 @@ export interface UseBatchOperationsResult<T> {
     isSelected: (id: string) => boolean;
 
     // Batch actions
-    executeAction: (action: BatchAction, payload?: any) => Promise<BatchActionResult>;
+    executeAction: (action: BatchAction, payload?: unknown) => Promise<BatchActionResult>;
     isExecuting: boolean;
     lastResult: BatchActionResult | null;
 }
@@ -134,10 +134,10 @@ export interface UseBatchOperationsOptions<T> {
     data: T[];
     idField?: keyof T;
     module: AuditModule;
-    onExecute?: (action: BatchAction, items: T[], payload?: any) => Promise<void>;
+    onExecute?: (action: BatchAction, items: T[], payload?: unknown) => Promise<void>;
 }
 
-export function useBatchOperations<T extends Record<string, any>>(
+export function useBatchOperations<T extends Record<string, unknown>>(
     options: UseBatchOperationsOptions<T>
 ): UseBatchOperationsResult<T> {
     const { data, idField = 'id' as keyof T, module, onExecute } = options;
@@ -216,7 +216,7 @@ export function useBatchOperations<T extends Record<string, any>>(
     // Execute batch action
     const executeAction = useCallback(async (
         action: BatchAction,
-        payload?: any
+        payload?: unknown
     ): Promise<BatchActionResult> => {
         if (selectedIds.size === 0) {
             return {

@@ -4,7 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import React from 'react';
-import { Printer, FileSpreadsheet, Download, CheckSquare, Square, Loader2 } from 'lucide-react';
+import { Printer, FileSpreadsheet, Download, CheckSquare, Loader2 } from 'lucide-react';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
 import { useToast } from '../../context/ToastContext';
@@ -16,7 +16,7 @@ interface ColumnDef {
 
 interface PageToolbarProps {
     /** Data array to export/print */
-    data: any[];
+    data: Record<string, unknown>[];
     /** Column definitions for export/print */
     columns: ColumnDef[];
     /** Title for print/export documents */

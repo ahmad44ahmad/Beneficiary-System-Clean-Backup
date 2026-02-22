@@ -6,8 +6,8 @@ import { HeartPulse, Activity, Syringe, AlertTriangle, Users, FileText, Trending
 import { Link } from 'react-router-dom';
 
 interface MedicalOverviewProps {
-    vaccinations?: any[];
-    isolationStats?: any;
+    vaccinations?: { id: string; beneficiaryId: string; type: string; date: string }[];
+    isolationStats?: { active: number; total: number };
 }
 
 export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations = [], isolationStats }) => {

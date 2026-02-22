@@ -70,12 +70,13 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
 
     // Rehab Plan Start (if active)
     if (profile.activeRehabPlan) {
+        const plan = profile.activeRehabPlan as { id?: string; startDate?: string; goals?: unknown[] } & Record<string, unknown>;
         events.push({
-            id: `plan-${profile.activeRehabPlan.id}`,
-            date: profile.activeRehabPlan.startDate,
+            id: `plan-${plan.id as string}`,
+            date: plan.startDate as string,
             type: 'rehab',
             title: 'Rehab Plan Started',
-            description: `${profile.activeRehabPlan.goals.length} Goals Set`,
+            description: `${(plan.goals as unknown[])?.length ?? 0} Goals Set`,
             icon: <ClipboardCheck className="w-4 h-4" />,
             colorClass: 'bg-purple-100 text-purple-600 border-purple-200'
         });
@@ -95,7 +96,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
 
     return (
         <div className="relative border-l-2 border-gray-200 ml-3 space-y-8 py-4">
-            {events.map((event, index) => (
+            {events.map((event, _index) => (
                 <div key={event.id} className="relative pl-8">
                     {/* Dot on the line */}
                     <div

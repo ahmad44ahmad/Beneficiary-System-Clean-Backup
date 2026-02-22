@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SpeechAssessment, ArticulationScore, SwallowingStatus } from '../../../types/speechTherapy';
+import { SpeechAssessment, SwallowingStatus } from '../../../types/speechTherapy';
 import { Card } from '../../ui/Card';
 import { Button } from '../../ui/Button';
 import { Save } from 'lucide-react';
@@ -21,14 +21,14 @@ export const SpeechAssessmentForm: React.FC<{
         recommendations: []
     });
 
-    const handleSwallowingChange = (field: keyof SwallowingStatus, value: any) => {
+    const handleSwallowingChange = (field: keyof SwallowingStatus, value: string | boolean) => {
         setFormData(prev => ({
             ...prev,
             swallowing: { ...prev.swallowing!, [field]: value }
         }));
     };
 
-    const handleSystemChange = (field: keyof SpeechAssessment, value: any) => {
+    const handleSystemChange = (field: keyof SpeechAssessment, value: string | boolean | number) => {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
 
@@ -61,11 +61,11 @@ export const SpeechAssessmentForm: React.FC<{
             <Card title="Orofacial Examination">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <SelectField label="Lips" value={formData.lips} options={['Normal', 'Abnormal']}
-                        onChange={(v: any) => handleSystemChange('lips', v)} />
+                        onChange={(v: string) => handleSystemChange('lips', v)} />
                     <SelectField label="Tongue" value={formData.tongue} options={['Normal', 'Abnormal']}
-                        onChange={(v: any) => handleSystemChange('tongue', v)} />
+                        onChange={(v: string) => handleSystemChange('tongue', v)} />
                     <SelectField label="Palate" value={formData.palate} options={['Normal', 'Abnormal']}
-                        onChange={(v: any) => handleSystemChange('palate', v)} />
+                        onChange={(v: string) => handleSystemChange('palate', v)} />
                     <div className="flex items-center mt-6">
                         <input type="checkbox" checked={formData.drooling}
                             onChange={(e) => handleSystemChange('drooling', e.target.checked)}
@@ -79,17 +79,17 @@ export const SpeechAssessmentForm: React.FC<{
             <Card title="Swallowing & Feeding">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                     <SelectField label="Oral Phase" value={formData.swallowing?.oralPhase} options={['Normal', 'Impaired']}
-                        onChange={(v: any) => handleSwallowingChange('oralPhase', v)} />
+                        onChange={(v: string) => handleSwallowingChange('oralPhase', v)} />
                     <SelectField label="Pharyngeal Phase" value={formData.swallowing?.pharyngealPhase} options={['Normal', 'Impaired']}
-                        onChange={(v: any) => handleSwallowingChange('pharyngealPhase', v)} />
+                        onChange={(v: string) => handleSwallowingChange('pharyngealPhase', v)} />
                     <SelectField label="Esophageal Phase" value={formData.swallowing?.esophagealPhase} options={['Normal', 'Impaired']}
-                        onChange={(v: any) => handleSwallowingChange('esophagealPhase', v)} />
+                        onChange={(v: string) => handleSwallowingChange('esophagealPhase', v)} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <SelectField label="Diet Texture" value={formData.swallowing?.dietTexture} options={['Regular', 'Soft', 'Minced', 'Pureed']}
-                        onChange={(v: any) => handleSwallowingChange('dietTexture', v)} />
+                        onChange={(v: string) => handleSwallowingChange('dietTexture', v)} />
                     <SelectField label="Liquid Consistency" value={formData.swallowing?.liquidConsistency} options={['Thin', 'Nectar', 'Honey', 'Pudding']}
-                        onChange={(v: any) => handleSwallowingChange('liquidConsistency', v)} />
+                        onChange={(v: string) => handleSwallowingChange('liquidConsistency', v)} />
                 </div>
             </Card>
 
@@ -118,7 +118,7 @@ export const SpeechAssessmentForm: React.FC<{
     );
 };
 
-const SelectField = ({ label, value, options, onChange }: any) => (
+const SelectField = ({ label, value, options, onChange }: { label: string; value?: string; options: string[]; onChange: (value: string) => void }) => (
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}

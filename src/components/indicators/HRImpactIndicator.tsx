@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Users, ChevronLeft, TrendingDown, TrendingUp,
+    Users, ChevronLeft, TrendingDown,
     AlertTriangle, Calendar, RefreshCw, UserMinus
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 interface DepartmentStats {
@@ -18,20 +17,20 @@ interface DepartmentStats {
     impact_score: number;
 }
 
-export const HRImpactIndicator: React.FC = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [departmentStats, setDepartmentStats] = useState<DepartmentStats[]>([]);
-
-    // Demo data
-    const demoStats: DepartmentStats[] = [
+// Demo data (module-level constant to avoid recreating on each render)
+const demoStats: DepartmentStats[] = [
         { department: 'التمريض - ذكور', total_staff: 12, present: 10, absent: 1, on_leave: 1, attendance_rate: 83, care_completion_rate: 78, impact_score: 15 },
         { department: 'التمريض - إناث', total_staff: 8, present: 6, absent: 2, on_leave: 0, attendance_rate: 75, care_completion_rate: 65, impact_score: 28 },
         { department: 'الرعاية الاجتماعية', total_staff: 5, present: 5, absent: 0, on_leave: 0, attendance_rate: 100, care_completion_rate: 95, impact_score: 0 },
         { department: 'العلاج الطبيعي', total_staff: 3, present: 3, absent: 0, on_leave: 0, attendance_rate: 100, care_completion_rate: 92, impact_score: 0 },
         { department: 'الإشراف الليلي', total_staff: 6, present: 4, absent: 1, on_leave: 1, attendance_rate: 67, care_completion_rate: 55, impact_score: 35 },
-        { department: 'الخدمات المساندة', total_staff: 10, present: 9, absent: 1, on_leave: 0, attendance_rate: 90, care_completion_rate: 88, impact_score: 8 },
-    ];
+    { department: 'الخدمات المساندة', total_staff: 10, present: 9, absent: 1, on_leave: 0, attendance_rate: 90, care_completion_rate: 88, impact_score: 8 },
+];
+
+export const HRImpactIndicator: React.FC = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [departmentStats, setDepartmentStats] = useState<DepartmentStats[]>([]);
 
     const weeklyTrend = [
         { day: 'الأحد', attendance: 92, care_quality: 88 },

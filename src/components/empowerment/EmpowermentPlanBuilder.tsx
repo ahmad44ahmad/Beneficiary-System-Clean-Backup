@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { EmpowermentProfile, EmpowermentGoal } from '../../types/unified';
+import { EmpowermentProfile } from '../../types/unified';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import {
     Target,
     Zap,
-    BookOpen,
-    Briefcase,
-    Smile,
     ArrowRight,
     Check,
     Lightbulb

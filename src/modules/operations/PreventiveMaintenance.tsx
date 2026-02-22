@@ -8,7 +8,6 @@ import {
     CheckCircle2,
     AlertTriangle,
     Clock,
-    Filter,
     ChevronLeft,
     ChevronRight
 } from 'lucide-react';
@@ -35,27 +34,27 @@ export const PreventiveMaintenance: React.FC = () => {
     const [view, setView] = useState<'calendar' | 'list'>('list');
 
     useEffect(() => {
+        const fetchTasks = async () => {
+            setLoading(true);
+            const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).toISOString().split('T')[0];
+            const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).toISOString().split('T')[0];
+
+            const { data, error } = await supabase
+                .from('om_preventive_schedules')
+                .select(`
+                    *,
+                    asset:om_assets(name_ar, asset_code)
+                `)
+                .gte('next_due_date', startOfMonth)
+                .lte('next_due_date', endOfMonth)
+                .order('next_due_date', { ascending: true });
+
+            if (!error) setTasks(data || []);
+            setLoading(false);
+        };
+
         fetchTasks();
     }, [currentMonth]);
-
-    const fetchTasks = async () => {
-        setLoading(true);
-        const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).toISOString().split('T')[0];
-        const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).toISOString().split('T')[0];
-
-        const { data, error } = await supabase
-            .from('om_preventive_schedules')
-            .select(`
-                *,
-                asset:om_assets(name_ar, asset_code)
-            `)
-            .gte('next_due_date', startOfMonth)
-            .lte('next_due_date', endOfMonth)
-            .order('next_due_date', { ascending: true });
-
-        if (!error) setTasks(data || []);
-        setLoading(false);
-    };
 
     const frequencyLabels: Record<string, string> = {
         daily: 'يومي',

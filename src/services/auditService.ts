@@ -48,8 +48,8 @@ export interface AuditLogEntry {
     resourceId?: string;
     resourceType?: string;
     description: string;
-    previousValue?: any;
-    newValue?: any;
+    previousValue?: unknown;
+    newValue?: unknown;
     ipAddress?: string;
     userAgent?: string;
     sessionId?: string;
@@ -226,7 +226,7 @@ interface UserContext {
  */
 export function createAuditLogger(module: AuditModule, userContext: UserContext) {
     return {
-        create: (resourceId: string, resourceType: string, description: string, newValue?: any) =>
+        create: (resourceId: string, resourceType: string, description: string, newValue?: unknown) =>
             logAuditEvent({
                 ...userContext,
                 action: 'CREATE',
@@ -249,7 +249,7 @@ export function createAuditLogger(module: AuditModule, userContext: UserContext)
                 success: true,
             }),
 
-        update: (resourceId: string, resourceType: string, description: string, previousValue?: any, newValue?: any) =>
+        update: (resourceId: string, resourceType: string, description: string, previousValue?: unknown, newValue?: unknown) =>
             logAuditEvent({
                 ...userContext,
                 action: 'UPDATE',

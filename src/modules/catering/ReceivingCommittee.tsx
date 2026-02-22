@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../config/supabase';
 import { UserCheck, FileSignature, CheckCircle2, ShieldCheck, Loader2 } from 'lucide-react';
 
@@ -31,11 +31,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
 
     const formattedDate = date.toISOString().split('T')[0];
 
-    useEffect(() => {
-        fetchReport();
-    }, [formattedDate]);
-
-    const fetchReport = async () => {
+    const fetchReport = useCallback(async () => {
         setLoading(true);
         // Try to find the report for this day
         const { data, error } = await supabase
@@ -55,7 +51,11 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
             setReport(null);
         }
         setLoading(false);
-    };
+    }, [formattedDate]);
+
+    useEffect(() => {
+        fetchReport();
+    }, [formattedDate, fetchReport]);
 
     const handleSign = async () => {
         setIsSigning(true);
@@ -67,7 +67,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                 user_id: 'demo-user-id'
             };
 
-            let newSignatures = { ...report?.signatures };
+            const newSignatures = { ...report?.signatures };
             newSignatures[activeRole] = currentSignature;
 
             // Determine if fully signed

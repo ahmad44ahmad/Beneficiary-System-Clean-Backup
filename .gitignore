@@ -42,3 +42,6 @@ google_drive_credentials.json
 credentials.json
 token.json
 client_secret*.json
+eslint_out.json
+eslint_out2.json
+.claude/

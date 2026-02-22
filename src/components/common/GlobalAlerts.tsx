@@ -1,6 +1,6 @@
 import React from 'react';
 import { UnifiedBeneficiaryProfile } from '../../types/unified';
-import { AlertTriangle, ShieldAlert, Info, Wind, CloudRain, Syringe, Shirt, Utensils } from 'lucide-react';
+import { AlertTriangle, ShieldAlert, Info, Wind, Syringe, Shirt, Utensils } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 interface GlobalAlertsProps {
@@ -13,7 +13,6 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
     // 1. Infection Control (Actionable)
     const isolationTag = profile.smartTags.find(t => t.id.startsWith('isolation-'));
     if (isolationTag) {
-        const type = isolationTag.id.split('-')[1]; // contact, airborne, droplet
         alerts.push({
             id: 'isolation',
             type: 'critical',

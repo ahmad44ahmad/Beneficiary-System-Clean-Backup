@@ -57,7 +57,15 @@ export const IncidentNotificationAlert: React.FC = () => {
                     table: 'incidents'
                 },
                 async (payload) => {
-                    const incident = payload.new as any;
+                    const incident = payload.new as {
+                        id: string;
+                        incident_type: string;
+                        severity: 'low' | 'medium' | 'high' | 'critical';
+                        location: string | null;
+                        description: string | null;
+                        reported_by_name: string | null;
+                        created_at: string;
+                    };
 
                     // Only alert for medium, high, or critical incidents
                     if (['medium', 'high', 'critical'].includes(incident.severity)) {
@@ -79,8 +87,8 @@ export const IncidentNotificationAlert: React.FC = () => {
                             try {
                                 const audio = new Audio('/alert.mp3');
                                 audio.volume = 0.5;
-                                audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
-                            } catch (_) { /* Audio not supported */ }
+                                audio.play().catch(() => { });
+                            } catch { /* ignored */ }
                         }
 
                         const severityLabel = SEVERITY_CONFIG[incident.severity as keyof typeof SEVERITY_CONFIG]?.label || '';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PsychProfileForm } from './PsychProfileForm';
 import { UnifiedBeneficiaryProfile } from '../../../types/unified';
 import { Card } from '../../ui/Card';
@@ -6,10 +6,10 @@ import { Brain, FileText, AlertOctagon } from 'lucide-react';
 
 interface PsychologyDashboardProps {
     beneficiary?: UnifiedBeneficiaryProfile | null;
-    onUpdate?: (data: any) => void;
+    onUpdate?: (data: Record<string, unknown>) => void;
 }
 
-export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ beneficiary, onUpdate }) => {
+export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ beneficiary }) => {
     // Handle case where beneficiary is not provided
     if (!beneficiary) {
         return (

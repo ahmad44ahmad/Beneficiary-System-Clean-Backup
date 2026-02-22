@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { supaService } from '../../services/supaService';
-import { Beneficiary, CaseStudy, SocialResearch, RehabilitationPlan, VisitLog, MedicalExamination, IndividualEducationalPlan, InjuryReport, FamilyCaseStudy, TrainingReferral, TrainingPlanFollowUp, VocationalEvaluation, FamilyGuidanceReferral, PostCareFollowUp } from '../../types';
+import { Beneficiary, CaseStudy, SocialResearch, RehabilitationPlan, VisitLog, MedicalExamination, IndividualEducationalPlan, InjuryReport, FamilyCaseStudy, TrainingReferral, TrainingPlanFollowUp, VocationalEvaluation, FamilyGuidanceReferral, PostCareFollowUp, DignityProfile } from '../../types';
 import { UnifiedBeneficiaryProfile } from '../../types/unified';
 import { MOCK_DIGNITY_PROFILES } from '../../types/dignity-profile';
 import { DetailCard } from '../common/DetailCard';
@@ -57,7 +57,7 @@ interface BeneficiaryDetailPanelProps {
 export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
     beneficiary,
     caseStudies,
-    socialResearchForms,
+    socialResearchForms: _socialResearchForms,
     rehabilitationPlans,
     visitLogs,
     medicalExaminations,
@@ -72,6 +72,33 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
 }) => {
     // Extended set of tabs
     const [activeTab, setActiveTab] = useState<'dignity' | 'basira_medical' | 'care' | 'safety' | 'medical' | 'pt' | 'st' | 'psych' | 'dental' | 'rehab' | 'social' | 'family' | 'training'>('dignity');
+
+    // Feature 1: Ehsan Algorithm - Data Logic
+    // Hooks must be called before any early returns (rules-of-hooks)
+    const [dignityProfile, setDignityProfile] = useState<DignityProfile | null>(null);
+
+    const beneficiaryName = beneficiary?.fullName || (beneficiary as unknown as Record<string, unknown>)?.full_name as string || '';
+
+    useEffect(() => {
+        if (beneficiary) {
+            const existingProfile = beneficiary.dignity_profile ||
+                // Fallback to mock if not in DB yet
+                MOCK_DIGNITY_PROFILES.find(dp => dp.beneficiaryId === beneficiary.id);
+
+            if (existingProfile) {
+                setDignityProfile(existingProfile as DignityProfile);
+            } else {
+                // Default template
+                setDignityProfile({
+                    beneficiaryId: beneficiary.id,
+                    nickname: beneficiaryName.split(' ')[0] || 'غير محدد',
+                    personalityType: 'social',
+                    sensoryPreferences: { lighting: 'natural', noise: 'moderate', temperature: 'normal' },
+                    microPreferences: { dislikes: [], favoriteColor: '' }
+                });
+            }
+        }
+    }, [beneficiary, beneficiaryName]);
 
     if (!beneficiary) {
         return (
@@ -88,47 +115,18 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
     const unifiedProfile = beneficiary as UnifiedBeneficiaryProfile;
 
     // Handles updates from sub-components (placeholder)
-    const handleUpdate = (data: any) => {
+    const handleUpdate = (_data: unknown) => {
         // Data updated successfully
     };
 
-    const beneficiaryName = beneficiary.fullName || (beneficiary as any).full_name || '';
-
-    // Try to find a dignity profile, or fall back to the mock one for demo
-    // Handle both camelCase (fullName) and snake_case (full_name) from Supabase
-    // Feature 1: Ehsan Algorithm - Data Logic
-    const [dignityProfile, setDignityProfile] = useState<any>(null);
-
-    useEffect(() => {
-        if (beneficiary) {
-            const existingProfile = beneficiary.dignity_profile ||
-                // Fallback to mock if not in DB yet
-                MOCK_DIGNITY_PROFILES.find(dp => dp.beneficiaryId === beneficiary.id);
-
-            if (existingProfile) {
-                setDignityProfile(existingProfile);
-            } else {
-                // Default template
-                setDignityProfile({
-                    beneficiaryId: beneficiary.id,
-                    nickname: beneficiaryName.split(' ')[0] || 'غير محدد',
-                    personalityType: 'social',
-                    sensoryPreferences: { lighting: 'natural', noise: 'moderate', temperature: 'normal' },
-                    microPreferences: { dislikes: [], favoriteColor: '' }
-                });
-            }
-        }
-    }, [beneficiary]);
-
-    const handleDignitySave = async (updatedData: any) => {
+    const handleDignitySave = async (updatedData: DignityProfile) => {
         setDignityProfile(updatedData);
         if (beneficiary) {
-            await supaService.updateDignityProfile(beneficiary.id, updatedData);
+            await supaService.updateDignityProfile(beneficiary.id, updatedData as Record<string, unknown>);
         }
     };
 
     const relevantCaseStudies = caseStudies.filter(cs => cs.beneficiaryId === beneficiary.id);
-    const relevantSocialResearch = socialResearchForms.filter(sr => sr.beneficiaryId === beneficiary.id);
     const relevantRehabPlans = rehabilitationPlans.filter(rp => rp.beneficiaryId === beneficiary.id);
     const relevantMedicalExams = medicalExaminations.filter(me => me.beneficiaryId === beneficiary.id);
     const relevantEducationalPlans = educationalPlans.filter(ep => ep.beneficiaryId === beneficiary.id);
@@ -174,7 +172,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
-                            onClick={() => setActiveTab(tab.id as any)}
+                            onClick={() => setActiveTab(tab.id as typeof activeTab)}
                             className={cn(
                                 "flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all flex-1 justify-center whitespace-nowrap",
                                 activeTab === tab.id

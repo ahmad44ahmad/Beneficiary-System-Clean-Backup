@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowLeftRight, Clock, AlertTriangle, CheckCircle, Pill,
-    Heart, MessageSquare, Mic, Plus, X, ChevronDown, ChevronUp,
-    User, Shield, Utensils, Activity, FileText, Send
+    Heart, Mic, Plus, X, ChevronDown, ChevronUp,
+    User, Activity, FileText, Send
 } from 'lucide-react';
 import { shiftService } from '../../services/shiftService';
 import { ShiftHandoverItem, ShiftCategory, ShiftSummary } from '../../types/shift';

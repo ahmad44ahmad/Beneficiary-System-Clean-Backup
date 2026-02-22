@@ -23,7 +23,7 @@ export const DentalOdontogram: React.FC<{
             const teeth = [...(prev.teeth || [])];
             const toothIndex = teeth.findIndex(t => t.number === toothNum);
             const currentStatus = teeth[toothIndex].status;
-            const nextStatus = statuses[statuses.indexOf(currentStatus) + 1] as any;
+            const nextStatus = statuses[statuses.indexOf(currentStatus) + 1] as ToothStatus['status'];
             teeth[toothIndex] = { ...teeth[toothIndex], status: nextStatus };
             return { ...prev, teeth };
         });
@@ -81,15 +81,15 @@ export const DentalOdontogram: React.FC<{
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <SelectField label="Gum Health" value={formData.gumHealth}
                         options={['Healthy', 'Gingivitis', 'Periodontitis']}
-                        onChange={(v: any) => setFormData(prev => ({ ...prev, gumHealth: v }))} />
+                        onChange={(v: string) => setFormData(prev => ({ ...prev, gumHealth: v as DentalAssessment['gumHealth'] }))} />
 
                     <SelectField label="Plaque Index" value={formData.plaqueIndex}
                         options={['Low', 'Moderate', 'Heavy']}
-                        onChange={(v: any) => setFormData(prev => ({ ...prev, plaqueIndex: v }))} />
+                        onChange={(v: string) => setFormData(prev => ({ ...prev, plaqueIndex: v as DentalAssessment['plaqueIndex'] }))} />
 
                     <SelectField label="Calculus Index" value={formData.calculusIndex}
                         options={['Low', 'Moderate', 'Heavy']}
-                        onChange={(v: any) => setFormData(prev => ({ ...prev, calculusIndex: v }))} />
+                        onChange={(v: string) => setFormData(prev => ({ ...prev, calculusIndex: v as DentalAssessment['calculusIndex'] }))} />
                 </div>
             </Card>
 
@@ -102,7 +102,7 @@ export const DentalOdontogram: React.FC<{
     );
 };
 
-const SelectField = ({ label, value, options, onChange }: any) => (
+const SelectField = ({ label, value, options, onChange }: { label: string; value?: string; options: string[]; onChange: (value: string) => void }) => (
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}

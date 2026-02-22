@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../config/supabase';
 import type { Meal, CateringViolation, QualityCheck } from '../types/catering';
 
@@ -7,6 +7,33 @@ export function useCatering() {
     const [violations, setViolations] = useState<CateringViolation[]>([]);
     const [checks, setChecks] = useState<QualityCheck[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const fetchData = useCallback(async function fetchData() {
+        setLoading(true);
+        try {
+            await Promise.all([fetchMeals(), fetchViolations(), fetchChecks()]);
+        } catch (error) {
+            console.error("Error fetching catering data:", error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    async function fetchMeals() {
+        const { data } = await supabase
+            .from('meals')
+            .select('*')
+            .order('scheduled_date', { ascending: true });
+        if (data) setMeals(data as Meal[]);
+    }
+
+    async function fetchViolations() {
+        const { data } = await supabase
+            .from('catering_violations')
+            .select('*')
+            .order('reported_at', { ascending: false });
+        if (data) setViolations(data as CateringViolation[]);
+    }
 
     useEffect(() => {
         fetchData();
@@ -28,34 +55,7 @@ export function useCatering() {
             supabase.removeChannel(mealsChannel);
             supabase.removeChannel(violationsChannel);
         };
-    }, []);
-
-    async function fetchData() {
-        setLoading(true);
-        try {
-            await Promise.all([fetchMeals(), fetchViolations(), fetchChecks()]);
-        } catch (error) {
-            console.error("Error fetching catering data:", error);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    async function fetchMeals() {
-        const { data } = await supabase
-            .from('meals')
-            .select('*')
-            .order('scheduled_date', { ascending: true });
-        if (data) setMeals(data as Meal[]);
-    }
-
-    async function fetchViolations() {
-        const { data } = await supabase
-            .from('catering_violations')
-            .select('*')
-            .order('reported_at', { ascending: false });
-        if (data) setViolations(data as CateringViolation[]);
-    }
+    }, [fetchData]);
 
     async function fetchChecks() {
         const { data } = await supabase

@@ -53,7 +53,7 @@ const TrendIcon: React.FC<{ trend: 'up' | 'down' | 'stable' }> = ({ trend }) => 
     return <Minus className="w-4 h-4 text-slate-400" />;
 };
 
-const IndicatorBar: React.FC<{ value: number; icon: React.ElementType; label: string }> = ({ value, icon: Icon, label }) => (
+const IndicatorBar: React.FC<{ value: number; icon: React.ElementType; label: string }> = ({ value, icon: Icon }) => (
     <div className="flex items-center gap-2">
         <Icon className="w-3 h-3 text-slate-400" />
         <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">

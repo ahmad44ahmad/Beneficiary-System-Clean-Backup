@@ -185,8 +185,6 @@ export const App = () => {
         socialActivityFollowUps,
         vaccinations,
         isolationStats,
-        medicalProfiles,
-        addVisitLog,
         addSocialActivityPlan,
         addSocialActivityDoc,
         addSocialActivityFollowUp,
@@ -256,7 +254,10 @@ export const App = () => {
 
                     <Route path="medical" element={
                         <div className="p-6">
-                            <MedicalOverview vaccinations={vaccinations} isolationStats={isolationStats} />
+                            <MedicalOverview
+                                vaccinations={vaccinations.map(v => ({ id: v.id, beneficiaryId: v.beneficiaryId, type: v.vaccineName, date: v.dueDate }))}
+                                isolationStats={{ active: isolationStats.occupiedBeds, total: isolationStats.totalBeds }}
+                            />
                         </div>
                     } />
 

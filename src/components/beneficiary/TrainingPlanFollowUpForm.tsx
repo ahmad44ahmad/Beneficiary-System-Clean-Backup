@@ -33,7 +33,7 @@ export const TrainingPlanFollowUpForm: React.FC<TrainingPlanFollowUpFormProps> =
         if (newSkill.skillName) {
             setFormData(prev => ({
                 ...prev,
-                skills: [...(prev.skills || []), newSkill as any]
+                skills: [...(prev.skills || []), newSkill as TrainingPlanFollowUp['skills'][number]]
             }));
             setNewSkill({ ...newSkill, skillName: '' });
         }

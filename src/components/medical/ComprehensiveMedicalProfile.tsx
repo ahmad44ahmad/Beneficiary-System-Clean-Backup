@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../config/supabase';
 import {
     Activity,
@@ -52,10 +52,10 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
         },
 
         injuries_profile: {
-            bedsores: [] as any[], // { grade, location, notes }
-            wounds: [] as any[],
-            fractures: [] as any[],
-            burns: [] as any[]
+            bedsores: [] as { grade: string; location: string; notes: string }[],
+            wounds: [] as { type: string; location: string; notes: string }[],
+            fractures: [] as { type: string; location: string; notes: string }[],
+            burns: [] as { degree: string; location: string; notes: string }[]
         },
 
         infection_status: {
@@ -74,11 +74,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
         }
     });
 
-    useEffect(() => {
-        fetchProfile();
-    }, [beneficiaryId]);
-
-    const fetchProfile = async () => {
+    const fetchProfile = useCallback(async () => {
         try {
             setLoading(true);
             const { data, error } = await supabase
@@ -92,21 +88,25 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
             }
 
             if (data) {
-                setFormData({
-                    ...formData,
+                setFormData(prev => ({
+                    ...prev,
                     ...data,
                     // Ensure JSON fields are merged correctly if null in DB
-                    chronic_conditions: data.chronic_conditions || formData.chronic_conditions,
-                    psychological_profile: data.psychological_profile || formData.psychological_profile,
-                    injuries_profile: data.injuries_profile || formData.injuries_profile,
-                    infection_status: data.infection_status || formData.infection_status,
-                    rehabilitation_plan: data.rehabilitation_plan || formData.rehabilitation_plan,
-                });
+                    chronic_conditions: data.chronic_conditions || prev.chronic_conditions,
+                    psychological_profile: data.psychological_profile || prev.psychological_profile,
+                    injuries_profile: data.injuries_profile || prev.injuries_profile,
+                    infection_status: data.infection_status || prev.infection_status,
+                    rehabilitation_plan: data.rehabilitation_plan || prev.rehabilitation_plan,
+                }));
             }
         } finally {
             setLoading(false);
         }
-    };
+    }, [beneficiaryId]);
+
+    useEffect(() => {
+        fetchProfile();
+    }, [fetchProfile]);
 
     const handleSave = async () => {
         try {
@@ -135,23 +135,6 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
         } finally {
             setSaving(false);
         }
-    };
-
-    const calculateBMI = (weight: number, heightCm: number) => {
-        if (!weight || !heightCm) return;
-        const heightM = heightCm / 100;
-        const bmi = (weight / (heightM * heightM)).toFixed(2);
-        // Auto categorize
-        let category = '';
-        const bmiNum = parseFloat(bmi);
-        if (bmiNum < 18.5) category = 'تحت الوزن الطبيعي';
-        else if (bmiNum < 24.9) category = 'وزن طبيعي';
-        else if (bmiNum < 29.9) category = 'زيادة وزن';
-        else if (bmiNum < 34.9) category = 'سمنة درجة أولى';
-        else if (bmiNum < 39.9) category = 'سمنة درجة ثانية';
-        else category = 'سمنة مفرطة';
-
-        setFormData(prev => ({ ...prev, bmi_value: bmi, bmi_category: category }));
     };
 
     if (loading) return <div className="p-8 text-center">جاري تحميل الملف الطبي...</div>;
@@ -323,7 +306,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                             type="number"
                                             placeholder="الوزن (كجم)"
                                             className="w-full p-2 border rounded"
-                                            onBlur={(e) => {
+                                            onBlur={(_e) => {
                                                 // Simple logic to calculate if height is available somewhere, for now manual entry or separate state
                                                 // Assuming user enters calculated BMI or separate fields. Let's provide manual BMI entry for now as it's often pre-calculated.
                                             }}

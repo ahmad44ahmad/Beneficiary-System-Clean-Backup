@@ -31,18 +31,20 @@ const AuthContext = createContext<AuthContextType>({
     isDemoMode: false,
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const mockUser = {
-        id: 'demo-user-123',
-        email: 'demo@example.com',
-        app_metadata: {},
-        user_metadata: { full_name: 'Demo User' },
-        aud: 'authenticated',
-        created_at: new Date().toISOString()
-    } as User;
+// Mock user for demo mode (module-level constant to avoid recreating on each render)
+const mockUser = {
+    id: 'demo-user-123',
+    email: 'demo@example.com',
+    app_metadata: {},
+    user_metadata: { full_name: 'Demo User' },
+    aud: 'authenticated',
+    created_at: new Date().toISOString()
+} as User;
 
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [session, setSession] = useState<Session | null>(null);
     const [loading, setLoading] = useState(true);

@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export const MaintenancePanel: React.FC = () => {
-    const [requests, setRequests] = useState<MaintenanceRequest[]>(MOCK_MAINTENANCE_REQUESTS);
+    const [requests] = useState<MaintenanceRequest[]>(MOCK_MAINTENANCE_REQUESTS);
     const [filter, setFilter] = useState<'all' | 'pending' | 'in_progress'>('all');
 
     const filteredRequests = requests.filter(r =>

@@ -31,8 +31,8 @@ export const Login = () => {
             setLoading(true);
             await signUp(email, password);
             navigate('/dashboard');
-        } catch (err: any) {
-            setError('Failed to create account. ' + err.message);
+        } catch (err: unknown) {
+            setError('Failed to create account. ' + (err instanceof Error ? err.message : String(err)));
             console.error(err);
         } finally {
             setLoading(false);
@@ -45,8 +45,8 @@ export const Login = () => {
             setLoading(true);
             await signInWithGoogle();
             navigate('/dashboard');
-        } catch (err: any) {
-            setError('Failed to sign in with Google. ' + err.message);
+        } catch (err: unknown) {
+            setError('Failed to sign in with Google. ' + (err instanceof Error ? err.message : String(err)));
             console.error(err);
         } finally {
             setLoading(false);

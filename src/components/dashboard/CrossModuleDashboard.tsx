@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Shield, Target, Users, Activity,
-    TrendingUp, AlertCircle, Heart, ChevronRight,
+    TrendingUp, AlertCircle, ChevronRight,
     CheckCircle, Clock
 } from 'lucide-react';
-import { ipcService } from '../../services/ipcService';
+import { ipcService, IPCStats } from '../../services/ipcService';
 import { empowermentService } from '../../services/empowermentService';
 
 // Unified Module Card
@@ -81,9 +81,13 @@ const AlertItem: React.FC<{
 };
 
 export const CrossModuleDashboard: React.FC = () => {
-    const navigate = useNavigate();
-    const [ipcStats, setIpcStats] = useState<any>(null);
-    const [empowermentStats, setEmpowermentStats] = useState<any>(null);
+    const [ipcStats, setIpcStats] = useState<IPCStats | null>(null);
+    const [empowermentStats, setEmpowermentStats] = useState<{
+        totalGoals: number;
+        achievedGoals: number;
+        inProgressGoals: number;
+        avgProgress: number;
+    } | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

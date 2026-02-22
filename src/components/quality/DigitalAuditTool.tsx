@@ -2,14 +2,12 @@ import React, { useState, useMemo } from 'react';
 import { governanceStandards } from '../../data/governanceStandards';
 import { AuditStandard, AuditResult, AuditStatus } from '../../types/quality';
 import { Card } from '../ui/Card';
-import { Button } from '../ui/Button';
 import {
     CheckCircle,
     XCircle,
     AlertTriangle,
     FileText,
     ShieldCheck,
-    BarChart3,
     ChevronDown,
     ChevronUp
 } from 'lucide-react';
@@ -47,15 +45,6 @@ export const DigitalAuditTool: React.FC = () => {
                 date: new Date().toISOString()
             }
         }));
-    };
-
-    const getStatusColor = (status?: AuditStatus) => {
-        switch (status) {
-            case 'compliant': return 'bg-green-100 text-green-700 border-green-200';
-            case 'non-compliant': return 'bg-red-100 text-red-700 border-red-200';
-            case 'partial': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
-            default: return 'bg-gray-50 text-gray-500 border-gray-200';
-        }
     };
 
     return (

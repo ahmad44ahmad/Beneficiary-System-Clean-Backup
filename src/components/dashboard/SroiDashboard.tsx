@@ -4,7 +4,6 @@ import {
     TrendingUp,
     DollarSign,
     Users,
-    ArrowRight,
     Building2,
     PieChart,
     Download
@@ -13,13 +12,10 @@ import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { SroiMetricsCard } from './SroiMetricsCard';
 import {
-    BarChart,
-    Bar,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend,
     ResponsiveContainer,
     AreaChart,
     Area
@@ -44,7 +40,13 @@ export const SroiDashboard: React.FC = () => {
         avgSalary: 4000 // SAR
     });
 
-    const [chartData, setChartData] = useState<any[]>([]);
+    const [chartData, setChartData] = useState<{
+        name: string;
+        'التكلفة التقليدية': number;
+        'تكلفة نموذج التمكين': number;
+        'القيمة الاقتصادية': number;
+        savings: number;
+    }[]>([]);
 
     // Calculation Logic
     useEffect(() => {
@@ -58,7 +60,6 @@ export const SroiDashboard: React.FC = () => {
         const successFactor = scenario.rehabSuccessRate / 100;
         const savingsPerSuccess = scenario.avgCostPerMonth * 0.40;
         const totalSavings = (scenario.beneficiaryCount * successFactor) * savingsPerSuccess;
-        const empowermentCost = traditionalCost - totalSavings;
 
         // Economic Value Created (Employment)
         const employedCount = scenario.beneficiaryCount * (scenario.employmentRate / 100);
@@ -66,9 +67,6 @@ export const SroiDashboard: React.FC = () => {
 
         // SROI Ratio Calculation
         // Value Created = Savings + Economic Contribution
-        const totalValueCreated = totalSavings + economicValue;
-        const sroiRatio = (totalValueCreated / traditionalCost).toFixed(2);
-
         // Generate Chart Data for 1 Year Projection
         const data = months.map((month, index) => {
             // Simulate gradual improvement over the year

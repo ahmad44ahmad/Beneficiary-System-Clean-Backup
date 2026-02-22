@@ -6,7 +6,7 @@ const API_KEY = process.env.GEMINI_API_KEY || process.env.API_KEY || import.meta
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(API_KEY || '');
 
-export const analyzeReport = async (reportData: any) => {
+export const analyzeReport = async (reportData: Record<string, unknown>) => {
     if (!API_KEY) {
         throw new Error('API Key is missing');
     }

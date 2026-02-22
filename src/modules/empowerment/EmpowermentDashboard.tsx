@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Target, ChevronLeft, Plus, RefreshCw,
-    TrendingUp, CheckCircle, Clock, Award,
+    TrendingUp, Clock, Award,
     User, Calendar, BarChart3, Sparkles
 } from 'lucide-react';
 import { empowermentService, RehabGoal, REHAB_DOMAINS } from '../../services/empowermentService';

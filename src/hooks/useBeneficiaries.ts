@@ -3,13 +3,13 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supaService } from '../services/supaService';
-import { Beneficiary, UnifiedBeneficiaryProfile } from '../types';
+import { Beneficiary } from '../types';
 
 // Query keys for cache management
 export const beneficiaryKeys = {
     all: ['beneficiaries'] as const,
     lists: () => [...beneficiaryKeys.all, 'list'] as const,
-    list: (filters: Record<string, any>) => [...beneficiaryKeys.lists(), filters] as const,
+    list: (filters: Record<string, unknown>) => [...beneficiaryKeys.lists(), filters] as const,
     details: () => [...beneficiaryKeys.all, 'detail'] as const,
     detail: (id: string) => [...beneficiaryKeys.details(), id] as const,
     byNationalId: (nationalId: string) => [...beneficiaryKeys.all, 'nationalId', nationalId] as const,

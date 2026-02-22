@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-    Calendar, Clock, User, Activity, Heart, Stethoscope,
-    Users, ChevronLeft, ChevronRight, Plus, Filter, Search,
-    CheckCircle, XCircle, AlertCircle, MoreHorizontal
+    Calendar, User, Activity, Stethoscope,
+    Users, ChevronLeft, ChevronRight, Plus, Search,
+    MoreHorizontal
 } from 'lucide-react';
 import { ShiftRecommendationCard } from '../staff/ShiftRecommendationCard';
 

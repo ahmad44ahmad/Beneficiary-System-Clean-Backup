@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { Activity, AlertTriangle, ShieldCheck, TrendingUp, User } from 'lucide-react';
+import { Activity, ShieldCheck, TrendingUp } from 'lucide-react';
 import { Card } from '../ui/Card';
-import { UnifiedBeneficiaryProfile } from '../../types/unified';
+import { UnifiedBeneficiaryProfile } from '../../types';
 import { calculateRiskScore, getWardTensionScore } from '../../services/riskAnalysisService';
 import { useNavigate } from 'react-router-dom';
 

@@ -55,7 +55,7 @@ export const BeneficiaryListItem: React.FC<BeneficiaryListItemProps> = ({ benefi
                                         <span
                                             key={alertId}
                                             className={`alert-badge-${alert.id} px-2 py-0.5 rounded-full text-xs text-white flex items-center gap-1`}
-                                            // eslint-disable-next-line react/forbid-component-props
+
                                             style={{ backgroundColor: alert.color }}
                                             title={alert.label}
                                         >

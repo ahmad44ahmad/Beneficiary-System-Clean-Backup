@@ -3,9 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
     Heart, ChevronLeft, Save, Loader2, Edit2,
     User, Smile, Frown, Star, Coffee, Moon, Sun,
-    Users, Music, Utensils, MessageCircle, Sparkles
+    MessageCircle, Sparkles
 } from 'lucide-react';
-import { empowermentService, BeneficiaryPreferences } from '../../services/empowermentService';
+import { empowermentService } from '../../services/empowermentService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 
 // Predefined Options
@@ -105,53 +105,53 @@ export const DignityFile: React.FC = () => {
     const [favoriteFoods, setFavoriteFoods] = useState<string[]>([]);
 
     useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                let targetId = beneficiaryId;
+
+                // If no ID provided, try to find the first active beneficiary
+                if (!targetId) {
+                    const { data: beneficiaries } = await empowermentService.getBeneficiariesLimit1();
+                    if (beneficiaries && beneficiaries.length > 0) {
+                        targetId = beneficiaries[0].id;
+                        // Optionally navigate to the URL with ID to persist state
+                        // navigate(/empowerment/dignity/${targetId}, { replace: true });
+                    }
+                }
+
+                const prefs = targetId
+                    ? await empowermentService.getPreferences(targetId)
+                    : null;
+
+                if (prefs) {
+                    setPreferredName(prefs.preferred_name || '');
+                    setPreferredTitle(prefs.preferred_title || '');
+                    setCommunicationStyle(prefs.communication_style || '');
+                    setPreferredActivities(prefs.preferred_activities || []);
+                    setHobbies(prefs.hobbies || []);
+                    setCalmingStrategies(prefs.calming_strategies || []);
+                    setMotivators(prefs.motivators || []);
+                    setWhatMakesMeHappy(prefs.what_makes_me_happy || '');
+                    setWhatMakesMeUpset(prefs.what_makes_me_upset || '');
+                    setMyDreams(prefs.my_dreams || '');
+                    setFavoriteFoods(prefs.favorite_foods || []);
+                    setWakeUpTime(prefs.wake_up_time || '06:30');
+                    setSleepTime(prefs.sleep_time || '21:00');
+                }
+            } catch (error) {
+                console.error('Error fetching dignity file:', error);
+            } finally {
+                setLoading(false);
+                // If we found a targetId but didn't have one in params, we are viewing an existing file
+                // If we still don't have a targetId, we are in strictly new mode
+                // BUT here we want to default to edit mode if we just loaded blank
+                setEditMode(!beneficiaryId);
+            }
+        };
+
         fetchData();
     }, [beneficiaryId]);
-
-    const fetchData = async () => {
-        setLoading(true);
-        try {
-            let targetId = beneficiaryId;
-
-            // If no ID provided, try to find the first active beneficiary
-            if (!targetId) {
-                const { data: beneficiaries } = await empowermentService.getBeneficiariesLimit1();
-                if (beneficiaries && beneficiaries.length > 0) {
-                    targetId = beneficiaries[0].id;
-                    // Optionally navigate to the URL with ID to persist state
-                    // navigate(/empowerment/dignity/${targetId}, { replace: true });
-                }
-            }
-
-            const prefs = targetId
-                ? await empowermentService.getPreferences(targetId)
-                : null;
-
-            if (prefs) {
-                setPreferredName(prefs.preferred_name || '');
-                setPreferredTitle(prefs.preferred_title || '');
-                setCommunicationStyle(prefs.communication_style || '');
-                setPreferredActivities(prefs.preferred_activities || []);
-                setHobbies(prefs.hobbies || []);
-                setCalmingStrategies(prefs.calming_strategies || []);
-                setMotivators(prefs.motivators || []);
-                setWhatMakesMeHappy(prefs.what_makes_me_happy || '');
-                setWhatMakesMeUpset(prefs.what_makes_me_upset || '');
-                setMyDreams(prefs.my_dreams || '');
-                setFavoriteFoods(prefs.favorite_foods || []);
-                setWakeUpTime(prefs.wake_up_time || '06:30');
-                setSleepTime(prefs.sleep_time || '21:00');
-            }
-        } catch (error) {
-            console.error('Error fetching dignity file:', error);
-        } finally {
-            setLoading(false);
-            // If we found a targetId but didn't have one in params, we are viewing an existing file
-            // If we still don't have a targetId, we are in strictly new mode
-            // BUT here we want to default to edit mode if we just loaded blank
-            setEditMode(!beneficiaryId);
-        }
-    };
 
     const handleSave = async () => {
         setSaving(true);

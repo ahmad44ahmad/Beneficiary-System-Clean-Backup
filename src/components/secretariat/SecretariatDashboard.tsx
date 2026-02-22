@@ -3,7 +3,7 @@ import { IncomingMail, OutgoingMail, MeetingMinute } from '../../types';
 import { IncomingMailForm } from './IncomingMailForm';
 import { OutgoingMailForm } from './OutgoingMailForm';
 import { MeetingMinutesForm } from './MeetingMinutesForm';
-import { FileText, Send, Inbox, Users, Plus, Search, Calendar, Paperclip, MoreVertical } from 'lucide-react';
+import { Send, Inbox, Users, Plus, Search, Calendar, MoreVertical } from 'lucide-react';
 
 export const SecretariatDashboard: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'incoming' | 'outgoing' | 'meetings'>('incoming');

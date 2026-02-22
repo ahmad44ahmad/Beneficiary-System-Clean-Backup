@@ -28,7 +28,7 @@ export const VisitLogPanel: React.FC<VisitLogPanelProps> = ({ beneficiary, logs,
             const log: VisitLog = {
                 id: `log_${Date.now()}`,
                 beneficiaryId: beneficiary.id,
-                type: newLog.type as any,
+                type: newLog.type as VisitLog['type'],
                 date: newLog.date,
                 time: newLog.time,
                 visitorName: newLog.visitorName,
@@ -66,7 +66,7 @@ export const VisitLogPanel: React.FC<VisitLogPanelProps> = ({ beneficiary, logs,
                             <label>نوع السجل</label>
                             <select
                                 value={newLog.type}
-                                onChange={e => setNewLog({ ...newLog, type: e.target.value as any })}
+                                onChange={e => setNewLog({ ...newLog, type: e.target.value as VisitLog['type'] })}
                                 required
                             >
                                 <option value="internal">زيارة داخلية</option>

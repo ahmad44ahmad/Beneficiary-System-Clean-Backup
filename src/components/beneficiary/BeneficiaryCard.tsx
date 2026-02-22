@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     User, MapPin, Calendar, Activity,
-    TrendingUp, ChevronRight, Heart, AlertTriangle
+    TrendingUp, ChevronRight, Heart
 } from 'lucide-react';
 import { ALERT_TAGS } from '../../data/domain-assets';
 
@@ -34,12 +34,6 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
     alerts = []
 }) => {
     const navigate = useNavigate();
-
-    const statusColors = {
-        stable: 'bg-hrsd-green-light text-hrsd-green-dark',
-        needs_attention: 'bg-hrsd-gold-light text-hrsd-gold-dark',
-        critical: 'bg-red-100 text-red-700',
-    };
 
     const ipcColors = {
         safe: 'border-hrsd-green',
@@ -131,7 +125,7 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
                             <span
                                 key={alertId}
                                 className="alert-badge px-2 py-1 rounded-full text-xs text-white flex items-center gap-1"
-                                // eslint-disable-next-line react/forbid-component-props
+
                                 style={{ backgroundColor: alert.color }}
                                 title={alert.label}
                             >

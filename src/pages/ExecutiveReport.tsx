@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip,
-    RadialBarChart, RadialBar, Legend, AreaChart, Area, LineChart, Line
+    ResponsiveContainer, XAxis, YAxis, Tooltip,
+    RadialBarChart, RadialBar, Legend, AreaChart, Area
 } from 'recharts';
 import {
     TrendingUp, Users, Shield, Heart, Brain, Target, Award, Zap,
-    CheckCircle2, AlertTriangle, Clock, ArrowLeft, Sparkles, Leaf,
-    BarChart3, Activity, FileText, Building2, Star, ThumbsUp
+    CheckCircle2, Clock, ArrowLeft, Sparkles, Leaf,
+    BarChart3, Star
 } from 'lucide-react';
 
 export const ExecutiveReport: React.FC = () => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
-    const [activeKPI, setActiveKPI] = useState(0);
+    const [_activeKPI, setActiveKPI] = useState(0);
 
     useEffect(() => {
         setIsVisible(true);

@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {
     FileText,
     AlertTriangle,
-    CheckCircle2,
     BarChart2,
     Shield,
-    Users,
-    TrendingUp
+    Users
 } from 'lucide-react';
 import { getOvrReports, getOvrStats, OvrReport, OvrStats } from '../../services/ovrService';
 import { Card } from '../ui/Card';

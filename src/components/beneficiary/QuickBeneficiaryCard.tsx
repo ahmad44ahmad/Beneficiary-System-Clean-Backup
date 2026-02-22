@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { X, Heart, Pill, AlertTriangle, Activity, Target, Moon, User, Phone, MapPin, Calendar, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { X, Heart, Pill, AlertTriangle, Target, Moon, User, MapPin, Calendar, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 interface QuickCardProps {
     isOpen: boolean;

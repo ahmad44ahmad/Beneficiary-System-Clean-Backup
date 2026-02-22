@@ -33,23 +33,11 @@ export const MainLayout = () => {
 
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-
-    // Detect mobile viewport
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     // Close mobile menu on route change
     useEffect(() => {
         setIsMobileMenuOpen(false);
-    }, [location.pathname]);
+    }, []);
 
     const handleMenuToggle = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);

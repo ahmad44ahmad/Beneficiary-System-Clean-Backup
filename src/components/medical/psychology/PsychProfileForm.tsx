@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { PsychologyAssessment, MentalStatusExam, IQTestResult } from '../../../types/psychology';
+import { PsychologyAssessment, MentalStatusExam } from '../../../types/psychology';
 import { Card } from '../../ui/Card';
 import { Button } from '../../ui/Button';
 import { Save } from 'lucide-react';
@@ -20,7 +20,7 @@ export const PsychProfileForm: React.FC<{
         treatmentPlan: { goals: [], interventions: [] }
     });
 
-    const handleMSEChange = (field: keyof MentalStatusExam, value: any) => {
+    const handleMSEChange = (field: keyof MentalStatusExam, value: string | boolean) => {
         setFormData(prev => ({
             ...prev,
             mentalStatus: { ...prev.mentalStatus!, [field]: value }
@@ -52,13 +52,13 @@ export const PsychProfileForm: React.FC<{
                     </div>
 
                     <SelectField label="Mood" value={formData.mentalStatus?.mood} options={['Euthymic', 'Depressed', 'Anxious', 'Euphoric']}
-                        onChange={(v: any) => handleMSEChange('mood', v)} />
+                        onChange={(v: string) => handleMSEChange('mood', v)} />
 
                     <SelectField label="Affect" value={formData.mentalStatus?.affect} options={['Congruent', 'Flat', 'Labile']}
-                        onChange={(v: any) => handleMSEChange('affect', v)} />
+                        onChange={(v: string) => handleMSEChange('affect', v)} />
 
                     <SelectField label="Thought Process" value={formData.mentalStatus?.thoughtProcess} options={['Linear', 'Tangential', 'Flight of Ideas']}
-                        onChange={(v: any) => handleMSEChange('thoughtProcess', v)} />
+                        onChange={(v: string) => handleMSEChange('thoughtProcess', v)} />
 
                     <div className="flex items-center mt-6">
                         <input type="checkbox" checked={formData.mentalStatus?.perceptualDisturbances}
@@ -100,7 +100,7 @@ export const PsychProfileForm: React.FC<{
     );
 };
 
-const SelectField = ({ label, value, options, onChange }: any) => (
+const SelectField = ({ label, value, options, onChange }: { label: string; value?: string; options: string[]; onChange: (value: string) => void }) => (
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}

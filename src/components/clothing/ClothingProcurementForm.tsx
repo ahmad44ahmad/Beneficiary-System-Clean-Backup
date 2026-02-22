@@ -21,7 +21,7 @@ export const ClothingProcurementForm: React.FC<ClothingProcurementFormProps> = (
         if (!currentItem.itemId) return;
         const newItems = [...(formData.items || []), currentItem];
         const total = newItems.reduce((sum, item) => sum + Number(item.amount), 0);
-        setFormData({ ...formData, items: newItems as any, totalAmount: total }); // Cast to any to avoid partial compatibility issues during transition
+        setFormData({ ...formData, items: newItems as ClothingProcurement['items'], totalAmount: total });
         setCurrentItem({ itemId: '', quantity: 0, invoiceNo: '', amount: 0 });
     };
 

@@ -1,126 +1,199 @@
-# CLAUDE.md
+# CLAUDE.md — Basira (نظام بصيرة) Beneficiary Management System
 
 ## Project Overview
 
-**Basira** (بصيرة) is an Arabic RTL healthcare quality management system for Al-Baha Comprehensive Rehabilitation Center. It manages beneficiaries (residents), medical care, quality assurance, GRC (Governance, Risk, Compliance), catering, operations, and more. Compliant with Ministry of Human Resources and Social Development (HRSD) branding.
+Arabic RTL healthcare quality management system for HRSD Al-Baha Rehabilitation Center.
+300 TypeScript/TSX files (~60k lines), 150+ routes, Supabase backend with local data fallback.
 
-## Tech Stack
+**Project root:** `C:\Users\aass1\.local\bin\Beneficiary-System-Clean-Backup`
 
-- **Framework**: React 19 + TypeScript
-- **Build**: Vite 6 (dev server on port 5173)
-- **Styling**: Tailwind CSS 4 with PostCSS, custom HRSD brand colors in `tailwind.config.js`
-- **State/Data**: TanStack Query (React Query) for server state, React Context for app state
-- **Backend**: Supabase (PostgreSQL + Auth + Realtime)
-- **Routing**: React Router DOM v7
-- **Animations**: Framer Motion
-- **Forms**: React Hook Form + Zod validation
-- **Charts**: Recharts
-- **AI**: Google Generative AI (Gemini) via `@google/generative-ai`
-- **Deployment**: GitHub Pages (`gh-pages`)
+---
 
-## Commands
+## ABSOLUTE RULES (2025/2026) — NO EXCEPTIONS
 
-```bash
-npm run dev       # Start dev server (localhost:5173)
-npm run build     # Production build (vite build)
-npm run preview   # Preview production build
-npm run deploy    # Build + deploy to GitHub Pages
+### 1. Tech Stack — Locked Versions
+
+| Layer | Technology | Version |
+|-------|-----------|---------|
+| UI Framework | React | 19 |
+| Build Tool | Vite | 6 |
+| Styling | Tailwind CSS | v4 |
+| Client State | Zustand | v5 |
+| Server State | TanStack Query | v5 |
+| Forms | react-hook-form | v7+ |
+| Validation | Zod | v4+ |
+| Routing | React Router | v7 |
+| Backend | Supabase | v2 |
+
+- **DO NOT** introduce any state management library other than Zustand v5 (client) and TanStack Query v5 (server).
+- **DO NOT** downgrade or swap any of these dependencies.
+- Migrate existing React Context state to Zustand stores incrementally when touching those files.
+
+### 2. Form Handling — Strict Pattern
+
+All forms MUST use React 19 `useActionState` combined with `react-hook-form` and `Zod`:
+
+```tsx
+import { useActionState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({ /* ... */ });
+type FormData = z.infer<typeof schema>;
+
+function MyForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
+  const [state, formAction, isPending] = useActionState(
+    async (_prev: State, formData: FormData) => {
+      // server/supabase mutation
+    },
+    initialState
+  );
+
+  return (
+    <form onSubmit={handleSubmit((data) => formAction(data))}>
+      {/* ... */}
+    </form>
+  );
+}
 ```
 
-There are no test or lint commands configured.
+- **DO NOT** use plain `onSubmit` handlers without `useActionState`.
+- **DO NOT** use `useFormState` (deprecated) — use `useActionState` only.
+- Every form field must have a Zod schema. No unvalidated inputs.
 
-## Project Structure
+### 3. Database Security & Performance (Supabase/Postgres)
+
+#### pgaudit — READ Logging (PDPL Compliance) ✅ CONFIGURED
+- `pgaudit` extension is enabled with **object-level logging** via the `pdpl_auditor` role.
+- All SELECT queries on sensitive tables are automatically logged to Postgres logs.
+- Audit role `pdpl_auditor` has SELECT grants on:
+  `beneficiaries`, `medical_profiles`, `social_research`, `daily_care_logs`,
+  `medications`, `medication_administrations`, `fall_risk_assessments`, `fall_incidents`, `audit_logs`.
+- Both `postgres` and `authenticator` roles have `pgaudit.role = 'pdpl_auditor'`.
+- View audit logs in Supabase Dashboard > Logs > Postgres Logs (filter: `AUDIT`).
+
+#### Views Strategy (pg_ivm NOT available on Supabase)
+- `pg_ivm` is **NOT available** in Supabase's extension catalog.
+- Instead, use **regular views** with `security_invoker = true` (already implemented for wellbeing views).
+- Regular views auto-refresh on every query — no manual refresh needed.
+- For heavy aggregations, consider Supabase Edge Functions with caching.
+- **DO NOT** use `pg_cron` for view refreshes.
+
+#### BANNED Database Patterns
+- **DO NOT** use `pgsodium` Transparent Column Encryption (TCE). Use Supabase Vault or application-level encryption instead.
+- **DO NOT** use `pg_cron` for materialized view refreshes.
+- **DO NOT** use `pg_ivm` — it is not available on Supabase. Use regular views instead.
+
+### 4. Agentic Loop — Mandatory Post-Modification Checks
+
+After ANY code modification, ALWAYS run these commands and fix all errors autonomously:
+
+```bash
+cd "C:/Users/aass1/.local/bin/Beneficiary-System-Clean-Backup"
+npm run lint 2>&1
+npx tsc --noEmit 2>&1
+```
+
+- Read stderr output carefully.
+- Fix every error and warning.
+- Re-run until **0 errors** remain.
+- Do NOT submit work with lint or type errors.
+
+> **Note:** If `npm run lint` is not configured, set up ESLint first before running.
+
+---
+
+## Project Architecture
+
+### Directory Structure
 
 ```
 src/
-├── api/                  # API layer (beneficiaries, rehabilitation)
-├── components/           # UI components organized by domain
-│   ├── admin/            # Audit logs, secretariat
-│   ├── alerts/           # Fall risk, medication, incident alerts
-│   ├── beneficiary/      # Beneficiary CRUD, profiles, forms
-│   ├── care/             # Daily care forms
-│   ├── clothing/         # Clothing management
-│   ├── common/           # Shared components (ErrorBoundary, LoadingSpinner, PageHeader, etc.)
-│   ├── crisis/           # Crisis mode
-│   ├── dashboard/        # Executive, strategic, quality dashboards
-│   ├── emergency/        # Emergency dashboard
-│   ├── empowerment/      # Empowerment plan builder
-│   ├── indicators/       # Smart KPI indicators (ISO, behavioral, cost, etc.)
-│   ├── layout/           # MainLayout, Sidebar, Header, MobileNav
-│   ├── medical/          # Medical dashboard, profiles, assessments
-│   ├── medication/       # Medication administration
-│   ├── pulse/            # Morning pulse, wellbeing heatmap
-│   ├── quality/          # Quality manual (ISO 9001), OVR reports
-│   ├── rehab/            # Rehabilitation plan builder
-│   ├── reports/          # Report generation, strategic dashboard
-│   ├── safety/           # Fall risk assessment
-│   ├── shift/            # Shift handover
-│   ├── social/           # Social overview, activities, leave requests
-│   ├── staff/            # Staff profiles
-│   ├── ui/               # Primitive UI components
-│   └── App.tsx           # Root component with all routes
-├── config/               # Supabase config, theme
-├── context/              # React contexts (App, Auth, Toast, UnifiedData, etc.)
-├── data/                 # Static/seed data
-├── hooks/                # Custom hooks (useExport, usePrint, useBeneficiaries, etc.)
-├── modules/              # Feature modules
-│   ├── catering/         # Food service management
-│   ├── empowerment/      # Goal setting, dignity files
-│   ├── family/           # Family portal
-│   ├── grc/              # GRC dashboard, risk register, compliance
-│   ├── ipc/              # Infection prevention & control
-│   ├── operations/       # Asset registry, maintenance, waste
-│   ├── reports/          # Integrated dashboard
-│   └── wisdom/           # Wisdom module
-├── pages/                # Route-level page components
-├── services/             # Business logic services (AI, audit, risk, shift, etc.)
-├── styles/               # Global styles
-├── types/                # TypeScript type definitions
-└── utils/                # Helpers (Arabic translations, validation, export, etc.)
+├── api/              # Supabase API client functions
+├── components/       # 36+ component directories (lazy-loaded)
+│   ├── admin/        # Admin panels (secretariat, audit)
+│   ├── beneficiary/  # Beneficiary management
+│   ├── care/         # Daily care management
+│   ├── common/       # Reusable UI components
+│   ├── dashboard/    # Dashboard variants
+│   ├── indicators/   # Smart AI indicators
+│   ├── medical/      # Medical module (dental, PT, psych, speech)
+│   ├── quality/      # Quality management
+│   ├── ui/           # UI component library
+│   └── App.tsx       # Main router (150+ routes)
+├── config/
+│   ├── supabase.ts   # Supabase client init
+│   └── theme/        # Dark/light theme system
+├── context/          # React Context providers (8 providers)
+├── data/             # Local mock/seed data
+├── hooks/            # Custom hooks (TanStack Query + utilities)
+├── modules/          # Feature modules (catering, GRC, IPC, etc.)
+├── pages/            # Page-level components
+├── services/         # Business logic (15 services)
+├── styles/           # CSS (hrsd-theme, hrsd-utilities, print)
+├── types/            # TypeScript types (17 files)
+└── utils/            # Utilities (validation, export, Arabic)
 ```
 
-## Key Architecture Decisions
+### Entry Point
 
-- **Lazy loading**: Most pages use `React.lazy()` + `Suspense` for code splitting (see `App.tsx`)
-- **Role-based access**: `ProtectedRoute` component guards routes by user role (`director`, `admin`, `social_worker`, `doctor`, `specialist`, `secretary`)
-- **Unified data context**: `UnifiedDataContext` provides centralized access to beneficiaries, visit logs, medical data, social data, etc.
-- **Path alias**: `@/*` maps to project root (configured in `tsconfig.json` and `vite.config.ts`)
-- **RTL-first**: UI is designed right-to-left for Arabic; fonts use Tajawal/Cairo
+`index.tsx` — Provider stack order:
+1. ErrorBoundary
+2. ThemeProvider (dark/light, localStorage)
+3. QueryProvider (TanStack Query, 5min staleTime)
+4. BrowserRouter (React Router v7)
+5. AppProvider (global state)
+6. UnifiedDataProvider (beneficiary aggregation)
+7. AuthProvider (Supabase auth + demo mode)
+8. UserProvider
+9. ToastProvider
 
-## Environment Variables
+### Key Patterns
 
-Copy `.env.example` to `.env` and configure:
+- **TanStack Query keys:** `beneficiaryKeys.detail(id)` pattern — structured factory keys
+- **Data loading:** Supabase-first with local data fallback
+- **Code splitting:** `React.lazy()` + `Suspense` on all routes
+- **Role-based access:** ProtectedRoute component (director, admin, doctor, social_worker, specialist, secretary, nurse, staff)
+- **RTL:** Arabic-first with Tajawal/Cairo fonts
+- **Theming:** HRSD branding (navy #1a365d, teal #0d9488, gold #eab308)
+- **Audit trail:** `startAuditService()` runs on app initialization
+
+### Environment Variables
 
 ```
-VITE_SUPABASE_URL=<your-supabase-url>
-VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
-VITE_APP_MODE=development    # development | production | demo
-VITE_DEMO_MESSAGE="نسخة تجريبية"
-VITE_KNOWLEDGE_BASE_URL=
+VITE_SUPABASE_URL=<project-url>
+VITE_SUPABASE_ANON_KEY=<anon-key>
+VITE_APP_MODE=demo          # optional: enables demo mode
+GEMINI_API_KEY=<api-key>    # optional: AI features
 ```
 
-Gemini API key is loaded via `GEMINI_API_KEY` env var (exposed as `process.env.API_KEY` in Vite config).
+### Build & Dev
 
-## Database
+```bash
+npm run dev        # Vite dev server on port 5173
+npm run build      # Production build to dist/
+npm run preview    # Preview production build
+npm run deploy     # Deploy to GitHub Pages
+```
 
-- Backend is **Supabase** (PostgreSQL)
-- SQL schema files in `supabase/sql/` (`001_core_schema.sql` through `011_shift_handover.sql` and more)
-- Migrations in `supabase/migrations/`
-- Seed scripts in `scripts/` (`.mjs` and `.sql` files)
-- Supabase edge functions in `supabase/functions/`
+### SQL Migrations
+
+Migration files are at project root: `001_core_schema.sql` through `011_shift_handover.sql`.
+Apply via Supabase MCP `apply_migration` tool or Supabase dashboard.
+
+---
 
 ## Conventions
 
-- **Language**: All UI text is in Arabic. Code (variables, comments) is in English
-- **Components**: Functional components with named exports
-- **Styling**: Tailwind utility classes; custom HRSD brand tokens (`hrsd-navy`, `hrsd-teal`, `hrsd-gold`)
-- **TypeScript**: Strict-ish config (ES2022 target, bundler module resolution, no emit)
-- **No ESLint/Prettier** configured — no automated linting or formatting rules
-- **Excluded from compilation**: `src/server/`, `src/_archive/` (see `tsconfig.json`)
-
-## Git Workflow Rules
-
-- Always work directly on the `main` branch unless explicitly asked to create a new branch
-- After each group of changes: `git add -A && git commit -m "..." && git push origin main`
-- Vercel auto-deploys from main — push = live update
-- Never create feature branches without explicit permission
+- **Language:** TypeScript strict — no `any` types, no `@ts-ignore`.
+- **Naming:** camelCase for variables/functions, PascalCase for components/types, snake_case for DB columns.
+- **Imports:** Use `@/` path alias (maps to project root).
+- **Components:** Functional components only. No class components.
+- **Styling:** Tailwind utility classes. No inline styles. No CSS modules.
+- **Arabic text:** Always use translation utilities from `src/utils/arabic-translations.ts`.
+- **Supabase queries:** Always go through `src/services/supaService.ts` or dedicated hooks in `src/hooks/`.

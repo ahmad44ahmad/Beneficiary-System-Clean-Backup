@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { qualityProcesses } from '../../data/qualityProcesses';
+import { QualityProcess } from '../../types/quality-process';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Search, Filter, BarChart2, Users, Clock, ArrowRight, X } from 'lucide-react';
@@ -7,7 +8,7 @@ import { Search, Filter, BarChart2, Users, Clock, ArrowRight, X } from 'lucide-r
 export const QualityProcessesPanel: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDepartment, setSelectedDepartment] = useState<string>('All');
-    const [selectedProcess, setSelectedProcess] = useState<any>(null);
+    const [selectedProcess, setSelectedProcess] = useState<QualityProcess | null>(null);
 
     // Filter Logic
     const filteredProcesses = useMemo(() => {
@@ -139,7 +140,7 @@ export const QualityProcessesPanel: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {filteredProcesses.map((process, idx) => (
+                            {filteredProcesses.map((process, _idx) => (
                                 <tr key={process.id} className="hover:bg-gray-50 transition-colors">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{process.id}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{process.department}</td>

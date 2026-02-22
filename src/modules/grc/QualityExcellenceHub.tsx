@@ -7,7 +7,6 @@ import {
     TrendingUp,
     Users,
     Search,
-    Filter,
     Award,
     CheckCircle2,
     ArrowRight,
@@ -23,9 +22,7 @@ import {
     Heart,
     Activity,
     Stethoscope,
-    Hand,
     Target,
-    UserCheck,
     Layers
 } from 'lucide-react';
 import { Card } from '../../components/ui/Card';
@@ -919,47 +916,35 @@ const SopLibraryView = () => {
         currentPage * PAGE_SIZE
     );
 
-    // Reset page when filters change
-    const handleSearchChange = (val: string) => {
-        setSearchTerm(val);
-        setCurrentPage(1);
-    };
-    const handleDeptChange = (val: string | null) => {
-        setSelectedDept(val);
-        setCurrentPage(1);
-    };
-
-    // Department stats
-    const deptStats = useMemo(() => {
-        const stats: Record<string, number> = {};
-        qualityProcesses.forEach(p => {
-            stats[p.department] = (stats[p.department] || 0) + 1;
-        });
-        return stats;
-    }, []);
-
-    return (
-        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* Department Overview Cards */}
-            <div className="flex gap-2 overflow-x-auto pb-2">
-                <button
-                    onClick={() => handleDeptChange(null)}
-                    className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        selectedDept === null ? 'bg-[#148287] text-white shadow-md' : 'bg-white text-gray-600 border hover:bg-gray-50'
-                    }`}
-                >
-                    الكل ({qualityProcesses.length})
-                </button>
-                {departments.map((dept, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => handleDeptChange(selectedDept === dept ? null : dept)}
-                        className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                            selectedDept === dept ? 'bg-[#148287] text-white shadow-md' : 'bg-white text-gray-600 border hover:bg-gray-50'
-                        }`}
-                    >
-                        {dept} ({deptStats[dept] || 0})
-                    </button>
+            {/* SOP List */}
+            <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
+                {filteredProcesses.slice(0, 15).map((process, _idx) => (
+                    <div key={process.id} className="p-4 hover:bg-gray-50 transition-colors flex items-center justify-between group cursor-pointer">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
+                                <FileText className="w-5 h-5" />
+                            </div>
+                            <div>
+                                <div className="flex items-center gap-2">
+                                    <h4 className="font-bold text-gray-800 text-sm group-hover:text-[#148287] transition-colors">{process.name}</h4>
+                                    <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-mono">SOP-{process.id.padStart(3, '0')}</span>
+                                </div>
+                                <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                                    <span>القسم: {process.department}</span>
+                                    <span>•</span>
+                                    <span>المسؤول: {process.responsible}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <span className="px-2 py-1 rounded text-xs font-medium bg-green-50 text-green-700">
+                                {process.frequency}
+                            </span>
+                            <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                                عرض
+                            </Button>
+                        </div>
+                    </div>
                 ))}
             </div>
 

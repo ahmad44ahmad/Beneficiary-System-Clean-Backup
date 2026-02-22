@@ -96,7 +96,7 @@ export const IncidentReportForm: React.FC<IncidentReportFormProps> = ({ benefici
 
                     <div className="form-group">
                         <label>نوع الواقعة</label>
-                        <select value={formData.type} onChange={e => setFormData({ ...formData, type: e.target.value as any })}>
+                        <select value={formData.type} onChange={e => setFormData({ ...formData, type: e.target.value as IncidentReport['type'] })}>
                             <option value="injury">إصابة</option>
                             <option value="assault">اعتداء</option>
                             <option value="neglect">إهمال</option>

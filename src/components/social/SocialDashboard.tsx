@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { UnifiedBeneficiaryProfile } from '../../types/unified';
 import { Card } from '../ui/Card';
 import { Shirt, Users, Calendar } from 'lucide-react';
@@ -6,10 +6,10 @@ import { Button } from '../ui/Button';
 
 interface SocialDashboardProps {
     beneficiary?: UnifiedBeneficiaryProfile | null;
-    onUpdate?: (data: any) => void;
+    onUpdate?: (data: Partial<UnifiedBeneficiaryProfile>) => void;
 }
 
-export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary, onUpdate }) => {
+export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary }) => {
     // Handle case where beneficiary is not provided
     if (!beneficiary) {
         return (
