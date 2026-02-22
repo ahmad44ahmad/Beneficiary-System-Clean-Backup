@@ -178,16 +178,7 @@
     font-weight: 600;
 }
 
-.badgedanger {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--hrsd-radius-md);
-    background-color: rgb(254, 226, 226);
-    color: rgb(185, 28, 28);
-    font-size: 0.75rem;
-    font-weight: 600;
-}
+/* .badgedanger typo removed — use .badge-danger defined below */
 
 .badge-info {
     display: inline-flex;
@@ -200,27 +191,7 @@
     font-weight: 600;
 }
 
-/* ===== Card Components ===== */
-.hrsd-card {
-    background: white;
-    border-radius: var(--hrsd-radius-xl);
-    padding: 1.5rem;
-    box-shadow: var(--hrsd-shadow-md);
-    transition: all var(--hrsd-transition);
-}
-
-.hrsd-card:hover {
-    box-shadow: var(--hrsd-shadow-lg);
-    transform: translateY(-2px);
-}
-
-.hrsd-card-stat {
-    background: white;
-    border-radius: var(--hrsd-radius-lg);
-    padding: 1.25rem;
-    box-shadow: var(--hrsd-shadow-sm);
-    border-left: 4px solid var(--hrsd-teal);
-}
+/* ===== Card Components — defined in hrsd-theme.css and index.css ===== */
 
 /* ===== Icon Containers ===== */
 .icon-container-sm {
@@ -288,102 +259,9 @@
     background: linear-gradient(135deg, #ef4444, var(--hrsd-orange));
 }
 
-/* ===== Animations ===== */
-@keyframes slideInUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
+/* ===== Animations — defined in hrsd-theme.css and index.css ===== */
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(-20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes pulse-soft {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.03);
-    }
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-@keyframes glow {
-
-    0%,
-    100% {
-        box-shadow: 0 0 5px rgba(20, 130, 135, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 0 20px rgba(20, 130, 135, 0.5);
-    }
-}
-
-.animate-slide-up {
-    animation: slideInUp 0.4s ease forwards;
-}
-
-.animate-slide-right {
-    animation: slideInRight 0.4s ease forwards;
-}
-
-.animate-fade-in {
-    animation: fadeIn 0.3s ease forwards;
-}
-
-.animate-pulse-soft {
-    animation: pulse-soft 2s infinite;
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-glow {
-    animation: glow 2s ease-in-out infinite;
-}
-
-/* Staggered animation delays */
+/* Staggered animation delays (unique to this file) */
 .delay-1 {
     animation-delay: 0.1s;
 }
@@ -416,23 +294,7 @@
     font-weight: 600;
 }
 
-/* ===== Hover Effects ===== */
-.hover-lift {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--hrsd-shadow-lg);
-}
-
-.hover-scale {
-    transition: transform 0.2s ease;
-}
-
-.hover-scale:hover {
-    transform: scale(1.02);
-}
+/* ===== Hover Effects — defined in hrsd-theme.css and index.css ===== */
 
 /* ===== Health Score Gauge ===== */
 .health-gauge {

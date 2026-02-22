@@ -9,6 +9,11 @@
 @source "./index.html";
 @source "./index.tsx";
 
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* DARK MODE — Class-based variant (ThemeProvider adds .dark to <html>)      */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     /* ===== Colors: HRSD Official Brand ===== */
     --color-hrsd-navy: #1a365d;
@@ -146,10 +151,90 @@ body {
     background-color: var(--secondary-bg);
     color: var(--text-color);
     line-height: 1.7;
-    /* Increased from 1.6 */
     font-size: 18px;
-    /* Increased from 16px */
     font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* DARK MODE OVERRIDES                                                        */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+.dark body,
+.dark {
+    --secondary-bg: #0f172a;
+    --text-color: #f8fafc;
+    --light-text-color: #94a3b8;
+    --white-color: #1e293b;
+    --border-color: #334155;
+    --accent-dark-blue: #0f2744;
+    color-scheme: dark;
+}
+
+.dark .hrsd-card,
+.dark .hrsd-card-stat {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+.dark .dashboard-panel,
+.dark .dashboard-section {
+    background-color: #1e293b;
+}
+
+.dark .data-table th {
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+
+.dark .data-table tr:hover {
+    background-color: #334155;
+}
+
+.dark .modal-content {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+.dark .modal-header {
+    border-color: #334155;
+}
+
+.dark .modal-footer {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+.dark .form-group input,
+.dark .form-group select,
+.dark .form-group textarea {
+    background-color: #0f172a;
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+.dark .form-group label {
+    color: #e2e8f0;
+}
+
+.dark .glass-panel {
+    background: rgba(15, 23, 42, 0.75);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .skeleton {
+    background: linear-gradient(90deg,
+            #1e293b 0%,
+            #334155 50%,
+            #1e293b 100%);
+    background-size: 200% 100%;
+}
+
+.dark .kpi-card {
+    background: #1e293b;
+}
+
+.dark .clothing-panel {
+    background: #1e293b;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
