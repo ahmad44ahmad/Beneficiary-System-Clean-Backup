@@ -9,9 +9,7 @@ import {
     XCircle,
     AlertCircle,
     Filter,
-    FileText,
-    Target,
-    TrendingUp
+    FileText
 } from 'lucide-react';
 
 // HRSD Colors
@@ -49,83 +47,82 @@ export const ComplianceTracker: React.FC = () => {
     });
 
     useEffect(() => {
+        const DEMO_REQUIREMENTS: ComplianceRequirement[] = [
+            {
+                id: '1',
+                requirement_code: 'ISO-001',
+                title_ar: 'سياسة حماية البيانات',
+                description: 'وجود سياسة معتمدة لحماية بيانات المستفيدين',
+                section: 'أمن المعلومات',
+                compliance_status: 'compliant',
+                compliance_score: 100,
+                responsible_person: 'مدير التقنية',
+                due_date: '2025-12-31'
+            },
+            {
+                id: '2',
+                requirement_code: 'MOH-045',
+                title_ar: 'ترخيص العيادة الطبية',
+                description: 'تجديد ترخيص العيادة الداخلية',
+                section: 'التراخيص',
+                compliance_status: 'partial',
+                compliance_score: 50,
+                responsible_person: 'المدير الطبي',
+                due_date: '2025-04-01'
+            },
+            {
+                id: '3',
+                requirement_code: 'ISO-002',
+                title_ar: 'إجراءات الطوارئ',
+                description: 'توثيق إجراءات الإخلاء وتدريب الموظفين عليها',
+                section: 'السلامة والصحة المهنية',
+                compliance_status: 'non_compliant',
+                compliance_score: 20,
+                responsible_person: 'مسؤول السلامة',
+                due_date: '2025-02-15'
+            }
+        ];
+
+        const fetchRequirements = async () => {
+            setLoading(true);
+            try {
+                const { data, error } = await supabase
+                    .from('grc_compliance_requirements')
+                    .select(`
+                        *,
+                        standard:grc_standards(name_ar, code)
+                    `)
+                    .order('created_at', { ascending: false });
+
+                let finalData = data;
+
+                // Fallback to demo data if empty or error
+                if (error || !data || data.length === 0) {
+                    console.log('Using demo compliance data due to:', error || 'Empty data');
+                    finalData = DEMO_REQUIREMENTS;
+                }
+
+                // Only set if we have data (either real or demo)
+                if (finalData) {
+                    setRequirements(finalData as ComplianceRequirement[]);
+                    setStats({
+                        total: finalData.length,
+                        compliant: finalData.filter(r => r.compliance_status === 'compliant').length,
+                        partial: finalData.filter(r => r.compliance_status === 'partial').length,
+                        nonCompliant: finalData.filter(r => r.compliance_status === 'non_compliant').length,
+                        pending: finalData.filter(r => r.compliance_status === 'pending').length
+                    });
+                }
+            } catch (e) {
+                console.error('Compliance Logic Error', e);
+                setRequirements(DEMO_REQUIREMENTS);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchRequirements();
     }, []);
-
-    // Demo Data fallback
-    const DEMO_REQUIREMENTS: ComplianceRequirement[] = [
-        {
-            id: '1',
-            requirement_code: 'ISO-001',
-            title_ar: 'سياسة حماية البيانات',
-            description: 'وجود سياسة معتمدة لحماية بيانات المستفيدين',
-            section: 'أمن المعلومات',
-            compliance_status: 'compliant',
-            compliance_score: 100,
-            responsible_person: 'مدير التقنية',
-            due_date: '2025-12-31'
-        },
-        {
-            id: '2',
-            requirement_code: 'MOH-045',
-            title_ar: 'ترخيص العيادة الطبية',
-            description: 'تجديد ترخيص العيادة الداخلية',
-            section: 'التراخيص',
-            compliance_status: 'partial',
-            compliance_score: 50,
-            responsible_person: 'المدير الطبي',
-            due_date: '2025-04-01'
-        },
-        {
-            id: '3',
-            requirement_code: 'ISO-002',
-            title_ar: 'إجراءات الطوارئ',
-            description: 'توثيق إجراءات الإخلاء وتدريب الموظفين عليها',
-            section: 'السلامة والصحة المهنية',
-            compliance_status: 'non_compliant',
-            compliance_score: 20,
-            responsible_person: 'مسؤول السلامة',
-            due_date: '2025-02-15'
-        }
-    ];
-
-    const fetchRequirements = async () => {
-        setLoading(true);
-        try {
-            const { data, error } = await supabase
-                .from('grc_compliance_requirements')
-                .select(`
-                    *,
-                    standard:grc_standards(name_ar, code)
-                `)
-                .order('created_at', { ascending: false });
-
-            let finalData = data;
-
-            // Fallback to demo data if empty or error
-            if (error || !data || data.length === 0) {
-                console.log('Using demo compliance data due to:', error || 'Empty data');
-                finalData = DEMO_REQUIREMENTS;
-            }
-
-            // Only set if we have data (either real or demo)
-            if (finalData) {
-                setRequirements(finalData as any);
-                setStats({
-                    total: finalData.length,
-                    compliant: finalData.filter(r => r.compliance_status === 'compliant').length,
-                    partial: finalData.filter(r => r.compliance_status === 'partial').length,
-                    nonCompliant: finalData.filter(r => r.compliance_status === 'non_compliant').length,
-                    pending: finalData.filter(r => r.compliance_status === 'pending').length
-                });
-            }
-        } catch (e) {
-            console.error('Compliance Logic Error', e);
-            setRequirements(DEMO_REQUIREMENTS);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const getStatusBadge = (status: string) => {
         const config: Record<string, { icon: React.ElementType; bg: string; text: string; label: string }> = {
@@ -305,7 +302,7 @@ export const ComplianceTracker: React.FC = () => {
                                                     return (
                                                         <div
                                                             className={`progress-bar ${score >= 80 ? 'progress-bar-success' : score >= 50 ? 'progress-bar-warning' : 'progress-bar-danger'}`}
-                                                            // eslint-disable-next-line react/forbid-component-props
+
                                                             style={{ '--progress-width': `${score}%` } as React.CSSProperties}
                                                         />
                                                     );

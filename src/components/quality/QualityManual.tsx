@@ -7,12 +7,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Book, FileText, Target, Users, Settings, TrendingUp,
+  Book, FileText, Target, Settings, TrendingUp,
   ChevronRight, ChevronDown, Search, Download, Printer,
-  CheckCircle, AlertCircle, Info, Building2, Shield,
-  Award, Compass, Heart, Zap, Eye, Clock, Calendar,
-  BarChart3, PieChart, Layers, GitBranch, ArrowRight,
-  Globe, Lock, Sparkles, BookOpen, GraduationCap
+  CheckCircle, AlertCircle, Building2,
+  Award, Zap, Clock,
+  BarChart3, BookOpen
 } from 'lucide-react';
 
 // ═══════════════════════════════════════════════════════════════════════════════

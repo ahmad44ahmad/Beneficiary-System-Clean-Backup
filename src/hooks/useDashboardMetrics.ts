@@ -1,6 +1,10 @@
 import { useMemo } from 'react';
 import { useUnifiedData } from '../context/UnifiedDataContext';
-import { GoalType } from '../types/rehab';
+import { RehabPlan } from '../types/rehab';
+
+function isRehabPlan(plan: unknown): plan is RehabPlan {
+    return plan != null && typeof plan === 'object' && 'goals' in plan && 'approvals' in plan;
+}
 
 export const useDashboardMetrics = () => {
     const { beneficiaries } = useUnifiedData();
@@ -33,8 +37,9 @@ export const useDashboardMetrics = () => {
         };
 
         beneficiaries.forEach(b => {
-            if (b.activeRehabPlan && b.activeRehabPlan.goals) {
-                b.activeRehabPlan.goals.forEach(goal => {
+            const plan = b.activeRehabPlan;
+            if (plan && isRehabPlan(plan) && plan.goals) {
+                plan.goals.forEach(goal => {
                     totalGoals++;
                     totalProgress += goal.progress;
 
@@ -47,7 +52,7 @@ export const useDashboardMetrics = () => {
                     goalsByType[type].total++;
                     goalsByType[type].progressSum += goal.progress;
 
-                    if (goal.status === 'completed' || goal.progress === 100) {
+                    if ((goal.status as string) === 'completed' || goal.progress === 100) {
                         goalsByType[type].completed++;
                     }
                 });
@@ -65,9 +70,10 @@ export const useDashboardMetrics = () => {
 
         // 3. Operational Alerts
         // Pending Approvals: Plans waiting for Director
-        const pendingDirectorApprovals = beneficiaries.filter(b =>
-            b.activeRehabPlan?.approvals.some(a => a.role === 'director' && a.status === 'pending')
-        ).length;
+        const pendingDirectorApprovals = beneficiaries.filter(b => {
+            const plan = b.activeRehabPlan;
+            return isRehabPlan(plan) && plan.approvals.some(a => a.role === 'director' && a.status === 'pending');
+        }).length;
 
         // Critical Cases: High Risk Level
         const criticalCasesCount = beneficiaries.filter(b => b.riskLevel === 'high' || b.riskLevel === 'critical').length;

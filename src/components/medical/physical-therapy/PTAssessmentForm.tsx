@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { PhysicalTherapyAssessment, SkeletalAlignment, RangeOfMotion, MotorFunction } from '../../../types/physicalTherapy';
+import { PhysicalTherapyAssessment, SkeletalAlignment, MotorFunction } from '../../../types/physicalTherapy';
 import { Card } from '../../ui/Card';
 import { Button } from '../../ui/Button';
 import { Save, Plus, Trash2 } from 'lucide-react';
@@ -80,7 +80,7 @@ export const PTAssessmentForm: React.FC<{
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {Object.keys(formData.motorFunctions || {}).map((key) => (
                         <SelectField key={key} label={key.charAt(0).toUpperCase() + key.slice(1)}
-                            value={(formData.motorFunctions as any)[key]}
+                            value={formData.motorFunctions?.[key as keyof MotorFunction]}
                             options={['Independent', 'Assist', 'Dependent', 'Normal', 'Impaired', 'Unable']}
                             onChange={(v) => handleMotorChange(key as keyof MotorFunction, v)}
                         />
@@ -115,7 +115,7 @@ export const PTAssessmentForm: React.FC<{
     );
 };
 
-const SelectField = ({ label, value, options, onChange }: any) => (
+const SelectField = ({ label, value, options, onChange }: { label: string; value?: string; options: string[]; onChange: (value: string) => void }) => (
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}

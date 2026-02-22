@@ -1,14 +1,44 @@
 import React, { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import { LeaveRequest, LeaveRequestStatus, LeaveRequestAction } from '../../types/social';
-import { Beneficiary } from '../../types';
+import { LeaveRequestStatus } from '../../types/social';
+
+// Extended LeaveRequest with richer history for this workflow
+interface LeaveHistoryEntry {
+    actionBy: string;
+    actionByName: string;
+    role: string;
+    actionDate: string;
+    action: string;
+    notes: string;
+}
+
+interface LeaveRequest {
+    id: string;
+    beneficiaryId: string;
+    beneficiaryName?: string;
+    requestDate: string;
+    type: 'HomeVisit' | 'Hospital' | 'Event' | 'Other';
+    startDate: string;
+    endDate: string;
+    reason: string;
+    durationDays?: number;
+    status: LeaveRequestStatus;
+    guardianName: string;
+    guardianPhone: string;
+    medicalClearance?: {
+        clearedBy: string;
+        clearedAt: string;
+        isFit: boolean;
+        precautions?: string;
+    };
+    history: LeaveHistoryEntry[];
+}
 import { beneficiaries as initialBeneficiaries } from '../../data/beneficiaries';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Modal } from '../ui/Modal';
-import { Check, X, AlertTriangle, Clock, FileText, Activity, Plus } from 'lucide-react';
-import { cn } from '../ui/Button';
+import { Check, X, AlertTriangle, FileText, Activity, Plus } from 'lucide-react';
 
 // Mock Medical Data for "Smart Integration"
 const mockMedicalStatus: Record<string, { infection: boolean; unstableVitals: boolean; notes: string }> = {
@@ -77,7 +107,7 @@ export const LeaveRequestFlow: React.FC = () => {
             beneficiaryId: beneficiary.id,
             beneficiaryName: beneficiary.fullName,
             requestDate: new Date().toISOString().split('T')[0],
-            type: newRequestData.type as any,
+            type: newRequestData.type as LeaveRequest['type'],
             startDate: newRequestData.startDate!,
             endDate: newRequestData.endDate!,
             durationDays: 2, // Calculate diff
@@ -89,7 +119,7 @@ export const LeaveRequestFlow: React.FC = () => {
                 {
                     actionBy: currentUser.id,
                     actionByName: currentUser.name,
-                    role: currentUser.role as any,
+                    role: currentUser.role,
                     actionDate: new Date().toISOString(),
                     action: 'request',
                     notes: 'تم إنشاء الطلب'
@@ -130,7 +160,7 @@ export const LeaveRequestFlow: React.FC = () => {
                 {
                     actionBy: currentUser.id,
                     actionByName: currentUser.name,
-                    role: currentUser.role as any,
+                    role: currentUser.role,
                     actionDate: new Date().toISOString(),
                     action: 'approve',
                     notes: actionNote
@@ -153,7 +183,7 @@ export const LeaveRequestFlow: React.FC = () => {
                 {
                     actionBy: currentUser.id,
                     actionByName: currentUser.name,
-                    role: currentUser.role as any,
+                    role: currentUser.role,
                     actionDate: new Date().toISOString(),
                     action: 'reject',
                     notes: actionNote

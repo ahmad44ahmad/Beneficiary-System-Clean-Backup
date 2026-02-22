@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     AlertTriangle, Bell, CheckCircle, Clock, Heart,
-    Pill, Shield, Activity, X, ChevronDown, ChevronUp,
-    Filter, Search, Volume2, VolumeX, Eye, MessageSquare
+    Pill, Shield, Activity, ChevronDown, ChevronUp,
+    Volume2, VolumeX, Eye
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 
@@ -43,7 +43,7 @@ const SEVERITY_CONFIG = {
     low: { color: 'blue', bgColor: 'bg-blue-500/20', borderColor: 'border-blue-500/50', textColor: 'text-blue-400', label: 'منخفض' },
 };
 
-const TYPE_CONFIG: Record<string, { icon: any; label: string }> = {
+const TYPE_CONFIG: Record<string, { icon: React.FC<{ className?: string }>; label: string }> = {
     vitals: { icon: Heart, label: 'علامات حيوية' },
     medication: { icon: Pill, label: 'أدوية' },
     fall: { icon: AlertTriangle, label: 'سقوط' },
@@ -58,7 +58,7 @@ const TYPE_CONFIG: Record<string, { icon: any; label: string }> = {
 export const SmartAlertsPanel: React.FC = () => {
     const location = useLocation();
     const [alerts, setAlerts] = useState<SmartAlert[]>(defaultAlerts);
-    const [loading, setLoading] = useState(true);
+    const [, setLoading] = useState(true);
     const [selectedAlert, setSelectedAlert] = useState<string | null>(null);
     const [filterSeverity, setFilterSeverity] = useState<AlertSeverity | 'all'>('all');
     const [filterType, setFilterType] = useState<AlertType | 'all'>('all');
@@ -87,19 +87,19 @@ export const SmartAlertsPanel: React.FC = () => {
 
                 if (data && data.length > 0) {
                     // Transform database alerts to component format
-                    const transformedAlerts: SmartAlert[] = data.map((a: any) => ({
-                        id: a.id,
-                        type: a.alert_type || 'vitals',
-                        severity: a.severity || 'medium',
-                        title: a.title || 'تنبيه',
-                        message: a.message || a.description || '',
-                        beneficiaryName: a.beneficiary_name || 'غير محدد',
-                        beneficiaryId: a.beneficiary_id || '',
-                        location: a.location || 'غير محدد',
-                        timestamp: a.created_at ? new Date(a.created_at).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : '',
+                    const transformedAlerts: SmartAlert[] = data.map((a: Record<string, unknown>) => ({
+                        id: a.id as string,
+                        type: (a.alert_type as AlertType) || 'vitals',
+                        severity: (a.severity as AlertSeverity) || 'medium',
+                        title: (a.title as string) || 'تنبيه',
+                        message: (a.message as string) || (a.description as string) || '',
+                        beneficiaryName: (a.beneficiary_name as string) || 'غير محدد',
+                        beneficiaryId: (a.beneficiary_id as string) || '',
+                        location: (a.location as string) || 'غير محدد',
+                        timestamp: a.created_at ? new Date(a.created_at as string).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }) : '',
                         acknowledged: a.status === 'acknowledged' || a.status === 'resolved',
-                        acknowledgedBy: a.acknowledged_by,
-                        suggestedAction: a.suggested_action || 'يرجى التحقق من الحالة'
+                        acknowledgedBy: a.acknowledged_by as string | undefined,
+                        suggestedAction: (a.suggested_action as string) || 'يرجى التحقق من الحالة'
                     }));
                     setAlerts(transformedAlerts);
                 }

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Brain, Scale, TrendingUp, ChevronLeft,
-    AlertTriangle, Activity, Zap, Heart, DollarSign,
-    BarChart3, Shield, Users, RefreshCw, CheckCircle,
+    Brain, Scale, ChevronLeft,
+    AlertTriangle, Activity, Heart, DollarSign,
+    BarChart3, Shield, Users, RefreshCw,
     ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
-
 interface IndicatorCard {
     id: string;
     title: string;
@@ -76,12 +74,8 @@ const HealthGauge: React.FC<{ score: number; label: string }> = ({ score, label 
     );
 };
 
-export const SmartIndicatorsHub: React.FC = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [overallHealth, setOverallHealth] = useState(68);
-
-    const indicators: IndicatorCard[] = [
+// Indicator definitions (module-level constant to avoid recreating on each render)
+const indicators: IndicatorCard[] = [
         {
             id: 'early-warning',
             title: 'الطوارئ الوقائي',
@@ -193,7 +187,12 @@ export const SmartIndicatorsHub: React.FC = () => {
             category: 'ministry',
             sparklineData: [35, 40, 45, 48, 50, 52],
         },
-    ];
+];
+
+export const SmartIndicatorsHub: React.FC = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [overallHealth, setOverallHealth] = useState(68);
 
     useEffect(() => {
         // Calculate overall health based on indicators

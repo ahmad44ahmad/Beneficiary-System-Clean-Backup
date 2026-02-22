@@ -75,6 +75,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
  * Hook to access the theme context.
  * Must be used within a ThemeProvider.
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
     const context = useContext(ThemeContext);
     if (!context) {

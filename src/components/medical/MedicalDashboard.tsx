@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Beneficiary } from '../../types';
-import { MedicalExamination, NursingAdmissionAssessment, NursingCarePlan, NursingProgressNote } from '../../types/medical';
-import { Card } from '../ui/Card';
+import { MedicalExamination } from '../../types/medical';
 import { Button } from '../ui/Button';
 import { HeartPulse, FileText, ClipboardList, Activity, Plus } from 'lucide-react';
 import { AdmissionAssessmentForm } from './AdmissionAssessmentForm';
@@ -12,12 +11,9 @@ interface MedicalDashboardProps {
     // Future props for nursing data would go here
 }
 
-export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary, medicalExams = [] }) => {
+export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary }) => {
     const [activeSubTab, setActiveSubTab] = useState<'overview' | 'assessment' | 'notes' | 'careplan'>('overview');
     const [isAssessing, setIsAssessing] = useState(false);
-
-    // Mock Nursing Data (Temporary until connected to Context)
-    const mockNotes: NursingProgressNote[] = [];
 
     // Handle case where beneficiary is not provided
     if (!beneficiary) {

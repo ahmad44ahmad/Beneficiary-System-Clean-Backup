@@ -1,64 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
-import { FileText, Calculator, Download, Calendar, AlertTriangle, CheckCircle2, Sparkles, BrainCircuit, Loader2, X } from 'lucide-react';
+import { FileText, AlertTriangle, Sparkles, BrainCircuit, Loader2, X } from 'lucide-react';
 
 export const MonthlyInvoice: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [analyzing, setAnalyzing] = useState(false);
     const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);
-    const [month, setMonth] = useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
-    const [invoiceData, setInvoiceData] = useState<any>(null);
+    const [month, _setMonth] = useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
+    const [invoiceData, setInvoiceData] = useState<{
+        mealCounts: { breakfast: number; lunch: number; dinner: number; snack: number };
+        grossTotal: number;
+        totalPenalties: number;
+        netTotal: number;
+    } | null>(null);
 
     useEffect(() => {
-        calculateInvoice();
-    }, [month]);
+        const calculateInvoice = async () => {
+            setLoading(true);
+            const startDate = `${month}-01`;
+            const endDate = `${month}-31`; // Simplified
 
-    const calculateInvoice = async () => {
-        setLoading(true);
-        const startDate = `${month}-01`;
-        const endDate = `${month}-31`; // Simplified
+            // 1. Fetch Meal Counts (Using daily_meals)
+            const { data: meals } = await supabase
+                .from('daily_meals')
+                .select('meal_type, status')
+                .gte('meal_date', startDate)
+                .lte('meal_date', endDate)
+                .eq('status', 'consumed');
 
-        // 1. Fetch Meal Counts (Using daily_meals)
-        const { data: meals } = await supabase
-            .from('daily_meals')
-            .select('meal_type, status')
-            .gte('meal_date', startDate)
-            .lte('meal_date', endDate)
-            .eq('status', 'consumed');
+            // 2. Fetch Penalties (Using contractor_evaluations)
+            const { data: penalties } = await supabase
+                .from('contractor_evaluations')
+                .select('total_penalty_amount')
+                .gte('evaluation_date', startDate)
+                .lte('evaluation_date', endDate);
 
-        // 2. Fetch Penalties (Using contractor_evaluations)
-        const { data: penalties } = await supabase
-            .from('contractor_evaluations')
-            .select('total_penalty_amount')
-            .gte('evaluation_date', startDate)
-            .lte('evaluation_date', endDate);
+            // 3. Process Data
+            const mealCounts = {
+                breakfast: meals?.filter(m => m.meal_type === 'فطور').length || 0,
+                lunch: meals?.filter(m => m.meal_type === 'غداء').length || 0,
+                dinner: meals?.filter(m => m.meal_type === 'عشاء').length || 0,
+                snack: meals?.filter(m => m.meal_type.includes('خفيفة')).length || 0,
+            };
 
-        // 3. Process Data
-        const mealCounts = {
-            breakfast: meals?.filter(m => m.meal_type === 'فطور').length || 0,
-            lunch: meals?.filter(m => m.meal_type === 'غداء').length || 0,
-            dinner: meals?.filter(m => m.meal_type === 'عشاء').length || 0,
-            snack: meals?.filter(m => m.meal_type.includes('خفيفة')).length || 0,
+            const PRICES = { breakfast: 10, lunch: 15, dinner: 12, snack: 5 };
+
+            const grossTotal =
+                (mealCounts.breakfast * PRICES.breakfast) +
+                (mealCounts.lunch * PRICES.lunch) +
+                (mealCounts.dinner * PRICES.dinner) +
+                (mealCounts.snack * PRICES.snack);
+
+            const totalPenalties = penalties?.reduce((sum, p) => sum + (p.total_penalty_amount || 0), 0) || 0;
+
+            setInvoiceData({
+                mealCounts,
+                grossTotal,
+                totalPenalties,
+                netTotal: grossTotal - totalPenalties
+            });
+            setLoading(false);
         };
 
-        const PRICES = { breakfast: 10, lunch: 15, dinner: 12, snack: 5 };
-
-        const grossTotal =
-            (mealCounts.breakfast * PRICES.breakfast) +
-            (mealCounts.lunch * PRICES.lunch) +
-            (mealCounts.dinner * PRICES.dinner) +
-            (mealCounts.snack * PRICES.snack);
-
-        const totalPenalties = penalties?.reduce((sum, p) => sum + (p.total_penalty_amount || 0), 0) || 0;
-
-        setInvoiceData({
-            mealCounts,
-            grossTotal,
-            totalPenalties,
-            netTotal: grossTotal - totalPenalties
-        });
-        setLoading(false);
-    };
+        calculateInvoice();
+    }, [month]);
 
     const handleAnalyze = async () => {
         if (!invoiceData) return;

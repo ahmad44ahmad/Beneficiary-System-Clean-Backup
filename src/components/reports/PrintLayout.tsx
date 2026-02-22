@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Printer } from 'lucide-react';
+import { Printer } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 interface PrintLayoutProps {

@@ -9,20 +9,7 @@ import {
     XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     AreaChart, Area
 } from 'recharts';
-import { ipcService } from '../../services/ipcService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
-
-// HRSD 2025 Colors
-const COLORS = {
-    primary: '#007E4E',
-    secondary: '#D4AF37',
-    success: '#22C55E',
-    warning: '#F59E0B',
-    error: '#DC2626',
-    info: '#0EA5E9',
-};
-
-const PIE_COLORS = ['#22C55E', '#F59E0B', '#DC2626', '#0EA5E9', '#8B5CF6'];
 
 // Demo data for charts
 const WEEKLY_COMPLIANCE_DATA = [
@@ -61,12 +48,18 @@ const MONTHLY_TREND = [
 ];
 
 // Custom Tooltip
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface TooltipPayloadEntry {
+    color: string;
+    name: string;
+    value: string | number;
+}
+
+const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: TooltipPayloadEntry[]; label?: string }) => {
     if (active && payload && payload.length) {
         return (
             <div className="bg-white p-3 rounded-lg shadow-lg border text-right" style={{ direction: 'rtl' }}>
                 <p className="font-bold text-gray-800 mb-1">{label}</p>
-                {payload.map((entry: any, index: number) => (
+                {payload.map((entry: TooltipPayloadEntry, index: number) => (
                     <p key={index} style={{ color: entry.color }} className="text-sm">
                         {entry.name}: {entry.value}{typeof entry.value === 'number' && entry.value <= 100 ? '%' : ''}
                     </p>

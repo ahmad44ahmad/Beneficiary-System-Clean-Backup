@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../config/supabase';
 import { SROICard } from './SROICard';
 import {
-    BarChart, Activity, Users, AlertTriangle, CheckCircle,
-    TrendingUp, TrendingDown, ClipboardCheck, Clock
+    Activity, Users, AlertTriangle,
+    TrendingUp, ClipboardCheck, Clock
 } from 'lucide-react';
 
 // Interfaces for Dashboard Data
@@ -97,10 +97,10 @@ export const ExecutiveDashboard: React.FC = () => {
 
                 if (alertsData) {
                     setRecentAlerts(alertsData.map(alert => ({
-                        id: alert.id,
+                        id: alert.id as string,
                         title: `خطر سقوط مرتفع (${alert.risk_score})`,
-                        beneficiary: (alert.beneficiaries as any)?.full_name || 'مستفيد غير معروف',
-                        time: new Date(alert.created_at).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+                        beneficiary: (alert.beneficiaries as unknown as { full_name: string } | null)?.full_name || 'مستفيد غير معروف',
+                        time: new Date(alert.created_at as string).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
                         type: 'critical'
                     })));
                 }
@@ -119,7 +119,13 @@ export const ExecutiveDashboard: React.FC = () => {
 
     }, []);
 
-    const [recentAlerts, setRecentAlerts] = useState<any[]>([]);
+    const [recentAlerts, setRecentAlerts] = useState<{
+        id: string;
+        title: string;
+        beneficiary: string;
+        time: string;
+        type: string;
+    }[]>([]);
 
     return (
         <div className="space-y-6 font-readex animate-fade-in pb-12" dir="rtl">

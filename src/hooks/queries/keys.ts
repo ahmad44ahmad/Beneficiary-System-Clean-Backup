@@ -9,7 +9,7 @@ export const queryKeys = {
     beneficiaries: {
         all: ['beneficiaries'] as const,
         lists: () => [...queryKeys.beneficiaries.all, 'list'] as const,
-        list: (filters?: Record<string, any>) => [...queryKeys.beneficiaries.lists(), filters] as const,
+        list: (filters?: Record<string, unknown>) => [...queryKeys.beneficiaries.lists(), filters] as const,
         details: () => [...queryKeys.beneficiaries.all, 'detail'] as const,
         detail: (id: string) => [...queryKeys.beneficiaries.details(), id] as const,
         stats: () => [...queryKeys.beneficiaries.all, 'stats'] as const,
@@ -44,7 +44,7 @@ export const queryKeys = {
     // ═══════════════════════════════════════════════════════════════
     incidents: {
         all: ['incidents'] as const,
-        list: (filters?: Record<string, any>) => [...queryKeys.incidents.all, 'list', filters] as const,
+        list: (filters?: Record<string, unknown>) => [...queryKeys.incidents.all, 'list', filters] as const,
         detail: (id: string) => [...queryKeys.incidents.all, 'detail', id] as const,
     },
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
-import { Utensils, AlertTriangle, CheckCircle, Calendar, FileText, ArrowLeft, Plus, Loader2 } from 'lucide-react';
+import { Utensils, AlertTriangle, CheckCircle, Calendar, FileText, Loader2 } from 'lucide-react';
 import { MealSchedule } from './MealSchedule';
 import { ViolationReport } from './ViolationReport';
 import { QualityChecklist } from './QualityChecklist';
@@ -9,7 +9,7 @@ import { useCatering } from '../../hooks/useCatering';
 
 export const CateringDashboard: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'overview' | 'schedule' | 'violations' | 'quality'>('overview');
-    const { meals, violations, checks, loading } = useCatering();
+    const { meals, violations, loading } = useCatering();
 
     if (loading) {
         return (
@@ -60,7 +60,7 @@ export const CateringDashboard: React.FC = () => {
                 ].map(tab => (
                     <button
                         key={tab.id}
-                        onClick={() => setActiveTab(tab.id as any)}
+                        onClick={() => setActiveTab(tab.id as typeof activeTab)}
                         className={`pb-3 px-4 font-medium transition-colors border-b-2 ${activeTab === tab.id
                             ? 'border-hrsd-primary text-hrsd-primary'
                             : 'border-transparent text-gray-500 hover:text-gray-700'

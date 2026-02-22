@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertTriangle, X, ChevronRight, MapPin, Clock } from 'lucide-react';
+import { AlertTriangle, X, ChevronRight, MapPin } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
@@ -57,7 +57,15 @@ export const IncidentNotificationAlert: React.FC = () => {
                     table: 'incidents'
                 },
                 async (payload) => {
-                    const incident = payload.new as any;
+                    const incident = payload.new as {
+                        id: string;
+                        incident_type: string;
+                        severity: 'low' | 'medium' | 'high' | 'critical';
+                        location: string | null;
+                        description: string | null;
+                        reported_by_name: string | null;
+                        created_at: string;
+                    };
 
                     // Only alert for medium, high, or critical incidents
                     if (['medium', 'high', 'critical'].includes(incident.severity)) {
@@ -80,7 +88,7 @@ export const IncidentNotificationAlert: React.FC = () => {
                                 const audio = new Audio('/alert.mp3');
                                 audio.volume = 0.5;
                                 audio.play().catch(() => { });
-                            } catch (e) { }
+                            } catch { /* ignored */ }
                         }
 
                         const severityLabel = SEVERITY_CONFIG[incident.severity as keyof typeof SEVERITY_CONFIG]?.label || '';

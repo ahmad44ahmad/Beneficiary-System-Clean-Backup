@@ -58,7 +58,7 @@ export const ClothingRequestForm: React.FC<ClothingRequestFormProps> = ({ benefi
                     <div className="modal-body">
                         <div className="form-group">
                             <label>نوع الكسوة</label>
-                            <select value={type} onChange={e => setType(e.target.value as any)}>
+                            <select value={type} onChange={e => setType(e.target.value as 'summer' | 'winter' | 'eid' | 'other')}>
                                 <option value="summer">كسوة صيفية</option>
                                 <option value="winter">كسوة شتوية</option>
                                 <option value="eid">كسوة عيد</option>

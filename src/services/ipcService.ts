@@ -139,7 +139,7 @@ const DEMO_STATS: IPCStats = {
 };
 
 // Helper
-const logError = (context: string, error: any) => {
+const logError = (context: string, error: unknown) => {
     if (import.meta.env.DEV) {
         console.error(`[IPCService] ${context}:`, error);
     }

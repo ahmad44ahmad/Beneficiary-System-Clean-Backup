@@ -137,9 +137,6 @@ export function useMedicationAlerts() {
         queryFn: async () => {
             if (!isSupabaseReady()) return { overdue: [], upcoming: [] };
 
-            const now = new Date();
-            const oneHourFromNow = new Date(now.getTime() + 60 * 60 * 1000);
-
             // This would ideally be a server-side computed view
             // For now, we'll return empty arrays and let the component handle logic
             return {

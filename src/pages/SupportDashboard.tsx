@@ -5,12 +5,9 @@ import { InventoryPanel } from '../components/dashboard/InventoryPanel'; // Reus
 import { inventoryItems } from '../data/inventory'; // Existing data
 import { Card } from '../components/ui/Card';
 import {
-    LayoutGrid,
     Box,
     Wrench,
     AlertTriangle,
-    CheckCircle2,
-    TrendingUp,
     Package
 } from 'lucide-react';
 
@@ -25,7 +22,7 @@ export const SupportDashboard: React.FC = () => {
     const criticalTickets = mockTickets.filter(t => t.priority === 'critical' || t.priority === 'high').length;
 
     // Handlers
-    const handleReportFault = (asset: any) => {
+    const handleReportFault = (asset: { name: string }) => {
         alert(`Opening ticket for: ${asset.name}`);
         // Logic to open ticket modal would go here
     };

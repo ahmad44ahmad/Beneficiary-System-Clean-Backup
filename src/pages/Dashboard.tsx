@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDashboardMetrics } from '../hooks/useDashboardMetrics';
-import { useGRCStats } from '../hooks/useGrcStats';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import {
     LayoutDashboard,
@@ -11,9 +10,7 @@ import {
     Clock,
     Activity,
     TrendingUp,
-    CheckCircle2,
-    Shield,
-    FileWarning
+    CheckCircle2
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { AccountabilityAlerts } from '../modules/grc/AccountabilityAlerts';
@@ -39,7 +36,7 @@ const typeColors: Record<string, string> = {
 
 export const Dashboard: React.FC = () => {
     const { kpis, departmentPerformance, alerts } = useDashboardMetrics();
-    const { loading } = useUnifiedData();
+    const { loading, beneficiaries } = useUnifiedData();
 
     if (loading) {
         return (
@@ -121,7 +118,7 @@ export const Dashboard: React.FC = () => {
                     <div className="mt-4 w-full bg-gray-100 rounded-full h-1.5">
                         <div
                             className="progress-bar progress-bar-purple rounded-full"
-                            // eslint-disable-next-line react/forbid-component-props
+
                             style={{ '--progress-width': `${kpis.overallGoalAchievementRate}%` } as React.CSSProperties}
                         />
                     </div>
@@ -162,7 +159,7 @@ export const Dashboard: React.FC = () => {
                                     <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
                                         <div
                                             className={`progress-bar rounded-full ${typeColors[dept.type] || 'bg-gray-500'}`}
-                                            // eslint-disable-next-line react/forbid-component-props
+                
                                             style={{ '--progress-width': `${dept.avgProgress}%` } as React.CSSProperties}
                                         />
                                     </div>
@@ -200,7 +197,7 @@ export const Dashboard: React.FC = () => {
                 <div className="space-y-6">
                     {/* RISK PREDICTION ENGINE (Feature 3) */}
                     <div className="h-96">
-                        <RiskPredictionCard beneficiaries={Object.values(useUnifiedData().beneficiaries)} />
+                        <RiskPredictionCard beneficiaries={Object.values(beneficiaries)} />
                     </div>
 
                     <Card className="p-0 bg-white shadow-sm overflow-hidden">

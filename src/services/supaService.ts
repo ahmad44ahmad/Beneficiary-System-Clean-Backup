@@ -3,17 +3,11 @@ import { supabase } from '../config/supabase';
 import {
     Beneficiary,
     UnifiedBeneficiaryProfile,
-    VisitLog,
-    InventoryItem,
     SocialResearch,
-    CaseStudy,
-    MedicalExamination,
-    IncidentReport,
-    RehabilitationPlan
 } from '../types';
 
 // Helper for consistent error logging
-const logError = (context: string, error: any) => {
+const logError = (context: string, error: unknown) => {
     if (import.meta.env.DEV) {
         console.error(`[SupaService] ${context}:`, error);
     }
@@ -49,7 +43,7 @@ export const supaService = {
         }
 
         // Transform Supabase snake_case to camelCase for TypeScript interface
-        return (data || []).map((b: any) => {
+        return (data || []).map((b: Record<string, unknown>) => {
             // Parse alerts array from database
             const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
             const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
@@ -125,7 +119,7 @@ export const supaService = {
                 // Computed fields
                 riskLevel,
                 isOrphan: b.guardian_relation === 'institution' ||
-                    (b.social_status || '').includes('يتيم'),
+                    ((b.social_status as string) || '').includes('يتيم'),
                 hasChronicCondition,
                 requiresIsolation: false,
             } as UnifiedBeneficiaryProfile;
@@ -201,7 +195,7 @@ export const supaService = {
     },
 
     // Feature 1: Ehsan Algorithm (Dignity Profile)
-    async updateDignityProfile(beneficiaryId: string, profile: any): Promise<boolean> {
+    async updateDignityProfile(beneficiaryId: string, profile: Record<string, unknown>): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
         console.log('Saving Dignity Profile:', profile);
@@ -315,7 +309,7 @@ export const supaService = {
         return data;
     },
 
-    async createMaintenanceRequest(request: any): Promise<any | null> {
+    async createMaintenanceRequest(request: Record<string, unknown>): Promise<Record<string, unknown> | null> {
         if (!isSupabaseReady()) return null;
 
         // Generate request number
@@ -446,7 +440,7 @@ export const supaService = {
         return true;
     },
 
-    async saveMedicalProfile(data: any): Promise<boolean> {
+    async saveMedicalProfile(data: Record<string, unknown>): Promise<boolean> {
         if (!isSupabaseReady()) return false;
 
         const { error } = await supabase
@@ -464,7 +458,7 @@ export const supaService = {
     // الملف الشامل (Full Profile)
     // ═══════════════════════════════════════════════════════════════
 
-    async getFullProfile(nationalId: string): Promise<any> {
+    async getFullProfile(nationalId: string): Promise<Record<string, unknown> | null> {
         const beneficiary = await this.getBeneficiaryByNationalId(nationalId);
         if (!beneficiary) return null;
 

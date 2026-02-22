@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-    Target, ChevronLeft, Plus, Save, Loader2,
+    ChevronLeft, Plus, Save, Loader2,
     TrendingUp, Calendar, Clock, MessageSquare,
-    User, Users, CheckCircle, AlertCircle
+    User, Users, AlertCircle
 } from 'lucide-react';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
@@ -45,11 +45,7 @@ export const GoalProgressTracker: React.FC = () => {
     const [beneficiaryFeedback, setBeneficiaryFeedback] = useState('');
     const [recorderName, setRecorderName] = useState('');
 
-    useEffect(() => {
-        fetchData();
-    }, [goalId]);
-
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         try {
             const goals = await empowermentService.getGoals();
@@ -61,7 +57,11 @@ export const GoalProgressTracker: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [goalId]);
+
+    useEffect(() => {
+        fetchData();
+    }, [goalId, fetchData]);
 
     const handleSubmitProgress = async () => {
         if (!newValue || !recorderName.trim()) {
@@ -304,7 +304,7 @@ export const GoalProgressTracker: React.FC = () => {
                     </h3>
                 </div>
                 <div className="divide-y">
-                    {progressLogs.map((log, idx) => (
+                    {progressLogs.map((log, _idx) => (
                         <div key={log.id} className="p-4 hover:bg-gray-50">
                             <div className="flex justify-between items-start mb-2">
                                 <div className="flex items-center gap-2">

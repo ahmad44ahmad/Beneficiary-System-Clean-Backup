@@ -8,17 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { wellbeingService, WellbeingScore, WellbeingStats } from '../../services/wellbeingService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 
-// HRSD Colors
-const COLORS = {
-    primary: '#F5961E',
-    secondary: '#FAB414',
-    success: '#2DB473',
-    teal: '#148287',
-    navy: '#14415A',
-    warning: '#FAB414',
-    danger: '#DC2626',
-};
-
 export const IntegratedDashboard: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);

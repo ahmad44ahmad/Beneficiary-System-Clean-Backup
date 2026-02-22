@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supaService } from '../services/supaService';
 import { Beneficiary } from '../types';
 import { useAuth as useAppAuth } from '../context/AuthContext';
@@ -9,7 +9,7 @@ export const useBeneficiaries = (filters?: { status?: string }) => {
     const [error, setError] = useState<Error | null>(null);
     const { user } = useAppAuth();
 
-    const fetchBeneficiaries = async () => {
+    const fetchBeneficiaries = useCallback(async () => {
         // if (!user && !filters?.force) return; // Optional: enforce auth
         try {
             setLoading(true);
@@ -24,11 +24,11 @@ export const useBeneficiaries = (filters?: { status?: string }) => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [filters?.status]);
 
     useEffect(() => {
         fetchBeneficiaries();
-    }, [filters?.status, user]);
+    }, [filters?.status, user, fetchBeneficiaries]);
 
     return { beneficiaries, loading, error, refetch: fetchBeneficiaries };
 };
@@ -64,7 +64,7 @@ export const useBeneficiaryMutations = () => {
         }
     };
 
-    const remove = async (id: string) => {
+    const remove = async (_id: string) => {
         // Implement delete in supaService if needed, for now throw error or just log
         console.warn("Delete not implemented in supaService yet");
         // setLoading(true);

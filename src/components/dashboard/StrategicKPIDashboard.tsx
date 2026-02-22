@@ -4,7 +4,6 @@ import { supabase } from '../../config/supabase';
 import {
     BarChart3,
     TrendingUp,
-    TrendingDown,
     Target,
     Shield,
     Users,

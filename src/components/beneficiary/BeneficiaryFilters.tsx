@@ -124,7 +124,7 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
                             </label>
                             <select
                                 value={filters.health_status}
-                                onChange={(e) => handleFilterChange('health_status', e.target.value as any)}
+                                onChange={(e) => handleFilterChange('health_status', e.target.value)}
                                 className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 text-hierarchy-small"
                             >
                                 <option value="all">الكل</option>
@@ -141,7 +141,7 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
                             </label>
                             <select
                                 value={filters.ipc_status}
-                                onChange={(e) => handleFilterChange('ipc_status', e.target.value as any)}
+                                onChange={(e) => handleFilterChange('ipc_status', e.target.value)}
                                 className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 text-hierarchy-small"
                             >
                                 <option value="all">الكل</option>
@@ -158,7 +158,7 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
                             </label>
                             <select
                                 value={filters.empowerment_status}
-                                onChange={(e) => handleFilterChange('empowerment_status', e.target.value as any)}
+                                onChange={(e) => handleFilterChange('empowerment_status', e.target.value)}
                                 className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 text-hierarchy-small"
                             >
                                 <option value="all">الكل</option>

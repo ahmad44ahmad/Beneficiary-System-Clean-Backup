@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Syringe, ChevronLeft, Plus, Search, Filter,
-    CheckCircle, AlertCircle, Clock, Calendar,
-    User, Users, RefreshCw, Download
+    Syringe, ChevronLeft, Plus, Search,
+    Calendar,
+    User, Users, RefreshCw
 } from 'lucide-react';
 import { ipcService, Immunization } from '../../services/ipcService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
-
-// Vaccine Types
-const VACCINE_TYPES = [
-    { code: 'HBV', name: 'التهاب الكبد B', name_ar: 'التهاب الكبد الوبائي ب', doses: 3 },
-    { code: 'FLU', name: 'الإنفلونزا', name_ar: 'الأنفلونزا الموسمية', doses: 1 },
-    { code: 'COVID', name: 'COVID-19', name_ar: 'كوفيد-19', doses: 2 },
-    { code: 'TDAP', name: 'الكزاز والدفتيريا', name_ar: 'الكزاز والخناق والسعال الديكي', doses: 1 },
-    { code: 'MMR', name: 'الحصبة', name_ar: 'الحصبة والنكاف والحصبة الألمانية', doses: 2 },
-    { code: 'VAR', name: 'جدري الماء', name_ar: 'الحماق', doses: 2 },
-    { code: 'PNEU', name: 'المكورات الرئوية', name_ar: 'التهاب الرئة', doses: 1 },
-];
 
 // Demo Data
 const DEMO_IMMUNIZATIONS: Immunization[] = [
@@ -61,7 +50,7 @@ export const ImmunizationTracker: React.FC = () => {
     const [filterType, setFilterType] = useState<'all' | 'staff' | 'beneficiary'>('all');
     const [filterStatus, setFilterStatus] = useState<string>('all');
     const [searchTerm, setSearchTerm] = useState('');
-    const [showAddModal, setShowAddModal] = useState(false);
+    const [_showAddModal, setShowAddModal] = useState(false);
 
     useEffect(() => {
         fetchData();

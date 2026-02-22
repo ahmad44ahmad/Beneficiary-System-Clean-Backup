@@ -69,19 +69,19 @@ export const DailyShiftForm: React.FC<DailyShiftFormProps> = ({ beneficiaries, o
         });
     };
 
-    const updateStaffStats = (index: number, field: string, value: any) => {
+    const updateStaffStats = (index: number, field: string, value: string | number) => {
         const newStats = [...(formData.staffAttendance || [])];
         newStats[index] = { ...newStats[index], [field]: value };
         setFormData({ ...formData, staffAttendance: newStats });
     };
 
-    const updateServiceStats = (index: number, field: string, value: any) => {
+    const updateServiceStats = (index: number, field: string, value: string | number) => {
         const newStats = [...(formData.serviceStats || [])];
         newStats[index] = { ...newStats[index], [field]: value };
         setFormData({ ...formData, serviceStats: newStats });
     };
 
-    const updateCleaningStats = (index: number, field: string, value: any) => {
+    const updateCleaningStats = (index: number, field: string, value: string | number) => {
         const newStats = [...(formData.cleaningMaintenance || [])];
         newStats[index] = { ...newStats[index], [field]: value };
         setFormData({ ...formData, cleaningMaintenance: newStats });

@@ -5,9 +5,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    ClipboardList, Search, Filter, Calendar, User, Activity,
+    Search, User, Activity,
     Download, FileSpreadsheet, Printer, ChevronDown, ChevronUp,
-    AlertCircle, CheckCircle, XCircle, Shield, Clock, Eye
+    CheckCircle, XCircle, Shield, Clock, Eye
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { usePrint } from '../../hooks/usePrint';

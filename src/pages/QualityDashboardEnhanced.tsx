@@ -2,18 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-    Award, TrendingUp, CheckCircle2, AlertTriangle, Target, Users,
-    BarChart3, FileText, Activity, Shield, BookOpen, ClipboardList,
+    Award, TrendingUp, CheckCircle2, AlertTriangle, Target,
+    BarChart3, BookOpen, ClipboardList,
     AlertOctagon, ChevronRight, Calendar, Star
 } from 'lucide-react';
-
-const HRSD = {
-    orange: 'rgb(245, 150, 30)',
-    gold: 'rgb(250, 180, 20)',
-    green: 'rgb(45, 180, 115)',
-    teal: 'rgb(20, 130, 135)',
-    navy: 'rgb(20, 65, 90)',
-};
 
 // KPI Data
 const kpis = [
@@ -72,7 +64,7 @@ export const QualityDashboardEnhanced: React.FC = () => {
                 ].map(tab => (
                     <button
                         key={tab.id}
-                        onClick={() => setActiveTab(tab.id as any)}
+                        onClick={() => setActiveTab(tab.id as typeof activeTab)}
                         className={`px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all ${activeTab === tab.id ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white' : 'text-slate-400 hover:text-white'}`}
                     >
                         <tab.icon className="w-4 h-4" />

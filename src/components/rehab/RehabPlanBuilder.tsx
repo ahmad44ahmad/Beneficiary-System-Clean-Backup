@@ -16,7 +16,6 @@ import {
     Activity,
     Save,
     FileText,
-    ShieldAlert,
     Crosshair
 } from 'lucide-react';
 
@@ -266,7 +265,7 @@ export const RehabPlanBuilder: React.FC = () => {
                     </div>
 
                     <div className="space-y-4">
-                        {plan.goals?.map((goal, idx) => (
+                        {plan.goals?.map((goal, _idx) => (
                             <Card key={goal.id} className="p-4 border-r-4 border-r-primary-500 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex justify-between items-start mb-3">
                                     <div className="flex-1">
@@ -280,7 +279,7 @@ export const RehabPlanBuilder: React.FC = () => {
                                             <select
                                                 className="text-xs border rounded p-1 bg-gray-50"
                                                 value={goal.type}
-                                                onChange={e => updateGoal(goal.id, { type: e.target.value as any })}
+                                                onChange={e => updateGoal(goal.id, { type: e.target.value as GoalType })}
                                                 title="نوع الهدف"
                                                 aria-label="اختر نوع الهدف التأهيلي"
                                             >

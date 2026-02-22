@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DignityProfile } from '../../types';
-import { X, Save, User, Sun, Volume2, Thermometer, Smile, Heart, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { X, Save, User, Sun, Heart } from 'lucide-react';
 
 interface DignityProfileFormProps {
     initialData?: DignityProfile;
@@ -14,9 +14,6 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
         sensoryPreferences: { lighting: 'natural', noise: 'moderate', temperature: 'warm' },
         microPreferences: { dislikes: [], favoriteColor: '', favoriteCup: '' }
     });
-
-    const [dislikesInput, setDislikesInput] = useState('');
-    const [favoritesInput, setFavoritesInput] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -60,7 +57,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                         <select
                             id="personalityType"
                             value={formData.personalityType}
-                            onChange={e => setFormData({ ...formData, personalityType: e.target.value as any })}
+                            onChange={e => setFormData({ ...formData, personalityType: e.target.value as DignityProfile['personalityType'] })}
                             className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
                             title="نمط الشخصية"
                         >
@@ -89,7 +86,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             value={formData.sensoryPreferences?.lighting}
                             onChange={e => setFormData({
                                 ...formData,
-                                sensoryPreferences: { ...formData.sensoryPreferences, lighting: e.target.value as any }
+                                sensoryPreferences: { ...formData.sensoryPreferences, lighting: e.target.value as NonNullable<DignityProfile['sensoryPreferences']>['lighting'] }
                             })}
                             className="w-full p-2 border rounded-lg"
                             title="تفضيلات الإضاءة"
@@ -107,7 +104,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             value={formData.sensoryPreferences?.noise}
                             onChange={e => setFormData({
                                 ...formData,
-                                sensoryPreferences: { ...formData.sensoryPreferences, noise: e.target.value as any }
+                                sensoryPreferences: { ...formData.sensoryPreferences, noise: e.target.value as NonNullable<DignityProfile['sensoryPreferences']>['noise'] }
                             })}
                             className="w-full p-2 border rounded-lg"
                             title="تفضيلات الصوت"
@@ -126,7 +123,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             value={formData.sensoryPreferences?.temperature}
                             onChange={e => setFormData({
                                 ...formData,
-                                sensoryPreferences: { ...formData.sensoryPreferences, temperature: e.target.value as any }
+                                sensoryPreferences: { ...formData.sensoryPreferences, temperature: e.target.value as NonNullable<DignityProfile['sensoryPreferences']>['temperature'] }
                             })}
                             className="w-full p-2 border rounded-lg"
                             title="تفضيلات الحرارة"

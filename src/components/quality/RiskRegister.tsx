@@ -14,7 +14,7 @@ export const RiskRegister: React.FC<RiskRegisterProps> = ({ profile }) => {
     const risks = profile.risks || [];
 
     const getRiskScore = (p: string, i: string) => {
-        const map: any = { 'Low': 1, 'Medium': 2, 'High': 3 };
+        const map: Record<string, number> = { 'Low': 1, 'Medium': 2, 'High': 3 };
         return map[p] * map[i];
     };
 

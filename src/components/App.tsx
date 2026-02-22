@@ -39,7 +39,6 @@ const PermissionsPage = lazy(() => import('../pages/PermissionsPage').then(m => 
 // ═══════════════════════════════════════════════════════════════════════════
 
 // Medical Module
-const MedicalDashboard = lazy(() => import('./medical/MedicalDashboard').then(m => ({ default: m.MedicalDashboard })));
 const MedicalOverview = lazy(() => import('./medical/MedicalOverview').then(m => ({ default: m.MedicalOverview })));
 
 // Social Module
@@ -186,8 +185,6 @@ export const App = () => {
         socialActivityFollowUps,
         vaccinations,
         isolationStats,
-        medicalProfiles,
-        addVisitLog,
         addSocialActivityPlan,
         addSocialActivityDoc,
         addSocialActivityFollowUp,
@@ -261,7 +258,10 @@ export const App = () => {
 
                     <Route path="medical" element={
                         <div className="p-6">
-                            <MedicalOverview vaccinations={vaccinations} isolationStats={isolationStats} />
+                            <MedicalOverview
+                                vaccinations={vaccinations.map(v => ({ id: v.id, beneficiaryId: v.beneficiaryId, type: v.vaccineName, date: v.dueDate }))}
+                                isolationStats={{ active: isolationStats.occupiedBeds, total: isolationStats.totalBeds }}
+                            />
                         </div>
                     } />
 

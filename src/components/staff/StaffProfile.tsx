@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Award, Star, TrendingUp, Calendar, Pill, Clock, Shield, CheckCircle, Flame, Target, FileText, Phone, Mail } from 'lucide-react';
+import { User, Award, Star, TrendingUp, Pill, Clock, Shield, CheckCircle, Flame, Target, FileText, Phone, Mail } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface StaffMember {

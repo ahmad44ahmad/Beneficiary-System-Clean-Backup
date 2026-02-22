@@ -10,10 +10,6 @@ import {
     Filter,
     Eye,
     Edit,
-    CheckCircle2,
-    XCircle,
-    Clock,
-    Target,
     Save
 } from 'lucide-react';
 

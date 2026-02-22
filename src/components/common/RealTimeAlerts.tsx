@@ -69,7 +69,7 @@ const useAlertSound = () => {
     const playSound = useCallback(() => {
         if (soundEnabled) {
             try {
-                const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+                const audioContext = new (window.AudioContext || (window as unknown as Record<string, typeof AudioContext>).webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
 
@@ -85,7 +85,7 @@ const useAlertSound = () => {
 
                 oscillator.start(audioContext.currentTime);
                 oscillator.stop(audioContext.currentTime + 0.5);
-            } catch (e) {
+            } catch {
                 // Audio not supported in this browser
             }
         }
@@ -197,7 +197,12 @@ export const RealTimeAlerts: React.FC = () => {
                 'postgres_changes',
                 { event: 'INSERT', schema: 'public', table: 'ipc_incidents' },
                 (payload) => {
-                    const newIncident = payload.new as any;
+                    const newIncident = payload.new as {
+                        id: string;
+                        severity_level: string | null;
+                        incident_category: string | null;
+                        location_id: string | null;
+                    };
                     const newAlert: SystemAlert = {
                         id: `incident-${newIncident.id}`,
                         type: 'incident',
@@ -206,7 +211,7 @@ export const RealTimeAlerts: React.FC = () => {
                                 newIncident.severity_level === 'moderate' ? 'medium' : 'low',
                         title: 'تنبيه حادثة عدوى جديدة',
                         message: `تم تسجيل حالة: ${newIncident.incident_category}`,
-                        location: newIncident.location_id,
+                        location: newIncident.location_id || undefined,
                         created_at: new Date().toISOString(),
                         acknowledged: false,
                     };
@@ -225,7 +230,11 @@ export const RealTimeAlerts: React.FC = () => {
                 'postgres_changes',
                 { event: 'INSERT', schema: 'public', table: 'fall_risk_assessments' },
                 (payload) => {
-                    const assessment = payload.new as any;
+                    const assessment = payload.new as {
+                        id: string;
+                        total_score: number;
+                        beneficiary_id: string | null;
+                    };
                     if (assessment.total_score >= 45) {
                         const newAlert: SystemAlert = {
                             id: `fall-${assessment.id}`,
@@ -233,7 +242,7 @@ export const RealTimeAlerts: React.FC = () => {
                             severity: assessment.total_score >= 50 ? 'critical' : 'high',
                             title: 'تنبيه خطر سقوط عالي',
                             message: `درجة خطر السقوط: ${assessment.total_score}/60`,
-                            beneficiary_name: assessment.beneficiary_id,
+                            beneficiary_name: assessment.beneficiary_id || undefined,
                             created_at: new Date().toISOString(),
                             acknowledged: false,
                         };

@@ -21,7 +21,7 @@ export interface LeaveRequest {
         isFit: boolean;
         precautions?: string;
     };
-    history?: any[]; // Added for simplified workflow
+    history?: { action: string; date: string; by?: string; note?: string }[]; // Added for simplified workflow
 }
 
 export interface SocialResearch {

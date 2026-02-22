@@ -213,6 +213,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
 // Hook
 // ═══════════════════════════════════════════════════════════════════════════
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useNotifications() {
     const context = useContext(NotificationContext);
     if (!context) {
@@ -228,7 +229,7 @@ export function useNotifications() {
 function playNotificationSound() {
     try {
         // Create a simple beep sound using Web Audio API
-        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
 
@@ -241,7 +242,7 @@ function playNotificationSound() {
 
         oscillator.start();
         oscillator.stop(audioContext.currentTime + 0.2);
-    } catch (e) {
+    } catch {
         // Ignore audio errors
     }
 }
@@ -250,6 +251,7 @@ function playNotificationSound() {
 // Pre-built Notification Creators
 // ═══════════════════════════════════════════════════════════════════════════
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const NotificationCreators = {
     riskAlert: (beneficiaryName: string, riskScore: number, beneficiaryId: string) => ({
         type: 'alert' as NotificationType,

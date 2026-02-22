@@ -4,7 +4,7 @@ import { Button } from '../ui/Button';
 import { CommandMenu } from '../ui/CommandMenu';
 import { useUser } from '../../context/UserContext';
 import { useLocation } from 'react-router-dom';
-import { useViewMode } from '../../context/ViewModeContext';
+import { useViewMode, ViewMode } from '../../context/ViewModeContext';
 import { Eye } from 'lucide-react';
 
 interface HeaderProps {
@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             <div className="hidden lg:block relative group">
                 <select
                     value={currentView}
-                    onChange={(e) => setView(e.target.value as any)}
+                    onChange={(e) => setView(e.target.value as ViewMode)}
                     className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg pl-8 pr-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
                     title="تغيير واجهة العرض"
                 >

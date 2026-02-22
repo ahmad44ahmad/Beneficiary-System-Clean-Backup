@@ -18,14 +18,8 @@ interface ISOClause {
     next_audit_date?: string;
 }
 
-export const ISOComplianceTracker: React.FC = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [clauses, setClauses] = useState<ISOClause[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-    // Demo data
-    const demoData: ISOClause[] = [
+// Demo data (module-level constant to avoid recreating on each render)
+const demoData: ISOClause[] = [
         { iso_clause: '4.1', requirement_ar: 'فهم المنظمة وسياقها', category: 'Leadership', status: 'implemented', compliance_percentage: 80, priority: 'high', responsible_department: 'الإدارة' },
         { iso_clause: '4.2', requirement_ar: 'فهم احتياجات الأطراف المعنية', category: 'Leadership', status: 'implemented', compliance_percentage: 75, priority: 'high', responsible_department: 'الإدارة' },
         { iso_clause: '5.1', requirement_ar: 'القيادة والالتزام', category: 'Leadership', status: 'in_progress', compliance_percentage: 60, priority: 'critical', responsible_department: 'مدير المركز' },
@@ -36,8 +30,14 @@ export const ISOComplianceTracker: React.FC = () => {
         { iso_clause: '8.1', requirement_ar: 'التخطيط والتحكم التشغيلي', category: 'Operation', status: 'in_progress', compliance_percentage: 55, priority: 'high', responsible_department: 'التشغيل' },
         { iso_clause: '8.4', requirement_ar: 'خطط استمرارية الأعمال', category: 'Operation', status: 'not_started', compliance_percentage: 20, priority: 'critical', responsible_department: 'الطوارئ', next_audit_date: '2026-03-01' },
         { iso_clause: '9.1', requirement_ar: 'المراقبة والقياس والتحليل', category: 'Evaluation', status: 'in_progress', compliance_percentage: 40, priority: 'medium', responsible_department: 'الجودة' },
-        { iso_clause: '10.1', requirement_ar: 'عدم المطابقة والإجراء التصحيحي', category: 'Improvement', status: 'not_started', compliance_percentage: 15, priority: 'high', responsible_department: 'الجودة' },
-    ];
+    { iso_clause: '10.1', requirement_ar: 'عدم المطابقة والإجراء التصحيحي', category: 'Improvement', status: 'not_started', compliance_percentage: 15, priority: 'high', responsible_department: 'الجودة' },
+];
+
+export const ISOComplianceTracker: React.FC = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [clauses, setClauses] = useState<ISOClause[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
     useEffect(() => {
         const fetchClauses = async () => {
@@ -64,16 +64,6 @@ export const ISOComplianceTracker: React.FC = () => {
             case 'in_progress': return <Clock className="w-5 h-5 text-hrsd-gold" />;
             case 'non_conformity': return <XCircle className="w-5 h-5 text-red-600" />;
             default: return <AlertCircle className="w-5 h-5 text-gray-400" />;
-        }
-    };
-
-    const getStatusText = (status: string) => {
-        switch (status) {
-            case 'verified': return 'موثق';
-            case 'implemented': return 'مطبق';
-            case 'in_progress': return 'قيد التنفيذ';
-            case 'non_conformity': return 'عدم مطابقة';
-            default: return 'لم يبدأ';
         }
     };
 

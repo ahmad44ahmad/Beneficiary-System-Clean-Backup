@@ -23,7 +23,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
             selfCare: 'average', // Default valid value
             // Using type assertion to bypass strict check for form-specific simplified fields
             // In a real scenario, we should map these 4 fields to the comprehensive type
-        } as any,
+        } as TrainingReferral['currentPerformance'],
         notes: ''
     });
 
@@ -92,7 +92,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                         <h3>مستوى الأداء الحالي</h3>
                         <div className="form-group">
                             <label>الاعتماد على النفس (قضاء الحاجة، تناول الطعام، العناية الشخصية)</label>
-                            <select name="selfCare" value={(formData.currentPerformance as any)?.selfCare} onChange={handlePerformanceChange}>
+                            <select name="selfCare" value={(formData.currentPerformance as Partial<TrainingReferral['currentPerformance']>)?.selfCare} onChange={handlePerformanceChange}>
                                 <option value="">اختر التقييم</option>
                                 <option value="good">جيد</option>
                                 <option value="fair">جيد نوعاً ما</option>
@@ -101,7 +101,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                         </div>
                         <div className="form-group">
                             <label>المهارات الاجتماعية (التواصل، الآداب، المشاركة)</label>
-                            <select name="socialSkills" value={(formData.currentPerformance as any)?.socialSkills} onChange={handlePerformanceChange}>
+                            <select name="socialSkills" value={(formData.currentPerformance as Record<string, string | undefined>)?.socialSkills} onChange={handlePerformanceChange}>
                                 <option value="">اختر التقييم</option>
                                 <option value="good">جيد</option>
                                 <option value="fair">جيد نوعاً ما</option>
@@ -110,7 +110,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                         </div>
                         <div className="form-group">
                             <label>المهارات الإدراكية (التمييز، التصنيف، المعرفة)</label>
-                            <select name="cognitiveSkills" value={(formData.currentPerformance as any)?.cognitiveSkills} onChange={handlePerformanceChange}>
+                            <select name="cognitiveSkills" value={(formData.currentPerformance as Record<string, string | undefined>)?.cognitiveSkills} onChange={handlePerformanceChange}>
                                 <option value="">اختر التقييم</option>
                                 <option value="good">جيد</option>
                                 <option value="fair">جيد نوعاً ما</option>
@@ -119,7 +119,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                         </div>
                         <div className="form-group">
                             <label>المهارات الحركية (مسك القلم، الكتابة)</label>
-                            <select name="motorSkills" value={(formData.currentPerformance as any)?.motorSkills} onChange={handlePerformanceChange}>
+                            <select name="motorSkills" value={(formData.currentPerformance as Record<string, string | undefined>)?.motorSkills} onChange={handlePerformanceChange}>
                                 <option value="">اختر التقييم</option>
                                 <option value="good">جيد</option>
                                 <option value="fair">جيد نوعاً ما</option>

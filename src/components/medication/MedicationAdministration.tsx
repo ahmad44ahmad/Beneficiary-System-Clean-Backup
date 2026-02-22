@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Pill, Clock, AlertTriangle, CheckCircle, X, User,
-    Activity, Droplet, ThermometerSun, Heart, Search,
-    ChevronDown, ChevronUp, Camera, FileText, AlertCircle
+    Pill, Clock, AlertTriangle, CheckCircle, User,
+    Search,
+    ChevronDown, ChevronUp, AlertCircle
 } from 'lucide-react';
 
 interface Medication {
@@ -45,7 +45,6 @@ export const MedicationAdministration: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showCompleted, setShowCompleted] = useState(false);
     const [preReqChecked, setPreReqChecked] = useState<Record<string, boolean>>({});
-    const [adminNote, setAdminNote] = useState('');
 
     const pendingCount = medications.filter(m => m.status === 'pending').length;
     const overdueCount = medications.filter(m => m.status === 'overdue').length;
@@ -62,10 +61,9 @@ export const MedicationAdministration: React.FC = () => {
         ));
         setSelectedMed(null);
         setPreReqChecked({});
-        setAdminNote('');
     };
 
-    const handleSkip = (medId: string, reason: string) => {
+    const handleSkip = (medId: string, _reason: string) => {
         setMedications(prev => prev.map(m =>
             m.id === medId ? { ...m, status: 'skipped' as const } : m
         ));

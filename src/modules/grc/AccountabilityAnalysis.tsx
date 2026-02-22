@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
     TrendingUp, AlertTriangle, FileSearch, MapPin,
-    Clock, Building2, Users, Car, Home, Wrench,
+    Clock, Building2, Users, Home, Wrench,
     ArrowRight, ChevronDown, ChevronUp, BarChart3
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 
-// HRSD Colors
-const HRSD = {
-    orange: 'rgb(245, 150, 30)',
-    gold: 'rgb(250, 180, 20)',
-    green: 'rgb(45, 180, 115)',
-    teal: 'rgb(20, 130, 135)',
-    navy: 'rgb(20, 65, 90)',
-};
 
 // Evasion Pattern Analysis from Claude Opus
 const evasionPatterns = {
@@ -126,7 +118,7 @@ const summaryStats = {
 
 export const AccountabilityAnalysis: React.FC = () => {
     const [expandedSection, setExpandedSection] = useState<string | null>('patterns');
-    const [gapsData, setGapsData] = useState<any[]>([]);
+    const [_gapsData, setGapsData] = useState<Record<string, unknown>[]>([]);
 
     useEffect(() => {
         fetchGapsData();
@@ -217,7 +209,7 @@ export const AccountabilityAnalysis: React.FC = () => {
                                     <div className="mb-3">
                                         <div className="w-full bg-gray-100 rounded-full h-2">
                                             <div
-                                                className={`h-2 rounded-full ${pattern.color} ${(pattern as any).widthClass}`}
+                                                className={`h-2 rounded-full ${pattern.color} ${pattern.widthClass}`}
                                             ></div>
                                         </div>
                                     </div>

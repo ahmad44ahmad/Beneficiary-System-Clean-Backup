@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Printer, BookOpen, ChevronLeft, Target, Shield, Heart, Activity, LineChart } from 'lucide-react';
+import { FileText, Printer, BookOpen, Target, Shield, Heart, Activity, LineChart } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 export const StrategicDashboard: React.FC = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DentalOdontogram } from './DentalOdontogram';
 import { UnifiedBeneficiaryProfile } from '../../../types/unified';
 import { Card } from '../../ui/Card';
@@ -6,10 +6,10 @@ import { Smile, AlertCircle, HeartPulse } from 'lucide-react';
 
 interface DentalDashboardProps {
     beneficiary?: UnifiedBeneficiaryProfile | null;
-    onUpdate?: (data: any) => void;
+    onUpdate?: (data: Record<string, unknown>) => void;
 }
 
-export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary, onUpdate }) => {
+export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary }) => {
     // Handle case where beneficiary is not provided
     if (!beneficiary) {
         return (

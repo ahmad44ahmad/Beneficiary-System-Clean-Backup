@@ -71,7 +71,7 @@ const DEMO_STATS: WellbeingStats = {
 };
 
 // Helper for logging
-const logError = (context: string, error: any) => {
+const logError = (context: string, error: unknown) => {
     if (import.meta.env.DEV) {
         console.error(`[WellbeingService] ${context}:`, error);
     }

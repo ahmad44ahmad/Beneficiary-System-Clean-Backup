@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
-    Sun, Moon, CloudSun, AlertTriangle, CheckCircle, Clock,
-    Users, Heart, Pill, Shield, TrendingUp, TrendingDown,
-    Thermometer, Wind, Bell, X, ChevronLeft, Sparkles,
-    Coffee, Sunrise, Activity, Zap
+    Sun, Moon, CloudSun, AlertTriangle, CheckCircle,
+    Users, Heart, Pill, TrendingUp,
+    Bell, X, ChevronLeft, Sparkles,
+    Sunrise, Activity
 } from 'lucide-react';
 
 interface MorningPulseProps {
@@ -55,12 +55,10 @@ const getWeatherIcon = (condition: string) => {
 export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate }) => {
     const [data] = useState<PulseData>(mockPulseData);
     const [currentTime, setCurrentTime] = useState(new Date());
-    const [isVisible, setIsVisible] = useState(false);
     const greeting = getGreeting();
     const WeatherIcon = getWeatherIcon(data.weather.condition);
 
     useEffect(() => {
-        setIsVisible(true);
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
         return () => clearInterval(timer);
     }, []);

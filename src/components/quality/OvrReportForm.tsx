@@ -5,7 +5,6 @@ import {
     EyeOff,
     Send,
     CheckCircle2,
-    HelpCircle,
     ArrowLeft,
     ArrowRight
 } from 'lucide-react';
@@ -43,7 +42,7 @@ export const OvrReportForm: React.FC = () => {
         setIsSubmitting(true);
         try {
             await submitOvrReport({
-                ...formData as any,
+                ...formData as Omit<OvrReport, 'id' | 'status'>,
                 incidentDate: new Date().toISOString().split('T')[0]
             });
             // Show success via step 4? or toast? reusing validation step for simplicity
@@ -124,7 +123,7 @@ export const OvrReportForm: React.FC = () => {
                                 {categories.map(cat => (
                                     <button
                                         key={cat.id}
-                                        onClick={() => setFormData({ ...formData, category: cat.id as any })}
+                                        onClick={() => setFormData({ ...formData, category: cat.id as OvrReport['category'] })}
                                         className={`p-3 rounded-xl border text-center transition-all ${formData.category === cat.id
                                             ? 'border-red-500 bg-red-50 text-red-700 ring-2 ring-red-200'
                                             : 'border-gray-200 hover:border-red-200 hover:bg-gray-50'
@@ -143,7 +142,7 @@ export const OvrReportForm: React.FC = () => {
                                 {severities.map(sev => (
                                     <button
                                         key={sev.id}
-                                        onClick={() => setFormData({ ...formData, severity: sev.id as any })}
+                                        onClick={() => setFormData({ ...formData, severity: sev.id as OvrReport['severity'] })}
                                         className={`w-full text-right px-4 py-3 rounded-lg border transition-all flex items-center justify-between ${formData.severity === sev.id
                                             ? 'border-gray-400 bg-gray-50 font-bold'
                                             : 'border-gray-100 hover:bg-gray-50'

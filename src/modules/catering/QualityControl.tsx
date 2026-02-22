@@ -1,16 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext'; // Assuming context exists or using standard alert
-import { Calendar, ClipboardCheck, AlertTriangle, Save, Loader2, DollarSign, CheckCircle, XCircle } from 'lucide-react';
+import { ClipboardCheck, Save, Loader2, DollarSign, CheckCircle, XCircle } from 'lucide-react';
 
 export const QualityControl = () => {
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
     // Data
-    const [suppliers, setSuppliers] = useState<any[]>([]);
-    const [criteria, setCriteria] = useState<any[]>([]);
+    const [suppliers, setSuppliers] = useState<{ id: string; name: string }[]>([]);
+    const [criteria, setCriteria] = useState<{ id: string; category: string; question: string; max_score: number }[]>([]);
 
     // Form State
     const [selectedSupplier, setSelectedSupplier] = useState('');
@@ -19,73 +18,72 @@ export const QualityControl = () => {
     const [notes, setNotes] = useState<Record<string, string>>({});
     const [generalNote, setGeneralNote] = useState('');
 
-    // Demo data fallbacks
-    const DEMO_SUPPLIERS = [
-        { id: 'demo-1', name: 'شركة الأغذية المتحدة' },
-        { id: 'demo-2', name: 'مطاعم الرياض للتموين' },
-    ];
-
-    const DEMO_CRITERIA = [
-        { id: '1', category: 'النظافة', question: 'زي العمال نظيف ومرتب', max_score: 10 },
-        { id: '2', category: 'النظافة', question: 'نظافة أدوات التقديم', max_score: 10 },
-        { id: '3', category: 'الطعام', question: 'درجة حرارة الطعام مناسبة', max_score: 10 },
-        { id: '4', category: 'الطعام', question: 'جودة المواد الخام', max_score: 10 },
-        { id: '5', category: 'الخدمة', question: 'الالتزام بمواعيد التوصيل', max_score: 10 },
-        { id: '6', category: 'الخدمة', question: 'تعامل الموظفين مع المستفيدين', max_score: 10 },
-    ];
-
     useEffect(() => {
+        const DEMO_SUPPLIERS = [
+            { id: 'demo-1', name: 'شركة الأغذية المتحدة' },
+            { id: 'demo-2', name: 'مطاعم الرياض للتموين' },
+        ];
+
+        const DEMO_CRITERIA = [
+            { id: '1', category: 'النظافة', question: 'زي العمال نظيف ومرتب', max_score: 10 },
+            { id: '2', category: 'النظافة', question: 'نظافة أدوات التقديم', max_score: 10 },
+            { id: '3', category: 'الطعام', question: 'درجة حرارة الطعام مناسبة', max_score: 10 },
+            { id: '4', category: 'الطعام', question: 'جودة المواد الخام', max_score: 10 },
+            { id: '5', category: 'الخدمة', question: 'الالتزام بمواعيد التوصيل', max_score: 10 },
+            { id: '6', category: 'الخدمة', question: 'تعامل الموظفين مع المستفيدين', max_score: 10 },
+        ];
+
+        const fetchInitialData = async () => {
+            setLoading(true);
+            try {
+                if (!supabase) {
+                    setSuppliers(DEMO_SUPPLIERS);
+                    setCriteria(DEMO_CRITERIA);
+                    setSelectedSupplier(DEMO_SUPPLIERS[0].id);
+                    return;
+                }
+
+                // Fetch Suppliers
+                const { data: supData, error: supError } = await supabase
+                    .from('catering_suppliers')
+                    .select('*');
+
+                if (supError || !supData?.length) {
+                    // Use demo data
+                    setSuppliers(DEMO_SUPPLIERS);
+                    setSelectedSupplier(DEMO_SUPPLIERS[0].id);
+                } else {
+                    setSuppliers(supData);
+                    if (supData.length > 0) setSelectedSupplier(supData[0].id);
+                }
+
+                // Fetch Criteria
+                const { data: critData, error: critError } = await supabase
+                    .from('evaluation_criteria')
+                    .select('*')
+                    .eq('is_active', true)
+                    .order('category');
+
+                if (critError || !critData?.length) {
+                    setCriteria(DEMO_CRITERIA);
+                } else {
+                    setCriteria(critData);
+                }
+
+            } catch (error) {
+                if (import.meta.env.DEV) {
+                    console.log('[QualityControl] Using demo data:', error);
+                }
+                setSuppliers(DEMO_SUPPLIERS);
+                setCriteria(DEMO_CRITERIA);
+                setSelectedSupplier(DEMO_SUPPLIERS[0].id);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchInitialData();
     }, []);
-
-    const fetchInitialData = async () => {
-        setLoading(true);
-        try {
-            if (!supabase) {
-                setSuppliers(DEMO_SUPPLIERS);
-                setCriteria(DEMO_CRITERIA);
-                setSelectedSupplier(DEMO_SUPPLIERS[0].id);
-                return;
-            }
-
-            // Fetch Suppliers
-            const { data: supData, error: supError } = await supabase
-                .from('catering_suppliers')
-                .select('*');
-
-            if (supError || !supData?.length) {
-                // Use demo data
-                setSuppliers(DEMO_SUPPLIERS);
-                setSelectedSupplier(DEMO_SUPPLIERS[0].id);
-            } else {
-                setSuppliers(supData);
-                if (supData.length > 0) setSelectedSupplier(supData[0].id);
-            }
-
-            // Fetch Criteria
-            const { data: critData, error: critError } = await supabase
-                .from('evaluation_criteria')
-                .select('*')
-                .eq('is_active', true)
-                .order('category');
-
-            if (critError || !critData?.length) {
-                setCriteria(DEMO_CRITERIA);
-            } else {
-                setCriteria(critData);
-            }
-
-        } catch (error) {
-            if (import.meta.env.DEV) {
-                console.log('[QualityControl] Using demo data:', error);
-            }
-            setSuppliers(DEMO_SUPPLIERS);
-            setCriteria(DEMO_CRITERIA);
-            setSelectedSupplier(DEMO_SUPPLIERS[0].id);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleResponse = (id: string, value: 'compliant' | 'non_compliant') => {
         setResponses(prev => ({ ...prev, [id]: value }));
@@ -163,7 +161,7 @@ export const QualityControl = () => {
         if (!acc[crit.category]) acc[crit.category] = [];
         acc[crit.category].push(crit);
         return acc;
-    }, {} as Record<string, any[]>);
+    }, {} as Record<string, { id: string; category: string; question: string; max_score: number }[]>);
 
     return (
         <div className="bg-gray-50 min-h-screen p-6" dir="rtl">
@@ -203,7 +201,7 @@ export const QualityControl = () => {
                                 <h3 className="font-bold">{category}</h3>
                             </div>
                             <div className="p-4 space-y-4">
-                                {(items as any[]).map((item: any) => (
+                                {items.map((item) => (
                                     <div key={item.id} className="border-b last:border-0 pb-4 last:pb-0">
                                         <div className="flex justify-between items-start mb-3">
                                             <p className="font-medium text-gray-800 w-2/3">{item.question}</p>

@@ -5,7 +5,6 @@ import { CheckCircle, XCircle } from 'lucide-react';
 
 export const ISOComplianceReport: React.FC = () => {
     // Aggregating Data
-    const totalAudits = mockAudits.length;
     const totalFindings = mockAudits.reduce((acc, audit) => acc + audit.findings.length, 0);
     const compliantFindings = mockAudits.reduce((acc, audit) => acc + audit.findings.filter(f => f.isCompliant).length, 0);
     const complianceRate = Math.round((compliantFindings / totalFindings) * 100);

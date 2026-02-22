@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUnifiedData } from '../../context/UnifiedDataContext';
 import {
-    Search, Home, Users, Settings, Activity, FileText,
+    Search, Home, Users, Settings,
     Shield, Heart, Calendar, X, ArrowRight, Command,
-    LayoutDashboard, ClipboardList, AlertTriangle,
+    LayoutDashboard, AlertTriangle,
     Stethoscope, Building2, BookOpen, PieChart
 } from 'lucide-react';
 
@@ -214,7 +214,7 @@ export function CommandMenu() {
                                         <div className="px-3 py-1 text-xs text-gray-500 uppercase tracking-wide">
                                             {categoryLabels[category]}
                                         </div>
-                                        {commands.map((cmd, idx) => {
+                                        {commands.map((cmd, _idx) => {
                                             const globalIndex = filteredCommands.findIndex(c => c.id === cmd.id);
                                             const Icon = cmd.icon;
                                             return (

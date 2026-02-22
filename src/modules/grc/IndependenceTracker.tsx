@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
     ArrowRight, AlertTriangle, TrendingUp, TrendingDown,
-    Users, DollarSign, Heart, Scale, Building2,
+    Users, Scale, Building2,
     CheckCircle2, XCircle, AlertCircle, BarChart3,
     Home, Briefcase, Sun
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 
-// HRSD Official Colors
-const HRSD = {
-    orange: 'rgb(245, 150, 30)',
-    gold: 'rgb(250, 180, 20)',
-    green: 'rgb(45, 180, 115)',
-    teal: 'rgb(20, 130, 135)',
-    navy: 'rgb(20, 65, 90)',
-};
 
 interface ServicesGap {
     id: string;

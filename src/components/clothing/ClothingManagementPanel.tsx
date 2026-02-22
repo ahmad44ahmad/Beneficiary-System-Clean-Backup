@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Beneficiary, WardrobeInventory, ClothingNeeds, ClothingDispensation, ClothingProcurement } from '../../types';
+import { WardrobeInventory, ClothingNeeds, ClothingDispensation, ClothingProcurement } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { WardrobeInventoryForm } from './WardrobeInventoryForm';
 import { ClothingNeedsForm } from './ClothingNeedsForm';
@@ -22,7 +22,7 @@ export const ClothingManagementPanel: React.FC = () => {
     const [isCreatingProcurement, setIsCreatingProcurement] = useState(false);
 
     // Export function
-    const handleExport = (data: any[], filename: string) => {
+    const handleExport = (data: Record<string, unknown>[] | WardrobeInventory[] | ClothingNeeds[] | ClothingDispensation[] | ClothingProcurement[], filename: string) => {
         if (!data.length) {
             alert('لا توجد بيانات للتصدير');
             return;
@@ -32,8 +32,9 @@ export const ClothingManagementPanel: React.FC = () => {
         csvRows.push(headers.join(','));
 
         for (const row of data) {
+            const r = row as Record<string, unknown>;
             const values = headers.map(header => {
-                const val = (row as any)[header];
+                const val = r[header];
                 if (typeof val === 'object') return `"${JSON.stringify(val).replace(/"/g, '""')}"`;
                 return `"${val}"`;
             });

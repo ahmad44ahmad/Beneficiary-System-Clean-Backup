@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
 
 export interface CateringKPIs {
@@ -112,7 +112,7 @@ export const useCateringLogic = () => {
             // Map for Table
             const logs = meals?.map(m => ({
                 id: m.id,
-                beneficiary_name: Array.isArray(m.beneficiaries) ? m.beneficiaries[0]?.full_name : (m.beneficiaries as any)?.full_name || 'غير معروف',
+                beneficiary_name: Array.isArray(m.beneficiaries) ? m.beneficiaries[0]?.full_name : (m.beneficiaries as { full_name?: string } | null)?.full_name || 'غير معروف',
                 meal_type: m.meal_type,
                 status: m.status,
                 consumption: m.consumption_percentage || 0,

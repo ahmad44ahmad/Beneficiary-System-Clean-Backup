@@ -36,7 +36,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const newImages = Array.from(e.target.files).map((file: any) => URL.createObjectURL(file));
+            const newImages = Array.from(e.target.files).map((file: File) => URL.createObjectURL(file));
             setFormData(prev => ({
                 ...prev,
                 images: [...(prev.images || []), ...newImages]

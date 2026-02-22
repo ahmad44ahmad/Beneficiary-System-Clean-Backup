@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../config/supabase';
-import { Utensils, Calendar, Clock, AlertCircle, FileSignature, Save, Printer, Check, X, Loader2, FileSpreadsheet, Download } from 'lucide-react';
+import { Utensils, Save, Printer, Check, X, Loader2, FileSpreadsheet } from 'lucide-react';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +19,7 @@ interface MealItem {
 export const CateringDailyLog: React.FC = () => {
     const navigate = useNavigate();
     const { printTable, isPrinting } = usePrint();
-    const { exportToExcel, exportToCsv, isExporting } = useExport();
+    const { exportToExcel, isExporting } = useExport();
     const { showToast } = useToast();
 
     const [loading, setLoading] = useState(false);
@@ -57,15 +57,11 @@ export const CateringDailyLog: React.FC = () => {
         showToast(`تم تصدير ${meals.length} سجل إلى Excel`, 'success');
     };
 
-    useEffect(() => {
-        fetchMeals();
-    }, [selectedMealType]);
-
-    const fetchMeals = async () => {
+    const fetchMeals = useCallback(async () => {
         setLoading(true);
         try {
             const today = new Date().toISOString().split('T')[0];
-            const { data, error } = await supabase
+            const { data } = await supabase
                 .from('daily_meals')
                 .select(`
                     id, 
@@ -78,13 +74,17 @@ export const CateringDailyLog: React.FC = () => {
                 .eq('meal_type', selectedMealType);
 
             if (data) {
-                const formatted = data.map((m: any) => ({
-                    id: m.id,
-                    beneficiary_name: m.beneficiaries?.full_name,
-                    plan_type: m.dietary_plans?.plan_type || 'قياسي',
-                    status: m.status,
-                    meal_type: m.meal_type
-                }));
+                const formatted = data.map((m: Record<string, unknown>) => {
+                    const beneficiaries = m.beneficiaries as { full_name?: string } | null;
+                    const dietaryPlans = m.dietary_plans as { plan_type?: string } | null;
+                    return {
+                        id: m.id as string,
+                        beneficiary_name: beneficiaries?.full_name || '',
+                        plan_type: dietaryPlans?.plan_type || 'قياسي',
+                        status: m.status as MealItem['status'],
+                        meal_type: m.meal_type as string,
+                    };
+                });
                 setMeals(formatted);
             }
         } catch (err) {
@@ -92,7 +92,11 @@ export const CateringDailyLog: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [selectedMealType]);
+
+    useEffect(() => {
+        fetchMeals();
+    }, [selectedMealType, fetchMeals]);
 
     const generateDailyMeals = async () => {
         setGenerating(true);
@@ -132,7 +136,7 @@ export const CateringDailyLog: React.FC = () => {
 
     const updateStatus = async (id: string, newStatus: string) => {
         // Optimistic update
-        setMeals(prev => prev.map(m => m.id === id ? { ...m, status: newStatus as any } : m));
+        setMeals(prev => prev.map(m => m.id === id ? { ...m, status: newStatus as MealItem['status'] } : m));
 
         await supabase
             .from('daily_meals')

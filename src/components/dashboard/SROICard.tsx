@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TrendingUp, DollarSign, Users, Heart } from 'lucide-react';
+import { TrendingUp, Heart } from 'lucide-react';
 
 export const SROICard: React.FC = () => {
     // Assumptions for SROI Calculation (Demo Logic)

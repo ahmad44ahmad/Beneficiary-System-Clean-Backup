@@ -6,7 +6,6 @@ interface MealScheduleProps {
 }
 
 export const MealSchedule: React.FC<MealScheduleProps> = ({ preview }) => {
-    const days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
     const meals = [
         { day: 'الأحد', breakfast: 'فول + تميس + جبن', lunch: 'كبسة دجاج + سلطة + لبن', dinner: 'بيض مسلوق + خضار + خبز' },
         { day: 'الاثنين', breakfast: 'شكشوكة + خبز + زيتون', lunch: 'إيدام خضار + أرز أبيض + دجاج', dinner: 'مكرونة بالبشاميل + عصير' },

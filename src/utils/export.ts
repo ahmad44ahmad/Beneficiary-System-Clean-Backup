@@ -12,7 +12,7 @@ export interface ExportColumn {
     header: string; // Arabic header
     width?: number;
     type?: 'string' | 'number' | 'date' | 'boolean';
-    format?: (value: any) => string;
+    format?: (value: unknown) => string;
 }
 
 export interface ExportOptions {
@@ -20,7 +20,7 @@ export interface ExportOptions {
     title?: string;
     subtitle?: string;
     columns: ExportColumn[];
-    data: Record<string, any>[];
+    data: Record<string, unknown>[];
     includeTimestamp?: boolean;
     orientation?: 'portrait' | 'landscape';
 }
@@ -59,7 +59,7 @@ export function exportToCSV(options: ExportOptions): void {
             if (col.format) {
                 value = col.format(value);
             } else if (col.type === 'date' && value) {
-                value = new Date(value).toLocaleDateString('ar-SA');
+                value = new Date(value as string).toLocaleDateString('ar-SA');
             } else if (col.type === 'boolean') {
                 value = value ? 'نعم' : 'لا';
             }
@@ -152,7 +152,7 @@ export function exportToExcel(options: ExportOptions): void {
             if (col.format) {
                 value = col.format(value);
             } else if (col.type === 'date' && value) {
-                value = new Date(value).toLocaleDateString('ar-SA');
+                value = new Date(value as string).toLocaleDateString('ar-SA');
             } else if (col.type === 'boolean') {
                 value = value ? 'نعم' : 'لا';
             } else if (col.type === 'number' && typeof value === 'number') {
@@ -253,7 +253,7 @@ export function exportToPDF(options: ExportOptions): void {
                     ${columns.map(col => {
         let value = row[col.key];
         if (col.format) value = col.format(value);
-        else if (col.type === 'date' && value) value = new Date(value).toLocaleDateString('ar-SA');
+        else if (col.type === 'date' && value) value = new Date(value as string).toLocaleDateString('ar-SA');
         else if (col.type === 'boolean') value = value ? 'نعم' : 'لا';
         return `<td>${value ?? ''}</td>`;
     }).join('')}
@@ -308,14 +308,14 @@ function downloadFile(content: string, filename: string, mimeType: string): void
 /**
  * Export beneficiaries list
  */
-export function exportBeneficiariesList(data: any[], format: 'csv' | 'excel' | 'pdf' = 'excel'): void {
+export function exportBeneficiariesList(data: Record<string, unknown>[], format: 'csv' | 'excel' | 'pdf' = 'excel'): void {
     const options: ExportOptions = {
         filename: 'قائمة_المستفيدين',
         title: 'قائمة المستفيدين',
         columns: [
             { key: 'nationalId', header: 'رقم الهوية' },
             { key: 'fullName', header: 'الاسم الكامل' },
-            { key: 'gender', header: 'الجنس', format: v => v === 'male' ? 'ذكر' : 'أنثى' },
+            { key: 'gender', header: 'الجنس', format: (v: unknown) => v === 'male' ? 'ذكر' : 'أنثى' },
             { key: 'dob', header: 'تاريخ الميلاد', type: 'date' },
             { key: 'roomNumber', header: 'رقم الغرفة' },
             { key: 'status', header: 'الحالة' },
@@ -331,7 +331,7 @@ export function exportBeneficiariesList(data: any[], format: 'csv' | 'excel' | '
 /**
  * Export incidents report
  */
-export function exportIncidentsReport(data: any[], format: 'csv' | 'excel' | 'pdf' = 'excel'): void {
+export function exportIncidentsReport(data: Record<string, unknown>[], format: 'csv' | 'excel' | 'pdf' = 'excel'): void {
     const options: ExportOptions = {
         filename: 'تقرير_الحوادث',
         title: 'تقرير الحوادث',

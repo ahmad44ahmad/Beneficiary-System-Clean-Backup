@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Moon, Sun, Bell, BellOff, Globe, Palette, Save, CheckCircle } from 'lucide-react';
+import { Settings, Moon, Sun, Bell, Globe, Palette, Save, CheckCircle } from 'lucide-react';
 
 interface SettingsState {
     theme: 'light' | 'dark' | 'auto';
@@ -58,7 +58,7 @@ export const SettingsPage: React.FC = () => {
                     ].map(({ value, label, icon: Icon }) => (
                         <button
                             key={value}
-                            onClick={() => setSettings({ ...settings, theme: value as any })}
+                            onClick={() => setSettings({ ...settings, theme: value as SettingsState['theme'] })}
                             className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 transition-all ${settings.theme === value
                                 ? 'border-[#148287] bg-[#148287]/10'
                                 : 'border-gray-200 hover:border-gray-300'
@@ -107,7 +107,7 @@ export const SettingsPage: React.FC = () => {
                     ].map(({ value, label, flag }) => (
                         <button
                             key={value}
-                            onClick={() => setSettings({ ...settings, language: value as any })}
+                            onClick={() => setSettings({ ...settings, language: value as SettingsState['language'] })}
                             className={`p-4 rounded-xl border-2 flex items-center gap-3 transition-all ${settings.language === value
                                 ? 'border-[#148287] bg-[#148287]/10'
                                 : 'border-gray-200 hover:border-gray-300'

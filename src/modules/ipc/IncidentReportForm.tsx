@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     AlertTriangle, ChevronLeft, Save, Loader2,
-    User, MapPin, Calendar, Clock, FileText,
+    User, MapPin, Calendar, FileText,
     Thermometer, Shield, AlertCircle
 } from 'lucide-react';
 import { ipcService, Location } from '../../services/ipcService';
@@ -102,12 +102,12 @@ export const IncidentReportForm: React.FC = () => {
         try {
             const result = await ipcService.saveIncident({
                 incident_category: category,
-                affected_type: affectedType as any,
+                affected_type: affectedType as 'beneficiary' | 'staff' | 'visitor',
                 reported_by: reporterName,
                 location_id: locationId || undefined,
                 infection_site: infectionSite || undefined,
                 symptoms: symptoms,
-                severity_level: severityLevel as any,
+                severity_level: severityLevel as 'mild' | 'moderate' | 'severe' | 'critical',
                 onset_date: onsetDate || undefined,
                 immediate_actions: immediateActions,
                 isolation_required: isolationRequired,

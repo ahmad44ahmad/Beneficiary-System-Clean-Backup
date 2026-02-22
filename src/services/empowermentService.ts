@@ -176,7 +176,7 @@ const DEMO_TEMPLATES: GoalTemplate[] = [
 ];
 
 // Helper
-const logError = (context: string, error: any) => {
+const logError = (context: string, error: unknown) => {
     if (import.meta.env.DEV) {
         console.error(`[EmpowermentService] ${context}:`, error);
     }

@@ -7,14 +7,15 @@ export const deriveSmartTags = (profile: UnifiedBeneficiaryProfile): SmartTag[] 
     // ═══════════════════════════════════════════════════════════════════════════
     // 0. Database Alerts - Include any alerts stored directly in the database
     // ═══════════════════════════════════════════════════════════════════════════
-    if ((profile as any).alerts && Array.isArray((profile as any).alerts)) {
-        for (const alertId of (profile as any).alerts) {
+    const profileAlerts = (profile as unknown as { alerts?: string[] }).alerts;
+    if (profileAlerts && Array.isArray(profileAlerts)) {
+        for (const alertId of profileAlerts) {
             const alertDef = ALERT_TAGS.find(t => t.id === alertId);
             if (alertDef) {
                 tags.push({
                     id: alertDef.id,
                     label: alertDef.label,
-                    color: alertDef.color as any,
+                    color: alertDef.color as SmartTag['color'],
                     icon: alertDef.icon
                 });
             }
@@ -141,7 +142,7 @@ export const deriveSmartTags = (profile: UnifiedBeneficiaryProfile): SmartTag[] 
             tags.push({
                 id: `isolation-${config.type}`,
                 label: config.label,
-                color: config.color as any,
+                color: config.color as SmartTag['color'],
                 icon: config.icon,
                 description: `Requires ${config.type} precautions. Check Global Alerts.`
             });

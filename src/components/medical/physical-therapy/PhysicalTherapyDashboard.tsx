@@ -7,10 +7,10 @@ import { Activity, ClipboardList, PenTool } from 'lucide-react';
 
 interface PhysicalTherapyDashboardProps {
     beneficiary?: UnifiedBeneficiaryProfile | null;
-    onUpdate?: (data: any) => void;
+    onUpdate?: (data: Record<string, unknown>) => void;
 }
 
-export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> = ({ beneficiary, onUpdate }) => {
+export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> = ({ beneficiary }) => {
     const [activeTab, setActiveTab] = useState<'assessment' | 'notes'>('assessment');
 
     // Handle case where beneficiary is not provided

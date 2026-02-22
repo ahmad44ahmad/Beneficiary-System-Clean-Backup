@@ -21,7 +21,7 @@ export const LegacyConsultant: React.FC = () => {
         }
     ]);
 
-    const { searchWisdom, markUseful, results, loading } = useWisdom();
+    const { searchWisdom, results, loading } = useWisdom();
 
     const handleSend = async () => {
         if (!query.trim()) return;
@@ -52,7 +52,7 @@ export const LegacyConsultant: React.FC = () => {
         } else if (loading) {
             // Optional: Loading state
         }
-    }, [results]);
+    }, [results, loading]);
 
     return (
         <Card className="h-[600px] flex flex-col overflow-hidden border-orange-200">

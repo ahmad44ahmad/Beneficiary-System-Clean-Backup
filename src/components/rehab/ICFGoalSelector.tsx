@@ -6,7 +6,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search, X, Check, ChevronDown } from 'lucide-react';
 import {
-    ICF_CODES,
     ICF_QUALIFIERS,
     ICF_CATEGORY_LABELS,
     getICFCodesByCategory,

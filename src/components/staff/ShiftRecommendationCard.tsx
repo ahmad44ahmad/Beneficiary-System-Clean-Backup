@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Users, AlertTriangle, CheckCircle, TrendingUp, UserPlus } from 'lucide-react';
+import { Users, AlertTriangle, CheckCircle, UserPlus } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { staffingOptimizerService, WardAcuity } from '../../services/staffingOptimizerService';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend } from 'recharts';

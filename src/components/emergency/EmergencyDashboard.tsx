@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-    AlertTriangle, Phone, Clock, Users, Heart, Activity,
-    CheckCircle, X, Shield, Zap, Radio, MapPin, User,
-    Thermometer, Droplet, Wind
+    AlertTriangle, Phone, Users, Heart, Activity,
+    CheckCircle, Shield, Zap, Radio, MapPin, User,
+    Wind
 } from 'lucide-react';
 
 type EmergencyType = 'code_blue' | 'fall' | 'fire' | 'choking' | 'seizure';

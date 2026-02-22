@@ -93,7 +93,7 @@ async function isTableEmpty(tableName: string): Promise<boolean> {
         }
 
         return !data || data.length === 0;
-    } catch (err) {
+    } catch {
         return true;
     }
 }

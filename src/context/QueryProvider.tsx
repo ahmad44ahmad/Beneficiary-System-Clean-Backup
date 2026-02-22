@@ -36,4 +36,5 @@ export function QueryProvider({ children }: QueryProviderProps) {
 }
 
 // Export the client for manual cache operations
+// eslint-disable-next-line react-refresh/only-export-components
 export { queryClient };

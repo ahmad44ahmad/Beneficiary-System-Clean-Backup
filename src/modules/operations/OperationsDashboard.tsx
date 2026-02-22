@@ -6,7 +6,6 @@ import {
     AlertTriangle,
     CheckCircle2,
     Clock,
-    TrendingUp,
     Trash2,
     Calendar,
     Settings,
@@ -36,7 +35,7 @@ export const OperationsDashboard: React.FC = () => {
         wasteThisMonth: 0
     });
     const [loading, setLoading] = useState(true);
-    const [recentRequests, setRecentRequests] = useState<any[]>([]);
+    const [recentRequests, setRecentRequests] = useState<Record<string, unknown>[]>([]);
 
     useEffect(() => {
         fetchDashboardData();
@@ -273,22 +272,22 @@ export const OperationsDashboard: React.FC = () => {
                             </thead>
                             <tbody className="divide-y divide-gray-100">
                                 {recentRequests.map((req) => (
-                                    <tr key={req.id} className="hover:bg-gray-50">
-                                        <td className="p-3 font-mono text-sm">{req.request_number}</td>
-                                        <td className="p-3">{req.title}</td>
-                                        <td className="p-3 text-center text-sm">{req.request_type}</td>
+                                    <tr key={req.id as string} className="hover:bg-gray-50">
+                                        <td className="p-3 font-mono text-sm">{req.request_number as string}</td>
+                                        <td className="p-3">{req.title as string}</td>
+                                        <td className="p-3 text-center text-sm">{req.request_type as string}</td>
                                         <td className="p-3 text-center">
                                             <span className={`px-2 py-1 rounded text-xs ${req.priority === 'critical' ? 'bg-red-100 text-red-800' :
                                                     req.priority === 'high' ? 'bg-orange-100 text-orange-800' :
                                                         req.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
                                                             'bg-gray-100 text-gray-800'
                                                 }`}>
-                                                {req.priority}
+                                                {req.priority as string}
                                             </span>
                                         </td>
-                                        <td className="p-3 text-center">{getStatusBadge(req.status)}</td>
+                                        <td className="p-3 text-center">{getStatusBadge(req.status as string)}</td>
                                         <td className="p-3 text-sm text-gray-500">
-                                            {new Date(req.created_at).toLocaleDateString('ar-SA')}
+                                            {new Date(req.created_at as string).toLocaleDateString('ar-SA')}
                                         </td>
                                     </tr>
                                 ))}

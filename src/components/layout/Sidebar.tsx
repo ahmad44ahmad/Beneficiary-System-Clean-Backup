@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import {
-    LayoutDashboard,
     Users,
-    Stethoscope,
     Package,
-    Shirt,
-    CalendarCheck,
     Activity,
     Settings,
     FileText,
-    GraduationCap,
-    Building2,
     CheckCircle2,
     Network,
-    Sparkles,
     Target,
     X,
     ChevronDown,
-    ChevronLeft,
     Home,
     Bell,
     LogOut,
@@ -28,11 +20,9 @@ import {
     Utensils,
     Wrench,
     BarChart3,
-    AlertOctagon,
     Brain,
     Syringe,
     ClipboardList,
-    AlertCircle,
     Users2,
     TrendingUp
 } from 'lucide-react';
@@ -57,7 +47,6 @@ interface NavItem {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobile = false }) => {
-    const location = useLocation();
     const [expandedSections, setExpandedSections] = useState<string[]>(['main']);
 
     // Basira 5.0 Navigation Structure
@@ -213,7 +202,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
 
                 {/* Navigation */}
                 <nav className="flex-1 p-3 overflow-y-auto hrsd-scrollbar">
-                    {navSections.map((section, idx) => (
+                    {navSections.map((section, _idx) => (
                         <div key={section.title} className="mb-3">
                             {/* Section Header */}
                             <button

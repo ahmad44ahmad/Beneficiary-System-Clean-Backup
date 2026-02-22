@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Users, Plus, RefreshCw, Grid, List,
     ChevronLeft, Activity, Printer, Download,
-    FileSpreadsheet, ChevronDown, CheckSquare,
-    Search, Archive, Trash, X
+    FileSpreadsheet, CheckSquare,
+    Archive, Trash, X
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
 import { BeneficiaryCard } from './BeneficiaryCard';
 import { BeneficiaryFilters, FilterState } from './BeneficiaryFilters';
-import { SkeletonCard, SkeletonStatCard } from '../ui/Skeleton';
+import { SkeletonCard } from '../ui/Skeleton';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport, BENEFICIARY_COLUMNS } from '../../hooks/useExport';
 import { useToast } from '../../context/ToastContext';
@@ -20,6 +20,7 @@ import { useBatchOperations } from '../../hooks/useBatchOperations';
 import { useAudit } from '../../hooks/useAudit';
 
 interface Beneficiary {
+    [key: string]: unknown; // Index signature for Record<string, unknown> compatibility
     id: string;
     name: string;
     age: number;
@@ -40,7 +41,7 @@ export const BeneficiaryListPage: React.FC = () => {
 
     // Hooks for print, export, and notifications
     const { printTable, isPrinting } = usePrint();
-    const { exportToExcel, exportToCsv, isExporting } = useExport();
+    const { exportToExcel, isExporting } = useExport();
     const { showToast } = useToast();
 
     // Advanced audit logging
@@ -122,12 +123,8 @@ export const BeneficiaryListPage: React.FC = () => {
     // Advanced Search with Multi-field Support
     // ═══════════════════════════════════════════════════════════════════════════
     const {
-        query: searchQuery,
         setQuery: setSearchQuery,
         results: searchResults,
-        isSearching,
-        resultCount,
-        hasActiveFilters: hasActiveSearch
     } = useAdvancedSearch(beneficiaries, {
         searchFields: ['name', 'id', 'room'],
         debounceMs: 300,
@@ -156,22 +153,18 @@ export const BeneficiaryListPage: React.FC = () => {
     // Batch Operations for Multi-select
     // ═══════════════════════════════════════════════════════════════════════════
     const {
-        selectedIds,
         selectedItems,
-        toggle: toggleSelect,
         selectAll,
         deselectAll,
-        isSelected,
         selectionCount,
         isAllSelected,
-        isPartiallySelected,
         executeAction,
         isExecuting
     } = useBatchOperations({
         data: filteredBeneficiaries,
         idField: 'id',
         module: 'beneficiaries',
-        onExecute: async (action, items, payload) => {
+        onExecute: async (action, items) => {
             switch (action) {
                 case 'archive':
                     await audit.update('batch', 'beneficiary', `أرشفة ${items.length} مستفيد`);
@@ -473,18 +466,18 @@ export const BeneficiaryListPage: React.FC = () => {
                 }>
                     {filteredBeneficiaries.map(beneficiary => (
                         <BeneficiaryCard
-                            key={beneficiary.id}
-                            id={beneficiary.id}
-                            name={beneficiary.name}
-                            age={beneficiary.age}
-                            room={beneficiary.room}
-                            wing={getWingName(beneficiary.wing)}
-                            admission_date={beneficiary.admission_date}
-                            status={beneficiary.status}
-                            ipc_status={beneficiary.ipc_status}
-                            latest_goal={beneficiary.latest_goal}
-                            avatar_url={beneficiary.avatar_url}
-                            alerts={beneficiary.alerts || []}
+                            key={beneficiary.id as string}
+                            id={beneficiary.id as string}
+                            name={beneficiary.name as string}
+                            age={beneficiary.age as number}
+                            room={beneficiary.room as string}
+                            wing={getWingName(beneficiary.wing as string)}
+                            admission_date={beneficiary.admission_date as string}
+                            status={beneficiary.status as 'stable' | 'needs_attention' | 'critical'}
+                            ipc_status={beneficiary.ipc_status as 'safe' | 'monitor' | 'alert'}
+                            latest_goal={beneficiary.latest_goal as string}
+                            avatar_url={beneficiary.avatar_url as string}
+                            alerts={(beneficiary.alerts || []) as string[]}
                         />
                     ))}
                 </div>

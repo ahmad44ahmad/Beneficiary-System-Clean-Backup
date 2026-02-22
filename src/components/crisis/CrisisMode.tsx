@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-    AlertOctagon, Users, Activity,
+    AlertOctagon, Users,
     MapPin, Phone, Ambulance, CheckCircle,
-    Clock, ChevronRight, Power, Radio, X, Zap
+    Clock, Power, Radio, Zap
 } from 'lucide-react';
 
 // Types
@@ -31,8 +31,8 @@ const EvacuationList: React.FC<{
     beneficiaries: Beneficiary[];
     color: string;
     title: string;
-    onAssign: (beneficiaryId: string, staffId: string) => void;
-}> = ({ beneficiaries, color, title, onAssign }) => {
+    onAssign: (_beneficiaryId: string, _staffId: string) => void;
+}> = ({ beneficiaries, color, title }) => {
     const bgColors = {
         red: 'bg-red-50 border-red-500',
         yellow: 'bg-yellow-50 border-yellow-500',
@@ -301,19 +301,19 @@ export const CrisisMode: React.FC = () => {
                         beneficiaries={beneficiaries.filter(b => b.mobility_status === 'bedridden')}
                         color="red"
                         title="🔴 طريح فراش (أولوية قصوى)"
-                        onAssign={(benId, staffId) => { }}
+                        onAssign={(_benId, _staffId) => { }}
                     />
                     <EvacuationList
                         beneficiaries={beneficiaries.filter(b => b.mobility_status === 'wheelchair')}
                         color="yellow"
                         title="🟡 كرسي متحرك"
-                        onAssign={(benId, staffId) => { }}
+                        onAssign={(_benId, _staffId) => { }}
                     />
                     <EvacuationList
                         beneficiaries={beneficiaries.filter(b => b.mobility_status === 'ambulatory')}
                         color="green"
                         title="🟢 يمشي"
-                        onAssign={(benId, staffId) => { }}
+                        onAssign={(_benId, _staffId) => { }}
                     />
                 </div>
 

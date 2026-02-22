@@ -10,7 +10,7 @@ interface SocialResearchFormProps {
 }
 
 export const SocialResearchForm: React.FC<SocialResearchFormProps> = ({ beneficiary, onSave, onCancel }) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState<Omit<SocialResearch, 'id' | 'beneficiaryId' | 'beneficiaryName'>>({
         researchDate: '',
         researcherName: '',

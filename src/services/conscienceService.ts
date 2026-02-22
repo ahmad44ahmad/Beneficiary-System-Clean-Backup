@@ -11,7 +11,7 @@ export interface ConscienceDecision {
     alternatives: string[];
     reasoning: string[];
     beneficiaryId?: string;
-    context?: any;
+    context?: Record<string, unknown>;
 }
 
 export const ETHICAL_PRINCIPLES = {

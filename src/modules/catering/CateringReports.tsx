@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../config/supabase';
-import { Calendar, FileText, Printer, ChevronLeft, Download, Users, Layers, Scale, FileSpreadsheet } from 'lucide-react';
+import { Printer, ChevronLeft, Users, Layers, Scale, FileSpreadsheet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { TabButton } from '../../components/common/TabButton';
@@ -55,10 +55,10 @@ export const CateringReports: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'attendance' | 'daily_log' | 'summary'>('attendance');
     const [selectedGender, setSelectedGender] = useState<Gender>('male');
     const [selectedDay, setSelectedDay] = useState<DayOfWeek>('السبت');
-    const [usingDemoData, setUsingDemoData] = useState(false);
+    const [, setUsingDemoData] = useState(false);
 
     // State for Attendance
-    const [attendanceData, setAttendanceData] = useState<any[]>([]);
+    const [attendanceData, setAttendanceData] = useState<{ id: number; real_id: string; name: string; days: boolean[] }[]>([]);
     const [loading, setLoading] = useState(false);
 
     // Column definitions for export
@@ -98,14 +98,7 @@ export const CateringReports: React.FC = () => {
         showToast(`تم تصدير ${attendanceData.length} سجل إلى Excel`, 'success');
     };
 
-    // Fetch Attendance Data
-    useEffect(() => {
-        if (activeTab === 'attendance') {
-            fetchAttendance();
-        }
-    }, [activeTab, selectedGender]);
-
-    const fetchAttendance = async () => {
+    const fetchAttendance = useCallback(async () => {
         setLoading(true);
         try {
             if (!supabase) {
@@ -186,7 +179,13 @@ export const CateringReports: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [selectedGender]);
+
+    useEffect(() => {
+        if (activeTab === 'attendance') {
+            fetchAttendance();
+        }
+    }, [activeTab, selectedGender, fetchAttendance]);
 
     // Expanded Mock Data for Daily Log Items (Matching the "Heavy" Spreadsheet structure)
     const dailyItems = [

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Brain, Thermometer, AlertTriangle, TrendingUp,
+    Brain, Thermometer, AlertTriangle,
     Wind, Sun, CloudRain, ChevronLeft, Info, BarChart3
 } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 // Types
 interface IncidentRecord {
@@ -37,7 +37,6 @@ export const BehavioralPrediction: React.FC = () => {
     ];
 
     const [currentTemp] = useState(28);
-    const [hvacStatus] = useState('معطل'); // Broken
 
     // AI Prediction
     const prediction: Prediction = {

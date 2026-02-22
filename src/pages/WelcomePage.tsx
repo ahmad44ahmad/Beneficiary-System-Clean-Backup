@@ -12,7 +12,6 @@ import {
     Zap,
     Target,
     BarChart3,
-    Clock,
     Award,
     Leaf,
     AlertTriangle

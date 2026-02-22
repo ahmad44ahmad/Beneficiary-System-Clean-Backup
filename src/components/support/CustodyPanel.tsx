@@ -7,15 +7,12 @@ import {
     User,
     Search,
     Plus,
-    ArrowRightLeft,
-    CheckCircle2,
-    AlertCircle,
     Package
 } from 'lucide-react';
 
 export const CustodyPanel: React.FC = () => {
-    const [assets, setAssets] = useState<AssetItem[]>(MOCK_ASSETS);
-    const [custodyRecords, setCustodyRecords] = useState<CustodyRecord[]>(MOCK_CUSTODY);
+    const [assets] = useState<AssetItem[]>(MOCK_ASSETS);
+    const [custodyRecords] = useState<CustodyRecord[]>(MOCK_CUSTODY);
     const [activeTab, setActiveTab] = useState<'inventory' | 'custody'>('custody');
     const [searchTerm, setSearchTerm] = useState('');
 

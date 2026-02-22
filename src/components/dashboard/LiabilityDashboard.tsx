@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {
     Shield, AlertTriangle, CheckCircle, XCircle,
     Clock, TrendingUp, TrendingDown, Users,
-    Activity, Utensils, Heart, AlertCircle as Alert,
-    Wrench, Thermometer, Droplets, Navigation,
+    Activity, Utensils, Heart,
+    Thermometer, Droplets, Navigation,
     ChevronLeft, Info
 } from 'lucide-react';
 

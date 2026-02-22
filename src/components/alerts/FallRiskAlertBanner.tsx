@@ -41,7 +41,12 @@ export const FallRiskAlertBanner: React.FC = () => {
                     table: 'fall_risk_assessments'
                 },
                 async (payload) => {
-                    const assessment = payload.new as any;
+                    const assessment = payload.new as {
+                        id: string;
+                        beneficiary_id: string;
+                        risk_score: number;
+                        created_at: string | null;
+                    };
 
                     // Only alert for high risk (score >= 45)
                     if (assessment.risk_score >= 45) {

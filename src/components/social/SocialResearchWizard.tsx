@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
-import { Beneficiary } from '../../types';
 import { SocialResearch } from '../../types/social';
 import { beneficiaries as initialBeneficiaries } from '../../data/beneficiaries';
 import { Button } from '../ui/Button';
@@ -19,7 +18,7 @@ const STEPS = [
 
 export const SocialResearchWizard: React.FC = () => {
     const navigate = useNavigate();
-    const { currentUser } = useUser();
+    const { currentUser: _currentUser } = useUser();
     const [currentStep, setCurrentStep] = useState(1);
     const [selectedBeneficiaryId, setSelectedBeneficiaryId] = useState('');
 
@@ -103,7 +102,7 @@ export const SocialResearchWizard: React.FC = () => {
                                                 type="radio"
                                                 name="isFatherAlive"
                                                 checked={formData.isFatherAlive === opt}
-                                                onChange={() => setFormData({ ...formData, isFatherAlive: opt as any })}
+                                                onChange={() => setFormData({ ...formData, isFatherAlive: opt })}
                                             />
                                             <span>{opt === 'yes' ? 'على قيد الحياة' : opt === 'no' ? 'متوفى' : 'مجهول'}</span>
                                         </label>
@@ -119,7 +118,7 @@ export const SocialResearchWizard: React.FC = () => {
                                                 type="radio"
                                                 name="isMotherAlive"
                                                 checked={formData.isMotherAlive === opt}
-                                                onChange={() => setFormData({ ...formData, isMotherAlive: opt as any })}
+                                                onChange={() => setFormData({ ...formData, isMotherAlive: opt })}
                                             />
                                             <span>{opt === 'yes' ? 'على قيد الحياة' : opt === 'no' ? 'متوفى' : 'مجهول'}</span>
                                         </label>

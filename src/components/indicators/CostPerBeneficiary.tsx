@@ -5,7 +5,7 @@ import {
     Users, Utensils, Zap, Droplets, Wrench, RefreshCw
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 interface CostData {
     cost_month: string;
@@ -14,13 +14,8 @@ interface CostData {
     beneficiary_count: number;
 }
 
-export const CostPerBeneficiary: React.FC = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [costData, setCostData] = useState<CostData[]>([]);
-
-    // Demo data
-    const demoCostData: CostData[] = [
+// Demo data (module-level constant to avoid recreating on each render)
+const demoCostData: CostData[] = [
         { cost_month: '2025-10-01', cost_category: 'رواتب', amount: 450000, beneficiary_count: 120 },
         { cost_month: '2025-10-01', cost_category: 'غذاء', amount: 85000, beneficiary_count: 120 },
         { cost_month: '2025-10-01', cost_category: 'كهرباء', amount: 35000, beneficiary_count: 120 },
@@ -35,8 +30,13 @@ export const CostPerBeneficiary: React.FC = () => {
         { cost_month: '2025-12-01', cost_category: 'غذاء', amount: 88000, beneficiary_count: 122 },
         { cost_month: '2025-12-01', cost_category: 'كهرباء', amount: 32000, beneficiary_count: 122 },
         { cost_month: '2025-12-01', cost_category: 'مياه', amount: 8500, beneficiary_count: 122 },
-        { cost_month: '2025-12-01', cost_category: 'صيانة', amount: 18000, beneficiary_count: 122 },
-    ];
+    { cost_month: '2025-12-01', cost_category: 'صيانة', amount: 18000, beneficiary_count: 122 },
+];
+
+export const CostPerBeneficiary: React.FC = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [costData, setCostData] = useState<CostData[]>([]);
 
     useEffect(() => {
         const fetchCosts = async () => {

@@ -75,8 +75,8 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
             referralDateHijri: formData.referralDateHijri,
             medicalDiagnosis: selectedBeneficiary?.medicalDiagnosis,
             psychologicalDiagnosis: selectedBeneficiary?.psychiatricDiagnosis,
-            goals: formData.goals as any,
-            currentPerformance: formData.currentPerformance as any,
+            goals: formData.goals as TrainingReferral['goals'],
+            currentPerformance: formData.currentPerformance as TrainingReferral['currentPerformance'],
             specialistName: formData.specialistName,
             trainerName: formData.trainerName,
             supervisorName: formData.supervisorName,
@@ -159,8 +159,8 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                                 <label key={k} className="flex items-center gap-2 cursor-pointer p-3 border rounded-lg hover:bg-gray-50">
                                     <input
                                         type="checkbox"
-                                        checked={(formData.goals as any)[k]}
-                                        onChange={() => handleGoalChange(k as any)}
+                                        checked={formData.goals![k as keyof typeof formData.goals]}
+                                        onChange={() => handleGoalChange(k as keyof typeof formData.goals)}
                                         className="w-5 h-5 text-green-600 rounded"
                                     />
                                     <span className="font-medium text-gray-700">{label}</span>
@@ -205,16 +205,16 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                                                 <input
                                                     type="radio"
                                                     name={k}
-                                                    checked={(formData.currentPerformance as any)[k] === 'good'}
-                                                    onChange={() => handlePerformanceChange(k as any, 'good')}
+                                                    checked={formData.currentPerformance![k as keyof typeof formData.currentPerformance] === 'good'}
+                                                    onChange={() => handlePerformanceChange(k as keyof typeof formData.currentPerformance, 'good')}
                                                 />
                                             </td>
                                             <td className="border p-2 text-center">
                                                 <input
                                                     type="radio"
                                                     name={k}
-                                                    checked={(formData.currentPerformance as any)[k] === 'average'}
-                                                    onChange={() => handlePerformanceChange(k as any, 'average')}
+                                                    checked={formData.currentPerformance![k as keyof typeof formData.currentPerformance] === 'average'}
+                                                    onChange={() => handlePerformanceChange(k as keyof typeof formData.currentPerformance, 'average')}
                                                 />
                                             </td>
                                             <td className="border p-2">

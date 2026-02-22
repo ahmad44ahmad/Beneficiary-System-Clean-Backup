@@ -7,8 +7,6 @@ import {
     Building2,
     Users,
     CheckCircle2,
-    AlertTriangle,
-    Clock,
     Share2
 } from 'lucide-react';
 import { Card } from '../ui/Card';
