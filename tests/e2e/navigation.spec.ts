@@ -10,17 +10,14 @@ test.describe('Navigation & App Loading', () => {
 
     test('dashboard page is accessible', async ({ page }) => {
         await page.goto('/dashboard');
-        // Wait for lazy-loaded dashboard to render
-        await page.waitForLoadState('networkidle');
-        // Dashboard should have loaded (no longer showing loading spinner)
-        await expect(page.locator('.animate-spin')).not.toBeVisible({ timeout: 15_000 });
+        // Wait for dashboard heading to render (replaces flaky networkidle)
+        await expect(page.getByText('لوحة القياس التنفيذية')).toBeVisible({ timeout: 15_000 });
     });
 
     test('IPC dashboard is accessible', async ({ page }) => {
         await page.goto('/ipc');
-        await page.waitForLoadState('networkidle');
-        // IPC dashboard should render with its Arabic heading
-        await expect(page.getByText('مكافحة العدوى', { exact: true })).toBeVisible({ timeout: 15_000 });
+        // IPC dashboard heading is "درع السلامة"
+        await expect(page.getByText('درع السلامة')).toBeVisible({ timeout: 15_000 });
     });
 
     test('incident report form loads via lazy route', async ({ page }) => {

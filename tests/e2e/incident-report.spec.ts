@@ -69,6 +69,39 @@ test.describe('Incident Report Form — Full Journey', () => {
         expect(alertMessage).toContain('تم تسجيل الحادثة بنجاح');
     });
 
+    test('RCA section expands and accepts root cause analysis', async ({ page }) => {
+        await page.goto('/ipc/incident/new');
+        await expect(page.getByText('الإبلاغ عن حادثة عدوى')).toBeVisible({ timeout: 15_000 });
+
+        // ── RCA section is initially collapsed ──
+        await expect(page.getByText('تحليل السبب الجذري (RCA)')).toBeVisible();
+        // 5 Whys inputs should NOT be visible yet
+        await expect(page.getByPlaceholder('لماذا حدثت المشكلة؟')).not.toBeVisible();
+
+        // ── Expand the RCA section ──
+        await page.getByText('تحليل السبب الجذري (RCA)').click();
+
+        // ── Select RCA category ──
+        await expect(page.getByText('عامل بشري')).toBeVisible();
+        await page.getByText('عامل بشري').click();
+
+        // ── Fill 5 Whys chain ──
+        await page.getByPlaceholder('لماذا حدثت المشكلة؟').fill('عدم اتباع بروتوكول النظافة');
+        await page.getByPlaceholder('لماذا؟ (المستوى 2)').fill('نقص التدريب على البروتوكول');
+        await page.getByPlaceholder('لماذا؟ (المستوى 3)').fill('لم يتم جدولة دورات تدريبية');
+
+        // ── Fill root cause summary ──
+        await page.getByPlaceholder('ما هو السبب الجذري النهائي المحدد؟').fill('غياب برنامج تدريب منتظم');
+
+        // ── Fill corrective and preventive actions ──
+        await page.getByPlaceholder('ما الإجراء لمعالجة السبب الحالي؟').fill('تدريب فوري لجميع الموظفين');
+        await page.getByPlaceholder('ما الإجراء لمنع التكرار مستقبلاً؟').fill('جدولة دورات تدريبية ربع سنوية');
+
+        // ── Verify all fields retained their values ──
+        await expect(page.getByPlaceholder('لماذا حدثت المشكلة؟')).toHaveValue('عدم اتباع بروتوكول النظافة');
+        await expect(page.getByPlaceholder('ما هو السبب الجذري النهائي المحدد؟')).toHaveValue('غياب برنامج تدريب منتظم');
+    });
+
     test('form validates required fields before submission', async ({ page }) => {
         await page.goto('/ipc/incident/new');
         await expect(page.getByText('الإبلاغ عن حادثة عدوى')).toBeVisible({ timeout: 15_000 });
