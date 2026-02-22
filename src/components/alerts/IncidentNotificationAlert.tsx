@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, X, ChevronRight, MapPin } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 import { useNavigate } from 'react-router-dom';
 
 interface Incident {
@@ -41,7 +41,7 @@ const INCIDENT_TYPES: Record<string, string> = {
 export const IncidentNotificationAlert: React.FC = () => {
     const [incidents, setIncidents] = useState<Incident[]>([]);
     const [isVisible, setIsVisible] = useState(false);
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const navigate = useNavigate();
 
     useEffect(() => {

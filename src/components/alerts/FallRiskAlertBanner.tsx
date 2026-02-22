@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, X, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 
 interface FallRiskAlert {
     id: string;
@@ -25,7 +25,7 @@ export const FallRiskAlertBanner: React.FC = () => {
     const [alerts, setAlerts] = useState<FallRiskAlert[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     useEffect(() => {
         // Skip if Supabase is not configured

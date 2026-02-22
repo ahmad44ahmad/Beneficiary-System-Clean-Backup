@@ -2,9 +2,9 @@ import React from 'react';
 import { Bell, User, Menu, Eye } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { CommandMenu } from '../ui/CommandMenu';
-import { useUser } from '../../context/UserContext';
+import { useUserStore } from '../../stores/useUserStore';
 import { useLocation } from 'react-router-dom';
-import { useViewMode, ViewMode } from '../../context/ViewModeContext';
+import { useViewModeStore, ViewMode } from '../../stores/useViewModeStore';
 
 interface HeaderProps {
     onMenuClick?: () => void;
@@ -30,9 +30,9 @@ const pageTitles: Record<string, string> = {
 };
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-    const { currentUser } = useUser();
+    const { currentUser } = useUserStore();
     const location = useLocation();
-    const { currentView, setView } = useViewMode();
+    const { currentView, setView } = useViewModeStore();
 
     // Get current page title
     const getPageTitle = () => {

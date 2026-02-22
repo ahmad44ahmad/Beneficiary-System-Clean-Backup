@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 
 interface MaintenanceRequest {
     id: string;
@@ -34,7 +34,7 @@ interface MaintenanceRequest {
 export const MaintenanceRequests: React.FC = () => {
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     const [requests, setRequests] = useState<MaintenanceRequest[]>([]);
     const [loading, setLoading] = useState(true);

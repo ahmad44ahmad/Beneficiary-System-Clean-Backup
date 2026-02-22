@@ -1,7 +1,7 @@
 import React, { useState, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
-import { useApp } from '../context/AppContext';
+import { useAppStore } from '../stores/useAppStore';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
@@ -157,12 +157,10 @@ const SchedulingSystem = lazy(() => import('./scheduling/SchedulingSystem').then
 const StaffProfile = lazy(() => import('./staff/StaffProfile').then(m => ({ default: m.StaffProfile })));
 
 export const App = () => {
-    const {
-        activeBeneficiary: selectedBeneficiary,
-        setActiveBeneficiary: setSelectedBeneficiary,
-        isMasterViewOpen,
-        setIsMasterViewOpen
-    } = useApp();
+    const selectedBeneficiary = useAppStore((s) => s.activeBeneficiary);
+    const setSelectedBeneficiary = useAppStore((s) => s.setActiveBeneficiary);
+    const isMasterViewOpen = useAppStore((s) => s.isMasterViewOpen);
+    const setIsMasterViewOpen = useAppStore((s) => s.setIsMasterViewOpen);
 
     const {
         beneficiaries: unifiedBeneficiaries,

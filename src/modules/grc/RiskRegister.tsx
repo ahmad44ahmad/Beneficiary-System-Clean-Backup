@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 import { supabase } from '../../config/supabase';
 import {
     AlertTriangle,
@@ -50,7 +50,7 @@ const RISK_CATEGORIES = [
 
 export const RiskRegister: React.FC = () => {
     const location = useLocation();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const [risks, setRisks] = useState<Risk[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');

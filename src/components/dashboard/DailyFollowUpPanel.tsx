@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 import { DailyShiftRecord, IncidentReport, GenderSection } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { DailyShiftForm } from './DailyShiftForm';
@@ -21,7 +21,7 @@ const demoIncidentReports: IncidentReport[] = [
 
 export const DailyFollowUpPanel: React.FC = () => {
     const location = useLocation();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const [activeSection, setActiveSection] = useState<GenderSection>('male');
     const [activeTab, setActiveTab] = useState<'shifts' | 'incidents'>('shifts');
 

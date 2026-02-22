@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, X, ChevronRight, Bell } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 import { useNavigate } from 'react-router-dom';
 
 interface ShiftHandover {
@@ -29,7 +29,7 @@ export const ShiftHandoverAlert: React.FC = () => {
     const [alert, setAlert] = useState<ShiftHandover | null>(null);
     const [isVisible, setIsVisible] = useState(false);
     const autoHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const navigate = useNavigate();
 
     useEffect(() => {

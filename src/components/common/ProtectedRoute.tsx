@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUser, UserRole } from '../../context/UserContext';
+import { useUserStore, UserRole } from '../../stores/useUserStore';
 import { AccessDenied } from '../ui/AccessDenied';
 
 interface ProtectedRouteProps {
@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, allowedRoles }) => {
-    const { currentUser } = useUser();
+    const { currentUser } = useUserStore();
 
     if (allowedRoles && !allowedRoles.includes(currentUser.role)) {
         return <AccessDenied />;

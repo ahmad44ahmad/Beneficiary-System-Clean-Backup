@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReceivingCommittee } from './ReceivingCommittee';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 interface MealItem {
     id: string;
     beneficiary_name: string;
@@ -20,7 +20,7 @@ export const CateringDailyLog: React.FC = () => {
     const navigate = useNavigate();
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     const [loading, setLoading] = useState(false);
     const [generating, setGenerating] = useState(false);

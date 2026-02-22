@@ -7,7 +7,7 @@ import React from 'react';
 import { Printer, FileSpreadsheet, Download, CheckSquare, Loader2 } from 'lucide-react';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../context/ToastContext';
+import { useToastStore } from '../../stores/useToastStore';
 
 interface ColumnDef {
     key: string;
@@ -67,7 +67,7 @@ export const PageToolbar: React.FC<PageToolbarProps> = ({
 }) => {
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, exportToCsv, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     const handlePrint = () => {
         if (data.length === 0) {
