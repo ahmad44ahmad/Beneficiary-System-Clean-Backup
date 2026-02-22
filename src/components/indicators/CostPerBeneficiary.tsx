@@ -6,7 +6,9 @@ import {
     Shirt, Stethoscope, Bus, Package, Sparkles
 } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, ReferenceLine } from 'recharts';
+
+const TARGET_DAILY_COST = 350;
 
 interface CostData {
     cost_month: string;

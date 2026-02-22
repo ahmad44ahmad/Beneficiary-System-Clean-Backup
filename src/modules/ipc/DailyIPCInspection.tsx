@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     Shield, CheckCircle, XCircle, Camera, Save,
     AlertTriangle, Loader2, ChevronLeft, MapPin,
-    History, X, Image, Calendar
+    History, X, Calendar
 } from 'lucide-react';
 import { ipcService, Location, ChecklistTemplate } from '../../services/ipcService';
 

@@ -102,7 +102,7 @@ export const SmartAlertsPanel: React.FC = () => {
                     }));
                     setAlerts(transformedAlerts);
                 }
-            } catch (err) {
+            } catch {
                 // Silently fall back to default alerts
             } finally {
                 setLoading(false);

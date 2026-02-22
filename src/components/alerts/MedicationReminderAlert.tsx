@@ -22,7 +22,12 @@ export const MedicationReminderAlert: React.FC = () => {
     const [overdueAlerts, setOverdueAlerts] = useState<OverdueMedication[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
+    const isMinimizedRef = useRef(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        isMinimizedRef.current = isMinimized;
+    }, [isMinimized]);
 
     useEffect(() => {
         if (!supabase) return;

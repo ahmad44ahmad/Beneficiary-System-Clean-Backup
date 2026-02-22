@@ -11,7 +11,6 @@ import {
   FileText,
   Calendar,
   User,
-  MapPin,
   Droplets,
   Heart,
   Search,
@@ -19,7 +18,7 @@ import {
   Plus,
   Eye,
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { supabase as _supabase } from '../../config/supabase';
 
 // --- Types ---
 

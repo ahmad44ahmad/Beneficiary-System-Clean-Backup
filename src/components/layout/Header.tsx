@@ -5,7 +5,6 @@ import { CommandMenu } from '../ui/CommandMenu';
 import { useUser } from '../../context/UserContext';
 import { useLocation } from 'react-router-dom';
 import { useViewMode, ViewMode } from '../../context/ViewModeContext';
-import { Eye } from 'lucide-react';
 
 interface HeaderProps {
     onMenuClick?: () => void;

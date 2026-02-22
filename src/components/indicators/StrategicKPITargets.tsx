@@ -8,7 +8,7 @@ import {
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
     ResponsiveContainer, ReferenceLine, Cell, Legend,
-    LineChart, Line
+    LineChart as _LineChart, Line as _Line
 } from 'recharts';
 import {
     STRATEGIC_KPIS, KPI_CATEGORIES, KPI_MONTHLY_TRENDS,

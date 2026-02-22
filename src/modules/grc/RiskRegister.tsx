@@ -103,7 +103,7 @@ export const RiskRegister: React.FC = () => {
             } else {
                 setRisks(data && data.length > 0 ? data : demoRisks);
             }
-        } catch (err) {
+        } catch {
             setRisks(demoRisks);
         }
 

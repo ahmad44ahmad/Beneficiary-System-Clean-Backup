@@ -82,7 +82,7 @@ export const FallRiskAlertBanner: React.FC = () => {
                             const audio = new Audio('/alert.mp3');
                             audio.volume = 0.3;
                             audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
-                        } catch (_) { /* Audio not supported */ }
+                        } catch { /* Audio not supported */ }
 
                         // Show toast notification
                         showToast(

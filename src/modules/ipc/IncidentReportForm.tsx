@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {
     AlertTriangle, ChevronLeft, Save, Loader2,
     User, MapPin, Calendar, FileText,
-    Thermometer, Shield, AlertCircle
+    Thermometer, Shield, AlertCircle,
+    Search, ChevronUp, ChevronDown
 } from 'lucide-react';
 import { ipcService, Location } from '../../services/ipcService';
 

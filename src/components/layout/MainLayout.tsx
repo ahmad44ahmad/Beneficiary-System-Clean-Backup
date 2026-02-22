@@ -31,7 +31,7 @@ export const MainLayout = () => {
     // Enable real-time Supabase subscription for critical data
     useRealtimeSubscription();
 
-    const location = useLocation();
+    const _location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Close mobile menu on route change

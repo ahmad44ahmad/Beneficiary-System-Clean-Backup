@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Activity, ShieldCheck, TrendingUp } from 'lucide-react';
+import { Activity, ShieldCheck, TrendingUp, User } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { UnifiedBeneficiaryProfile } from '../../types';
 import { calculateRiskScore, getWardTensionScore } from '../../services/riskAnalysisService';

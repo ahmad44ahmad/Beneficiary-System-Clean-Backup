@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
 import { Brain, Send, User, Sparkles } from 'lucide-react';
-import { useWisdom } from '../../hooks/useWisdom';
+// useWisdom hook was removed - using inline implementation
+const useWisdom = () => ({
+    searchWisdom: async (_query: string) => {},
+    results: [] as { answer: string; source: string }[],
+    loading: false,
+});
 
 interface ChatMessage {
     id: string;

@@ -103,7 +103,7 @@ export const DailyFollowUpPanel: React.FC = () => {
                 showToast('تعذر تحميل الحوادث من قاعدة البيانات', 'info');
             }
 
-        } catch (err) {
+        } catch {
             // Silently fall back to demo data
         }
 

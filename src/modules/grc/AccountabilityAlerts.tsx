@@ -55,7 +55,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
             } else if (data) {
                 setGaps(data);
             }
-        } catch (error) {
+        } catch {
             setGaps([]);
         } finally {
             setLoading(false);

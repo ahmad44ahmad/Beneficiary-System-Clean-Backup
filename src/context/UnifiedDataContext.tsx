@@ -112,7 +112,7 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         totalBeds: 10,
         occupiedBeds: 0,
         patients: [] as { name: string; reason: string }[]
-    });
+    };
 
     const isDemoMode = import.meta.env.VITE_APP_MODE === 'demo';
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    ChevronLeft, RefreshCw, Calendar, TrendingUp,
+    ChevronLeft, Calendar, TrendingUp,
     AlertTriangle, MapPin, BarChart3, PieChart as PieChartIcon,
-    Download, FileSpreadsheet, Printer
+    Download, Printer
 } from 'lucide-react';
 import {
     LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
@@ -11,6 +11,7 @@ import {
     AreaChart, Area
 } from 'recharts';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
+import { ipcService } from '../../services/ipcService';
 
 // Demo data for charts
 const WEEKLY_COMPLIANCE_DATA = [

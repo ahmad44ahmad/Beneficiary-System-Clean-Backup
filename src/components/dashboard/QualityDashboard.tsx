@@ -4,7 +4,8 @@ import {
     AlertTriangle,
     BarChart2,
     Shield,
-    Users
+    Users,
+    CheckCircle2
 } from 'lucide-react';
 import { getOvrReports, getOvrStats, OvrReport, OvrStats } from '../../services/ovrService';
 import { Card } from '../ui/Card';
