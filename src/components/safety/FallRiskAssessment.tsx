@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { ShieldAlert, Activity, CheckCircle, AlertTriangle, Save, History } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 interface FallRiskPayload {
     beneficiary_id: string;
@@ -86,6 +86,9 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
 
                 assessed_by: null // Typically from auth context
             };
+
+            const supabase = getSupabaseClient();
+            if (!supabase) throw new Error('Supabase not configured');
 
             const { error: insertError } = await supabase
                 .from('fall_risk_assessments')

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     BarChart3,
     TrendingUp,
@@ -94,6 +94,12 @@ export const StrategicKPIDashboard: React.FC = () => {
     const fetchDashboardData = async () => {
         setLoading(true);
         try {
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setLoading(false);
+                return;
+            }
+
             // Fetch beneficiaries count
             const { count: beneficiaryCount } = await supabase
                 .from('beneficiaries')

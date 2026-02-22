@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Building2,
     Plus,
@@ -82,6 +82,8 @@ export const AssetRegistry: React.FC = () => {
 
     const fetchAssets = async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         const { data, error } = await supabase
             .from('om_assets')
             .select('*')

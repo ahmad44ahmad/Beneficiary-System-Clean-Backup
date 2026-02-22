@@ -70,7 +70,8 @@ export const SmartAlertsPanel: React.FC = () => {
     const { data: fetchedAlerts } = useQuery<SmartAlert[]>({
         queryKey: [...queryKeys.alerts.list(), location.key],
         queryFn: async () => {
-            const { supabase } = await import('../../config/supabase');
+            const { getSupabaseClient } = await import('../../hooks/queries');
+            const supabase = getSupabaseClient();
             if (!supabase) return defaultAlerts;
 
             const { data, error } = await supabase

@@ -4,7 +4,7 @@ import {
     AlertTriangle, Shield, ChevronLeft, TrendingUp,
     AlertOctagon, Wrench, Activity, Users, RefreshCw
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface RiskScoreData {
@@ -40,6 +40,13 @@ export const EarlyWarningSystem: React.FC = () => {
     useEffect(() => {
         const fetchRiskData = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setRiskData(demoData);
+                setCurrentRisk(demoData[demoData.length - 1]);
+                setLoading(false);
+                return;
+            }
             const { data, error } = await supabase
                 .from('risk_score_log')
                 .select('*')

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Calendar,
     Plus,
@@ -36,6 +36,8 @@ export const PreventiveMaintenance: React.FC = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) { setLoading(false); return; }
             const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).toISOString().split('T')[0];
             const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).toISOString().split('T')[0];
 

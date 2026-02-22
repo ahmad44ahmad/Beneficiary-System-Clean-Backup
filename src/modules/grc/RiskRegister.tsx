@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useToastStore } from '../../stores/useToastStore';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     AlertTriangle,
     Plus,
@@ -76,6 +76,7 @@ export const RiskRegister: React.FC = () => {
 
     const fetchRisks = async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
 
         // Fallback demo data if Supabase is unavailable
         const demoRisks: Risk[] = [
@@ -112,6 +113,8 @@ export const RiskRegister: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
         const { error } = await supabase
             .from('grc_risks')
             .insert([formData]);

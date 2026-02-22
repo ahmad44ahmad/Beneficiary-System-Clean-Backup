@@ -17,7 +17,7 @@ import {
   Calendar,
   Plus,
 } from 'lucide-react';
-import { supabase as _supabase } from '../../config/supabase';
+// Supabase access via getSupabaseClient() from hooks/queries when needed
 
 // HRSD brand colors
 const NAVY = '#14415A';

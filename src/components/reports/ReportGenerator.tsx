@@ -1,36 +1,38 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useToastStore } from '../../stores/useToastStore';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
-    FileText, Download, Printer, ChevronLeft,
+    FileText, Download, ChevronLeft,
     Calendar, User, Building, CheckCircle,
-    Loader2, Eye, Settings
+    Loader2, Eye, ExternalLink
 } from 'lucide-react';
 
 // Report Types
 const REPORT_TYPES = [
     {
-        id: 'beneficiary_summary',
+        id: 'beneficiary_summary' as const,
         title: 'تقرير ملخص المستفيد',
         description: 'ملخص شامل لحالة المستفيد والأهداف والتقدم',
         icon: User,
         color: 'blue',
     },
     {
-        id: 'ipc_compliance',
+        id: 'ipc_compliance' as const,
         title: 'تقرير الامتثال IPC',
         description: 'تقرير مكافحة العدوى والتفتيشات الأسبوعية',
         icon: CheckCircle,
         color: 'green',
     },
     {
-        id: 'empowerment_progress',
+        id: 'empowerment_progress' as const,
         title: 'تقرير التمكين والأهداف',
         description: 'تفاصيل الأهداف التأهيلية ونسب الإنجاز',
         icon: FileText,
         color: 'purple',
     },
     {
-        id: 'monthly_center',
+        id: 'monthly_center' as const,
         title: 'التقرير الشهري للمركز',
         description: 'إحصائيات شاملة للمركز والخدمات المقدمة',
         icon: Building,
@@ -38,12 +40,24 @@ const REPORT_TYPES = [
     },
 ];
 
+type ReportType = typeof REPORT_TYPES[number]['id'];
+
+interface GeneratedReport {
+    reportId: string;
+    reportType: ReportType;
+    verificationToken: string;
+    downloadUrl?: string;
+    html?: string;
+    mode?: string;
+}
+
 // Report Card Component
 const ReportCard: React.FC<{
     report: typeof REPORT_TYPES[0];
-    onGenerate: (id: string) => void;
+    onGenerate: (id: ReportType) => void;
     generating: boolean;
-}> = ({ report, onGenerate, generating }) => {
+    generatedReport: GeneratedReport | null;
+}> = ({ report, onGenerate, generating, generatedReport }) => {
     const Icon = report.icon;
 
     const colorClasses: Record<string, { bg: string; icon: string; button: string }> = {
@@ -55,10 +69,22 @@ const ReportCard: React.FC<{
 
     const colors = colorClasses[report.color] || colorClasses.blue;
 
+    const handlePreview = () => {
+        if (generatedReport?.html) {
+            const w = window.open('', '_blank');
+            if (w) {
+                w.document.write(generatedReport.html);
+                w.document.close();
+            }
+        } else if (generatedReport?.downloadUrl) {
+            window.open(generatedReport.downloadUrl, '_blank');
+        }
+    };
+
     return (
         <div className={`${colors.bg} rounded-2xl p-5 hover-lift transition-all`}>
             <div className="flex items-start gap-4">
-                <div className={`p-3 bg-white rounded-xl shadow-sm`}>
+                <div className="p-3 bg-white rounded-xl shadow-sm">
                     <Icon className={`w-6 h-6 ${colors.icon}`} />
                 </div>
                 <div className="flex-1">
@@ -69,7 +95,7 @@ const ReportCard: React.FC<{
                         <button
                             onClick={() => onGenerate(report.id)}
                             disabled={generating}
-                            className={`flex-1 py-2 ${colors.button} text-white rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all`}
+                            className={`flex-1 py-2 ${colors.button} text-white rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all disabled:opacity-50`}
                         >
                             {generating ? (
                                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -78,158 +104,176 @@ const ReportCard: React.FC<{
                             )}
                             {generating ? 'جاري الإنشاء...' : 'تحميل PDF'}
                         </button>
-                        <button className="px-3 py-2 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
-                            <Eye className="w-4 h-4 text-gray-500" />
-                        </button>
-                        <button className="px-3 py-2 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
-                            <Printer className="w-4 h-4 text-gray-500" />
-                        </button>
+                        {generatedReport && (
+                            <>
+                                <button
+                                    onClick={handlePreview}
+                                    className="px-3 py-2 bg-white border rounded-lg hover:bg-gray-50 transition-colors"
+                                    title="معاينة"
+                                >
+                                    <Eye className="w-4 h-4 text-gray-500" />
+                                </button>
+                                {generatedReport.downloadUrl && (
+                                    <a
+                                        href={generatedReport.downloadUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-3 py-2 bg-white border rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center"
+                                        title="فتح الرابط"
+                                    >
+                                        <ExternalLink className="w-4 h-4 text-gray-500" />
+                                    </a>
+                                )}
+                            </>
+                        )}
                     </div>
+
+                    {generatedReport && (
+                        <div className="mt-2 text-xs text-gray-500 flex items-center gap-1">
+                            <CheckCircle className="w-3 h-3 text-green-500" />
+                            تم الإنشاء - {generatedReport.mode === 'html-fallback' ? 'وضع المعاينة' : 'PDF جاهز'}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     );
 };
 
-// Generate PDF Function (Client-side)
-const generatePDF = async (reportType: string): Promise<void> => {
-    // Create report content based on type
-    const reportTitles: Record<string, string> = {
-        beneficiary_summary: 'تقرير ملخص المستفيد',
-        ipc_compliance: 'تقرير الامتثال لمكافحة العدوى',
-        empowerment_progress: 'تقرير التمكين والأهداف التأهيلية',
-        monthly_center: 'التقرير الشهري للمركز',
+export const ReportGenerator: React.FC = () => {
+    const navigate = useNavigate();
+    const showToast = useToastStore((s) => s.showToast);
+    const [generating, setGenerating] = useState<string | null>(null);
+    const [generatedReports, setGeneratedReports] = useState<Record<string, GeneratedReport>>({});
+    const [dateRange, setDateRange] = useState({
+        from: new Date().toISOString().split('T')[0],
+        to: new Date().toISOString().split('T')[0],
+    });
+
+    const handleGenerate = async (reportId: ReportType) => {
+        setGenerating(reportId);
+
+        try {
+            // Call the Edge Function
+            const supabase = getSupabaseClient();
+            if (supabase) {
+                const { data, error } = await supabase.functions.invoke('generate-report', {
+                    body: {
+                        reportType: reportId,
+                        dateFrom: dateRange.from,
+                        dateTo: dateRange.to,
+                    },
+                });
+
+                if (error) throw error;
+
+                const report = data as GeneratedReport;
+                setGeneratedReports(prev => ({ ...prev, [reportId]: report }));
+
+                if (report.downloadUrl) {
+                    showToast('تم إنشاء التقرير بنجاح - اضغط للتحميل', 'success');
+                } else if (report.html) {
+                    // HTML fallback mode - open in new window
+                    const w = window.open('', '_blank');
+                    if (w) {
+                        w.document.write(report.html);
+                        w.document.close();
+                    }
+                    showToast('تم إنشاء التقرير (وضع المعاينة)', 'info');
+                }
+            } else {
+                // Demo mode - generate client-side
+                await fallbackClientSidePDF(reportId);
+                showToast('تم إنشاء التقرير (وضع تجريبي)', 'info');
+            }
+        } catch (err) {
+            console.error('Report generation error:', err);
+            // Fallback to client-side generation
+            await fallbackClientSidePDF(reportId);
+            showToast('تم إنشاء التقرير محلياً', 'info');
+        } finally {
+            setGenerating(null);
+        }
     };
 
-    const title = reportTitles[reportType] || 'تقرير';
-    const date = new Date().toLocaleDateString('ar-SA');
+    /** Client-side fallback when Edge Function is unavailable */
+    const fallbackClientSidePDF = async (reportType: string) => {
+        const reportTitles: Record<string, string> = {
+            beneficiary_summary: 'تقرير ملخص المستفيد',
+            ipc_compliance: 'تقرير الامتثال لمكافحة العدوى',
+            empowerment_progress: 'تقرير التمكين والأهداف التأهيلية',
+            monthly_center: 'التقرير الشهري للمركز',
+        };
 
-    // Create printable HTML content
-    const content = `
-<!DOCTYPE html>
+        const title = reportTitles[reportType] || 'تقرير';
+        const date = new Date().toLocaleDateString('ar-SA');
+        const reportId = `local-${Date.now().toString(36)}`;
+
+        const html = `<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <title>${title}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
         * { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
         body { padding: 40px; background: white; color: #1f2937; }
         .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #0d9488; }
-        .header h1 { font-size: 28px; color: #14415a; margin-bottom: 10px; }
-        .header p { color: #6b7280; }
-        .logo { width: 80px; margin-bottom: 20px; }
-        .section { margin-bottom: 30px; }
-        .section h2 { font-size: 18px; color: #0d9488; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb; }
-        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-        .stat-card { background: #f0fdfa; padding: 15px; border-radius: 12px; text-align: center; }
-        .stat-card .value { font-size: 24px; font-weight: 700; color: #14415a; }
-        .stat-card .label { font-size: 12px; color: #6b7280; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; }
-        th { background: #f8fafc; font-weight: 600; color: #14415a; }
-        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #9ca3af; }
+        .header h1 { font-size: 22px; color: #14415a; margin-bottom: 8px; font-weight: 900; }
+        .header h2 { font-size: 16px; color: #0d9488; }
+        .header p { color: #6b7280; font-size: 12px; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
+        .stat { background: #f0fdfa; padding: 15px; border-radius: 10px; text-align: center; }
+        .stat .v { font-size: 24px; font-weight: 900; color: #14415a; }
+        .stat .l { font-size: 10px; color: #6b7280; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #14415a; color: white; padding: 10px; text-align: right; }
+        td { padding: 8px 10px; border-bottom: 1px solid #e5e7eb; }
+        tr:nth-child(even) { background: #f9fafb; }
+        .footer { margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: center; font-size: 10px; color: #9ca3af; }
         @media print { body { padding: 20px; } }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>وزارة الموارد البشرية والتنمية الاجتماعية</h1>
-        <p>مركز التأهيل الشامل</p>
-        <h2 style="margin-top: 20px; color: #0d9488;">${title}</h2>
-        <p>تاريخ التقرير: ${date}</p>
+        <h2>${title}</h2>
+        <p>مركز التأهيل الشامل بمنطقة الباحة | تاريخ: ${date}</p>
     </div>
-    
-    <div class="section">
-        <h2>ملخص الإحصائيات</h2>
-        <div class="stat-grid">
-            <div class="stat-card">
-                <div class="value">85%</div>
-                <div class="label">معدل الامتثال</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">12</div>
-                <div class="label">أهداف نشطة</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">45</div>
-                <div class="label">مستفيد</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">94%</div>
-                <div class="label">نسبة التحصين</div>
-            </div>
-        </div>
+    <div class="stats">
+        <div class="stat"><div class="v">45</div><div class="l">إجمالي المستفيدين</div></div>
+        <div class="stat"><div class="v">92%</div><div class="l">معدل الامتثال</div></div>
+        <div class="stat"><div class="v">18</div><div class="l">أهداف نشطة</div></div>
+        <div class="stat"><div class="v">78%</div><div class="l">نسبة الإنجاز</div></div>
     </div>
-    
-    <div class="section">
-        <h2>التفاصيل</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>البند</th>
-                    <th>الحالة</th>
-                    <th>ملاحظات</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>مكافحة العدوى</td>
-                    <td style="color: #22c55e;">✓ ممتاز</td>
-                    <td>جميع الفحوصات مكتملة</td>
-                </tr>
-                <tr>
-                    <td>التمكين والتأهيل</td>
-                    <td style="color: #22c55e;">✓ جيد جداً</td>
-                    <td>3 أهداف محققة هذا الشهر</td>
-                </tr>
-                <tr>
-                    <td>الرعاية الصحية</td>
-                    <td style="color: #22c55e;">✓ ممتاز</td>
-                    <td>جميع التحصينات محدثة</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
+    <table>
+        <thead><tr><th>#</th><th>البند</th><th>الحالة</th><th>النسبة</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>مكافحة العدوى</td><td style="color:#22c55e">ممتاز</td><td>95%</td></tr>
+            <tr><td>2</td><td>التمكين والتأهيل</td><td style="color:#22c55e">جيد جداً</td><td>88%</td></tr>
+            <tr><td>3</td><td>الرعاية الصحية</td><td style="color:#22c55e">ممتاز</td><td>94%</td></tr>
+            <tr><td>4</td><td>الخدمات الاجتماعية</td><td style="color:#eab308">يحتاج تحسين</td><td>72%</td></tr>
+        </tbody>
+    </table>
     <div class="footer">
-        <p>تم إنشاء هذا التقرير بواسطة نظام بصيرة 2.0</p>
-        <p>© ${new Date().getFullYear()} وزارة الموارد البشرية والتنمية الاجتماعية</p>
+        <p>نظام بصيرة 2.0 | تقرير ${reportId}</p>
+        <p>© ${new Date().getFullYear()} HRSD - Al Baha Rehabilitation Center</p>
     </div>
 </body>
 </html>`;
 
-    // Open print dialog
-    const printWindow = window.open('', '_blank');
-    if (printWindow) {
-        printWindow.document.write(content);
-        printWindow.document.close();
-        printWindow.focus();
+        const w = window.open('', '_blank');
+        if (w) {
+            w.document.write(html);
+            w.document.close();
+            w.focus();
+            setTimeout(() => w.print(), 500);
+        }
 
-        // Wait for fonts to load then print
-        setTimeout(() => {
-            printWindow.print();
-        }, 500);
-    }
-};
-
-export const ReportGenerator: React.FC = () => {
-    const navigate = useNavigate();
-    const [generating, setGenerating] = useState<string | null>(null);
-    const [dateRange, setDateRange] = useState({
-        from: new Date().toISOString().split('T')[0],
-        to: new Date().toISOString().split('T')[0],
-    });
-
-    const handleGenerate = async (reportId: string) => {
-        setGenerating(reportId);
-
-        // Simulate processing
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        await generatePDF(reportId);
-
-        setGenerating(null);
+        setGeneratedReports(prev => ({
+            ...prev,
+            [reportType]: { reportId, reportType: reportType as ReportType, verificationToken: 'local', html, mode: 'html-fallback' },
+        }));
     };
 
     return (
@@ -244,8 +288,8 @@ export const ReportGenerator: React.FC = () => {
                         <FileText className="w-8 h-8 text-purple-600" />
                     </div>
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-800">مولد التقارير</h1>
-                        <p className="text-gray-500">إنشاء وتصدير التقارير بصيغة PDF</p>
+                        <h1 className="text-2xl font-bold text-gray-800">مولد التقارير المؤسسية</h1>
+                        <p className="text-gray-500">إنشاء تقارير PDF مع توقيع رقمي QR (Edge Function)</p>
                     </div>
                 </div>
             </div>
@@ -275,10 +319,6 @@ export const ReportGenerator: React.FC = () => {
                             className="px-4 py-2 border rounded-lg"
                         />
                     </div>
-                    <button className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 self-end">
-                        <Settings className="w-4 h-4" />
-                        خيارات متقدمة
-                    </button>
                 </div>
             </div>
 
@@ -290,6 +330,7 @@ export const ReportGenerator: React.FC = () => {
                         report={report}
                         onGenerate={handleGenerate}
                         generating={generating === report.id}
+                        generatedReport={generatedReports[report.id] || null}
                     />
                 ))}
             </div>

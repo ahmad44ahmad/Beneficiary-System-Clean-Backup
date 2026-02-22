@@ -9,7 +9,7 @@ import {
     Download, FileSpreadsheet, Printer, ChevronDown, ChevronUp,
     CheckCircle, XCircle, Shield, Clock, Eye
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
 import { useToastStore } from '../../stores/useToastStore';
@@ -135,6 +135,7 @@ export const AuditLogViewer: React.FC = () => {
     const fetchLogs = async () => {
         setLoading(true);
         try {
+            const supabase = getSupabaseClient();
             if (!supabase) {
                 setLogs(DEMO_LOGS);
                 setUsingDemo(true);

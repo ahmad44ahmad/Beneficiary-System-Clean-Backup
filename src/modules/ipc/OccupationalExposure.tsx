@@ -18,7 +18,7 @@ import {
   Plus,
   Eye,
 } from 'lucide-react';
-import { supabase as _supabase } from '../../config/supabase';
+// Supabase access via getSupabaseClient() from hooks/queries when needed
 
 // --- Types ---
 

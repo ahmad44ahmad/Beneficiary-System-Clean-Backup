@@ -8,7 +8,7 @@ import {
     FileSpreadsheet, CheckSquare,
     Archive, Trash, X
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { BeneficiaryCard } from './BeneficiaryCard';
 import { BeneficiaryFilters, FilterState } from './BeneficiaryFilters';
 import { SkeletonCard } from '../ui/Skeleton';
@@ -79,6 +79,9 @@ export const BeneficiaryListPage: React.FC = () => {
     const { data: beneficiaries = [], isLoading, refetch } = useQuery<Beneficiary[]>({
         queryKey: ['beneficiaries', 'list'],
         queryFn: async () => {
+            const supabase = getSupabaseClient();
+            if (!supabase) return demoData;
+
             const { data, error } = await supabase
                 .from('beneficiaries')
                 .select('*')

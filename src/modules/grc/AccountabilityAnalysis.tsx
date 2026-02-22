@@ -4,7 +4,7 @@ import {
     Clock, Building2, Users, Home, Wrench,
     ArrowRight, ChevronDown, ChevronUp, BarChart3
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 
 // Evasion Pattern Analysis from Claude Opus
@@ -125,6 +125,8 @@ export const AccountabilityAnalysis: React.FC = () => {
     }, []);
 
     const fetchGapsData = async () => {
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
         const { data } = await supabase
             .from('accountability_gaps')
             .select('*')

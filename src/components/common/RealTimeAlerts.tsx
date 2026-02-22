@@ -3,7 +3,7 @@ import {
     AlertTriangle, X, Bell, Shield, Activity,
     ChevronRight, Volume2, VolumeX, CheckCircle
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { useRealtimeCallback } from '../../hooks/queries';
 
 // Alert Types
 export interface SystemAlert {
@@ -186,80 +186,60 @@ export const RealTimeAlerts: React.FC = () => {
         setUnreadCount(DEMO_ALERTS.filter(a => !a.acknowledged).length);
     }, []);
 
-    // Subscribe to Supabase Realtime
-    useEffect(() => {
-        if (!supabase) return;
-
-        // Subscribe to IPC incidents
-        const incidentChannel = supabase
-            .channel('ipc_incidents_channel')
-            .on(
-                'postgres_changes',
-                { event: 'INSERT', schema: 'public', table: 'ipc_incidents' },
-                (payload) => {
-                    const newIncident = payload.new as {
-                        id: string;
-                        severity_level: string | null;
-                        incident_category: string | null;
-                        location_id: string | null;
-                    };
-                    const newAlert: SystemAlert = {
-                        id: `incident-${newIncident.id}`,
-                        type: 'incident',
-                        severity: newIncident.severity_level === 'critical' ? 'critical' :
-                            newIncident.severity_level === 'severe' ? 'high' :
-                                newIncident.severity_level === 'moderate' ? 'medium' : 'low',
-                        title: 'تنبيه حادثة عدوى جديدة',
-                        message: `تم تسجيل حالة: ${newIncident.incident_category}`,
-                        location: newIncident.location_id || undefined,
-                        created_at: new Date().toISOString(),
-                        acknowledged: false,
-                    };
-
-                    setAlerts(prev => [newAlert, ...prev]);
-                    setUnreadCount(prev => prev + 1);
-                    playSound();
-                }
-            )
-            .subscribe();
-
-        // Subscribe to fall risk assessments
-        const fallRiskChannel = supabase
-            .channel('fall_risk_channel')
-            .on(
-                'postgres_changes',
-                { event: 'INSERT', schema: 'public', table: 'fall_risk_assessments' },
-                (payload) => {
-                    const assessment = payload.new as {
-                        id: string;
-                        total_score: number;
-                        beneficiary_id: string | null;
-                    };
-                    if (assessment.total_score >= 45) {
-                        const newAlert: SystemAlert = {
-                            id: `fall-${assessment.id}`,
-                            type: 'fall_risk',
-                            severity: assessment.total_score >= 50 ? 'critical' : 'high',
-                            title: 'تنبيه خطر سقوط عالي',
-                            message: `درجة خطر السقوط: ${assessment.total_score}/60`,
-                            beneficiary_name: assessment.beneficiary_id || undefined,
-                            created_at: new Date().toISOString(),
-                            acknowledged: false,
-                        };
-
-                        setAlerts(prev => [newAlert, ...prev]);
-                        setUnreadCount(prev => prev + 1);
-                        playSound();
-                    }
-                }
-            )
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(incidentChannel);
-            supabase.removeChannel(fallRiskChannel);
+    // Subscribe to IPC incidents via realtime hook
+    const handleIncidentInsert = useCallback((payload: { new: Record<string, unknown> }) => {
+        const newIncident = payload.new as {
+            id: string;
+            severity_level: string | null;
+            incident_category: string | null;
+            location_id: string | null;
         };
+        const newAlert: SystemAlert = {
+            id: `incident-${newIncident.id}`,
+            type: 'incident',
+            severity: newIncident.severity_level === 'critical' ? 'critical' :
+                newIncident.severity_level === 'severe' ? 'high' :
+                    newIncident.severity_level === 'moderate' ? 'medium' : 'low',
+            title: 'تنبيه حادثة عدوى جديدة',
+            message: `تم تسجيل حالة: ${newIncident.incident_category}`,
+            location: newIncident.location_id || undefined,
+            created_at: new Date().toISOString(),
+            acknowledged: false,
+        };
+
+        setAlerts(prev => [newAlert, ...prev]);
+        setUnreadCount(prev => prev + 1);
+        playSound();
     }, [playSound]);
+
+    useRealtimeCallback('ipc_incidents', 'INSERT', handleIncidentInsert, 'ipc_incidents_channel');
+
+    // Subscribe to fall risk assessments via realtime hook
+    const handleFallRiskInsert = useCallback((payload: { new: Record<string, unknown> }) => {
+        const assessment = payload.new as {
+            id: string;
+            total_score: number;
+            beneficiary_id: string | null;
+        };
+        if (assessment.total_score >= 45) {
+            const newAlert: SystemAlert = {
+                id: `fall-${assessment.id}`,
+                type: 'fall_risk',
+                severity: assessment.total_score >= 50 ? 'critical' : 'high',
+                title: 'تنبيه خطر سقوط عالي',
+                message: `درجة خطر السقوط: ${assessment.total_score}/60`,
+                beneficiary_name: assessment.beneficiary_id || undefined,
+                created_at: new Date().toISOString(),
+                acknowledged: false,
+            };
+
+            setAlerts(prev => [newAlert, ...prev]);
+            setUnreadCount(prev => prev + 1);
+            playSound();
+        }
+    }, [playSound]);
+
+    useRealtimeCallback('fall_risk_assessments', 'INSERT', handleFallRiskInsert, 'fall_risk_channel');
 
     const handleAcknowledge = (id: string) => {
         setAlerts(prev => prev.map(a =>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Wrench,
     AlertTriangle,
@@ -45,6 +45,8 @@ export const OperationsDashboard: React.FC = () => {
         setLoading(true);
         const today = new Date();
         const monthStart = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`;
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
 
         try {
             // Fetch asset stats

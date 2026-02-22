@@ -3,10 +3,10 @@
 // Alerts staff when a new safety incident is reported
 // ═══════════════════════════════════════════════════════════════════════════
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, X, ChevronRight, MapPin } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { useRealtimeCallback } from '../../hooks/queries';
 import { useToastStore } from '../../stores/useToastStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -44,67 +44,50 @@ export const IncidentNotificationAlert: React.FC = () => {
     const showToast = useToastStore((s) => s.showToast);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!supabase) return;
-
-        // Subscribe to new incidents
-        const channel = supabase.channel('incidents-alerts')
-            .on(
-                'postgres_changes',
-                {
-                    event: 'INSERT',
-                    schema: 'public',
-                    table: 'incidents'
-                },
-                async (payload) => {
-                    const incident = payload.new as {
-                        id: string;
-                        incident_type: string;
-                        severity: 'low' | 'medium' | 'high' | 'critical';
-                        location: string | null;
-                        description: string | null;
-                        reported_by_name: string | null;
-                        created_at: string;
-                    };
-
-                    // Only alert for medium, high, or critical incidents
-                    if (['medium', 'high', 'critical'].includes(incident.severity)) {
-                        const newIncident: Incident = {
-                            id: incident.id,
-                            incident_type: incident.incident_type || 'other',
-                            severity: incident.severity || 'medium',
-                            location: incident.location || 'غير محدد',
-                            description: incident.description || '',
-                            reported_by: incident.reported_by_name || 'موظف',
-                            created_at: incident.created_at
-                        };
-
-                        setIncidents(prev => [newIncident, ...prev.slice(0, 2)]);
-                        setIsVisible(true);
-
-                        // Play alert sound for high/critical
-                        if (['high', 'critical'].includes(incident.severity)) {
-                            try {
-                                const audio = new Audio('/alert.mp3');
-                                audio.volume = 0.5;
-                                audio.play().catch(() => { });
-                            } catch { /* ignored */ }
-                        }
-
-                        const severityLabel = SEVERITY_CONFIG[incident.severity as keyof typeof SEVERITY_CONFIG]?.label || '';
-                        showToast(
-                            `🚨 حادث ${severityLabel}: ${INCIDENT_TYPES[incident.incident_type] || incident.incident_type}`,
-                            'error'
-                        );
-                    }
-                }
-            )
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(channel);
+    const handleIncidentInsert = useCallback((payload: { new: Record<string, unknown> }) => {
+        const incident = payload.new as {
+            id: string;
+            incident_type: string;
+            severity: 'low' | 'medium' | 'high' | 'critical';
+            location: string | null;
+            description: string | null;
+            reported_by_name: string | null;
+            created_at: string;
         };
+
+        // Only alert for medium, high, or critical incidents
+        if (['medium', 'high', 'critical'].includes(incident.severity)) {
+            const newIncident: Incident = {
+                id: incident.id,
+                incident_type: incident.incident_type || 'other',
+                severity: incident.severity || 'medium',
+                location: incident.location || 'غير محدد',
+                description: incident.description || '',
+                reported_by: incident.reported_by_name || 'موظف',
+                created_at: incident.created_at
+            };
+
+            setIncidents(prev => [newIncident, ...prev.slice(0, 2)]);
+            setIsVisible(true);
+
+            // Play alert sound for high/critical
+            if (['high', 'critical'].includes(incident.severity)) {
+                try {
+                    const audio = new Audio('/alert.mp3');
+                    audio.volume = 0.5;
+                    audio.play().catch(() => { });
+                } catch { /* ignored */ }
+            }
+
+            const severityLabel = SEVERITY_CONFIG[incident.severity as keyof typeof SEVERITY_CONFIG]?.label || '';
+            showToast(
+                `حادث ${severityLabel}: ${INCIDENT_TYPES[incident.incident_type] || incident.incident_type}`,
+                'error'
+            );
+        }
     }, [showToast]);
+
+    useRealtimeCallback('incidents', 'INSERT', handleIncidentInsert, 'incidents-alerts');
 
     const handleDismiss = (id: string) => {
         setIncidents(prev => {

@@ -5,7 +5,7 @@ import { DailyShiftRecord, IncidentReport, GenderSection } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { DailyShiftForm } from './DailyShiftForm';
 import { IncidentReportForm } from '../medical/IncidentReportForm';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 // Demo data for when Supabase is unavailable
 const demoShiftRecords: DailyShiftRecord[] = [
@@ -36,6 +36,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
     // Fetch data from Supabase
     const fetchData = useCallback(async () => {
+        const supabase = getSupabaseClient();
         if (!supabase) {
             setLoading(false);
             return;
@@ -116,6 +117,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
     const handleSaveShift = async (data: DailyShiftRecord) => {
         try {
+            const supabase = getSupabaseClient();
             if (supabase) {
                 const { error } = await supabase.from('daily_care_logs').insert([{
                     log_date: data.date,
@@ -139,6 +141,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
     const handleSaveIncident = async (data: IncidentReport) => {
         try {
+            const supabase = getSupabaseClient();
             if (supabase) {
                 const { error } = await supabase.from('incident_reports').insert([{
                     date: data.date,

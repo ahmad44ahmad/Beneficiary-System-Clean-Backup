@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { Printer, ChevronLeft, Users, Layers, Scale, FileSpreadsheet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
@@ -100,6 +100,7 @@ export const CateringReports: React.FC = () => {
 
     const fetchAttendance = useCallback(async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
         try {
             if (!supabase) {
                 setAttendanceData(generateDemoAttendance());

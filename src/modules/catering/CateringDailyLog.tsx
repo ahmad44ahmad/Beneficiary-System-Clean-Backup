@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { Utensils, Save, Printer, Check, X, Loader2, FileSpreadsheet } from 'lucide-react';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 import { StatusBadge } from '../../components/common/StatusBadge';
@@ -59,6 +59,8 @@ export const CateringDailyLog: React.FC = () => {
 
     const fetchMeals = useCallback(async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         try {
             const today = new Date().toISOString().split('T')[0];
             const { data } = await supabase
@@ -100,6 +102,8 @@ export const CateringDailyLog: React.FC = () => {
 
     const generateDailyMeals = async () => {
         setGenerating(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setGenerating(false); return; }
         try {
             // 1. Get all active beneficiaries with their active plan
             const { data: beneficiaries } = await supabase
@@ -137,6 +141,8 @@ export const CateringDailyLog: React.FC = () => {
     const updateStatus = async (id: string, newStatus: string) => {
         // Optimistic update
         setMeals(prev => prev.map(m => m.id === id ? { ...m, status: newStatus as MealItem['status'] } : m));
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
 
         await supabase
             .from('daily_meals')
@@ -147,6 +153,8 @@ export const CateringDailyLog: React.FC = () => {
     const markAllDelivered = async () => {
         const ids = meals.filter(m => m.status === 'pending').map(m => m.id);
         if (!ids.length) return;
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
 
         setLoading(true);
         await supabase
