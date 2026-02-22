@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useUnifiedData } from '../../context/UnifiedDataContext';
+import { useBeneficiaries } from '../../hooks/useBeneficiaries';
 import {
     Search, Home, Users, Settings,
     Shield, Heart, Calendar, X, ArrowRight, Command,
@@ -53,7 +53,7 @@ export function CommandMenu() {
     const navigate = useNavigate();
 
     // Dynamic data
-    const { beneficiaries } = useUnifiedData();
+    const { data: beneficiaries = [] } = useBeneficiaries();
 
     // Dynamically add beneficiaries to commands
     const dynamicCommands = [

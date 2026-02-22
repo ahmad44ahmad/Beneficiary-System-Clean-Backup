@@ -37,6 +37,7 @@ export const queryKeys = {
         vitals: (beneficiaryId: string) => [...queryKeys.medical.all, 'vitals', beneficiaryId] as const,
         medications: () => [...queryKeys.medical.all, 'medications'] as const,
         medication: (id: string) => [...queryKeys.medical.medications(), id] as const,
+        fullProfile: (nationalId: string) => [...queryKeys.medical.all, 'fullProfile', nationalId] as const,
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -46,6 +47,15 @@ export const queryKeys = {
         all: ['incidents'] as const,
         list: (filters?: Record<string, unknown>) => [...queryKeys.incidents.all, 'list', filters] as const,
         detail: (id: string) => [...queryKeys.incidents.all, 'detail', id] as const,
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // الرعاية اليومية (Care)
+    // ═══════════════════════════════════════════════════════════════
+    care: {
+        all: ['care'] as const,
+        dailyLog: (beneficiaryId: string, date: string) => [...queryKeys.care.all, 'dailyLog', beneficiaryId, date] as const,
+        fallRiskAssessments: (beneficiaryId?: string) => [...queryKeys.care.all, 'fallRisk', beneficiaryId] as const,
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -65,6 +75,34 @@ export const queryKeys = {
         requests: (status?: string) => [...queryKeys.maintenance.all, 'requests', status] as const,
         assets: () => [...queryKeys.maintenance.all, 'assets'] as const,
         schedules: () => [...queryKeys.maintenance.all, 'schedules'] as const,
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // التنبيهات (Alerts)
+    // ═══════════════════════════════════════════════════════════════
+    alerts: {
+        all: ['alerts'] as const,
+        list: () => [...queryKeys.alerts.all, 'list'] as const,
+        overdueMedications: () => [...queryKeys.alerts.all, 'overdueMedications'] as const,
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // التدقيق (Audit)
+    // ═══════════════════════════════════════════════════════════════
+    audit: {
+        all: ['audit'] as const,
+        logs: () => [...queryKeys.audit.all, 'logs'] as const,
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // المؤشرات (Indicators)
+    // ═══════════════════════════════════════════════════════════════
+    indicators: {
+        all: ['indicators'] as const,
+        iso: () => [...queryKeys.indicators.all, 'iso'] as const,
+        earlyWarning: () => [...queryKeys.indicators.all, 'earlyWarning'] as const,
+        benchmark: () => [...queryKeys.indicators.all, 'benchmark'] as const,
+        cost: () => [...queryKeys.indicators.all, 'cost'] as const,
     },
 
     // ═══════════════════════════════════════════════════════════════

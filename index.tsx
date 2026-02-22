@@ -8,7 +8,6 @@ import { App } from './src/components/App';
 
 import { BrowserRouter } from 'react-router-dom';
 import { QueryProvider } from './src/context/QueryProvider';
-import { UnifiedDataProvider } from './src/context/UnifiedDataContext';
 import { AuthProvider } from './src/context/AuthContext';
 import { ErrorBoundary } from './src/components/common/ErrorBoundary';
 import { ThemeProvider } from './src/config/theme';
@@ -25,12 +24,10 @@ root.render(
             <ThemeProvider defaultMode="dark">
                 <QueryProvider>
                     <BrowserRouter>
-                        <UnifiedDataProvider>
-                            <AuthProvider>
-                                <App />
-                                <ToastRenderer />
-                            </AuthProvider>
-                        </UnifiedDataProvider>
+                        <AuthProvider>
+                            <App />
+                            <ToastRenderer />
+                        </AuthProvider>
                     </BrowserRouter>
                 </QueryProvider>
             </ThemeProvider>

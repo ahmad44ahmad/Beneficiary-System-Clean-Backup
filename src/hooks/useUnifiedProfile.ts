@@ -1,19 +1,18 @@
 import { useMemo } from 'react';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useBeneficiaries } from './useBeneficiaries';
+import { useLocalDataStore } from '../stores/useLocalDataStore';
 import { UnifiedBeneficiaryProfile } from '../types/unified';
 import { deriveSmartTags, calculateRiskLevel } from '../utils/tagEngine';
 
 export const useUnifiedProfile = (beneficiaryId: string): UnifiedBeneficiaryProfile | null => {
-    const {
-        beneficiaries,
-        medicalProfiles,
-        socialResearchForms,
-        rehabilitationPlans,
-        visitLogs,
-        incidents,
-        medicalExaminations,
-        educationalPlans
-    } = useUnifiedData();
+    const { data: beneficiaries = [] } = useBeneficiaries();
+    const medicalProfiles = useLocalDataStore((s) => s.medicalProfiles);
+    const socialResearchForms = useLocalDataStore((s) => s.socialResearchForms);
+    const rehabilitationPlans = useLocalDataStore((s) => s.rehabilitationPlans);
+    const visitLogs = useLocalDataStore((s) => s.visitLogs);
+    const incidents = useLocalDataStore((s) => s.incidents);
+    const medicalExaminations = useLocalDataStore((s) => s.medicalExaminations);
+    const educationalPlans = useLocalDataStore((s) => s.educationalPlans);
 
     const profile = useMemo(() => {
         const baseBeneficiary = beneficiaries.find(b => b.id === beneficiaryId);
