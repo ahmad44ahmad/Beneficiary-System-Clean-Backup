@@ -183,7 +183,7 @@ export const OccupationalExposure: React.FC = () => {
       inc.type.includes(searchQuery)
   );
 
-  const updateFormField = (field: keyof FormData, value: any) => {
+  const updateFormField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

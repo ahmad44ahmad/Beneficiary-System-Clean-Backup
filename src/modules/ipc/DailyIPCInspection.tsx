@@ -5,7 +5,7 @@ import {
     AlertTriangle, Loader2, ChevronLeft, MapPin,
     History, X, Calendar
 } from 'lucide-react';
-import { ipcService, Location, ChecklistTemplate } from '../../services/ipcService';
+import { ipcService, Location, ChecklistTemplate, IPCInspection } from '../../services/ipcService';
 
 // Checklist Item Interface
 interface ChecklistItem {
@@ -43,7 +43,7 @@ export const DailyIPCInspection: React.FC = () => {
     const [answeredCount, setAnsweredCount] = useState(0);
     const [photos, setPhotos] = useState<{ name: string; preview: string }[]>([]);
     const [showHistory, setShowHistory] = useState(false);
-    const [inspectionHistory, setInspectionHistory] = useState<any[]>([]);
+    const [inspectionHistory, setInspectionHistory] = useState<IPCInspection[]>([]);
     const [loadingHistory, setLoadingHistory] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -133,14 +133,14 @@ export const DailyIPCInspection: React.FC = () => {
                     { id: '3', inspection_date: '2026-02-18', inspector_name: 'خالد سعد', location_name: 'جناح الإناث', shift: 'صباحي', compliance_score: 95 },
                     { id: '4', inspection_date: '2026-02-17', inspector_name: 'أحمد محمد', location_name: 'العيادة الطبية', shift: 'صباحي', compliance_score: 78 },
                     { id: '5', inspection_date: '2026-02-16', inspector_name: 'نورة أحمد', location_name: 'غرفة العزل', shift: 'ليلي', compliance_score: 100 },
-                ]);
+                ] as IPCInspection[]);
             }
         } catch {
             setInspectionHistory([
                 { id: '1', inspection_date: '2026-02-20', inspector_name: 'أحمد محمد', location_name: 'جناح الذكور 1', shift: 'صباحي', compliance_score: 92 },
                 { id: '2', inspection_date: '2026-02-19', inspector_name: 'سارة العلي', location_name: 'المطبخ', shift: 'مسائي', compliance_score: 88 },
                 { id: '3', inspection_date: '2026-02-18', inspector_name: 'خالد سعد', location_name: 'جناح الإناث', shift: 'صباحي', compliance_score: 95 },
-            ]);
+            ] as IPCInspection[]);
         } finally {
             setLoadingHistory(false);
         }
@@ -281,7 +281,7 @@ export const DailyIPCInspection: React.FC = () => {
                         </div>
                     ) : (
                         <div className="divide-y divide-gray-100">
-                            {inspectionHistory.map((record: any) => (
+                            {inspectionHistory.map((record) => (
                                 <div key={record.id} className="flex items-center justify-between py-3 hover:bg-gray-50 px-2 rounded-lg transition-colors">
                                     <div className="flex items-center gap-3">
                                         <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${

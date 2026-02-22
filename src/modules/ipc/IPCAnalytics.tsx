@@ -90,7 +90,7 @@ export const IPCAnalytics: React.FC = () => {
                     totalInspections: inspections.length || 86,
                     totalIncidents: incidents.length || 13,
                     avgCompliance: 87,
-                    openIncidents: incidents.filter((i: any) => i.status === 'open').length || 3,
+                    openIncidents: incidents.filter((i) => i.status === 'open').length || 3,
                 });
             } catch {
                 setStats({ totalInspections: 86, totalIncidents: 13, avgCompliance: 87, openIncidents: 3 });
@@ -101,7 +101,7 @@ export const IPCAnalytics: React.FC = () => {
         loadData();
     }, [dateRange]);
 
-    const exportToCSV = useCallback((data: any[], filename: string) => {
+    const exportToCSV = useCallback((data: Record<string, unknown>[], filename: string) => {
         if (!data.length) return;
         const headers = Object.keys(data[0]).join(',');
         const rows = data.map(row => Object.values(row).join(',')).join('\n');
