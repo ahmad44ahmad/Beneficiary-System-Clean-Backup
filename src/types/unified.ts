@@ -116,7 +116,7 @@ export interface ClothingRequestEntry {
 }
 
 export interface NutritionPlan {
-    dietType: 'Regular' | 'Diabetic' | 'Low Sodium' | 'Soft' | 'Liquid';
+    dietType: 'Regular' | 'Diabetic' | 'Low Sodium' | 'Soft' | 'Liquid' | 'حمية سكري' | 'طري' | 'عادي' | 'قليل الملح' | 'سائل';
     allergies: string[];
     restrictions: string[];
     hydrationGoal: string; // e.g. "2L per day"

@@ -9,10 +9,17 @@ import { empowermentService, RehabGoal, REHAB_DOMAINS } from '../../services/emp
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 
 // Progress Bar Component
+const PROGRESS_COLORS: Record<string, string> = {
+    emerald: 'bg-emerald-500',
+    blue: 'bg-blue-500',
+    red: 'bg-red-500',
+    orange: 'bg-orange-500',
+};
+
 const ProgressBar: React.FC<{ value: number; color?: string }> = ({ value, color = 'emerald' }) => (
     <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <div
-            className={`h-full bg-${color}-500 transition-all duration-500`}
+            className={`h-full ${PROGRESS_COLORS[color] || 'bg-emerald-500'} transition-all duration-500`}
             style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
         />
     </div>
@@ -107,6 +114,8 @@ export const EmpowermentDashboard: React.FC = () => {
         try {
             const data = await empowermentService.getGoals();
             setGoals(data);
+        } catch (err) {
+            console.error('EmpowermentDashboard fetch error:', err);
         } finally {
             setLoading(false);
         }

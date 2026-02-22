@@ -8,8 +8,6 @@
     "build": "vite build",
     "lint": "eslint src/",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "setup:demo": "node scripts/setup-demo.js"
   },
   "dependencies": {
@@ -17,16 +15,9 @@
     "@hookform/resolvers": "^5.2.2",
     "@supabase/supabase-js": "^2.93.3",
     "@tanstack/react-query": "^5.90.18",
-    "@tanstack/react-query-devtools": "^5.91.2",
     "@tanstack/react-table": "^8.21.3",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/pg": "^8.16.0",
-    "axios": "^1.6.7",
     "clsx": "^2.1.1",
-    "cors": "^2.8.5",
     "date-fns": "^3.6.0",
-    "express": "^5.2.1",
     "framer-motion": "^12.23.24",
     "hijri-date": "^0.2.2",
     "lucide-react": "^0.555.0",
@@ -43,6 +34,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.3",
     "@tailwindcss/postcss": "^4.1.17",
+    "@tanstack/react-query-devtools": "^5.91.2",
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",

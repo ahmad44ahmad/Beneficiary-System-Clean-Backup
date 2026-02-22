@@ -107,10 +107,11 @@ export const IncidentNotificationAlert: React.FC = () => {
     }, [showToast]);
 
     const handleDismiss = (id: string) => {
-        setIncidents(prev => prev.filter(i => i.id !== id));
-        if (incidents.length <= 1) {
-            setIsVisible(false);
-        }
+        setIncidents(prev => {
+            const remaining = prev.filter(i => i.id !== id);
+            if (remaining.length === 0) setIsVisible(false);
+            return remaining;
+        });
     };
 
     const handleDismissAll = () => {
@@ -171,7 +172,7 @@ export const IncidentNotificationAlert: React.FC = () => {
                                     key={incident.id}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className={`flex items-start justify-between p-3 ${config.bgLight} rounded-xl border border-${incident.severity === 'critical' ? 'red' : 'orange'}-200`}
+                                    className={`flex items-start justify-between p-3 ${config.bgLight} rounded-xl border ${incident.severity === 'critical' ? 'border-red-200' : 'border-orange-200'}`}
                                 >
                                     <div className="flex items-start gap-3">
                                         <div className={`p-2 ${config.color} rounded-lg`}>

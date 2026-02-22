@@ -1,22 +1,10 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
 import { useApp } from '../context/AppContext';
 import { useUnifiedData } from '../context/UnifiedDataContext';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// LOADING FALLBACK COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════
-const LoadingFallback = () => (
-    <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-hrsd-teal border-t-transparent rounded-full animate-spin" />
-            <span className="text-slate-500 text-sm">جاري التحميل...</span>
-        </div>
-    </div>
-);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // ESSENTIAL PAGES (Static Imports - Load Immediately)
@@ -49,11 +37,11 @@ const SocialResearchWizard = lazy(() => import('./social/SocialResearchWizard').
 
 // Quality Module
 const QualityManual = lazy(() => import('./quality/QualityManual').then(m => ({ default: m.QualityManual })));
+const NcrCapaTracker = lazy(() => import('./quality/NcrCapaTracker').then(m => ({ default: m.NcrCapaTracker })));
 
 // Reports Module
 const StrategicDashboard = lazy(() => import('./reports/StrategicDashboard').then(m => ({ default: m.StrategicDashboard })));
 const ReportsDashboard = lazy(() => import('./reports/ReportsDashboard').then(m => ({ default: m.ReportsDashboard })));
-const ReportGenerator = lazy(() => import('./reports/ReportGenerator').then(m => ({ default: m.ReportGenerator })));
 const ExecutiveReport = lazy(() => import('../pages/ExecutiveReport').then(m => ({ default: m.ExecutiveReport })));
 
 // Dashboard Components
@@ -102,6 +90,7 @@ const RiskRegister = lazy(() => import('../modules/grc/RiskRegister').then(m => 
 const ComplianceTracker = lazy(() => import('../modules/grc/ComplianceTracker').then(m => ({ default: m.ComplianceTracker })));
 const IndependenceTracker = lazy(() => import('../modules/grc/IndependenceTracker').then(m => ({ default: m.IndependenceTracker })));
 const AccountabilityAnalysis = lazy(() => import('../modules/grc/AccountabilityAnalysis').then(m => ({ default: m.AccountabilityAnalysis })));
+const QualityExcellenceHub = lazy(() => import('../modules/grc/QualityExcellenceHub').then(m => ({ default: m.QualityExcellenceHub })));
 
 // IPC Module
 const IPCDashboard = lazy(() => import('../modules/ipc').then(m => ({ default: m.IPCDashboard })));
@@ -109,6 +98,17 @@ const DailyIPCInspection = lazy(() => import('../modules/ipc').then(m => ({ defa
 const IncidentReportForm = lazy(() => import('../modules/ipc').then(m => ({ default: m.IncidentReportForm })));
 const ImmunizationTracker = lazy(() => import('../modules/ipc').then(m => ({ default: m.ImmunizationTracker })));
 const IPCAnalytics = lazy(() => import('../modules/ipc').then(m => ({ default: m.IPCAnalytics })));
+const PPEProtocols = lazy(() => import('../modules/ipc').then(m => ({ default: m.PPEProtocols })));
+const BICLSCertification = lazy(() => import('../modules/ipc').then(m => ({ default: m.BICLSCertification })));
+const OccupationalExposure = lazy(() => import('../modules/ipc').then(m => ({ default: m.OccupationalExposure })));
+const OutbreakManagement = lazy(() => import('../modules/ipc').then(m => ({ default: m.OutbreakManagement })));
+const IsolationGuide = lazy(() => import('../modules/ipc').then(m => ({ default: m.IsolationGuide })));
+
+// Quality Module (Internal Audit)
+const InternalAuditSystem = lazy(() => import('../modules/quality').then(m => ({ default: m.InternalAuditSystem })));
+
+// Strategic KPI Targets
+const StrategicKPITargets = lazy(() => import('./indicators/StrategicKPITargets').then(m => ({ default: m.StrategicKPITargets })));
 
 // Empowerment Module
 const EmpowermentDashboard = lazy(() => import('../modules/empowerment').then(m => ({ default: m.EmpowermentDashboard })));
@@ -213,11 +213,7 @@ export const App = () => {
                 {/* Main Application with Layout */}
                 <Route path="/*" element={<MainLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="knowledge" element={
-                        <Suspense fallback={<LoadingFallback />}>
-                            <ExternalKnowledgeBase />
-                        </Suspense>
-                    } />
+                    <Route path="knowledge" element={<ExternalKnowledgeBase />} />
                     <Route path="executive-report" element={<ExecutiveReport />} />
 
                     <Route path="beneficiaries" element={
@@ -285,6 +281,7 @@ export const App = () => {
 
                     {/* Quality Manual Route */}
                     <Route path="quality/manual" element={<QualityManual />} />
+                    <Route path="quality/ncr-capa" element={<NcrCapaTracker />} />
 
                     {/* Admin Routes */}
                     <Route path="admin/audit-logs" element={<AuditLogViewer />} />
@@ -363,20 +360,16 @@ export const App = () => {
                     <Route path="indicators/hr" element={<HRImpactIndicator />} />
                     <Route path="indicators/benchmark" element={<BenchmarkDashboard />} />
                     <Route path="indicators/iso" element={<ISOComplianceTracker />} />
-                    <Route path="beneficiaries-list" element={<BeneficiaryListPage />} />
-                    <Route path="reports" element={<ReportGenerator />} />
                     <Route path="basira/care" element={
                         <DailyCareForm
-                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
-                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
-                            onSuccess={() => console.log('Care form saved')}
+                            beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={selectedBeneficiary?.id || ''}
                         />
                     } />
                     <Route path="basira/safety" element={
                         <FallRiskAssessment
-                            beneficiaryName={unifiedBeneficiaries[0]?.fullName || 'اختر مستفيد'}
-                            beneficiaryId={unifiedBeneficiaries[0]?.id || ''}
-                            onSave={(data) => console.log('Safety assessment saved', data)}
+                            beneficiaryName={selectedBeneficiary?.fullName || 'اختر مستفيد'}
+                            beneficiaryId={selectedBeneficiary?.id || ''}
                         />
                     } />
 
@@ -406,7 +399,6 @@ export const App = () => {
                     <Route path="governance" element={<GoldenThreadView />} />
 
                     {/* Feature 5: Just Culture & OVR */}
-                    <Route path="quality" element={<QualityDashboard />} />
                     <Route path="ovr/new" element={<OvrReportForm />} />
 
                     {/* GRC Module Routes */}
@@ -416,6 +408,7 @@ export const App = () => {
                     <Route path="grc/compliance" element={<ComplianceTracker />} />
                     <Route path="grc/independence" element={<IndependenceTracker />} />
                     <Route path="grc/accountability" element={<AccountabilityAnalysis />} />
+                    <Route path="grc/excellence" element={<QualityExcellenceHub />} />
 
                     {/* Integrated Reports */}
                     <Route path="integrated-reports" element={<IntegratedDashboard />} />
@@ -426,6 +419,17 @@ export const App = () => {
                     <Route path="ipc/incident/new" element={<IncidentReportForm />} />
                     <Route path="ipc/immunizations" element={<ImmunizationTracker />} />
                     <Route path="ipc/analytics" element={<IPCAnalytics />} />
+                    <Route path="ipc/ppe" element={<PPEProtocols />} />
+                    <Route path="ipc/bicsl" element={<BICLSCertification />} />
+                    <Route path="ipc/exposure/new" element={<OccupationalExposure />} />
+                    <Route path="ipc/outbreak" element={<OutbreakManagement />} />
+                    <Route path="ipc/isolation" element={<IsolationGuide />} />
+
+                    {/* Quality Internal Audit */}
+                    <Route path="quality/audit" element={<InternalAuditSystem />} />
+
+                    {/* Strategic KPI Targets */}
+                    <Route path="indicators/strategic" element={<StrategicKPITargets />} />
 
                     {/* Empowerment Module Routes */}
                     <Route path="empowerment" element={<EmpowermentDashboard />} />

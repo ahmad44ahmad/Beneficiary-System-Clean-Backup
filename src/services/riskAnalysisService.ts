@@ -41,10 +41,9 @@ export const calculateRiskScore = (beneficiary: UnifiedBeneficiaryProfile): Risk
         factors.push('متابعة نفسية');
     }
 
-    // 4. Simulated "Recent Incidents" (Randomized for Demo if no real data)
-    // In a real app, this would query the incident_reports table
-    const hasRecentIncident = Math.random() > 0.8; // 20% chance of simulated recent incident
-    if (hasRecentIncident) {
+    // 4. Check for recent incidents based on beneficiary data
+    const incidents = beneficiary.incidents || [];
+    if (incidents.length > 0) {
         score += 20;
         factors.push('حادث عرضي حديث (خلال 30 يوم)');
     }
@@ -58,11 +57,14 @@ export const calculateRiskScore = (beneficiary: UnifiedBeneficiaryProfile): Risk
     else if (score >= 50) level = 'high';
     else if (score >= 20) level = 'medium';
 
+    // Determine trend based on alert count (deterministic)
+    const trend: RiskAnalysisResult['trend'] = alerts.length >= 3 ? 'increasing' : 'stable';
+
     return {
         score,
         level,
         factors,
-        trend: Math.random() > 0.5 ? 'stable' : 'increasing' // Simulated trend
+        trend
     };
 };
 

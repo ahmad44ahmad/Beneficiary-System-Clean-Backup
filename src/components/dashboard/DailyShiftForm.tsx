@@ -190,7 +190,7 @@ export const DailyShiftForm: React.FC<DailyShiftFormProps> = ({ beneficiaries, o
                                 </thead>
                                 <tbody>
                                     {formData.staffAttendance?.map((staff, index) => (
-                                        <tr key={index}>
+                                        <tr key={staff.category}>
                                             <td>{staff.category}</td>
                                             <td><input type="number" className="table-input" value={staff.total} onChange={e => updateStaffStats(index, 'total', Number(e.target.value))} /></td>
                                             <td><input type="number" className="table-input" value={staff.present} onChange={e => updateStaffStats(index, 'present', Number(e.target.value))} /></td>
@@ -216,7 +216,7 @@ export const DailyShiftForm: React.FC<DailyShiftFormProps> = ({ beneficiaries, o
                                 </thead>
                                 <tbody>
                                     {formData.serviceStats?.map((service, index) => (
-                                        <tr key={index}>
+                                        <tr key={service.serviceName}>
                                             <td>{service.serviceName}</td>
                                             <td><input type="number" className="table-input" value={service.totalBeneficiaries} onChange={e => updateServiceStats(index, 'totalBeneficiaries', Number(e.target.value))} /></td>
                                             <td><input type="number" className="table-input" value={service.attended} onChange={e => updateServiceStats(index, 'attended', Number(e.target.value))} /></td>
@@ -293,7 +293,7 @@ export const DailyShiftForm: React.FC<DailyShiftFormProps> = ({ beneficiaries, o
                                 </thead>
                                 <tbody>
                                     {formData.cleaningMaintenance?.map((item, index) => (
-                                        <tr key={index}>
+                                        <tr key={item.area}>
                                             <td>
                                                 {item.area === 'rooms' ? 'الغرف' :
                                                     item.area === 'bathrooms' ? 'دورات المياه' :

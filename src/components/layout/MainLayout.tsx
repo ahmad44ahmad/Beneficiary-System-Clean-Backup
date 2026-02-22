@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect, Suspense } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { ErrorBoundary } from '../common/ErrorBoundary';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { DemoBanner } from '../DemoBanner';
@@ -16,10 +17,21 @@ import { Breadcrumb } from '../navigation/Breadcrumb';
 // Import HRSD theme
 import '../../styles/hrsd-theme.css';
 
+// Loading fallback for lazy-loaded routes
+const LoadingFallback = () => (
+    <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 border-4 border-hrsd-teal border-t-transparent rounded-full animate-spin" />
+            <span className="text-slate-500 text-sm">جاري التحميل...</span>
+        </div>
+    </div>
+);
+
 export const MainLayout = () => {
     // Enable real-time Supabase subscription for critical data
     useRealtimeSubscription();
 
+    const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Close mobile menu on route change
@@ -46,10 +58,6 @@ export const MainLayout = () => {
             <ShiftHandoverAlert />
             <IncidentNotificationAlert />
 
-            {/* Real-Time Alerts Notification - Temporarily disabled for presentation */}
-            {/* TODO: Re-enable after demo - uncomment the line below */}
-            {/* <RealTimeAlerts /> */}
-
             {/* Desktop Sidebar */}
             <Sidebar isMobile={false} />
 
@@ -70,7 +78,11 @@ export const MainLayout = () => {
                 <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 hrsd-scrollbar bg-gradient-to-br from-slate-50 to-slate-100">
                     <div className="max-w-7xl mx-auto animate-fade-in">
                         <Breadcrumb className="mb-4" />
-                        <Outlet />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <ErrorBoundary>
+                                <Outlet />
+                            </ErrorBoundary>
+                        </Suspense>
                     </div>
                 </main>
 

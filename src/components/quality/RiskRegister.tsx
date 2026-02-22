@@ -89,7 +89,7 @@ export const RiskRegister: React.FC<RiskRegisterProps> = ({ profile }) => {
                             );
                         }) : (
                             <tr>
-                                <td colSpan={4} className="px-6 py-4 text-center text-gray-500 italic">No active risks identified.</td>
+                                <td colSpan={4} className="px-6 py-4 text-center text-gray-500 italic">لا توجد مخاطر نشطة</td>
                             </tr>
                         )}
                     </tbody>

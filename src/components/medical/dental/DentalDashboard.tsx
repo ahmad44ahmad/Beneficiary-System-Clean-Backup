@@ -32,10 +32,10 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary })
                         <div className="p-3 rounded-full bg-cyan-100 text-cyan-600">
                             <Smile size={24} />
                         </div>
-                        <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-500">Hygiene Status</p>
+                        <div className="mr-4">
+                            <p className="text-sm font-medium text-gray-500">حالة النظافة</p>
                             <p className="text-lg font-semibold text-gray-900">
-                                {latestAssessment?.plaqueIndex || 'Unknown'}
+                                {latestAssessment?.plaqueIndex || 'غير محدد'}
                             </p>
                         </div>
                     </div>
@@ -45,8 +45,8 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary })
                         <div className="p-3 rounded-full bg-red-100 text-red-600">
                             <AlertCircle size={24} />
                         </div>
-                        <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-500">Cavities</p>
+                        <div className="mr-4">
+                            <p className="text-sm font-medium text-gray-500">التسوس</p>
                             <p className="text-2xl font-semibold text-gray-900">
                                 {latestAssessment?.teeth?.filter(t => t.status === 'Decayed').length || 0}
                             </p>
@@ -58,10 +58,10 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary })
                         <div className="p-3 rounded-full bg-green-100 text-green-600">
                             <HeartPulse size={24} />
                         </div>
-                        <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-500">Gum Health</p>
+                        <div className="mr-4">
+                            <p className="text-sm font-medium text-gray-500">صحة اللثة</p>
                             <p className="text-lg font-semibold text-gray-900">
-                                {latestAssessment?.gumHealth || 'Healthy'}
+                                {latestAssessment?.gumHealth || 'سليمة'}
                             </p>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary })
             <div className="mt-6">
                 <DentalOdontogram
                     initialData={latestAssessment}
-                    onSubmit={(data) => console.log('Update Dental Assessment', data)}
+                    onSubmit={() => {}}
                 />
             </div>
         </div>

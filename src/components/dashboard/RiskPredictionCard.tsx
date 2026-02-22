@@ -70,13 +70,9 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                                 className="flex items-center gap-3 p-3 rounded-xl bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer border border-transparent hover:border-red-100 group"
                             >
                                 <div className="relative">
-                                    <img
-                                        src={item.gender === 'female'
-                                            ? 'https://cdn-icons-png.flaticon.com/512/6997/6997662.png'
-                                            : 'https://cdn-icons-png.flaticon.com/512/4042/4042356.png'}
-                                        alt={item.fullName}
-                                        className="w-10 h-10 rounded-full bg-white border border-red-100 p-1"
-                                    />
+                                    <div className="w-10 h-10 rounded-full bg-white border border-red-100 p-1 flex items-center justify-center">
+                                        <User className={`w-6 h-6 ${item.gender === 'female' ? 'text-pink-400' : 'text-blue-400'}`} />
+                                    </div>
                                     <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>

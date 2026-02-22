@@ -37,7 +37,6 @@ export const DailyFollowUpPanel: React.FC = () => {
     // Fetch data from Supabase
     const fetchData = useCallback(async () => {
         if (!supabase) {
-            console.warn('Supabase not available, using demo data');
             setLoading(false);
             return;
         }
@@ -100,13 +99,12 @@ export const DailyFollowUpPanel: React.FC = () => {
                 }));
                 setIncidentReports(transformedIncidents);
             } else if (incidentsError) {
-                // If table doesn't exist or other error, fallback to demo but log warning
-                console.warn('Could not fetch incidents, defaulting to demo data:', incidentsError.message);
+                // If table doesn't exist or other error, fallback to demo
                 showToast('تعذر تحميل الحوادث من قاعدة البيانات', 'info');
             }
 
         } catch (err) {
-            console.warn('Error fetching data:', err);
+            // Silently fall back to demo data
         }
 
         setLoading(false);

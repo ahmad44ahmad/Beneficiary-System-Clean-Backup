@@ -45,6 +45,15 @@ const IMMEDIATE_ACTIONS = [
     'فحص المخالطين', 'تعزيز الاحتياطات'
 ];
 
+const RCA_CATEGORIES = [
+    { value: 'human', label: 'عامل بشري', icon: '👤', examples: ['نقص التدريب', 'عدم اتباع البروتوكول', 'إرهاق الموظف'] },
+    { value: 'process', label: 'خلل في العملية', icon: '⚙️', examples: ['عدم وجود SOP', 'إجراء غير واضح', 'تأخر الاستجابة'] },
+    { value: 'equipment', label: 'معدات/أدوات', icon: '🔧', examples: ['عطل في المعدات', 'نقص المستلزمات', 'أدوات غير مناسبة'] },
+    { value: 'environment', label: 'بيئة العمل', icon: '🏥', examples: ['تلوث المنطقة', 'إضاءة ضعيفة', 'ازدحام'] },
+    { value: 'communication', label: 'تواصل', icon: '💬', examples: ['سوء التواصل', 'عدم التسليم', 'توثيق ناقص'] },
+    { value: 'system', label: 'نظام/سياسة', icon: '📋', examples: ['غياب الرقابة', 'سياسة قديمة', 'نقص الموارد'] },
+];
+
 export const IncidentReportForm: React.FC = () => {
     const navigate = useNavigate();
 
@@ -61,6 +70,12 @@ export const IncidentReportForm: React.FC = () => {
     const [immediateActions, setImmediateActions] = useState<string[]>([]);
     const [isolationRequired, setIsolationRequired] = useState(false);
     const [notes, setNotes] = useState('');
+    const [showRCA, setShowRCA] = useState(false);
+    const [rcaCategory, setRcaCategory] = useState<string>('');
+    const [rcaWhyChain, setRcaWhyChain] = useState<string[]>(['', '', '', '', '']);
+    const [rcaRootCause, setRcaRootCause] = useState('');
+    const [rcaCorrectiveAction, setRcaCorrectiveAction] = useState('');
+    const [rcaPreventiveAction, setRcaPreventiveAction] = useState('');
 
     // UI State
     const [locations, setLocations] = useState<Location[]>([]);
@@ -114,7 +129,12 @@ export const IncidentReportForm: React.FC = () => {
                 investigation_notes: notes || undefined,
                 status: 'open',
                 detection_date: new Date().toISOString().split('T')[0],
-            });
+                rca_category: rcaCategory || undefined,
+                rca_why_chain: rcaWhyChain.filter(w => w.trim()) || undefined,
+                rca_root_cause: rcaRootCause || undefined,
+                rca_corrective_action: rcaCorrectiveAction || undefined,
+                rca_preventive_action: rcaPreventiveAction || undefined,
+            } as any);
 
             if (result.success) {
                 alert('✅ تم تسجيل الحادثة بنجاح - رقم المرجع: ' + result.id);
@@ -359,6 +379,115 @@ export const IncidentReportForm: React.FC = () => {
                     />
                     <span className="font-medium text-yellow-800">يتطلب عزل فوري</span>
                 </label>
+            </div>
+
+            {/* Root Cause Analysis (RCA) Section */}
+            <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
+                <button
+                    type="button"
+                    onClick={() => setShowRCA(!showRCA)}
+                    className="w-full flex items-center justify-between"
+                >
+                    <label className="block text-gray-700 font-bold flex items-center gap-2 cursor-pointer">
+                        <Search className="w-5 h-5 text-amber-500" />
+                        تحليل السبب الجذري (RCA)
+                        <span className="text-xs font-normal text-gray-400 mr-2">- اختياري</span>
+                    </label>
+                    {showRCA ? <ChevronUp className="w-5 h-5 text-gray-400" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
+                </button>
+
+                {showRCA && (
+                    <div className="mt-4 space-y-4 animate-in fade-in duration-300">
+                        {/* RCA Category */}
+                        <div>
+                            <label className="block text-gray-600 text-sm mb-2">تصنيف السبب الجذري</label>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                {RCA_CATEGORIES.map(cat => (
+                                    <button
+                                        key={cat.value}
+                                        type="button"
+                                        onClick={() => setRcaCategory(cat.value)}
+                                        className={`p-3 rounded-xl border-2 transition-all text-right ${
+                                            rcaCategory === cat.value
+                                                ? 'border-amber-500 bg-amber-50 ring-2 ring-amber-200'
+                                                : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                                        }`}
+                                    >
+                                        <span className="text-xl block mb-1">{cat.icon}</span>
+                                        <span className="font-medium text-gray-700 text-sm block">{cat.label}</span>
+                                        <div className="text-[10px] text-gray-400 mt-1">
+                                            {cat.examples.join(' · ')}
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* 5 Whys Analysis */}
+                        <div>
+                            <label className="block text-gray-600 text-sm mb-2 flex items-center gap-1">
+                                🔍 تحليل الأسباب (5 لماذا)
+                            </label>
+                            <div className="bg-amber-50/50 rounded-xl p-4 border border-amber-100 space-y-3">
+                                {rcaWhyChain.map((why, idx) => (
+                                    <div key={idx} className="flex items-center gap-3">
+                                        <div className="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                            {idx + 1}
+                                        </div>
+                                        <input
+                                            type="text"
+                                            value={why}
+                                            onChange={e => {
+                                                const updated = [...rcaWhyChain];
+                                                updated[idx] = e.target.value;
+                                                setRcaWhyChain(updated);
+                                            }}
+                                            placeholder={idx === 0 ? 'لماذا حدثت المشكلة؟' : `لماذا؟ (المستوى ${idx + 1})`}
+                                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Root Cause Summary */}
+                        <div>
+                            <label className="block text-gray-600 text-sm mb-2">ملخص السبب الجذري</label>
+                            <textarea
+                                value={rcaRootCause}
+                                onChange={e => setRcaRootCause(e.target.value)}
+                                placeholder="ما هو السبب الجذري النهائي المحدد؟"
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none min-h-[70px] resize-none text-sm"
+                            />
+                        </div>
+
+                        {/* Corrective & Preventive Actions */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-gray-600 text-sm mb-2 flex items-center gap-1">
+                                    ✅ الإجراء التصحيحي
+                                </label>
+                                <textarea
+                                    value={rcaCorrectiveAction}
+                                    onChange={e => setRcaCorrectiveAction(e.target.value)}
+                                    placeholder="ما الإجراء لمعالجة السبب الحالي؟"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 outline-none min-h-[70px] resize-none text-sm"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 text-sm mb-2 flex items-center gap-1">
+                                    🛡️ الإجراء الوقائي
+                                </label>
+                                <textarea
+                                    value={rcaPreventiveAction}
+                                    onChange={e => setRcaPreventiveAction(e.target.value)}
+                                    placeholder="ما الإجراء لمنع التكرار مستقبلاً؟"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none min-h-[70px] resize-none text-sm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Notes */}

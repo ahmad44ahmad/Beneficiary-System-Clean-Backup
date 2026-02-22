@@ -22,11 +22,11 @@ export interface SystemAlert {
 
 // Alert Configuration
 const ALERT_CONFIG = {
-    infection: { icon: Shield, color: 'red', sound: true },
-    fall_risk: { icon: AlertTriangle, color: 'orange', sound: true },
-    medication: { icon: Activity, color: 'purple', sound: true },
-    inspection_failed: { icon: AlertTriangle, color: 'yellow', sound: false },
-    incident: { icon: AlertTriangle, color: 'red', sound: true },
+    infection: { icon: Shield, color: 'red', sound: true, bgClass: 'bg-red-100', textClass: 'text-red-600' },
+    fall_risk: { icon: AlertTriangle, color: 'orange', sound: true, bgClass: 'bg-orange-100', textClass: 'text-orange-600' },
+    medication: { icon: Activity, color: 'purple', sound: true, bgClass: 'bg-purple-100', textClass: 'text-purple-600' },
+    inspection_failed: { icon: AlertTriangle, color: 'yellow', sound: false, bgClass: 'bg-yellow-100', textClass: 'text-yellow-600' },
+    incident: { icon: AlertTriangle, color: 'red', sound: true, bgClass: 'bg-red-100', textClass: 'text-red-600' },
 };
 
 const SEVERITY_STYLES = {
@@ -110,8 +110,8 @@ const AlertCard: React.FC<{
         >
             <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3">
-                    <div className={`p-2 rounded-full bg-${config.color}-100`}>
-                        <Icon className={`w-5 h-5 text-${config.color}-600`} />
+                    <div className={`p-2 rounded-full ${config.bgClass}`}>
+                        <Icon className={`w-5 h-5 ${config.textClass}`} />
                     </div>
                     <div className="flex-1">
                         <div className="flex items-center gap-2">

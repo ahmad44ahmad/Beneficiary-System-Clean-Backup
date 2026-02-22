@@ -98,7 +98,7 @@ export const PTProgressNoteManager: React.FC<{
                     </div>
                 ))}
                 {notes.length === 0 && (
-                    <div className="text-center text-gray-500 py-8">No progress notes recorded yet.</div>
+                    <div className="text-center text-gray-500 py-8">لا توجد ملاحظات تقدم مسجلة بعد</div>
                 )}
             </div>
         </div>

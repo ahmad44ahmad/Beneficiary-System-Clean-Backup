@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
+    base: env.VITE_BASE_URL || '/',
     envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
     server: {
       port: 5173,
@@ -18,6 +19,21 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
+      }
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+            'vendor-charts': ['recharts'],
+            'vendor-query': ['@tanstack/react-query'],
+            'vendor-motion': ['framer-motion'],
+            'vendor-supabase': ['@supabase/supabase-js'],
+            'vendor-forms': ['react-hook-form', 'zod'],
+            'vendor-icons': ['lucide-react'],
+          }
+        }
       }
     }
   };

@@ -88,17 +88,6 @@ export const BeneficiaryListPage: React.FC = () => {
                 return demoData;
             }
 
-            // DEBUG: Log total count and first 3 records with their alerts field
-            console.log('📊 [BeneficiaryListPage] Total records from Supabase:', data.length);
-            const withAlerts = data.filter(b => b.alerts && Array.isArray(b.alerts) && b.alerts.length > 0);
-            console.log('📊 [BeneficiaryListPage] Records with alerts:', withAlerts.length);
-            if (withAlerts.length > 0) {
-                console.log('📊 [BeneficiaryListPage] Sample alerts:', withAlerts.slice(0, 3).map(b => ({ name: b.full_name, alerts: b.alerts })));
-            }
-            if (data.length > 0) {
-                console.log('📊 [BeneficiaryListPage] First record alerts field:', data[0].alerts, 'type:', typeof data[0].alerts);
-            }
-
             return data.map(b => {
                 return {
                     id: b.id,
@@ -270,8 +259,8 @@ export const BeneficiaryListPage: React.FC = () => {
                         </div>
                         <div>
                             <h1 className="text-hierarchy-title text-gray-900">قائمة المستفيدين</h1>
-                            <p className="text-hierarchy-small text-gray-500">
-                                إجمالي {stats.total} مستفيد • {stats.stable} مستقر • {stats.needsAttention} يحتاج متابعة • {stats.critical} حرج
+                            <p className="text-sm text-gray-500 mt-0.5">
+                                إجمالي {stats.total} مستفيد في مركز التأهيل الشامل
                             </p>
                         </div>
                     </div>
@@ -310,7 +299,7 @@ export const BeneficiaryListPage: React.FC = () => {
                 </div>
 
                 {/* Quick Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     <div className="hrsd-card-stat border-l-hrsd-teal">
                         <div className="flex items-center gap-3">
                             <Users className="w-6 h-6 text-hrsd-teal" />
@@ -406,21 +395,7 @@ export const BeneficiaryListPage: React.FC = () => {
                         <span className="hidden sm:inline">Excel</span>
                     </motion.button>
 
-                    {/* Export Excel Button */}
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={handleExportExcel}
-                        disabled={isExporting}
-                        className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors disabled:opacity-50"
-                        aria-label="تصدير إلى Excel"
-                        title="تصدير إلى Excel"
-                    >
-                        <Download className={`w-4 h-4 ${isExporting ? 'animate-pulse' : ''}`} />
-                        <span className="hidden sm:inline">Excel</span>
-                    </motion.button>
-
-                    {/* Results count moved here */}
+                    {/* Spacer + Results count */}
                     <div className="flex-1 text-left">
                         <p className="text-hierarchy-small text-gray-500">
                             عرض {filteredBeneficiaries.length} من أصل {beneficiaries.length}

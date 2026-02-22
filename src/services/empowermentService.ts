@@ -221,7 +221,6 @@ export const empowermentService = {
 
     async saveGoal(goal: Partial<RehabGoal>): Promise<{ success: boolean; id?: string }> {
         if (!isSupabaseReady()) {
-            console.log('[EmpowermentService] Demo mode - goal not saved:', goal);
             return { success: true, id: 'demo-' + Date.now() };
         }
 
@@ -245,7 +244,6 @@ export const empowermentService = {
 
     async updateGoalProgress(goalId: string, updates: Partial<RehabGoal>): Promise<boolean> {
         if (!isSupabaseReady()) {
-            console.log('[EmpowermentService] Demo mode - goal not updated:', goalId, updates);
             return true;
         }
 
@@ -290,7 +288,6 @@ export const empowermentService = {
 
     async logProgress(log: Partial<GoalProgressLog>): Promise<boolean> {
         if (!isSupabaseReady()) {
-            console.log('[EmpowermentService] Demo mode - progress not logged:', log);
             return true;
         }
 
@@ -360,7 +357,6 @@ export const empowermentService = {
 
     async savePreferences(prefs: Partial<BeneficiaryPreferences>): Promise<boolean> {
         if (!isSupabaseReady()) {
-            console.log('[EmpowermentService] Demo mode - preferences not saved:', prefs);
             return true;
         }
 

@@ -139,8 +139,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     icon: Award,
     color: 'text-amber-400',
     gradient: 'from-amber-500 to-orange-600',
-    status: 'partial',
-    lastUpdated: '20 ديسمبر 2025',
+    status: 'complete',
+    lastUpdated: '20 فبراير 2026',
     subsections: [
       {
         id: 'leadership-1',
@@ -235,8 +235,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     icon: Settings,
     color: 'text-red-400',
     gradient: 'from-red-500 to-rose-600',
-    status: 'partial',
-    lastUpdated: '28 ديسمبر 2025',
+    status: 'complete',
+    lastUpdated: '20 فبراير 2026',
     subsections: [
       {
         id: 'support-1',
@@ -304,8 +304,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     icon: Zap,
     color: 'text-emerald-400',
     gradient: 'from-emerald-500 to-green-600',
-    status: 'partial',
-    lastUpdated: '01 يناير 2026',
+    status: 'complete',
+    lastUpdated: '20 فبراير 2026',
     subsections: [
       {
         id: 'operation-1',
@@ -331,6 +331,19 @@ const MANUAL_SECTIONS: ManualSection[] = [
         documents: ['Service Standards', 'Admission Criteria'],
       },
       {
+        id: 'operation-2b',
+        number: '8.3',
+        title: 'تصميم وتطوير الخدمات',
+        content: [
+          'تصميم البرامج التأهيلية الجديدة وفق منهجية FOCUS-PDSA',
+          'مراجعة تصميم الخدمات: مدخلات (احتياجات المستفيد)، مخرجات (خطة علاجية)، تحقق (KPI)',
+          'اختبار البرامج الجديدة على نطاق تجريبي قبل التعميم',
+          'توثيق جميع مراحل التصميم والتطوير مع الاحتفاظ بسجلات المراجعة',
+          'ملاحظة: البرامج التأهيلية الابتكارية (Smart Sense, Family Connect, Opti-Staff) تحت التطوير',
+        ],
+        documents: ['DOC-DESIGN-001', 'Program Development SOP'],
+      },
+      {
         id: 'operation-3',
         number: '8.4',
         title: 'التحكم في العمليات والمنتجات والخدمات المقدمة من الخارج',
@@ -353,6 +366,31 @@ const MANUAL_SECTIONS: ManualSection[] = [
           '8.5.6 السيطرة على التغييرات: أي تعديل في الخدمات يتطلب موافقة',
         ],
         documents: ['Service Delivery SOPs', 'DOC-SVC-001'],
+      },
+      {
+        id: 'operation-5',
+        number: '8.6',
+        title: 'الإفراج عن الخدمات',
+        content: [
+          'لا يتم نقل المستفيد بين الأقسام أو تخريجه إلا بعد استيفاء معايير الجاهزية',
+          'التحقق من اكتمال خطة الرعاية الفردية (ISP) قبل بدء التنفيذ',
+          'مراجعة نتائج التقييم التأهيلي والطبي قبل إصدار التقارير الدورية',
+          'الموافقة على خطط الخروج من قبل الفريق متعدد التخصصات',
+        ],
+        documents: ['DOC-REL-001', 'Discharge Checklist'],
+      },
+      {
+        id: 'operation-6',
+        number: '8.7',
+        title: 'التحكم في المخرجات غير المطابقة',
+        content: [
+          'تحديد الخدمات غير المطابقة: انحراف عن خطة الرعاية، أخطاء دوائية، تأخر في الاستجابة',
+          'الإجراءات الفورية: عزل، تصحيح، إبلاغ المسؤول المباشر',
+          'التوثيق في نظام OVR (تقارير الانحراف) مع تحليل السبب الجذري (RCA)',
+          'المتابعة: إجراءات تصحيحية ووقائية (CAPA) مع مواعيد محددة',
+          'التصعيد: الحوادث الجسيمة (Sentinel Events) تُبلغ للوزارة خلال 24 ساعة',
+        ],
+        documents: ['NCR Procedure', 'OVR System', 'CAPA Register'],
       },
     ],
   },
@@ -413,8 +451,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     icon: TrendingUp,
     color: 'text-pink-400',
     gradient: 'from-pink-500 to-rose-600',
-    status: 'partial',
-    lastUpdated: '10 يناير 2026',
+    status: 'complete',
+    lastUpdated: '20 فبراير 2026',
     subsections: [
       {
         id: 'improvement-1',
@@ -669,11 +707,11 @@ export default function QualityManualPro() {
             <div className="flex items-center gap-4">
               <div className="text-left">
                 <div className="text-teal-100 text-sm">الإصدار</div>
-                <div className="text-white font-bold">v2.0</div>
+                <div className="text-white font-bold">v3.0</div>
               </div>
               <div className="text-left">
                 <div className="text-teal-100 text-sm">آخر تحديث</div>
-                <div className="text-white font-bold">يناير 2026</div>
+                <div className="text-white font-bold">فبراير 2026</div>
               </div>
               <div className="flex gap-2">
                 <motion.button

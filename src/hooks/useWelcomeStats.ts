@@ -54,13 +54,6 @@ export const useWelcomeStats = (): WelcomeStats => {
                     complianceRate,
                     loading: false,
                 });
-
-                console.log('✅ Welcome stats loaded:', {
-                    beneficiaries: beneficiariesCount,
-                    risks: activeRisksCount,
-                    staff: staffCount,
-                    compliance: complianceRate
-                });
             } catch (error) {
                 console.error('Error fetching welcome stats:', error);
                 // Use fallback values

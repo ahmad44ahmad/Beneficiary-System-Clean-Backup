@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useMemo, ReactNode } from 'react';
 
 export type ViewMode = 'ADMIN' | 'DIRECTOR' | 'DEPARTMENT_HEAD' | 'STAFF';
 
@@ -15,8 +15,10 @@ const ViewModeContext = createContext<ViewModeContextType>({
 export const ViewModeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [currentView, setView] = useState<ViewMode>('ADMIN');
 
+    const value = useMemo(() => ({ currentView, setView }), [currentView]);
+
     return (
-        <ViewModeContext.Provider value={{ currentView, setView }}>
+        <ViewModeContext.Provider value={value}>
             {children}
         </ViewModeContext.Provider>
     );

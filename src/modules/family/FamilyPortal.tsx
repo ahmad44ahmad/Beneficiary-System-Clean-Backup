@@ -71,12 +71,19 @@ export const FamilyPortal: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'updates' | 'goals' | 'gallery' | 'messages'>('updates');
 
     useEffect(() => {
+        let cancelled = false;
         const fetchData = async () => {
-            const data = await empowermentService.getGoals();
-            setGoals(data);
-            setLoading(false);
+            try {
+                const data = await empowermentService.getGoals();
+                if (!cancelled) setGoals(data);
+            } catch (err) {
+                console.error('FamilyPortal fetch error:', err);
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
         };
         fetchData();
+        return () => { cancelled = true; };
     }, []);
 
     if (loading) {

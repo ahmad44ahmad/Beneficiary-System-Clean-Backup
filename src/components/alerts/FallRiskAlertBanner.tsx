@@ -81,10 +81,8 @@ export const FallRiskAlertBanner: React.FC = () => {
                         try {
                             const audio = new Audio('/alert.mp3');
                             audio.volume = 0.3;
-                            audio.play().catch(() => { }); // Ignore if audio fails
-                        } catch {
-                            // Audio not available
-                        }
+                            audio.play().catch(() => { /* Audio autoplay blocked by browser */ });
+                        } catch (_) { /* Audio not supported */ }
 
                         // Show toast notification
                         showToast(
@@ -102,10 +100,11 @@ export const FallRiskAlertBanner: React.FC = () => {
     }, [showToast]);
 
     const dismissAlert = (id: string) => {
-        setAlerts(prev => prev.filter(a => a.id !== id));
-        if (alerts.length <= 1) {
-            setIsVisible(false);
-        }
+        setAlerts(prev => {
+            const remaining = prev.filter(a => a.id !== id);
+            if (remaining.length === 0) setIsVisible(false);
+            return remaining;
+        });
     };
 
     const viewBeneficiary = (beneficiaryId: string) => {

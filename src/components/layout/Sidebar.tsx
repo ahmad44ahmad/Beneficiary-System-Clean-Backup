@@ -82,6 +82,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                 { to: '/risks', icon: AlertTriangle, label: 'سجل المخاطر' },
                 { to: '/ipc', icon: Shield, label: 'درع السلامة (IPC)' },
                 { to: '/compliance', icon: CheckCircle2, label: 'الامتثال ISO' },
+                { to: '/quality/manual', icon: FileText, label: 'دليل الجودة ISO' },
+                { to: '/quality/ncr-capa', icon: AlertOctagon, label: 'سجل NCR/CAPA', badge: 3 },
+                { to: '/quality/audit', icon: ClipboardList, label: 'التدقيق الداخلي' },
+                { to: '/quality', icon: BarChart3, label: 'لوحة الجودة' },
+                { to: '/grc/excellence', icon: Sparkles, label: 'مركز التميز' },
+                { to: '/indicators/strategic', icon: Target, label: 'المؤشرات الاستراتيجية' },
             ]
         },
         {

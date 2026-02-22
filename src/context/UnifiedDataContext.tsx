@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import {
     Beneficiary,
     VisitLog,
@@ -110,52 +110,63 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     ]);
     const isolationStats = {
         totalBeds: 10,
-        occupiedBeds: 2,
-        patients: [
-            { name: 'محمد علي', reason: 'اشتباه عدوى تنفسية' },
-            { name: 'خالد أحمد', reason: 'جدري مائي' }
-        ]
-    };
+        occupiedBeds: 0,
+        patients: [] as { name: string; reason: string }[]
+    });
+
+    const isDemoMode = import.meta.env.VITE_APP_MODE === 'demo';
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    // Helper to convert local beneficiaries to unified profiles
+    const toUnifiedProfiles = (source: typeof localBeneficiaries): UnifiedBeneficiaryProfile[] => {
+        return source.map(b => ({
+            ...b,
+            visitLogs: [],
+            incidents: [],
+            medicalHistory: [],
+            smartTags: [],
+            riskLevel: 'low' as const,
+            isOrphan: b.guardianRelation?.toLowerCase().includes('يتيم') || b.guardianRelation === 'State Ward',
+            hasChronicCondition: Boolean(b.medicalDiagnosis && (
+                b.medicalDiagnosis.includes('سكري') ||
+                b.medicalDiagnosis.includes('صرع') ||
+                b.medicalDiagnosis.includes('diabetes') ||
+                b.medicalDiagnosis.includes('epilepsy')
+            )),
+            requiresIsolation: false
+        } as UnifiedBeneficiaryProfile));
+    };
 
     const fetchData = async () => {
         setLoading(true);
         setError(null);
         try {
-            const data = await supaService.getBeneficiaries();
-
-            // Fallback to local data if Supabase returns empty or unavailable
-            // OR if local data has MORE records (to preserve existing data)
-            let dataSource: UnifiedBeneficiaryProfile[];
-
-            // Use Supabase data if available
-            if (data && data.length > 0) {
-                dataSource = data;
-                console.log(`✓ Loaded ${data.length} beneficiaries from Supabase`);
-            } else {
-                // Fallback to local data only if Supabase is empty
-                dataSource = localBeneficiaries.map(b => ({
+            // Demo mode: use local data directly
+            if (isDemoMode) {
+                const enrichedData = toUnifiedProfiles(localBeneficiaries).map(b => ({
                     ...b,
-                    visitLogs: [],
-                    incidents: [],
-                    medicalHistory: [],
-                    smartTags: [],
-                    riskLevel: 'low' as const,
-                    isOrphan: b.guardianRelation?.toLowerCase().includes('يتيم') || b.guardianRelation === 'State Ward',
-                    hasChronicCondition: Boolean(b.medicalDiagnosis && (
-                        b.medicalDiagnosis.includes('سكري') ||
-                        b.medicalDiagnosis.includes('صرع') ||
-                        b.medicalDiagnosis.includes('diabetes') ||
-                        b.medicalDiagnosis.includes('epilepsy')
-                    )),
-                    requiresIsolation: false
-                } as UnifiedBeneficiaryProfile));
-                console.log(`ℹ Supabase returned empty, using local fallback: ${localBeneficiaries.length} beneficiaries`);
+                    smartTags: deriveSmartTags(b)
+                }));
+                setBeneficiaries(enrichedData);
+                setError(null);
+                return;
             }
 
-            // Enrich with smart tags
+            // Production mode: fetch from Supabase
+            const data = await supaService.getBeneficiaries();
+
+            let dataSource: UnifiedBeneficiaryProfile[];
+
+            if (data && data.length > 0) {
+                dataSource = data;
+            } else {
+                // Fallback to local data only if Supabase returns empty
+                dataSource = toUnifiedProfiles(localBeneficiaries);
+                setError('Supabase returned empty — using local fallback data');
+            }
+
             const enrichedData = dataSource.map(b => ({
                 ...b,
                 smartTags: deriveSmartTags(b)
@@ -167,30 +178,12 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         } catch (err: unknown) {
             console.error("Data fetch error:", err);
             // Use local data as fallback on error
-            const dataSource = localBeneficiaries.map(b => ({
-                ...b,
-                visitLogs: [],
-                incidents: [],
-                medicalHistory: [],
-                smartTags: [],
-                riskLevel: 'low' as const,
-                isOrphan: b.guardianRelation?.toLowerCase().includes('يتيم') || b.guardianRelation === 'State Ward',
-                hasChronicCondition: Boolean(b.medicalDiagnosis && (
-                    b.medicalDiagnosis.includes('سكري') ||
-                    b.medicalDiagnosis.includes('صرع') ||
-                    b.medicalDiagnosis.includes('diabetes') ||
-                    b.medicalDiagnosis.includes('epilepsy')
-                )),
-                requiresIsolation: false
-            } as UnifiedBeneficiaryProfile));
-
-            const enrichedData = dataSource.map(b => ({
+            const enrichedData = toUnifiedProfiles(localBeneficiaries).map(b => ({
                 ...b,
                 smartTags: deriveSmartTags(b)
             }));
 
             setBeneficiaries(enrichedData);
-            console.warn(`⚠ Error occurred, using local data: ${localBeneficiaries.length} beneficiaries`);
             setError('Using local data (Supabase unavailable)');
         } finally {
             setLoading(false);
@@ -201,17 +194,17 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         fetchData();
     }, []);
 
-    const getBeneficiaryById = (id: string) => {
+    const getBeneficiaryById = useCallback((id: string) => {
         return beneficiaries.find(b => b.id === id);
-    };
+    }, [beneficiaries]);
 
-    const getBeneficiaryByNationalId = async (nid: string) => {
+    const getBeneficiaryByNationalId = useCallback(async (nid: string) => {
         const local = beneficiaries.find(b => b.nationalId === nid);
         if (local) return local;
         return await supaService.getBeneficiaryByNationalId(nid);
-    };
+    }, [beneficiaries]);
 
-    const updateBeneficiary = async (id: string, data: Partial<Beneficiary>) => {
+    const updateBeneficiary = useCallback(async (id: string, data: Partial<Beneficiary>) => {
         try {
             await supaService.updateBeneficiary(id, data);
             setBeneficiaries(prev => prev.map(b => b.id === id ? { ...b, ...data } : b));
@@ -219,57 +212,68 @@ export const UnifiedDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             console.error("Update failed:", err);
             throw err;
         }
-    };
+    }, []);
 
-    const refreshData = async () => {
+    const refreshData = useCallback(async () => {
         await fetchData();
-    };
+    }, []);
 
     // Simple setters for migration
-    const addVisitLog = (log: VisitLog) => setVisitLogs(prev => [log, ...prev]);
-    const addSocialActivityPlan = (plan: SocialActivityPlan) => setSocialActivityPlans(prev => [plan, ...prev]);
-    const addSocialActivityDoc = (doc: SocialActivityDocumentation) => setSocialActivityDocs(prev => [doc, ...prev]);
-    const addSocialActivityFollowUp = (followUp: SocialActivityFollowUp) => setSocialActivityFollowUps(prev => [followUp, ...prev]);
-    const addMedicalProfile = (profile: MedicalProfile) => setMedicalProfiles(prev => [...prev, profile]);
+    const addVisitLog = useCallback((log: VisitLog) => setVisitLogs(prev => [log, ...prev]), []);
+    const addSocialActivityPlan = useCallback((plan: SocialActivityPlan) => setSocialActivityPlans(prev => [plan, ...prev]), []);
+    const addSocialActivityDoc = useCallback((doc: SocialActivityDocumentation) => setSocialActivityDocs(prev => [doc, ...prev]), []);
+    const addSocialActivityFollowUp = useCallback((followUp: SocialActivityFollowUp) => setSocialActivityFollowUps(prev => [followUp, ...prev]), []);
+    const addMedicalProfile = useCallback((profile: MedicalProfile) => setMedicalProfiles(prev => [...prev, profile]), []);
+
+    const value = useMemo(() => ({
+        beneficiaries,
+        visitLogs,
+        inventory,
+        medicalProfiles,
+        caseStudies,
+        socialResearchForms,
+        rehabilitationPlans,
+        incidents,
+        clothingRequests,
+        medicalExaminations,
+        educationalPlans,
+        injuryReports,
+        familyCaseStudies,
+        socialActivityPlans,
+        socialActivityDocs,
+        socialActivityFollowUps,
+        trainingReferrals,
+        trainingPlanFollowUps,
+        vocationalEvaluations,
+        familyGuidanceReferrals,
+        postCareFollowUps,
+        vaccinations,
+        isolationStats,
+        loading,
+        error,
+        getBeneficiaryById,
+        getBeneficiaryByNationalId,
+        updateBeneficiary,
+        refreshData,
+        addVisitLog,
+        addSocialActivityPlan,
+        addSocialActivityDoc,
+        addSocialActivityFollowUp,
+        addMedicalProfile
+    }), [
+        beneficiaries, visitLogs, inventory, medicalProfiles, caseStudies,
+        socialResearchForms, rehabilitationPlans, incidents, clothingRequests,
+        medicalExaminations, educationalPlans, injuryReports, familyCaseStudies,
+        socialActivityPlans, socialActivityDocs, socialActivityFollowUps,
+        trainingReferrals, trainingPlanFollowUps, vocationalEvaluations,
+        familyGuidanceReferrals, postCareFollowUps, vaccinations, isolationStats,
+        loading, error, getBeneficiaryById, getBeneficiaryByNationalId,
+        updateBeneficiary, refreshData, addVisitLog, addSocialActivityPlan,
+        addSocialActivityDoc, addSocialActivityFollowUp, addMedicalProfile
+    ]);
 
     return (
-        <UnifiedDataContext.Provider value={{
-            beneficiaries,
-            visitLogs,
-            inventory,
-            medicalProfiles,
-            caseStudies,
-            socialResearchForms,
-            rehabilitationPlans,
-            incidents,
-            clothingRequests,
-            medicalExaminations,
-            educationalPlans,
-            injuryReports,
-            familyCaseStudies,
-            socialActivityPlans,
-            socialActivityDocs,
-            socialActivityFollowUps,
-            trainingReferrals,
-            trainingPlanFollowUps,
-            vocationalEvaluations,
-            familyGuidanceReferrals,
-            postCareFollowUps,
-            vaccinations,
-            isolationStats,
-            loading,
-            error,
-            getBeneficiaryById,
-            getBeneficiaryByNationalId,
-            updateBeneficiary,
-            refreshData,
-
-            addVisitLog,
-            addSocialActivityPlan,
-            addSocialActivityDoc,
-            addSocialActivityFollowUp,
-            addMedicalProfile
-        }}>
+        <UnifiedDataContext.Provider value={value}>
             {children}
         </UnifiedDataContext.Provider>
     );

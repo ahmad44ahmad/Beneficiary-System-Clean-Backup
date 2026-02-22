@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useMemo, useCallback, ReactNode } from 'react';
 import { Beneficiary } from '../types';
 
 // Define the shape of our Global State
@@ -29,12 +29,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const [isMasterViewOpen, setIsMasterViewOpen] = useState(false);
 
     // Actions
-    const toggleTheme = () => {
+    const toggleTheme = useCallback(() => {
         setTheme(prev => prev === 'light' ? 'dark' : 'light');
-        // Logic to update document class for Tailwind dark mode could go here
-    };
+    }, []);
 
-    const value = {
+    const value = useMemo(() => ({
         activeBeneficiary,
         theme,
         language,
@@ -43,7 +42,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         toggleTheme,
         setLanguage,
         setIsMasterViewOpen
-    };
+    }), [activeBeneficiary, theme, language, isMasterViewOpen, toggleTheme]);
 
     return (
         <AppContext.Provider value={value}>

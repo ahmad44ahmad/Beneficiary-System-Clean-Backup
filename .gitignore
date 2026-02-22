@@ -34,6 +34,9 @@ Desktop.ini
 coverage
 
 
+# Google Drive downloads
+downloads/
+
 # Google Drive Credentials (CRITICAL SECURITY)
 google_drive_credentials.json
 credentials.json

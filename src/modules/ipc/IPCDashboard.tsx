@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {
     Shield, AlertCircle, Activity,
     TrendingUp, TrendingDown, Syringe, ClipboardCheck,
-    ChevronLeft, Plus, RefreshCw, Calendar
+    ChevronLeft, Plus, RefreshCw, Calendar,
+    ShieldCheck, Biohazard, HardHat, BedDouble, AlertTriangle
 } from 'lucide-react';
 import { ipcService, IPCStats } from '../../services/ipcService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
@@ -56,7 +57,8 @@ const KPICard: React.FC<{
 
 // Weekly Chart Component (Simple)
 const WeeklyChart: React.FC<{ data: Array<{ week: string; compliance: number }> }> = ({ data }) => {
-    const maxValue = Math.max(...data.map(d => d.compliance));
+    if (!data.length) return <div className="flex items-center justify-center h-40 text-gray-400">لا توجد بيانات</div>;
+    const maxValue = Math.max(...data.map(d => d.compliance)) || 1;
 
     return (
         <div className="flex items-end justify-between gap-2 h-40 px-2">
@@ -207,34 +209,69 @@ export const IPCDashboard: React.FC = () => {
                         <ClipboardCheck className="w-5 h-5 text-emerald-600" />
                         الإجراءات السريعة
                     </h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-3">
                         <button
                             onClick={() => navigate('/ipc/inspection')}
-                            className="p-4 bg-emerald-50 rounded-xl text-emerald-700 hover:bg-emerald-100 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-emerald-50 rounded-xl text-emerald-700 hover:bg-emerald-100 transition-colors flex flex-col items-center gap-2"
                         >
-                            <ClipboardCheck size={32} />
-                            <span className="font-medium">جولة تفتيش</span>
+                            <ClipboardCheck size={28} />
+                            <span className="font-medium text-sm">جولة تفتيش</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/incident/new')}
-                            className="p-4 bg-red-50 rounded-xl text-red-700 hover:bg-red-100 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-red-50 rounded-xl text-red-700 hover:bg-red-100 transition-colors flex flex-col items-center gap-2"
                         >
-                            <AlertCircle size={32} />
-                            <span className="font-medium">إبلاغ حادثة</span>
+                            <AlertCircle size={28} />
+                            <span className="font-medium text-sm">إبلاغ حادثة</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/immunizations')}
-                            className="p-4 bg-blue-50 rounded-xl text-blue-700 hover:bg-blue-100 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-blue-50 rounded-xl text-blue-700 hover:bg-blue-100 transition-colors flex flex-col items-center gap-2"
                         >
-                            <Syringe size={32} />
-                            <span className="font-medium">سجل التحصينات</span>
+                            <Syringe size={28} />
+                            <span className="font-medium text-sm">التحصينات</span>
+                        </button>
+                        <button
+                            onClick={() => navigate('/ipc/ppe')}
+                            className="p-3 bg-amber-50 rounded-xl text-amber-700 hover:bg-amber-100 transition-colors flex flex-col items-center gap-2"
+                        >
+                            <HardHat size={28} />
+                            <span className="font-medium text-sm">بروتوكول PPE</span>
+                        </button>
+                        <button
+                            onClick={() => navigate('/ipc/bicsl')}
+                            className="p-3 bg-teal-50 rounded-xl text-teal-700 hover:bg-teal-100 transition-colors flex flex-col items-center gap-2"
+                        >
+                            <ShieldCheck size={28} />
+                            <span className="font-medium text-sm">رخصة BICSL</span>
+                        </button>
+                        <button
+                            onClick={() => navigate('/ipc/exposure/new')}
+                            className="p-3 bg-orange-50 rounded-xl text-orange-700 hover:bg-orange-100 transition-colors flex flex-col items-center gap-2"
+                        >
+                            <Biohazard size={28} />
+                            <span className="font-medium text-sm">تعرض مهني</span>
+                        </button>
+                        <button
+                            onClick={() => navigate('/ipc/outbreak')}
+                            className="p-3 bg-rose-50 rounded-xl text-rose-700 hover:bg-rose-100 transition-colors flex flex-col items-center gap-2"
+                        >
+                            <AlertTriangle size={28} />
+                            <span className="font-medium text-sm">إدارة التفشي</span>
+                        </button>
+                        <button
+                            onClick={() => navigate('/ipc/isolation')}
+                            className="p-3 bg-violet-50 rounded-xl text-violet-700 hover:bg-violet-100 transition-colors flex flex-col items-center gap-2"
+                        >
+                            <BedDouble size={28} />
+                            <span className="font-medium text-sm">دليل العزل</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/analytics')}
-                            className="p-4 bg-purple-50 rounded-xl text-purple-700 hover:bg-purple-100 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-purple-50 rounded-xl text-purple-700 hover:bg-purple-100 transition-colors flex flex-col items-center gap-2"
                         >
-                            <Activity size={32} />
-                            <span className="font-medium">التحليلات</span>
+                            <Activity size={28} />
+                            <span className="font-medium text-sm">التحليلات</span>
                         </button>
                     </div>
                 </div>

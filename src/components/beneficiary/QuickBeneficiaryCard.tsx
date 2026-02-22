@@ -82,10 +82,10 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
                     <div>
                         <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Heart className="w-4 h-4 text-red-400" />العلامات الحيوية</h3>
                         <div className="grid grid-cols-4 gap-3">
-                            {[{ label: 'الضغط', value: info.vitals.bp, color: 'blue' }, { label: 'النبض', value: info.vitals.hr, color: 'pink' }, { label: 'الأكسجين', value: `${info.vitals.spo2}%`, color: 'cyan' }, { label: 'الحرارة', value: `${info.vitals.temp}°`, color: 'orange' }].map((v, i) => (
-                                <div key={i} className={`bg-${v.color}-500/20 rounded-xl p-3 text-center`}>
+                            {[{ label: 'الضغط', value: info.vitals.bp, bgClass: 'bg-blue-500/20', textClass: 'text-blue-400' }, { label: 'النبض', value: info.vitals.hr, bgClass: 'bg-pink-500/20', textClass: 'text-pink-400' }, { label: 'الأكسجين', value: `${info.vitals.spo2}%`, bgClass: 'bg-cyan-500/20', textClass: 'text-cyan-400' }, { label: 'الحرارة', value: `${info.vitals.temp}°`, bgClass: 'bg-orange-500/20', textClass: 'text-orange-400' }].map((v, i) => (
+                                <div key={i} className={`${v.bgClass} rounded-xl p-3 text-center`}>
                                     <p className="text-slate-400 text-xs">{v.label}</p>
-                                    <p className={`text-lg font-bold text-${v.color}-400`}>{v.value}</p>
+                                    <p className={`text-lg font-bold ${v.textClass}`}>{v.value}</p>
                                 </div>
                             ))}
                         </div>
