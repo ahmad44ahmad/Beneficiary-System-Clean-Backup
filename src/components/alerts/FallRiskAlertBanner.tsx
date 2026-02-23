@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, X, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useToast } from '../../stores/useToastStore';
 
 interface FallRiskAlert {
     id: string;

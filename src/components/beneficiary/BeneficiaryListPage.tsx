@@ -14,7 +14,7 @@ import { BeneficiaryFilters, FilterState } from './BeneficiaryFilters';
 import { SkeletonCard } from '../ui/Skeleton';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport, BENEFICIARY_COLUMNS } from '../../hooks/useExport';
-import { useToast } from '../../context/ToastContext';
+import { useToast } from '../../stores/useToastStore';
 import { useAdvancedSearch } from '../../hooks/useAdvancedSearch';
 import { useBatchOperations } from '../../hooks/useBatchOperations';
 import { useAudit } from '../../hooks/useAudit';

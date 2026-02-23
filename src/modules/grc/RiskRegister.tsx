@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useToast } from '../../context/ToastContext';
+import { useToast } from '../../stores/useToastStore';
 import { supabase } from '../../config/supabase';
 import {
     AlertTriangle,

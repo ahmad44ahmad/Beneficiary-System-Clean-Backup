@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDashboardMetrics } from '../hooks/useDashboardMetrics';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useDataStore } from '../stores/useDataStore';
 import {
     LayoutDashboard,
     Users,
@@ -36,7 +36,7 @@ const typeColors: Record<string, string> = {
 
 export const Dashboard: React.FC = () => {
     const { kpis, departmentPerformance, alerts } = useDashboardMetrics();
-    const { loading, beneficiaries } = useUnifiedData();
+    const { loading, beneficiaries } = useDataStore();
 
     if (loading) {
         return (

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Beneficiary } from '../../types';
 import { SearchBar } from '../common/SearchBar';
 import { BeneficiaryListItem } from './BeneficiaryListItem';
-import { useUnifiedData } from '../../context/UnifiedDataContext';
+import { useDataStore } from '../../stores/useDataStore';
 
 interface BeneficiaryListPanelProps {
     beneficiaries: Beneficiary[];
@@ -15,7 +15,7 @@ interface BeneficiaryListPanelProps {
 const ITEMS_PER_PAGE = 20;
 
 export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ beneficiaries, selectedBeneficiary, onSelect, searchTerm, onSearchChange }) => {
-    const { loading } = useUnifiedData();
+    const { loading } = useDataStore();
     const [currentPage, setCurrentPage] = React.useState(1);
 
     const filteredBeneficiaries = React.useMemo(() => {

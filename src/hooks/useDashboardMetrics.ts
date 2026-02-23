@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useDataStore } from '../stores/useDataStore';
 import { RehabPlan } from '../types/rehab';
 
 function isRehabPlan(plan: unknown): plan is RehabPlan {
@@ -7,7 +7,7 @@ function isRehabPlan(plan: unknown): plan is RehabPlan {
 }
 
 export const useDashboardMetrics = () => {
-    const { beneficiaries } = useUnifiedData();
+    const { beneficiaries } = useDataStore();
 
     return useMemo(() => {
         // 1. Real-Time KPIs

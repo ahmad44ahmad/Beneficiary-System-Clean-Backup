@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, X, ChevronRight, MapPin } from 'lucide-react';
 import { supabase } from '../../config/supabase';
-import { useToast } from '../../context/ToastContext';
+import { useToast } from '../../stores/useToastStore';
 import { useNavigate } from 'react-router-dom';
 
 interface Incident {

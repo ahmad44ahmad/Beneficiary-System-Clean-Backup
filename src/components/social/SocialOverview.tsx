@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card } from '../ui/Card';
-import { useUnifiedData } from '../../context/UnifiedDataContext';
+import { useDataStore } from '../../stores/useDataStore';
 import { Users, Shirt, Calendar, Heart, FileText, MessageSquare, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const SocialOverview: React.FC = () => {
-    const { beneficiaries, socialActivityPlans, socialActivityDocs } = useUnifiedData();
+    const { beneficiaries, socialActivityPlans, socialActivityDocs } = useDataStore();
 
     const totalBeneficiaries = beneficiaries.length;
     const activePlans = socialActivityPlans?.length || 0;

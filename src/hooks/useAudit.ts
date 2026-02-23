@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import { useCallback, useMemo } from 'react';
-import { useUser } from '../context/UserContext';
+import { useUserStore } from '../stores/useUserStore';
 import {
     createAuditLogger,
     AuditModule,
@@ -26,7 +26,7 @@ import {
  * ```
  */
 export function useAudit(module: AuditModule) {
-    const { currentUser } = useUser();
+    const { currentUser } = useUserStore();
 
     const auditLogger = useMemo(() => {
         return createAuditLogger(module, {

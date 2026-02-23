@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { TrainingReferral } from '../types';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useDataStore } from '../stores/useDataStore';
 import { TrainingReferralForm } from '../components/training/TrainingReferralForm';
 import { Button } from '../components/ui/Button';
 
 export const TrainingDashboard = () => {
-    const { beneficiaries } = useUnifiedData();
+    const { beneficiaries } = useDataStore();
     const [referrals, setReferrals] = useState<TrainingReferral[]>([]);
     const [isCreating, setIsCreating] = useState(false);
 

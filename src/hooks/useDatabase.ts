@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supaService } from '../services/supaService';
 import { Beneficiary } from '../types';
-import { useAuth as useAppAuth } from '../context/AuthContext';
+import { useAuthStore } from '../stores/useAuthStore';
 
 export const useBeneficiaries = (filters?: { status?: string }) => {
     const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
-    const { user } = useAppAuth();
+    const { user } = useAuthStore();
 
     const fetchBeneficiaries = useCallback(async () => {
         // if (!user && !filters?.force) return; // Optional: enforce auth
@@ -76,4 +76,4 @@ export const useBeneficiaryMutations = () => {
     return { create, update, remove, loading, error };
 };
 
-export const useAuth = useAppAuth;
+export const useAuth = useAuthStore;

@@ -1,8 +1,8 @@
 import React, { useState, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
-import { useApp } from '../context/AppContext';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useAppStore } from '../stores/useAppStore';
+import { useDataStore } from '../stores/useDataStore';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
 
@@ -162,24 +162,12 @@ export const App = () => {
         setActiveBeneficiary: setSelectedBeneficiary,
         isMasterViewOpen,
         setIsMasterViewOpen
-    } = useApp();
+    } = useAppStore();
 
     const {
         beneficiaries: unifiedBeneficiaries,
         visitLogs,
         inventory,
-        caseStudies,
-        socialResearchForms,
-        rehabilitationPlans,
-        medicalExaminations,
-        educationalPlans,
-        injuryReports,
-        familyCaseStudies,
-        trainingReferrals,
-        trainingPlanFollowUps,
-        vocationalEvaluations,
-        familyGuidanceReferrals,
-        postCareFollowUps,
         socialActivityPlans,
         socialActivityDocs,
         socialActivityFollowUps,
@@ -189,7 +177,7 @@ export const App = () => {
         addSocialActivityDoc,
         addSocialActivityFollowUp,
         addMedicalProfile
-    } = useUnifiedData();
+    } = useDataStore();
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isCreatingMedicalProfile, setIsCreatingMedicalProfile] = useState(false);
@@ -228,19 +216,19 @@ export const App = () => {
                             <div className="flex-1 overflow-y-auto">
                                 <BeneficiaryDetailPanel
                                     beneficiary={selectedBeneficiary}
-                                    caseStudies={caseStudies}
-                                    socialResearchForms={socialResearchForms}
-                                    rehabilitationPlans={rehabilitationPlans}
+                                    caseStudies={[]}
+                                    socialResearchForms={[]}
+                                    rehabilitationPlans={[]}
                                     visitLogs={visitLogs}
-                                    medicalExaminations={medicalExaminations}
-                                    educationalPlans={educationalPlans}
-                                    injuryReports={injuryReports}
-                                    familyCaseStudies={familyCaseStudies}
-                                    trainingReferrals={trainingReferrals}
-                                    trainingPlanFollowUps={trainingPlanFollowUps}
-                                    vocationalEvaluations={vocationalEvaluations}
-                                    familyGuidanceReferrals={familyGuidanceReferrals}
-                                    postCareFollowUps={postCareFollowUps}
+                                    medicalExaminations={[]}
+                                    educationalPlans={[]}
+                                    injuryReports={[]}
+                                    familyCaseStudies={[]}
+                                    trainingReferrals={[]}
+                                    trainingPlanFollowUps={[]}
+                                    vocationalEvaluations={[]}
+                                    familyGuidanceReferrals={[]}
+                                    postCareFollowUps={[]}
                                 />
                             </div>
                         </div>

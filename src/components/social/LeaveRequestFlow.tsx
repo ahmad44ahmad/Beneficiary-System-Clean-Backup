@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useUser } from '../../context/UserContext';
+import { useUserStore } from '../../stores/useUserStore';
 import { LeaveRequestStatus } from '../../types/social';
 
 // Extended LeaveRequest with richer history for this workflow
@@ -47,7 +47,7 @@ const mockMedicalStatus: Record<string, { infection: boolean; unstableVitals: bo
 };
 
 export const LeaveRequestFlow: React.FC = () => {
-    const { currentUser } = useUser();
+    const { currentUser } = useUserStore();
     const [requests, setRequests] = useState<LeaveRequest[]>([
         {
             id: 'LR-001',

@@ -916,6 +916,8 @@ const SopLibraryView = () => {
         currentPage * PAGE_SIZE
     );
 
+    return (
+        <div>
             {/* SOP List */}
             <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
                 {filteredProcesses.slice(0, 15).map((process, _idx) => (
@@ -968,7 +970,7 @@ const SopLibraryView = () => {
                                     type="text"
                                     placeholder="بحث بالاسم، القسم، المسؤول، أو المؤشر..."
                                     value={searchTerm}
-                                    onChange={(e) => handleSearchChange(e.target.value)}
+                                    onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                                     className="w-full pl-4 pr-10 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#148287] text-sm bg-white"
                                 />
                             </div>

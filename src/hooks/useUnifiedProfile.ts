@@ -1,19 +1,18 @@
 import { useMemo } from 'react';
-import { useUnifiedData } from '../context/UnifiedDataContext';
+import { useDataStore } from '../stores/useDataStore';
 import { UnifiedBeneficiaryProfile } from '../types/unified';
+import { SocialResearch, RehabilitationPlan, IncidentReport, MedicalExamination, IndividualEducationalPlan } from '../types';
 import { deriveSmartTags, calculateRiskLevel } from '../utils/tagEngine';
 
+// Domain arrays permanently empty — will be replaced by dedicated TanStack Query hooks
+const socialResearchForms: SocialResearch[] = [];
+const rehabilitationPlans: RehabilitationPlan[] = [];
+const incidents: IncidentReport[] = [];
+const medicalExaminations: MedicalExamination[] = [];
+const educationalPlans: IndividualEducationalPlan[] = [];
+
 export const useUnifiedProfile = (beneficiaryId: string): UnifiedBeneficiaryProfile | null => {
-    const {
-        beneficiaries,
-        medicalProfiles,
-        socialResearchForms,
-        rehabilitationPlans,
-        visitLogs,
-        incidents,
-        medicalExaminations,
-        educationalPlans
-    } = useUnifiedData();
+    const { beneficiaries, medicalProfiles, visitLogs } = useDataStore();
 
     const profile = useMemo(() => {
         const baseBeneficiary = beneficiaries.find(b => b.id === beneficiaryId);
@@ -75,12 +74,7 @@ export const useUnifiedProfile = (beneficiaryId: string): UnifiedBeneficiaryProf
         beneficiaryId,
         beneficiaries,
         medicalProfiles,
-        socialResearchForms,
-        rehabilitationPlans,
         visitLogs,
-        incidents,
-        medicalExaminations,
-        educationalPlans
     ]);
 
     return profile;

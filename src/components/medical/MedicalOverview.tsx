@@ -1,7 +1,7 @@
 import React from 'react';
 import { VitalsMonitorCard } from './VitalsMonitorCard';
 import { Card } from '../ui/Card';
-import { useUnifiedData } from '../../context/UnifiedDataContext';
+import { useDataStore } from '../../stores/useDataStore';
 import { HeartPulse, Activity, Syringe, AlertTriangle, Users, FileText, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ interface MedicalOverviewProps {
 }
 
 export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations = [], isolationStats }) => {
-    const { beneficiaries, medicalProfiles } = useUnifiedData();
+    const { beneficiaries, medicalProfiles } = useDataStore();
 
     // Calculate statistics
     const totalBeneficiaries = beneficiaries.length;
