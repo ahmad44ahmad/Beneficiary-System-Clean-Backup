@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useToast } from '../../stores/useToastStore';
+import { useToastStore } from '../../stores/useToastStore';
 import { DailyShiftRecord, IncidentReport, GenderSection } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { DailyShiftForm } from './DailyShiftForm';
 import { IncidentReportForm } from '../medical/IncidentReportForm';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 // Demo data for when Supabase is unavailable
 const demoShiftRecords: DailyShiftRecord[] = [
@@ -21,7 +21,7 @@ const demoIncidentReports: IncidentReport[] = [
 
 export const DailyFollowUpPanel: React.FC = () => {
     const location = useLocation();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const [activeSection, setActiveSection] = useState<GenderSection>('male');
     const [activeTab, setActiveTab] = useState<'shifts' | 'incidents'>('shifts');
 
@@ -36,6 +36,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
     // Fetch data from Supabase
     const fetchData = useCallback(async () => {
+        const supabase = getSupabaseClient();
         if (!supabase) {
             setLoading(false);
             return;
@@ -103,7 +104,7 @@ export const DailyFollowUpPanel: React.FC = () => {
                 showToast('تعذر تحميل الحوادث من قاعدة البيانات', 'info');
             }
 
-        } catch (err) {
+        } catch {
             // Silently fall back to demo data
         }
 
@@ -116,6 +117,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
     const handleSaveShift = async (data: DailyShiftRecord) => {
         try {
+            const supabase = getSupabaseClient();
             if (supabase) {
                 const { error } = await supabase.from('daily_care_logs').insert([{
                     log_date: data.date,
@@ -139,6 +141,7 @@ export const DailyFollowUpPanel: React.FC = () => {
 
     const handleSaveIncident = async (data: IncidentReport) => {
         try {
+            const supabase = getSupabaseClient();
             if (supabase) {
                 const { error } = await supabase.from('incident_reports').insert([{
                     date: data.date,

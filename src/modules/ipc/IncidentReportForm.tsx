@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {
     AlertTriangle, ChevronLeft, Save, Loader2,
     User, MapPin, Calendar, FileText,
-    Thermometer, Shield, AlertCircle
+    Thermometer, Shield, AlertCircle,
+    Search, ChevronUp, ChevronDown
 } from 'lucide-react';
-import { ipcService, Location } from '../../services/ipcService';
+import { ipcService, Location, IPCIncident } from '../../services/ipcService';
 
 // Incident Categories
 const INCIDENT_CATEGORIES = [
@@ -134,7 +135,7 @@ export const IncidentReportForm: React.FC = () => {
                 rca_root_cause: rcaRootCause || undefined,
                 rca_corrective_action: rcaCorrectiveAction || undefined,
                 rca_preventive_action: rcaPreventiveAction || undefined,
-            } as any);
+            } as Partial<IPCIncident>);
 
             if (result.success) {
                 alert('✅ تم تسجيل الحادثة بنجاح - رقم المرجع: ' + result.id);

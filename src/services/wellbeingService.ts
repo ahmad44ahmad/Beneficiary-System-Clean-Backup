@@ -91,9 +91,9 @@ export const wellbeingService = {
 
         try {
             const { data, error } = await supabase
-                .from('v_wellbeing_index')
+                .from('mv_wellbeing_index')
                 .select('*')
-                .order('wellbeing_score', { ascending: true });
+                .order('wellbeing_index', { ascending: true });
 
             if (error || !data?.length) {
                 if (import.meta.env.DEV) {
@@ -117,7 +117,7 @@ export const wellbeingService = {
 
         try {
             const { data, error } = await supabase
-                .from('v_wellbeing_stats')
+                .from('mv_wellbeing_stats')
                 .select('*')
                 .single();
 
@@ -175,7 +175,7 @@ export const wellbeingService = {
 
         try {
             const { data, error } = await supabase
-                .from('v_wellbeing_index')
+                .from('mv_wellbeing_index')
                 .select('*')
                 .eq('beneficiary_id', beneficiaryId)
                 .single();

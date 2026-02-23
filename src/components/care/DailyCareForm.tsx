@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Save,
     AlertCircle,
@@ -86,6 +86,14 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
                 incidents: formData.incidents,
                 requires_followup: formData.requires_followup
             };
+
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                // Demo mode — simulate successful save
+                setSuccessMessage('تم حفظ سجل العناية اليومية بنجاح');
+                if (onSuccess) onSuccess();
+                return;
+            }
 
             const { error: insertError } = await supabase
                 .from('daily_care_logs')

@@ -5,7 +5,7 @@ import {
     CheckCircle2, XCircle, AlertCircle, BarChart3,
     Home, Briefcase, Sun
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 
 
 interface ServicesGap {
@@ -48,6 +48,8 @@ export const IndependenceTracker: React.FC = () => {
     }, []);
 
     const fetchData = async () => {
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         try {
             // Fetch services gap
             const { data: gapData } = await supabase

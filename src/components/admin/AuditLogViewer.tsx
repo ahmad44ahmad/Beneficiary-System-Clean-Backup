@@ -9,10 +9,10 @@ import {
     Download, FileSpreadsheet, Printer, ChevronDown, ChevronUp,
     CheckCircle, XCircle, Shield, Clock, Eye
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../stores/useToastStore';
+import { useToastStore } from '../../stores/useToastStore';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { NoData } from '../common/EmptyState';
 
@@ -125,7 +125,7 @@ export const AuditLogViewer: React.FC = () => {
 
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     // Fetch audit logs
     useEffect(() => {
@@ -135,6 +135,7 @@ export const AuditLogViewer: React.FC = () => {
     const fetchLogs = async () => {
         setLoading(true);
         try {
+            const supabase = getSupabaseClient();
             if (!supabase) {
                 setLogs(DEMO_LOGS);
                 setUsingDemo(true);

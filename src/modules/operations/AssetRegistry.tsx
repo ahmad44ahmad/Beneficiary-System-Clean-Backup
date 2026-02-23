@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Building2,
     Plus,
@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../stores/useToastStore';
+import { useToastStore } from '../../stores/useToastStore';
 
 interface Asset {
     id: string;
@@ -36,7 +36,7 @@ interface Asset {
 export const AssetRegistry: React.FC = () => {
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     const [assets, setAssets] = useState<Asset[]>([]);
     const [loading, setLoading] = useState(true);
@@ -82,6 +82,8 @@ export const AssetRegistry: React.FC = () => {
 
     const fetchAssets = async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         const { data, error } = await supabase
             .from('om_assets')
             .select('*')

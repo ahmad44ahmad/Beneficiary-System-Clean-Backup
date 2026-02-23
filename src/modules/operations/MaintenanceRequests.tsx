@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     Wrench,
     Plus,
@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { usePrint } from '../../hooks/usePrint';
 import { useExport } from '../../hooks/useExport';
-import { useToast } from '../../stores/useToastStore';
+import { useToastStore } from '../../stores/useToastStore';
 
 interface MaintenanceRequest {
     id: string;
@@ -34,7 +34,7 @@ interface MaintenanceRequest {
 export const MaintenanceRequests: React.FC = () => {
     const { printTable, isPrinting } = usePrint();
     const { exportToExcel, isExporting } = useExport();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
 
     const [requests, setRequests] = useState<MaintenanceRequest[]>([]);
     const [loading, setLoading] = useState(true);
@@ -89,6 +89,8 @@ export const MaintenanceRequests: React.FC = () => {
 
     const fetchRequests = async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
+        if (!supabase) { setLoading(false); return; }
         const { data, error } = await supabase
             .from('om_maintenance_requests')
             .select(`
@@ -103,6 +105,8 @@ export const MaintenanceRequests: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
         const { error } = await supabase
             .from('om_maintenance_requests')
             .insert([formData]);

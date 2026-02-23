@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useToast } from '../../stores/useToastStore';
-import { supabase } from '../../config/supabase';
+import { useToastStore } from '../../stores/useToastStore';
+import { getSupabaseClient } from '../../hooks/queries';
 import {
     AlertTriangle,
     Plus,
@@ -50,7 +50,7 @@ const RISK_CATEGORIES = [
 
 export const RiskRegister: React.FC = () => {
     const location = useLocation();
-    const { showToast } = useToast();
+    const showToast = useToastStore((s) => s.showToast);
     const [risks, setRisks] = useState<Risk[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -76,6 +76,7 @@ export const RiskRegister: React.FC = () => {
 
     const fetchRisks = async () => {
         setLoading(true);
+        const supabase = getSupabaseClient();
 
         // Fallback demo data if Supabase is unavailable
         const demoRisks: Risk[] = [
@@ -103,7 +104,7 @@ export const RiskRegister: React.FC = () => {
             } else {
                 setRisks(data && data.length > 0 ? data : demoRisks);
             }
-        } catch (err) {
+        } catch {
             setRisks(demoRisks);
         }
 
@@ -112,6 +113,8 @@ export const RiskRegister: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const supabase = getSupabaseClient();
+        if (!supabase) return;
         const { error } = await supabase
             .from('grc_risks')
             .insert([formData]);

@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../../config/supabase';
+import React, { useState, useCallback } from 'react';
+import { useRealtimeCallback, getSupabaseClient } from '../../hooks/queries';
 import { X, ShieldAlert } from 'lucide-react';
 
 interface RiskAlert {
@@ -14,86 +14,76 @@ interface RiskAlert {
 export const RiskAlertSystem: React.FC = () => {
     const [alerts, setAlerts] = useState<RiskAlert[]>([]);
 
-    useEffect(() => {
-        // Initializing Risk Alert System
-
-        const channel = supabase
-            .channel('risk-alerts')
-            .on(
-                'postgres_changes',
-                { event: 'INSERT', schema: 'public', table: 'fall_risk_assessments' },
-                async (payload) => {
-                    // New risk assessment received
-                    const newRecord = payload.new;
-
-                    // Only alert for High Risk (Score >= 45)
-                    if (newRecord.risk_score >= 45) {
-
-                        // Fetch beneficiary name
-                        let beneficiaryName = 'Unknown';
-                        try {
-                            const { data } = await supabase
-                                .from('beneficiaries')
-                                .select('full_name') // adjust column name if needed
-                                .eq('id', newRecord.beneficiary_id)
-                                .single();
-
-                            if (data) beneficiaryName = data.full_name;
-                        } catch (err) {
-                            console.error('Error fetching beneficiary details', err);
-                        }
-
-                        const newAlert: RiskAlert = {
-                            id: newRecord.id,
-                            beneficiary_id: newRecord.beneficiary_id,
-                            risk_score: newRecord.risk_score,
-                            created_at: newRecord.created_at,
-                            beneficiaryName
-                        };
-
-                        setAlerts(prev => [newAlert, ...prev]);
-
-                        // Play Alert Sound (Data URI for simple beep)
-                        // Play Alert Sound
-                        try {
-                            const playSound = () => {
-                                const AudioContext = window.AudioContext || (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
-                                if (!AudioContext) return;
-
-                                const audioCtx = new AudioContext();
-                                const oscillator = audioCtx.createOscillator();
-                                const gainNode = audioCtx.createGain();
-
-                                oscillator.connect(gainNode);
-                                gainNode.connect(audioCtx.destination);
-
-                                oscillator.type = 'sine';
-                                oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
-                                oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
-
-                                gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
-                                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-
-                                oscillator.start();
-                                oscillator.stop(audioCtx.currentTime + 0.5);
-                            };
-                            playSound();
-                        } catch (e) {
-                            console.error('Audio play failed', e);
-                        }
-                    }
-                }
-            )
-            .subscribe((status) => {
-                if (status === 'SUBSCRIBED') {
-                    // Connected to Realtime
-                }
-            });
-
-        return () => {
-            supabase.removeChannel(channel);
+    const handleFallRiskInsert = useCallback(async (payload: { new: Record<string, unknown> }) => {
+        const supabase = getSupabaseClient();
+        // New risk assessment received
+        const newRecord = payload.new as {
+            id: string;
+            beneficiary_id: string;
+            risk_score: number;
+            created_at: string;
         };
+
+        // Only alert for High Risk (Score >= 45)
+        if (newRecord.risk_score >= 45) {
+
+            // Fetch beneficiary name
+            let beneficiaryName = 'Unknown';
+            try {
+                if (supabase) {
+                    const { data } = await supabase
+                        .from('beneficiaries')
+                        .select('full_name')
+                        .eq('id', newRecord.beneficiary_id)
+                        .single();
+
+                    if (data) beneficiaryName = data.full_name;
+                }
+            } catch (err) {
+                console.error('Error fetching beneficiary details', err);
+            }
+
+            const newAlert: RiskAlert = {
+                id: newRecord.id,
+                beneficiary_id: newRecord.beneficiary_id,
+                risk_score: newRecord.risk_score,
+                created_at: newRecord.created_at,
+                beneficiaryName
+            };
+
+            setAlerts(prev => [newAlert, ...prev]);
+
+            // Play Alert Sound
+            try {
+                const playSound = () => {
+                    const AudioContext = window.AudioContext || (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
+                    if (!AudioContext) return;
+
+                    const audioCtx = new AudioContext();
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+
+                    gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.5);
+                };
+                playSound();
+            } catch (e) {
+                console.error('Audio play failed', e);
+            }
+        }
     }, []);
+
+    useRealtimeCallback('fall_risk_assessments', 'INSERT', handleFallRiskInsert, 'risk-alerts');
 
     if (alerts.length === 0) return null;
 

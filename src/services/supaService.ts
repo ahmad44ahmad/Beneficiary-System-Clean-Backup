@@ -25,9 +25,9 @@ const isSupabaseReady = (): boolean => {
 };
 
 // Shared transformation from Supabase snake_case to camelCase
-const transformBeneficiary = (b: any): UnifiedBeneficiaryProfile => {
-    const alerts: string[] = Array.isArray(b.alerts) ? b.alerts : [];
-    const medicalText = `${b.medical_diagnosis || ''} ${b.psychiatric_diagnosis || ''}`.toLowerCase();
+const transformBeneficiary = (b: Record<string, unknown>): UnifiedBeneficiaryProfile => {
+    const alerts: string[] = Array.isArray(b.alerts) ? (b.alerts as string[]) : [];
+    const medicalText = `${String(b.medical_diagnosis || '')} ${String(b.psychiatric_diagnosis || '')}`.toLowerCase();
 
     const hasChronicCondition = Boolean(
         medicalText.includes('سكري') ||
@@ -86,7 +86,7 @@ const transformBeneficiary = (b: any): UnifiedBeneficiaryProfile => {
         smartTags: [],
         riskLevel,
         isOrphan: b.guardian_relation === 'institution' ||
-            (b.social_status || '').includes('يتيم'),
+            String(b.social_status || '').includes('يتيم'),
         hasChronicCondition,
         requiresIsolation: false,
     } as UnifiedBeneficiaryProfile;
@@ -237,7 +237,7 @@ export const supaService = {
         if (!isSupabaseReady()) return null;
 
         // Transform camelCase to snake_case for Supabase
-        const dbRecord: Record<string, any> = {
+        const dbRecord: Record<string, unknown> = {
             national_id: beneficiary.nationalId,
             file_id: beneficiary.fileId,
             full_name: beneficiary.fullName || beneficiary.name,
@@ -287,7 +287,7 @@ export const supaService = {
         if (!isSupabaseReady()) return false;
 
         // Transform camelCase to snake_case for Supabase
-        const dbUpdates: Record<string, any> = { updated_at: new Date().toISOString() };
+        const dbUpdates: Record<string, unknown> = { updated_at: new Date().toISOString() };
         if (updates.fullName !== undefined) dbUpdates.full_name = updates.fullName;
         if (updates.nationalId !== undefined) dbUpdates.national_id = updates.nationalId;
         if (updates.fileId !== undefined) dbUpdates.file_id = updates.fileId;

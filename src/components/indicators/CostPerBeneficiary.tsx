@@ -5,8 +5,10 @@ import {
     Users, Utensils, Zap, Droplets, Wrench, RefreshCw, Target,
     Shirt, Stethoscope, Bus, Package, Sparkles
 } from 'lucide-react';
-import { supabase } from '../../config/supabase';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { getSupabaseClient } from '../../hooks/queries';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, ReferenceLine } from 'recharts';
+
+const TARGET_DAILY_COST = 350;
 
 interface CostData {
     cost_month: string;
@@ -54,6 +56,12 @@ export const CostPerBeneficiary: React.FC = () => {
     useEffect(() => {
         const fetchCosts = async () => {
             setLoading(true);
+            const supabase = getSupabaseClient();
+            if (!supabase) {
+                setCostData(demoCostData);
+                setLoading(false);
+                return;
+            }
             const { data, error } = await supabase
                 .from('cost_tracking')
                 .select('*')

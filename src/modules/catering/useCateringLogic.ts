@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient, useRealtimeCallback } from '../../hooks/queries';
 
 export interface CateringKPIs {
     totalMealsServed: number;
@@ -41,23 +41,17 @@ export const useCateringLogic = () => {
 
     useEffect(() => {
         fetchDashboardData();
-
-        // Realtime subscription
-        const subscription = supabase
-            ?.channel('catering_dashboard')
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'daily_meals' }, () => {
-                fetchDashboardData();
-            })
-            .subscribe();
-
-        return () => {
-            subscription?.unsubscribe();
-        };
     }, []);
+
+    // Realtime subscription for daily_meals changes
+    useRealtimeCallback('daily_meals', '*', () => {
+        fetchDashboardData();
+    }, 'catering_dashboard');
 
     const fetchDashboardData = async () => {
         try {
             setLoading(true);
+            const supabase = getSupabaseClient();
 
             if (!supabase) {
                 // Use demo data if no supabase

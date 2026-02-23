@@ -573,7 +573,7 @@ export const OutbreakManagement: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 bg-gray-50"
-                  style={{ focusRingColor: TEAL } as any}
+                  style={{ '--tw-ring-color': TEAL } as React.CSSProperties}
                 />
               </div>
               <div className="flex items-center gap-2">

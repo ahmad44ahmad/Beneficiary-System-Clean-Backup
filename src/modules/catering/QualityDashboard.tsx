@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../config/supabase';
+import { getSupabaseClient } from '../../hooks/queries';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Loader2, TrendingDown, CheckCircle, Award } from 'lucide-react';
 
@@ -19,6 +19,9 @@ export const QualityDashboard = () => {
 
     const fetchDashboardData = async () => {
         try {
+            const supabase = getSupabaseClient();
+            if (!supabase) { setLoading(false); return; }
+
             // 1. Total Deductions (This Month)
             const startOfMonth = new Date();
             startOfMonth.setDate(1);

@@ -9,7 +9,7 @@ interface User {
     avatar?: string;
 }
 
-export const MOCK_USERS: Record<UserRole, User> = {
+const MOCK_USERS: Record<UserRole, User> = {
     director: { id: 'u1', name: 'خالد بن مطر الزهراني (المدير)', role: 'director' },
     doctor: { id: 'u2', name: 'د. محمد بلال (طبيب)', role: 'doctor' },
     social_worker: { id: 'u3', name: 'أ. سعيد بن علي الغامدي (أخصائي اجتماعي)', role: 'social_worker' },
@@ -28,9 +28,13 @@ interface UserActions {
     hasPermission: (requiredRole: UserRole | UserRole[]) => boolean;
 }
 
-export const useUserStore = create<UserState & UserActions>((set, get) => ({
-    currentUser: MOCK_USERS.admin,
+const isDemo = typeof import.meta !== 'undefined' && import.meta.env?.VITE_APP_MODE === 'demo';
+
+export const useUserStore = create<UserState & UserActions>()((set, get) => ({
+    currentUser: isDemo ? MOCK_USERS.admin : MOCK_USERS.admin,
+
     switchRole: (role) => set({ currentUser: MOCK_USERS[role] }),
+
     hasPermission: (requiredRole) => {
         const { currentUser } = get();
         if (Array.isArray(requiredRole)) {

@@ -1,7 +1,8 @@
+import React from 'react';
 import { X, CheckCircle, AlertCircle, Info } from 'lucide-react';
 import { useToastStore } from '../../stores/useToastStore';
 
-export function ToastContainer() {
+export const ToastRenderer: React.FC = () => {
     const toasts = useToastStore((s) => s.toasts);
     const removeToast = useToastStore((s) => s.removeToast);
 
@@ -27,4 +28,4 @@ export function ToastContainer() {
             ))}
         </div>
     );
-}
+};

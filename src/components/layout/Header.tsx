@@ -1,10 +1,11 @@
 import React from 'react';
-import { Bell, User, Menu, Eye } from 'lucide-react';
+import { Bell, User, Menu, Eye, Sun, Moon } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { CommandMenu } from '../ui/CommandMenu';
 import { useUserStore } from '../../stores/useUserStore';
 import { useLocation } from 'react-router-dom';
-import { useAppStore, ViewMode } from '../../stores/useAppStore';
+import { useViewModeStore, ViewMode } from '../../stores/useViewModeStore';
+import { useTheme } from '../../config/theme';
 
 interface HeaderProps {
     onMenuClick?: () => void;
@@ -32,7 +33,8 @@ const pageTitles: Record<string, string> = {
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     const { currentUser } = useUserStore();
     const location = useLocation();
-    const { currentView, setView } = useAppStore();
+    const { currentView, setView } = useViewModeStore();
+    const { isDark, toggleTheme } = useTheme();
 
     // Get current page title
     const getPageTitle = () => {
@@ -91,8 +93,23 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </div>
             </div>
 
-            {/* Notifications + User */}
+            {/* Theme Toggle + Notifications + User */}
             <div className="flex items-center gap-2 md:gap-4">
+                {/* Theme Toggle */}
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={toggleTheme}
+                    className="hover:bg-white/10 p-2"
+                    title={isDark ? 'الوضع الفاتح' : 'الوضع الداكن'}
+                >
+                    {isDark ? (
+                        <Sun className="w-5 h-5 text-hrsd-gold" />
+                    ) : (
+                        <Moon className="w-5 h-5 text-hrsd-gold" />
+                    )}
+                </Button>
+
                 {/* Notifications */}
                 <Button variant="ghost" size="sm" className="relative hover:bg-white/10 p-2">
                     <Bell className="w-5 h-5 text-hrsd-gold" />

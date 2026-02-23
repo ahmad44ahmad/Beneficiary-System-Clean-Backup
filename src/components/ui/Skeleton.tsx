@@ -23,7 +23,7 @@ export function Skeleton({
     height,
     animate = true,
 }: SkeletonProps) {
-    const baseClasses = 'bg-gradient-to-r from-slate-700/50 via-slate-600/50 to-slate-700/50 bg-[length:200%_100%]';
+    const baseClasses = 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-slate-700/50 dark:via-slate-600/50 dark:to-slate-700/50 bg-[length:200%_100%]';
 
     const variantClasses = {
         text: 'h-4 rounded',
@@ -76,7 +76,7 @@ export function SkeletonText({ lines = 3, className = '' }: { lines?: number; cl
  */
 export function SkeletonCard({ className = '' }: { className?: string }) {
     return (
-        <div className={`bg-slate-800/50 rounded-xl p-4 border border-white/10 ${className}`}>
+        <div className={`bg-gray-100 dark:bg-slate-800/50 rounded-xl p-4 border border-gray-200 dark:border-white/10 ${className}`}>
             <div className="flex items-start gap-3">
                 <Skeleton variant="circular" width={40} height={40} />
                 <div className="flex-1 space-y-2">
@@ -96,7 +96,7 @@ export function SkeletonCard({ className = '' }: { className?: string }) {
  */
 export function SkeletonTableRow({ columns = 4, className = '' }: { columns?: number; className?: string }) {
     return (
-        <div className={`flex items-center gap-4 p-4 border-b border-white/5 ${className}`}>
+        <div className={`flex items-center gap-4 p-4 border-b border-gray-100 dark:border-white/5 ${className}`}>
             {Array.from({ length: columns }).map((_, i) => (
                 <div key={i} className="flex-1">
                     <Skeleton
@@ -114,9 +114,9 @@ export function SkeletonTableRow({ columns = 4, className = '' }: { columns?: nu
  */
 export function SkeletonTable({ rows = 5, columns = 4, className = '' }: { rows?: number; columns?: number; className?: string }) {
     return (
-        <div className={`bg-slate-800/50 rounded-xl border border-white/10 overflow-hidden ${className}`}>
+        <div className={`bg-gray-100 dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-white/10 overflow-hidden ${className}`}>
             {/* Header */}
-            <div className="flex items-center gap-4 p-4 bg-white/5 border-b border-white/10">
+            <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-white/10">
                 {Array.from({ length: columns }).map((_, i) => (
                     <div key={i} className="flex-1">
                         <Skeleton variant="text" width={i === 0 ? 40 : '100%'} />
@@ -145,7 +145,7 @@ export function SkeletonAvatar({ size = 40, className = '' }: { size?: number; c
  */
 export function SkeletonStatCard({ className = '' }: { className?: string }) {
     return (
-        <div className={`bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl p-6 border border-white/10 ${className}`}>
+        <div className={`bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-800/50 dark:to-slate-900/50 rounded-2xl p-6 border border-gray-200 dark:border-white/10 ${className}`}>
             <div className="flex items-center justify-between mb-4">
                 <Skeleton variant="circular" width={48} height={48} />
                 <Skeleton variant="text" width={60} height={24} />
@@ -161,7 +161,7 @@ export function SkeletonStatCard({ className = '' }: { className?: string }) {
  */
 export function SkeletonChart({ className = '' }: { className?: string }) {
     return (
-        <div className={`bg-slate-800/50 rounded-xl p-6 border border-white/10 ${className}`}>
+        <div className={`bg-gray-100 dark:bg-slate-800/50 rounded-xl p-6 border border-gray-200 dark:border-white/10 ${className}`}>
             <div className="flex items-center justify-between mb-6">
                 <Skeleton variant="text" width={150} height={24} />
                 <Skeleton variant="rectangular" width={100} height={32} className="rounded-lg" />

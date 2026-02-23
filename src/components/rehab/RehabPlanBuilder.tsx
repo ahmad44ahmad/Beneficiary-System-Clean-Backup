@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useUserStore, UserRole } from '../../stores/useUserStore';
-import { useToast } from '../../stores/useToastStore';
-import { useDataStore } from '../../stores/useDataStore';
+import { useToastStore } from '../../stores/useToastStore';
+import { useBeneficiaries } from '../../hooks/useBeneficiaries';
 import { RehabPlan, SmartGoal, GoalType } from '../../types/rehab';
 import { Beneficiary } from '../../types';
 import { Card } from '../ui/Card';
@@ -67,8 +67,8 @@ const useSmartSuggestions = (beneficiary: Beneficiary | null) => {
 
 export const RehabPlanBuilder: React.FC = () => {
     const { currentUser, hasPermission } = useUserStore();
-    const { showToast } = useToast();
-    const { beneficiaries } = useDataStore();
+    const showToast = useToastStore((s) => s.showToast);
+    const { data: beneficiaries = [] } = useBeneficiaries();
 
     const [selectedBeneficiaryId, setSelectedBeneficiaryId] = useState('');
     const selectedBeneficiary = useMemo(() => beneficiaries.find(b => b.id === selectedBeneficiaryId) || null, [beneficiaries, selectedBeneficiaryId]);

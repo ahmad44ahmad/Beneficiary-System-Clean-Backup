@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
-import { useDataStore } from '../stores/useDataStore';
+import { useBeneficiaries } from './useBeneficiaries';
+import { useLocalDataStore } from '../stores/useLocalDataStore';
 import { UnifiedBeneficiaryProfile } from '../types/unified';
-import { SocialResearch, RehabilitationPlan, IncidentReport, MedicalExamination, IndividualEducationalPlan } from '../types';
 import { deriveSmartTags, calculateRiskLevel } from '../utils/tagEngine';
 
-// Domain arrays permanently empty — will be replaced by dedicated TanStack Query hooks
-const socialResearchForms: SocialResearch[] = [];
-const rehabilitationPlans: RehabilitationPlan[] = [];
-const incidents: IncidentReport[] = [];
-const medicalExaminations: MedicalExamination[] = [];
-const educationalPlans: IndividualEducationalPlan[] = [];
-
 export const useUnifiedProfile = (beneficiaryId: string): UnifiedBeneficiaryProfile | null => {
-    const { beneficiaries, medicalProfiles, visitLogs } = useDataStore();
+    const { data: beneficiaries = [] } = useBeneficiaries();
+    const medicalProfiles = useLocalDataStore((s) => s.medicalProfiles);
+    const socialResearchForms = useLocalDataStore((s) => s.socialResearchForms);
+    const rehabilitationPlans = useLocalDataStore((s) => s.rehabilitationPlans);
+    const visitLogs = useLocalDataStore((s) => s.visitLogs);
+    const incidents = useLocalDataStore((s) => s.incidents);
+    const medicalExaminations = useLocalDataStore((s) => s.medicalExaminations);
+    const educationalPlans = useLocalDataStore((s) => s.educationalPlans);
 
     const profile = useMemo(() => {
         const baseBeneficiary = beneficiaries.find(b => b.id === beneficiaryId);
@@ -74,7 +74,12 @@ export const useUnifiedProfile = (beneficiaryId: string): UnifiedBeneficiaryProf
         beneficiaryId,
         beneficiaries,
         medicalProfiles,
+        socialResearchForms,
+        rehabilitationPlans,
         visitLogs,
+        incidents,
+        medicalExaminations,
+        educationalPlans
     ]);
 
     return profile;

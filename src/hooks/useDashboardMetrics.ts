@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useDataStore } from '../stores/useDataStore';
+import { useBeneficiaries } from './useBeneficiaries';
 import { RehabPlan } from '../types/rehab';
 
 function isRehabPlan(plan: unknown): plan is RehabPlan {
@@ -7,7 +7,7 @@ function isRehabPlan(plan: unknown): plan is RehabPlan {
 }
 
 export const useDashboardMetrics = () => {
-    const { beneficiaries } = useDataStore();
+    const { data: beneficiaries = [] } = useBeneficiaries();
 
     return useMemo(() => {
         // 1. Real-Time KPIs

@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import {
+    Package, ClipboardList, Truck, ShoppingCart, Trash2, Warehouse,
+    FileText, Plus, Download, Printer
+} from 'lucide-react';
 import { WardrobeInventory, ClothingNeeds, ClothingDispensation, ClothingProcurement } from '../../types';
 import { beneficiaries } from '../../data/beneficiaries';
 import { WardrobeInventoryForm } from './WardrobeInventoryForm';

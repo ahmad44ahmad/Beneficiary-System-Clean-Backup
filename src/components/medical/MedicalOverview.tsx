@@ -1,7 +1,8 @@
 import React from 'react';
 import { VitalsMonitorCard } from './VitalsMonitorCard';
 import { Card } from '../ui/Card';
-import { useDataStore } from '../../stores/useDataStore';
+import { useBeneficiaries } from '../../hooks/useBeneficiaries';
+import { useLocalDataStore } from '../../stores/useLocalDataStore';
 import { HeartPulse, Activity, Syringe, AlertTriangle, Users, FileText, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +12,8 @@ interface MedicalOverviewProps {
 }
 
 export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations = [], isolationStats }) => {
-    const { beneficiaries, medicalProfiles } = useDataStore();
+    const { data: beneficiaries = [] } = useBeneficiaries();
+    const medicalProfiles = useLocalDataStore((s) => s.medicalProfiles);
 
     // Calculate statistics
     const totalBeneficiaries = beneficiaries.length;

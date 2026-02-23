@@ -8,11 +8,11 @@ export const AccessDenied: React.FC = () => {
 
     return (
         <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-6">
-            <div className="bg-red-50 p-6 rounded-full mb-6">
-                <ShieldAlert className="w-16 h-16 text-red-600" />
+            <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-full mb-6">
+                <ShieldAlert className="w-16 h-16 text-red-600 dark:text-red-400" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">عذراً، ليس لديك صلاحية الوصول</h1>
-            <p className="text-gray-500 mb-8 max-w-md">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">عذراً، ليس لديك صلاحية الوصول</h1>
+            <p className="text-gray-500 dark:text-slate-400 mb-8 max-w-md">
                 هذه الصفحة مخصصة لمستويات إدارية أو تخصصية محددة. يرجى التواصل مع مدير النظام إذا كنت تعتقد أن هذا خطأ.
             </p>
             <div className="flex gap-4">
