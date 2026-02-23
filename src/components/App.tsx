@@ -13,6 +13,7 @@ import { Beneficiary } from '../types';
 import { Dashboard } from '../pages/Dashboard';
 const ExternalKnowledgeBase = lazy(() => import('./knowledge/ExternalKnowledgeBase').then(m => ({ default: m.ExternalKnowledgeBase })));
 import { WelcomePage } from '../pages/WelcomePage';
+import { SystemEntryPage } from '../pages/SystemEntryPage';
 import { LoginPage } from '../pages/LoginPage';
 import { BeneficiaryListPanel } from './beneficiary/BeneficiaryListPanel';
 import { BeneficiaryDetailPanel } from './beneficiary/BeneficiaryDetailPanel';
@@ -209,6 +210,9 @@ export const App = () => {
 
                 {/* Welcome Page - Landing */}
                 <Route path="/" element={<WelcomePage />} />
+
+                {/* System Entry - Logo Splash */}
+                <Route path="/system-entry" element={<SystemEntryPage />} />
 
                 {/* Main Application with Layout */}
                 <Route path="/*" element={<MainLayout />}>
