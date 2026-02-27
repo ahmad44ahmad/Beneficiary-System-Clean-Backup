@@ -241,11 +241,11 @@ export const SchedulingSystem: React.FC = () => {
                             مواعيد {selectedDate.toLocaleDateString('ar-SA', { weekday: 'long', day: 'numeric', month: 'long' })}
                         </h2>
                         <div className="relative">
-                            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                            <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                             <input
                                 type="text"
                                 placeholder="بحث..."
-                                className="bg-slate-800 border border-slate-700 rounded-lg pr-9 pl-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[rgb(20,130,135)]"
+                                className="bg-slate-800 border border-slate-700 rounded-lg pe-9 ps-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[rgb(20,130,135)]"
                             />
                         </div>
                     </div>
@@ -289,7 +289,7 @@ export const SchedulingSystem: React.FC = () => {
                                                     </span>
                                                 </div>
                                                 <p className="text-slate-400 text-sm mt-1">
-                                                    <User className="w-3 h-3 inline ml-1" />
+                                                    <User className="w-3 h-3 inline ms-1" />
                                                     {apt.beneficiaryName}
                                                 </p>
                                                 <p className="text-slate-500 text-sm">

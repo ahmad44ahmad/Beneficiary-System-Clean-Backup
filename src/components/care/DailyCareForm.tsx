@@ -327,7 +327,7 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
                 {/* Actions */}
                 <div className="md:col-span-2 pt-4 border-t flex justify-between items-center bg-gray-50 -m-6 p-6 mt-2">
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-                    <div className="flex gap-3 mr-auto">
+                    <div className="flex gap-3 me-auto">
                         <button
                             type="button"
                             className="px-6 py-2 text-gray-600 hover:bg-gray-200 rounded-lg transition-colors font-medium"

@@ -143,7 +143,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                                     <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
                                 </span>
                                 جار التسجيل...
-                                <span className="font-mono text-sm text-gray-600 mr-2" dir="ltr">
+                                <span className="font-mono text-sm text-gray-600 me-2" dir="ltr">
                                     {formatDuration(recordingDuration)}
                                 </span>
                             </div>

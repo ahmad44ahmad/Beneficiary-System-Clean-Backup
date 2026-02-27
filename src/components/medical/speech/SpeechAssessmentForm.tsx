@@ -70,7 +70,7 @@ export const SpeechAssessmentForm: React.FC<{
                         <input type="checkbox" checked={formData.drooling}
                             onChange={(e) => handleSystemChange('drooling', e.target.checked)}
                             className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-                        <label className="ml-2 block text-sm text-gray-900">Drooling Present</label>
+                        <label className="ms-2 block text-sm text-gray-900">Drooling Present</label>
                     </div>
                 </div>
             </Card>
@@ -111,7 +111,7 @@ export const SpeechAssessmentForm: React.FC<{
 
             <div className="flex justify-end">
                 <Button onClick={() => onSubmit(formData as SpeechAssessment)}>
-                    <Save className="mr-2 h-4 w-4" /> Save Assessment
+                    <Save className="me-2 h-4 w-4" /> Save Assessment
                 </Button>
             </div>
         </div>

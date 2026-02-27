@@ -24,7 +24,7 @@ export const PrintLayout: React.FC<PrintLayoutProps> = ({ title, subtitle, child
             <div className="max-w-4xl mx-auto mb-6 flex justify-between items-center print:hidden">
                 <h2 className="text-xl font-bold text-gray-800">معاينة التقرير</h2>
                 <Button onClick={handlePrint} className="bg-blue-600 text-white hover:bg-blue-700">
-                    <Printer className="w-4 h-4 ml-2" />
+                    <Printer className="w-4 h-4 ms-2" />
                     طباعة / تصدير PDF
                 </Button>
             </div>
@@ -62,7 +62,7 @@ export const PrintLayout: React.FC<PrintLayoutProps> = ({ title, subtitle, child
                 </div>
 
                 {/* Formal Footer */}
-                <div className="mt-20 pt-8 border-t border-gray-300 flex justify-between items-end print:absolute print:bottom-10 print:left-0 print:right-0 print:px-10">
+                <div className="mt-20 pt-8 border-t border-gray-300 flex justify-between items-end print:absolute print:bottom-10 print:start-0 print:end-0 print:px-10">
                     <div className="text-center">
                         <p className="text-sm font-bold mb-4">مدير قسم الجودة</p>
                         <div className="h-10 border-b border-dashed border-gray-400 w-40 mx-auto"></div>

@@ -64,7 +64,7 @@ export const PsychProfileForm: React.FC<{
                         <input type="checkbox" checked={formData.mentalStatus?.perceptualDisturbances}
                             onChange={(e) => handleMSEChange('perceptualDisturbances', e.target.checked)}
                             className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-                        <label className="ml-2 block text-sm text-gray-900">Perceptual Disturbances (Hallucinations)</label>
+                        <label className="ms-2 block text-sm text-gray-900">Perceptual Disturbances (Hallucinations)</label>
                     </div>
                 </div>
             </Card>
@@ -93,7 +93,7 @@ export const PsychProfileForm: React.FC<{
 
             <div className="flex justify-end">
                 <Button onClick={() => onSubmit(formData as PsychologyAssessment)}>
-                    <Save className="mr-2 h-4 w-4" /> Save Psychological Profile
+                    <Save className="me-2 h-4 w-4" /> Save Psychological Profile
                 </Button>
             </div>
         </div>

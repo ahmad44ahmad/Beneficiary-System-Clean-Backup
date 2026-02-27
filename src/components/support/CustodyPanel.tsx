@@ -47,11 +47,11 @@ export const CustodyPanel: React.FC = () => {
 
                 <div className="flex gap-2 w-full md:w-auto">
                     <div className="relative flex-1 md:w-64">
-                        <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <Search className="absolute end-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <input
                             type="text"
                             placeholder="بحث برقم التسلسل، الاسم..."
-                            className="w-full pr-9 pl-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                            className="w-full pe-9 ps-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-sm"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -67,7 +67,7 @@ export const CustodyPanel: React.FC = () => {
             {activeTab === 'custody' ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredCustody.map(record => (
-                        <Card key={record.id} className="p-4 border-r-4 border-r-teal-500">
+                        <Card key={record.id} className="p-4 border-e-4 border-e-teal-500">
                             <div className="flex justify-between items-start mb-3">
                                 <div className="flex items-center gap-2">
                                     <div className="p-2 bg-teal-50 rounded-lg text-teal-600">

@@ -29,10 +29,10 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
                     </div>
                     <div className="mt-3 flex gap-2">
                         <Button size="sm" variant="outline" className="bg-red-100 border-red-200 hover:bg-red-200 text-red-800" onClick={() => alert('Laundry notified: Wash separately')}>
-                            <Shirt className="w-3 h-3 mr-1" /> Notify Laundry
+                            <Shirt className="w-3 h-3 me-1" /> Notify Laundry
                         </Button>
                         <Button size="sm" variant="outline" className="bg-red-100 border-red-200 hover:bg-red-200 text-red-800" onClick={() => alert('Kitchen notified: Disposable utensils')}>
-                            <Utensils className="w-3 h-3 mr-1" /> Disposable Utensils
+                            <Utensils className="w-3 h-3 me-1" /> Disposable Utensils
                         </Button>
                     </div>
                 </div>

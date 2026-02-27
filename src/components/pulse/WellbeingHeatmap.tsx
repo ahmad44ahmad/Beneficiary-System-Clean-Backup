@@ -137,13 +137,13 @@ export const WellbeingHeatmap: React.FC = () => {
             {/* Search & Filter */}
             <div className="flex gap-4 mb-6">
                 <div className="flex-1 relative">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                    <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                     <input
                         type="text"
                         placeholder="البحث بالاسم أو رقم الغرفة..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-xl pr-10 pl-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-slate-800 border border-slate-700 rounded-xl pe-10 ps-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
                     />
                 </div>
                 <button
@@ -168,7 +168,7 @@ export const WellbeingHeatmap: React.FC = () => {
                     >
                         {/* Alerts Badge */}
                         {beneficiary.alerts > 0 && (
-                            <div className="absolute -top-2 -left-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
+                            <div className="absolute -top-2 -start-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
                                 {beneficiary.alerts}
                             </div>
                         )}

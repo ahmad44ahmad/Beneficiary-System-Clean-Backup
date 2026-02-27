@@ -86,7 +86,7 @@ export const StrategicDashboard: React.FC = () => {
                         </p>
 
                         <h3 className="font-bold text-lg text-secondary-700 mt-6">الانفصام الاستراتيجي</h3>
-                        <div className="bg-red-50 border-r-4 border-red-500 p-4 rounded-l-lg">
+                        <div className="bg-red-50 border-e-4 border-red-500 p-4 rounded-l-lg">
                             <p className="text-red-900 font-medium">كشف المسح العميق (Deep Dive) للملفات التشغيلية، وتحديداً في مراكز التأهيل الشامل، عن فجوة جوهرية.</p>
                             <p className="text-sm text-red-800 mt-2">
                                 فبينما تتحدث الاستراتيجيات العليا عن "التمكين" و"الحقوق" و"جودة الحياة"، لا تزال التروس التشغيلية في الميدان تدور وفق "النموذج الطبي" (Medical Model) الصرف، حيث يُختزل المستفيد في تقرير طبي ورقم سرير، وتُقاس الجودة بنظافة الأرضيات واكتمال التواقيع الورقية، وهو ما يولد ظاهرة "وهم الإنجاز".
@@ -229,7 +229,7 @@ export const StrategicDashboard: React.FC = () => {
                         <h2 className="text-2xl font-bold text-gray-800">خارطة الطريق (18-24 شهراً)</h2>
                     </div>
 
-                    <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+                    <div className="space-y-8 relative before:absolute before:inset-0 before:ms-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
 
                         {/* Phase 1 */}
                         <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">

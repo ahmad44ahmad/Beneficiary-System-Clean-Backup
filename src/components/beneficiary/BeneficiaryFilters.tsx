@@ -56,13 +56,13 @@ export const BeneficiaryFilters: React.FC<BeneficiaryFiltersProps> = ({
             {/* Search Bar */}
             <div className="flex items-center gap-3">
                 <div className="flex-1 relative">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                         type="text"
                         value={searchQuery}
                         onChange={handleSearchChange}
                         placeholder="ابحث عن مستفيد بالاسم..."
-                        className="w-full pr-10 pl-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 focus:border-hrsd-teal text-hierarchy-body"
+                        className="w-full pe-10 ps-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/50 focus:border-hrsd-teal text-hierarchy-body"
                     />
                 </div>
                 <button

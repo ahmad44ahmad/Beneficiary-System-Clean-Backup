@@ -166,7 +166,7 @@ export const SocialOverview: React.FC = () => {
             <Card title="آخر النشاطات الاجتماعية">
                 <div className="p-4">
                     <div className="space-y-3">
-                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-hrsd-teal">
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-e-2 border-hrsd-teal">
                             <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center">
                                 <Calendar className="w-5 h-5 text-teal-600" />
                             </div>
@@ -176,7 +176,7 @@ export const SocialOverview: React.FC = () => {
                             </div>
                             <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">قيد المراجعة</span>
                         </div>
-                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-hrsd-teal">
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-e-2 border-hrsd-teal">
                             <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                                 <Heart className="w-5 h-5 text-green-600" />
                             </div>
@@ -186,7 +186,7 @@ export const SocialOverview: React.FC = () => {
                             </div>
                             <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">مكتمل</span>
                         </div>
-                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-r-2 border-hrsd-teal">
+                        <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-e-2 border-hrsd-teal">
                             <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
                                 <FileText className="w-5 h-5 text-orange-600" />
                             </div>

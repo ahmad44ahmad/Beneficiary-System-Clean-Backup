@@ -25,7 +25,7 @@ export const ShiftRecommendationCard: React.FC = () => {
     ];
 
     return (
-        <Card className={`border-l-4 ${acuity.status === 'understaffed' ? 'border-l-red-500' : 'border-l-green-500'}`}>
+        <Card className={`border-s-4 ${acuity.status === 'understaffed' ? 'border-s-red-500' : 'border-s-green-500'}`}>
             <div className="p-4">
                 <div className="flex justify-between items-start mb-4">
                     <div>

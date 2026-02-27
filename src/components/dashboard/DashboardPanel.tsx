@@ -42,7 +42,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
 
             {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="p-4 border-r-4 border-r-primary-500">
+                <Card className="p-4 border-e-4 border-e-primary-500">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm text-gray-500">إجمالي المستفيدين</p>
@@ -55,7 +55,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
                     </div>
                 </Card>
 
-                <Card className="p-4 border-r-4 border-r-green-500">
+                <Card className="p-4 border-e-4 border-e-green-500">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm text-gray-500">المتواجدون حالياً</p>
@@ -68,7 +68,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
                     </div>
                 </Card>
 
-                <Card className="p-4 border-r-4 border-r-secondary-500">
+                <Card className="p-4 border-e-4 border-e-secondary-500">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm text-gray-500">زيارات خارجية</p>
@@ -81,7 +81,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
                     </div>
                 </Card>
 
-                <Card className="p-4 border-r-4 border-r-red-500">
+                <Card className="p-4 border-e-4 border-e-red-500">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-sm text-gray-500">تنبيهات المخزون</p>

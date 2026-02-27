@@ -280,13 +280,13 @@ export const AuditLogViewer: React.FC = () => {
             <div className="bg-white rounded-xl shadow-md p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 {/* Search */}
                 <div className="relative lg:col-span-2">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                         type="text"
                         placeholder="البحث بالوصف أو اسم المستخدم..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pr-10 pl-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hrsd-primary focus:border-transparent"
+                        className="w-full pe-10 ps-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hrsd-primary focus:border-transparent"
                     />
                 </div>
 

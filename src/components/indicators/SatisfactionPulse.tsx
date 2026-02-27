@@ -75,7 +75,7 @@ export const SatisfactionPulse: React.FC = () => {
                     </div>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mr-auto p-2 hover:bg-gray-100 rounded-lg"
+                        className="me-auto p-2 hover:bg-gray-100 rounded-lg"
                     >
                         <RefreshCw className="w-5 h-5 text-gray-500" />
                     </button>
@@ -182,7 +182,7 @@ export const SatisfactionPulse: React.FC = () => {
                             {escalationRisks.length > 0 ? (
                                 <div className="space-y-3">
                                     {escalationRisks.map((risk, idx) => (
-                                        <div key={idx} className={`p-4 rounded-lg border-r-4 ${risk.risk_level === 'high' ? 'bg-red-50 border-red-500' : 'bg-yellow-50 border-yellow-500'}`}>
+                                        <div key={idx} className={`p-4 rounded-lg border-e-4 ${risk.risk_level === 'high' ? 'bg-red-50 border-red-500' : 'bg-yellow-50 border-yellow-500'}`}>
                                             <div className="flex items-center justify-between">
                                                 <div>
                                                     <p className="font-medium">{risk.family}</p>

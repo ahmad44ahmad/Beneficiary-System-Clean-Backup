@@ -233,7 +233,7 @@ export const LeaveRequestFlow: React.FC = () => {
                 <h2 className="text-xl font-bold">إدارة طلبات الإجازات</h2>
                 {currentUser?.role === 'social_worker' && (
                     <Button onClick={() => setIsNewRequestOpen(true)}>
-                        <Plus className="w-4 h-4 ml-2" />
+                        <Plus className="w-4 h-4 ms-2" />
                         طلب جديد
                     </Button>
                 )}
@@ -337,10 +337,10 @@ export const LeaveRequestFlow: React.FC = () => {
                         {/* Audit Trail */}
                         <div>
                             <h4 className="font-bold text-sm text-gray-700 mb-2">سجل المتابعة (Audit Trail)</h4>
-                            <div className="border-l-2 border-gray-200 pr-4 space-y-4">
+                            <div className="border-s-2 border-gray-200 pe-4 space-y-4">
                                 {selectedRequest.history.map((action, idx) => (
                                     <div key={idx} className="relative">
-                                        <div className="absolute -right-[21px] top-1 w-3 h-3 bg-gray-400 rounded-full border-2 border-white"></div>
+                                        <div className="absolute -end-[21px] top-1 w-3 h-3 bg-gray-400 rounded-full border-2 border-white"></div>
                                         <p className="text-sm font-semibold">{action.actionByName} <span className="text-xs font-normal text-gray-500">({action.role})</span></p>
                                         <p className="text-xs text-gray-400">{new Date(action.actionDate).toLocaleString('ar-SA')}</p>
                                         <p className="text-sm mt-1">{action.notes}</p>
@@ -362,11 +362,11 @@ export const LeaveRequestFlow: React.FC = () => {
                                     />
                                     <div className="flex gap-3">
                                         <Button className="flex-1 bg-green-600 hover:bg-green-700" onClick={() => handleApprove(selectedRequest)}>
-                                            <Check className="w-4 h-4 ml-2" />
+                                            <Check className="w-4 h-4 ms-2" />
                                             موافقة واعتماد
                                         </Button>
                                         <Button className="flex-1" variant="danger" onClick={() => handleReject(selectedRequest)}>
-                                            <X className="w-4 h-4 ml-2" />
+                                            <X className="w-4 h-4 ms-2" />
                                             رفض الطلب
                                         </Button>
                                     </div>

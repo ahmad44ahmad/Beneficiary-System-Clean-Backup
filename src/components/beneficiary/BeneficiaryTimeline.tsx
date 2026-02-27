@@ -148,7 +148,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                         </div>
 
                         {/* Events */}
-                        <div className="space-y-3 mr-6 border-r-2 border-slate-700 pr-6">
+                        <div className="space-y-3 me-6 border-e-2 border-slate-700 pe-6">
                             {dateEvents.map((event, index) => {
                                 const config = EVENT_CONFIG[event.type];
                                 const isExpanded = expandedEvent === event.id;
@@ -162,7 +162,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                                         className="relative"
                                     >
                                         {/* Timeline Dot */}
-                                        <div className={`absolute -right-9 w-4 h-4 rounded-full ${config.bgColor} border-2 border-slate-800`}></div>
+                                        <div className={`absolute -end-9 w-4 h-4 rounded-full ${config.bgColor} border-2 border-slate-800`}></div>
 
                                         <div
                                             className={`${config.bgColor} rounded-2xl p-4 cursor-pointer hover:ring-2 hover:ring-${config.color.replace('text-', '')}/30 transition-all`}

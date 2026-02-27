@@ -32,7 +32,7 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
     return (
         <Card className="h-full border-red-50 shadow-sm relative overflow-hidden">
             {/* Background Pulse Effect */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-orange-500 to-red-500 opacity-20" />
+            <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-green-500 via-orange-500 to-red-500 opacity-20" />
 
             <div className="p-5">
                 <div className="flex items-center justify-between mb-4">
@@ -73,7 +73,7 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                                     <div className="w-10 h-10 rounded-full bg-white border border-red-100 p-1 flex items-center justify-center">
                                         <User className={`w-6 h-6 ${item.gender === 'female' ? 'text-pink-400' : 'text-blue-400'}`} />
                                     </div>
-                                    <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
+                                    <span className="absolute -bottom-1 -end-1 flex h-4 w-4">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>
                                     </span>

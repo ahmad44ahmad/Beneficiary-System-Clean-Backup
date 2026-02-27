@@ -162,9 +162,9 @@ export const OvrReportForm: React.FC = () => {
                         <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
                             <h3 className="font-bold text-lg text-blue-900 mb-4">ملخص البلاغ</h3>
                             <div className="space-y-2 text-sm text-blue-800 text-right">
-                                <p><span className="font-bold ml-2">التصنيف:</span> {categories.find(c => c.id === formData.category)?.label}</p>
-                                <p><span className="font-bold ml-2">الضرر:</span> {severities.find(s => s.id === formData.severity)?.label}</p>
-                                <p><span className="font-bold ml-2">الخصوصية:</span> {formData.isAnonymous ? 'مجهول الهوية' : 'معرف بالاسم'}</p>
+                                <p><span className="font-bold ms-2">التصنيف:</span> {categories.find(c => c.id === formData.category)?.label}</p>
+                                <p><span className="font-bold ms-2">الضرر:</span> {severities.find(s => s.id === formData.severity)?.label}</p>
+                                <p><span className="font-bold ms-2">الخصوصية:</span> {formData.isAnonymous ? 'مجهول الهوية' : 'معرف بالاسم'}</p>
                                 <p className="mt-4 p-3 bg-white/50 rounded-lg border border-blue-100 text-gray-700">
                                     "{formData.description}"
                                 </p>

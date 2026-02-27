@@ -33,7 +33,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                         <div className="p-3 rounded-full bg-indigo-100 text-indigo-600">
                             <MessageCircle size={24} />
                         </div>
-                        <div className="mr-4">
+                        <div className="me-4">
                             <p className="text-sm font-medium text-gray-500">نمط التواصل</p>
                             <p className="text-lg font-semibold text-gray-900">لفظي (جمل)</p>
                         </div>
@@ -44,7 +44,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                         <div className="p-3 rounded-full bg-pink-100 text-pink-600">
                             <Mic size={24} />
                         </div>
-                        <div className="mr-4">
+                        <div className="me-4">
                             <p className="text-sm font-medium text-gray-500">وضوح الكلام</p>
                             <p className="text-2xl font-semibold text-gray-900">
                                 {latestAssessment?.intelligibility || 100}%
@@ -57,7 +57,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                         <div className="p-3 rounded-full bg-orange-100 text-orange-600">
                             <AlertTriangle size={24} />
                         </div>
-                        <div className="mr-4">
+                        <div className="me-4">
                             <p className="text-sm font-medium text-gray-500">خطر البلع</p>
                             <p className="text-lg font-semibold text-gray-900">
                                 {latestAssessment?.swallowing?.aspirationRisk ? 'خطر عالي' : 'خطر منخفض'}

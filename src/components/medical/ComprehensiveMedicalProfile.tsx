@@ -172,14 +172,14 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
 
             <div className="flex flex-col md:flex-row min-h-[600px]">
                 {/* Sidebar Tabs */}
-                <div className="w-full md:w-64 bg-slate-50 border-l border-slate-100">
+                <div className="w-full md:w-64 bg-slate-50 border-s border-slate-100">
                     {tabs.map(tab => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`w-full text-right px-4 py-4 flex items-center gap-3 transition-colors
                 ${activeTab === tab.id
-                                    ? 'bg-white text-teal-700 border-r-4 border-teal-600 font-medium shadow-sm'
+                                    ? 'bg-white text-teal-700 border-e-4 border-teal-600 font-medium shadow-sm'
                                     : 'text-slate-500 hover:bg-slate-100 hover:text-slate-700'
                                 }`}
                         >

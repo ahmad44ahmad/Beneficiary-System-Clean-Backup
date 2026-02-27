@@ -209,11 +209,11 @@ export const SmartIndicatorsHub: React.FC = () => {
     const getStatusBadge = (status: string) => {
         switch (status) {
             case 'critical':
-                return <span className="status-dot status-dot-critical mr-2"></span>;
+                return <span className="status-dot status-dot-critical me-2"></span>;
             case 'warning':
-                return <span className="status-dot status-dot-warning mr-2"></span>;
+                return <span className="status-dot status-dot-warning me-2"></span>;
             default:
-                return <span className="status-dot status-dot-success mr-2"></span>;
+                return <span className="status-dot status-dot-success me-2"></span>;
         }
     };
 

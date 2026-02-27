@@ -322,10 +322,10 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
 
             <div className="flex justify-between border-t pt-4">
                 <Button variant="secondary" onClick={step === 1 ? onCancel : prevStep}>
-                    {step === 1 ? 'إلغاء' : <><ChevronRight className="w-4 h-4 ml-2" /> السابق</>}
+                    {step === 1 ? 'إلغاء' : <><ChevronRight className="w-4 h-4 ms-2" /> السابق</>}
                 </Button>
                 <Button onClick={step === 3 ? handleSave : nextStep}>
-                    {step === 3 ? <><Save className="w-4 h-4 mr-2" /> حفظ التقييم</> : <>التالي <ChevronLeft className="w-4 h-4 mr-2" /></>}
+                    {step === 3 ? <><Save className="w-4 h-4 me-2" /> حفظ التقييم</> : <>التالي <ChevronLeft className="w-4 h-4 me-2" /></>}
                 </Button>
             </div>
         </div>

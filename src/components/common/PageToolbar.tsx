@@ -98,7 +98,7 @@ export const PageToolbar: React.FC<PageToolbarProps> = ({
         <div className={`bg-white rounded-xl shadow-sm p-3 flex flex-wrap items-center gap-3 ${className}`} dir="rtl">
             {/* Selection Controls */}
             {enableSelection && (
-                <div className="flex items-center gap-2 border-l pl-3">
+                <div className="flex items-center gap-2 border-s ps-3">
                     {selectedCount > 0 ? (
                         <>
                             <span className="text-sm text-gray-600">

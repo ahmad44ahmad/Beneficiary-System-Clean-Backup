@@ -55,11 +55,11 @@ export const GoldenThreadView: React.FC = () => {
 
                 <div
                     className={`
-                        relative mb-4 p-4 rounded-xl border-l-4 shadow-sm bg-white transition-all
-                        ${depth === 0 ? 'border-l-indigo-500 mb-8' : ''}
-                        ${depth === 1 ? 'border-l-blue-500 mr-8' : ''}
-                        ${depth === 2 ? 'border-l-teal-500 mr-16' : ''}
-                        ${depth === 3 ? 'border-l-green-500 mr-24' : ''}
+                        relative mb-4 p-4 rounded-xl border-s-4 shadow-sm bg-white transition-all
+                        ${depth === 0 ? 'border-s-indigo-500 mb-8' : ''}
+                        ${depth === 1 ? 'border-s-blue-500 me-8' : ''}
+                        ${depth === 2 ? 'border-s-teal-500 me-16' : ''}
+                        ${depth === 3 ? 'border-s-green-500 me-24' : ''}
                     `}
                 >
                     <div className="flex items-start justify-between">
@@ -110,7 +110,7 @@ export const GoldenThreadView: React.FC = () => {
 
                 {/* Render Children */}
                 {isExpanded && node.children && (
-                    <div className="border-r border-gray-100 pr-6 mr-6"> {/* Indent Children */}
+                    <div className="border-e border-gray-100 pe-6 me-6"> {/* Indent Children */}
                         {node.children.map(child => (
                             <TreeNode key={child.id} node={child} depth={depth + 1} />
                         ))}

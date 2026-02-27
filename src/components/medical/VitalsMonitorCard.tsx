@@ -28,7 +28,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
     return (
         <Card className="overflow-hidden border-teal-100 shadow-sm relative">
             {/* Live Indicator Pulse */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+            <div className="absolute top-4 end-4 flex items-center gap-2 z-10">
                 <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -79,7 +79,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
             </div>
 
             {/* Real-time Chart */}
-            <div className="h-32 w-full mt-4 pr-2">
+            <div className="h-32 w-full mt-4 pe-2">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={dataHistory}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} />

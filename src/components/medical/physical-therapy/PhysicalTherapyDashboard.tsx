@@ -34,7 +34,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                         <div className="p-3 rounded-full bg-blue-100 text-blue-600">
                             <Activity size={24} />
                         </div>
-                        <div className="mr-4">
+                        <div className="me-4">
                             <p className="text-sm font-medium text-gray-500">الأهداف النشطة</p>
                             <p className="text-2xl font-semibold text-gray-900">
                                 {ptData.assessments[0]?.goals?.length || 0}
@@ -47,7 +47,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                         <div className="p-3 rounded-full bg-green-100 text-green-600">
                             <ClipboardList size={24} />
                         </div>
-                        <div className="mr-4">
+                        <div className="me-4">
                             <p className="text-sm font-medium text-gray-500">آخر جلسة</p>
                             <p className="text-lg font-semibold text-gray-900">
                                 قبل يومين
@@ -60,7 +60,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                         <div className="p-3 rounded-full bg-purple-100 text-purple-600">
                             <PenTool size={24} />
                         </div>
-                        <div className="mr-4">
+                        <div className="me-4">
                             <p className="text-sm font-medium text-gray-500">جلسات هذا الشهر</p>
                             <p className="text-2xl font-semibold text-gray-900">12</p>
                         </div>

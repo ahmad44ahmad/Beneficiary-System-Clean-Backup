@@ -32,7 +32,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
                         <div className="p-3 rounded-full bg-teal-100 text-teal-600">
                             <Brain size={24} />
                         </div>
-                        <div className="ml-4">
+                        <div className="ms-4">
                             <p className="text-sm font-medium text-gray-500">IQ Score</p>
                             <p className="text-lg font-semibold text-gray-900">
                                 {latestAssessment?.iqTests?.[0]?.fullScaleIQ || 'N/A'}
@@ -45,7 +45,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
                         <div className="p-3 rounded-full bg-blue-100 text-blue-600">
                             <FileText size={24} />
                         </div>
-                        <div className="ml-4">
+                        <div className="ms-4">
                             <p className="text-sm font-medium text-gray-500">Diagnosis</p>
                             <p className="text-lg font-semibold text-gray-900 truncate w-40">
                                 {latestAssessment?.diagnosis || 'قيد التقييم'}
@@ -58,7 +58,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
                         <div className="p-3 rounded-full bg-red-100 text-red-600">
                             <AlertOctagon size={24} />
                         </div>
-                        <div className="ml-4">
+                        <div className="ms-4">
                             <p className="text-sm font-medium text-gray-500">Active Behavior Plan</p>
                             <p className="text-lg font-semibold text-gray-900">
                                 Yes

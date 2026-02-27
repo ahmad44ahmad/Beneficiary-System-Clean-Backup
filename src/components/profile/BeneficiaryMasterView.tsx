@@ -99,11 +99,11 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                     {/* Quick Actions */}
                     <div className="flex gap-2">
                         <Button variant="outline" size="sm" className="text-red-600 border-red-200 hover:bg-red-50">
-                            <AlertTriangle className="w-4 h-4 mr-2" />
+                            <AlertTriangle className="w-4 h-4 me-2" />
                             Report Incident
                         </Button>
                         <Button variant="primary" size="sm">
-                            <FileText className="w-4 h-4 mr-2" />
+                            <FileText className="w-4 h-4 me-2" />
                             Edit Profile
                         </Button>
                     </div>
@@ -202,7 +202,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                 {activeTab === 'support' && (
                     <div className="space-y-6">
                         {/* Nutrition Plan */}
-                        <Card title="خطة التغذية" className="border-l-4 border-l-green-500">
+                        <Card title="خطة التغذية" className="border-s-4 border-s-green-500">
                             {profile.nutritionPlan ? (
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
@@ -231,7 +231,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                         </Card>
 
                         {/* Clothing Requests */}
-                        <Card title="الملابس والمتعلقات الشخصية" className="border-l-4 border-l-blue-500">
+                        <Card title="الملابس والمتعلقات الشخصية" className="border-s-4 border-s-blue-500">
                             {profile.clothingRequests && profile.clothingRequests.length > 0 ? (
                                 <div className="space-y-3">
                                     {profile.clothingRequests.map(req => (

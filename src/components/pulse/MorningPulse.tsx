@@ -138,7 +138,7 @@ export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate 
                         <p className="text-4xl font-bold text-white mb-1">{stat.value}</p>
                         <p className="text-slate-400 text-sm">{stat.label}</p>
                         {stat.trend && (
-                            <div className="absolute top-4 left-4 flex items-center gap-1 text-green-400 text-xs">
+                            <div className="absolute top-4 start-4 flex items-center gap-1 text-green-400 text-xs">
                                 <TrendingUp className="w-3 h-3" />
                                 {stat.trend}
                             </div>

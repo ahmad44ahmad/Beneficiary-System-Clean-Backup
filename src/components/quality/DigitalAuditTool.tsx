@@ -119,7 +119,7 @@ export const DigitalAuditTool: React.FC = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-col gap-2 shrink-0 ml-4">
+                                            <div className="flex flex-col gap-2 shrink-0 ms-4">
                                                 <div className="flex gap-1">
                                                     <button
                                                         onClick={() => handleAuditCheck(std.id, 'compliant')}

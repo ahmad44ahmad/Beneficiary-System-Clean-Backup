@@ -80,7 +80,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     <div className="flex flex-wrap gap-2">
                         {profile.strengths?.map((s, i) => (
                             <span key={i} className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm shadow-sm border border-blue-100 flex items-center gap-1">
-                                {s} <button onClick={() => setProfile(prev => ({ ...prev, strengths: prev.strengths?.filter((_, idx) => idx !== i) }))} className="hover:text-red-500 ml-1">×</button>
+                                {s} <button onClick={() => setProfile(prev => ({ ...prev, strengths: prev.strengths?.filter((_, idx) => idx !== i) }))} className="hover:text-red-500 ms-1">×</button>
                             </span>
                         ))}
                     </div>
@@ -104,7 +104,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     <div className="flex flex-wrap gap-2">
                         {profile.aspirations?.map((s, i) => (
                             <span key={i} className="bg-white text-purple-700 px-3 py-1 rounded-full text-sm shadow-sm border border-purple-100 flex items-center gap-1">
-                                {s} <button onClick={() => setProfile(prev => ({ ...prev, aspirations: prev.aspirations?.filter((_, idx) => idx !== i) }))} className="hover:text-red-500 ml-1">×</button>
+                                {s} <button onClick={() => setProfile(prev => ({ ...prev, aspirations: prev.aspirations?.filter((_, idx) => idx !== i) }))} className="hover:text-red-500 ms-1">×</button>
                             </span>
                         ))}
                     </div>
@@ -218,11 +218,11 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
 
                 {step < 3 ? (
                     <Button onClick={() => setStep(s => Math.min(3, s + 1))}>
-                        Next Step <ArrowRight className="w-4 h-4 ml-2" />
+                        Next Step <ArrowRight className="w-4 h-4 ms-2" />
                     </Button>
                 ) : (
                     <Button onClick={() => onSave(profile as EmpowermentProfile)} className="bg-green-600 hover:bg-green-700 text-white">
-                        Finish & Save Plan <Check className="w-4 h-4 ml-2" />
+                        Finish & Save Plan <Check className="w-4 h-4 ms-2" />
                     </Button>
                 )}
             </div>

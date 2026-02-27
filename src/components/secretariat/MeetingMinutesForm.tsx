@@ -148,9 +148,9 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             <button
                                 type="button"
                                 onClick={addAttendee}
-                                className="mr-auto text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 flex items-center"
+                                className="me-auto text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 flex items-center"
                             >
-                                <Plus size={14} className="ml-1" />
+                                <Plus size={14} className="ms-1" />
                                 إضافة
                             </button>
                         </h3>
@@ -168,7 +168,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                     <button
                                         type="button"
                                         onClick={() => removeAttendee(index)}
-                                        className="bg-red-50 text-red-500 px-3 border border-l-0 rounded-l-md hover:bg-red-100"
+                                        className="bg-red-50 text-red-500 px-3 border border-s-0 rounded-l-md hover:bg-red-100"
                                     >
                                         <Trash2 size={16} />
                                     </button>
@@ -184,9 +184,9 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             <button
                                 type="button"
                                 onClick={addActionItem}
-                                className="mr-auto text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 flex items-center"
+                                className="me-auto text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 flex items-center"
                             >
-                                <Plus size={14} className="ml-1" />
+                                <Plus size={14} className="ms-1" />
                                 إضافة مهمة
                             </button>
                         </h3>
@@ -244,7 +244,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             type="submit"
                             className="flex items-center px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
                         >
-                            <Save size={18} className="ml-2" />
+                            <Save size={18} className="ms-2" />
                             حفظ
                         </button>
                     </div>

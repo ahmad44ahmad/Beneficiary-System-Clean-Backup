@@ -68,10 +68,10 @@ export const DentalOdontogram: React.FC<{
                     </div>
 
                     <div className="flex gap-4 mt-4 text-sm">
-                        <span className="flex items-center"><div className="w-3 h-3 bg-red-500 mr-1"></div> Decayed</span>
-                        <span className="flex items-center"><div className="w-3 h-3 bg-blue-500 mr-1"></div> Filled</span>
-                        <span className="flex items-center"><div className="w-3 h-3 bg-yellow-500 mr-1"></div> Crown</span>
-                        <span className="flex items-center"><div className="w-3 h-3 bg-gray-800 mr-1"></div> Missing</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-red-500 me-1"></div> Decayed</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-blue-500 me-1"></div> Filled</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-yellow-500 me-1"></div> Crown</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-gray-800 me-1"></div> Missing</span>
                     </div>
                 </div>
             </Card>
@@ -95,7 +95,7 @@ export const DentalOdontogram: React.FC<{
 
             <div className="flex justify-end">
                 <Button onClick={() => onSubmit(formData as DentalAssessment)}>
-                    <Save className="mr-2 h-4 w-4" /> Save Dental Chart
+                    <Save className="me-2 h-4 w-4" /> Save Dental Chart
                 </Button>
             </div>
         </div>

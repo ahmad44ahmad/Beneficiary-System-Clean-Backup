@@ -82,7 +82,7 @@ export const PTProgressNoteManager: React.FC<{
                         <div className="flex justify-between items-start mb-2">
                             <div>
                                 <span className="font-bold text-gray-900">{new Date(note.date).toLocaleDateString()}</span>
-                                <span className="ml-2 text-sm text-gray-500">{new Date(note.date).toLocaleTimeString()}</span>
+                                <span className="ms-2 text-sm text-gray-500">{new Date(note.date).toLocaleTimeString()}</span>
                             </div>
                             <span className={`px-2 py-1 rounded text-xs font-medium 
                         ${note.response === 'Cooperative' ? 'bg-green-100 text-green-800' :
@@ -93,7 +93,7 @@ export const PTProgressNoteManager: React.FC<{
                         <div className="text-gray-700 whitespace-pre-wrap">{note.notes}</div>
                         <div className="mt-2 text-sm text-gray-500">
                             <span className="font-medium">Therapist:</span> {note.therapistName} |
-                            <span className="font-medium ml-2">Type:</span> {note.sessionType}
+                            <span className="font-medium ms-2">Type:</span> {note.sessionType}
                         </div>
                     </div>
                 ))}

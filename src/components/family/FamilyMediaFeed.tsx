@@ -122,7 +122,7 @@ export const FamilyMediaFeed: React.FC = () => {
                         <div className={`mt-2 h-64 w-full ${post.mediaUrl} flex items-center justify-center group cursor-pointer relative`}>
                             {post.type === 'video' ? (
                                 <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                    <Video className="w-6 h-6 text-gray-800 ml-1" />
+                                    <Video className="w-6 h-6 text-gray-800 ms-1" />
                                 </div>
                             ) : (
                                 <ImageIcon className="w-12 h-12 text-gray-400/50" />

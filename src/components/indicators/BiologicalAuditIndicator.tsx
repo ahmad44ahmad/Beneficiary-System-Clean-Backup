@@ -147,7 +147,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                     التنبيهات النشطة ({alerts.length})
                 </h3>
                 {alerts.map(alert => (
-                    <div key={alert.id} className={`border-r-4 rounded-xl p-5 ${severityColors[alert.severity]}`}>
+                    <div key={alert.id} className={`border-e-4 rounded-xl p-5 ${severityColors[alert.severity]}`}>
                         <div className="flex items-start justify-between mb-3">
                             <div className="flex items-center gap-2">
                                 <span className="text-2xl">{severityIcons[alert.severity]}</span>

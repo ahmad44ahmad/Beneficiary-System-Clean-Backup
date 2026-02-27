@@ -118,14 +118,14 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
                             التشخيصات الطبية
                         </h3>
                         <div className="space-y-3">
-                            <div className="p-3 bg-gradient-to-r from-blue-50 to-transparent rounded-lg border-r-4 border-blue-500 hover-lift">
+                            <div className="p-3 bg-gradient-to-r from-blue-50 to-transparent rounded-lg border-e-4 border-blue-500 hover-lift">
                                 <div className="flex justify-between items-center">
                                     <span className="font-semibold text-gray-900">{beneficiary.medicalDiagnosis}</span>
                                     <span className="badge badge-info">أساسي</span>
                                 </div>
                             </div>
                             {beneficiary.psychiatricDiagnosis && (
-                                <div className="p-3 bg-gradient-to-r from-purple-50 to-transparent rounded-lg border-r-4 border-purple-500 hover-lift">
+                                <div className="p-3 bg-gradient-to-r from-purple-50 to-transparent rounded-lg border-e-4 border-purple-500 hover-lift">
                                     <div className="flex justify-between items-center">
                                         <span className="font-semibold text-gray-900">{beneficiary.psychiatricDiagnosis}</span>
                                         <span className="badge" style={{ background: '#f3e8ff', color: '#6b21a8' }}>نفسي</span>

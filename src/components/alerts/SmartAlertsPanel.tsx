@@ -146,7 +146,7 @@ export const SmartAlertsPanel: React.FC = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg relative">
                         <Bell className="w-7 h-7 text-white" />
                         {unacknowledgedCount > 0 && (
-                            <span className="absolute -top-2 -right-2 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
+                            <span className="absolute -top-2 -end-2 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
                                 {unacknowledgedCount}
                             </span>
                         )}

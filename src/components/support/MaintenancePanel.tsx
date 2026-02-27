@@ -72,7 +72,7 @@ export const MaintenancePanel: React.FC = () => {
 
             <div className="grid grid-cols-1 gap-4">
                 {filteredRequests.map(req => (
-                    <Card key={req.id} className="p-4 border-r-4 border-r-teal-500 hover:shadow-md transition-shadow">
+                    <Card key={req.id} className="p-4 border-e-4 border-e-teal-500 hover:shadow-md transition-shadow">
                         <div className="flex flex-col md:flex-row justify-between gap-4">
                             <div className="flex items-start gap-3">
                                 <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">

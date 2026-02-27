@@ -204,7 +204,7 @@ export const RehabPlanBuilder: React.FC = () => {
             <div className="flex-1 grid grid-cols-12 gap-0 bg-gray-50 overflow-hidden">
 
                 {/* LEFT PANEL: Context & Suggestions (3 cols) */}
-                <div className="col-span-3 border-l bg-white p-4 overflow-y-auto">
+                <div className="col-span-3 border-s bg-white p-4 overflow-y-auto">
                     <h3 className="font-bold text-gray-700 mb-4 flex items-center gap-2">
                         <Activity className="w-4 h-4" />
                         السياق والمقترحات
@@ -259,14 +259,14 @@ export const RehabPlanBuilder: React.FC = () => {
                             أهداف الخطة (SMART Goals)
                         </h2>
                         <Button onClick={() => addGoal()} size="sm" variant="outline">
-                            <Plus className="w-4 h-4 ml-2" />
+                            <Plus className="w-4 h-4 ms-2" />
                             إضافة هدف يدوي
                         </Button>
                     </div>
 
                     <div className="space-y-4">
                         {plan.goals?.map((goal, _idx) => (
-                            <Card key={goal.id} className="p-4 border-r-4 border-r-primary-500 shadow-sm hover:shadow-md transition-shadow">
+                            <Card key={goal.id} className="p-4 border-e-4 border-e-primary-500 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex justify-between items-start mb-3">
                                     <div className="flex-1">
                                         <Input
@@ -344,7 +344,7 @@ export const RehabPlanBuilder: React.FC = () => {
                 </div>
 
                 {/* RIGHT PANEL: Actions & Governance (3 cols) */}
-                <div className="col-span-3 border-r bg-white p-4 overflow-y-auto">
+                <div className="col-span-3 border-e bg-white p-4 overflow-y-auto">
                     <h3 className="font-bold text-gray-700 mb-4 flex items-center gap-2">
                         <FileText className="w-4 h-4" />
                         الاعتماد والحوكمة
@@ -380,7 +380,7 @@ export const RehabPlanBuilder: React.FC = () => {
 
                     <div className="mt-8 pt-6 border-t">
                         <Button className="w-full bg-primary hover:bg-primary-600 text-white mb-3" onClick={handleSave}>
-                            <Save className="w-4 h-4 ml-2" />
+                            <Save className="w-4 h-4 ms-2" />
                             حفظ المسودة
                         </Button>
                         <p className="text-xs text-center text-gray-400">

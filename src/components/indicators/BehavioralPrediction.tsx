@@ -82,7 +82,7 @@ export const BehavioralPrediction: React.FC = () => {
             </div>
 
             {/* Current Status Alert */}
-            <div className={`mb-6 rounded-2xl p-6 border-r-4 ${getRiskColor(prediction.risk_level)}`}>
+            <div className={`mb-6 rounded-2xl p-6 border-e-4 ${getRiskColor(prediction.risk_level)}`}>
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                         <AlertTriangle className="w-8 h-8" />
@@ -154,21 +154,21 @@ export const BehavioralPrediction: React.FC = () => {
                         حالة أنظمة التبريد
                     </h3>
                     <div className="space-y-3">
-                        <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border-r-2 border-red-500">
+                        <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border-e-2 border-red-500">
                             <div>
                                 <p className="font-bold text-red-900">مكيف الجناح الشرقي</p>
                                 <p className="text-sm text-red-700">معطل منذ 3 أيام</p>
                             </div>
                             <span className="px-3 py-1 bg-red-600 text-white rounded-full text-xs font-bold">حرج</span>
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border-r-2 border-yellow-500">
+                        <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border-e-2 border-yellow-500">
                             <div>
                                 <p className="font-bold text-yellow-900">مكيف الجناح الغربي</p>
                                 <p className="text-sm text-yellow-700">يعمل بطاقة 60%</p>
                             </div>
                             <span className="px-3 py-1 bg-yellow-600 text-white rounded-full text-xs font-bold">متوسط</span>
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border-r-2 border-green-500">
+                        <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border-e-2 border-green-500">
                             <div>
                                 <p className="font-bold text-green-900">مكيف الجناح الشمالي</p>
                                 <p className="text-sm text-green-700">يعمل بكفاءة</p>

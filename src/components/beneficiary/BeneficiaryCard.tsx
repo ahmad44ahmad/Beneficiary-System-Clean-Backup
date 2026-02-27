@@ -49,7 +49,7 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
     return (
         <div
             onClick={() => navigate(`/beneficiaries/${id}`)}
-            className={`hrsd-card cursor-pointer border-r-4 ${ipcColors[ipc_status]} hover-lift transition-all`}
+            className={`hrsd-card cursor-pointer border-e-4 ${ipcColors[ipc_status]} hover-lift transition-all`}
             dir="rtl"
         >
             {/* Header with Avatar */}
@@ -89,11 +89,11 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
             {/* Status Badges */}
             <div className="flex items-center gap-2 mb-3 flex-wrap">
                 <span className={`badge-${status === 'stable' ? 'success' : status === 'needs_attention' ? 'warning' : 'danger'}`}>
-                    <Heart className="w-3 h-3 ml-1" />
+                    <Heart className="w-3 h-3 ms-1" />
                     {status === 'stable' ? 'مستقر' : status === 'needs_attention' ? 'يحتاج متابعة' : 'حرج'}
                 </span>
                 <span className="badge-info">
-                    <Activity className="w-3 h-3 ml-1" />
+                    <Activity className="w-3 h-3 ms-1" />
                     IPC: {ipc_status === 'safe' ? 'آمن' : ipc_status === 'monitor' ? 'مراقبة' : 'تنبيه'}
                 </span>
             </div>
