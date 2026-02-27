@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     AlertTriangle, Shield, ChevronLeft, TrendingUp,
     AlertOctagon, Wrench, Activity, Users, RefreshCw
 } from 'lucide-react';
-import { getSupabaseClient } from '../../hooks/queries';
+import { useRiskScoreLog } from '../../hooks/queries';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface RiskScoreData {
@@ -33,37 +33,10 @@ const demoData: RiskScoreData[] = [
 
 export const EarlyWarningSystem: React.FC = () => {
     const navigate = useNavigate();
-    const [riskData, setRiskData] = useState<RiskScoreData[]>([]);
-    const [currentRisk, setCurrentRisk] = useState<RiskScoreData | null>(null);
-    const [loading, setLoading] = useState(true);
+    const { data: fetchedData, isLoading: loading } = useRiskScoreLog();
 
-    useEffect(() => {
-        const fetchRiskData = async () => {
-            setLoading(true);
-            const supabase = getSupabaseClient();
-            if (!supabase) {
-                setRiskData(demoData);
-                setCurrentRisk(demoData[demoData.length - 1]);
-                setLoading(false);
-                return;
-            }
-            const { data, error } = await supabase
-                .from('risk_score_log')
-                .select('*')
-                .order('score_date', { ascending: true })
-                .limit(14);
-
-            if (error || !data || data.length === 0) {
-                setRiskData(demoData);
-                setCurrentRisk(demoData[demoData.length - 1]);
-            } else {
-                setRiskData(data);
-                setCurrentRisk(data[data.length - 1]);
-            }
-            setLoading(false);
-        };
-        fetchRiskData();
-    }, []);
+    const riskData = (fetchedData && fetchedData.length > 0) ? fetchedData as RiskScoreData[] : demoData;
+    const currentRisk = riskData[riskData.length - 1];
 
     const getRiskColor = (level: string) => {
         switch (level) {
@@ -105,7 +78,7 @@ export const EarlyWarningSystem: React.FC = () => {
                     </div>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mr-auto p-2 hover:bg-gray-100 rounded-lg"
+                        className="me-auto p-2 hover:bg-gray-100 rounded-lg"
                     >
                         <RefreshCw className="w-5 h-5 text-gray-500" />
                     </button>

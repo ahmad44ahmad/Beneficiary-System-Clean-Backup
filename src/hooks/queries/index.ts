@@ -8,3 +8,4 @@ export * from './useOperationsQueries';
 export * from './useMedicalQueries';
 export * from './useStatsQueries';
 export * from './useRealtimeSubscription';
+export * from './useIndicatorQueries';

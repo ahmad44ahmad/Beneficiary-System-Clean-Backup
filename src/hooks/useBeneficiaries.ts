@@ -26,6 +26,9 @@ export function useBeneficiaries(filters?: {
     return useQuery({
         queryKey: beneficiaryKeys.list(filters || {}),
         queryFn: async () => {
+            // FIXME: PERFORMANCE — All beneficiaries are fetched then filtered client-side.
+            // This will degrade as data grows. Move filtering to Supabase query params.
+            // Do NOT change now — requires supaService API update and testing.
             const beneficiaries = await supaService.getBeneficiaries();
 
             // Apply client-side filters if provided
@@ -108,6 +111,7 @@ export function useBeneficiaryStats() {
     return useQuery({
         queryKey: ['beneficiaries', 'stats'],
         queryFn: async () => {
+            // FIXME: PERFORMANCE — Fetches all beneficiaries just to count. Use Supabase count query.
             const beneficiaries = await supaService.getBeneficiaries();
             return {
                 total: beneficiaries.length,

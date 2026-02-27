@@ -4,6 +4,7 @@ import { Button } from '../ui/Button';
 import { CommandMenu } from '../ui/CommandMenu';
 import { useUserStore } from '../../stores/useUserStore';
 import { useLocation } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 import { useViewModeStore, ViewMode } from '../../stores/useViewModeStore';
 import { useTheme } from '../../config/theme';
 
@@ -31,9 +32,9 @@ const pageTitles: Record<string, string> = {
 };
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-    const { currentUser } = useUserStore();
+    const currentUser = useUserStore(s => s.currentUser);
     const location = useLocation();
-    const { currentView, setView } = useViewModeStore();
+    const { currentView, setView } = useViewModeStore(useShallow(s => ({ currentView: s.currentView, setView: s.setView })));
     const { isDark, toggleTheme } = useTheme();
 
     // Get current page title
@@ -80,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 <select
                     value={currentView}
                     onChange={(e) => setView(e.target.value as ViewMode)}
-                    className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg pl-8 pr-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
+                    className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg ps-8 pe-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
                     title="تغيير واجهة العرض"
                 >
                     <option value="ADMIN" className="text-gray-900">👁️ انظر كـ: مدير النظام</option>
@@ -88,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                     <option value="DEPARTMENT_HEAD" className="text-gray-900">📋 انظر كـ: رئيس قسم</option>
                     <option value="STAFF" className="text-gray-900">👤 انظر كـ: موظف</option>
                 </select>
-                <div className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                <div className="absolute start-2 top-1/2 -translate-y-1/2 pointer-events-none">
                     <Eye className="w-3.5 h-3.5 text-hrsd-gold" />
                 </div>
             </div>
@@ -113,11 +114,11 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 {/* Notifications */}
                 <Button variant="ghost" size="sm" className="relative hover:bg-white/10 p-2">
                     <Bell className="w-5 h-5 text-hrsd-gold" />
-                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-hrsd-orange rounded-full border-2 border-hrsd-navy animate-pulse"></span>
+                    <span className="absolute top-1 end-1 w-2.5 h-2.5 bg-hrsd-orange rounded-full border-2 border-hrsd-navy animate-pulse"></span>
                 </Button>
 
                 {/* User Info */}
-                <div className="flex items-center gap-3 pr-2 md:pr-4 md:border-r border-white/10">
+                <div className="flex items-center gap-3 pe-2 md:pe-4 md:border-e border-white/10">
                     <div className="text-right hidden md:block">
                         <p className="text-sm font-bold text-hrsd-gold leading-tight drop-shadow-md">{currentUser?.name || 'مستخدم'}</p>
                         <p className="text-xs text-hrsd-green font-medium">{currentUser?.role || 'موظف'}</p>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     BarChart3, ChevronLeft, CheckCircle, AlertCircle,
     XCircle, RefreshCw, Target
 } from 'lucide-react';
-import { getSupabaseClient } from '../../hooks/queries';
+import { useBenchmarkStandards } from '../../hooks/queries';
 
 interface BenchmarkStandard {
     indicator_name: string;
@@ -33,36 +33,16 @@ const demoData: BenchmarkStandard[] = [
 
 export const BenchmarkDashboard: React.FC = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [benchmarks, setBenchmarks] = useState<BenchmarkStandard[]>([]);
+    const { data: fetchedData, isLoading: loading } = useBenchmarkStandards();
 
-    useEffect(() => {
-        const fetchBenchmarks = async () => {
-            setLoading(true);
-            const supabase = getSupabaseClient();
-            if (!supabase) {
-                setBenchmarks(demoData);
-                setLoading(false);
-                return;
-            }
-            const { data, error } = await supabase
-                .from('benchmark_standards')
-                .select('*');
-
-            if (error || !data || data.length === 0) {
-                setBenchmarks(demoData);
-            } else {
-                // Add demo current values
-                const withValues = data.map((item, idx) => ({
-                    ...item,
-                    current_value: demoData[idx]?.current_value || Math.random() * 100
-                }));
-                setBenchmarks(withValues);
-            }
-            setLoading(false);
-        };
-        fetchBenchmarks();
-    }, []);
+    const benchmarks = React.useMemo(() => {
+        if (!fetchedData || fetchedData.length === 0) return demoData;
+        // Add demo current values to DB data
+        return fetchedData.map((item: Record<string, unknown>, idx: number) => ({
+            ...item,
+            current_value: demoData[idx]?.current_value || Math.random() * 100
+        })) as BenchmarkStandard[];
+    }, [fetchedData]);
 
     const getStatus = (benchmark: BenchmarkStandard): 'excellent' | 'good' | 'acceptable' | 'poor' => {
         const val = benchmark.current_value || 0;
@@ -137,7 +117,7 @@ export const BenchmarkDashboard: React.FC = () => {
                     </div>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mr-auto p-2 hover:bg-gray-100 rounded-lg"
+                        className="me-auto p-2 hover:bg-gray-100 rounded-lg"
                     >
                         <RefreshCw className="w-5 h-5 text-gray-500" />
                     </button>

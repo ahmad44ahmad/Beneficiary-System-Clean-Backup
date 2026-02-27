@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Shield, ChevronLeft, CheckCircle, Clock,
     AlertCircle, XCircle, RefreshCw, FileCheck
 } from 'lucide-react';
-import { getSupabaseClient } from '../../hooks/queries';
+import { useISOCompliance } from '../../hooks/queries';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface ISOClause {
@@ -35,33 +35,10 @@ const demoData: ISOClause[] = [
 
 export const ISOComplianceTracker: React.FC = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [clauses, setClauses] = useState<ISOClause[]>([]);
+    const { data: fetchedData, isLoading: loading } = useISOCompliance();
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-    useEffect(() => {
-        const fetchClauses = async () => {
-            setLoading(true);
-            const supabase = getSupabaseClient();
-            if (!supabase) {
-                setClauses(demoData);
-                setLoading(false);
-                return;
-            }
-            const { data, error } = await supabase
-                .from('iso_compliance_checklist')
-                .select('*')
-                .order('iso_clause', { ascending: true });
-
-            if (error || !data || data.length === 0) {
-                setClauses(demoData);
-            } else {
-                setClauses(data);
-            }
-            setLoading(false);
-        };
-        fetchClauses();
-    }, []);
+    const clauses = (fetchedData && fetchedData.length > 0) ? fetchedData as ISOClause[] : demoData;
 
     const getStatusIcon = (status: string) => {
         switch (status) {
@@ -134,7 +111,7 @@ export const ISOComplianceTracker: React.FC = () => {
                     </div>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mr-auto p-2 hover:bg-gray-100 rounded-lg"
+                        className="me-auto p-2 hover:bg-gray-100 rounded-lg"
                     >
                         <RefreshCw className="w-5 h-5 text-gray-500" />
                     </button>
