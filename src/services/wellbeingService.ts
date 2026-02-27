@@ -96,9 +96,6 @@ export const wellbeingService = {
                 .order('wellbeing_index', { ascending: true });
 
             if (error || !data?.length) {
-                if (import.meta.env.DEV) {
-                    console.log('[WellbeingService] Using demo data - view may not exist');
-                }
                 return DEMO_BENEFICIARIES;
             }
 

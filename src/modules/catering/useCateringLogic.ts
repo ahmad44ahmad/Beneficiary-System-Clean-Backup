@@ -81,9 +81,6 @@ export const useCateringLogic = () => {
 
             // If errors or no data, use demo data
             if (dietError || mealsError || !meals?.length) {
-                if (import.meta.env.DEV) {
-                    console.log('[Catering] Using demo data - tables may be empty');
-                }
                 setKpis(DEMO_KPIS);
                 setTodaysMeals(DEMO_MEALS);
                 setUsingDemoData(true);

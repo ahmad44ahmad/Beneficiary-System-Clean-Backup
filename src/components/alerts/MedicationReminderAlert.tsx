@@ -52,9 +52,6 @@ export const MedicationReminderAlert: React.FC = () => {
                     .lt('scheduled_time', currentTime);
 
                 if (error) {
-                    if (import.meta.env.DEV) {
-                        console.log('[MedicationReminder] Query error, table may not exist:', error.message);
-                    }
                     return;
                 }
 
@@ -81,9 +78,7 @@ export const MedicationReminderAlert: React.FC = () => {
                     }
                 }
             } catch (err) {
-                if (import.meta.env.DEV) {
-                    console.log('[MedicationReminder] Check failed:', err);
-                }
+                void err;
             }
         };
 

@@ -84,16 +84,6 @@ export async function logAuditEvent(entry: Omit<AuditLogEntry, 'id' | 'timestamp
     // Add to queue
     auditQueue.push(fullEntry);
 
-    // Log to console in development
-    if (import.meta.env.DEV) {
-        console.log('[Audit]', {
-            action: entry.action,
-            module: entry.module,
-            description: entry.description,
-            user: entry.userName,
-        });
-    }
-
     // Flush if queue is full
     if (auditQueue.length >= BATCH_SIZE) {
         await flushAuditQueue();

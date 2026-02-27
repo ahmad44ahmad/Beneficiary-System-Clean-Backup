@@ -72,9 +72,7 @@ export const QualityControl = () => {
                 }
 
             } catch (error) {
-                if (import.meta.env.DEV) {
-                    console.log('[QualityControl] Using demo data:', error);
-                }
+                void error;
                 setSuppliers(DEMO_SUPPLIERS);
                 setCriteria(DEMO_CRITERIA);
                 setSelectedSupplier(DEMO_SUPPLIERS[0].id);

@@ -1,4 +1,4 @@
-import { QualityProcess } from '../types/quality-process';
+import { QualityProcess } from '../types/quality';
 
 export const qualityProcesses: QualityProcess[] = [
     // 1. Secretariat & Communications (السكرتارية والاتصالات)
