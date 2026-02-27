@@ -1,4 +1,4 @@
-import React, { useState, lazy } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
 import { useAppStore } from '../stores/useAppStore';
@@ -8,17 +8,17 @@ import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ESSENTIAL PAGES (Static Imports - Load Immediately)
+// ESSENTIAL PAGES (Lazy-Loaded)
 // ═══════════════════════════════════════════════════════════════════════════
-import { Dashboard } from '../pages/Dashboard';
+const Dashboard = lazy(() => import('../pages/Dashboard').then(m => ({ default: m.Dashboard })));
 const ExternalKnowledgeBase = lazy(() => import('./knowledge/ExternalKnowledgeBase').then(m => ({ default: m.ExternalKnowledgeBase })));
-import { WelcomePage } from '../pages/WelcomePage';
-import { SystemEntryPage } from '../pages/SystemEntryPage';
-import { LoginPage } from '../pages/LoginPage';
-import { BeneficiaryListPanel } from './beneficiary/BeneficiaryListPanel';
-import { BeneficiaryDetailPanel } from './beneficiary/BeneficiaryDetailPanel';
-import { BeneficiaryMasterView } from './profile/BeneficiaryMasterView';
-import { NewAdmissionForm } from './beneficiary/NewAdmissionForm';
+const WelcomePage = lazy(() => import('../pages/WelcomePage').then(m => ({ default: m.WelcomePage })));
+const SystemEntryPage = lazy(() => import('../pages/SystemEntryPage').then(m => ({ default: m.SystemEntryPage })));
+const LoginPage = lazy(() => import('../pages/LoginPage').then(m => ({ default: m.LoginPage })));
+const BeneficiaryListPanel = lazy(() => import('./beneficiary/BeneficiaryListPanel').then(m => ({ default: m.BeneficiaryListPanel })));
+const BeneficiaryDetailPanel = lazy(() => import('./beneficiary/BeneficiaryDetailPanel').then(m => ({ default: m.BeneficiaryDetailPanel })));
+const BeneficiaryMasterView = lazy(() => import('./profile/BeneficiaryMasterView').then(m => ({ default: m.BeneficiaryMasterView })));
+const NewAdmissionForm = lazy(() => import('./beneficiary/NewAdmissionForm').then(m => ({ default: m.NewAdmissionForm })));
 
 // Settings & Permissions Pages
 const SettingsPage = lazy(() => import('../pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
@@ -462,6 +462,7 @@ export const App = () => {
             </Routes >
 
             {/* Modals */}
+            <Suspense fallback={null}>
             {
                 isCreatingMedicalProfile && (
                     <NewAdmissionForm
@@ -482,6 +483,7 @@ export const App = () => {
                     />
                 )
             }
+            </Suspense>
         </>
     );
 };

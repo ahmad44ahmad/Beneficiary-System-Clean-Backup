@@ -22,16 +22,23 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
+      chunkSizeWarningLimit: 900,
       rollupOptions: {
         output: {
-          manualChunks: {
-            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-            'vendor-charts': ['recharts'],
-            'vendor-query': ['@tanstack/react-query'],
-            'vendor-motion': ['framer-motion'],
-            'vendor-supabase': ['@supabase/supabase-js'],
-            'vendor-forms': ['react-hook-form', 'zod'],
-            'vendor-icons': ['lucide-react'],
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('lucide-react')) return 'vendor-icons';
+              if (id.includes('recharts')) return 'vendor-charts';
+              if (id.includes('@tanstack/react-query')) return 'vendor-query';
+              if (id.includes('framer-motion')) return 'vendor-motion';
+
+              if (id.includes('react-hook-form')) return 'vendor-forms';
+              if (id.includes('/zod/')) return 'vendor-forms';
+              if (id.includes('react-router-dom')) return 'vendor-react';
+              if (id.includes('react-dom')) return 'vendor-react';
+              if (/[/\\]node_modules[/\\]react[/\\]/.test(id)) return 'vendor-react';
+            }
+            if (id.includes('src/data/')) return 'data-local';
           }
         }
       }

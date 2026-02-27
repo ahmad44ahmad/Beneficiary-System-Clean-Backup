@@ -7,7 +7,7 @@ import {
     Pill, Shield, Activity, ChevronDown, ChevronUp,
     Volume2, VolumeX, Eye
 } from 'lucide-react';
-import { useRealtimeTableSubscription, queryKeys } from '../../hooks/queries';
+import { useRealtimeTableSubscription, queryKeys, getSupabaseClient } from '../../hooks/queries';
 
 type AlertSeverity = 'critical' | 'high' | 'medium' | 'low';
 type AlertType = 'vitals' | 'medication' | 'fall' | 'behavior' | 'infection' | 'medical' | 'safety' | 'behavioral' | 'nutrition';
@@ -70,7 +70,6 @@ export const SmartAlertsPanel: React.FC = () => {
     const { data: fetchedAlerts } = useQuery<SmartAlert[]>({
         queryKey: [...queryKeys.alerts.list(), location.key],
         queryFn: async () => {
-            const { getSupabaseClient } = await import('../../hooks/queries');
             const supabase = getSupabaseClient();
             if (!supabase) return defaultAlerts;
 

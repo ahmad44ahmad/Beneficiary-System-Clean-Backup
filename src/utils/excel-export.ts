@@ -3,7 +3,7 @@
  * أداة تصدير Excel مع دعم RTL
  */
 
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 
 export interface ExportColumn<T> {
     key: keyof T;
@@ -21,58 +21,56 @@ export interface ExportOptions {
  * Exports data to Excel file with RTL support
  * تصدير البيانات إلى ملف Excel مع دعم RTL
  */
-export function exportToExcel<T extends Record<string, unknown>>(
+export async function exportToExcel<T extends Record<string, unknown>>(
     data: T[],
     columns: ExportColumn<T>[],
     options: ExportOptions
-): void {
+): Promise<void> {
     const { fileName, sheetName = "البيانات", rtl = true } = options;
 
-    // Create header row
-    const headers = columns.map(col => col.header);
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet(sheetName, {
+        views: [{ rightToLeft: rtl }],
+    });
 
-    // Create data rows
-    const rows = data.map(item =>
-        columns.map(col => {
-            const value = item[col.key];
-            // Handle different types
-            if (value === null || value === undefined) return "";
-            if (Array.isArray(value)) return value.join("، ");
-            if (typeof value === "object") return JSON.stringify(value);
-            return String(value);
-        })
-    );
-
-    // Combine headers and rows
-    const wsData = [headers, ...rows];
-
-    // Create worksheet
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-
-    // Set column widths
-    const colWidths = columns.map(col => ({
-        wch: col.width || Math.max(
+    // Set columns with headers and widths
+    worksheet.columns = columns.map(col => ({
+        header: col.header,
+        key: String(col.key),
+        width: col.width || Math.max(
             col.header.length * 2,
             ...data.map(item => String(item[col.key] || "").length)
-        ) + 2
+        ) + 2,
     }));
-    ws['!cols'] = colWidths;
 
-    // Set RTL direction
-    if (rtl) {
-        ws['!dir'] = 'rtl';
+    // Add data rows
+    for (const item of data) {
+        const row: Record<string, string> = {};
+        for (const col of columns) {
+            const value = item[col.key];
+            if (value === null || value === undefined) row[String(col.key)] = "";
+            else if (Array.isArray(value)) row[String(col.key)] = value.join("، ");
+            else if (typeof value === "object") row[String(col.key)] = JSON.stringify(value);
+            else row[String(col.key)] = String(value);
+        }
+        worksheet.addRow(row);
     }
-
-    // Create workbook
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
 
     // Generate filename with timestamp
     const timestamp = new Date().toISOString().slice(0, 10);
     const fullFileName = `${fileName}_${timestamp}.xlsx`;
 
-    // Trigger download
-    XLSX.writeFile(wb, fullFileName);
+    // Write to buffer and trigger download
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fullFileName;
+    a.click();
+    URL.revokeObjectURL(url);
 }
 
 /**

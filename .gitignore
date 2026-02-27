@@ -48,3 +48,5 @@ client_secret*.json
 eslint_out.json
 eslint_out2.json
 .claude/
+
+.vercel

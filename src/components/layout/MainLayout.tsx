@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from '../common/ErrorBoundary';
 import { Sidebar } from './Sidebar';
@@ -6,13 +6,15 @@ import { Header } from './Header';
 import { DemoBanner } from '../DemoBanner';
 import { MobileNav } from './MobileNav';
 import { RiskAlertSystem } from '../safety/RiskAlertSystem';
-import { FallRiskAlertBanner } from '../alerts/FallRiskAlertBanner';
-import { MedicationReminderAlert } from '../alerts/MedicationReminderAlert';
-import { ShiftHandoverAlert } from '../alerts/ShiftHandoverAlert';
-import { IncidentNotificationAlert } from '../alerts/IncidentNotificationAlert';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 import { useRealtimeSubscription } from '../../hooks/useRealtimeSubscription';
 import { Breadcrumb } from '../navigation/Breadcrumb';
+
+// Lazy-load alert components (render conditionally, not critical path)
+const FallRiskAlertBanner = lazy(() => import('../alerts/FallRiskAlertBanner').then(m => ({ default: m.FallRiskAlertBanner })));
+const MedicationReminderAlert = lazy(() => import('../alerts/MedicationReminderAlert').then(m => ({ default: m.MedicationReminderAlert })));
+const ShiftHandoverAlert = lazy(() => import('../alerts/ShiftHandoverAlert').then(m => ({ default: m.ShiftHandoverAlert })));
+const IncidentNotificationAlert = lazy(() => import('../alerts/IncidentNotificationAlert').then(m => ({ default: m.IncidentNotificationAlert })));
 
 // Import HRSD theme
 import '../../styles/hrsd-theme.css';
@@ -53,10 +55,12 @@ export const MainLayout = () => {
             <RiskAlertSystem />
 
             {/* Realtime Alert Components */}
-            <FallRiskAlertBanner />
-            <MedicationReminderAlert />
-            <ShiftHandoverAlert />
-            <IncidentNotificationAlert />
+            <Suspense fallback={null}>
+                <FallRiskAlertBanner />
+                <MedicationReminderAlert />
+                <ShiftHandoverAlert />
+                <IncidentNotificationAlert />
+            </Suspense>
 
             {/* Desktop Sidebar */}
             <Sidebar isMobile={false} />

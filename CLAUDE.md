@@ -17,13 +17,13 @@ Arabic RTL healthcare quality management system for HRSD Al-Baha Rehabilitation 
 |-------|-----------|---------|
 | UI Framework | React | 19.1 |
 | Build Tool | Vite | 6.2 |
-| Styling | Tailwind CSS | v4.1 |
+| Styling | Tailwind CSS | v4.2 |
 | Client State | Zustand | v5.0.11 |
 | Server State | TanStack Query | v5.90 |
 | Forms | react-hook-form | v7.71 |
 | Validation | Zod | v4.3 |
 | Routing | React Router | v7.13 |
-| Backend | Supabase | v2.93 |
+| Backend | Supabase | v2.98 |
 
 - **DO NOT** introduce any state management library other than Zustand v5 (client) and TanStack Query v5 (server).
 - **DO NOT** downgrade or swap any of these dependencies.
@@ -216,7 +216,7 @@ npm run test:e2e:headed # Playwright headed mode
 
 ### SQL Migrations
 
-Migration files in `supabase/sql/`: `001_core_schema.sql` through `017_pgaudit_verification.sql`.
+Migration files in `supabase/sql/`: `001_core_schema.sql` through `021_index_unindexed_foreign_keys.sql`.
 Apply via Supabase MCP `apply_migration` tool or Supabase dashboard.
 Note: `002` has two files (`002_catering_quality.sql`, `002_functions.sql`) — apply both.
 
