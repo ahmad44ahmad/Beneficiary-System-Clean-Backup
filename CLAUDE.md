@@ -3,7 +3,7 @@
 ## Project Overview
 
 Arabic RTL healthcare quality management system for HRSD Al-Baha Rehabilitation Center.
-300 TypeScript/TSX files (~60k lines), 150+ routes, Supabase backend with local data fallback.
+299 source files (219 TSX + 80 TS), 150+ routes, Supabase backend with local data fallback.
 
 **Project root:** `C:\Users\aass1\.local\bin\Beneficiary-System-Clean-Backup`
 
@@ -15,19 +15,19 @@ Arabic RTL healthcare quality management system for HRSD Al-Baha Rehabilitation 
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
-| UI Framework | React | 19 |
-| Build Tool | Vite | 6 |
-| Styling | Tailwind CSS | v4 |
-| Client State | Zustand | v5 |
-| Server State | TanStack Query | v5 |
-| Forms | react-hook-form | v7+ |
-| Validation | Zod | v4+ |
-| Routing | React Router | v7 |
-| Backend | Supabase | v2 |
+| UI Framework | React | 19.1 |
+| Build Tool | Vite | 6.2 |
+| Styling | Tailwind CSS | v4.1 |
+| Client State | Zustand | v5.0.11 |
+| Server State | TanStack Query | v5.90 |
+| Forms | react-hook-form | v7.71 |
+| Validation | Zod | v4.3 |
+| Routing | React Router | v7.13 |
+| Backend | Supabase | v2.93 |
 
 - **DO NOT** introduce any state management library other than Zustand v5 (client) and TanStack Query v5 (server).
 - **DO NOT** downgrade or swap any of these dependencies.
-- Migrate existing React Context state to Zustand stores incrementally when touching those files.
+- Context → Zustand migration is **complete** (7 stores in `src/stores/`). Use Zustand stores for all new client state.
 
 ### 2. Form Handling — Strict Pattern
 
@@ -108,7 +108,6 @@ npx tsc --noEmit 2>&1
 - Re-run until **0 errors** remain.
 - Do NOT submit work with lint or type errors.
 
-> **Note:** If `npm run lint` is not configured, set up ESLint first before running.
 
 ---
 
@@ -119,43 +118,69 @@ npx tsc --noEmit 2>&1
 ```
 src/
 ├── api/              # Supabase API client functions
-├── components/       # 36+ component directories (lazy-loaded)
+├── components/       # 34 component subdirectories (lazy-loaded)
 │   ├── admin/        # Admin panels (secretariat, audit)
+│   ├── alerts/       # Alert components
+│   ├── assets/       # Asset management
+│   ├── auth/         # Authentication
 │   ├── beneficiary/  # Beneficiary management
 │   ├── care/         # Daily care management
+│   ├── clothing/     # Clothing management
 │   ├── common/       # Reusable UI components
+│   ├── crisis/       # Crisis management
 │   ├── dashboard/    # Dashboard variants
+│   ├── emergency/    # Emergency management
+│   ├── empowerment/  # Empowerment features
+│   ├── family/       # Family engagement
 │   ├── indicators/   # Smart AI indicators
+│   ├── knowledge/    # Knowledge base
+│   ├── layout/       # Layout components
 │   ├── medical/      # Medical module (dental, PT, psych, speech)
+│   ├── medication/   # Medication management
+│   ├── navigation/   # Navigation components
+│   ├── organization/ # Organization management
+│   ├── profile/      # Profile views
+│   ├── pulse/        # Wellbeing heatmap
 │   ├── quality/      # Quality management
+│   ├── rehab/        # Rehabilitation
+│   ├── reports/      # Reports
+│   ├── safety/       # Safety features
+│   ├── scheduling/   # Scheduling
+│   ├── secretariat/  # Secretariat operations
+│   ├── shift/        # Shift management
+│   ├── social/       # Social services
+│   ├── staff/        # Staff management
+│   ├── support/      # Support services
+│   ├── training/     # Training modules
 │   ├── ui/           # UI component library
 │   └── App.tsx       # Main router (150+ routes)
 ├── config/
-│   ├── supabase.ts   # Supabase client init
+│   ├── supabase.ts   # Supabase client init (persistSession, autoRefreshToken)
 │   └── theme/        # Dark/light theme system
-├── context/          # React Context providers (8 providers)
+├── context/          # Legacy context providers (most state now in Zustand stores)
+├── stores/           # 7 Zustand stores (app, localData, notification, toast, UI, user, viewMode)
 ├── data/             # Local mock/seed data
-├── hooks/            # Custom hooks (TanStack Query + utilities)
-├── modules/          # Feature modules (catering, GRC, IPC, etc.)
+├── hooks/            # 16 custom hooks (TanStack Query + utilities)
+├── modules/          # 10 feature modules (catering, GRC, IPC, empowerment, family, operations, quality, reports, wisdom)
 ├── pages/            # Page-level components
-├── services/         # Business logic (15 services)
+├── services/         # 15 business logic services
 ├── styles/           # CSS (hrsd-theme, hrsd-utilities, print)
-├── types/            # TypeScript types (17 files)
+├── types/            # 17 TypeScript type files
 └── utils/            # Utilities (validation, export, Arabic)
 ```
 
 ### Entry Point
 
 `index.tsx` — Provider stack order:
-1. ErrorBoundary
-2. ThemeProvider (dark/light, localStorage)
-3. QueryProvider (TanStack Query, 5min staleTime)
-4. BrowserRouter (React Router v7)
-5. AppProvider (global state)
-6. UnifiedDataProvider (beneficiary aggregation)
-7. AuthProvider (Supabase auth + demo mode)
-8. UserProvider
-9. ToastProvider
+1. React.StrictMode
+2. ErrorBoundary
+3. ThemeProvider (dark mode default)
+4. QueryProvider (TanStack Query, 5min staleTime)
+5. BrowserRouter (React Router v7)
+6. AuthProvider (Supabase auth + demo mode)
+7. App + ToastRenderer (sibling inside AuthProvider)
+
+Client state (app, notifications, toast, UI, user, view mode) lives in Zustand stores (`src/stores/`), not providers.
 
 ### Key Patterns
 
@@ -179,16 +204,21 @@ GEMINI_API_KEY=<api-key>    # optional: AI features
 ### Build & Dev
 
 ```bash
-npm run dev        # Vite dev server on port 5173
-npm run build      # Production build to dist/
-npm run preview    # Preview production build
-npm run deploy     # Deploy to GitHub Pages
+npm run dev            # Vite dev server on port 5173
+npm run build          # Production build to dist/
+npm run preview        # Preview production build
+npm run lint           # ESLint (src/)
+npm run setup:demo     # Seed demo data (scripts/setup-demo.js)
+npm run test:e2e       # Playwright e2e tests
+npm run test:e2e:ui    # Playwright UI mode
+npm run test:e2e:headed # Playwright headed mode
 ```
 
 ### SQL Migrations
 
-Migration files are at project root: `001_core_schema.sql` through `011_shift_handover.sql`.
+Migration files in `supabase/sql/`: `001_core_schema.sql` through `017_pgaudit_verification.sql`.
 Apply via Supabase MCP `apply_migration` tool or Supabase dashboard.
+Note: `002` has two files (`002_catering_quality.sql`, `002_functions.sql`) — apply both.
 
 ---
 
