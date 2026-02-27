@@ -1,8 +1,6 @@
-// ═══════════════════════════════════════════════════════════════════════════════
 // 🍒 لوحة الحوكمة والمخاطر والامتثال الاحترافية
 // GRC Dashboard Pro - Governance, Risk & Compliance
 // بيانات حقيقية من سجل المخاطر الشامل لمركز التأهيل بالباحة
-// ═══════════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,9 +15,7 @@ import {
   ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // 📊 الأنواع والواجهات
-// ═══════════════════════════════════════════════════════════════════════════════
 
 type RiskLevel = 1 | 2 | 3 | 4 | 5;
 type RiskCategory = 'clinical' | 'safety' | 'social' | 'infrastructure' | 'compliance' | 'contractual';
@@ -83,9 +79,7 @@ interface BCPScenario {
   status: 'ready' | 'needs_update' | 'not_tested';
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // 🎨 إعدادات التصميم
-// ═══════════════════════════════════════════════════════════════════════════════
 
 const CATEGORY_CONFIG: Record<RiskCategory, {
   label: string;
@@ -158,9 +152,7 @@ const NCR_SEVERITY_CONFIG: Record<NCRSeverity, { label: string; color: string; b
   minor: { label: 'ثانوي', color: 'text-blue-400', bg: 'bg-blue-500/20' },
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // 📦 البيانات الحقيقية من سجل المخاطر
-// ═══════════════════════════════════════════════════════════════════════════════
 
 const REAL_RISKS: Risk[] = [
   // المخاطر السريرية
@@ -540,9 +532,7 @@ const BCP_SCENARIOS: BCPScenario[] = [
   },
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // 🧩 المكونات الفرعية
-// ═══════════════════════════════════════════════════════════════════════════════
 
 // مصفوفة المخاطر 5×5 التفاعلية
 const RiskMatrixPro = ({ risks, onCellClick }: { risks: Risk[]; onCellClick?: (l: number, i: number) => void }) => {
@@ -969,9 +959,7 @@ const BCPScenarioCard = ({ scenario, index }: { scenario: BCPScenario; index: nu
   );
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // 🎯 المكون الرئيسي
-// ═══════════════════════════════════════════════════════════════════════════════
 
 export default function GRCDashboardPro() {
   const [activeTab, setActiveTab] = useState<'risks' | 'compliance' | 'ncr' | 'bcp'>('risks');

@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // useExport Hook - Excel/CSV export functionality wrapper
 // Wraps the existing export utilities with React hook patterns
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { useState, useCallback } from 'react';
 import { exportToCSV, exportToExcel, exportToPDF, ExportOptions, ExportColumn } from '../utils/export';
@@ -13,96 +11,39 @@ interface UseExportResult {
     isExporting: boolean;
 }
 
-/**
- * Hook for exporting data to various formats
- * Wraps the existing export utilities with loading state
- */
+function buildOptions(data: object[], columns: ExportColumn[], options: Partial<ExportOptions>): ExportOptions {
+    return {
+        filename: options.filename || 'export',
+        title: options.title,
+        subtitle: options.subtitle,
+        columns,
+        data: data as Record<string, unknown>[],
+        includeTimestamp: options.includeTimestamp ?? true,
+        orientation: options.orientation || 'portrait',
+    };
+}
+
 export function useExport(): UseExportResult {
     const [isExporting, setIsExporting] = useState(false);
 
-    const handleExportToExcel = useCallback((
-        data: object[],
-        columns: ExportColumn[],
-        options: Partial<ExportOptions> = {}
-    ) => {
+    const runExport = useCallback((exportFn: (opts: ExportOptions) => void, data: object[], columns: ExportColumn[], options: Partial<ExportOptions> = {}) => {
         setIsExporting(true);
-
         try {
-            const fullOptions: ExportOptions = {
-                filename: options.filename || 'export',
-                title: options.title,
-                subtitle: options.subtitle,
-                columns,
-                data: data as Record<string, unknown>[],
-                includeTimestamp: options.includeTimestamp ?? true,
-                orientation: options.orientation || 'portrait',
-            };
-
-            exportToExcel(fullOptions);
-        } finally {
-            setTimeout(() => setIsExporting(false), 500);
-        }
-    }, []);
-
-    const handleExportToCsv = useCallback((
-        data: object[],
-        columns: ExportColumn[],
-        options: Partial<ExportOptions> = {}
-    ) => {
-        setIsExporting(true);
-
-        try {
-            const fullOptions: ExportOptions = {
-                filename: options.filename || 'export',
-                title: options.title,
-                subtitle: options.subtitle,
-                columns,
-                data: data as Record<string, unknown>[],
-                includeTimestamp: options.includeTimestamp ?? true,
-                orientation: options.orientation || 'portrait',
-            };
-
-            exportToCSV(fullOptions);
-        } finally {
-            setTimeout(() => setIsExporting(false), 500);
-        }
-    }, []);
-
-    const handleExportToPdf = useCallback((
-        data: object[],
-        columns: ExportColumn[],
-        options: Partial<ExportOptions> = {}
-    ) => {
-        setIsExporting(true);
-
-        try {
-            const fullOptions: ExportOptions = {
-                filename: options.filename || 'export',
-                title: options.title,
-                subtitle: options.subtitle,
-                columns,
-                data: data as Record<string, unknown>[],
-                includeTimestamp: options.includeTimestamp ?? true,
-                orientation: options.orientation || 'portrait',
-            };
-
-            exportToPDF(fullOptions);
+            exportFn(buildOptions(data, columns, options));
         } finally {
             setTimeout(() => setIsExporting(false), 500);
         }
     }, []);
 
     return {
-        exportToExcel: handleExportToExcel,
-        exportToCsv: handleExportToCsv,
-        exportToPdf: handleExportToPdf,
+        exportToExcel: (data, columns, options = {}) => runExport(exportToExcel, data, columns, options),
+        exportToCsv: (data, columns, options = {}) => runExport(exportToCSV, data, columns, options),
+        exportToPdf: (data, columns, options = {}) => runExport(exportToPDF, data, columns, options),
         isExporting,
     };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Pre-configured Export Helpers
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Pre-configured column definitions for common exports

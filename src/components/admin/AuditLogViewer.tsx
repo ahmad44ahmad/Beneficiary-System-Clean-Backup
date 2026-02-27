@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // AuditLogViewer - View and export audit logs for ministry compliance
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

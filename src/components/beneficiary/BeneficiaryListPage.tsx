@@ -111,9 +111,7 @@ export const BeneficiaryListPage: React.FC = () => {
         refetchOnMount: 'always',
     });
 
-    // ═══════════════════════════════════════════════════════════════════════════
     // Advanced Search with Multi-field Support
-    // ═══════════════════════════════════════════════════════════════════════════
     const {
         setQuery: setSearchQuery,
         results: searchResults,
@@ -141,9 +139,7 @@ export const BeneficiaryListPage: React.FC = () => {
         return result;
     }, [searchResults, filters]);
 
-    // ═══════════════════════════════════════════════════════════════════════════
     // Batch Operations for Multi-select
-    // ═══════════════════════════════════════════════════════════════════════════
     const {
         selectedItems,
         selectAll,
@@ -201,9 +197,7 @@ export const BeneficiaryListPage: React.FC = () => {
         critical: beneficiaries.filter(b => b.status === 'critical').length,
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
     // Action Handlers
-    // ═══════════════════════════════════════════════════════════════════════════
 
     const handlePrint = async () => {
         const dataToExport = selectionCount > 0

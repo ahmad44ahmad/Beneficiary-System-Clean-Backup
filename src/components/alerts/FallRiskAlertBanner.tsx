@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // FallRiskAlertBanner - Real-time alert for high fall risk assessments
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

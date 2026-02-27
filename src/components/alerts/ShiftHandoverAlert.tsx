@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // ShiftHandoverAlert - Realtime shift change notifications
 // Alerts staff when a new shift handover report is submitted
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React, { useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

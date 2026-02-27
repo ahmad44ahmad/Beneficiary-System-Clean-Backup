@@ -1,15 +1,11 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // Batch Operations Hook for Basira System
 // Enables multi-selection and bulk actions on beneficiaries and other entities
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { useState, useCallback, useMemo } from 'react';
 import { useAudit } from './useAudit';
 import type { AuditModule } from '../services/auditService';
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Types
-// ═══════════════════════════════════════════════════════════════════════════
 
 export type BatchAction =
     | 'export'
@@ -64,9 +60,7 @@ export interface BatchActionResult {
     message: string;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Default Batch Actions Configuration
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const DEFAULT_BATCH_ACTIONS: BatchActionConfig[] = [
     {
@@ -126,9 +120,7 @@ export const DEFAULT_BATCH_ACTIONS: BatchActionConfig[] = [
     },
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Hook Implementation
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface UseBatchOperationsOptions<T> {
     data: T[];

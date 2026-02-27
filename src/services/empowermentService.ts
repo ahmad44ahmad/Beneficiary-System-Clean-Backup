@@ -1,8 +1,6 @@
 import { supabase } from '../config/supabase';
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // Empowerment Service - التمكين والتأهيل
-// ═══════════════════════════════════════════════════════════════════════════════
 
 // Types
 export interface RehabGoal {
@@ -184,9 +182,7 @@ const logError = (context: string, error: unknown) => {
 
 const isSupabaseReady = (): boolean => !!supabase;
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // Service
-// ═══════════════════════════════════════════════════════════════════════════════
 
 export const empowermentService = {
     // Helper to find a default beneficiary

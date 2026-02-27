@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // Strategic KPI Targets - المؤشرات الاستراتيجية مع القيم المستهدفة
 // Based on Ministry of Human Resources and Social Development standards
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface StrategicKPI {
     code: string;

@@ -1,13 +1,9 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // Audit Logging Service for Basira System
 // Tracks all user actions for accountability and compliance
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { supabase } from '../config/supabase';
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Types
-// ═══════════════════════════════════════════════════════════════════════════
 
 export type AuditAction =
     | 'CREATE'
@@ -57,9 +53,7 @@ export interface AuditLogEntry {
     errorMessage?: string;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // In-Memory Queue for batch inserts (improves performance)
-// ═══════════════════════════════════════════════════════════════════════════
 
 const auditQueue: AuditLogEntry[] = [];
 const BATCH_SIZE = 10;
@@ -67,9 +61,7 @@ const FLUSH_INTERVAL = 5000; // 5 seconds
 
 let flushTimer: ReturnType<typeof setInterval> | null = null;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Core Audit Functions
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Log an audit event
@@ -83,16 +75,6 @@ export async function logAuditEvent(entry: Omit<AuditLogEntry, 'id' | 'timestamp
 
     // Add to queue
     auditQueue.push(fullEntry);
-
-    // Log to console in development
-    if (import.meta.env.DEV) {
-        console.log('[Audit]', {
-            action: entry.action,
-            module: entry.module,
-            description: entry.description,
-            user: entry.userName,
-        });
-    }
 
     // Flush if queue is full
     if (auditQueue.length >= BATCH_SIZE) {
@@ -178,9 +160,7 @@ export async function syncOfflineLogs(): Promise<void> {
     }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Auto-flush timer
-// ═══════════════════════════════════════════════════════════════════════════
 
 let beforeUnloadHandler: (() => void) | null = null;
 
@@ -211,9 +191,7 @@ export function stopAuditService(): void {
     flushAuditQueue();
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Convenience Wrappers for Common Actions
-// ═══════════════════════════════════════════════════════════════════════════
 
 interface UserContext {
     userId: string;
@@ -303,9 +281,7 @@ export function createAuditLogger(module: AuditModule, userContext: UserContext)
     };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Login/Logout Audit
-// ═══════════════════════════════════════════════════════════════════════════
 
 export function auditLogin(userId: string, userName: string, userRole: string, success: boolean, errorMessage?: string) {
     return logAuditEvent({

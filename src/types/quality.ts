@@ -91,3 +91,16 @@ export interface CorrectiveAction {
     rootCause?: string;
     actionTaken?: string;
 }
+
+export interface QualityProcess {
+    id: string;
+    department: string;
+    name: string;
+    responsible: string;
+    inputs: string;
+    outputs: string;
+    kpi: string;
+    frequency: string;
+    duration: string;
+    description?: string;
+}

@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // MedicationReminderAlert - Realtime overdue medication alerts
 // Shows notifications when medications are overdue for administration
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -52,9 +50,6 @@ export const MedicationReminderAlert: React.FC = () => {
                     .lt('scheduled_time', currentTime);
 
                 if (error) {
-                    if (import.meta.env.DEV) {
-                        console.log('[MedicationReminder] Query error, table may not exist:', error.message);
-                    }
                     return;
                 }
 
@@ -81,9 +76,7 @@ export const MedicationReminderAlert: React.FC = () => {
                     }
                 }
             } catch (err) {
-                if (import.meta.env.DEV) {
-                    console.log('[MedicationReminder] Check failed:', err);
-                }
+                void err;
             }
         };
 

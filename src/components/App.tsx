@@ -7,9 +7,7 @@ import { useLocalDataStore } from '../stores/useLocalDataStore';
 import { ProtectedRoute } from './common/ProtectedRoute';
 import { Beneficiary } from '../types';
 
-// ═══════════════════════════════════════════════════════════════════════════
 // ESSENTIAL PAGES (Lazy-Loaded)
-// ═══════════════════════════════════════════════════════════════════════════
 const Dashboard = lazy(() => import('../pages/Dashboard').then(m => ({ default: m.Dashboard })));
 const ExternalKnowledgeBase = lazy(() => import('./knowledge/ExternalKnowledgeBase').then(m => ({ default: m.ExternalKnowledgeBase })));
 const WelcomePage = lazy(() => import('../pages/WelcomePage').then(m => ({ default: m.WelcomePage })));
@@ -24,9 +22,7 @@ const NewAdmissionForm = lazy(() => import('./beneficiary/NewAdmissionForm').the
 const SettingsPage = lazy(() => import('../pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
 const PermissionsPage = lazy(() => import('../pages/PermissionsPage').then(m => ({ default: m.PermissionsPage })));
 
-// ═══════════════════════════════════════════════════════════════════════════
 // LAZY LOADED MODULES (Dynamic Imports - Load On-Demand)
-// ═══════════════════════════════════════════════════════════════════════════
 
 // Medical Module
 const MedicalOverview = lazy(() => import('./medical/MedicalOverview').then(m => ({ default: m.MedicalOverview })));

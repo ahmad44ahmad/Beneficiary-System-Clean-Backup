@@ -1,13 +1,9 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // Advanced Search Hook for Basira System
 // Provides debounced search with filter support
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Types
-// ═══════════════════════════════════════════════════════════════════════════
 
 export type FilterOperator =
     | 'equals'
@@ -47,9 +43,7 @@ export interface UseSearchResult<T> {
     hasActiveFilters: boolean;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Hook Implementation
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Advanced search hook with filtering capabilities
@@ -160,9 +154,7 @@ export function useAdvancedSearch<T extends object>(
     };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Helper Functions
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Get nested object value using dot notation
@@ -225,64 +217,6 @@ function matchesFilter(value: unknown, filter: SearchFilter): boolean {
         default:
             return true;
     }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// Saved Searches
-// ═══════════════════════════════════════════════════════════════════════════
-
-const SAVED_SEARCHES_KEY = 'basira_saved_searches';
-
-export interface SavedSearch {
-    id: string;
-    name: string;
-    query: string;
-    filters: SearchFilter[];
-    module: string;
-    createdAt: string;
-}
-
-/**
- * Save a search configuration
- */
-export function saveSearch(name: string, query: string, filters: SearchFilter[], module: string): void {
-    const saved = getSavedSearches();
-    const newSearch: SavedSearch = {
-        id: `search_${Date.now()}`,
-        name,
-        query,
-        filters,
-        module,
-        createdAt: new Date().toISOString(),
-    };
-    saved.push(newSearch);
-    localStorage.setItem(SAVED_SEARCHES_KEY, JSON.stringify(saved));
-}
-
-/**
- * Get all saved searches
- */
-export function getSavedSearches(): SavedSearch[] {
-    try {
-        return JSON.parse(localStorage.getItem(SAVED_SEARCHES_KEY) || '[]');
-    } catch {
-        return [];
-    }
-}
-
-/**
- * Delete a saved search
- */
-export function deleteSavedSearch(id: string): void {
-    const saved = getSavedSearches().filter(s => s.id !== id);
-    localStorage.setItem(SAVED_SEARCHES_KEY, JSON.stringify(saved));
-}
-
-/**
- * Get saved searches for a specific module
- */
-export function getModuleSavedSearches(module: string): SavedSearch[] {
-    return getSavedSearches().filter(s => s.module === module);
 }
 
 export default useAdvancedSearch;

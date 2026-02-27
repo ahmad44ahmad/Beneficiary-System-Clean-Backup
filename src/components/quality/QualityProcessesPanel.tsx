@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { qualityProcesses } from '../../data/qualityProcesses';
-import { QualityProcess } from '../../types/quality-process';
+import { QualityProcess } from '../../types/quality';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Search, Filter, BarChart2, Users, Clock, ArrowRight, X } from 'lucide-react';

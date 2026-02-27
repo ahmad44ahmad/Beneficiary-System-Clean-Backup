@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // usePrint Hook - Print functionality with Arabic RTL support
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { useState, useCallback } from 'react';
 

@@ -118,9 +118,6 @@ export const CateringReports: React.FC = () => {
                 .order('full_name');
 
             if (benError || !bens || bens.length === 0) {
-                if (import.meta.env.DEV) {
-                    console.log('[CateringReports] Using demo data - no beneficiaries found');
-                }
                 setAttendanceData(generateDemoAttendance());
                 setUsingDemoData(true);
                 return;
@@ -140,9 +137,6 @@ export const CateringReports: React.FC = () => {
                 .lte('meal_date', endOfMonth);
 
             if (logsError) {
-                if (import.meta.env.DEV) {
-                    console.log('[CateringReports] Using demo data - daily_meals error');
-                }
                 setAttendanceData(generateDemoAttendance());
                 setUsingDemoData(true);
                 return;

@@ -157,7 +157,7 @@ src/
 ├── config/
 │   ├── supabase.ts   # Supabase client init (persistSession, autoRefreshToken)
 │   └── theme/        # Dark/light theme system
-├── context/          # Legacy context providers (most state now in Zustand stores)
+├── context/          # AuthContext.tsx (Supabase auth) + QueryProvider.tsx (TanStack Query)
 ├── stores/           # 7 Zustand stores (app, localData, notification, toast, UI, user, viewMode)
 ├── data/             # Local mock/seed data
 ├── hooks/            # 16 custom hooks (TanStack Query + utilities)
