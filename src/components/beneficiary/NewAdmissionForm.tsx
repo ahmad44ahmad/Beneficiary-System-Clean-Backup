@@ -152,9 +152,9 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                             <h3><Activity className="inline-icon" /> العلامات الحيوية (Vital Signs)</h3>
 
                             {validation.warnings.length > 0 && (
-                                <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                                <div className="bg-red-50 border-s-4 border-red-500 p-4 mb-4">
                                     <div className="flex">
-                                        <AlertCircle className="h-6 w-6 text-red-500 ml-3" />
+                                        <AlertCircle className="h-6 w-6 text-red-500 ms-3" />
                                         <div>
                                             <p className="text-sm text-red-700 font-bold">تنبيهات طبية:</p>
                                             <ul className="list-disc list-inside text-sm text-red-600">
@@ -336,7 +336,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                 className="btn-primary bg-green-600 hover:bg-green-700"
                                 disabled={!validation.isValid}
                             >
-                                <Save className="inline-icon ml-2" />
+                                <Save className="inline-icon ms-2" />
                                 حفظ التقييم الطبي
                             </button>
                         )}

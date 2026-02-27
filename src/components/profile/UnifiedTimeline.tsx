@@ -95,13 +95,13 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
     }
 
     return (
-        <div className="relative border-l-2 border-gray-200 ml-3 space-y-8 py-4">
+        <div className="relative border-s-2 border-gray-200 ms-3 space-y-8 py-4">
             {events.map((event, _index) => (
-                <div key={event.id} className="relative pl-8">
+                <div key={event.id} className="relative ps-8">
                     {/* Dot on the line */}
                     <div
                         className={`
-                            absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm flex items-center justify-center
+                            absolute -start-[9px] top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm flex items-center justify-center
                             ${event.type === 'incident' ? 'bg-red-500' :
                                 event.type === 'medical' ? 'bg-green-500' :
                                     event.type === 'rehab' ? 'bg-purple-500' : 'bg-blue-500'}

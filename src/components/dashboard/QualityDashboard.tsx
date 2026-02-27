@@ -65,28 +65,28 @@ export const QualityDashboard: React.FC = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card className="p-4 flex items-center gap-4 bg-white border-r-4 border-r-blue-500">
+                <Card className="p-4 flex items-center gap-4 bg-white border-e-4 border-e-blue-500">
                     <div className="bg-blue-50 p-3 rounded-full"><FileText className="w-6 h-6 text-blue-600" /></div>
                     <div>
                         <p className="text-sm text-gray-500">إجمالي البلاغات</p>
                         <p className="text-2xl font-bold">{stats?.totalReports || '-'}</p>
                     </div>
                 </Card>
-                <Card className="p-4 flex items-center gap-4 bg-white border-r-4 border-r-red-500">
+                <Card className="p-4 flex items-center gap-4 bg-white border-e-4 border-e-red-500">
                     <div className="bg-red-50 p-3 rounded-full"><AlertTriangle className="w-6 h-6 text-red-600" /></div>
                     <div>
                         <p className="text-sm text-gray-500">بلاغات مفتوحة</p>
                         <p className="text-2xl font-bold">{stats?.openReports || '-'}</p>
                     </div>
                 </Card>
-                <Card className="p-4 flex items-center gap-4 bg-white border-r-4 border-r-purple-500">
+                <Card className="p-4 flex items-center gap-4 bg-white border-e-4 border-e-purple-500">
                     <div className="bg-purple-50 p-3 rounded-full"><Users className="w-6 h-6 text-purple-600" /></div>
                     <div>
                         <p className="text-sm text-gray-500">نسبة التبليغ المجهول</p>
                         <p className="text-2xl font-bold">{stats?.anonymousRate || '-'}%</p>
                     </div>
                 </Card>
-                <Card className="p-4 flex items-center gap-4 bg-white border-r-4 border-r-green-500">
+                <Card className="p-4 flex items-center gap-4 bg-white border-e-4 border-e-green-500">
                     <div className="bg-green-50 p-3 rounded-full"><BarChart2 className="w-6 h-6 text-green-600" /></div>
                     <div>
                         <p className="text-sm text-gray-500">متوسط وقت الإغلاق</p>

@@ -142,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
 
     const sidebarClasses = isMobile
         ? `sidebar-drawer ${isOpen ? 'open' : ''}`
-        : 'w-[300px] text-white flex flex-col h-screen border-l-4 border-[rgb(245,150,30)] shadow-xl flex-shrink-0 bg-[rgb(20,65,90)] desktop-only';
+        : 'w-[300px] text-white flex flex-col h-screen border-s-4 border-[rgb(245,150,30)] shadow-xl flex-shrink-0 bg-[rgb(20,65,90)] desktop-only';
 
     return (
         <>
@@ -197,7 +197,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             </NavLink>
                             <button className="flex flex-col items-center gap-1 p-2 hover:bg-white/10 rounded-lg transition-colors relative">
                                 <Bell className="w-5 h-5 text-white" />
-                                <span className="absolute top-1 right-1 w-2 h-2 bg-hrsd-orange rounded-full"></span>
+                                <span className="absolute top-1 end-1 w-2 h-2 bg-hrsd-orange rounded-full"></span>
                                 <span className="text-[10px] text-white/80">الإشعارات</span>
                             </button>
                             <button className="flex flex-col items-center gap-1 p-2 hover:bg-white/10 rounded-lg transition-colors">
@@ -245,19 +245,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                                                             }`} />
                                                         <span>{item.label}</span>
                                                         {item.badge && (
-                                                            <span className="mr-auto bg-hrsd-orange text-white text-xs px-2 py-0.5 rounded-full">
+                                                            <span className="me-auto bg-hrsd-orange text-white text-xs px-2 py-0.5 rounded-full">
                                                                 {item.badge}
                                                             </span>
                                                         )}
                                                         {item.children && (
-                                                            <ChevronDown className="w-3 h-3 mr-auto text-gray-400" />
+                                                            <ChevronDown className="w-3 h-3 me-auto text-gray-400" />
                                                         )}
                                                     </>
                                                 )}
                                             </NavLink>
                                             {/* Sub-items */}
                                             {item.children && (
-                                                <div className="mr-6 mt-1 space-y-1 border-r-2 border-hrsd-teal/30 pr-2">
+                                                <div className="me-6 mt-1 space-y-1 border-e-2 border-hrsd-teal/30 pe-2">
                                                     {item.children.map((child) => (
                                                         <NavLink
                                                             key={child.to}

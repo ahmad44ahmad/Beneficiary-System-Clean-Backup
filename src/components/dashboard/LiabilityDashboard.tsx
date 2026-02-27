@@ -93,7 +93,7 @@ const MetricCard: React.FC<{ metric: OperationalMetric }> = ({ metric }) => {
     };
 
     return (
-        <div className={`p-4 rounded-xl border-r-4 ${statusColors[metric.status]} hover-lift transition-all`}>
+        <div className={`p-4 rounded-xl border-e-4 ${statusColors[metric.status]} hover-lift transition-all`}>
             <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2">
                     <div className="p-2 bg-white rounded-lg shadow-sm">
@@ -146,7 +146,7 @@ const IssueCard: React.FC<{ issue: StructuralIssue }> = ({ issue }) => {
     };
 
     return (
-        <div className={`p-4 rounded-xl border-r-4 ${severityColors[issue.severity]} hover-lift transition-all`}>
+        <div className={`p-4 rounded-xl border-e-4 ${severityColors[issue.severity]} hover-lift transition-all`}>
             <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2">
                     <div className="p-2 bg-white rounded-lg shadow-sm">

@@ -53,7 +53,7 @@ export const StaffProfile: React.FC = () => {
                                 <User className="w-12 h-12 text-slate-400" />
                             </div>
                         </div>
-                        <div className={`absolute -bottom-2 -right-2 w-10 h-10 rounded-xl bg-gradient-to-br ${getLevelColor(staff.gamification.level)} flex items-center justify-center font-bold`}>{staff.gamification.level}</div>
+                        <div className={`absolute -bottom-2 -end-2 w-10 h-10 rounded-xl bg-gradient-to-br ${getLevelColor(staff.gamification.level)} flex items-center justify-center font-bold`}>{staff.gamification.level}</div>
                     </div>
                     <div className="flex-1">
                         <h1 className="text-3xl font-bold mb-1">{staff.name}</h1>

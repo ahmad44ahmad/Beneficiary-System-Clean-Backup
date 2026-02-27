@@ -52,6 +52,8 @@ export const Modal: React.FC<ModalProps> = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200">
             <div
                 ref={overlayRef}
+                role="dialog"
+                aria-modal="true"
                 className={cn(
                     'relative w-full bg-white rounded-lg shadow-lg flex flex-col max-h-[90vh] dark:bg-slate-800 dark:shadow-2xl',
                     sizes[size],
@@ -66,6 +68,7 @@ export const Modal: React.FC<ModalProps> = ({
                         size="sm"
                         onClick={onClose}
                         className="h-8 w-8 p-0 rounded-full"
+                        aria-label="إغلاق"
                     >
                         <X className="h-4 w-4" />
                     </Button>

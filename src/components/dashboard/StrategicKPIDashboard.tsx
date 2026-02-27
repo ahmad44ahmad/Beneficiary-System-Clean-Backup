@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { getSupabaseClient } from '../../hooks/queries';
+import { useStrategicKPIStats } from '../../hooks/queries';
 import {
     BarChart3,
     TrendingUp,
@@ -29,15 +29,19 @@ interface ModuleStatus {
 }
 
 export const StrategicKPIDashboard: React.FC = () => {
-    const [loading, setLoading] = useState(true);
-    const [stats, setStats] = useState({
-        totalBeneficiaries: 0,
-        activeCases: 0,
-        completedTasks: 0,
-        pendingRisks: 0,
-        overallCompliance: 0,
-        sroiScore: 0
-    });
+    const { data: kpiData, isLoading: loading, refetch } = useStrategicKPIStats();
+
+    const stats = React.useMemo(() => {
+        const count = kpiData?.beneficiaryCount || 0;
+        return {
+            totalBeneficiaries: count,
+            activeCases: Math.floor(count * 0.85),
+            completedTasks: 156,
+            pendingRisks: 3,
+            overallCompliance: 87,
+            sroiScore: 2.4
+        };
+    }, [kpiData]);
 
     const modules: ModuleStatus[] = [
         {
@@ -87,41 +91,6 @@ export const StrategicKPIDashboard: React.FC = () => {
         },
     ];
 
-    useEffect(() => {
-        fetchDashboardData();
-    }, []);
-
-    const fetchDashboardData = async () => {
-        setLoading(true);
-        try {
-            const supabase = getSupabaseClient();
-            if (!supabase) {
-                setLoading(false);
-                return;
-            }
-
-            // Fetch beneficiaries count
-            const { count: beneficiaryCount } = await supabase
-                .from('beneficiaries')
-                .select('*', { count: 'exact', head: true });
-
-            // Calculate mock SROI (Social Return on Investment)
-            const sroiScore = 2.4; // ر.س 2.4 لكل ريال مستثمر
-
-            setStats({
-                totalBeneficiaries: beneficiaryCount || 0,
-                activeCases: Math.floor((beneficiaryCount || 0) * 0.85),
-                completedTasks: 156,
-                pendingRisks: 3,
-                overallCompliance: 87,
-                sroiScore
-            });
-        } catch (error) {
-            console.error('Error fetching dashboard data:', error);
-        }
-        setLoading(false);
-    };
-
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'complete': return 'bg-green-500';
@@ -152,7 +121,7 @@ export const StrategicKPIDashboard: React.FC = () => {
                     <p className="text-gray-500 mt-1">العائد الاجتماعي على الاستثمار (SROI) • رؤية 2030</p>
                 </div>
                 <button
-                    onClick={fetchDashboardData}
+                    onClick={() => refetch()}
                     className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2"
                 >
                     <RefreshCcw className="w-4 h-4" />
@@ -163,13 +132,13 @@ export const StrategicKPIDashboard: React.FC = () => {
             {/* SROI Hero Card */}
             <div className="bg-gradient-to-br from-hrsd-primary to-[rgb(20,100,130)] rounded-2xl shadow-xl p-8 text-white">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="text-center md:border-l border-white/20 md:pl-8">
+                    <div className="text-center md:border-s border-white/20 md:ps-8">
                         <Target className="w-12 h-12 mx-auto mb-3 text-hrsd-gold" />
                         <p className="text-sm uppercase tracking-wide opacity-80">العائد الاجتماعي SROI</p>
                         <p className="text-5xl font-bold mt-2">{stats.sroiScore}</p>
                         <p className="text-sm opacity-80 mt-1">ريال لكل ريال مستثمر</p>
                     </div>
-                    <div className="text-center md:border-l border-white/20 md:pl-8">
+                    <div className="text-center md:border-s border-white/20 md:ps-8">
                         <CheckCircle2 className="w-12 h-12 mx-auto mb-3 text-green-400" />
                         <p className="text-sm uppercase tracking-wide opacity-80">نسبة الامتثال</p>
                         <p className="text-5xl font-bold mt-2">{stats.overallCompliance}%</p>

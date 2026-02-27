@@ -99,11 +99,11 @@ export const QualityProcessesPanel: React.FC = () => {
             {/* Search & Filter */}
             <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-white p-4 rounded-lg shadow-sm border">
                 <div className="relative w-full md:w-96">
-                    <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Search className="absolute end-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                     <input
                         type="text"
                         placeholder="بحث عن عملية، قسم..."
-                        className="w-full pr-10 pl-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                        className="w-full pe-10 ps-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />

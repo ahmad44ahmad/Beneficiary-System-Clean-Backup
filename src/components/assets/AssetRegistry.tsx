@@ -47,10 +47,10 @@ export const AssetRegistry: React.FC<AssetRegistryProps> = ({ assets, onReportFa
             {/* Filters & Actions */}
             <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-white p-4 rounded-lg shadow-sm border">
                 <div className="flex-1 w-full md:w-auto relative">
-                    <Search className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
+                    <Search className="absolute end-3 top-2.5 w-4 h-4 text-gray-400" />
                     <Input
                         placeholder="بحث برقم الأصل، الاسم، أو الموقع..."
-                        className="pr-10"
+                        className="pe-10"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -81,7 +81,7 @@ export const AssetRegistry: React.FC<AssetRegistryProps> = ({ assets, onReportFa
                     </select>
                 </div>
                 <Button>
-                    <FileText className="w-4 h-4 ml-2" />
+                    <FileText className="w-4 h-4 ms-2" />
                     إضافة أصل جديد
                 </Button>
             </div>
@@ -112,7 +112,7 @@ export const AssetRegistry: React.FC<AssetRegistryProps> = ({ assets, onReportFa
                                 </td>
                                 <td className="p-3">
                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${conditionColors[asset.condition]}`}>
-                                        {asset.condition === 'damaged' && <AlertTriangle className="w-3 h-3 inline ml-1" />}
+                                        {asset.condition === 'damaged' && <AlertTriangle className="w-3 h-3 inline ms-1" />}
                                         {asset.condition.toUpperCase()}
                                     </span>
                                 </td>

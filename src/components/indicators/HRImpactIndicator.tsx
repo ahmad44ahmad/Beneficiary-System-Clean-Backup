@@ -79,7 +79,7 @@ export const HRImpactIndicator: React.FC = () => {
                     </div>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mr-auto p-2 hover:bg-gray-100 rounded-lg"
+                        className="me-auto p-2 hover:bg-gray-100 rounded-lg"
                     >
                         <RefreshCw className="w-5 h-5 text-gray-500" />
                     </button>
@@ -174,7 +174,7 @@ export const HRImpactIndicator: React.FC = () => {
                             </h3>
                             <div className="space-y-3">
                                 {criticalDepartments.map((dept, idx) => (
-                                    <div key={idx} className="p-4 bg-red-50 rounded-xl border-r-4 border-red-500">
+                                    <div key={idx} className="p-4 bg-red-50 rounded-xl border-e-4 border-red-500">
                                         <div className="flex items-center justify-between mb-2">
                                             <span className="font-bold text-red-900">{dept.department}</span>
                                             <span className="badge-danger">تأثير {dept.impact_score}%</span>

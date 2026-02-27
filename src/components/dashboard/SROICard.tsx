@@ -12,8 +12,8 @@ export const SROICard: React.FC = () => {
     return (
         <div className="bg-gradient-to-br from-indigo-900 to-purple-900 rounded-xl p-6 text-white overflow-hidden relative shadow-lg">
             {/* Background Pattern */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500 opacity-10 rounded-full -ml-24 -mb-24 pointer-events-none"></div>
+            <div className="absolute top-0 end-0 w-64 h-64 bg-white opacity-5 rounded-full -me-32 -mt-32 pointer-events-none"></div>
+            <div className="absolute bottom-0 start-0 w-48 h-48 bg-purple-500 opacity-10 rounded-full -ms-24 -mb-24 pointer-events-none"></div>
 
             <h3 className="text-indigo-200 font-medium mb-1 flex items-center gap-2 relative z-10">
                 <Heart className="w-5 h-5 text-pink-400" />
@@ -29,7 +29,7 @@ export const SROICard: React.FC = () => {
                     <p className="text-indigo-200 text-sm">كل 1 ريال يُستثمر يحقق أثراً بقيمة 4.2 ريال</p>
                 </div>
 
-                <div className="border-r border-indigo-700 pr-8">
+                <div className="border-e border-indigo-700 pe-8">
                     <p className="text-indigo-300 text-xs uppercase tracking-wider mb-2">القيمة الاجتماعية المولدة</p>
                     <div className="text-2xl font-bold flex items-center gap-1 text-emerald-300">
                         <TrendingUp className="w-5 h-5" />

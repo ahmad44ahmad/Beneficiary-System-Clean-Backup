@@ -46,7 +46,7 @@ const EvacuationList: React.FC<{
     };
 
     return (
-        <div className={`${bgColors[color as keyof typeof bgColors]} border-r-4 rounded-xl p-4`}>
+        <div className={`${bgColors[color as keyof typeof bgColors]} border-e-4 rounded-xl p-4`}>
             <h3 className={`font-bold text-lg mb-3 ${iconColors[color as keyof typeof iconColors]}`}>
                 {title} ({beneficiaries.length})
             </h3>

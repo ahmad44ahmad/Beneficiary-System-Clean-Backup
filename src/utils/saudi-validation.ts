@@ -101,3 +101,12 @@ export function formatSaudiPhone(phone: string): string {
     if (cleaned.length !== 10) return phone;
     return `${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6)}`;
 }
+
+/**
+ * Masks Saudi National ID for display (PDPL compliance)
+ * تمويه رقم الهوية الوطنية للعرض
+ */
+export function maskNationalId(id: string): string {
+    if (!id || id.length < 4) return '****';
+    return id.slice(0, 2) + '*'.repeat(id.length - 4) + id.slice(-2);
+}

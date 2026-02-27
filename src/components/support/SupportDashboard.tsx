@@ -64,7 +64,7 @@ export const SupportDashboard: React.FC = () => {
                     <div className="space-y-6">
                         {/* Stats Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <Card className="p-6 border-r-4 border-r-blue-500">
+                            <Card className="p-6 border-e-4 border-e-blue-500">
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <p className="text-gray-500 text-sm mb-1">إجمالي الأصول</p>
@@ -77,7 +77,7 @@ export const SupportDashboard: React.FC = () => {
                                 </div>
                             </Card>
 
-                            <Card className="p-6 border-r-4 border-r-teal-500">
+                            <Card className="p-6 border-e-4 border-e-teal-500">
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <p className="text-gray-500 text-sm mb-1">قيمة الأصول</p>
@@ -90,7 +90,7 @@ export const SupportDashboard: React.FC = () => {
                                 </div>
                             </Card>
 
-                            <Card className="p-6 border-r-4 border-r-orange-500">
+                            <Card className="p-6 border-e-4 border-e-orange-500">
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <p className="text-gray-500 text-sm mb-1">في الصيانة</p>
@@ -103,7 +103,7 @@ export const SupportDashboard: React.FC = () => {
                                 </div>
                             </Card>
 
-                            <Card className="p-6 border-r-4 border-r-purple-500">
+                            <Card className="p-6 border-e-4 border-e-purple-500">
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <p className="text-gray-500 text-sm mb-1">عهد الموظفين</p>

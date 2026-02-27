@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
@@ -6,51 +6,48 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [isPending, startTransition] = useTransition();
     const { signIn, signUp, signInWithGoogle } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            setError('');
-            setLoading(true);
-            await signIn(email, password);
-            navigate('/dashboard');
-        } catch (err) {
-            setError('Failed to sign in. Please check your credentials.');
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
+        startTransition(async () => {
+            try {
+                setError('');
+                await signIn(email, password);
+                navigate('/dashboard');
+            } catch (err) {
+                setError('Failed to sign in. Please check your credentials.');
+                console.error(err);
+            }
+        });
     };
 
-    const handleSignUp = async () => {
-        try {
-            setError('');
-            setLoading(true);
-            await signUp(email, password);
-            navigate('/dashboard');
-        } catch (err: unknown) {
-            setError('Failed to create account. ' + (err instanceof Error ? err.message : String(err)));
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
+    const handleSignUp = () => {
+        startTransition(async () => {
+            try {
+                setError('');
+                await signUp(email, password);
+                navigate('/dashboard');
+            } catch (err: unknown) {
+                setError('Failed to create account. ' + (err instanceof Error ? err.message : String(err)));
+                console.error(err);
+            }
+        });
     };
 
-    const handleGoogleSignIn = async () => {
-        try {
-            setError('');
-            setLoading(true);
-            await signInWithGoogle();
-            navigate('/dashboard');
-        } catch (err: unknown) {
-            setError('Failed to sign in with Google. ' + (err instanceof Error ? err.message : String(err)));
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
+    const handleGoogleSignIn = () => {
+        startTransition(async () => {
+            try {
+                setError('');
+                await signInWithGoogle();
+                navigate('/dashboard');
+            } catch (err: unknown) {
+                setError('Failed to sign in with Google. ' + (err instanceof Error ? err.message : String(err)));
+                console.error(err);
+            }
+        });
     };
 
     return (
@@ -89,15 +86,15 @@ export const Login = () => {
                         <button
                             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
                             type="submit"
-                            disabled={loading}
+                            disabled={isPending}
                         >
-                            {loading ? 'جاري التحميل...' : 'دخول'}
+                            {isPending ? 'جاري التحميل...' : 'دخول'}
                         </button>
                         <button
                             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
                             type="button"
                             onClick={handleSignUp}
-                            disabled={loading}
+                            disabled={isPending}
                         >
                             تسجيل جديد
                         </button>
@@ -105,7 +102,7 @@ export const Login = () => {
                             className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                             type="button"
                             onClick={handleGoogleSignIn}
-                            disabled={loading}
+                            disabled={isPending}
                         >
                             تسجيل الدخول عبر Google
                         </button>

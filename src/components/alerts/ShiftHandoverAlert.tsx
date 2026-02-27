@@ -96,7 +96,7 @@ export const ShiftHandoverAlert: React.FC = () => {
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
-                className="fixed bottom-24 left-4 z-50 w-80"
+                className="fixed bottom-24 start-4 z-50 w-80"
                 dir="rtl"
             >
                 <div className="bg-white rounded-2xl shadow-xl border border-blue-200 overflow-hidden">

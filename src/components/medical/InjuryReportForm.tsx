@@ -64,11 +64,11 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                     <div className="flex-1 overflow-y-auto p-6 space-y-6">
                         <div className="bg-blue-50/50 p-4 rounded-lg border border-blue-100 flex justify-between items-center text-sm">
                             <div>
-                                <span className="text-gray-500 ml-2">اسم المستفيد:</span>
+                                <span className="text-gray-500 ms-2">اسم المستفيد:</span>
                                 <span className="font-bold text-gray-900">{beneficiary.fullName}</span>
                             </div>
                             <div>
-                                <span className="text-gray-500 ml-2">رقم الملف:</span>
+                                <span className="text-gray-500 ms-2">رقم الملف:</span>
                                 <span className="font-mono font-bold text-gray-900">{beneficiary.id}</span>
                             </div>
                         </div>

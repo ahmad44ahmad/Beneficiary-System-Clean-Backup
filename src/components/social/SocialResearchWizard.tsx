@@ -266,7 +266,7 @@ export const SocialResearchWizard: React.FC = () => {
             <div className="mb-8">
                 <div className="flex items-center justify-between relative">
                     {/* Progress Line Background */}
-                    <div className="absolute left-0 right-0 top-6 h-1 bg-gray-200 -z-10 rounded-full">
+                    <div className="absolute start-0 end-0 top-6 h-1 bg-gray-200 -z-10 rounded-full">
                         <div
                             className="h-full bg-gradient-to-l from-[#148287] to-[#2DB473] rounded-full transition-all duration-500"
                             style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
@@ -309,18 +309,18 @@ export const SocialResearchWizard: React.FC = () => {
                         onClick={handlePrev}
                         disabled={currentStep === 1}
                     >
-                        <ChevronRight className="w-4 h-4 ml-2" />
+                        <ChevronRight className="w-4 h-4 ms-2" />
                         السابق
                     </Button>
 
                     {currentStep < STEPS.length ? (
                         <Button onClick={handleNext} disabled={!selectedBeneficiaryId && currentStep === 1}>
                             التالي
-                            <ChevronLeft className="w-4 h-4 mr-2" />
+                            <ChevronLeft className="w-4 h-4 me-2" />
                         </Button>
                     ) : (
                         <Button className="bg-[#2DB473] hover:bg-[#1e9a5c]" onClick={handleSubmit}>
-                            <Save className="w-4 h-4 ml-2" />
+                            <Save className="w-4 h-4 ms-2" />
                             حفظ واعتماد البحث
                         </Button>
                     )}

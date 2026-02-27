@@ -56,9 +56,9 @@ const AlertItem: React.FC<{
     time: string;
 }> = ({ type, severity, title, time }) => {
     const severityColors = {
-        high: 'border-r-red-500 bg-gradient-to-l from-red-50 to-transparent',
-        medium: 'border-r-yellow-500 bg-gradient-to-l from-yellow-50 to-transparent',
-        low: 'border-r-blue-500 bg-gradient-to-l from-blue-50 to-transparent',
+        high: 'border-e-red-500 bg-gradient-to-l from-red-50 to-transparent',
+        medium: 'border-e-yellow-500 bg-gradient-to-l from-yellow-50 to-transparent',
+        low: 'border-e-blue-500 bg-gradient-to-l from-blue-50 to-transparent',
     };
 
     const icons = {
@@ -68,7 +68,7 @@ const AlertItem: React.FC<{
     };
 
     return (
-        <div className={`flex items-center gap-3 p-4 rounded-xl border-r-4 ${severityColors[severity]} hover-lift`}>
+        <div className={`flex items-center gap-3 p-4 rounded-xl border-e-4 ${severityColors[severity]} hover-lift`}>
             <div className="p-2 bg-white rounded-xl shadow-sm">
                 {icons[type]}
             </div>

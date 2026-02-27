@@ -101,14 +101,14 @@ export const PTAssessmentForm: React.FC<{
                         </div>
                     ))}
                     <Button onClick={addGoal} variant="outline" size="sm" className="w-full mt-2">
-                        <Plus size={16} className="mr-2" /> Add Treatment Goal
+                        <Plus size={16} className="me-2" /> Add Treatment Goal
                     </Button>
                 </div>
             </Card>
 
             <div className="flex justify-end">
                 <Button onClick={() => onSubmit(formData as PhysicalTherapyAssessment)}>
-                    <Save className="mr-2 h-4 w-4" /> Save Assessment
+                    <Save className="me-2 h-4 w-4" /> Save Assessment
                 </Button>
             </div>
         </div>

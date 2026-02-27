@@ -266,11 +266,11 @@ export const RealTimeAlerts: React.FC = () => {
             {/* Floating Bell Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-4 left-4 z-50 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all border border-gray-200"
+                className="fixed top-4 start-4 z-50 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all border border-gray-200"
             >
                 <Bell className={`w-6 h-6 ${unreadCount > 0 ? 'text-red-500' : 'text-gray-500'}`} />
                 {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold animate-bounce">
+                    <span className="absolute -top-1 -end-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold animate-bounce">
                         {unreadCount}
                     </span>
                 )}
@@ -278,7 +278,7 @@ export const RealTimeAlerts: React.FC = () => {
 
             {/* Alerts Panel */}
             {isOpen && (
-                <div className="fixed top-16 left-4 z-50 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden">
+                <div className="fixed top-16 start-4 z-50 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden">
                     {/* Header */}
                     <div className="bg-gradient-to-l from-red-600 to-orange-600 p-4 text-white">
                         <div className="flex items-center justify-between">
@@ -340,7 +340,7 @@ export const RealTimeAlerts: React.FC = () => {
 
             {/* Critical Alert Overlay */}
             {alerts.some(a => a.severity === 'critical' && !a.acknowledged) && (
-                <div className="fixed bottom-4 right-4 left-4 z-40" dir="rtl">
+                <div className="fixed bottom-4 end-4 start-4 z-40" dir="rtl">
                     {alerts.filter(a => a.severity === 'critical' && !a.acknowledged).slice(0, 1).map(alert => (
                         <div
                             key={alert.id}

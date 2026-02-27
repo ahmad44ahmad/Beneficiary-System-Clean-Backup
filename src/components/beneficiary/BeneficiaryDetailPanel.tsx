@@ -309,7 +309,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                 {relevantInjuryReports.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantInjuryReports.map(ir => (
-                                            <li key={ir.id} className="p-3 bg-red-50 rounded-lg border-r-4 border-r-red-500 text-sm">
+                                            <li key={ir.id} className="p-3 bg-red-50 rounded-lg border-e-4 border-e-red-500 text-sm">
                                                 <strong>التاريخ:</strong> {ir.date} {ir.time}
                                                 <br />
                                                 <strong>النوع:</strong> {ir.injuryType} | <strong>المكان:</strong> {ir.location}

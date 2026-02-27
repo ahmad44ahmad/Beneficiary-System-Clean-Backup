@@ -144,7 +144,7 @@ export const CostPerBeneficiary: React.FC = () => {
                     </div>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mr-auto p-2 hover:bg-gray-100 rounded-lg"
+                        className="me-auto p-2 hover:bg-gray-100 rounded-lg"
                     >
                         <RefreshCw className="w-5 h-5 text-gray-500" />
                     </button>
@@ -163,7 +163,7 @@ export const CostPerBeneficiary: React.FC = () => {
                             <Target className={`w-6 h-6 ${statusConfig[costStatus].color}`} />
                             <div>
                                 <span className={`font-bold ${statusConfig[costStatus].color}`}>{statusConfig[costStatus].label}</span>
-                                <span className="text-gray-600 text-sm mr-2">
+                                <span className="text-gray-600 text-sm me-2">
                                     — المستهدف: {TARGET_DAILY_COST} ريال/مستفيد/يوم | الفعلي: {Math.round(dailyCostPerBeneficiary)} ريال
                                 </span>
                             </div>

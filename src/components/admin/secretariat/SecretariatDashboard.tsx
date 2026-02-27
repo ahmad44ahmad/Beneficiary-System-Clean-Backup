@@ -73,13 +73,13 @@ export const SecretariatDashboard = () => {
                         <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
                             <div className="flex gap-3 w-1/2">
                                 <div className="relative w-full">
-                                    <Search className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
-                                    <input type="text" placeholder="بحث في الوارد..." className="w-full pr-10 pl-4 py-2 border rounded-md text-sm" />
+                                    <Search className="absolute end-3 top-2.5 w-4 h-4 text-gray-400" />
+                                    <input type="text" placeholder="بحث في الوارد..." className="w-full pe-10 ps-4 py-2 border rounded-md text-sm" />
                                 </div>
                                 <Button variant="outline"><Filter className="w-4 h-4" /></Button>
                             </div>
                             <Button onClick={() => setShowIncomingForm(true)}>
-                                <Plus className="w-4 h-4 ml-2" />
+                                <Plus className="w-4 h-4 ms-2" />
                                 وارد جديد
                             </Button>
                         </div>
@@ -135,13 +135,13 @@ export const SecretariatDashboard = () => {
                         <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
                             <div className="flex gap-3 w-1/2">
                                 <div className="relative w-full">
-                                    <Search className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
-                                    <input type="text" placeholder="بحث في الصادر..." className="w-full pr-10 pl-4 py-2 border rounded-md text-sm" />
+                                    <Search className="absolute end-3 top-2.5 w-4 h-4 text-gray-400" />
+                                    <input type="text" placeholder="بحث في الصادر..." className="w-full pe-10 ps-4 py-2 border rounded-md text-sm" />
                                 </div>
                                 <Button variant="outline"><Filter className="w-4 h-4" /></Button>
                             </div>
                             <Button onClick={() => setShowOutgoingForm(true)} className="bg-green-600 hover:bg-green-700">
-                                <Plus className="w-4 h-4 ml-2" />
+                                <Plus className="w-4 h-4 ms-2" />
                                 صادر جديد
                             </Button>
                         </div>
@@ -187,12 +187,12 @@ export const SecretariatDashboard = () => {
                         <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
                             <div className="flex gap-3 w-1/2">
                                 <div className="relative w-full">
-                                    <Search className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
-                                    <input type="text" placeholder="بحث في الاجتماعات..." className="w-full pr-10 pl-4 py-2 border rounded-md text-sm" />
+                                    <Search className="absolute end-3 top-2.5 w-4 h-4 text-gray-400" />
+                                    <input type="text" placeholder="بحث في الاجتماعات..." className="w-full pe-10 ps-4 py-2 border rounded-md text-sm" />
                                 </div>
                             </div>
                             <Button onClick={() => setShowMeetingForm(true)} className="bg-purple-600 hover:bg-purple-700">
-                                <Plus className="w-4 h-4 ml-2" />
+                                <Plus className="w-4 h-4 ms-2" />
                                 اجتماع جديد
                             </Button>
                         </div>

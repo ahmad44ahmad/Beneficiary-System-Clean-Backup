@@ -3,6 +3,7 @@ import { Beneficiary } from '../../types';
 import { SearchBar } from '../common/SearchBar';
 import { BeneficiaryListItem } from './BeneficiaryListItem';
 import { useBeneficiaries } from '../../hooks/useBeneficiaries';
+import { maskNationalId } from '../../utils/saudi-validation';
 
 interface BeneficiaryListPanelProps {
     beneficiaries: Beneficiary[];
@@ -44,7 +45,7 @@ export const BeneficiaryListPanel: React.FC<BeneficiaryListPanelProps> = ({ bene
     const handleExport = () => {
         const csvContent = "data:text/csv;charset=utf-8,\uFEFF" +
             "الاسم,رقم الهوية,رقم الغرفة,تاريخ الدخول\n" +
-            filteredBeneficiaries.map(b => `"${b.fullName}","${b.nationalId || ''}","${b.roomNumber || ''}","${b.enrollmentDate}"`).join("\n");
+            filteredBeneficiaries.map(b => `"${b.fullName}","${maskNationalId(b.nationalId || '')}","${b.roomNumber || ''}","${b.enrollmentDate}"`).join("\n");
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);

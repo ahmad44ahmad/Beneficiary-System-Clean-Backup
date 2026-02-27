@@ -269,13 +269,13 @@ export const NcrCapaTracker: React.FC = () => {
       <div className="flex flex-wrap gap-3 items-center bg-gray-50 rounded-xl p-4 border border-gray-100">
         <Filter className="w-4 h-4 text-gray-400" />
         <div className="relative flex-1 max-w-xs">
-          <Search className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search className="w-4 h-4 absolute end-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             placeholder="بحث..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-4 pr-9 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#14415A]"
+            className="w-full ps-4 pe-9 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#14415A]"
           />
         </div>
         <select

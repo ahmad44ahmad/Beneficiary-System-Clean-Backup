@@ -297,7 +297,7 @@ export const BeneficiaryListPage: React.FC = () => {
 
                 {/* Quick Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div className="hrsd-card-stat border-l-hrsd-teal">
+                    <div className="hrsd-card-stat border-s-hrsd-teal">
                         <div className="flex items-center gap-3">
                             <Users className="w-6 h-6 text-hrsd-teal" />
                             <div>
@@ -306,7 +306,7 @@ export const BeneficiaryListPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="hrsd-card-stat border-l-hrsd-green">
+                    <div className="hrsd-card-stat border-s-hrsd-green">
                         <div className="flex items-center gap-3">
                             <Activity className="w-6 h-6 text-hrsd-green" />
                             <div>
@@ -315,7 +315,7 @@ export const BeneficiaryListPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="hrsd-card-stat border-l-hrsd-gold">
+                    <div className="hrsd-card-stat border-s-hrsd-gold">
                         <div className="flex items-center gap-3">
                             <Activity className="w-6 h-6 text-hrsd-gold" />
                             <div>
@@ -324,7 +324,7 @@ export const BeneficiaryListPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="hrsd-card-stat border-l-red-500">
+                    <div className="hrsd-card-stat border-s-red-500">
                         <div className="flex items-center gap-3">
                             <Activity className="w-6 h-6 text-red-600" />
                             <div>

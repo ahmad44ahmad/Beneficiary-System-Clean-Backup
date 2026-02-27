@@ -168,7 +168,7 @@ export const ExecutiveDashboard: React.FC = () => {
 
                 {/* Occupancy Card */}
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
-                    <div className="absolute left-0 top-0 w-24 h-24 bg-blue-50 rounded-br-full -ml-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div className="absolute start-0 top-0 w-24 h-24 bg-blue-50 rounded-br-full -ms-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
                             <div className="p-3 bg-blue-100 text-blue-600 rounded-lg">
@@ -188,7 +188,7 @@ export const ExecutiveDashboard: React.FC = () => {
 
                 {/* Falls Risk Card */}
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
-                    <div className="absolute left-0 top-0 w-24 h-24 bg-red-50 rounded-br-full -ml-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div className="absolute start-0 top-0 w-24 h-24 bg-red-50 rounded-br-full -ms-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
                             <div className="p-3 bg-red-100 text-red-600 rounded-lg">
@@ -205,7 +205,7 @@ export const ExecutiveDashboard: React.FC = () => {
 
                 {/* Incidents Card */}
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
-                    <div className="absolute left-0 top-0 w-24 h-24 bg-orange-50 rounded-br-full -ml-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div className="absolute start-0 top-0 w-24 h-24 bg-orange-50 rounded-br-full -ms-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
                             <div className="p-3 bg-orange-100 text-orange-600 rounded-lg">
@@ -222,7 +222,7 @@ export const ExecutiveDashboard: React.FC = () => {
 
                 {/* Operational Efficiency */}
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
-                    <div className="absolute left-0 top-0 w-24 h-24 bg-emerald-50 rounded-br-full -ml-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    <div className="absolute start-0 top-0 w-24 h-24 bg-emerald-50 rounded-br-full -ms-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
                             <div className="p-3 bg-emerald-100 text-emerald-600 rounded-lg">

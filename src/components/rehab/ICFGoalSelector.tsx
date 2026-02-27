@@ -156,13 +156,13 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                         {/* Search */}
                         <div className="p-3 border-b border-gray-100">
                             <div className="relative">
-                                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                 <input
                                     type="text"
                                     placeholder="بحث عن رمز ICF..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pr-10 pl-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#148287]"
+                                    className="w-full pe-10 ps-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#148287]"
                                 />
                             </div>
                         </div>

@@ -190,7 +190,7 @@ export const SecretariatDashboard: React.FC = () => {
                 <div key={meeting.id} className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
                     <div className="flex justify-between items-start mb-4">
                         <div className="flex items-center text-gray-600">
-                            <Calendar size={18} className="ml-2" />
+                            <Calendar size={18} className="ms-2" />
                             <span className="text-sm font-medium">{meeting.date} | {meeting.time}</span>
                         </div>
                         <div className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
@@ -212,7 +212,7 @@ export const SecretariatDashboard: React.FC = () => {
                         <ul className="space-y-2">
                             {meeting.actionItems.slice(0, 2).map((task, idx) => (
                                 <li key={idx} className="flex justify-between items-center text-sm">
-                                    <span className="truncate flex-1 ml-2">{task.task}</span>
+                                    <span className="truncate flex-1 ms-2">{task.task}</span>
                                     <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${task.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
                                         {task.status === 'completed' ? 'منجز' : 'قيد التنفيذ'}
                                     </span>
@@ -246,7 +246,7 @@ export const SecretariatDashboard: React.FC = () => {
                     }}
                     className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
                 >
-                    <Plus size={20} className="ml-2" />
+                    <Plus size={20} className="ms-2" />
                     {activeTab === 'incoming' ? 'تسجيل وارد جديد' :
                         activeTab === 'outgoing' ? 'تسجيل صادر جديد' : 'تسجيل محضر اجتماع'}
                 </button>
@@ -259,7 +259,7 @@ export const SecretariatDashboard: React.FC = () => {
                     className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'incoming' ? 'bg-blue-50 text-blue-700 shadow-sm' : 'text-gray-500 hover:text-gray-900'
                         }`}
                 >
-                    <Inbox size={18} className="ml-2" />
+                    <Inbox size={18} className="ms-2" />
                     البريد الوارد
                 </button>
                 <button
@@ -267,7 +267,7 @@ export const SecretariatDashboard: React.FC = () => {
                     className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'outgoing' ? 'bg-blue-50 text-blue-700 shadow-sm' : 'text-gray-500 hover:text-gray-900'
                         }`}
                 >
-                    <Send size={18} className="ml-2" />
+                    <Send size={18} className="ms-2" />
                     البريد الصادر
                 </button>
                 <button
@@ -275,18 +275,18 @@ export const SecretariatDashboard: React.FC = () => {
                     className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'meetings' ? 'bg-blue-50 text-blue-700 shadow-sm' : 'text-gray-500 hover:text-gray-900'
                         }`}
                 >
-                    <Users size={18} className="ml-2" />
+                    <Users size={18} className="ms-2" />
                     الاجتماعات والمحاضر
                 </button>
             </div>
 
             {/* Search Filter - Optional global filter */}
             <div className="relative">
-                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Search className="absolute end-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
                     type="text"
                     placeholder="بحث في السجلات..."
-                    className="w-full pl-4 pr-10 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full ps-4 pe-10 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />

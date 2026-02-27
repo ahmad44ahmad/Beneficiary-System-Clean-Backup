@@ -100,7 +100,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 {onUpdate && (
                     <button
                         onClick={() => setIsEditing(true)}
-                        className="absolute top-4 left-4 p-2 bg-white rounded-full shadow-sm text-gray-400 hover:text-indigo-600 transition-colors opacity-0 group-hover:opacity-100"
+                        className="absolute top-4 start-4 p-2 bg-white rounded-full shadow-sm text-gray-400 hover:text-indigo-600 transition-colors opacity-0 group-hover:opacity-100"
                         title="تعديل الملف"
                     >
                         <Edit2 className="w-4 h-4" />
@@ -250,10 +250,10 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                     </button>
                 </div>
 
-                <div className="relative border-r-2 border-gray-200 mr-3 pr-6 space-y-6">
+                <div className="relative border-e-2 border-gray-200 me-3 pe-6 space-y-6">
                     {deeds.length > 0 ? deeds.map((deed) => (
                         <div key={deed.id} className="relative">
-                            <div className="absolute -right-[31px] top-1 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow-sm"></div>
+                            <div className="absolute -end-[31px] top-1 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow-sm"></div>
 
                             <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 dark:border-gray-800">
                                 <div className="flex justify-between items-start mb-2">
