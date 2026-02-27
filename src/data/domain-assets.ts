@@ -4,9 +4,7 @@
  * مركز التأهيل الشامل بالباحة
  */
 
-// ═══════════════════════════════════════════════════════════════════════════
 // ICF CODES (التصنيف الدولي للأداء)
-// ═══════════════════════════════════════════════════════════════════════════
 
 export type ICFCategory = "Mobility" | "Cognitive" | "Speech" | "SelfCare" | "Communication";
 export type ICFQualifier = 0 | 1 | 2 | 3 | 4;
@@ -82,9 +80,7 @@ export const ICF_CATEGORY_LABELS: Record<ICFCategory, string> = {
     Communication: "التواصل"
 };
 
-// ═══════════════════════════════════════════════════════════════════════════
 // AL-BAHA FAMILIES & NAMES
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const AL_BAHA_FAMILIES = [
     "الغامدي", "الزهراني", "العمري", "الدوسي", "الحسني",
@@ -101,9 +97,7 @@ export const FEMALE_FIRST_NAMES = [
     "لطيفة", "منيرة", "جواهر", "ريم", "أمل", "دلال"
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════
 // MEDICAL DIAGNOSES & MEDICATIONS
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface MedicalDiagnosis {
     code: string;
@@ -153,9 +147,7 @@ export const MEDICATIONS_DATABASE = {
     ] as Medication[]
 } as const;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // SOCIAL RESEARCH FORM SCHEMA
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface FormFieldOption {
     value: string;
@@ -225,9 +217,7 @@ export const SOCIAL_RESEARCH_SCHEMA: Record<string, FormField> = {
     }
 };
 
-// ═══════════════════════════════════════════════════════════════════════════
 // ALERT TAGS SYSTEM
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface AlertTag {
     id: string;
@@ -247,9 +237,7 @@ export const ALERT_TAGS: AlertTag[] = [
     { id: "visuallyImpaired", label: "ضعف بصر", color: "#34495E", icon: "👁️" }
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════
 // SEED BENEFICIARIES - 10 Realistic Al-Baha Beneficiaries
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface SeedBeneficiary {
     fileId: string;
@@ -420,9 +408,7 @@ export const SEED_BENEFICIARIES: SeedBeneficiary[] = [
     }
 ];
 
-// ═══════════════════════════════════════════════════════════════════════════
 // HELPER FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Get ICF codes grouped by category

@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // EmptyState - Reusable empty state display component
 // Shows a consistent empty/no-results state across all pages
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React from 'react';
 import { Inbox, Search, FileX, AlertCircle, LucideIcon } from 'lucide-react';

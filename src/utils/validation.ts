@@ -1,12 +1,8 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // Zod Validation Schemas for Basira System
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { z } from 'zod';
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Common Validation Helpers
-// ═══════════════════════════════════════════════════════════════════════════
 
 // Saudi National ID: 10 digits starting with 1 or 2
 const saudiNationalIdSchema = z.string()
@@ -22,9 +18,7 @@ const arabicNameSchema = z.string()
     .max(100, 'الاسم يجب ألا يتجاوز 100 حرف')
     .regex(/^[\u0600-\u06FF\s]+$/, 'الاسم يجب أن يكون باللغة العربية');
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Beneficiary Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const beneficiarySchema = z.object({
     nationalId: saudiNationalIdSchema,
@@ -43,9 +37,7 @@ export const beneficiarySchema = z.object({
 
 export type BeneficiaryFormData = z.infer<typeof beneficiarySchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Visit Log Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const visitLogSchema = z.object({
     beneficiaryId: z.string().min(1, 'معرف المستفيد مطلوب'),
@@ -59,9 +51,7 @@ export const visitLogSchema = z.object({
 
 export type VisitLogFormData = z.infer<typeof visitLogSchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Medical Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const vitalSignsSchema = z.object({
     beneficiaryId: z.string().min(1, 'معرف المستفيد مطلوب'),
@@ -86,9 +76,7 @@ export const vitalSignsSchema = z.object({
 
 export type VitalSignsFormData = z.infer<typeof vitalSignsSchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Medication Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const medicationSchema = z.object({
     name: z.string().min(2, 'اسم الدواء مطلوب'),
@@ -102,9 +90,7 @@ export const medicationSchema = z.object({
 
 export type MedicationFormData = z.infer<typeof medicationSchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Incident Report Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const incidentReportSchema = z.object({
     beneficiaryId: z.string().min(1, 'معرف المستفيد مطلوب'),
@@ -122,9 +108,7 @@ export const incidentReportSchema = z.object({
 
 export type IncidentReportFormData = z.infer<typeof incidentReportSchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Maintenance Request Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const maintenanceRequestSchema = z.object({
     assetId: z.string().optional(),
@@ -137,9 +121,7 @@ export const maintenanceRequestSchema = z.object({
 
 export type MaintenanceRequestFormData = z.infer<typeof maintenanceRequestSchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Leave Request Schemas
-// ═══════════════════════════════════════════════════════════════════════════
 
 export const leaveRequestSchema = z.object({
     beneficiaryId: z.string().min(1, 'معرف المستفيد مطلوب'),
@@ -155,9 +137,7 @@ export const leaveRequestSchema = z.object({
 
 export type LeaveRequestFormData = z.infer<typeof leaveRequestSchema>;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Utility Functions
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Validate form data and return errors in Arabic

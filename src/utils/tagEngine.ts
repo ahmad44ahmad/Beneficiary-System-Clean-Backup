@@ -4,9 +4,7 @@ import { ALERT_TAGS } from '../data/domain-assets';
 export const deriveSmartTags = (profile: UnifiedBeneficiaryProfile): SmartTag[] => {
     const tags: SmartTag[] = [];
 
-    // ═══════════════════════════════════════════════════════════════════════════
     // 0. Database Alerts - Include any alerts stored directly in the database
-    // ═══════════════════════════════════════════════════════════════════════════
     const profileAlerts = (profile as unknown as { alerts?: string[] }).alerts;
     if (profileAlerts && Array.isArray(profileAlerts)) {
         for (const alertId of profileAlerts) {

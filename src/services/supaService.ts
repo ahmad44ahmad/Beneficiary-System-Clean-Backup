@@ -93,9 +93,7 @@ const transformBeneficiary = (b: Record<string, unknown>): UnifiedBeneficiaryPro
 };
 
 export const supaService = {
-    // ═══════════════════════════════════════════════════════════════
     // المستفيدون (Beneficiaries)
-    // ═══════════════════════════════════════════════════════════════
 
     async getBeneficiaries(): Promise<UnifiedBeneficiaryProfile[]> {
         if (!isSupabaseReady()) return [];
@@ -348,9 +346,7 @@ export const supaService = {
         return true;
     },
 
-    // ═══════════════════════════════════════════════════════════════
     // الإعاشة (Catering)
-    // ═══════════════════════════════════════════════════════════════
 
     async getDailyMeals(date: string, mealType?: string) {
         if (!isSupabaseReady()) return [];
@@ -411,9 +407,7 @@ export const supaService = {
         return data;
     },
 
-    // ═══════════════════════════════════════════════════════════════
     // التشغيل والصيانة (Operations & Maintenance)
-    // ═══════════════════════════════════════════════════════════════
 
     async getMaintenanceRequests(status?: string) {
         if (!isSupabaseReady()) return [];
@@ -507,9 +501,7 @@ export const supaService = {
         return data;
     },
 
-    // ═══════════════════════════════════════════════════════════════
     // الرعاية اليومية (Daily Care)
-    // ═══════════════════════════════════════════════════════════════
 
     async getDailyCareLog(beneficiaryId: string, date: string) {
         if (!isSupabaseReady()) return null;
@@ -552,9 +544,7 @@ export const supaService = {
         return data;
     },
 
-    // ═══════════════════════════════════════════════════════════════
     // البحث الاجتماعي والملف الطبي
-    // ═══════════════════════════════════════════════════════════════
 
     async saveSocialResearch(data: SocialResearch): Promise<boolean> {
         if (!isSupabaseReady()) return false;
@@ -584,9 +574,7 @@ export const supaService = {
         return true;
     },
 
-    // ═══════════════════════════════════════════════════════════════
     // الملف الشامل (Full Profile)
-    // ═══════════════════════════════════════════════════════════════
 
     async getFullProfile(nationalId: string): Promise<Record<string, unknown> | null> {
         const beneficiary = await this.getBeneficiaryByNationalId(nationalId);
@@ -615,9 +603,7 @@ export const supaService = {
         }
     },
 
-    // ═══════════════════════════════════════════════════════════════
     // الإحصائيات
-    // ═══════════════════════════════════════════════════════════════
 
     async getDashboardStats() {
         if (!isSupabaseReady()) return {

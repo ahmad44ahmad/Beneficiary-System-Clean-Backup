@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // useAudit Hook - Access audit logging in React components
-// ═══════════════════════════════════════════════════════════════════════════
 
 import { useCallback, useMemo } from 'react';
 import { useUserStore } from '../stores/useUserStore';

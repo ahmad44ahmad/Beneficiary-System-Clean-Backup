@@ -1,11 +1,7 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // Data Export Utility for Basira System
 // Supports Excel and PDF export with Arabic content
-// ═══════════════════════════════════════════════════════════════════════════
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Types
-// ═══════════════════════════════════════════════════════════════════════════
 
 export interface ExportColumn {
     key: string;
@@ -25,9 +21,7 @@ export interface ExportOptions {
     orientation?: 'portrait' | 'landscape';
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // CSV Export (Base format for Excel compatibility)
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Export data to CSV format
@@ -75,9 +69,7 @@ export function exportToCSV(options: ExportOptions): void {
     downloadFile(csvContent, `${filename}.csv`, 'text/csv;charset=utf-8');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Excel Export (using simple XML format)
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Export data to Excel format (SpreadsheetML)
@@ -177,9 +169,7 @@ export function exportToExcel(options: ExportOptions): void {
     downloadFile(xml, `${filename}.xls`, 'application/vnd.ms-excel');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // PDF Export (using print-based approach)
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Export data to PDF by opening print dialog
@@ -276,9 +266,7 @@ export function exportToPDF(options: ExportOptions): void {
     }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Helper Functions
-// ═══════════════════════════════════════════════════════════════════════════
 
 function escapeXml(str: string): string {
     return str
@@ -301,9 +289,7 @@ function downloadFile(content: string, filename: string, mimeType: string): void
     URL.revokeObjectURL(url);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════
 // Pre-configured Export Templates
-// ═══════════════════════════════════════════════════════════════════════════
 
 /**
  * Export beneficiaries list

@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // IncidentNotificationAlert - Realtime incident notifications
 // Alerts staff when a new safety incident is reported
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

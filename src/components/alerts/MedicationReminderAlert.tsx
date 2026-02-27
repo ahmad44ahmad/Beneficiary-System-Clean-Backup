@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // MedicationReminderAlert - Realtime overdue medication alerts
 // Shows notifications when medications are overdue for administration
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

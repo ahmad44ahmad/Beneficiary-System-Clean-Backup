@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════════════════════════
 // PageToolbar - Reusable toolbar component for Print/Export/Actions
 // Provides consistent UI across all list pages
-// ═══════════════════════════════════════════════════════════════════════════
 
 import React from 'react';
 import { Printer, FileSpreadsheet, Download, CheckSquare, Loader2 } from 'lucide-react';
