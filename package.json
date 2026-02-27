@@ -21,7 +21,6 @@
     "@tanstack/react-table": "^8.21.3",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
-    "exceljs": "^4.4.0",
     "framer-motion": "^12.34.3",
     "hijri-date": "^0.2.2",
     "lucide-react": "^0.575.0",
