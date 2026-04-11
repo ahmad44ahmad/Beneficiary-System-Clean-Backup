@@ -150,9 +150,9 @@ body {
     font-family: var(--font-family);
     background-color: var(--secondary-bg);
     color: var(--text-color);
-    line-height: 1.7;
-    font-size: 18px;
-    font-weight: 500;
+    line-height: 1.55;
+    font-size: 15px;
+    font-weight: 400;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 

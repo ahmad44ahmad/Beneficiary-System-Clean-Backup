@@ -167,8 +167,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             />
                         </div>
                         <div>
-                            <h1 className="font-bold text-lg leading-tight text-[rgb(250,180,20)]">مركز التأهيل الشامل بالباحة</h1>
-                            <p className="text-[rgb(45,180,115)] text-sm mt-1 font-semibold">وزارة الموارد البشرية والتنمية الاجتماعية</p>
+                            <h1 className="font-bold text-lg leading-tight text-white">مركز التأهيل الشامل بالباحة</h1>
+                            <p className="text-[rgb(130,220,175)] text-sm mt-1 font-semibold">وزارة الموارد البشرية والتنمية الاجتماعية</p>
                         </div>
                     </div>
 
@@ -211,11 +211,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                 {/* Navigation */}
                 <nav className="flex-1 p-3 overflow-y-auto hrsd-scrollbar">
                     {navSections.map((section, _idx) => (
-                        <div key={section.title} className="mb-3">
+                        <div key={section.title} className="mb-2 pb-2 border-b border-white/10 last:border-b-0">
                             {/* Section Header */}
                             <button
                                 onClick={() => toggleSection(section.title)}
-                                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-hrsd-gold/80 uppercase tracking-wider hover:text-hrsd-gold transition-colors"
+                                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-hrsd-gold uppercase tracking-wider hover:text-hrsd-gold-light transition-colors"
                             >
                                 <span>{section.title}</span>
                                 <ChevronDown
@@ -235,13 +235,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                                                 className={({ isActive }) =>
                                                     `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-sm font-medium group ${isActive
                                                         ? 'bg-hrsd-teal text-white shadow-md'
-                                                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                                        : 'text-gray-200 hover:text-white hover:bg-white/5'
                                                     }`
                                                 }
                                             >
                                                 {({ isActive }) => (
                                                     <>
-                                                        <item.icon className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-400 group-hover:text-white'
+                                                        <item.icon className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-300 group-hover:text-white'
                                                             }`} />
                                                         <span>{item.label}</span>
                                                         {item.badge && (
@@ -291,13 +291,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                         className={({ isActive }) =>
                             `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-sm font-medium group ${isActive
                                 ? 'bg-hrsd-teal text-white shadow-md'
-                                : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                : 'text-gray-200 hover:text-white hover:bg-white/5'
                             }`
                         }
                     >
                         {({ isActive }) => (
                             <>
-                                <Settings className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-400 group-hover:text-white'
+                                <Settings className={`w-4 h-4 transition-colors ${isActive ? 'text-hrsd-gold' : 'text-gray-300 group-hover:text-white'
                                     }`} />
                                 <span>الإعدادات</span>
                             </>
