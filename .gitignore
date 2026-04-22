@@ -50,3 +50,8 @@ eslint_out2.json
 .claude/
 
 .vercel
+
+# Local diagnostic scripts — may contain hardcoded credentials, never commit
+basira-diagnostic.mjs
+*-diagnostic.mjs
+scripts/local-diag-*.mjs
