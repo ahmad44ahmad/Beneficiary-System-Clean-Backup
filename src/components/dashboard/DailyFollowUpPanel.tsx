@@ -200,7 +200,7 @@ export const DailyFollowUpPanel: React.FC = () => {
     };
 
     return (
-        <div className="clothing-panel"> {/* Reusing the panel style for consistency */}
+        <div className="clothing-panel daily-follow-up-panel"> {/* scoped teal palette override */}
             <div className="panel-header">
                 <h2>سجل المتابعة اليومية للخدمات</h2>
 
