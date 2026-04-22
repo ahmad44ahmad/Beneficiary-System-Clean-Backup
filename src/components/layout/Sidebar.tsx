@@ -25,6 +25,7 @@ import {
     TrendingUp,
     Scale,
     Award,
+    Compass,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -161,6 +162,12 @@ const NAV_SECTIONS: NavSection[] = [
         entries: [
             { kind: 'link', to: '/reports', icon: BarChart3, label: 'التقارير' },
             { kind: 'link', to: '/sroi', icon: TrendingUp, label: 'العائد الاجتماعي (SROI)' },
+        ],
+    },
+    {
+        title: 'القيادة الاستراتيجيّة',
+        entries: [
+            { kind: 'link', to: '/leadership-compass', icon: Compass, label: 'بوصلة القيادة' },
         ],
     },
     {
