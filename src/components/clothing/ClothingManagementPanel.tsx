@@ -9,6 +9,9 @@ import { WardrobeInventoryForm } from './WardrobeInventoryForm';
 import { ClothingNeedsForm } from './ClothingNeedsForm';
 import { ClothingDispensationForm } from './ClothingDispensationForm';
 import { ClothingProcurementForm } from './ClothingProcurementForm';
+import { ClothingPhaseTracker } from './ClothingPhaseTracker';
+import { ClothingCommitteeCard } from './ClothingCommitteeCard';
+import { ClothingSeasonalCalendar } from './ClothingSeasonalCalendar';
 
 const TABS = [
     { id: 'inventory', label: 'جرد الخزائن', formNum: '1', icon: Package },
@@ -79,18 +82,27 @@ export const ClothingManagementPanel: React.FC = () => {
     };
 
     return (
-        <div className="p-6 min-h-screen" dir="rtl">
+        <div className="p-6 min-h-screen space-y-6" dir="rtl">
             {/* Page Header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                     <div className="w-14 h-14 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-2xl flex items-center justify-center shadow-lg">
                         <Package className="w-7 h-7 text-white" />
                     </div>
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900">إدارة الكسوة والمستودع</h1>
-                        <p className="text-sm text-gray-500 mt-1">إدارة جرد الملابس والاحتياجات والصرف والمشتريات</p>
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">إدارة الكسوة والمستودع</h1>
+                        <p className="text-[14px] text-gray-500 dark:text-gray-400 mt-1">
+                            ملتزمة بالضوابط التنظيمية لتأمين الكسوة 2020 — وكالة التأهيل والتوجيه الاجتماعي
+                        </p>
                     </div>
                 </div>
+            </div>
+
+            {/* Domain frame — phases, seasons, committee (per ضوابط الكسوة 2020) */}
+            <ClothingPhaseTracker currentPhase="phase_2_procurement" />
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                <ClothingSeasonalCalendar />
+                <ClothingCommitteeCard />
             </div>
 
             {/* Stats Cards */}

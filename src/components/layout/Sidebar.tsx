@@ -145,7 +145,7 @@ const NAV_SECTIONS: NavSection[] = [
             { kind: 'link', to: '/operations', icon: Settings, label: 'لوحة التشغيل' },
             { kind: 'link', to: '/catering', icon: Utensils, label: 'الإعاشة' },
             { kind: 'link', to: '/assets', icon: Wrench, label: 'الأصول والصيانة' },
-            { kind: 'link', to: '/inventory', icon: Package, label: 'المخزون والكسوة' },
+            { kind: 'link', to: '/clothing', icon: Package, label: 'المخزون والكسوة' },
         ],
     },
     {
