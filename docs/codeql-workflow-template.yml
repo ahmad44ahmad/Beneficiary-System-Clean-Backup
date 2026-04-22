@@ -1,3 +1,28 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# INSTALLATION INSTRUCTIONS (must be done by Ahmad manually):
+#
+# The OAuth token used by command-line git in this environment does not have
+# the `workflow` scope, so this file is shipped as a template instead of being
+# committed directly to `.github/workflows/`. To activate CodeQL scanning:
+#
+# Option A — GitHub Web UI (easiest, 2 minutes):
+#   1. Open: https://github.com/ahmad44ahmad/Beneficiary-System-Clean-Backup
+#   2. Click "Actions" tab → "New workflow" → "set up a workflow yourself"
+#   3. Name the file: codeql.yml
+#   4. Paste the contents of this file (everything below the delimiter "---")
+#   5. Commit directly to the v2 branch
+#
+# Option B — Local with a PAT that has workflow scope:
+#   1. Generate a Personal Access Token with the `workflow` scope
+#   2. Use that token for git push
+#   3. cp this file to .github/workflows/codeql.yml, commit, push
+#
+# Once installed, the action runs on: push to v2/main, PRs to v2, and every
+# Sunday 03:00 UTC (weekly full scan). Results appear in GitHub Security tab.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+---
+
 name: CodeQL Security Analysis
 
 # Static Application Security Testing per DT-IS-POL-3100 V1 §3.2.8
