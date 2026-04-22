@@ -5,7 +5,21 @@
 Arabic RTL healthcare quality management system for HRSD Al-Baha Rehabilitation Center.
 299 source files (219 TSX + 80 TS), 150+ routes, Supabase backend with local data fallback.
 
-**Project root:** `C:\Users\aass1\.local\bin\Beneficiary-System-Clean-Backup`
+**Project root:** `C:\dev\basira\` (canonical, flattened 2026-04-16)
+
+Bash form: `/c/dev/basira`. Old paths under `Beneficiary-System-Clean-Backup\Beneficiary-System-Clean-Backup\` or `.local\bin\` are deprecated — do not use.
+
+## Dev server
+
+```bash
+cd /c/dev/basira && ./node_modules/.bin/vite --port 5175 --strictPort --host
+```
+
+Opens at `http://localhost:5175/dashboard`. Correct UI shows "مركز التأهيل الشامل بالباحة" in light theme. If dark theme with FHIR engine cards, STOP — wrong codebase.
+
+## Verification before "done"
+
+For any UI change, use the `basira-ui-verifier` subagent (Playwright) to screenshot and confirm the signature before reporting success. Do not rely on "Vite printed ready."
 
 ---
 
@@ -98,7 +112,7 @@ function MyForm() {
 After ANY code modification, ALWAYS run these commands and fix all errors autonomously:
 
 ```bash
-cd "C:/Users/aass1/.local/bin/Beneficiary-System-Clean-Backup"
+cd /c/dev/basira
 npm run lint 2>&1
 npx tsc --noEmit 2>&1
 ```
@@ -204,7 +218,7 @@ GEMINI_API_KEY=<api-key>    # optional: AI features
 ### Build & Dev
 
 ```bash
-npm run dev            # Vite dev server on port 5173
+npm run dev            # Vite dev server on port 5175 (strict)
 npm run build          # Production build to dist/
 npm run preview        # Preview production build
 npm run lint           # ESLint (src/)
