@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="مركز التأهيل الشامل بالباحة — وزارة الموارد البشرية والتنمية الاجتماعية">
+<title>مركز التأهيل الشامل بالباحة</title>
+
+<!-- خطوط عربية من Google Fonts (لا تبعيّات محليّة) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Readex+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   هوية وزارة الموارد البشرية والتنمية الاجتماعية — الألوان الرسميّة
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+    --hrsd-navy: #14415A;
+    --hrsd-navy-dark: #0A2D41;
+    --hrsd-navy-light: #285A78;
+    --hrsd-gold: #FAB414;
+    --hrsd-gold-light: #FFC83C;
+    --hrsd-orange: #F5961E;
+    --hrsd-green: #2DB473;
+    --hrsd-green-dark: #1E965A;
+    --hrsd-teal: #148287;
+
+    --ink: #1a202c;
+    --ink-soft: #4a5568;
+    --paper: #ffffff;
+    --paper-soft: #f8fafc;
+    --paper-card: #ffffff;
+    --divider: #e2e8f0;
+
+    --shadow-sm: 0 1px 2px rgba(20, 65, 90, 0.08);
+    --shadow-md: 0 4px 16px rgba(20, 65, 90, 0.1);
+    --shadow-lg: 0 12px 32px rgba(20, 65, 90, 0.14);
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Tajawal', 'Readex Pro', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--paper-soft);
+    direction: rtl;
+    text-align: right;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.3; color: var(--hrsd-navy); }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); margin-bottom: 1rem; }
+h3 { font-size: clamp(1.15rem, 2vw, 1.35rem); }
+p { margin-bottom: 1rem; color: var(--ink-soft); }
+
+section { padding: 5rem 1.5rem; }
+
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   شريط علوي — ربط سريع بهويّة الوزارة
+   ═══════════════════════════════════════════════════════════════════════════ */
+.topbar {
+    background: var(--hrsd-navy-dark);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+}
+.topbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.topbar .ministry {
+    color: var(--hrsd-gold);
+    font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   الغلاف الرئيسي (Hero)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero {
+    background:
+        linear-gradient(135deg, rgba(20, 65, 90, 0.92) 0%, rgba(20, 130, 135, 0.88) 100%),
+        radial-gradient(circle at top left, rgba(250, 180, 20, 0.25), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(45, 180, 115, 0.25), transparent 55%),
+        var(--hrsd-navy);
+    color: white;
+    text-align: center;
+    padding: 7rem 1.5rem 6rem;
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FAB414' fill-opacity='0.08' d='M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,112C1120,96,1280,96,1360,96L1440,96L1440,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(250, 180, 20, 0.15);
+    border: 1px solid rgba(250, 180, 20, 0.5);
+    border-radius: 100px;
+    color: var(--hrsd-gold);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+}
+.hero h1 {
+    color: white;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    font-weight: 400;
+    line-height: 1.7;
+}
+.hero-motto {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-right: 3px solid var(--hrsd-gold);
+    border-left: 3px solid var(--hrsd-gold);
+    border-radius: 6px;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--hrsd-gold);
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   شريط الأرقام
+   ═══════════════════════════════════════════════════════════════════════════ */
+.stats-bar {
+    background: white;
+    padding: 2.5rem 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-top: -3rem;
+    position: relative;
+    z-index: 2;
+    border-radius: var(--radius-lg);
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+.stat {
+    padding: 0.5rem;
+    border-inline-end: 1px solid var(--divider);
+}
+.stat:last-child { border-inline-end: none; }
+.stat .num {
+    font-size: clamp(2.2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--hrsd-navy);
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+.stat .num .plus { color: var(--hrsd-gold); font-size: 0.7em; vertical-align: super; }
+.stat .label {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin: 0;
+}
+@media (max-width: 640px) {
+    .stat { border-inline-end: none; border-bottom: 1px solid var(--divider); padding-bottom: 1rem; }
+    .stat:last-child { border-bottom: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   من نحن
+   ═══════════════════════════════════════════════════════════════════════════ */
+.section-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+.section-title .eyebrow {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: rgba(20, 130, 135, 0.1);
+    color: var(--hrsd-teal);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+.section-title h2 { max-width: 760px; }
+.section-title p { max-width: 720px; color: var(--ink-soft); }
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+}
+@media (max-width: 840px) { .about-grid { grid-template-columns: 1fr; } }
+
+.about-text h2 { margin-bottom: 1.5rem; }
+.about-text p { font-size: 1.05rem; line-height: 1.9; }
+.about-text .highlight {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(250, 180, 20, 0.08);
+    border-right: 4px solid var(--hrsd-gold);
+    border-radius: 8px;
+    color: var(--hrsd-navy-dark);
+    font-weight: 500;
+}
+
+.about-image {
+    height: 420px;
+    border-radius: var(--radius-lg);
+    background:
+        linear-gradient(135deg, rgba(20, 65, 90, 0.25) 0%, rgba(250, 180, 20, 0.15) 100%),
+        linear-gradient(135deg, var(--hrsd-teal) 0%, var(--hrsd-navy) 100%);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.about-image::after {
+    content: '🏛️';
+    font-size: 5rem;
+    opacity: 0.35;
+}
+/* عند توفّر صورة حقيقيّة، ضع مسارها في img/center-building.jpg واستبدل blockquote بـ <img> */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   الخطّ الزمني للإنجازات
+   ═══════════════════════════════════════════════════════════════════════════ */
+.timeline-section { background: var(--paper); }
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 50%;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--hrsd-gold), var(--hrsd-teal), var(--hrsd-green));
+    transform: translateX(50%);
+    border-radius: 3px;
+}
+.t-item {
+    position: relative;
+    width: 50%;
+    padding: 0 2.5rem 2.5rem;
+}
+.t-item.right { margin-inline-start: 50%; text-align: start; }
+.t-item.left { text-align: end; }
+.t-item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid var(--hrsd-gold);
+    top: 0.5rem;
+    z-index: 1;
+}
+.t-item.right::before { inset-inline-start: -10px; }
+.t-item.left::before { inset-inline-end: -10px; }
+
+.t-year {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: var(--hrsd-navy);
+    color: white;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+}
+.t-title { color: var(--hrsd-navy); font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem; }
+.t-desc { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+
+@media (max-width: 760px) {
+    .timeline::before { inset-inline-start: 20px; transform: none; }
+    .t-item, .t-item.right, .t-item.left {
+        width: 100%; padding: 0 0 2rem 3rem; margin-inline-start: 0; text-align: start;
+    }
+    .t-item::before, .t-item.right::before, .t-item.left::before { inset-inline-start: 10px; inset-inline-end: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   التميّز الرياضي — بطاقة مميّزة
+   ═══════════════════════════════════════════════════════════════════════════ */
+.sports-showcase {
+    background: linear-gradient(135deg, var(--hrsd-navy-dark) 0%, var(--hrsd-navy) 60%, var(--hrsd-teal) 100%);
+    color: white;
+    padding: 5rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.sports-showcase::before {
+    content: '🏆';
+    position: absolute;
+    font-size: 35rem;
+    inset-inline-start: -6rem;
+    top: -5rem;
+    opacity: 0.03;
+    pointer-events: none;
+}
+.sports-showcase h2, .sports-showcase h3 { color: white; }
+.sports-showcase .section-title .eyebrow { background: rgba(250, 180, 20, 0.2); color: var(--hrsd-gold); }
+
+.sports-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+@media (max-width: 760px) { .sports-grid { grid-template-columns: 1fr; } }
+
+.sport-card {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.sport-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.sport-card.gold {
+    background: linear-gradient(135deg, rgba(250, 180, 20, 0.2) 0%, rgba(250, 180, 20, 0.05) 100%);
+    border-color: rgba(250, 180, 20, 0.45);
+}
+.sport-icon { font-size: 2.75rem; margin-bottom: 1rem; display: block; }
+.sport-rank {
+    display: inline-block;
+    padding: 0.25rem 0.85rem;
+    background: var(--hrsd-gold);
+    color: var(--hrsd-navy-dark);
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+}
+.sport-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+.sport-card p { color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   قصص التمكين
+   ═══════════════════════════════════════════════════════════════════════════ */
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.75rem;
+}
+.story-card {
+    background: var(--paper-card);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.75rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--divider);
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.story-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--hrsd-gold);
+    border-radius: 0 0 4px 4px;
+}
+.story-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(45, 180, 115, 0.12);
+    color: var(--hrsd-green-dark);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.story-card h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+.story-card p { font-size: 0.95rem; line-height: 1.75; margin: 0; color: var(--ink-soft); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   خدماتنا — شبكة سداسية
+   ═══════════════════════════════════════════════════════════════════════════ */
+.services-section { background: var(--paper-soft); }
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+.service {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 2rem 1.5rem;
+    text-align: start;
+    border-top: 4px solid var(--hrsd-navy);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.service:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.service.gold { border-top-color: var(--hrsd-gold); }
+.service.teal { border-top-color: var(--hrsd-teal); }
+.service.green { border-top-color: var(--hrsd-green); }
+.service.orange { border-top-color: var(--hrsd-orange); }
+.service-icon {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+.service h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.service p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   الشراكات
+   ═══════════════════════════════════════════════════════════════════════════ */
+.partners-section { background: white; }
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+.partner {
+    padding: 1.5rem 1rem;
+    background: var(--paper-soft);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    transition: border-color 0.25s, transform 0.25s;
+}
+.partner:hover { border-color: var(--hrsd-teal); transform: translateY(-2px); }
+.partner-name { font-weight: 600; color: var(--hrsd-navy); font-size: 0.95rem; margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   شارات الاعتماد
+   ═══════════════════════════════════════════════════════════════════════════ */
+.compliance-section {
+    background: linear-gradient(135deg, var(--paper-soft) 0%, white 100%);
+}
+.compliance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.badge {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border-inline-start: 4px solid var(--hrsd-gold);
+    transition: transform 0.25s;
+}
+.badge:hover { transform: translateY(-2px); }
+.badge-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+.badge-title { font-weight: 700; color: var(--hrsd-navy); font-size: 1rem; margin-bottom: 0.25rem; }
+.badge-desc { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   التطلعات
+   ═══════════════════════════════════════════════════════════════════════════ */
+.future-section {
+    background: linear-gradient(135deg, var(--hrsd-navy) 0%, var(--hrsd-teal) 100%);
+    color: white;
+    text-align: center;
+    padding: 6rem 1.5rem;
+}
+.future-section h2 { color: white; margin-bottom: 1.5rem; }
+.future-section p { color: rgba(255, 255, 255, 0.92); max-width: 720px; margin: 0 auto 1.25rem; font-size: 1.1rem; line-height: 1.85; }
+.future-pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
+}
+.pillar {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.25rem;
+    text-align: start;
+    backdrop-filter: blur(4px);
+}
+.pillar-num {
+    display: block;
+    color: var(--hrsd-gold);
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+.pillar h3 { color: white; font-size: 1rem; margin: 0 0 0.25rem; }
+.pillar p { color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; margin: 0; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   الخاتمة
+   ═══════════════════════════════════════════════════════════════════════════ */
+.closing {
+    background: white;
+    text-align: center;
+    padding: 5rem 1.5rem;
+}
+.closing-quote {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--hrsd-navy);
+    line-height: 1.85;
+    padding: 2rem 1.5rem;
+    border-top: 2px solid var(--hrsd-gold);
+    border-bottom: 2px solid var(--hrsd-gold);
+}
+.closing-sig {
+    margin-top: 2rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+.closing-sig strong { color: var(--hrsd-navy); display: block; font-size: 1.05rem; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   التذييل
+   ═══════════════════════════════════════════════════════════════════════════ */
+footer {
+    background: var(--hrsd-navy-dark);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 3rem 1.5rem 1.5rem;
+    font-size: 0.95rem;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+}
+@media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+.footer-col h4 {
+    color: var(--hrsd-gold);
+    font-size: 1rem;
+    margin-bottom: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.footer-col p, .footer-col a {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    line-height: 1.85;
+    display: block;
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+}
+.footer-col a:hover { color: var(--hrsd-gold); }
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.85rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   طباعة (PDF-friendly)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+    body { background: white; font-size: 12pt; }
+    .topbar, footer .footer-bottom { display: none; }
+    section { padding: 1.5rem 0; page-break-inside: avoid; }
+    .hero { background: var(--hrsd-navy) !important; print-color-adjust: exact; }
+    .sports-showcase, .future-section { print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═════════════════════════ الشريط العلوي ═════════════════════════ -->
+<div class="topbar">
+    <div class="container">
+        <span class="ministry">وزارة الموارد البشرية والتنمية الاجتماعية</span>
+        <span>وكالة التأهيل والتوجيه الاجتماعي · منطقة الباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الغلاف الرئيسي ═════════════════════════ -->
+<header class="hero">
+    <span class="hero-badge">منذ 2016 · رعاية · تأهيل · تمكين</span>
+    <h1>مركز التأهيل الشامل بالباحة</h1>
+    <p class="hero-subtitle">
+        بيتٌ يَجمع الكرامة والرعاية والفرصة لذوي الإعاقة في منطقة الباحة،
+        يَسير ضمن منظومة واحدة من ثمانية وثلاثين مركزاً على مستوى المملكة،
+        بتوجيهٍ مباشر من وكالة التأهيل والتوجيه الاجتماعي.
+    </p>
+    <p class="hero-motto">«نُصدِّر الكرامة قبل أن نُقدِّم الخدمة»</p>
+</header>
+
+<!-- ═════════════════════════ شريط الأرقام ═════════════════════════ -->
+<div class="stats-bar">
+    <div class="stats-grid">
+        <div class="stat">
+            <span class="num">+139</span>
+            <p class="label">مستفيدون نشطون</p>
+        </div>
+        <div class="stat">
+            <span class="num">14</span>
+            <p class="label">فعالية وطنية ودولية</p>
+        </div>
+        <div class="stat">
+            <span class="num">07</span>
+            <p class="label">شركاء استراتيجيون</p>
+        </div>
+        <div class="stat">
+            <span class="num">05<span class="plus">+</span></span>
+            <p class="label">شهادات امتثال معتمدة</p>
+        </div>
+        <div class="stat">
+            <span class="num">03</span>
+            <p class="label">ميداليات رياضية وطنية</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═════════════════════════ من نحن ═════════════════════════ -->
+<section>
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <span class="eyebrow" style="display:inline-block;padding:0.35rem 1rem;background:rgba(20,130,135,0.1);color:var(--hrsd-teal);border-radius:100px;font-size:0.85rem;font-weight:600;letter-spacing:0.1em;margin-bottom:1rem;">من نحن</span>
+                <h2>مؤسّسة تَأْهيليّة متكاملة تَخدُم الإنسان قبل أن تَخدُم اللائحة</h2>
+                <p>
+                    نُقدِّم الإيواء والإعاشة والتأهيل المتكامل لأبنائنا وبناتنا من ذوي الإعاقة
+                    في منطقة الباحة. منظومة خدماتنا تَنتظم في ستّ طبقات: طبّية، واجتماعية،
+                    وتأهيلية، ومساندة، ومهنية، وجودة مؤسّسيّة — يَعملن معاً لتحقيق
+                    هدفٍ واحدٍ: حياةٌ كريمةٌ تَستحقّها كلّ نفسٍ أودَعها الله في رعايتنا.
+                </p>
+                <p>
+                    منذ تولّي الإدارة الحاليّة مسؤوليّة المركز في الربيع الثاني من عام 1444هـ،
+                    سار العمل وفق خطّةٍ تشغيليّةٍ مكتوبةٍ، وتَقارير ربع سنويّةٍ مرفوعةٍ لوكالة
+                    تجربة المستفيد، وامتثالٍ تامٍّ بمعايير وزارة الموارد البشرية والتنمية الاجتماعية.
+                </p>
+                <span class="highlight">
+                    شرف الخدمة هنا لا يَختلف باختلاف الألقاب —
+                    من المدير إلى الأخصّائي إلى العامل المباشر —
+                    كلّ اسمٍ في فريقنا يَعمل لأجل فكرةٍ واحدة: الكرامة.
+                </span>
+            </div>
+            <div class="about-image" role="img" aria-label="مبنى مركز التأهيل الشامل بالباحة">
+                <!-- ضع هنا صورة حقيقيّة: <img src="img/center-building.jpg" alt="مبنى المركز"> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ الخطّ الزمني ═════════════════════════ -->
+<section class="timeline-section">
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow">مسيرة</span>
+            <h2>محطّات على طريق التأهيل الشامل</h2>
+            <p>عِقدٌ من العمل، وكلّ سنةٍ فيه شاهدةٌ على خطوةٍ ثابتةٍ نحو تمكين أبنائنا وبناتنا من ذوي الإعاقة.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="t-item left">
+                <span class="t-year">2016</span>
+                <h3 class="t-title">انطلاقة العمل التأسيسيّ</h3>
+                <p class="t-desc">وضع الحجر الأوّل لمنظومة خدماتنا وربط العمل اليوميّ برؤية الوزارة وأهدافها.</p>
+            </div>
+            <div class="t-item right">
+                <span class="t-year">1444هـ</span>
+                <h3 class="t-title">بداية مرحلة جديدة</h3>
+                <p class="t-desc">تَولّت الإدارة الحاليّة المسؤولية في الربيع الثاني، ووضعت خطّةً تشغيليّة شاملة.</p>
+            </div>
+            <div class="t-item left">
+                <span class="t-year">2023</span>
+                <h3 class="t-title">الحوكمة والشراكات</h3>
+                <p class="t-desc">إبرام سبع شراكات استراتيجيّة، وتفعيل الدليل الوطنيّ لإدارة الأصول والمرافق.</p>
+            </div>
+            <div class="t-item right">
+                <span class="t-year">2024</span>
+                <h3 class="t-title">دليلٌ مرئيٌّ متعدّد اللغات</h3>
+                <p class="t-desc">إصدار دليل العناية الشخصيّة بخمس لغات، اعتُمد من إدارة سلامة المستفيدين وعُمِّم على مراكز المملكة.</p>
+            </div>
+            <div class="t-item left">
+                <span class="t-year">2025</span>
+                <h3 class="t-title">تميّزٌ رياضيّ وطنيّ</h3>
+                <p class="t-desc">ذهبيّة الأولمبياد الخاص في كرة الطاولة الزوجيّ، وتوظيف مستفيدين في سوق العمل الحقيقيّ.</p>
+            </div>
+            <div class="t-item right">
+                <span class="t-year">2026</span>
+                <h3 class="t-title">نحو الأفضل على مستوى المملكة</h3>
+                <p class="t-desc">مسار التميّز المؤسّسيّ — استهداف شهادة التميّز وتوسيع أثر نموذجنا وطنيّاً.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ التميّز الرياضي ═════════════════════════ -->
+<section class="sports-showcase">
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow">تميّزٌ رياضيّ</span>
+            <h2>أثبتوا أنّ الإعاقة لا تَقف في وجه الإرادة</h2>
+            <p style="color:rgba(255,255,255,0.8);max-width:720px;margin:0 auto;">
+                ثلاث منصّاتٍ في الأولمبياد الخاص السعودي،
+                وفريقٌ نسائيٌّ لكرة القدم هو الأوّل من نوعه في منطقة الباحة.
+            </p>
+        </div>
+
+        <div class="sports-grid">
+            <article class="sport-card gold">
+                <span class="sport-icon">🥇</span>
+                <span class="sport-rank">المركز الأوّل</span>
+                <h3>الميداليّة الذهبيّة — كرة الطاولة الزوجيّ</h3>
+                <p>
+                    المستفيدان مَروان سَلْمان وسَعيد عبدالعزيز في بطولة الأولمبياد الخاص السعودي،
+                    بعد الفوز على أندية القصيم وتبوك.
+                </p>
+            </article>
+
+            <article class="sport-card">
+                <span class="sport-icon">🥉</span>
+                <span class="sport-rank">المركز الثالث</span>
+                <h3>كرة الطاولة — الفرديّ</h3>
+                <p>المستفيد سَعيد عبدالعزيز، ضمن مجموعة أندية عسير والباحة والجوف.</p>
+            </article>
+
+            <article class="sport-card">
+                <span class="sport-icon">🏅</span>
+                <span class="sport-rank">المركز الرابع</span>
+                <h3>كرة الطاولة — الفرديّ</h3>
+                <p>المستفيد مَروان سَلْمان، ضمن مجموعة أندية الطائف والمدينة والباحة.</p>
+            </article>
+        </div>
+
+        <div style="margin-top:3rem;padding:2rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-md);max-width:900px;margin-left:auto;margin-right:auto;text-align:center;">
+            <span style="font-size:2rem;display:block;margin-bottom:0.5rem;">⚽</span>
+            <h3 style="color:white;margin-bottom:0.5rem;">فريق نسائيٌّ كاملٌ لكرة القدم</h3>
+            <p style="color:rgba(255,255,255,0.85);margin:0;max-width:680px;margin-inline:auto;">
+                اثنتا عشرة لاعبة من مستفيداتنا — أوّل فريقٍ نسائيٍّ من نوعه على مستوى منطقة الباحة.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ قصص التمكين ═════════════════════════ -->
+<section>
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow">أثرٌ حقيقيّ</span>
+            <h2>من الرعاية إلى الإنتاج — قِصصٌ من أبنائنا وبناتنا</h2>
+            <p>الأثر الحقيقيّ يُقاس باسمٍ واحدٍ، لا برقمٍ إجماليّ.</p>
+        </div>
+
+        <div class="stories-grid">
+            <div class="story-card">
+                <span class="story-tag">توظيفٌ حقيقيّ</span>
+                <h3>من المركز إلى سوق العمل</h3>
+                <p>
+                    مستفيدان — رجلٌ وامرأةٌ — وَظَّفتهما جَمعيّة سَعْي لتأهيل وتوظيف الأشخاص ذوي الإعاقة
+                    بعد برنامج تأهيلٍ مهنيٍّ متكامل. فرصةٌ حقيقيّةٌ بأجرٍ حقيقيٍّ.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <span class="story-tag">دمجٌ أُسَرِيّ</span>
+                <h3>عودةٌ كريمةٌ إلى البيت</h3>
+                <p>
+                    أحد مستفيدينا أَكمل برنامج الرعاية اللاحقة، وعاد ليَعيش مع عائلته بشكلٍ مستقرّ.
+                    نَجاحٌ يُؤكّد أنّ المركز ليس نهاية الطريق — بل محطّةٌ فيه.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <span class="story-tag">ابتكارٌ وطنيّ</span>
+                <h3>دليلٌ مرئيٌّ بخمس لغات</h3>
+                <p>
+                    العربية والإنجليزية والأوردو والبنغالية والهندية — دليل العناية الشخصيّة خرج من مركزنا
+                    وعُمِّم على جميع مراكز التأهيل في المملكة.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <span class="story-tag">دَمجٌ مجتمعيّ</span>
+                <h3>تلاوةٌ ومُسابَقَة</h3>
+                <p>
+                    ثلاثةٌ من مستفيدينا فازوا في مسابقة حفظ القرآن الكريم بالباحة —
+                    شاهدٌ على أنّ الإعاقة لا تَمنع من التميّز القيميّ والعلميّ.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ خدماتنا ═════════════════════════ -->
+<section class="services-section">
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow">ستّ طبقاتٍ متكاملة</span>
+            <h2>ما نُقدِّمه يوميّاً</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="service">
+                <span class="service-icon">🏠</span>
+                <h3>الإيواء والإعاشة</h3>
+                <p>بيئةٌ آمنةٌ لائقة، تحت إشراف حوكمةٍ غذائيّةٍ وتعاقدٍ مؤسّسيٍّ شفّاف.</p>
+            </div>
+            <div class="service gold">
+                <span class="service-icon">⚕️</span>
+                <h3>الرعاية الطبيّة</h3>
+                <p>علاج طبيعيٌّ وتأهيل حركيٌّ ومتابعةٌ سريريّةٌ يوميّة، وفقاً لبروتوكولاتٍ معتمدة.</p>
+            </div>
+            <div class="service teal">
+                <span class="service-icon">🤝</span>
+                <h3>الخدمات الاجتماعيّة</h3>
+                <p>بحثٌ اجتماعيٌّ فرديٌّ، ودعمٌ نفسيٌّ، وشراكةٌ فعّالةٌ مع الأُسَر.</p>
+            </div>
+            <div class="service green">
+                <span class="service-icon">💪</span>
+                <h3>التأهيل المهنيّ</h3>
+                <p>برامج مُتَكامِلة تَربط الأبناء والبنات بسوق العمل الحقيقيّ.</p>
+            </div>
+            <div class="service orange">
+                <span class="service-icon">🎗️</span>
+                <h3>الرعاية اللاحقة</h3>
+                <p>دعمٌ مستمرٌّ للأسرة بعد عودة المستفيد إلى بيته — لضمان الاستقرار والاستدامة.</p>
+            </div>
+            <div class="service">
+                <span class="service-icon">🏛️</span>
+                <h3>الحوكمة والجودة</h3>
+                <p>التزامٌ بمعايير ISO 9001، ومؤشّرات أداءٍ شهريّة، ومراجعاتٌ دوريّةٌ مستقلّة.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ الشراكات ═════════════════════════ -->
+<section class="partners-section">
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow">شراكاتنا</span>
+            <h2>لا نعمل وحدنا — نَبني معاً</h2>
+            <p>سبعُ شراكاتٍ استراتيجيّة تَمتدّ من الدعم الإنساني إلى التوظيف إلى التأهيل المجتمعيّ.</p>
+        </div>
+
+        <div class="partners-grid">
+            <div class="partner"><p class="partner-name">هيئة الهلال الأحمر السعودي</p></div>
+            <div class="partner"><p class="partner-name">جَمعيّة سَعْي لتوظيف ذوي الإعاقة</p></div>
+            <div class="partner"><p class="partner-name">مركز مهارات الحياة</p></div>
+            <div class="partner"><p class="partner-name">جَمعيّة فَرَح بالباحة</p></div>
+            <div class="partner"><p class="partner-name">جَمعيّة البِرّ الخيريّة</p></div>
+            <div class="partner"><p class="partner-name">جَمعيّة الدعوة والإرشاد</p></div>
+            <div class="partner"><p class="partner-name">القطاع الصحيّ الخاصّ</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ الاعتمادات ═════════════════════════ -->
+<section class="compliance-section">
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow">اعتماداتنا</span>
+            <h2>الالتزام دليلٌ لا ادّعاء</h2>
+        </div>
+
+        <div class="compliance-grid">
+            <div class="badge">
+                <span class="badge-icon">⭐</span>
+                <p class="badge-title">الهلال الأحمر · خمس نجوم</p>
+                <p class="badge-desc">الأعلى على مستوى المنطقة</p>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🏅</span>
+                <p class="badge-title">شهادة التميّز الوزاريّة</p>
+                <p class="badge-desc">من مكتب وكيل الوزارة للتأهيل والتوجيه الاجتماعي</p>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">📜</span>
+                <p class="badge-title">التميّز المؤسّسيّ في المؤشّرات</p>
+                <p class="badge-desc">ثلاث مرّاتٍ على مستوى المملكة</p>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🛡️</span>
+                <p class="badge-title">نظام «حصن» الوطنيّ</p>
+                <p class="badge-desc">تسجيلٌ فعّالٌ في المراقبة الوبائيّة</p>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">📐</span>
+                <p class="badge-title">ISO 9001:2015</p>
+                <p class="badge-desc">في مسار الاعتماد النهائيّ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ التطلعات ═════════════════════════ -->
+<section class="future-section">
+    <div class="container">
+        <div class="section-title">
+            <span class="eyebrow" style="background:rgba(250,180,20,0.2);color:var(--hrsd-gold);">تطلّعاتنا</span>
+            <h2>نَطمح لِنكون ضمن الأفضل على مستوى المملكة</h2>
+        </div>
+
+        <p>
+            ما أَنجزناه إلى اليوم ليس محطّة الوصول — هو بدايةٌ فقط.
+            نَسير خلف رؤيةٍ واضحة: أن يَصير كلّ مستفيدٍ لدينا قادراً على العيش بأقصى
+            استقلاليّةٍ ممكنةٍ له، وأن يَصير مركزنا نموذجاً يُحتذى به في القطاع الاجتماعيّ.
+        </p>
+
+        <div class="future-pillars">
+            <div class="pillar">
+                <span class="pillar-num">01</span>
+                <h3>توسيع الشراكات</h3>
+                <p>لتَشمل قطاعاتٍ جديدةً على المستويَيْن المحلّيّ والوطنيّ.</p>
+            </div>
+            <div class="pillar">
+                <span class="pillar-num">02</span>
+                <h3>توثيقٌ ذكيّ</h3>
+                <p>قاعدةُ بياناتٍ متكاملةٌ لقياس الأثر وتسهيل المتابعة.</p>
+            </div>
+            <div class="pillar">
+                <span class="pillar-num">03</span>
+                <h3>تقنيّاتٌ حديثة</h3>
+                <p>استثمارٌ في الذكاء الاصطناعي وأدوات التحوّل الرقميّ لخدمة الأبناء والبنات.</p>
+            </div>
+            <div class="pillar">
+                <span class="pillar-num">04</span>
+                <h3>قصصُ نجاح</h3>
+                <p>نَشرٌ واسعٌ لِنكون نموذجاً وطنيّاً يُحتذى به في التمكين.</p>
+            </div>
+            <div class="pillar">
+                <span class="pillar-num">05</span>
+                <h3>تدريبٌ مستدام</h3>
+                <p>برامج بناء قدراتٍ مستمرّةٌ للموظّفين والمستفيدين على حدٍّ سواء.</p>
+            </div>
+            <div class="pillar">
+                <span class="pillar-num">06</span>
+                <h3>بحثٌ وتطوير</h3>
+                <p>تعزيز الدراسات والبحوث في مجال التأهيل لتَطوير الممارسات المهنيّة.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ الخاتمة ═════════════════════════ -->
+<section class="closing">
+    <div class="container">
+        <blockquote class="closing-quote">
+            إنّ ما تَمّ إنجازه خطوةٌ على طريق التطوير المستمرّ،
+            ونُجدّد العهد بمواصلة العمل بكلّ جدٍّ وإخلاصٍ لخدمة هذه الفئة
+            الغالية على قلوبنا، وتعزيز رسالة الوزارة وأهدافها في تقديم أفضل
+            الخدمات لذوي الإعاقة وتمكينهم من الاندماج في المجتمع.
+        </blockquote>
+        <div class="closing-sig">
+            <strong>إدارة مركز التأهيل الشامل بالباحة</strong>
+            وكالة التأهيل والتوجيه الاجتماعي · وزارة الموارد البشرية والتنمية الاجتماعية
+        </div>
+    </div>
+</section>
+
+<!-- ═════════════════════════ التذييل ═════════════════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>مركز التأهيل الشامل بالباحة</h4>
+            <p>أحدُ ثمانيةٍ وثلاثين مركزاً للتأهيل الشامل على مستوى المملكة العربية السعودية، تابعٌ لوكالة التأهيل والتوجيه الاجتماعي.</p>
+        </div>
+        <div class="footer-col">
+            <h4>التواصل</h4>
+            <p>منطقة الباحة · المملكة العربية السعودية</p>
+            <p>فرع الوزارة بالباحة</p>
+            <a href="https://www.hrsd.gov.sa" target="_blank" rel="noopener">hrsd.gov.sa</a>
+        </div>
+        <div class="footer-col">
+            <h4>روابط</h4>
+            <a href="https://www.hrsd.gov.sa" target="_blank" rel="noopener">وزارة الموارد البشرية</a>
+            <a href="#top">أعلى الصفحة</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © <span id="year"></span> مركز التأهيل الشامل بالباحة · جميع الحقوق محفوظة لوزارة الموارد البشرية والتنمية الاجتماعية
+    </div>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
