@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدليل التعريفي والتشغيلي — نظام بصيرة v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   ألوان وزارة الموارد البشرية والتنمية الاجتماعية
+   ═════════════════════════════════════════════════════════════════════════ */
+:root {
+    --navy: #14415A;
+    --navy-dark: #0A2D41;
+    --navy-light: #285A78;
+    --gold: #FAB414;
+    --gold-light: #FFC83C;
+    --orange: #F5961E;
+    --green: #2DB473;
+    --green-dark: #1E965A;
+    --teal: #148287;
+    --ink: #1a202c;
+    --ink-soft: #4a5568;
+    --ink-muted: #718096;
+    --paper: #ffffff;
+    --paper-soft: #f7fafc;
+    --divider: #e2e8f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page {
+    size: A4;
+    margin: 2.2cm 2cm 2.5cm 2cm;
+}
+
+html { font-size: 11pt; }
+
+body {
+    font-family: 'Tajawal', Tahoma, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--ink);
+    background: #eef2f5;
+    direction: rtl;
+    text-align: right;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ─── بنية الصفحة (A4 محاكاة الطباعة) ─── */
+.doc {
+    max-width: 21cm;
+    margin: 1cm auto;
+    background: white;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+
+.page {
+    padding: 2.2cm 2cm;
+    min-height: 29.7cm;
+    position: relative;
+    page-break-after: always;
+    border-bottom: 1px solid var(--divider);
+}
+.page:last-child { page-break-after: avoid; border-bottom: none; }
+
+/* ─── الترويسة الموحّدة ─── */
+.page-header {
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9pt;
+    color: var(--ink-muted);
+}
+.page-header .left { color: var(--navy); font-weight: 700; }
+
+/* ─── التذييل ─── */
+.page-footer {
+    position: absolute;
+    bottom: 1.2cm;
+    left: 2cm;
+    right: 2cm;
+    border-top: 1px solid var(--divider);
+    padding-top: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: var(--ink-muted);
+}
+
+/* ─── العنوان الرئيسي والفرعي ─── */
+h1 {
+    color: var(--navy);
+    font-size: 20pt;
+    font-weight: 900;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--gold);
+}
+h2 {
+    color: var(--navy);
+    font-size: 16pt;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 1rem;
+    padding-right: 0.75rem;
+    border-right: 4px solid var(--gold);
+}
+h3 {
+    color: var(--navy);
+    font-size: 13pt;
+    font-weight: 700;
+    margin-top: 1.25rem;
+    margin-bottom: 0.6rem;
+}
+h4 {
+    color: var(--teal);
+    font-size: 11pt;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 0.75rem;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+ul, ol { padding-inline-start: 1.5rem; margin-bottom: 1rem; }
+ul li, ol li { margin-bottom: 0.35rem; line-height: 1.7; }
+
+/* ─── جداول حكومية ─── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0 1.25rem;
+    font-size: 10.5pt;
+    background: white;
+    page-break-inside: avoid;
+}
+table thead th {
+    background: var(--navy);
+    color: white;
+    padding: 0.6rem 0.75rem;
+    text-align: right;
+    font-weight: 700;
+    font-size: 10pt;
+    letter-spacing: 0.01em;
+}
+table tbody td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--divider);
+    vertical-align: top;
+}
+table tbody tr:nth-child(even) td { background: var(--paper-soft); }
+table tbody tr:last-child td { border-bottom: none; }
+
+/* ─── بطاقة إبراز ─── */
+.callout {
+    background: linear-gradient(135deg, rgba(250,180,20,0.08) 0%, rgba(20,130,135,0.05) 100%);
+    border-inline-start: 4px solid var(--gold);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+}
+.callout-title { color: var(--navy); font-weight: 700; margin-bottom: 0.25rem; }
+
+.note {
+    background: rgba(20,130,135,0.06);
+    border-inline-start: 3px solid var(--teal);
+    padding: 0.65rem 1rem;
+    margin: 0.75rem 0;
+    font-size: 10pt;
+    color: var(--ink-soft);
+}
+
+/* ─── شارات ─── */
+.chip {
+    display: inline-block;
+    padding: 0.15rem 0.65rem;
+    border-radius: 100px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin: 0 0.15rem;
+}
+.chip-navy { background: rgba(20,65,90,0.1); color: var(--navy); }
+.chip-gold { background: rgba(250,180,20,0.15); color: #8a6b00; }
+.chip-green { background: rgba(45,180,115,0.12); color: var(--green-dark); }
+.chip-teal { background: rgba(20,130,135,0.12); color: var(--teal); }
+.chip-red { background: rgba(220,38,38,0.1); color: #b91c1c; }
+
+/* ─── صفحة الغلاف ─── */
+.cover {
+    min-height: 29.7cm;
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 45%, var(--teal) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3cm 2.5cm;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at top left, rgba(250,180,20,0.15), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(45,180,115,0.12), transparent 55%);
+    pointer-events: none;
+}
+.cover > * { position: relative; z-index: 1; }
+
+.cover-ministry {
+    color: var(--gold);
+    font-size: 14pt;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+}
+.cover-agency { color: rgba(255,255,255,0.88); font-size: 11pt; }
+
+.cover-divider {
+    width: 80px; height: 3px;
+    background: var(--gold);
+    margin: 2rem 0 1.5rem;
+}
+
+.cover-title {
+    color: white;
+    font-size: 32pt;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    border: none;
+    padding: 0;
+}
+.cover-subtitle {
+    color: rgba(255,255,255,0.95);
+    font-size: 17pt;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.cover-initiative {
+    color: var(--gold);
+    font-size: 14pt;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+.cover-meta {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5rem 1.5rem;
+    margin: 2rem 0;
+    font-size: 11pt;
+}
+.cover-meta strong { color: var(--gold); font-weight: 700; }
+
+.cover-attribution {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1.25rem;
+    font-size: 11pt;
+    line-height: 2;
+}
+.cover-attribution .hierarchy-label {
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 10pt;
+    letter-spacing: 0.05em;
+}
+.cover-attribution .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+.cover-attribution .chain-step {
+    color: rgba(255,255,255,0.92);
+    padding-inline-start: 1.25rem;
+    position: relative;
+}
+.cover-attribution .chain-step::before {
+    content: '◂';
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--gold);
+    font-size: 0.85em;
+}
+
+.cover-confidential {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    font-size: 10pt;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ─── صفحة فهرس المحتويات ─── */
+.toc-list { list-style: none; padding: 0; }
+.toc-list li {
+    display: flex;
+    align-items: baseline;
+    padding: 0.45rem 0;
+    border-bottom: 1px dotted var(--divider);
+}
+.toc-list li .num {
+    color: var(--gold);
+    font-weight: 700;
+    margin-inline-end: 0.5rem;
+    min-width: 2rem;
+}
+.toc-list li .title { color: var(--navy); font-weight: 600; flex: 1; }
+.toc-list li .page-num { color: var(--ink-muted); font-size: 10pt; }
+.toc-list .sub { padding-inline-start: 2.25rem; font-size: 10.5pt; }
+.toc-list .sub .num { color: var(--teal); }
+.toc-list .sub .title { font-weight: 400; color: var(--ink-soft); }
+
+/* ─── مكوّنات متنوّعة ─── */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0 1.25rem;
+    page-break-inside: avoid;
+}
+.kpi-box {
+    background: var(--paper-soft);
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+}
+.kpi-box .num {
+    display: block;
+    font-size: 18pt;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.1;
+}
+.kpi-box .label {
+    font-size: 9pt;
+    color: var(--ink-muted);
+    margin-top: 0.15rem;
+}
+
+.icon-list { list-style: none; padding: 0; }
+.icon-list li {
+    position: relative;
+    padding-inline-start: 1.5rem;
+    margin-bottom: 0.45rem;
+}
+.icon-list li::before {
+    content: '◂';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0.2rem;
+    color: var(--gold);
+    font-weight: 700;
+}
+
+/* ─── صفحة ختام ─── */
+.closing-quote {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+    color: white;
+    padding: 2rem 1.75rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    text-align: center;
+    font-size: 13pt;
+    font-weight: 500;
+    line-height: 1.9;
+    page-break-inside: avoid;
+}
+.closing-quote strong { color: var(--gold); display: block; margin-top: 0.75rem; font-size: 12pt; }
+
+/* ─── الطباعة ─── */
+@media print {
+    body { background: white; }
+    .doc { margin: 0; max-width: 100%; box-shadow: none; }
+    .page {
+        border: none;
+        box-shadow: none;
+        min-height: auto;
+        padding: 0;
+    }
+    .page-footer { position: fixed; bottom: 1.2cm; }
+    .cover { page-break-after: always; }
+    section { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    table, .callout, .kpi-grid { page-break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+<div class="doc">
+
+<!-- ═════════════════════════ الغلاف ═════════════════════════ -->
+<div class="cover">
+    <div>
+        <div class="cover-ministry">وزارة الموارد البشرية والتنمية الاجتماعية</div>
+        <div class="cover-agency">وكالة التأهيل والتوجيه الاجتماعي</div>
+
+        <div class="cover-divider"></div>
+
+        <h1 class="cover-title">الدليل التعريفي والتشغيلي</h1>
+        <div class="cover-subtitle">نظام إدارة المستفيدين الذكي — بصيرة</div>
+        <div class="cover-initiative">مشروع التحوّل الرقمي · مبادرة «صفر ورق»</div>
+
+        <div class="cover-meta">
+            <span><strong>الإصدار:</strong></span><span>2.0</span>
+            <span><strong>التاريخ:</strong></span><span>2026-04-22</span>
+            <span><strong>فرع المشروع:</strong></span><span>v2</span>
+            <span><strong>حالة النظام:</strong></span><span>مرحلة التطوير المُتقَدِّم — ما قبل التسليم</span>
+        </div>
+    </div>
+
+    <div class="cover-attribution">
+        <span class="hierarchy-label">التبعيّة التنظيميّة</span>
+        <div class="chain">
+            <span class="chain-step"><strong style="color:var(--gold)">مشروع</strong> — بصيرة · نظام إدارة المستفيدين الذكي</span>
+            <span class="chain-step">فرع الوزارة بالباحة</span>
+            <span class="chain-step">قطاع التنمية</span>
+            <span class="chain-step">الإشراف الاجتماعي</span>
+            <span class="chain-step">مركز التأهيل الشامل</span>
+        </div>
+
+        <div class="cover-confidential">
+            وثيقة داخليّة — للاستخدام المؤسّسي · غير مُعدَّة للنشر الخارجيّ
+        </div>
+    </div>
+</div>
+
+<!-- ═════════════════════════ فهرس المحتويات ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الدليل التعريفي والتشغيلي — نظام بصيرة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>فهرس المحتويات</h1>
+
+    <ol class="toc-list">
+        <li><span class="num">١.</span><span class="title">مقدّمة عامّة — لماذا هذا النظام؟</span><span class="page-num">3</span></li>
+        <li><span class="num">٢.</span><span class="title">فلسفة «صفر ورق» — ماذا تعني عمليّاً؟</span><span class="page-num">4</span></li>
+        <li><span class="num">٣.</span><span class="title">الإطار الاستراتيجي الجديد — أرضيّة ائتمان لا جزيرة رقميّة</span><span class="page-num">5</span></li>
+        <li><span class="num">٤.</span><span class="title">البنية التقنيّة للنظام</span><span class="page-num">6</span></li>
+        <li><span class="num">٥.</span><span class="title">أقسام النظام والخدمات المُقدَّمة</span><span class="page-num">7</span></li>
+        <li class="sub"><span class="num">٥.١</span><span class="title">ملفّ المستفيد الشامل (360 درجة) + ملفّ الكرامة</span><span class="page-num">7</span></li>
+        <li class="sub"><span class="num">٥.٢</span><span class="title">الخدمات الطبيّة والتمريضيّة</span><span class="page-num">9</span></li>
+        <li class="sub"><span class="num">٥.٣</span><span class="title">الرعاية الاجتماعيّة والنفسيّة + بوّابة الأسرة</span><span class="page-num">10</span></li>
+        <li class="sub"><span class="num">٥.٤</span><span class="title">التأهيل والتمكين + مؤشّر الكرامة</span><span class="page-num">11</span></li>
+        <li class="sub"><span class="num">٥.٥</span><span class="title">الخدمات المساندة — الإعاشة والكسوة والأصول</span><span class="page-num">12</span></li>
+        <li class="sub"><span class="num">٥.٦</span><span class="title">الحوكمة والجودة والامتثال (ISO 9001)</span><span class="page-num">13</span></li>
+        <li><span class="num">٦.</span><span class="title">لوحات المعلومات والتقارير</span><span class="page-num">14</span></li>
+        <li><span class="num">٧.</span><span class="title">الأمن السيبراني — مُوائمة مع لوائح الوزارة</span><span class="page-num">15</span></li>
+        <li><span class="num">٨.</span><span class="title">نظام الصلاحيّات وإدارة الهويّات</span><span class="page-num">17</span></li>
+        <li><span class="num">٩.</span><span class="title">القيمة المُضافة للنظام</span><span class="page-num">18</span></li>
+        <li><span class="num">١٠.</span><span class="title">حالة النظام الحاليّة ومتطلّبات التسليم</span><span class="page-num">19</span></li>
+        <li><span class="num">١١.</span><span class="title">الخاتمة والتوصيات</span><span class="page-num">20</span></li>
+        <li><span class="num">—</span><span class="title">الملاحق (أ، ب، ج)</span><span class="page-num">21</span></li>
+    </ol>
+
+    <div class="note">
+        يُوصى بقراءة هذا الدليل بتسلسل فصوله عند الاطلاع الأوّل، مع إمكانيّة الرجوع إلى فصلٍ بعينه لاحقاً حسب الحاجة.
+        الفصول الحديثة (٣، ٧، ١٠) تعكس تطوُّرات الإصدار الثاني الجوهريّة عن الإصدار الأوّل.
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 2 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الفصل 1 — مقدّمة ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 1 — مقدّمة عامّة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>١. مقدّمة عامّة — لماذا هذا النظام؟</h1>
+
+    <p>
+        في إطار سعي المملكة العربية السعوديّة إلى تحقيق التميُّز المؤسّسي ومُواكبة رؤية 2030 في التحوُّل الرقمي،
+        طُوِّر نظام <strong>بصيرة</strong> ليكون البديل الإلكترونيّ الشامل للأرشيف الورقيّ التقليديّ في مراكز التأهيل الشامل،
+        مع التزامٍ كاملٍ بلوائح وزارة الموارد البشريّة والتنمية الاجتماعيّة.
+    </p>
+    <p>
+        لا يَقتصر دور النظام على حفظ البيانات، بل يَمتدّ ليَشمل إدارة رحلة المستفيد الكاملة —
+        من لحظة دخوله المركز إلى انتقاله للرعاية اللاحقة أو عودته لأسرته — مع <strong>قياس الأثر</strong>
+        على مستوى الاستقلاليّة والكرامة، لا على مستوى الإجراءات الورقيّة فقط.
+    </p>
+
+    <h2>1.1 الأهداف الاستراتيجيّة للنظام</h2>
+    <ul class="icon-list">
+        <li>ضمان دقّة المعلومة وسرعة الوصول إليها في أيّ وقتٍ ومن أيّ مكانٍ مُصرَّح.</li>
+        <li>تسريع اتّخاذ القرارات الإداريّة والطبيّة والتأهيليّة عبر بياناتٍ حيّة.</li>
+        <li>حماية حقوق المستفيد من خلال التوثيق الدقيق لكلّ تدخّلٍ وقرار.</li>
+        <li>تحقيق الامتثال لمعايير الجودة العالميّة (ISO 9001:2015) ومنظومة NCA للأمن السيبراني.</li>
+        <li>تقليل الهدر الماليّ في المواد المكتبيّة والأرشفة التقليديّة.</li>
+        <li>توفير بيئة عملٍ مرنةٍ وفعّالةٍ للكوادر الفنّيّة والإداريّة.</li>
+        <li><strong>قياس أثر التأهيل</strong> على كرامة المستفيد لا على عدد الأوراق المُنجَزة — وهو ما يُميّز الإصدار الثاني.</li>
+    </ul>
+
+    <h2>1.2 الفئات المُستهدَفة من النظام</h2>
+    <table>
+        <thead><tr><th style="width:28%">الفئة</th><th>نطاق الاستخدام والصلاحيّات</th></tr></thead>
+        <tbody>
+            <tr><td>مدير المركز</td><td>الإشراف العامّ، الموافقات النهائيّة، القرارات الاستراتيجيّة، لوحات القيادة.</td></tr>
+            <tr><td>الأطبّاء والممرّضون</td><td>الملفّات الطبيّة، العلامات الحيويّة، الأدوية، تقارير الحوادث.</td></tr>
+            <tr><td>الأخصّائيون الاجتماعيّون</td><td>البحث الاجتماعي، إدارة الزيارات والإجازات، التواصل مع الأسر.</td></tr>
+            <tr><td>الأخصّائيون التخصّصيّون</td><td>العلاج الطبيعي، النطق، النفسيّ، الأسنان — كلٌّ في نطاق اختصاصه.</td></tr>
+            <tr><td>أخصّائيو التأهيل والتمكين</td><td>بناء الخطط التأهيليّة، متابعة الأهداف، قياس مؤشّر الكرامة.</td></tr>
+            <tr><td>موظّفو الدعم والإعاشة</td><td>إدارة المخزون والكسوة والأصول والصيانة والإعاشة.</td></tr>
+            <tr><td>مسؤولو الجودة</td><td>التدقيق، سجل المخاطر، متابعة الامتثال، إغلاق الملاحظات.</td></tr>
+            <tr><td>الموظف العامّ</td><td>متابعة مستفيديه المُعيَّنين، قراءة محدودة، تسجيل اليوميّات.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">اللغة المُعتمَدة في الإصدار الثاني:</div>
+        <p style="margin:0">
+            «مُستفيد» لا «مريض» · «تقييم وظيفيّ» لا «تشخيص» · «تدخّل» لا «علاج» · «عائق اجتماعيّ» لا «إعاقة طبيّة».
+            يُعكَس هذا الخيار اللغويّ في جميع واجهات النظام ومخرجات التقارير، التزاماً بقواعد العمل في
+            وزارة الموارد البشريّة والتنمية الاجتماعيّة التي تُركِّز على النموذج الاجتماعيّ للإعاقة.
+        </p>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 3 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الفصل 2 — صفر ورق ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 2 — فلسفة «صفر ورق»</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٢. فلسفة «صفر ورق» — ماذا تعني عمليّاً؟</h1>
+
+    <p>
+        تَهدف مبادرة «صفر ورق» إلى إحداث تحوُّلٍ جذريٍّ في آليّات العمل اليوميّة، عبر استبدال جميع الإجراءات
+        الورقيّة بحلولٍ رقميّةٍ متكاملةٍ وآمنة. المبادرة اعتُمدت رسميّاً ضمن منظومة إنجازات الوزارة بتاريخ
+        2025-12-03، وتُكمَل الآن في الإصدار الثاني بإضافة طبقة قياس الأثر.
+    </p>
+
+    <h2>2.1 الملفّ الإلكترونيّ الموحَّد</h2>
+    <p>
+        يَستبدل النظام الملفّات الورقيّة الضخمة بملفٍّ رقميٍّ واحدٍ لكلّ مستفيد يُمكن الوصول إليه في ثوانٍ معدودة.
+        يَحتوي على البيانات الشخصيّة والطبيّة والاجتماعيّة والتأهيليّة، مع إمكانيّة البحث والفلترة والتصدير،
+        ومعها — جديد في v2 — <strong>ملفّ الكرامة</strong> الذي يُوثّق شخصيّة المستفيد وتفضيلاته ومخاوفه
+        كما يَراه الموظّفون المباشرون.
+    </p>
+
+    <h2>2.2 النماذج الذكيّة</h2>
+    <p>حُوِّلت جميع النماذج الورقيّة المستخدَمة في المركز إلى شاشات إدخال إلكترونيّة سريعة وسهلة، تَشمل:</p>
+    <ul class="icon-list">
+        <li>نموذج تسجيل العلامات الحيويّة (الضغط، الحرارة، النبض، السُّكَّر، الأكسجين، الوزن).</li>
+        <li>نموذج تقرير الحوادث والإصابات (مع التفريع حسب نوع الحادث).</li>
+        <li>نموذج البحث الاجتماعيّ الشامل.</li>
+        <li>نموذج الخطّة التأهيليّة الفرديّة (IRP) بأهدافٍ ذكيّة (SMART).</li>
+        <li>نموذج طلب الإجازة والزيارات.</li>
+        <li>نماذج الكسوة الأربعة وفق ضوابط الكسوة 2020 (طلب · تأمين · تسديد · معالجة التالف).</li>
+        <li>نماذج الجودة والتدقيق الداخليّ.</li>
+    </ul>
+
+    <h2>2.3 التقارير التلقائيّة</h2>
+    <p>
+        يُتيح النظام استخراج الإحصائيّات ومؤشّرات الأداء (KPIs) بضغطة زرّ واحدة، بدلاً من الجمع اليدويّ
+        المُرهِق والمُعرَّض للأخطاء. التقارير المتاحة:
+    </p>
+    <ul class="icon-list">
+        <li>تقارير إحصائيّة شهريّة وربع سنويّة وسنويّة.</li>
+        <li>تقارير أداء الأقسام والتخصّصات.</li>
+        <li>تقارير مطابقة معايير الجودة (ISO 9001 + CRPD).</li>
+        <li>تقارير تقدُّم المستفيدين في الخطط التأهيليّة مع مؤشّر الكرامة.</li>
+        <li>تقارير الأمن السيبراني الدوريّة (سجلّ التدقيق، حالة الضوابط).</li>
+    </ul>
+
+    <div class="callout">
+        <div class="callout-title">حصيلة رقميّة حتى تاريخه (2026-04-22):</div>
+        <div class="kpi-grid" style="margin-top:0.5rem">
+            <div class="kpi-box"><span class="num">67,300</span><span class="label">سطر برمجيّ</span></div>
+            <div class="kpi-box"><span class="num">24</span><span class="label">ترحيلاً لقاعدة البيانات</span></div>
+            <div class="kpi-box"><span class="num">150+</span><span class="label">مساراً (Route)</span></div>
+            <div class="kpi-box"><span class="num">49</span><span class="label">اختبار آليّ</span></div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 4 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الفصل 3 — الإطار الاستراتيجي ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 3 — الإطار الاستراتيجي</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٣. الإطار الاستراتيجي الجديد — أرضيّة ائتمان لا جزيرة رقميّة</h1>
+
+    <p>
+        ما يُميّز الإصدار الثاني عن الإصدار الأوّل هو تَوسُّع الرؤية: بصيرة ليست مجرّد تطبيقٍ لإدارة البيانات،
+        بل <strong>أرضيّة ائتمان</strong> تَسمح لفاعلي التنمية الاجتماعيّة (المركز، الأسرة، المجتمع، الوزارة)
+        بالتكامُل دون أن يَفقد أيٌّ منهم سيادته أو خصوصيّته.
+    </p>
+
+    <h2>3.1 ما ليست عليه بصيرة</h2>
+    <table>
+        <thead><tr><th style="width:40%">ليست</th><th>لأنّ هذا اختصاص جهةٍ أخرى</th></tr></thead>
+        <tbody>
+            <tr><td>سجلّ طبيّ إلكترونيّ (EHR)</td><td>اختصاص وزارة الصحّة — ونتكامل مع «رعاية» و«حصن» دون منافسة.</td></tr>
+            <tr><td>لوحة بيروقراطيّة جافّة</td><td>اللوحات التي تَموت في الأدراج لا تَخدُم مستفيداً.</td></tr>
+            <tr><td>أداة تحليل فجواتٍ اتّهاميّة</td><td>الأدوات التي تَكشف دون أن تُصلح تَتحوَّل إلى إدانةٍ مؤسّسيّة.</td></tr>
+            <tr><td>جزيرة رقميّة أخرى</td><td>أرضيّة ائتمانٍ تَجمع لا تَفرِّق.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>3.2 ما تَكونه بصيرة — أربع طبقات</h2>
+    <table>
+        <thead><tr><th style="width:18%">الطبقة</th><th style="width:22%">الاسم</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>الهويّة الموحَّدة</td><td>رسم هويّة يَملكه المستفيد، موافقة مشروطة، لا جهة تَنفرد بالملكيّة.</td></tr>
+            <tr><td>2</td><td>الأحداث</td><td>تغيُّرات حالة المستفيد تَنتشر أفقيّاً على الشركاء المُصرَّحين.</td></tr>
+            <tr><td>3</td><td>الاستجابة</td><td>كلّ جهةٍ تَحتفظ بنظامها الداخلي؛ بصيرة تَقترح ولا تُملي.</td></tr>
+            <tr><td>4</td><td>الأثر</td><td>قياس مؤشّر الكرامة على مستوى المستفيد، لا على مستوى الجهة.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>3.3 بوصلة العوق الاجتماعيّ — عشرة أنواع</h2>
+    <p>
+        يَعتمد الإصدار الثاني تصنيفاً عشريّاً لأنواع العوائق الاجتماعيّة، لتَوجيه الخطط التأهيليّة بدقّة:
+    </p>
+    <table>
+        <thead><tr><th style="width:12%">الرمز</th><th style="width:26%">النوع</th><th>التعريف المختصر</th></tr></thead>
+        <tbody>
+            <tr><td>B1</td><td>عائق</td><td>مادّي/محايد (مثلاً: منحدرٌ مفقود).</td></tr>
+            <tr><td>B2</td><td>تحدٍّ</td><td>احتكاكٌ إداريّ أو إجرائيّ.</td></tr>
+            <tr><td>B3</td><td>خصم</td><td>معارضٌ معلَن.</td></tr>
+            <tr><td>B4</td><td>مضادّ</td><td>ثقافةٌ مؤسّسيّةٌ ذات تفكيرٍ صفريّ.</td></tr>
+            <tr><td>B5</td><td>داعم مزيّف</td><td>يُوقّع ولا يُنفّذ.</td></tr>
+            <tr><td>B6</td><td>مصدر خوف</td><td>مُولِّد وَصمة.</td></tr>
+            <tr><td>B7</td><td>خوف</td><td>مُستبطَن.</td></tr>
+            <tr><td>B8</td><td>عُرف اجتماعيّ</td><td>توقُّعٌ غير مكتوب.</td></tr>
+            <tr><td>B9</td><td>ثقافة تابو</td><td>ما لا يُقال.</td></tr>
+            <tr><td>B10</td><td>مُسلَّم دينيّ</td><td>دوغما غير مُساءَلة.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">قاعدة استخدام البوصلة:</div>
+        <p style="margin:0">
+            قبل كلّ مشروع أو اقتراح أو وثيقة — يُجاب على ثلاثة أسئلة:
+            (١) أيّ نوعٍ من العوائق العشرة نَستهدف؟
+            (٢) هل الحلّ المُقترَح يُفكّكه أم يُعيد إنتاجه؟
+            (٣) هل نحن في دور المستشفى (طبّي) أم دورنا الاجتماعيّ؟
+        </p>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 5 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الفصل 4 — البنية التقنية ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 4 — البنية التقنيّة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٤. البنية التقنيّة للنظام</h1>
+
+    <p>بُني النظام بأحدث التقنيات البرمجيّة لضمان الأداء العالي والأمان والمرونة التطويريّة.</p>
+
+    <h2>4.1 المُكوِّنات التقنيّة</h2>
+    <table>
+        <thead><tr><th style="width:22%">الطبقة</th><th style="width:32%">التقنيّة</th><th>الإصدار</th></tr></thead>
+        <tbody>
+            <tr><td>الواجهة الأماميّة</td><td>React + TypeScript</td><td>19.2 + 5.9</td></tr>
+            <tr><td>أداة البناء</td><td>Vite</td><td>6.2</td></tr>
+            <tr><td>التصميم</td><td>Tailwind CSS</td><td>4.2</td></tr>
+            <tr><td>إدارة الحالة المحليّة</td><td>Zustand</td><td>5.0</td></tr>
+            <tr><td>إدارة بيانات الخادم</td><td>TanStack Query</td><td>5.90</td></tr>
+            <tr><td>النماذج والتحقّق</td><td>React Hook Form + Zod</td><td>7.71 + 4.3</td></tr>
+            <tr><td>التوجيه</td><td>React Router</td><td>7.13</td></tr>
+            <tr><td>قاعدة البيانات</td><td>Supabase (PostgreSQL)</td><td>2.98 (PG 15)</td></tr>
+            <tr><td>الأيقونات</td><td>Lucide React</td><td>0.575</td></tr>
+            <tr><td>الحركة التفاعليّة</td><td>Framer Motion</td><td>12.34</td></tr>
+            <tr><td>الاختبار الآليّ</td><td>Playwright</td><td>1.58</td></tr>
+        </tbody>
+    </table>
+
+    <h2>4.2 هيكل قاعدة البيانات</h2>
+    <p>تتكوَّن قاعدة البيانات من <strong>24 ترحيلاً</strong> (Migration) تُغطّي جميع جوانب إدارة المستفيدين:</p>
+    <table>
+        <thead><tr><th style="width:30%">المجموعة</th><th>الجداول الرئيسيّة</th></tr></thead>
+        <tbody>
+            <tr><td>الأساسي — المستفيدون والموظفون</td><td>beneficiaries · employees · daily_care_logs</td></tr>
+            <tr><td>السلامة والمخاطر</td><td>fall_risk_assessments · fall_incidents · risk_alerts · audit_logs</td></tr>
+            <tr><td>الاستقلاليّة والحقوق</td><td>beneficiary_classification · services_gap_analysis · independence_budget_analysis · human_rights_compliance</td></tr>
+            <tr><td>المحاسبة والحوكمة</td><td>accountability_gaps · inactive_committees</td></tr>
+            <tr><td>الجودة والحوكمة (GRC)</td><td>grc_risks · grc_risk_assessments · grc_standards · grc_audits · grc_safety_incidents · grc_disability_codes</td></tr>
+            <tr><td>الإعاشة</td><td>catering_suppliers · contractor_evaluations · evaluation_criteria · catering_inventory_*</td></tr>
+            <tr><td>التشغيل والصيانة</td><td>om_assets · om_maintenance_requests · om_waste_records · om_skills_matrix</td></tr>
+            <tr><td>المؤشّرات الذكيّة</td><td>hr_attendance · cost_tracking · benchmark_standards · iso_compliance_checklist · risk_score_log</td></tr>
+            <tr><td>تسليم الفترات</td><td>shift_handover_reports · shift_handover_items</td></tr>
+            <tr><td>مكافحة العدوى</td><td>bicsl_certifications · occupational_exposures · outbreaks · outbreak_contacts</td></tr>
+            <tr><td>الحوادث</td><td>incident_reports (مُقسَّم زمنيّاً)</td></tr>
+            <tr><td>التدقيق</td><td>internal_audit_cycles · internal_audits · audit_findings</td></tr>
+        </tbody>
+    </table>
+
+    <h2>4.3 تحسينات الأداء والأمان</h2>
+    <ul class="icon-list">
+        <li><strong>Materialized Views</strong> للاستعلامات الثقيلة + <strong>pg_cron</strong> للتحديث التلقائي كل 5 دقائق.</li>
+        <li><strong>Table Partitioning</strong> لجدول incident_reports حسب الشهر.</li>
+        <li><strong>pgaudit</strong> مُفعَّل مع دور pdpl_auditor على الجداول الحسّاسة.</li>
+        <li><strong>RLS</strong> (Row-Level Security) على كلّ جدولٍ حسّاس.</li>
+        <li><strong>فهارس مُعاد تحسينها</strong> على المفاتيح الخارجيّة (migration 021).</li>
+        <li><strong>تصنيف البيانات</strong> (عام/محدود/سري) عبر COMMENT ON في migration 023.</li>
+    </ul>
+
+    <div class="page-footer">
+        <span>صفحة 6 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الفصل 5 — الأقسام ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 5 — أقسام النظام</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٥. أقسام النظام والخدمات المُقدَّمة</h1>
+
+    <h2>5.1 ملفّ المستفيد الشامل (360 درجة) + ملفّ الكرامة</h2>
+
+    <p>
+        تُعتبر شاشة الملفّ الشامل قلب النظام، تَمنح المختصّ نظرةً كاملةً على حالة المستفيد في شاشةٍ واحدةٍ
+        متكاملة. في الإصدار الثاني، أُضيف <strong>ملفّ الكرامة</strong> الذي يُوثّق ما يَعرفه الموظّفون
+        المباشرون عن شخصيّة المستفيد — ما يُحبّه، ما يُخيفه، كيف يَتواصل — ممّا يَضمن تعاملاً إنسانيّاً
+        بصرف النظر عن دوران الموظّفين.
+    </p>
+
+    <h3>5.1.1 البيانات الأساسيّة</h3>
+    <table>
+        <thead><tr><th style="width:35%">الحقل</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>الاسم الكامل</td><td>الاسم الرباعيّ للمستفيد.</td></tr>
+            <tr><td>رقم الهويّة الوطنيّة</td><td>رقم الهويّة أو الإقامة — مخفيٌّ في الواجهة (***-***-NNNN).</td></tr>
+            <tr><td>تاريخ الميلاد والعمر</td><td>يُحسَب العمر تلقائيّاً.</td></tr>
+            <tr><td>موقع المستفيد</td><td>رقم الغرفة والسرير.</td></tr>
+            <tr><td>الجنسيّة والتصنيف</td><td>وفق التصنيف الوزاريّ المعتمَد.</td></tr>
+            <tr><td>تاريخ الالتحاق</td><td>تاريخ دخول المستفيد للمركز.</td></tr>
+            <tr><td>الحالة الحاليّة</td><td>نشط / إجازة / منوَّم بالمستشفى / خرج للرعاية اللاحقة.</td></tr>
+            <tr><td>التقييم الوظيفيّ الأوّلي</td><td>بدل «التشخيص الطبّي» — تَوافُقاً مع النموذج الاجتماعيّ.</td></tr>
+            <tr><td>بيانات وليّ الأمر</td><td>الاسم، صلة القرابة، رقم الجوّال، عنوان السَّكن.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.1.2 نظام التنبيهات المبكّرة (Alert Tags)</h3>
+    <p>يَعرض النظام إشعاراتٍ ملوّنةً فور فتح ملفّ المستفيد لضمان سلامته:</p>
+    <table>
+        <thead><tr><th style="width:25%">نوع التنبيه</th><th style="width:20%">اللون</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>مستفيد مصاب بالسكّر</td><td><span class="chip chip-red">أحمر</span></td><td>مُراقبة مستوى السكّر إلزاميّة.</td></tr>
+            <tr><td>خطر سقوط</td><td><span class="chip chip-gold">برتقالي</span></td><td>يَحتاج مساعدةً في التنقُّل.</td></tr>
+            <tr><td>حسّاسيّة طعام</td><td><span class="chip chip-gold">أصفر</span></td><td>تَجنُّب أطعمةٍ معيَّنة.</td></tr>
+            <tr><td>صعوبة بلع</td><td><span class="chip chip-red">أحمر</span></td><td>طعامٌ مهروس أو سوائل.</td></tr>
+            <tr><td>سلوك عدوانيّ</td><td><span class="chip chip-gold">برتقالي</span></td><td>إشرافٌ مكثَّف.</td></tr>
+            <tr><td>حالة صرع</td><td><span class="chip chip-red">أحمر</span></td><td>بروتوكولٌ خاصٌّ للنوبات.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.1.3 ملفّ الكرامة (جديد في v2)</h3>
+    <p>لكلّ مستفيد ملفٌّ شخصيٌّ ناعمٌ يُوثّق:</p>
+    <ul class="icon-list">
+        <li><strong>الاسم المُفضَّل</strong> الذي يُنادى به (قد يَختلف عن الاسم الرسميّ).</li>
+        <li>شخصيّته العامّة (اجتماعيّ، مُنطوٍ، هادئ، نشط، ملاحظ).</li>
+        <li>تفضيلاته الحسّيّة (الإضاءة، الضوضاء، درجة الحرارة، الروائح).</li>
+        <li>ما يُحبّه (طعام، أنشطة، أماكن، أشخاص، ألوان).</li>
+        <li>ما يُخيفه أو يُزعجه.</li>
+        <li>الطريقة المُثلى للتواصل معه (لفظيّ، إشارة، صور…).</li>
+        <li>سجلّ أعماله الإيجابيّة وإنجازاته الصغيرة اليوميّة.</li>
+    </ul>
+
+    <div class="note">
+        يَضمن ملفّ الكرامة أنّ أيّ موظّفٍ جديدٍ يَستلم عمل زميلٍ سابق لا يَبدأ من الصفر مع المستفيد.
+        المعلومة تَبقى مع الإنسان، لا مع الموظّف.
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 7 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 5.2 الطبي ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 5 — أقسام النظام (تتمّة)</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h2>5.2 الخدمات الطبيّة والتمريضيّة</h2>
+    <p>صُمِّم هذا القسم لضمان أعلى معايير السلامة الطبيّة وتوثيق الإجراءات العلاجيّة.</p>
+
+    <h3>5.2.1 تسجيل العلامات الحيويّة</h3>
+    <ul class="icon-list">
+        <li>ضغط الدم (الانقباضي والانبساطي).</li>
+        <li>درجة الحرارة ومعدّل النبض.</li>
+        <li>مستوى السكّر ونسبة الأكسجين.</li>
+        <li>الوزن والطول ومعدّل الكتلة الحيويّة (BMI).</li>
+        <li>رسومٌ بيانيّةٌ تُظهر التطوُّر الزمنيّ لكلّ مؤشّر.</li>
+    </ul>
+
+    <h3>5.2.2 إدارة الحوادث والإصابات</h3>
+    <table>
+        <thead><tr><th style="width:25%">البيان</th><th>التفاصيل</th></tr></thead>
+        <tbody>
+            <tr><td>أنواع الحوادث</td><td>سقوط · كدمات · جروح · اعتداء · محاولة إيذاء نفس · هروب.</td></tr>
+            <tr><td>بيانات التوثيق</td><td>التاريخ، الوقت، الموقع، الفترة، الشهود.</td></tr>
+            <tr><td>الإجراءات المُتَّخذة</td><td>الإسعافات الأوّليّة، التحويل للمستشفى، إبلاغ الإدارة.</td></tr>
+            <tr><td>المرفقات</td><td>صور، تسجيلات كاميرات، تقارير طبيّة.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.2.3 مكافحة العدوى والعزل</h3>
+    <ul class="icon-list">
+        <li>لوحة خاصّة لمتابعة حالات العزل والأمراض المُعدية.</li>
+        <li>تكامل مع نظام «حصن» (وزارة الصحّة) للإبلاغ الوبائيّ.</li>
+        <li>اعتماد اللحظات الخمس لنظافة اليدين (WHO) بصيغة «المستفيد» لا «المريض».</li>
+        <li>متابعة السعة الكلّيّة والأسرّة المشغولة.</li>
+    </ul>
+
+    <h3>5.2.4 سجلّ الأدوية والتطعيمات</h3>
+    <p>
+        جدولٌ إلكترونيٌّ لمتابعة الأدوية الموصوفة وأوقات إعطائها، مع <strong>قاعدة الخمس الصحيحات</strong>
+        (المستفيد الصحيح، الدواء الصحيح، الجرعة الصحيحة، الطريق الصحيح، الوقت الصحيح) — مُطبَّقةً بإطار
+        اللغة الاجتماعيّة للإصدار الثاني.
+    </p>
+
+    <h2>5.3 الرعاية الاجتماعيّة والنفسيّة + بوّابة الأسرة</h2>
+
+    <h3>5.3.1 البحث الاجتماعيّ الرقميّ</h3>
+    <ul class="icon-list">
+        <li>التاريخ العائلي والاجتماعي للمستفيد.</li>
+        <li>الحالة الاقتصاديّة للأسرة وظروف السَّكَن.</li>
+        <li>تكوين الأسرة وبيانات الأعضاء.</li>
+        <li>التوصيات والخطط المُستقبليّة.</li>
+    </ul>
+
+    <h3>5.3.2 إدارة الزيارات والإجازات</h3>
+    <table>
+        <thead><tr><th style="width:25%">نوع النشاط</th><th>التفاصيل</th></tr></thead>
+        <tbody>
+            <tr><td>زيارات داخليّة</td><td>زيارة الأهل للمركز مع توثيق الوقت والمدّة.</td></tr>
+            <tr><td>زيارات خارجيّة</td><td>خروج المستفيد مع الأهل لفترةٍ قصيرة.</td></tr>
+            <tr><td>إجازات منزليّة</td><td>توثيق وقت الخروج والعودة والملاحظات.</td></tr>
+            <tr><td>مكالمات هاتفيّة</td><td>تسجيل المكالمات مع الأهل.</td></tr>
+            <tr><td>حالات طوارئ</td><td>خروج طارئ لظروفٍ استثنائيّة.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.3.3 بوّابة الأسرة (جديد في v2)</h3>
+    <p>
+        قناة تواصلٍ منخفضة الاحتكاك مع أُسَر المستفيدين — تَتيح لوليّ الأمر رؤية ملخّصٍ أسبوعيٍّ لتقدُّم
+        ابنه/ابنته في المركز، واستقبال رسائل تثبُّتٍ بسيطة (مثلاً: «هل لاحظتِ أنّ فهداً يَمسك الملعقة في البيت؟»)،
+        ورفع مستوى الثقة في قياس الأثر إلى 100% بمُشاركة الأسرة.
+    </p>
+
+    <div class="page-footer">
+        <span>صفحة 8 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 5.4 التأهيل + مؤشر الكرامة ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 5 — التأهيل ومؤشّر الكرامة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h2>5.4 التأهيل والتمكين + مؤشّر الكرامة</h2>
+
+    <p>القسم الأهمّ لقياس مدى تحسُّن حالة المستفيد، ومُحرِّك التحوُّل من «الرعاية» إلى «الاستثمار في القدرات».</p>
+
+    <h3>5.4.1 بناء الخطّة التأهيليّة الفرديّة (IRP)</h3>
+    <p>أدواتٌ لوضع أهدافٍ ذكيّةٍ (SMART) لكلّ مستفيد:</p>
+    <table>
+        <thead><tr><th style="width:15%">المعيار</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>S — محدَّد</td><td>هدفٌ واضحٌ ومحدَّدٌ بدقّة.</td></tr>
+            <tr><td>M — قابلٌ للقياس</td><td>يُمكن قياس التقدُّم بمؤشّراتٍ رقميّة.</td></tr>
+            <tr><td>A — قابلٌ للتحقيق</td><td>واقعيٌّ ومناسبٌ لقدرات المستفيد.</td></tr>
+            <tr><td>R — ذو صلة</td><td>مرتبطٌ باحتياجات المستفيد الفعليّة.</td></tr>
+            <tr><td>T — محدَّدٌ زمنيّاً</td><td>له إطارٌ زمنيٌّ واضحٌ للتحقيق.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.4.2 مؤشّر الكرامة (Dignity Index) — v0</h3>
+    <p>
+        مُؤشّرٌ شهريّ لكلّ مستفيد يُجيب على سؤالٍ واحد: <em>أيُّ نوعٍ من العوائق العشرة تَمَّ تفكيكه هذا الشهر؟</em>
+    </p>
+
+    <div class="callout">
+        <div class="callout-title">المعادلة:</div>
+        <p style="margin:0.5rem 0; font-family: 'Courier New', monospace; direction: ltr; text-align: center; background: white; padding: 0.75rem; border-radius: 4px;">
+            DI<sub>مستفيد, شهر</sub> = Σ (w<sub>n</sub> × M<sub>n</sub>) &nbsp; for n = 1..10
+        </p>
+        <ul style="margin-top:0.5rem; margin-bottom:0;">
+            <li><strong>M<sub>n</sub></strong> = حركة العائق رقم n خلال الشهر (موجب = تفكيك، سالب = انتكاسة).</li>
+            <li><strong>w<sub>n</sub></strong> = وزنٌ سياسيّ/فلسفيّ يُحدِّده الوكيل (v0: أوزانٌ متساوية).</li>
+            <li><strong>المدى:</strong> [−20, +20] لكلّ مستفيدٍ شهريّاً.</li>
+        </ul>
+    </div>
+
+    <h3>5.4.3 تصنيفات الأهداف التأهيليّة</h3>
+    <ul class="icon-list">
+        <li><strong>أهداف طبيّة:</strong> العلاج الطبيعيّ، السيطرة على الأمراض المُزمنة.</li>
+        <li><strong>أهداف اجتماعيّة:</strong> التفاعل مع الآخرين، المشاركة في الأنشطة.</li>
+        <li><strong>أهداف نفسيّة:</strong> السيطرة على السلوك، التكيُّف العاطفيّ.</li>
+        <li><strong>أهداف العلاج الوظيفيّ:</strong> مهارات الحياة اليوميّة (اختيار الملابس، الأكل المستقلّ…).</li>
+        <li><strong>أهداف تمكينيّة:</strong> الاستعداد للدمج المهنيّ أو الأسريّ.</li>
+    </ul>
+
+    <h3>5.4.4 متابعة التقدُّم</h3>
+    <ul class="icon-list">
+        <li>شريط إنجازٍ يُوضِّح نسبة تحقُّق كلّ هدف.</li>
+        <li>حالات الأهداف: قيد التنفيذ، متأخّر، محقَّق، معلَّق.</li>
+        <li>تقارير دوريّة جاهزة للطباعة (للأهالي والوزارة).</li>
+        <li>مقارنة الأداء بين الفترات الزمنيّة المختلفة.</li>
+        <li>مؤشّر العائد الاجتماعيّ على الاستثمار (SROI) لكلّ تدخُّل.</li>
+    </ul>
+
+    <h3>5.4.5 نظام الموافقات والتواقيع</h3>
+    <ol style="padding-inline-start: 1.5rem;">
+        <li>إعداد الخطّة من قِبَل الأخصّائيّ المختصّ.</li>
+        <li>مراجعةٌ واعتمادٌ من رئيس القسم.</li>
+        <li>الموافقة النهائيّة من مدير المركز.</li>
+        <li>الأثر المقيس بعد 3 / 6 / 12 شهراً — تلقائيّاً عبر النظام.</li>
+    </ol>
+
+    <div class="page-footer">
+        <span>صفحة 9 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 5.5 الخدمات المساندة + الكسوة ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 5 — الخدمات المساندة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h2>5.5 الخدمات المساندة — الإعاشة والكسوة والأصول</h2>
+
+    <h3>5.5.1 وحدة الكسوة (إعادة بناءٌ شاملٌ في v2)</h3>
+    <p>
+        أُعيد بناء وحدة الكسوة بالكامل وفق <strong>الضوابط التنظيميّة لتأمين الكسوة 2020</strong>
+        الصادرة عن وكالة التأهيل والتوجيه الاجتماعي. تَضمّنت الإعادة:
+    </p>
+
+    <h4>أ. دورة الكسوة — أربع مراحل</h4>
+    <table>
+        <thead><tr><th style="width:12%">المرحلة</th><th style="width:28%">الاسم</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>طلب تأمين الكسوة</td><td>حصر الأعداد، تحديد المخصّص الماليّ، رفع الطلب (5-10 أيام).</td></tr>
+            <tr><td>2</td><td>تأمين الكسوة</td><td>تشكيل اللجنة، مسح السوق، الشراء، تسليم المستودع.</td></tr>
+            <tr><td>3</td><td>تسديد العهدة (السُّلفة)</td><td>خلال شهرين من قرار الصرف — مع كافّة المستندات.</td></tr>
+            <tr><td>4</td><td>معالجة الكسوة التالفة</td><td>5 أسبابٍ موثَّقة: حرق، خرق، تمزُّق، عدم صلاحيّة، وفاة.</td></tr>
+        </tbody>
+    </table>
+
+    <h4>ب. المواسم الأربعة</h4>
+    <ul class="icon-list">
+        <li><strong>الكسوة الصيفيّة:</strong> رفع الطلب 1/1 ميلاديّ.</li>
+        <li><strong>الكسوة الشتويّة:</strong> رفع الطلب 7/1 ميلاديّ.</li>
+        <li><strong>كسوة عيد الفطر:</strong> رفع الطلب 1 رجب.</li>
+        <li><strong>كسوة عيد الأضحى:</strong> رفع الطلب 1 رمضان.</li>
+    </ul>
+
+    <h4>ج. لجنة تأمين الكسوة — أربعة أعضاء</h4>
+    <table>
+        <thead><tr><th style="width:30%">الدور</th><th style="width:20%">نوع العضويّة</th><th>المهامّ الرئيسيّة</th></tr></thead>
+        <tbody>
+            <tr><td>رئيس القسم الاجتماعيّ (القسم الداخليّ)</td><td>رئيس</td><td>الاطّلاع على تقدير الاحتياج واعتماد التشكيل.</td></tr>
+            <tr><td>مأمور العهدة</td><td>عضو مقرِّر</td><td>تجهيز المستندات ورفع ملفّ التسديد.</td></tr>
+            <tr><td>أخصّائي اجتماعيّ</td><td>عضو</td><td>حصر احتياج المستفيدين حسب الحالات والمقاسات.</td></tr>
+            <tr><td>مراقب اجتماعيّ</td><td>عضو</td><td>حصر القطع التالفة وتوزيع البطاقات التصنيفيّة.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.5.2 إدارة الإعاشة</h3>
+    <ul class="icon-list">
+        <li>جداول يوميّة للوجبات الثلاث وفق مواصفات العقد.</li>
+        <li>محاضر استلام الإعاشة موقَّعة من لجنة الاستلام.</li>
+        <li>سجلّ المخالفات والتقييم الشهريّ للمُتعهِّد.</li>
+        <li>متابعة درجات حرارة الثلاّجات في كلّ قسم.</li>
+        <li>مواصفات تخزين المواد الجافّة والمبرَّدة والمجمَّدة.</li>
+    </ul>
+
+    <h3>5.5.3 إدارة المخزون والأصول والصيانة</h3>
+    <ul class="icon-list">
+        <li>تنبيهات تلقائيّة عند انخفاض المخزون عن الحدّ الأدنى.</li>
+        <li>تصنيف المواد حسب النوع والفئة.</li>
+        <li>سجلّ حركات المخزون (وارد/صادر).</li>
+        <li>سجلّ الأصول الثابتة: أجهزة، أثاث، معدّات.</li>
+        <li>تذاكر الصيانة: فتحها، متابعتها، تقييم الإنجاز.</li>
+        <li>جدول الصيانة الوقائيّة والتنبّؤيّة.</li>
+    </ul>
+
+    <div class="page-footer">
+        <span>صفحة 10 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 5.6 الجودة + لوحات ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 5-6 — الجودة ولوحات التحكُّم</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h2>5.6 الحوكمة والجودة والامتثال (ISO 9001)</h2>
+
+    <p>النظام مُصمَّم ليَكون «مُدقِّق جودةٍ ذاتيّاً» يَدعم الالتزام بالمعايير الدوليّة.</p>
+
+    <h3>5.6.1 سجلّ المخاطر</h3>
+    <table>
+        <thead><tr><th style="width:28%">العنصر</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>تصنيف المخاطر</td><td>صحّة وسلامة · تشغيلي · موارد بشريّة · ماليّ · تقنيّ · امتثال.</td></tr>
+            <tr><td>مصفوفة المخاطر</td><td>الاحتماليّة × الأثر = مستوى الخطورة.</td></tr>
+            <tr><td>مستويات الخطورة</td><td>منخفض (1-6) · متوسّط (7-12) · عالٍ (13-20) · حرج (21-25).</td></tr>
+            <tr><td>خطط المعالجة</td><td>إجراءات وقائيّة وتصحيحيّة مُوَقَّتة ومُسنَدة لمالك.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.6.2 التدقيق الداخليّ</h3>
+    <ul class="icon-list">
+        <li>قوائم مراجعة (Checklists) جاهزة لكلّ قسم.</li>
+        <li>تسجيل النتائج ونقاط عدم المطابقة (NCR).</li>
+        <li>الإجراءات التصحيحيّة والوقائيّة (CAPA) مع مُؤَقِّت إغلاق.</li>
+        <li>متابعة إغلاق الملاحظات بصريّاً عبر لوحة حالة.</li>
+    </ul>
+
+    <h3>5.6.3 تقارير المطابقة</h3>
+    <p>إصدار تقارير تُثبت التزام المركز بالمعايير العالميّة، جاهزةٌ للطباعة والتقديم للمقيِّمين الخارجيّين.</p>
+
+    <h1 style="margin-top:2rem">٦. لوحات المعلومات والتقارير</h1>
+
+    <h2>6.1 لوحة القيادة الرئيسيّة (Dashboard)</h2>
+    <table>
+        <thead><tr><th style="width:28%">المؤشّر</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>إجمالي المستفيدين</td><td>العدد الكلّي للملفّات النشطة.</td></tr>
+            <tr><td>المتواجدون حاليّاً</td><td>العدد الفعليّ داخل المركز.</td></tr>
+            <tr><td>في إجازة</td><td>المستفيدون خارج المركز حاليّاً.</td></tr>
+            <tr><td>حالات حرجة</td><td>الحالات التي تَتطلَّب متابعةً مكثَّفة.</td></tr>
+            <tr><td>نسبة الإشغال</td><td>نسبة الأسرّة المشغولة.</td></tr>
+            <tr><td>المواد منخفضة المخزون</td><td>تنبيه بالمواد التي تَحتاج إعادة طلب.</td></tr>
+            <tr><td>مؤشّر الكرامة الشهريّ</td><td>متوسّط المركز لتفكيك العوائق الاجتماعيّة.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>6.2 لوحة المعلومات الاستراتيجيّة</h2>
+    <ul class="icon-list">
+        <li>نسبة الالتزام بالخطط التأهيليّة.</li>
+        <li>معدّل تحقيق الأهداف حسب التخصّص.</li>
+        <li>أداء الأقسام المختلفة.</li>
+        <li>الموافقات المعلَّقة.</li>
+        <li>الحالات الحرجة التي تَتطلَّب تدخُّلاً.</li>
+        <li>العائد الاجتماعيّ على الاستثمار (SROI) على مستوى المركز.</li>
+    </ul>
+
+    <h2>6.3 نبض المركز (Pulse Heatmap)</h2>
+    <p>
+        خريطةٌ حراريّةٌ حيّة تَعرض حالة كلّ قسم لحظيّاً — أخضر (يَعمل جيّداً) · برتقالي (يَحتاج التفاتة)
+        · أحمر (تحت ضغط). تَتبدَّل الألوان تلقائيّاً حسب البيانات الواردة من النظام، ممّا يُتيح للإدارة
+        رؤية المكان الذي يَحتاج التدخُّل قبل أن يَنفجر.
+    </p>
+
+    <div class="page-footer">
+        <span>صفحة 11 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 7 — الأمن السيبراني ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 7 — الأمن السيبراني</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٧. الأمن السيبراني — موائمةٌ مع لوائح الوزارة</h1>
+
+    <p>
+        أُعِدَّ النظام ليَكون جاهزاً للتسليم للوكالة بحسب لوائح الأمن السيبراني الوزاريّة (مستَندةٌ إلى
+        NCA ECC-2:2024 + CSCC-1:2019). في هذا الإصدار طُبِّقت كلّ الضوابط القابلة للتطبيق في
+        <strong>مرحلة التطوير</strong>، وأُعِدَّت حزمة التسليم للضوابط التي تَعتمد على قرارات الوكالة عند النشر.
+    </p>
+
+    <h2>7.1 لوائح الوزارة المرجعيّة</h2>
+    <table>
+        <thead><tr><th style="width:32%">اللائحة</th><th style="width:20%">الرمز</th><th>نطاق التطبيق في بصيرة</th></tr></thead>
+        <tbody>
+            <tr><td>السياسة العامّة للأمن السيبراني</td><td>DT-IS-POL-001</td><td>الحوكمة العامّة للنظام.</td></tr>
+            <tr><td>تصنيف البيانات</td><td>DT-IS-POL-1000</td><td>تصنيف بيانات المستفيدين والموظفين.</td></tr>
+            <tr><td>إدارة الهويّات والصلاحيّات</td><td>DT-IS-POL-1400</td><td>Supabase Auth + الأدوار السبعة.</td></tr>
+            <tr><td>الأمن في الحوسبة السحابيّة</td><td>DT-IS-POL-400</td><td>استضافة Supabase + Vercel.</td></tr>
+            <tr><td>التشفير</td><td>DT-IS-POL-800</td><td>TLS 1.3 + AES-256.</td></tr>
+            <tr><td>أمن دورة حياة التطوير (SDLC)</td><td>DT-IS-POL-3100</td><td>CI + فحص ثغرات + مراجعة كود.</td></tr>
+            <tr><td>إدارة السجلّات والمراقبة</td><td>DT-IS-POL-1300</td><td>pgaudit + audit_logs.</td></tr>
+            <tr><td>إدارة الامتثال</td><td>DT-IS-FRM-520</td><td>المراجعة الدوريّة.</td></tr>
+            <tr><td>إدارة المخاطر</td><td>DT-IS-FRM-2320</td><td>سجلّ مخاطر بصيرة (15 مخاطرة).</td></tr>
+            <tr><td>حماية البيانات الشخصيّة</td><td>PDPL v1.0</td><td>بيانات المستفيدين المُصنَّفة «محدود».</td></tr>
+            <tr><td>الاحتفاظ بالبيانات</td><td>Data Retention v1.0</td><td>المدّة تُحدَّد من الوكالة عند النشر.</td></tl>
+        </tbody>
+    </table>
+
+    <h2>7.2 الضوابط المُفعَّلة في v2</h2>
+    <table>
+        <thead><tr><th style="width:32%">الضابط</th><th>الدليل التقنيّ</th></tr></thead>
+        <tbody>
+            <tr><td>Row-Level Security (RLS)</td><td>migrations 019, 020 على الجداول الحسّاسة.</td></tr>
+            <tr><td>pgaudit — تسجيل قراءات البيانات الحسّاسة</td><td>دور pdpl_auditor على 9 جداولٍ حسّاسة.</td></tr>
+            <tr><td>TLS 1.3 في الحركة</td><td>افتراضيّ في Vercel + Supabase.</td></tr>
+            <tr><td>AES-256 في السكون</td><td>افتراضيّ في Supabase Postgres + S3.</td></tr>
+            <tr><td>إخفاء الهويّة الوطنيّة</td><td>مخطَّط Zod + عرض ***-***-NNNN.</td></tr>
+            <tr><td>تحكُّم الأدوار السبعة</td><td>ProtectedRoute + JWT Claims.</td></tr>
+            <tr><td>بيئة .env مُحمية</td><td>.env و.env.local في .gitignore (.env.example فقط مُتعقَّب).</td></tr>
+            <tr><td>تصنيف البيانات</td><td>COMMENT ON عبر migration 023 (عام/محدود/سرّي).</td></tr>
+            <tr><td>CodeQL SAST</td><td>فحصٌ أسبوعيٌّ على JavaScript/TypeScript.</td></tr>
+            <tr><td>Dependabot</td><td>مراقبة ثغرات التبعيّات.</td></tr>
+            <tr><td>استراتيجيّة خروج من السحابة</td><td>scripts/export-full-backup.sh — تصدير كامل قابل للترحيل.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>7.3 الضوابط المُعتمَدة على الوكالة عند التسليم</h2>
+    <ul class="icon-list">
+        <li>اختيار منطقة الاستضافة السعوديّة (POL-400 §3.4.1).</li>
+        <li>تفعيل MFA للصلاحيّات العالية.</li>
+        <li>ربط نفاذ لتسجيل الدخول الوطنيّ.</li>
+        <li>تحديد مدّة الاحتفاظ الرسميّة.</li>
+        <li>اختبار الاختراق من جهةٍ ثالثة.</li>
+        <li>تفعيل SIEM / SOC مركزيّ.</li>
+        <li>توقيع اتّفاقيّات SLA و NDA مع المزوّدين.</li>
+    </ul>
+
+    <div class="page-footer">
+        <span>صفحة 12 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 7 تتمة ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 7 — الأمن السيبراني (تتمّة)</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h2>7.4 تصنيف البيانات (migration 023)</h2>
+    <table>
+        <thead><tr><th style="width:20%">التصنيف</th><th style="width:45%">أمثلة</th><th>نطاق الوصول</th></tr></thead>
+        <tbody>
+            <tr><td><span class="chip chip-green">عام</span></td><td>جداول المراجع (فئات، وحدات قياس، أيّام الأسبوع).</td><td>مفتوح.</td></tr>
+            <tr><td><span class="chip chip-gold">محدود</span></td><td>بيانات المستفيدين، الموظفين، السجلات اليوميّة، التنبيهات، الشهادات.</td><td>حسب الدور.</td></tr>
+            <tr><td><span class="chip chip-red">سرّي</span></td><td>الملفّ الطبيّ الكامل، الأدوية، البحث الاجتماعي، محاضر الحوادث.</td><td>محدود لأدوارٍ مُعيَّنة.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>7.5 سجلّ مخاطر بصيرة (15 مخاطرة)</h2>
+    <p>وفق إطار <strong>DT-IS-FRM-2320</strong>، يَشمل السجلّ:</p>
+    <table>
+        <thead><tr><th style="width:55%">المخاطرة</th><th style="width:15%">الجذريّة</th><th style="width:15%">المتبقّية</th><th>المسؤول</th></tr></thead>
+        <tbody>
+            <tr><td>R-01 تسريب بيانات عبر GitHub</td><td>10</td><td>8</td><td>مشروع</td></tr>
+            <tr><td>R-02 سرّ DB مسرَّب في ملفّ تشخيص</td><td>12</td><td>10</td><td>مشروع</td></tr>
+            <tr><td>R-03 استضافة Supabase خارج المملكة</td><td>20→10</td><td>10</td><td>الوكالة</td></tr>
+            <tr><td>R-04 غياب MFA للصلاحيّات العالية</td><td>12</td><td>10</td><td>الوكالة</td></tr>
+            <tr><td>R-05 ثغرات التبعيّات (Dependabot)</td><td>9</td><td>7</td><td>مشروع</td></tr>
+            <tr><td>R-06 حذف audit_logs بالخطأ</td><td>10</td><td>8</td><td>مشروع</td></tr>
+            <tr><td>R-07 فشل Supabase لأكثر من 4 ساعات</td><td>6</td><td>5</td><td>الوكالة</td></tr>
+            <tr><td>R-08 RLS مفقود على جدولٍ جديد</td><td>16</td><td>12</td><td>مشروع</td></tr>
+            <tr><td>R-09 AI على بياناتٍ حسّاسة</td><td>10</td><td>6</td><td>مشروع</td></tr>
+            <tr><td>R-10 مطوِّرٌ وحيد (SoD)</td><td>10</td><td>6</td><td>الوكالة</td></tr>
+            <tr><td>R-11 جلساتٌ مفتوحة على جهازٍ مُشترَك</td><td>12</td><td>10</td><td>الوكالة</td></tr>
+            <tr><td>R-12 غياب خطّة IR</td><td>8</td><td>6</td><td>مشروع</td></tr>
+            <tr><td>R-13 غياب قرار مدّة الاحتفاظ</td><td>10</td><td>10</td><td>الوكالة</td></tr>
+            <tr><td>R-14 عدم قراءة سياسة الخصوصيّة</td><td>15</td><td>9</td><td>مشروع</td></tr>
+            <tr><td>R-15 تسرُّب عبر تسجيل الشاشة</td><td>12</td><td>9</td><td>الوكالة</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">الحصيلة بعد تطبيق الضوابط:</div>
+        <div class="kpi-grid" style="margin-top:0.5rem; grid-template-columns: repeat(3, 1fr);">
+            <div class="kpi-box"><span class="num" style="color:#b91c1c">0</span><span class="label">مخاطر عالية متبقّية</span></div>
+            <div class="kpi-box"><span class="num" style="color:#8a6b00">9</span><span class="label">متوسّطة متبقّية</span></div>
+            <div class="kpi-box"><span class="num" style="color:var(--green-dark)">6</span><span class="label">منخفضة متبقّية</span></div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 13 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 8 — الصلاحيّات ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 8 — الصلاحيّات</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٨. نظام الصلاحيّات وإدارة الهويّات</h1>
+
+    <p>يُوفّر النظام حمايةً متعدّدة المستويات لضمان سرّيّة المعلومات وأمانها.</p>
+
+    <h2>8.1 الأدوار السبعة</h2>
+    <table>
+        <thead><tr><th style="width:22%">الدور</th><th>الصلاحيّات</th></tr></thead>
+        <tbody>
+            <tr><td>director (المدير)</td><td>صلاحيّاتٌ كاملة، موافقاتٌ نهائيّة، تقاريرُ استراتيجيّة.</td></tr>
+            <tr><td>admin (مسؤول النظام)</td><td>إدارة المستخدمين، الإعدادات، النسخ الاحتياطيّ.</td></tr>
+            <tr><td>doctor (طبيب)</td><td>الملفّات الطبيّة، الأدوية، تقارير الحوادث.</td></tr>
+            <tr><td>nurse (ممرّض)</td><td>العلامات الحيويّة، متابعة الأدوية، المتابعة اليوميّة.</td></tr>
+            <tr><td>social_worker (أخصّائي اجتماعي)</td><td>البحث الاجتماعيّ، الزيارات، الإجازات، الرعاية اللاحقة.</td></tr>
+            <tr><td>specialist (أخصّائي تخصّصي)</td><td>العلاج الطبيعيّ، النطق، النفسيّ، الأسنان — كلٌّ في نطاقه.</td></tr>
+            <tr><td>secretary (سكرتير)</td><td>الزيارات، المواعيد، السكرتاريا.</td></tr>
+            <tr><td>staff (موظف عامّ)</td><td>قراءة محدودة لمُستفيديه المُعيَّنين.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>8.2 آليّات الحماية</h2>
+    <table>
+        <thead><tr><th style="width:28%">الآليّة</th><th>الوصف</th></tr></thead>
+        <tbody>
+            <tr><td>Row-Level Security (RLS)</td><td>كلّ مستخدم يَرى فقط البيانات المُصرَّح له بها على مستوى Postgres.</td></tr>
+            <tr><td>سجلّ النشاطات (Audit Log)</td><td>توثيق جميع العمليّات مع هويّة المستخدم والوقت، مُحتفَظ به في audit_logs.</td></tr>
+            <tr><td>pgaudit</td><td>تسجيل كلّ قراءةٍ للبيانات المُصنَّفة محدود/سرّي في Postgres logs (PDPL).</td></tr>
+            <tr><td>التشفير</td><td>TLS 1.3 في الحركة + AES-256 في السكون.</td></tr>
+            <tr><td>النسخ الاحتياطي</td><td>PITR من Supabase (7 أيام مجّاناً، 30 يوماً Pro).</td></tr>
+            <tr><td>إخفاء PII في الواجهة</td><td>الهويّة الوطنيّة تُعرَض بصيغة ***-***-NNNN إلّا لمن يُخوَّل.</td></tr>
+            <tr><td>دوران الجلسات</td><td>refresh tokens تدور تلقائيّاً — TTL يَعتمد على الدور.</td></tr>
+            <tr><td>CodeQL + Dependabot</td><td>فحصٌ أسبوعيٌّ للكود + مراقبة ثغرات المكتبات.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>8.3 الاستثناءات المُعلَنة</h2>
+    <p>تُستَثنى الضوابط التالية صراحةً من نطاق بصيرة بقرارٍ مُعتمَد:</p>
+    <ul class="icon-list">
+        <li>آليّة حذف البيانات من قِبَل المستفيد — هذه البيانات مِلكٌ وزاريٌّ، ولذوي المصلحة حقُّ الاطّلاع.</li>
+        <li>صفحة إيقافٍ طارئ (kill-switch) لحذف قاعدة البيانات — غيرُ مبرَّرةٍ في نظامٍ مؤسّسيّ.</li>
+        <li>إخفاء بياناتٍ متقدِّمٌ (beyond national-ID masking) — الجمهور المستهدَف له حقُّ وصولٍ مشروع.</li>
+        <li>MFA وسياسة كلمات سرٍّ قاسية — مرحلة تطويرٍ، مطوِّرٌ واحد؛ تُفعَّل من الوكالة عند النشر.</li>
+    </ul>
+
+    <div class="page-footer">
+        <span>صفحة 14 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 9 — القيمة المضافة ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 9 — القيمة المُضافة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>٩. القيمة المُضافة للنظام</h1>
+
+    <table>
+        <thead><tr><th style="width:28%">الميزة</th><th>الوصف والفائدة</th></tr></thead>
+        <tbody>
+            <tr><td>حماية البيانات والخصوصيّة</td><td>صلاحيّاتٌ محدَّدةٌ لكلّ دور — الطبيب يَرى الملفّ الطبيّ فقط، والأخصّائي الاجتماعيّ يَرى الاجتماعيّ فقط.</td></tr>
+            <tr><td>دعم اتّخاذ القرار</td><td>لوحات معلوماتٍ تَعرض أرقاماً حيّةً للإدارة (حالات حرجة، نسبة إشغال، حوادث، مؤشّر الكرامة).</td></tr>
+            <tr><td>الاستدامة الماليّة</td><td>تقليل الهدر في الأحبار والأوراق، وحفظ تاريخ المركز من الضياع أو التلف.</td></tr>
+            <tr><td>سهولة الاستخدام</td><td>واجهاتٌ مُصمَّمةٌ بوضوح (أزرارٌ كبيرة، ألوانٌ معبّرة) لا تَتطلَّب خبرةً تقنيّة.</td></tr>
+            <tr><td>السرعة والكفاءة</td><td>الوصول للمعلومة في ثوانٍ بدلاً من البحث في الأرشيف الورقيّ.</td></tr>
+            <tr><td>الدقّة والموثوقيّة</td><td>تقليل الأخطاء البشريّة في إدخال ونقل البيانات.</td></tr>
+            <tr><td>التكامل</td><td>ربط جميع الأقسام في منصّةٍ واحدةٍ موحَّدة، مع إمكانيّة التكامل لاحقاً مع أنظمة الوزارة.</td></tr>
+            <tr><td>المرونة</td><td>إمكانيّة الوصول من أيّ جهازٍ متّصلٍ بالشبكة (بعد توزيع الصلاحيّات من الوكالة).</td></tr>
+            <tr><td>الامتثال للمعايير</td><td>دعم متطلّبات ISO 9001 ولوائح NCA الوزاريّة الـ12.</td></tr>
+            <tr><td>التقارير الذكيّة</td><td>إصدار تقارير إحصائيّة بضغطة زر.</td></tr>
+            <tr><td>قياس الأثر (جديد في v2)</td><td>مؤشّر الكرامة يَقيس ما يُهمّ فعلاً — تفكيك العوائق الاجتماعيّة — لا عدد الأوراق المُعبَّأة.</td></tr>
+            <tr><td>شفافيّة ثلاثيّة الطبقات</td><td>pgaudit + audit_logs + SECURITY.md علنيّ — كلُّ عمليّةٍ موثَّقةٌ ومرتبطةٌ بهويّة.</td></tr>
+            <tr><td>إنصاف العاملين المباشرين (جديد في v2)</td><td>كلّ موظّف — سعوديّ أو غير سعوديّ — له صفحةٌ خاصّة بإنجازاته الموثَّقة.</td></tr>
+            <tr><td>الحماية من الاحتراق الوظيفيّ (جديد في v2)</td><td>تنبيهاتٌ تلقائيّة عند إرهاق موظّفٍ — خريطةٌ حراريّة لاكتشاف الضغط قبل الانفجار.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">الرسالة المحوريّة للإصدار الثاني:</div>
+        <p style="margin:0">
+            بصيرة لا تُرقمن الأوراق فحسب. هي تَجعل المَخفيَّ مرئيّاً، والمسكوتَ مُقاساً، والمُنسيَّ مُعترَفاً به —
+            وهذا ما يُميّز التحوُّل الرقميّ الحقيقيّ عن مجرّد رقمنة الإجراءات.
+        </p>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 15 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 10 — حالة النظام ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 10 — حالة النظام</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>١٠. حالة النظام الحاليّة ومتطلّبات التسليم</h1>
+
+    <p>
+        النظام حاليّاً في مرحلة <strong>التطوير المُتقدِّم ما قبل التسليم</strong>. تَمّت إضافة طبقة
+        قياس الأثر (مؤشّر الكرامة) وإعادة بناء وحدة الكسوة وفق الضوابط 2020، وتَمّت مُوائمة الأمن السيبرانيّ
+        مع 12 لائحة HRSD. النظام جاهزٌ للتقديم للوكالة لتَبدأ مرحلة التسليم الإنتاجيّ.
+    </p>
+
+    <h2>10.1 ما أُنجِزَ حتى تاريخه</h2>
+    <div class="kpi-grid">
+        <div class="kpi-box"><span class="num">67,300</span><span class="label">سطر برمجيّ</span></div>
+        <div class="kpi-box"><span class="num">24</span><span class="label">ترحيل (migration)</span></div>
+        <div class="kpi-box"><span class="num">150+</span><span class="label">مسار تطبيق</span></div>
+        <div class="kpi-box"><span class="num">49</span><span class="label">اختبار آليّ</span></div>
+        <div class="kpi-box"><span class="num">7</span><span class="label">أدوار صلاحيّات</span></div>
+        <div class="kpi-box"><span class="num">12</span><span class="label">لائحة HRSD مربوطة</span></div>
+        <div class="kpi-box"><span class="num">15</span><span class="label">مخاطرة مُعرَّفة</span></div>
+        <div class="kpi-box"><span class="num">0</span><span class="label">ورقة يوميّة (الهدف)</span></div>
+    </div>
+
+    <h2>10.2 ما يَتطلَّبه التسليم الإنتاجيّ</h2>
+    <p>الخطوات التالية ستَنتقل إلى مسؤوليّة الوكالة عند قرار النشر:</p>
+    <ol style="padding-inline-start: 1.5rem;">
+        <li>اختيار منطقة استضافة سعوديّة (أو استثناءٌ رسميٌّ لـ Supabase الحاليّ).</li>
+        <li>تفعيل المصادقة الثنائيّة (MFA) للحسابات الإداريّة.</li>
+        <li>ربط النظام ببوّابة نفاذ للتسجيل الوطنيّ.</li>
+        <li>تحديد مدّة الاحتفاظ الرسميّة بالبيانات (مُقترَح: 7 سنواتٍ لسجلّات التدقيق).</li>
+        <li>اختبار اختراقٍ من جهةٍ ثالثةٍ مُستقلّة.</li>
+        <li>تفعيل SIEM / SOC مركزيٍّ للمراقبة الأمنيّة.</li>
+        <li>توقيع اتّفاقيّات SLA و NDA مع مزوّدي الخدمة.</li>
+        <li>تدريب المستخدمين النهائيّين.</li>
+        <li>ترحيل البيانات الورقيّة الحاليّة بشكلٍ مرحليّ.</li>
+    </ol>
+
+    <h2>10.3 الوثائق المُعدَّة لحزمة التسليم</h2>
+    <table>
+        <thead><tr><th style="width:40%">الوثيقة</th><th>الغرض</th></tr></thead>
+        <tbody>
+            <tr><td>SECURITY.md</td><td>سياسة الأمن السيبرانيّ الرسميّة للمشروع.</td></tr>
+            <tr><td>docs/risk-register.md</td><td>سجلّ المخاطر المُفصَّل (15 مخاطرة).</td></tr>
+            <tr><td>docs/security-compliance-analysis-2026-04-22.md</td><td>تحليل الامتثال + خطّة التعديل ثلاثيّة المراحل.</td></tl>
+            <tr><td>docs/dignity-index-v0.md</td><td>المواصفة الرسميّة لمؤشّر الكرامة.</td></tr>
+            <tr><td>docs/loc-reduction-plan.md</td><td>خطّة تقليص الكود من 67k إلى &lt;40k سطر.</td></tr>
+            <tr><td>PLAN-comprehensive-2026.md</td><td>الخطّة الشاملة لـ12 شهراً قادماً.</td></tr>
+            <tr><td>scripts/export-full-backup.sh</td><td>استراتيجيّة الخروج من السحابة (POL-400 §3.6).</td></tr>
+            <tr><td>supabase/sql/023_data_classification.sql</td><td>تصنيف جميع الجداول الحسّاسة.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>صفحة 16 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ 11 — الخاتمة ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الفصل 11 — الخاتمة</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>١١. الخاتمة والتوصيات</h1>
+
+    <p>
+        نظام بصيرة — في إصداره الثاني — يُمثّل نقلةً نوعيّةً من العمل التقليديّ إلى بيئةٍ عملٍ ذكيّةٍ ومحوكمة.
+        هو ليس مجرّد برنامجٍ حاسوبيٍّ، بل <strong>أداةٌ استراتيجيّةٌ</strong> لتمكين الكادر الفنّيّ من
+        التركيز على «رعاية الإنسان وكرامته» بدلاً من الانشغال بـ«تعبئة الأوراق وتتبُّع النماذج».
+    </p>
+
+    <h2>11.1 التوصيات للمرحلة القادمة</h2>
+    <ol style="padding-inline-start: 1.5rem;">
+        <li><strong>التدريب المُكثَّف:</strong> ورش عملٍ لجميع الموظّفين على استخدام النظام بإصداره الجديد.</li>
+        <li><strong>الترحيل التدريجيّ:</strong> نقل البيانات الورقيّة الحاليّة للنظام على مراحل — لا دفعةً واحدة.</li>
+        <li><strong>التقييم المستمرّ:</strong> جمع ملاحظات المستخدمين لتحسين النظام، خاصّةً من العاملين المباشرين.</li>
+        <li><strong>التكامل المستقبليّ:</strong> ربط النظام مع أنظمة الوزارة المركزيّة (رعاية، حصن، مسار).</li>
+        <li><strong>التطوير المستمرّ:</strong> إضافة ميزاتٍ جديدةٍ حسب احتياجات العمل وتغذية المستخدمين الراجعة.</li>
+        <li><strong>قرار الاعتماد الوزاريّ:</strong> تحويل بصيرة من «مشروع مركز الباحة» إلى «نموذج وطنيّ» قابلٍ للاستنساخ في 37 مركزاً آخر.</li>
+        <li><strong>إطلاق مؤشّر الكرامة v1:</strong> بعد 6-12 شهراً من جمع البيانات، إعادة معايرة الأوزان بقرارٍ وزاريّ.</li>
+    </ol>
+
+    <div class="closing-quote">
+        «الرقمنة ليست هدفاً بحدّ ذاتها، بل هي وسيلةٌ لخدمة المستفيد بشكلٍ أفضل —
+        ولقياس الكرامة التي نَدّعي أنّنا نَحميها.»
+        <strong>— الإصدار الثاني من بصيرة، 2026</strong>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 17 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ الملاحق ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الملحق (أ) — قائمة النماذج</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h1>الملاحق</h1>
+
+    <h2>ملحق (أ): قائمة النماذج الإلكترونيّة</h2>
+    <ol style="padding-inline-start: 1.5rem; columns: 2; column-gap: 2rem;">
+        <li>نموذج تسجيل مستفيد جديد.</li>
+        <li>نموذج الفحص الطبّي الشامل.</li>
+        <li>نموذج البحث الاجتماعيّ.</li>
+        <li>نموذج الخطّة التأهيليّة الفرديّة (IRP).</li>
+        <li>نموذج طلب الإجازة.</li>
+        <li>نموذج تقرير الحادث.</li>
+        <li>نموذج طلب تأمين الكسوة.</li>
+        <li>نموذج لجنة تأمين الكسوة.</li>
+        <li>نموذج محضر استلام الكسوة.</li>
+        <li>نموذج إتلاف الكسوة.</li>
+        <li>نموذج تسديد العهدة.</li>
+        <li>نموذج التدقيق الداخليّ.</li>
+        <li>نموذج تسجيل المخاطر.</li>
+        <li>نموذج المتابعة اليوميّة.</li>
+        <li>نموذج تقييم الإعاشة.</li>
+        <li>نموذج طلب صيانة.</li>
+        <li>نموذج تسليم فترة.</li>
+        <li>نموذج استقبال زيارة عائليّة.</li>
+        <li>نموذج مُلخَّص مؤشّر الكرامة الشهريّ.</li>
+        <li>نموذج المتابعة الأسريّة للرعاية اللاحقة.</li>
+    </ol>
+
+    <h2>ملحق (ب): مصطلحاتٌ ومفاهيم</h2>
+    <table>
+        <thead><tr><th style="width:28%">المصطلح</th><th>التعريف</th></tr></thead>
+        <tbody>
+            <tr><td>KPI</td><td>مؤشّر الأداء الرئيسيّ — مقياسٌ كمّيٌّ لتقييم الأداء.</td></tr>
+            <tr><td>Dashboard</td><td>لوحة المعلومات — شاشةٌ تَعرض البيانات والمؤشّرات بصريّاً.</td></tr>
+            <tr><td>SMART Goals</td><td>أهدافٌ ذكيّة: محدَّدة، قابلة للقياس، قابلة للتحقيق، ذات صلة، محدَّدة زمنيّاً.</td></tr>
+            <tr><td>IRP</td><td>Individual Rehabilitation Plan — الخطّة التأهيليّة الفرديّة.</td></tr>
+            <tr><td>RLS</td><td>Row-Level Security — أمانٌ على مستوى الصفّ في قاعدة البيانات.</td></tr>
+            <tr><td>pgaudit</td><td>إضافةٌ لـ PostgreSQL تُسجِّل عمليّات قراءة البيانات الحسّاسة.</td></tr>
+            <tr><td>PDPL</td><td>نظام حماية البيانات الشخصيّة السعودي.</td></tr>
+            <tr><td>ISO 9001</td><td>معيارٌ دوليٌّ لنظام إدارة الجودة.</td></tr>
+            <tr><td>CRPD</td><td>اتّفاقيّة الأمم المتّحدة لحقوق الأشخاص ذوي الإعاقة.</td></tr>
+            <tr><td>NCA</td><td>الهيئة الوطنيّة للأمن السيبراني.</td></tr>
+            <tr><td>ECC</td><td>Essential Cybersecurity Controls — الضوابط الأساسيّة للأمن السيبراني.</td></tr>
+            <tr><td>CSCC</td><td>Cloud Cybersecurity Controls — ضوابط الأمن السيبرانيّ السحابيّ.</td></tr>
+            <tr><td>SROI</td><td>Social Return on Investment — العائد الاجتماعيّ على الاستثمار.</td></tr>
+            <tr><td>Dignity Index</td><td>مؤشّر الكرامة — مقياسٌ شهريّ لتفكيك العوائق الاجتماعيّة لكلّ مستفيد.</td></tr>
+            <tr><td>Trust-Ground</td><td>أرضيّة ائتمان — إطارٌ تَجمع فيه بصيرة فاعلي التنمية الاجتماعيّة.</td></tr>
+            <tr><td>صفر ورق</td><td>مبادرة التحوُّل الرقميّ المُعتمَدة في منظومة الإنجازات الوزاريّة.</td></tr>
+            <tr><td>MFA</td><td>Multi-Factor Authentication — المصادقة متعدّدة العوامل.</td></tr>
+            <tr><td>CAPA</td><td>Corrective And Preventive Actions — الإجراءات التصحيحيّة والوقائيّة.</td></tr>
+            <tr><td>NCR</td><td>Non-Conformance Report — تقرير عدم المطابقة.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="page-footer">
+        <span>صفحة 18 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+<!-- ═════════════════════════ ملحق ج — أنواع العوائق ═════════════════════════ -->
+<div class="page">
+    <div class="page-header">
+        <span class="left">الملحق (ج) — بوصلة العوائق</span>
+        <span>الإصدار 2.0 · 2026</span>
+    </div>
+
+    <h2>ملحق (ج): مرجع مُفصَّل لأنواع العوائق الاجتماعيّة العشرة</h2>
+
+    <p>
+        تُستخدَم هذه المرجعيّة داخل وحدة التمكين ومؤشّر الكرامة. كلّ تدخُّلٍ تأهيليٍّ يَرتبط بأحد
+        هذه الأنواع العشرة، ويُقاس أثره على أساس تفكيكه فعليّاً.
+    </p>
+
+    <table>
+        <thead><tr><th style="width:8%">الرمز</th><th style="width:22%">النوع</th><th style="width:28%">الطبيعة</th><th>مثالٌ من بيئة المركز</th></tr></thead>
+        <tbody>
+            <tr><td>B1</td><td>عائق (barrier)</td><td>مادّيٌّ محايد</td><td>منحدرٌ مفقودٌ أمام الغرفة، بوابةٌ ضيّقةٌ للكرسيّ المُتحرِّك.</td></tr>
+            <tr><td>B2</td><td>تحدٍّ (challenge)</td><td>احتكاكٌ إداريٌّ نشط</td><td>بيروقراطيّة الموافقات متعدّدة الأطراف لأيّ خدمةٍ خارجيّة.</td></tr>
+            <tr><td>B3</td><td>خصم (opponent)</td><td>معارضٌ معلَن</td><td>موظّفٌ يُصرِّح: «هؤلاء لا يَستحقّون».</td></tr>
+            <tr><td>B4</td><td>مضادّ (antagonist)</td><td>قوّةٌ منهجيّة</td><td>ثقافةٌ مؤسّسيّةٌ ذات تفكيرٍ صفريّ تجاه ذوي الإعاقة.</td></tr>
+            <tr><td>B5</td><td>داعم مزيّف</td><td>يُوقِّع ولا يُنفِّذ</td><td>جهةٌ تُوقِّع تفاهُماً ثمّ تُجمِّد التنفيذ.</td></tr>
+            <tr><td>B6</td><td>مصدر خوف</td><td>مولِّد وصمة</td><td>مقهى قريةٍ يُصنِّف أسرة المستفيد سلبيّاً.</td></tr>
+            <tr><td>B7</td><td>خوف (fear)</td><td>مُستبطَن</td><td>مستفيدٌ يَرفض الخروج خشية النظرات.</td></tr>
+            <tr><td>B8</td><td>عُرف اجتماعيّ</td><td>توقُّعٌ غيرُ مكتوب</td><td>«الرعاية في البيت بواسطة الأسرة فقط».</td></tr>
+            <tr><td>B9</td><td>ثقافة تابو</td><td>ما لا يُقال</td><td>قضايا الجنس، الزواج، الدخل المُتضرّر للأسرة.</td></tr>
+            <tr><td>B10</td><td>مُسلَّم دينيّ</td><td>دوغما غيرُ مُساءَلة</td><td>«الإعاقة ابتلاء» كَسقفٍ لإغلاق نقاش التمكين.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">قاعدة الاستخدام في النظام:</div>
+        <p style="margin:0">
+            كلُّ هدفٍ في الخطّة التأهيليّة الفرديّة يُسنَد إلى أحد الرموز B1-B10. عند اكتمال الهدف،
+            تُضاف نقطة تفكيكٍ لصالح ذلك العائق في مؤشّر الكرامة الشهريّ للمستفيد.
+        </p>
+    </div>
+
+    <h2 style="margin-top:2rem">نهاية الوثيقة</h2>
+
+    <div style="text-align: center; padding: 2rem 0; color: var(--ink-muted); font-size: 10pt; line-height: 2;">
+        <div>الدليل التعريفي والتشغيلي — نظام بصيرة · الإصدار 2.0 · 2026-04-22</div>
+        <div style="margin-top: 1rem; color: var(--gold); font-weight: 700;">
+            مشروع · فرع الوزارة بالباحة · قطاع التنمية · الإشراف الاجتماعي · مركز التأهيل الشامل
+        </div>
+        <div style="margin-top: 1rem; font-size: 9pt;">
+            — وثيقة داخليّة · للاستخدام المؤسّسي فقط —
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>صفحة 19 من 22</span>
+        <span>بصيرة v2 · فرع الوزارة بالباحة</span>
+    </div>
+</div>
+
+</div><!-- /doc -->
+</body>
+</html>
