@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Compass, Gavel, Eye, TrendingUp, Lightbulb, BookOpen, Telescope } from 'lucide-react';
+import { Compass, Gavel, Eye, TrendingUp, Calculator, Lightbulb, BookOpen, Telescope } from 'lucide-react';
 import { SEED_DECISIONS } from './data/seed-decisions';
 import { SEED_MIRROR_FINDINGS } from './data/seed-mirror';
 import { DecisionCard } from './DecisionCard';
 import { MirrorFindingCard } from './MirrorFindingCard';
+import { Trajectories } from './Trajectories';
+import { ScenarioSimulator } from './ScenarioSimulator';
 import type { StrategicDecision, HonestMirrorFinding } from '../../types/leadership-compass';
 
-type CompassTab = 'decisions' | 'mirror' | 'trajectories' | 'discover' | 'ledger' | 'horizon';
+type CompassTab = 'decisions' | 'mirror' | 'trajectories' | 'simulator' | 'discover' | 'ledger' | 'horizon';
 
 interface TabDef {
     id: CompassTab;
@@ -31,7 +33,8 @@ export const LeadershipCompass: React.FC = () => {
     const tabs: TabDef[] = [
         { id: 'decisions',    label: 'القرارات المُعلَّقة', icon: Gavel,      available: true,  badge: pendingCount },
         { id: 'mirror',       label: 'المرآة الصادقة',     icon: Eye,        available: true,  badge: openFindings },
-        { id: 'trajectories', label: 'اتّجاهات 12 شهراً',  icon: TrendingUp, available: false },
+        { id: 'trajectories', label: 'اتّجاهات 12 شهراً',  icon: TrendingUp, available: true },
+        { id: 'simulator',    label: 'محاكاة السيناريوهات', icon: Calculator, available: true },
         { id: 'discover',     label: 'اكتشف',              icon: Lightbulb,  available: false },
         { id: 'ledger',       label: 'سجلّ القرارات',       icon: BookOpen,   available: false },
         { id: 'horizon',      label: 'أفق السياسات',       icon: Telescope,  available: false },
@@ -185,8 +188,12 @@ export const LeadershipCompass: React.FC = () => {
                 </section>
             )}
 
+            {activeTab === 'trajectories' && <Trajectories />}
+
+            {activeTab === 'simulator' && <ScenarioSimulator />}
+
             {/* شرائح «قريباً» — نبرة صريحة، لا تَظاهر بالاكتمال */}
-            {activeTab !== 'decisions' && activeTab !== 'mirror' && (
+            {activeTab !== 'decisions' && activeTab !== 'mirror' && activeTab !== 'trajectories' && activeTab !== 'simulator' && (
                 <section className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-10 text-center">
                     <div className="max-w-md mx-auto">
                         <h2 className="text-[18px] font-bold text-slate-900 dark:text-white mb-2">
