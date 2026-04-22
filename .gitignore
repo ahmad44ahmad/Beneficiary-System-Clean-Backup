@@ -56,6 +56,10 @@ basira-diagnostic.mjs
 *-diagnostic.mjs
 scripts/local-diag-*.mjs
 
+# Database backups from scripts/export-full-backup.sh — never commit
+# (contains full audit_logs, RLS policies, beneficiary data even if demo)
+backups/
+
 # skills CLI scaffolding (symlinks for many AI coding assistants).
 # `.mcp.json` is committed (project MCP config), everything else is tool-local.
 .agents/
