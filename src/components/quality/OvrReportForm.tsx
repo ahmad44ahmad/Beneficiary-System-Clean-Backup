@@ -186,7 +186,7 @@ export const OvrReportForm: React.FC = () => {
                             <CheckCircle2 className="w-10 h-10 text-green-600" />
                         </div>
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">تم استلام (OVR) بنجاح</h2>
-                        <p className="text-gray-500 mb-8">شكراً لمساهمتك في تحسين سلامة المرضى والجودة.</p>
+                        <p className="text-gray-500 mb-8">شكراً لمساهمتك في تحسين سلامة المستفيدين والجودة.</p>
                         <button
                             onClick={() => navigate('/dashboard')}
                             className="bg-gray-900 text-white px-8 py-3 rounded-xl hover:bg-black transition-colors"

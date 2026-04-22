@@ -40,7 +40,7 @@ const EMERGENCY_CONFIG: Record<EmergencyType, { icon: React.ElementType; color: 
     },
     seizure: {
         icon: Activity, color: 'text-cyan-400', bgColor: 'bg-cyan-500', label: 'نوبة صرع',
-        protocol: ['أمّن المريض من السقوط', 'لا تقيّد الحركة', 'سجّل مدة النوبة', 'اتصل بالطبيب']
+        protocol: ['أمّن المستفيد من السقوط', 'لا تقيّد الحركة', 'سجّل مدة النوبة', 'اتصل بالطبيب']
     },
 };
 

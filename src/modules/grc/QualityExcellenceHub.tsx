@@ -459,7 +459,7 @@ const KPIsContent = () => (
                 <div className="space-y-2">
                     {[
                         { name: 'تقرحات الفراش', target: '< 2 لكل 1000 يوم' },
-                        { name: 'معدل السقوط', target: 'حسب CBAHI' },
+                        { name: 'معدل السقوط', target: 'حسب المعايير الوطنية للرعاية التأهيلية' },
                         { name: 'التطعيمات الوقائية', target: '100%' },
                         { name: 'نزول الوزن غير المخطط', target: 'مراقبة مستمرة' },
                         { name: 'معدل الوفيات الشهرية', target: 'حسب المعايير الوطنية' },
@@ -514,8 +514,9 @@ const IPCContent = () => (
         </div>
         <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
             <h4 className="font-bold text-gray-800 mb-2 text-sm">اللحظات الخمس لنظافة اليدين</h4>
+            {/* WHO 5 Moments — adapted to beneficiary framing per MHRSD social-model context. */}
             <div className="flex flex-wrap gap-2">
-                {['قبل ملامسة المريض', 'قبل الإجراء المعقم', 'بعد التعرض لسوائل الجسم', 'بعد ملامسة المريض', 'بعد ملامسة محيط المريض'].map((moment, idx) => (
+                {['قبل ملامسة المستفيد', 'قبل الإجراء المعقم', 'بعد التعرض لسوائل الجسم', 'بعد ملامسة المستفيد', 'بعد ملامسة محيط المستفيد'].map((moment, idx) => (
                     <span key={idx} className="bg-white border border-gray-300 px-2 py-1 rounded text-xs text-gray-700">
                         {idx + 1}. {moment}
                     </span>

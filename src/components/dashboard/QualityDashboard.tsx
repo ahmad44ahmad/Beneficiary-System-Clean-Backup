@@ -41,7 +41,7 @@ export const QualityDashboard: React.FC = () => {
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <Shield className="w-8 h-8 text-teal-600" />
-                        لوحة الجودة وسلامة المرضى
+                        لوحة الجودة وسلامة المستفيدين
                     </h1>
                     <p className="text-gray-500 mt-1">مراقبة مؤشرات الأداء (KPIs) وتقارير الحوادث (OVR)</p>
                 </div>

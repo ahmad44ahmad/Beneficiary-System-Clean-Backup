@@ -115,8 +115,9 @@ export const MedicationAdministration: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-2xl p-4 mb-6 border border-purple-500/30"
             >
+                {/* 5 Rights of medication administration — adapted to beneficiary framing. */}
                 <p className="text-purple-300 text-sm text-center">
-                    ✓ المريض الصحيح • ✓ الدواء الصحيح • ✓ الجرعة الصحيحة • ✓ الطريق الصحيح • ✓ الوقت الصحيح
+                    ✓ المستفيد الصحيح • ✓ الدواء الصحيح • ✓ الجرعة الصحيحة • ✓ الطريق الصحيح • ✓ الوقت الصحيح
                 </p>
             </motion.div>
 
