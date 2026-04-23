@@ -47,7 +47,7 @@ export const DecisionLedger: React.FC = () => {
             {/* الفلترة والبحث */}
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-4 flex flex-wrap gap-3 items-center">
                 <div className="flex-1 min-w-[200px] relative">
-                    <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 right-3 text-slate-400" />
+                    <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 start-3 text-slate-400" />
                     <input
                         type="text"
                         value={search}
@@ -118,10 +118,10 @@ const StatCard: React.FC<{
 
 // ─── بطاقة قرار تاريخيّ ─────────────────────────────────────────────────────
 const STATUS_ICONS = {
-    approved:   { icon: CheckCircle2,  color: 'text-hrsd-green-dark', label: 'مُعتمَد' },
-    rejected:   { icon: XCircle,       color: 'text-rose-600',        label: 'مرفوض' },
-    delayed:    { icon: PauseCircle,   color: 'text-amber-600',       label: 'مُؤجَّل' },
-    superseded: { icon: RotateCw,      color: 'text-slate-500',       label: 'استُبدِل' },
+    approved:   { icon: CheckCircle2,  color: 'text-hrsd-green-dark', badge: 'bg-hrsd-green/15', label: 'مُعتمَد' },
+    rejected:   { icon: XCircle,       color: 'text-rose-600',        badge: 'bg-rose-100',      label: 'مرفوض' },
+    delayed:    { icon: PauseCircle,   color: 'text-amber-600',       badge: 'bg-amber-100',     label: 'مُؤجَّل' },
+    superseded: { icon: RotateCw,      color: 'text-slate-500',       badge: 'bg-slate-100',     label: 'استُبدِل' },
 };
 
 const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
@@ -144,12 +144,12 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
                             <span className="text-slate-400">·</span>
                             <span className="text-slate-600 dark:text-slate-300">مستوى {entry.level}</span>
                         </div>
-                        <h3 className="text-[16px] font-bold text-slate-900 dark:text-white leading-tight">
+                        <h3 className="text-[17px] font-bold text-slate-900 dark:text-white leading-tight">
                             {entry.title}
                         </h3>
                     </div>
                 </div>
-                <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded ${STATUS_ICONS[entry.status].color.replace('text-', 'bg-').replace('-600', '-100').replace('-dark', '/15').replace('-500', '-100')} ${STATUS_ICONS[entry.status].color}`}>
+                <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded ${STATUS_ICONS[entry.status].badge} ${STATUS_ICONS[entry.status].color}`}>
                     {STATUS_ICONS[entry.status].label}
                 </span>
             </header>

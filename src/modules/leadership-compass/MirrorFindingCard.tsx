@@ -21,7 +21,7 @@ export const MirrorFindingCard: React.FC<{
     return (
         <article
             dir="rtl"
-            className={`bg-white dark:bg-slate-800 rounded-xl border-2 ${tone.border}
+            className={`bg-white dark:bg-slate-800 rounded-2xl border-2 ${tone.border}
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
         >
             <div className={`${tone.bg} px-4 py-2 flex items-center justify-between`}>
@@ -38,7 +38,7 @@ export const MirrorFindingCard: React.FC<{
 
             <div className="p-5 space-y-3">
                 <header>
-                    <h3 className="text-[16px] font-bold text-slate-900 dark:text-white leading-snug mb-2">
+                    <h3 className="text-[15px] font-bold text-slate-900 dark:text-white leading-snug mb-2">
                         {finding.findingHeadline}
                     </h3>
                     {finding.findingDetail && (
@@ -65,7 +65,7 @@ export const MirrorFindingCard: React.FC<{
                 )}
 
                 {finding.suggestedAction && (
-                    <div className="flex items-start gap-2 p-3 bg-hrsd-teal/5 border-r-3 border-hrsd-teal rounded-lg">
+                    <div className="flex items-start gap-2 p-3 bg-hrsd-teal/5 border-r-4 border-hrsd-teal rounded-lg">
                         <Eye className="w-4 h-4 text-hrsd-teal mt-0.5 shrink-0" />
                         <div className="flex-1">
                             <div className="text-[11px] font-bold text-hrsd-teal uppercase tracking-wider mb-0.5">

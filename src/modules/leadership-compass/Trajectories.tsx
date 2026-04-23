@@ -169,7 +169,7 @@ const TrajectoryCard: React.FC<{
                         />
                         <YAxis
                             tick={{ fontSize: 10, fill: '#64748b' }}
-                            domain={spec.higherIsBetter ? [0, 'auto'] : [0, 'auto']}
+                            domain={[0, 'auto']}
                             width={35}
                         />
                         <Tooltip content={<CustomTooltip unit={spec.unit} />} />

@@ -67,7 +67,7 @@ export const DecisionCard: React.FC<{
             {/* المحتوى الرئيسيّ */}
             <div className="p-5 md:p-6 space-y-5">
                 <header>
-                    <h3 className="text-[18px] font-bold text-slate-900 dark:text-white leading-tight mb-2">
+                    <h3 className="text-[17px] font-bold text-slate-900 dark:text-white leading-tight mb-2">
                         {decision.title}
                     </h3>
                     <p className="text-[14px] text-slate-600 dark:text-slate-300 leading-relaxed">

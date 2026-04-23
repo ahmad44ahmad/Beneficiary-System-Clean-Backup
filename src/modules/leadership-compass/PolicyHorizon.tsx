@@ -90,7 +90,7 @@ const SignalCard: React.FC<{ signal: PolicySignal }> = ({ signal }) => {
     const strength = STRENGTH_TONES[signal.strength];
 
     return (
-        <article className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <article className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
             <div className={`${strength.bg} px-4 py-2 flex items-center gap-2 border-b ${strength.border}`}>
                 <span className="text-base" aria-hidden="true">{strength.icon}</span>
                 <span className={`text-[11px] font-bold uppercase tracking-wider ${strength.text}`}>
