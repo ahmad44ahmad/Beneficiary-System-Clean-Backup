@@ -262,3 +262,47 @@ Note: `002` has two files (`002_catering_quality.sql`, `002_functions.sql`) — 
 - **Styling:** Tailwind utility classes. No inline styles. No CSS modules.
 - **Arabic text:** Always use translation utilities from `src/utils/arabic-translations.ts`.
 - **Supabase queries:** Always go through `src/services/supaService.ts` or dedicated hooks in `src/hooks/`.
+
+---
+
+## Security & Compliance Handover Packet (Phase 2 — 2026-04-22)
+
+Phase 2 deliverables for the Agency handover. Every document links to the HRSD policy sections it discharges. Read `docs/handover-security-packet.md` first — it is the master index.
+
+| Document | Path | Covered HRSD Policies |
+|---|---|---|
+| Master security policy | `SECURITY.md` | `DT-IS-POL-001 V4` (governance) · references every policy listed below |
+| Handover packet (master index) | `docs/handover-security-packet.md` | `DT-IS-POL-001 V4` · `DT-IS-POL-400 V7` · `DT-IS-FRM-2320` · umbrella over all below |
+| Risk register | `docs/risk-register.md` | `DT-IS-FRM-2320 §3` (risk management framework) |
+| Incident response plan | `docs/incident-response.md` | `Emergency Management v1.0` · `DT-IS-POL-1300 V7 §3.6` · NCA ECC-2:2024 §4.2 |
+| Backup & retention strategy | `docs/backup-strategy.md` | `DT-IS-POL-200 V10` · `DT-IS-POL-400 V7 §3.6` · `Data Retention and Disposal Policy v1.0` |
+| Full-export script | `scripts/export-full.sh` | `DT-IS-POL-400 V7 §3.6` (cloud exit) · `DT-IS-POL-200 V10` (backup) |
+| Data classification reference | `docs/data-classification.md` | `DT-IS-POL-1000 V10` · `Personal Data Protection Policy v1.0` |
+| Data classification (technical) | `supabase/sql/023_data_classification.sql` | `DT-IS-POL-1000 V10` §3.1 (COMMENT ON at table + column) |
+| Third-party access procedure | `docs/third-party-access.md` | `DT-IS-POL-1400 V10 §3.2.8-3.2.11` · `DT-IS-POL-400 V7 §3.3.6` |
+| AI usage policy | `docs/ai-usage-policy.md` | `DT-IS-POL-2900` (acceptable AI) · `DT-IS-POL-3000` (AI governance) · `PDPL v1.0` · `CRPD` |
+| Cloud-region decision paper | `docs/cloud-region-decision.md` | `DT-IS-POL-400 V7 §3.4.1` (data residency) · §3.3 (cloud services) · §3.6 (exit) |
+| SoD gap acknowledgment | `docs/sod-gap-acknowledgment.md` | `DT-IS-POL-1400 V10 §3.3.2` (segregation of duties) · `DT-IS-POL-3100 V1 §3.5` (SDLC) |
+
+### Reading order for the Agency
+
+When the packet is handed to the Agency, recommend this sequence (keeps decisions before mechanics):
+
+1. `docs/handover-security-packet.md` — what's done, what's pending.
+2. `docs/cloud-region-decision.md` — first strategic decision.
+3. `docs/sod-gap-acknowledgment.md` — the honest acknowledgment.
+4. `docs/risk-register.md` — the full risk picture.
+5. `docs/data-classification.md` → `docs/backup-strategy.md` → `docs/incident-response.md` — operational references.
+6. `docs/third-party-access.md` → `docs/ai-usage-policy.md` — gated processes.
+7. `SECURITY.md` — the formal umbrella.
+8. `scripts/export-full.sh` — the exit-strategy executable.
+
+### Handover packet house rules (when editing any file above)
+
+- Governmental Arabic register (يتم، يُحدد، يلتزم). Not AI-academic. Not conversational.
+- Beneficiary (مستفيد), not patient (مريض).
+- No CBAHI references — MHRSD ≠ MoH.
+- Institutional voice only — no personal name on institutional surfaces.
+- No ranking between centers — best practice, not best center.
+- Decisions (and failed decisions) are permanent; archive, don't delete.
+- Helper-over-display: decision papers lead with the question + alternatives, not with data.
