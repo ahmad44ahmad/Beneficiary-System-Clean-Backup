@@ -2,10 +2,27 @@
 
 ## Project Overview
 
-Arabic RTL healthcare quality management system for HRSD Al-Baha Rehabilitation Center.
-299 source files (219 TSX + 80 TS), 150+ routes, Supabase backend with local data fallback.
+Arabic RTL **social-model rehabilitation operations system** for HRSD Al-Baha Comprehensive Rehabilitation Center. Not an EHR — MHRSD ≠ MoH. Framed as a **beneficiary-centric dignity instrument**, not a patient-record tool.
+
+314 source files (.ts + .tsx), ~66k LoC, 110+ routes, Supabase backend with local data fallback. Target in the v2 rebuild: <40k LoC.
 
 **Project root:** `C:\dev\basira\` (canonical, flattened 2026-04-16)
+
+## Branches
+
+- `main` — Basira v1 / مبادرة صفر ورق — MHRSD-endorsed 2025 achievement (approved 2025-12-03 by Ali Al-Qarni). Tagged `v1.0.0-zero-paper`. Frozen as the record-of-endorsement; hotfixes only.
+- `v2` — social-model / Trust-Ground / Dignity Index work. All new features land here. See `PLAN-comprehensive-2026.md` for the 12-month plan.
+
+## Strategic frame (2026-04-21)
+
+Per `launchpad-opus-4.7.md` §6–§7:
+
+- Basira IS: a **Trust-Ground** + **Stewardship Instrument** + **Dignity Index in disguise**.
+- Basira is NOT: an EHR, a bureaucratic dashboard, a gap-analysis tool.
+- Every feature must answer: **which of the 10 social-handicap barrier types does this dissolve?** (see launchpad §6.2).
+- Governmental Arabic for user-facing text (يتم، يُحدد، يلتزم). No AI-academic register.
+- **No CBAHI references** — MHRSD rehab centers are social, not clinical.
+- Beneficiary, not patient. Barrier, not diagnosis. Intervention, not treatment.
 
 Bash form: `/c/dev/basira`. Old paths under `Beneficiary-System-Clean-Backup\Beneficiary-System-Clean-Backup\` or `.local\bin\` are deprecated — do not use.
 

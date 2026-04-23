@@ -1445,6 +1445,29 @@ legend {
     border-radius: var(--radius);
 }
 
+/*
+ * Daily-follow-up panel — reuses .clothing-panel structure but overrides
+ * the orange accent with HRSD teal. Ahmad 2026-04-22: "لون برتقالي غريب".
+ * Add `.daily-follow-up-panel` alongside `.clothing-panel` on the wrapper.
+ */
+.daily-follow-up-panel {
+    --primary-color: #148287;         /* HRSD teal */
+    --primary-light: #28a0a5;
+    --primary-dark: #0a6469;
+    --secondary-color: #e6f4f4;       /* muted teal wash replaces the yellow tab-tray */
+}
+.daily-follow-up-panel .tabs {
+    background: #f1f5f9;              /* neutral slate tray */
+}
+.daily-follow-up-panel .tabs button.active {
+    color: #ffffff;
+    background: var(--primary-color);
+    box-shadow: 0 2px 6px rgba(20, 130, 135, 0.3);
+}
+.daily-follow-up-panel .panel-header h2 {
+    color: #14415A;                   /* HRSD navy — readable, not the orange default */
+}
+
 .data-table {
     width: 100%;
     border-collapse: collapse;

@@ -48,7 +48,7 @@ export const useMedicalWorkflow = (
             if (profile.isEpileptic) {
                 requireSeizureHistory = true;
                 if (!profile.history?.seizureHistory?.lastSeizureDate) {
-                    errors['seizureHistory'] = 'يجب تعبئة تاريخ آخر نوبة للمرضى المشخصين بالصرع.';
+                    errors['seizureHistory'] = 'يجب تعبئة تاريخ آخر نوبة للمستفيدين المشخصين بالصرع.';
                 }
             }
         }

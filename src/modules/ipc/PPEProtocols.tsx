@@ -48,7 +48,7 @@ const donningSteps: PPEStep[] = [
   },
   {
     title: 'الدخول',
-    description: 'ادخل غرفة المريض بحذر',
+    description: 'ادخل غرفة المستفيد بحذر',
     icon: <Play className="w-6 h-6" />,
   },
 ];

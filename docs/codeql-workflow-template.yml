@@ -1,0 +1,100 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# INSTALLATION INSTRUCTIONS (must be done by Ahmad manually):
+#
+# The OAuth token used by command-line git in this environment does not have
+# the `workflow` scope, so this file is shipped as a template instead of being
+# committed directly to `.github/workflows/`. To activate CodeQL scanning:
+#
+# Option A — GitHub Web UI (easiest, 2 minutes):
+#   1. Open: https://github.com/ahmad44ahmad/Beneficiary-System-Clean-Backup
+#   2. Click "Actions" tab → "New workflow" → "set up a workflow yourself"
+#   3. Name the file: codeql.yml
+#   4. Paste the contents of this file (everything below the delimiter "---")
+#   5. Commit directly to the v2 branch
+#
+# Option B — Local with a PAT that has workflow scope:
+#   1. Generate a Personal Access Token with the `workflow` scope
+#   2. Use that token for git push
+#   3. cp this file to .github/workflows/codeql.yml, commit, push
+#
+# Once installed, the action runs on: push to v2/main, PRs to v2, and every
+# Sunday 03:00 UTC (weekly full scan). Results appear in GitHub Security tab.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+---
+
+name: CodeQL Security Analysis
+
+# Static Application Security Testing per DT-IS-POL-3100 V1 §3.2.8
+# ("A secure-code scanning tool must be used on development code to
+#   identify security vulnerabilities")
+#
+# Runs CodeQL against JavaScript/TypeScript sources in the Basira repo.
+# Push → on every push to v2 (primary dev branch).
+# PR   → on every PR targeting v2 (pre-merge security gate).
+# Cron → weekly full scan to catch newly published CVEs in shipped code.
+
+on:
+  push:
+    branches: [v2, main]
+  pull_request:
+    branches: [v2]
+  schedule:
+    # Every Sunday at 03:00 UTC (06:00 Riyadh) — off-hours scan
+    - cron: '0 3 * * 0'
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript-typescript']
+        # If Supabase edge functions (Deno) are added later, extend matrix:
+        # language: ['javascript-typescript', 'python']
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Extended query suite — covers more checks than default.
+          # security-extended includes OWASP Top 10, CWE Top 25.
+          queries: security-extended,security-and-quality
+          # Scope the scan to source + config, exclude build artifacts
+          config: |
+            paths:
+              - src
+              - scripts
+              - supabase/functions
+            paths-ignore:
+              - node_modules
+              - dist
+              - dist-ssr
+              - coverage
+              - playwright-report
+              - test-results
+              - '**/*.test.ts'
+              - '**/*.spec.ts'
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{ matrix.language }}'
+          # Upload SARIF to GitHub Security tab
+          upload: true

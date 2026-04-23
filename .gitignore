@@ -50,3 +50,46 @@ eslint_out2.json
 .claude/
 
 .vercel
+
+# Local diagnostic scripts — may contain hardcoded credentials, never commit
+basira-diagnostic.mjs
+*-diagnostic.mjs
+scripts/local-diag-*.mjs
+
+# Database backups from scripts/export-full-backup.sh — never commit
+# (contains full audit_logs, RLS policies, beneficiary data even if demo)
+backups/
+
+# skills CLI scaffolding (symlinks for many AI coding assistants).
+# `.mcp.json` is committed (project MCP config), everything else is tool-local.
+.agents/
+skills/
+skills-lock.json
+.adal/
+.augment/
+.bob/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/

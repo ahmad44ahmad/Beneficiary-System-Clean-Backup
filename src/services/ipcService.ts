@@ -117,11 +117,14 @@ const DEMO_CHECKLIST_TEMPLATE: ChecklistTemplate = {
     category: 'hygiene',
     is_active: true,
     checklist_items: {
-        hand_moment_1: { ar: 'قبل ملامسة المريض/المستفيد', weight: 10, category: '5_moments' },
+        // WHO 5 Moments of Hand Hygiene — adapted to social-model beneficiary framing.
+        // Original WHO Arabic uses "المريض"; we use "المستفيد" consistently with
+        // MHRSD social-care context. See PLAN-comprehensive-2026.md §6.3.
+        hand_moment_1: { ar: 'قبل ملامسة المستفيد', weight: 10, category: '5_moments' },
         hand_moment_2: { ar: 'قبل الإجراء التعقيمي', weight: 10, category: '5_moments' },
         hand_moment_3: { ar: 'بعد التعرض لسوائل الجسم', weight: 10, category: '5_moments' },
-        hand_moment_4: { ar: 'بعد ملامسة المريض/المستفيد', weight: 10, category: '5_moments' },
-        hand_moment_5: { ar: 'بعد ملامسة محيط المريض', weight: 10, category: '5_moments' },
+        hand_moment_4: { ar: 'بعد ملامسة المستفيد', weight: 10, category: '5_moments' },
+        hand_moment_5: { ar: 'بعد ملامسة محيط المستفيد', weight: 10, category: '5_moments' },
         sanitizer_available: { ar: 'توفر المعقم في نقاط الرعاية', weight: 5, category: 'supplies' },
         soap_filled: { ar: 'موزعات الصابون ممتلئة', weight: 5, category: 'supplies' },
         ppe_gloves: { ar: 'توفر القفازات بأحجام متعددة', weight: 8, category: 'ppe' },

@@ -2,11 +2,17 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# نظام بصيرة - Basira Quality Management System
+# نظام بصيرة - Basira
 
 > مركز التأهيل الشامل بمنطقة الباحة | Al-Baha Comprehensive Rehabilitation Center
+> MHRSD-endorsed initiative "مبادرة صفر ورق" (Zero Paper) — approved 2025-12-03
 
-Arabic RTL healthcare quality management system built with React 19, TypeScript, Framer Motion, and Tailwind CSS. Compliant with Ministry of Human Resources and Social Development (HRSD) branding.
+Arabic RTL **social-model rehabilitation operations system** for the Ministry of Human Resources and Social Development (MHRSD). Built with React 19, TypeScript, Tailwind CSS, Supabase.
+
+Basira is framed as a **beneficiary-centric dignity instrument** — not an EHR. It supports the operational work of a comprehensive rehabilitation center (Al-Baha) while encoding the social model of disability: beneficiary-not-patient, barrier-not-diagnosis, intervention-not-treatment.
+
+- `main` branch = Basira v1 (Zero Paper, endorsed). Tag: `v1.0.0-zero-paper`.
+- `v2` branch = Trust-Ground + Dignity Index work. See [`PLAN-comprehensive-2026.md`](PLAN-comprehensive-2026.md).
 
 ---
 

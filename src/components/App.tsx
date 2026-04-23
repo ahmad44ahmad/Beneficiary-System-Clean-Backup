@@ -62,6 +62,9 @@ const SecretariatDashboard = lazy(() => import('./secretariat/SecretariatDashboa
 // Clothing & Inventory
 const ClothingManagementPanel = lazy(() => import('./clothing/ClothingManagementPanel').then(m => ({ default: m.ClothingManagementPanel })));
 
+// Leadership Compass — بوصلة القيادة (strategic decision surface)
+const LeadershipCompass = lazy(() => import('../modules/leadership-compass/LeadershipCompass').then(m => ({ default: m.LeadershipCompass })));
+
 // Rehab & Care
 const RehabPlanBuilder = lazy(() => import('./rehab/RehabPlanBuilder').then(m => ({ default: m.RehabPlanBuilder })));
 const DailyCareForm = lazy(() => import('./care/DailyCareForm').then(m => ({ default: m.DailyCareForm })));
@@ -394,6 +397,9 @@ export const App = () => {
 
                     {/* Feature 2: SROI Dashboard */}
                     <Route path="sroi" element={<SroiDashboard />} />
+
+                    {/* بوصلة القيادة — مساحة القرار الاستراتيجي (v0) */}
+                    <Route path="leadership-compass" element={<LeadershipCompass />} />
 
                     {/* Feature 4: Governance */}
                     <Route path="governance" element={<GoldenThreadView />} />

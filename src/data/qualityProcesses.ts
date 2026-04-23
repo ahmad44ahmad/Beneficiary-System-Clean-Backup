@@ -130,7 +130,7 @@ export const qualityProcesses: QualityProcess[] = [
     {
         id: '12',
         department: 'العلاج الطبي',
-        name: 'متابعة مرضى الصرع',
+        name: 'متابعة المستفيدين المصابين بالصرع',
         responsible: 'د. محمد بلال، د. أيمن علي',
         inputs: 'سجل النوبات، نتائج التحاليل',
         outputs: 'خطط العلاج، سجل النوبات المحدث',

@@ -53,6 +53,39 @@
   --hrsd-font-xl: 20px;
   --hrsd-font-2xl: 24px;
 
+  /* ===== Navigation / Sidebar hierarchy tokens =====
+     Every option is important — sizes avoid visual "squeezing"
+     (launchpad §6.2 / Ahmad 2026-04-22). Three clear tiers:
+     section → item (or subgroup) → sub-link.  */
+  --nav-section-title-size: 13px;         /* tier-1 section header (e.g. "الحوكمة والجودة") */
+  --nav-section-title-weight: 700;
+  --nav-section-title-tracking: 0.05em;
+
+  --nav-item-size: 15px;                  /* tier-2 nav link (e.g. "الملف الطبي") */
+  --nav-item-weight: 500;
+  --nav-item-weight-active: 700;
+  --nav-item-pad-y: 0.75rem;              /* 12px — never less */
+  --nav-item-pad-x: 0.875rem;             /* 14px */
+  --nav-item-gap: 0.75rem;                /* gap icon↔label */
+  --nav-item-icon-size: 1.25rem;          /* 20px */
+
+  --nav-subgroup-title-size: 14px;        /* tier-2.5 (e.g. "الحوكمة" inside "الحوكمة والجودة") */
+  --nav-subgroup-title-weight: 600;
+
+  --nav-sub-link-size: 14px;              /* tier-3 sub-link — NEVER below 14px (Ahmad) */
+  --nav-sub-link-weight: 500;
+  --nav-sub-link-pad-y: 0.5rem;           /* 8px */
+  --nav-sub-link-icon-size: 1rem;         /* 16px */
+
+  /* Spacing between items — breathing room, no crowding */
+  --nav-item-gap-v: 0.375rem;             /* 6px between items within a group */
+  --nav-subgroup-gap-v: 0.75rem;          /* 12px between subgroups */
+  --nav-section-gap-v: 1.25rem;           /* 20px between top-level sections */
+
+  /* Tree-guide for nested hierarchy */
+  --nav-tree-indent: 1rem;                /* 16px indent per depth */
+  --nav-tree-line: rgba(250, 180, 20, 0.35); /* muted gold guide-line */
+
   /* ===== Shadows ===== */
   --hrsd-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --hrsd-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -96,23 +129,61 @@ body {
   line-height: 1.6;
 }
 
-/* Ensure no text is smaller than 14px */
-* {
-  min-height: 0;
+/* Minimum font-size enforcement.
+   Previous rule used max(inherit, ...) which is invalid — inherit cannot
+   appear inside max(). Replaced with a correct approach: the sidebar and
+   other navigation surfaces opt in via utility classes below. */
+
+/* Sidebar / navigation hierarchy utilities —
+   designed so every option reads as important, never crammed.
+   Use data-nav-tier="section|item|subgroup|sub-link" on the relevant element. */
+
+[data-nav-tier="section"] {
+  font-size: var(--nav-section-title-size);
+  font-weight: var(--nav-section-title-weight);
+  letter-spacing: var(--nav-section-title-tracking);
 }
 
-p,
-span,
-a,
-li,
-td,
-th,
-label,
-input,
-select,
-textarea,
-button {
-  font-size: max(inherit, var(--hrsd-font-min));
+[data-nav-tier="item"] {
+  font-size: var(--nav-item-size);
+  font-weight: var(--nav-item-weight);
+  padding-top: var(--nav-item-pad-y);
+  padding-bottom: var(--nav-item-pad-y);
+  padding-inline-start: var(--nav-item-pad-x);
+  padding-inline-end: var(--nav-item-pad-x);
+  gap: var(--nav-item-gap);
+}
+
+[data-nav-tier="item"].is-active {
+  font-weight: var(--nav-item-weight-active);
+}
+
+[data-nav-tier="subgroup"] {
+  font-size: var(--nav-subgroup-title-size);
+  font-weight: var(--nav-subgroup-title-weight);
+}
+
+[data-nav-tier="sub-link"] {
+  font-size: var(--nav-sub-link-size);
+  font-weight: var(--nav-sub-link-weight);
+  padding-top: var(--nav-sub-link-pad-y);
+  padding-bottom: var(--nav-sub-link-pad-y);
+}
+
+/* Visual tree-guide for sub-links: vertical gold line on the start side
+   (RTL-aware via inline-start). Communicates "this is a branch of above". */
+.nav-tree-guide {
+  position: relative;
+  padding-inline-start: var(--nav-tree-indent);
+}
+.nav-tree-guide::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.25rem;
+  inset-inline-start: 0.375rem;
+  width: 2px;
+  background: var(--nav-tree-line);
+  border-radius: 2px;
 }
 
 /* ===== Wave Pattern Background ===== */

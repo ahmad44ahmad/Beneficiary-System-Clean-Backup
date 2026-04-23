@@ -41,7 +41,7 @@ export const QualityDashboard: React.FC = () => {
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <Shield className="w-8 h-8 text-teal-600" />
-                        لوحة الجودة وسلامة المرضى
+                        لوحة الجودة وسلامة المستفيدين
                     </h1>
                     <p className="text-gray-500 mt-1">مراقبة مؤشرات الأداء (KPIs) وتقارير الحوادث (OVR)</p>
                 </div>
@@ -104,27 +104,27 @@ export const QualityDashboard: React.FC = () => {
                 <div className="overflow-x-auto">
                     <table className="w-full text-right">
                         <thead>
-                            <tr className="bg-gray-50 text-gray-500 text-sm">
-                                <th className="p-4 font-medium">رقم البلاغ</th>
-                                <th className="p-4 font-medium">التاريخ</th>
-                                <th className="p-4 font-medium">التصنيف</th>
-                                <th className="p-4 font-medium">الوصف</th>
-                                <th className="p-4 font-medium">الخطورة</th>
-                                <th className="p-4 font-medium">الحالة</th>
+                            <tr className="bg-gray-50 text-gray-600 text-[14px]">
+                                <th className="p-4 font-semibold">رقم البلاغ</th>
+                                <th className="p-4 font-semibold">التاريخ</th>
+                                <th className="p-4 font-semibold">التصنيف</th>
+                                <th className="p-4 font-semibold">الوصف</th>
+                                <th className="p-4 font-semibold">الخطورة</th>
+                                <th className="p-4 font-semibold">الحالة</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y">
                             {reports.map((report) => (
                                 <tr key={report.id} className="hover:bg-gray-50 transition-colors">
-                                    <td className="p-4 font-mono text-xs">{report.id}</td>
-                                    <td className="p-4 text-sm">{report.incidentDate}</td>
-                                    <td className="p-4 text-sm font-medium">{report.category}</td>
-                                    <td className="p-4 text-sm text-gray-500 max-w-xs truncate" title={report.description}>
+                                    <td className="p-4 font-mono text-[13px] font-semibold text-gray-900">{report.id}</td>
+                                    <td className="p-4 text-[14px]">{report.incidentDate}</td>
+                                    <td className="p-4 text-[14px] font-medium">{report.category}</td>
+                                    <td className="p-4 text-[14px] text-gray-600 max-w-xs truncate" title={report.description}>
                                         {report.description}
                                     </td>
                                     <td className="p-4">{getSeverityBadge(report.severity)}</td>
                                     <td className="p-4">
-                                        <span className={`inline-flex items-center gap-1 text-xs px-2 py-1 rounded border ${report.status === 'open' ? 'bg-red-50 text-red-700 border-red-200' :
+                                        <span className={`inline-flex items-center gap-1 text-[12px] font-semibold px-2.5 py-1 rounded-md border ${report.status === 'open' ? 'bg-red-50 text-red-700 border-red-200' :
                                                 report.status === 'investigating' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                                                     'bg-gray-100 text-gray-600 border-gray-200'
                                             }`}>

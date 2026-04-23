@@ -42,6 +42,8 @@ export const ACTION_LABELS = {
 } as const;
 
 // Entity Labels
+// Social-model alignment: prefer `assessment` over `diagnosis` in new code.
+// `diagnosis` retained for back-compat; currently unused in src/ (verified 2026-04-22).
 export const ENTITY_LABELS = {
     beneficiary: 'مستفيد',
     beneficiaries: 'المستفيدين',
@@ -51,7 +53,11 @@ export const ENTITY_LABELS = {
     room: 'غرفة',
     bed: 'سرير',
     medication: 'دواء',
-    diagnosis: 'تشخيص',
+    assessment: 'تقييم وظيفي',
+    intervention: 'تدخّل',
+    barrier: 'عائق اجتماعي',
+    empowerment: 'تمكين',
+    diagnosis: 'تشخيص', // deprecated — prefer `assessment`
     report: 'تقرير',
     alert: 'تنبيه',
     notification: 'إشعار'
