@@ -48,6 +48,9 @@ export interface SocialResearch {
     chronicIllnessDetails?: string;
     familyAdaptation?: string;
     socialResearchSummary?: string;
+    housingType?: 'owned' | 'rented' | 'popular';
+    economicStatus?: 'good' | 'average' | 'low';
+    incomeDetails?: string;
 
     reasonForResearch?: string;
     socialHistory?: string;

@@ -61,13 +61,10 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
                             title="نمط الشخصية"
                         >
-                            <option value="introvert">انطوائي / هادئ</option>
-                            <option value="extrovert">اجتماعي / منفتح</option>
-                            <option value="ambivert">متوازن</option>
-                            <option value="social">اجتماعي</option>
-                            <option value="energetic">حيوي</option>
-                            <option value="calm">هادئ</option>
-                            <option value="observer">مراقب</option>
+                            <option value="social">اجتماعي ومحبوب</option>
+                            <option value="energetic">حيوي ونشيط</option>
+                            <option value="calm">هادئ ومتأمل</option>
+                            <option value="observer">مراقب جيد</option>
                         </select>
                     </div>
                 </div>
@@ -109,10 +106,9 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             className="w-full p-2 border rounded-lg"
                             title="تفضيلات الصوت"
                         >
-                            <option value="quiet">هادئ جداً</option>
-                            <option value="moderate">متوسط</option>
-                            <option value="loud">يتحمل الضجيج</option>
-                            <option value="lively">حيوي</option>
+                            <option value="quiet">هادئ</option>
+                            <option value="moderate">معتدل</option>
+                            <option value="loud">مرتفع</option>
                             <option value="any">أي صوت</option>
                         </select>
                     </div>
@@ -129,8 +125,8 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             title="تفضيلات الحرارة"
                         >
                             <option value="cool">باردة</option>
+                            <option value="normal">عادية</option>
                             <option value="warm">دافئة</option>
-                            <option value="normal">معتدلة</option>
                         </select>
                     </div>
                 </div>

@@ -120,7 +120,7 @@ const GoldenGuideView = () => {
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
                         <div className="grid grid-cols-2 gap-4 relative z-10">
                             <Card className="bg-white/10 border-white/10 text-white backdrop-blur-sm p-4">
-                                <div className="text-yellow-400 text-2xl font-bold mb-1">127</div>
+                                <div className="text-yellow-400 text-2xl font-bold mb-1">132</div>
                                 <div className="text-sm opacity-80">عملية موثقة</div>
                             </Card>
                             <Card className="bg-white/10 border-white/10 text-white backdrop-blur-sm p-4">

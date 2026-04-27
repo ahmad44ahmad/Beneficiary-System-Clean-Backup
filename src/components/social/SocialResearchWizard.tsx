@@ -185,8 +185,8 @@ export const SocialResearchWizard: React.FC = () => {
                                 <label className="block text-sm font-medium mb-2 text-gray-700">نوع السكن</label>
                                 <select
                                     className={inputClasses}
-                                    value={formData.chronicIllnessDetails || ''}
-                                    onChange={e => setFormData({ ...formData, chronicIllnessDetails: e.target.value })}
+                                    value={formData.housingType || ''}
+                                    onChange={e => setFormData({ ...formData, housingType: e.target.value as 'owned' | 'rented' | 'popular' })}
                                 >
                                     <option value="">اختر...</option>
                                     <option value="owned">ملك</option>
@@ -196,7 +196,12 @@ export const SocialResearchWizard: React.FC = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-2 text-gray-700">الحالة الاقتصادية</label>
-                                <select className={inputClasses}>
+                                <select
+                                    className={inputClasses}
+                                    value={formData.economicStatus || ''}
+                                    onChange={e => setFormData({ ...formData, economicStatus: e.target.value as 'good' | 'average' | 'low' })}
+                                >
+                                    <option value="">اختر...</option>
                                     <option value="good">جيدة</option>
                                     <option value="average">متوسطة</option>
                                     <option value="low">ضعيفة (يحتاج دعم)</option>
@@ -208,6 +213,8 @@ export const SocialResearchWizard: React.FC = () => {
                             <textarea
                                 className={inputClasses + ' h-28'}
                                 placeholder="اذكر مصادر الدخل..."
+                                value={formData.incomeDetails || ''}
+                                onChange={e => setFormData({ ...formData, incomeDetails: e.target.value })}
                             />
                         </div>
                     </div>
@@ -240,6 +247,8 @@ export const SocialResearchWizard: React.FC = () => {
                             <textarea
                                 className={inputClasses + ' h-28'}
                                 placeholder="توصياتك كأخصائي اجتماعي (مثلاً: يحتاج زيارات مكثفة، يحتاج دعم مالي، إلخ)..."
+                                value={formData.recommendations || ''}
+                                onChange={e => setFormData({ ...formData, recommendations: e.target.value })}
                             />
                         </div>
                     </div>

@@ -252,8 +252,8 @@ export const AuditLogViewer: React.FC = () => {
                     <p className="text-gray-500 mt-1">
                         تتبع جميع العمليات والإجراءات في النظام للامتثال والمساءلة
                     </p>
-                    {usingDemo && (
-                        <p className="text-amber-600 text-sm mt-1">⚠️ بيانات تجريبية - لا يوجد اتصال بقاعدة البيانات</p>
+                    {usingDemo && import.meta.env.DEV && (
+                        <p className="text-amber-600 text-sm mt-1">وضع العرض</p>
                     )}
                 </div>
                 <div className="flex gap-2">

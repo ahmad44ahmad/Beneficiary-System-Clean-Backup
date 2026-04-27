@@ -69,7 +69,7 @@ export interface DignityProfile {
     // Identity
     preferredName?: string;
     nickname?: string; // Alias for preferredName
-    personalityType?: 'introvert' | 'extrovert' | 'ambivert' | 'social' | 'energetic' | 'calm' | 'observer';
+    personalityType?: 'social' | 'energetic' | 'calm' | 'observer';
     personalityDescription?: string;
 
     // Senses

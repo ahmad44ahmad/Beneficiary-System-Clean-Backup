@@ -204,7 +204,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                         value={formData.disability_classification}
                                         onChange={(e) => setFormData({ ...formData, disability_classification: e.target.value })}
                                     >
-                                        <option value="">ختر التصنيف</option>
+                                        <option value="">اختر التصنيف</option>
                                         <option value="عقلية">إعاقة عقلية</option>
                                         <option value="حركية">إعاقة حركية</option>
                                         <option value="مزدوجة">مزدوجة (عقلية وحركية)</option>
@@ -307,7 +307,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="col-span-1 border p-4 rounded-lg bg-blue-50/50">
-                                    <h4 className="font-medium text-blue-800 mb-4">حساب كتلة الجمس (BMI)</h4>
+                                    <h4 className="font-medium text-blue-800 mb-4">حساب كتلة الجسم (BMI)</h4>
                                     <div className="space-y-3">
                                         <input
                                             type="number"
@@ -347,7 +347,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                 <div className="col-span-2">
                                     <label className="block text-sm font-medium text-slate-700 mb-2">نوع التغذية والحمية</label>
                                     <div className="grid grid-cols-1 gap-3">
-                                        {['فموي طبيعي', 'مهروس', 'سائل كثيف', 'أنبوبي معدي (PEG)', 'أنبوبي أنفي (NG Tupe)'].map(diet => (
+                                        {['فموي طبيعي', 'مهروس', 'سائل كثيف', 'أنبوبي معدي (PEG)', 'أنبوبي أنفي (NG Tube)'].map(diet => (
                                             <label key={diet} className="flex items-center gap-2">
                                                 <input
                                                     type="radio"

@@ -165,8 +165,8 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
                     <div className="w-20 h-20 bg-gradient-to-br from-pink-100 to-red-200 rounded-full mx-auto mb-4 flex items-center justify-center">
                         <HeartPulse className="w-10 h-10 text-red-600" />
                     </div>
-                    <h4 className="text-lg font-semibold text-gray-700 mb-2">خطط الرعاية التمريضية</h4>
-                    <p className="text-gray-500 text-sm">سيتم عرض الخطط العلاجية وتتبع الأهداف هنا</p>
+                    <h4 className="text-lg font-semibold text-gray-700 mb-2">خطط الرعاية والتأهيل</h4>
+                    <p className="text-gray-500 text-sm">تُعرض هنا الخطط الفردية للمستفيد ومستوى تحقيق أهدافها</p>
                 </div>
             )}
 
@@ -175,8 +175,8 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
                     <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-full mx-auto mb-4 flex items-center justify-center">
                         <FileText className="w-10 h-10 text-blue-600" />
                     </div>
-                    <h4 className="text-lg font-semibold text-gray-700 mb-2">الملاحظات التمريضية</h4>
-                    <p className="text-gray-500 text-sm">سجل الملاحظات اليومية وتطور الحالة</p>
+                    <h4 className="text-lg font-semibold text-gray-700 mb-2">الملاحظات اليومية</h4>
+                    <p className="text-gray-500 text-sm">يُسجَّل في هذا القسم تطور الحالة والملاحظات اليومية لفريق الرعاية</p>
                 </div>
             )}
         </div>

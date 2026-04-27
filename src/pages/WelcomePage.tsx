@@ -269,7 +269,6 @@ export const WelcomePage: React.FC = () => {
                                 <span className="text-[#2DB473] text-xs hidden sm:inline">متصل</span>
                             </div>
                             <span className="text-white/40 text-xs hidden md:inline">منطقة الباحة</span>
-                            <span className="bg-white/5 px-2 py-0.5 rounded text-white/30 text-[10px] font-mono hidden md:inline">v5.0</span>
                         </div>
                     </div>
                 </header>
@@ -284,9 +283,7 @@ export const WelcomePage: React.FC = () => {
                         transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <Sparkles className="w-4 h-4 text-[#FAB414]" />
-                        <span className="text-white/70 text-sm">نظام إدارة المستفيدين الذكي</span>
-                        <span className="w-[1px] h-3 bg-white/20" />
-                        <span className="text-[#2DB473] text-xs font-mono">الإصدار 5.0</span>
+                        <span className="text-white/70 text-sm">منظومة إدارة خدمات التأهيل والمتابعة</span>
                     </motion.div>
 
                     {/* Main Title */}
@@ -308,24 +305,14 @@ export const WelcomePage: React.FC = () => {
                         بصيرة
                     </motion.h1>
 
-                    {/* Arabic Subtitle */}
+                    {/* Subtitle (governmental register) */}
                     <motion.p
-                        className="text-2xl md:text-3xl text-white/80 font-light mb-3 tracking-wide"
+                        className="text-2xl md:text-3xl text-white/80 font-light mb-12 tracking-wide leading-relaxed max-w-3xl"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.8, duration: 0.6 }}
                     >
-                        رؤية ذكية لرعاية استثنائية
-                    </motion.p>
-
-                    {/* English Subtitle */}
-                    <motion.p
-                        className="text-sm md:text-base text-white/30 font-mono tracking-[0.3em] uppercase mb-12"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.0, duration: 0.6 }}
-                    >
-                        INTELLIGENT CARE MANAGEMENT PLATFORM
+                        منظومة رعاية وتأهيل وفق معايير وزارة الموارد البشرية والتنمية الاجتماعية
                     </motion.p>
 
                     {/* CTA Button */}
@@ -403,7 +390,7 @@ export const WelcomePage: React.FC = () => {
                                 <span className="text-[#148287] text-sm font-medium">ركائز التميز المؤسسي</span>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">خمس ركائز للتحول الرقمي</h2>
-                            <p className="text-white/50 text-lg max-w-2xl mx-auto">منظومة متكاملة تجمع بين أحدث التقنيات وأفضل الممارسات العالمية</p>
+                            <p className="text-white/50 text-lg max-w-2xl mx-auto">خمس ركائز رقمية تدعم خدمات التأهيل وفق معايير الوزارة</p>
                         </motion.div>
 
                         {/* Pillars Grid — Top Row (3 cards) */}
@@ -484,9 +471,9 @@ export const WelcomePage: React.FC = () => {
                             {/* Decoration */}
                             <div className="absolute top-0 left-0 w-32 h-32 rounded-full border-[20px] border-white/[0.02] -translate-y-1/2 -translate-x-1/2" />
 
-                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">جاهز للانطلاق؟</h3>
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">للدخول إلى المنظومة</h3>
                             <p className="text-white/50 mb-8 leading-relaxed">
-                                ابدأ رحلتك في إدارة رعاية المستفيدين بأعلى معايير الجودة والكفاءة
+                                يلتزم النظام بمعايير الوزارة في إدارة خدمات التأهيل والمتابعة للمستفيدين
                             </p>
 
                             <button
@@ -519,8 +506,8 @@ export const WelcomePage: React.FC = () => {
                             © 2026 مركز التأهيل الشامل بالباحة | وزارة الموارد البشرية والتنمية الاجتماعية
                         </div>
                         <div className="flex flex-col items-center md:items-start gap-0.5">
-                            <span className="text-white/20 text-[11px]">تصميم و تطوير: قسم الجودة</span>
-                            <span className="text-white/[0.12] text-[10px]">أحمد بن عبدالله الشهري</span>
+                            <span className="text-white/20 text-[11px]">إعداد قسم الجودة بمركز التأهيل الشامل بالباحة</span>
+                            <span className="text-white/[0.12] text-[10px]">بإشراف فرع وزارة الموارد البشرية والتنمية الاجتماعية بالباحة</span>
                         </div>
                     </div>
                 </footer>

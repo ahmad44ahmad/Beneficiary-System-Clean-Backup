@@ -4,7 +4,7 @@ export interface DignityProfile {
 
     // Core Identity
     nickname?: string; // What they like to be called
-    personalityType: 'social' | 'introverted' | 'energetic' | 'calm' | 'observer';
+    personalityType: 'social' | 'energetic' | 'calm' | 'observer';
     personalityDescription: string;
 
     // My Comfort (The "Dignity" Aspect)
@@ -97,5 +97,44 @@ export const MOCK_DIGNITY_PROFILES: DignityProfile[] = [
             }
         ],
         lastUpdated: '2025-12-18'
+    },
+    {
+        id: 'dp2',
+        beneficiaryId: '172', // محمد صالح شافي مثيب الرفاعي الغامدي
+        nickname: 'أبو سعد',
+        personalityType: 'calm',
+        personalityDescription: 'شخصية هادئة ومتأملة، يفضّل الأماكن الهادئة، ويستجيب جيداً للنداء بكنيته.',
+        sensoryPreferences: {
+            lighting: 'natural',
+            noise: 'moderate',
+            temperature: 'normal',
+            smells: ['العود']
+        },
+        favorites: {
+            food: ['تمر', 'قهوة عربية'],
+            activities: ['جلسات قراءة القرآن', 'الجلوس في الشمس قبل الغروب'],
+            places: ['المصلى', 'الحديقة الخلفية'],
+            people: ['الممرض سعد', 'المشرف عبدالله'],
+            colors: ['أخضر', 'أبيض']
+        },
+        dislikes: {
+            food: [],
+            triggers: ['الأصوات العالية بعد العصر', 'تأخّر موعد الصلاة'],
+            fears: []
+        },
+        communicationStyle: 'verbal',
+        bestWayToEngage: 'ناده بكنيته «أبو سعد»، واخفض الصوت عند الحديث معه.',
+        deeds: [
+            {
+                id: 'd3',
+                date: '2026-04-12',
+                title: 'الإمساك بكوب الماء',
+                description: 'أتمّ مرحلة جديدة في خطة التأهيل: الإمساك بكوب الماء بشكل مستقل بنسبة ٤٠٪.',
+                category: 'personal',
+                impactLevel: 'high',
+                verifiedBy: 'أخصائي العلاج الوظيفي'
+            }
+        ],
+        lastUpdated: '2026-04-25'
     }
 ];

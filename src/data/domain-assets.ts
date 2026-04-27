@@ -227,7 +227,7 @@ export interface AlertTag {
 }
 
 export const ALERT_TAGS: AlertTag[] = [
-    { id: "diabetic", label: "مريض سكري", color: "#3498DB", icon: "💉" },
+    { id: "diabetic", label: "حالة سكري", color: "#3498DB", icon: "💉" },
     { id: "fallRisk", label: "خطر سقوط", color: "#E67E22", icon: "⚠️" },
     { id: "foodAllergy", label: "حساسية طعام", color: "#E74C3C", icon: "🚫" },
     { id: "swallowingDifficulty", label: "صعوبة بلع", color: "#9B59B6", icon: "🍽️" },

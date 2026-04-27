@@ -103,6 +103,28 @@ export const QOL_DIMENSIONS = [
 // Demo Data
 const DEMO_GOALS: RehabGoal[] = [
     {
+        id: 'g0',
+        beneficiary_id: '172', // محمد — أبو سعد (ربط مع ملف الكرامة)
+        domain: 'self_care',
+        goal_title: 'الإمساك بكوب الماء بشكل مستقل',
+        goal_description: 'رفع قدرة المستفيد على الإمساك بكوب الماء بشكل مستقل من ٠٪ إلى ٨٠٪ خلال اثني عشر أسبوعاً',
+        measurement_type: 'numeric',
+        measurement_unit: '%',
+        baseline_value: 0,
+        target_value: 80,
+        current_value: 35,
+        quality_of_life_dimension: 'self_determination',
+        start_date: '2026-01-15',
+        target_date: '2026-04-09',
+        assigned_to: 'أخصائي العلاج الوظيفي',
+        assigned_department: 'العلاج الوظيفي',
+        status: 'in_progress',
+        progress_percentage: 44,
+        linked_national_goal: 'تمكين ذوي الإعاقة',
+        created_at: '2026-01-15',
+        updated_at: '2026-04-25',
+    },
+    {
         id: '1',
         beneficiary_id: 'b1',
         domain: 'physical',

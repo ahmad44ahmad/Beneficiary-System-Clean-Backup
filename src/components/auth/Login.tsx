@@ -18,7 +18,7 @@ export const Login = () => {
                 await signIn(email, password);
                 navigate('/dashboard');
             } catch (err) {
-                setError('Failed to sign in. Please check your credentials.');
+                setError('تعذّر تسجيل الدخول. يُرجى التأكّد من صحّة بيانات الاعتماد.');
                 console.error(err);
             }
         });
@@ -31,7 +31,7 @@ export const Login = () => {
                 await signUp(email, password);
                 navigate('/dashboard');
             } catch (err: unknown) {
-                setError('Failed to create account. ' + (err instanceof Error ? err.message : String(err)));
+                setError('تعذّر إنشاء الحساب: ' + (err instanceof Error ? err.message : String(err)));
                 console.error(err);
             }
         });
@@ -44,7 +44,7 @@ export const Login = () => {
                 await signInWithGoogle();
                 navigate('/dashboard');
             } catch (err: unknown) {
-                setError('Failed to sign in with Google. ' + (err instanceof Error ? err.message : String(err)));
+                setError('تعذّر تسجيل الدخول عبر Google: ' + (err instanceof Error ? err.message : String(err)));
                 console.error(err);
             }
         });

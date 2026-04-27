@@ -384,7 +384,7 @@ export const beneficiaries: Beneficiary[] = [
         medicalDiagnosis: "اضطراب فكري شديد. بكم - اضطرابات سلوكية و نفسية. فرط حركة",
         iqLevel: "23 أ",
         iqScore: "شديد مع بكم 25",
-        psychiatricDiagnosis: "مريض نفسي عصبية زائده يقوم باكل اصابعة وعضها من الحالات الغصبية الحاده يستخدم العلاج",
+        psychiatricDiagnosis: "حالة نفسية: عصبية زائدة، يقوم بأكل أصابعه وعضّها في حالات الغضب الحادة، يستخدم التدخل الدوائي",
         notes: "لا",
     },
     {
@@ -404,7 +404,7 @@ export const beneficiaries: Beneficiary[] = [
         medicalDiagnosis: "اضطراب فكري متوسط. بكم - فرط حركة - عدم التحكم بالمخارج",
         iqLevel: "23 أ",
         iqScore: "متوسط بكم 40",
-        psychiatricDiagnosis: "مرض نفسيا يلف على نفسه وعلى سريره ويقوم بالدوران من غير ان يقف",
+        psychiatricDiagnosis: "حالة نفسية: يدور حول نفسه وعلى سريره من غير توقف",
         notes: "لا",
     },
     {
@@ -424,7 +424,7 @@ export const beneficiaries: Beneficiary[] = [
         medicalDiagnosis: "اضطراب فكري شديد - اضطرابات سلوكية و نفسية. فرط حركة - صعوبات شديدة في النطق و الكلام و التواصل مع الآخرين",
         iqLevel: "23 أ",
         iqScore: "شديد 20",
-        psychiatricDiagnosis: "مريض نفسي غير مسيطر على اضطراب انفعالي مرضي",
+        psychiatricDiagnosis: "حالة نفسية: اضطراب انفعالي غير مسيطر عليه",
         notes: "لا",
     },
     {

@@ -84,10 +84,10 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                     className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg ps-8 pe-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
                     title="تغيير واجهة العرض"
                 >
-                    <option value="ADMIN" className="text-gray-900">👁️ انظر كـ: مدير النظام</option>
-                    <option value="DIRECTOR" className="text-gray-900">👔 انظر كـ: مدير المركز</option>
-                    <option value="DEPARTMENT_HEAD" className="text-gray-900">📋 انظر كـ: رئيس قسم</option>
-                    <option value="STAFF" className="text-gray-900">👤 انظر كـ: موظف</option>
+                    <option value="ADMIN" className="text-gray-900">الدور: مدير النظام</option>
+                    <option value="DIRECTOR" className="text-gray-900">الدور: مدير المركز</option>
+                    <option value="DEPARTMENT_HEAD" className="text-gray-900">الدور: رئيس قسم</option>
+                    <option value="STAFF" className="text-gray-900">الدور: موظف</option>
                 </select>
                 <div className="absolute start-2 top-1/2 -translate-y-1/2 pointer-events-none">
                     <Eye className="w-3.5 h-3.5 text-hrsd-gold" />
@@ -114,7 +114,6 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 {/* Notifications */}
                 <Button variant="ghost" size="sm" className="relative hover:bg-white/10 p-2">
                     <Bell className="w-5 h-5 text-hrsd-gold" />
-                    <span className="absolute top-1 end-1 w-2.5 h-2.5 bg-hrsd-orange rounded-full border-2 border-hrsd-navy animate-pulse"></span>
                 </Button>
 
                 {/* User Info */}

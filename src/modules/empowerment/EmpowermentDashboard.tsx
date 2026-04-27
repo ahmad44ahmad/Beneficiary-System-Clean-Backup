@@ -174,6 +174,31 @@ export const EmpowermentDashboard: React.FC = () => {
                 </div>
             </div>
 
+            {/* Three Strategic Tracks */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div className="bg-gradient-to-br from-emerald-50 to-white p-5 rounded-xl border border-emerald-100">
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white text-xl">١</div>
+                        <h3 className="font-bold text-emerald-900">تمكين الاستقلال الذاتي</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">تحسين مهارات الحياة اليومية ورفع قدرة المستفيد على القيام بشؤونه باستقلالية.</p>
+                </div>
+                <div className="bg-gradient-to-br from-blue-50 to-white p-5 rounded-xl border border-blue-100">
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl">٢</div>
+                        <h3 className="font-bold text-blue-900">تمكين الدمج المجتمعي</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">تيسير المشاركة في الأنشطة المجتمعية والتفاعل الاجتماعي خارج المركز.</p>
+                </div>
+                <div className="bg-gradient-to-br from-amber-50 to-white p-5 rounded-xl border border-amber-100">
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white text-xl">٣</div>
+                        <h3 className="font-bold text-amber-900">تمكين العودة لسوق العمل</h3>
+                    </div>
+                    <p className="text-sm text-gray-600">تطوير المهارات المهنية وفتح مسارات تأهيل تنتهي بفرص عمل مناسبة.</p>
+                </div>
+            </div>
+
             {/* Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-blue-500">

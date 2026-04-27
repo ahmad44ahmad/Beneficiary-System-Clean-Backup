@@ -10,20 +10,18 @@ interface SocialDashboardProps {
 }
 
 export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary }) => {
-    // Handle case where beneficiary is not provided
     if (!beneficiary) {
         return (
-            <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+            <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200" dir="rtl">
                 <p className="text-gray-500 font-medium">يرجى اختيار مستفيد لعرض بياناته الاجتماعية</p>
             </div>
         );
     }
 
-    // Mock data access for Social/Activities
     const socialData = beneficiary.social || { caseStudies: [], clothingDistributions: [], activityLog: [] };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6" dir="rtl">
             {/* Header Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
@@ -32,7 +30,7 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary })
                             <Shirt size={24} />
                         </div>
                         <div className="ms-4">
-                            <p className="text-sm font-medium text-gray-500">Clothing Items</p>
+                            <p className="text-sm font-medium text-gray-500">الكسوة الموزَّعة</p>
                             <p className="text-2xl font-semibold text-gray-900">
                                 {socialData.clothingDistributions.reduce((acc, curr) => acc + curr.items.length, 0)}
                             </p>
@@ -45,8 +43,8 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary })
                             <Users size={24} />
                         </div>
                         <div className="ms-4">
-                            <p className="text-sm font-medium text-gray-500">Social Support</p>
-                            <p className="text-lg font-semibold text-gray-900">Active</p>
+                            <p className="text-sm font-medium text-gray-500">الدعم الاجتماعي</p>
+                            <p className="text-lg font-semibold text-gray-900">نشط</p>
                         </div>
                     </div>
                 </Card>
@@ -56,36 +54,36 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary })
                             <Calendar size={24} />
                         </div>
                         <div className="ms-4">
-                            <p className="text-sm font-medium text-gray-500">Activities</p>
+                            <p className="text-sm font-medium text-gray-500">الأنشطة</p>
                             <p className="text-lg font-semibold text-gray-900 truncate">
-                                Arts & Crafts
+                                الأشغال الفنية
                             </p>
                         </div>
                     </div>
                 </Card>
             </div>
 
-            {/* Quick Actions for Clothing & Activities */}
+            {/* Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card title="Clothing Distribution">
+                <Card title="توزيع الكسوة">
                     <div className="space-y-4">
-                        <p className="text-gray-600 text-sm">Manage inventory and distribution of clothing for the beneficiary.</p>
-                        <div className="flex space-x-2">
+                        <p className="text-gray-600 text-sm">يُدار من هنا مخزون الكسوة وعمليات توزيعها على المستفيد.</p>
+                        <div className="flex gap-2">
                             <Button variant="outline" size="sm">
-                                <Shirt size={16} className="me-2" /> New Request
+                                <Shirt size={16} className="me-2" /> طلب جديد
                             </Button>
                             <Button variant="outline" size="sm">
-                                View Inventory
+                                عرض المخزون
                             </Button>
                         </div>
                     </div>
                 </Card>
 
-                <Card title="Activity Participation">
+                <Card title="المشاركة في الأنشطة">
                     <div className="space-y-4">
-                        <p className="text-gray-600 text-sm">Log participation in center activities (Sports, Art, Social).</p>
+                        <p className="text-gray-600 text-sm">يُسجَّل هنا مستوى مشاركة المستفيد في الأنشطة الرياضية والفنية والاجتماعية.</p>
                         <Button variant="outline" size="sm">
-                            <Calendar size={16} className="me-2" /> Log Activity
+                            <Calendar size={16} className="me-2" /> تسجيل نشاط
                         </Button>
                     </div>
                 </Card>
