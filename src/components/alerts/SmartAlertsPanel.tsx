@@ -8,6 +8,8 @@ import {
     Volume2, VolumeX, Eye
 } from 'lucide-react';
 import { useRealtimeTableSubscription, queryKeys, getSupabaseClient } from '../../hooks/queries';
+import { useVitalsAlertsStore } from '../../stores/useVitalsAlertsStore';
+import { seedDemoVitalsAlerts } from '../../services/iotService';
 
 type AlertSeverity = 'critical' | 'high' | 'medium' | 'low';
 type AlertType = 'vitals' | 'medication' | 'fall' | 'behavior' | 'infection' | 'medical' | 'safety' | 'behavioral' | 'nutrition';
@@ -109,20 +111,54 @@ export const SmartAlertsPanel: React.FC = () => {
     // Subscribe to realtime changes on alerts table
     useRealtimeTableSubscription('alerts', queryKeys.alerts.list());
 
-    const filteredAlerts = alerts.filter(alert => {
+    // Live vitals alerts from IoT (وSeed for demo)
+    const vitalsAlerts = useVitalsAlertsStore(s => s.alerts);
+    const ackVitalsAlert = useVitalsAlertsStore(s => s.acknowledge);
+    const resolveVitalsAlert = useVitalsAlertsStore(s => s.resolve);
+
+    useEffect(() => { seedDemoVitalsAlerts(); }, []);
+
+    // ادمج تنبيهات العلامات الحيوية مع التنبيهات المخزّنة
+    const mergedAlerts: SmartAlert[] = [
+        ...vitalsAlerts.map((v): SmartAlert => ({
+            id: `live-${v.id}`,
+            type: 'vitals',
+            severity: v.severity,
+            title: v.title,
+            message: v.message,
+            beneficiaryName: v.beneficiaryName,
+            beneficiaryId: v.beneficiaryId,
+            location: v.location,
+            timestamp: v.timestamp,
+            acknowledged: v.acknowledged,
+            acknowledgedBy: v.acknowledgedBy,
+            suggestedAction: v.suggestedAction,
+        })),
+        ...alerts,
+    ];
+
+    const filteredAlerts = mergedAlerts.filter(alert => {
         const matchesSeverity = filterSeverity === 'all' || alert.severity === filterSeverity;
         const matchesType = filterType === 'all' || alert.type === filterType;
         return matchesSeverity && matchesType;
     });
 
     const handleAcknowledge = (alertId: string) => {
+        if (alertId.startsWith('live-')) {
+            ackVitalsAlert(alertId.replace('live-', ''), 'المستخدم الحالي');
+            return;
+        }
         setAlerts(prev => prev.map(a =>
             a.id === alertId ? { ...a, acknowledged: true, acknowledgedBy: 'المستخدم الحالي' } : a
         ));
     };
 
     const handleResolve = (alertId: string) => {
-        setAlerts(prev => prev.filter(a => a.id !== alertId));
+        if (alertId.startsWith('live-')) {
+            resolveVitalsAlert(alertId.replace('live-', ''));
+        } else {
+            setAlerts(prev => prev.filter(a => a.id !== alertId));
+        }
         setSelectedAlert(null);
         setResolveNotes(prev => {
             const next = { ...prev };
@@ -131,8 +167,8 @@ export const SmartAlertsPanel: React.FC = () => {
         });
     };
 
-    const unacknowledgedCount = alerts.filter(a => !a.acknowledged).length;
-    const criticalCount = alerts.filter(a => a.severity === 'critical' && !a.acknowledged).length;
+    const unacknowledgedCount = mergedAlerts.filter(a => !a.acknowledged).length;
+    const criticalCount = mergedAlerts.filter(a => a.severity === 'critical' && !a.acknowledged).length;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6" dir="rtl">

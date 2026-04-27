@@ -146,6 +146,7 @@ const BeneficiaryTimeline = lazy(() => import('./beneficiary/BeneficiaryTimeline
 
 // Admin Components
 const AuditLogViewer = lazy(() => import('./admin/AuditLogViewer').then(m => ({ default: m.AuditLogViewer })));
+const LegalShieldPage = lazy(() => import('../pages/LegalShieldPage').then(m => ({ default: m.LegalShieldPage })));
 
 // Basira Components
 const MorningPulse = lazy(() => import('./pulse/MorningPulse').then(m => ({ default: m.MorningPulse })));
@@ -455,6 +456,7 @@ export const App = () => {
                     <Route path="compliance" element={<ComplianceTracker />} />
                     <Route path="assets" element={<AssetRegistry />} />
                     <Route path="alerts" element={<SmartAlertsPanel />} />
+                    <Route path="legal-shield" element={<LegalShieldPage />} />
                     <Route path="org-structure" element={<OrgStructurePage />} />
                     <Route path="staff" element={<StaffProfile />} />
                     <Route path="permissions" element={<PermissionsPage />} />

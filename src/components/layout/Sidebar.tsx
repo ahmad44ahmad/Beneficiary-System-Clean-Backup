@@ -136,6 +136,7 @@ const NAV_SECTIONS: NavSection[] = [
                 children: [
                     { to: '/grc/excellence', label: 'مركز التميز' },
                     { to: '/indicators/strategic', label: 'المؤشرات الاستراتيجية' },
+                    { to: '/legal-shield', label: 'الدرع القانوني' },
                 ],
             },
         ],

@@ -6,6 +6,7 @@ import {
     Bell, X, ChevronLeft, Sparkles,
     Sunrise, Activity
 } from 'lucide-react';
+import { useWelcomeStats } from '../../hooks/useWelcomeStats';
 
 interface MorningPulseProps {
     onClose?: () => void;
@@ -22,19 +23,19 @@ interface PulseData {
     occupancyRate: number;
 }
 
-const mockPulseData: PulseData = {
-    totalBeneficiaries: 145,
+const fallbackPulseData: PulseData = {
+    totalBeneficiaries: 62,
     criticalAlerts: 3,
     upcomingMedications: 12,
     todayPriorities: [
-        'فحص طبي شامل - جناح الذكور',
-        'زيارة عائلية - 5 مستفيدين',
-        'جلسة علاج طبيعي جماعية',
-        'اجتماع فريق الرعاية'
+        'متابعة طبية شاملة — الجناح الشمالي',
+        'زيارة أسرية مجدولة — ٥ مستفيدين',
+        'جلسة تأهيل حركي جماعية',
+        'اجتماع فريق الرعاية الأسبوعي',
     ],
     weather: { temp: 24, condition: 'sunny', humidity: 45 },
     staffOnDuty: 18,
-    occupancyRate: 87
+    occupancyRate: 87,
 };
 
 const getGreeting = () => {
@@ -53,9 +54,17 @@ const getWeatherIcon = (condition: string) => {
 };
 
 export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate }) => {
-    const [data] = useState<PulseData>(mockPulseData);
+    const liveStats = useWelcomeStats();
     const [currentTime, setCurrentTime] = useState(new Date());
     const greeting = getGreeting();
+
+    const data: PulseData = {
+        ...fallbackPulseData,
+        totalBeneficiaries: liveStats.loading ? fallbackPulseData.totalBeneficiaries : liveStats.beneficiariesCount,
+        criticalAlerts: liveStats.loading ? fallbackPulseData.criticalAlerts : Math.min(liveStats.activeRisksCount, 9),
+        staffOnDuty: liveStats.loading ? fallbackPulseData.staffOnDuty : liveStats.staffCount,
+        occupancyRate: liveStats.loading ? fallbackPulseData.occupancyRate : liveStats.complianceRate,
+    };
     const WeatherIcon = getWeatherIcon(data.weather.condition);
 
     useEffect(() => {
@@ -64,8 +73,8 @@ export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate 
     }, []);
 
     const stats = [
-        { label: 'المستفيدين', value: data.totalBeneficiaries, icon: Users, color: 'bg-blue-500', trend: '+2' },
-        { label: 'تنبيهات حرجة', value: data.criticalAlerts, icon: AlertTriangle, color: 'bg-red-500', urgent: true },
+        { label: 'المستفيدون', value: data.totalBeneficiaries, icon: Users, color: 'bg-blue-500' },
+        { label: 'تنبيهات حرجة', value: data.criticalAlerts, icon: AlertTriangle, color: 'bg-red-500', urgent: data.criticalAlerts > 0 },
         { label: 'أدوية قادمة', value: data.upcomingMedications, icon: Pill, color: 'bg-purple-500' },
         { label: 'الكادر المتواجد', value: data.staffOnDuty, icon: Heart, color: 'bg-green-500' },
     ];
@@ -113,12 +122,12 @@ export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate 
             >
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 px-4 py-2 rounded-full mb-4 border border-amber-500/30">
                     <Sparkles className="w-4 h-4 text-amber-400" />
-                    <span className="text-amber-300 text-sm font-medium">نظام بصيرة | نبض المركز</span>
+                    <span className="text-amber-300 text-sm font-medium">منظومة بصيرة — نبض المركز</span>
                 </div>
                 <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                    الحالة العامة للمركز
+                    الموقف العام للمركز
                 </h2>
-                <p className="text-slate-400 mt-2">نظرة سريعة على أهم المؤشرات في 10 ثوانٍ</p>
+                <p className="text-slate-400 mt-2">تحديث لحظي للمؤشرات التشغيلية</p>
             </motion.div>
 
             {/* Stats Grid */}
@@ -137,12 +146,6 @@ export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate 
                         </div>
                         <p className="text-4xl font-bold text-white mb-1">{stat.value}</p>
                         <p className="text-slate-400 text-sm">{stat.label}</p>
-                        {stat.trend && (
-                            <div className="absolute top-4 start-4 flex items-center gap-1 text-green-400 text-xs">
-                                <TrendingUp className="w-3 h-3" />
-                                {stat.trend}
-                            </div>
-                        )}
                     </motion.div>
                 ))}
             </div>

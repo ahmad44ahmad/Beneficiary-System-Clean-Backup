@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Pill, Clock, AlertTriangle, CheckCircle, User,
-    Search,
+    Search, FileDown,
     ChevronDown, ChevronUp, AlertCircle
 } from 'lucide-react';
 
@@ -22,6 +22,8 @@ interface Medication {
     interactions?: string[];
     specialInstructions?: string;
     delayMinutes?: number;
+    administeredBy?: string;
+    administeredAt?: string; // ISO
 }
 
 const mockMedications: Medication[] = [
@@ -56,11 +58,20 @@ export const MedicationAdministration: React.FC = () => {
     });
 
     const handleAdminister = (medId: string) => {
+        const nowIso = new Date().toISOString();
         setMedications(prev => prev.map(m =>
-            m.id === medId ? { ...m, status: 'administered' as const } : m
+            m.id === medId
+                ? { ...m, status: 'administered' as const, administeredBy: 'الممرضة عبير الشهري', administeredAt: nowIso }
+                : m
         ));
         setSelectedMed(null);
         setPreReqChecked({});
+    };
+
+    const handleExport = () => {
+        // طباعة سجل الأدوية كـ PDF عبر نافذة الطباعة المتاحة في المتصفح.
+        // المستخدم يختار "حفظ كـ PDF" من خيارات الطباعة.
+        window.print();
     };
 
     const handleSkip = (medId: string, _reason: string) => {
@@ -105,6 +116,14 @@ export const MedicationAdministration: React.FC = () => {
                         <div className="bg-blue-500/20 border border-blue-500/50 rounded-xl px-4 py-2">
                             <span className="text-blue-400 font-medium">{pendingCount} قيد الانتظار</span>
                         </div>
+                        <button
+                            onClick={handleExport}
+                            className="bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-xl px-4 py-2 flex items-center gap-2 text-emerald-300 transition-colors"
+                            title="تصدير سجل الأدوية بصيغة PDF"
+                        >
+                            <FileDown className="w-5 h-5" />
+                            <span className="font-medium">تصدير PDF</span>
+                        </button>
                     </div>
                 </div>
             </motion.div>
@@ -257,6 +276,27 @@ export const MedicationAdministration: React.FC = () => {
                                                     <p className="text-purple-300 text-sm">
                                                         <strong>تعليمات خاصة:</strong> {med.specialInstructions}
                                                     </p>
+                                                </div>
+                                            )}
+
+                                            {/* Administration record (after status === administered) */}
+                                            {med.status === 'administered' && med.administeredBy && (
+                                                <div className="bg-emerald-900/30 border border-emerald-500/30 rounded-xl p-3 text-emerald-200 text-sm space-y-1">
+                                                    <div className="flex items-center gap-2">
+                                                        <CheckCircle className="w-4 h-4 text-emerald-400" />
+                                                        <span>تم إعطاء الجرعة بواسطة <strong>{med.administeredBy}</strong></span>
+                                                    </div>
+                                                    {med.administeredAt && (
+                                                        <div className="flex items-center gap-2 text-emerald-300/80">
+                                                            <Clock className="w-3.5 h-3.5" />
+                                                            <span>
+                                                                {new Date(med.administeredAt).toLocaleString('ar-SA', {
+                                                                    year: 'numeric', month: 'long', day: 'numeric',
+                                                                    hour: '2-digit', minute: '2-digit',
+                                                                })}
+                                                            </span>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
 
