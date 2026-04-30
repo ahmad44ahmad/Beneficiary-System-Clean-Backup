@@ -12,6 +12,7 @@ import {
     Edit,
     Save
 } from 'lucide-react';
+import { StatusBadge } from '../../design-system/primitives';
 
 
 
@@ -137,34 +138,27 @@ export const RiskRegister: React.FC = () => {
     };
 
     const getRiskLevelBadge = (level: string) => {
-        const config: Record<string, { bg: string; text: string; label: string }> = {
-            critical: { bg: 'bg-[#DC2626]', text: 'text-white', label: 'حرج' },
-            high: { bg: 'bg-[#F7941D]', text: 'text-white', label: 'عالي' },
-            medium: { bg: 'bg-[#FCB614]', text: 'text-gray-800', label: 'متوسط' },
-            low: { bg: 'bg-[#2BB574]', text: 'text-white', label: 'منخفض' }
+        const config: Record<string, { tone: 'danger' | 'elevated' | 'warning' | 'success'; label: string }> = {
+            critical: { tone: 'danger', label: 'حرج' },
+            high:     { tone: 'elevated', label: 'عالي' },
+            medium:   { tone: 'warning', label: 'متوسط' },
+            low:      { tone: 'success', label: 'منخفض' },
         };
-        const { bg, text, label } = config[level] || config.low;
-        return <span className={`px-3 py-1 rounded-full text-xs font-bold ${bg} ${text}`}>{label}</span>;
+        const { tone, label } = config[level] ?? config.low;
+        return <StatusBadge tone={tone} label={label} size="sm" showIcon={false} />;
     };
 
     const getStatusBadge = (status: string) => {
-        const labels: Record<string, string> = {
-            identified: 'تم التحديد',
-            analyzing: 'قيد التحليل',
-            mitigating: 'قيد المعالجة',
-            monitoring: 'تحت المراقبة',
-            closed: 'مغلق',
-            escalated: 'تم التصعيد'
+        const config: Record<string, { tone: 'info' | 'warning' | 'success' | 'danger' | 'neutral'; label: string }> = {
+            identified: { tone: 'info',    label: 'تم التحديد' },
+            analyzing:  { tone: 'warning', label: 'قيد التحليل' },
+            mitigating: { tone: 'warning', label: 'قيد المعالجة' },
+            monitoring: { tone: 'info',    label: 'تحت المراقبة' },
+            closed:     { tone: 'success', label: 'مغلق' },
+            escalated:  { tone: 'danger',  label: 'تم التصعيد' },
         };
-        const colors: Record<string, string> = {
-            identified: 'bg-[#269798]/15 text-[#269798]',
-            analyzing: 'bg-[#FCB614]/15 text-[#0F3144]',
-            mitigating: 'bg-[#FCB614]/15 text-[#0F3144]',
-            monitoring: 'bg-[#269798]/10 text-[#0F3144]',
-            closed: 'bg-[#2BB574]/15 text-[#0F3144]',
-            escalated: 'bg-[#DC2626]/15 text-[#7F1D1D]'
-        };
-        return <span className={`px-2 py-1 rounded text-xs ${colors[status] || 'bg-gray-100'}`}>{labels[status] || status}</span>;
+        const entry = config[status] ?? { tone: 'neutral' as const, label: status };
+        return <StatusBadge tone={entry.tone} label={entry.label} size="sm" showIcon={false} />;
     };
 
     const filteredRisks = risks.filter(risk => {

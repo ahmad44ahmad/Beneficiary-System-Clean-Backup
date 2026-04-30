@@ -8,11 +8,37 @@ type StatusType =
     | 'active' | 'inactive' | 'completed' | 'cancelled'
     | 'low' | 'medium' | 'high' | 'critical';
 
-interface StatusBadgeProps {
-    status: StatusType | string;
+/**
+ * Six canonical badge tones — every brand-aligned status shape collapses
+ * to one of these. Modules with custom labels (RiskRegister, BICLS, etc.)
+ * use `tone + label` instead of `status` for their domain words.
+ */
+export type StatusTone = 'success' | 'warning' | 'info' | 'danger' | 'neutral' | 'elevated';
+
+interface BaseProps {
     size?: 'sm' | 'md';
     showIcon?: boolean;
 }
+
+type StatusModeProps = BaseProps & {
+    /** Built-in status keyword. Auto-resolves label, tone, and icon. */
+    status: StatusType | string;
+    tone?: never;
+    label?: never;
+    icon?: never;
+};
+
+type ToneModeProps = BaseProps & {
+    /** Canonical brand tone — used together with `label` for custom statuses. */
+    tone: StatusTone;
+    /** Display text. Required in tone mode. */
+    label: string;
+    /** Optional icon component. */
+    icon?: React.ElementType;
+    status?: never;
+};
+
+type StatusBadgeProps = StatusModeProps | ToneModeProps;
 
 /**
  * Status badge — brand-strict, AA-compliant.
@@ -63,15 +89,31 @@ const statusConfig: Record<string, ToneSpec> = {
     critical:  { label: 'حرج',          fg: '#FFFFFF', bg: '#DC2626',          icon: AlertCircle },
 };
 
-export const StatusBadge: React.FC<StatusBadgeProps> = ({
-    status,
-    size = 'md',
-    showIcon = true,
-}) => {
-    const config = statusConfig[status] ?? {
-        label: status,
-        ...NEUTRAL_PAIR,
-    };
+/** Canonical tone → SAFE_PAIRS mapping. */
+const TONE_PAIR: Record<StatusTone, { fg: string; bg: string }> = {
+    success:  SAFE_PAIRS.badgeOnGreen,
+    info:     SAFE_PAIRS.badgeOnTeal,
+    warning:  SAFE_PAIRS.badgeOnGold,
+    elevated: SAFE_PAIRS.badgeOnOrange,
+    danger:   { fg: '#FFFFFF', bg: '#DC2626' },
+    neutral:  NEUTRAL_PAIR,
+};
+
+export const StatusBadge: React.FC<StatusBadgeProps> = (props) => {
+    const { size = 'md', showIcon = true } = props;
+
+    let resolved: ToneSpec;
+    if ('tone' in props && props.tone) {
+        const pair = TONE_PAIR[props.tone];
+        resolved = { label: props.label, fg: pair.fg, bg: pair.bg, icon: props.icon };
+    } else if ('status' in props && props.status) {
+        resolved = statusConfig[props.status] ?? {
+            label: props.status,
+            ...NEUTRAL_PAIR,
+        };
+    } else {
+        resolved = { label: '—', ...NEUTRAL_PAIR };
+    }
 
     const sizeClasses = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm';
     const iconSize = size === 'sm' ? 'w-3 h-3' : 'w-4 h-4';
@@ -79,10 +121,10 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     return (
         <span
             className={`inline-flex items-center gap-1 ${sizeClasses} rounded-full font-medium`}
-            style={{ color: config.fg, backgroundColor: config.bg }}
+            style={{ color: resolved.fg, backgroundColor: resolved.bg }}
         >
-            {showIcon && config.icon && <config.icon className={iconSize} />}
-            {config.label}
+            {showIcon && resolved.icon && <resolved.icon className={iconSize} />}
+            {resolved.label}
         </span>
     );
 };
