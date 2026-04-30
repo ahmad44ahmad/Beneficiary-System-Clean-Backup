@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useUserStore } from '../../stores/useUserStore';
 import { LeaveRequestStatus } from '../../types/social';
+import { StatusBadge } from '../../design-system/primitives';
+import type { StatusTone } from '../../components/common/StatusBadge';
 
 // Extended LeaveRequest with richer history for this workflow
 interface LeaveHistoryEntry {
@@ -196,27 +198,21 @@ export const LeaveRequestFlow: React.FC = () => {
     };
 
     const getStatusBadge = (status: LeaveRequestStatus) => {
-        const styles = {
-            PENDING_SOCIAL: 'bg-gray-100 text-gray-800',
-            PENDING_MEDICAL: 'bg-[#269798]/15 text-[#269798]',
-            PENDING_DIRECTOR: 'bg-[#FCB614]/15 text-[#0F3144]',
-            APPROVED: 'bg-[#2BB574]/15 text-[#0F3144]',
-            REJECTED: 'bg-[#DC2626]/15 text-[#7F1D1D]',
-            ACTIVE: 'bg-[#2BB574] text-white',
-            COMPLETED: 'bg-gray-500 text-white',
-            OVERDUE: 'bg-[#DC2626] text-white',
+        const config: Record<string, { tone: StatusTone; label: string }> = {
+            PENDING_SOCIAL:   { tone: 'neutral',  label: 'بانتظار الاجتماعي' },
+            PENDING_MEDICAL:  { tone: 'info',     label: 'بانتظار الطبي' },
+            PENDING_DIRECTOR: { tone: 'warning',  label: 'بانتظار المدير' },
+            APPROVED:         { tone: 'success',  label: 'معتمد' },
+            REJECTED:         { tone: 'danger',   label: 'مرفوض' },
+            ACTIVE:           { tone: 'success',  label: 'نشط (خارج المركز)' },
+            COMPLETED:        { tone: 'neutral',  label: 'مكتمل' },
+            OVERDUE:          { tone: 'danger',   label: 'متأخر' },
+            Pending:          { tone: 'neutral',  label: 'قيد الانتظار' },
+            Approved:         { tone: 'success',  label: 'معتمد' },
+            Rejected:         { tone: 'danger',   label: 'مرفوض' },
         };
-        const labels = {
-            PENDING_SOCIAL: 'بانتظار الاجتماعي',
-            PENDING_MEDICAL: 'بانتظار الطبي',
-            PENDING_DIRECTOR: 'بانتظار المدير',
-            APPROVED: 'معتمد',
-            REJECTED: 'مرفوض',
-            ACTIVE: 'نشط (خارج المركز)',
-            COMPLETED: 'مكتمل',
-            OVERDUE: 'متأخر',
-        };
-        return <span className={`px-2 py-1 rounded-full text-xs font-medium ${styles[status]}`}>{labels[status]}</span>;
+        const entry = config[status] ?? { tone: 'neutral' as const, label: status };
+        return <StatusBadge tone={entry.tone} label={entry.label} size="sm" showIcon={false} />;
     };
 
     // Filter requests based on role
