@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Shield, FileCheck2, Award, ShieldCheck, Download, FileText, Lock, Scale } from 'lucide-react';
-import { Card } from '../components/ui/Card';
+import { Section, PageHeader } from '../design-system/primitives';
+import { brand } from '../design-system/tokens';
+import { SAFE_PAIRS } from '../design-system/a11y-tokens';
 
 interface AuditEntry {
     id: string;
@@ -54,34 +56,42 @@ const SAMPLE_AUDIT_TRAIL: AuditEntry[] = [
     },
 ];
 
-const COMPLIANCE_PILLARS = [
+type PillarKey = 'green' | 'teal' | 'navy' | 'gold';
+
+const COMPLIANCE_PILLARS: Array<{
+    icon: React.ElementType;
+    title: string;
+    body: string;
+    status: string;
+    key: PillarKey;
+}> = [
     {
         icon: Scale,
         title: 'اتفاقية حقوق الأشخاص ذوي الإعاقة (CRPD)',
         body: 'يلتزم النظام بتفعيل المادتين ٩ و١٩ من الاتفاقية: الوصولية وحق العيش المستقل في المجتمع.',
         status: 'مُفعَّل',
-        color: 'emerald',
+        key: 'green',
     },
     {
         icon: Lock,
         title: 'نظام حماية البيانات الشخصية (PDPL)',
         body: 'تشفير على مستوى قاعدة البيانات، مسار تدقيق على كل عملية حساسة، وتحكُّم بالوصول مبني على الأدوار.',
         status: 'مطبَّق',
-        color: 'blue',
+        key: 'teal',
     },
     {
         icon: ShieldCheck,
         title: 'الضوابط الأساسية للأمن السيبراني (NCA ECC-2:2024)',
         body: 'إدارة الهويات، تسجيل الأحداث، الاستجابة للحوادث، استمرارية الأعمال — جميعها موثقة في حزمة الامتثال.',
         status: 'موثَّق',
-        color: 'indigo',
+        key: 'navy',
     },
     {
         icon: Award,
         title: 'معايير الوكالة لحوكمة الزيارات الإشرافية',
         body: 'نموذج التوثيق الذاتي ما قبل الزيارة، وتغطية البنود الثلاثة: الإداري والتقني، المالي، التشغيلي.',
         status: 'جاهز',
-        color: 'amber',
+        key: 'gold',
     },
 ];
 
@@ -91,14 +101,22 @@ const CERTIFICATE_TEMPLATES = [
     { id: 'pdpl', label: 'إقرار الالتزام بحماية البيانات الشخصية', description: 'إجراء سنوي يصدر مع نتائج التدقيق الداخلي' },
 ];
 
-const colorClass = (color: string): { bg: string; text: string; border: string } => {
-    const map: Record<string, { bg: string; text: string; border: string }> = {
-        emerald: { bg: 'bg-[#2BB574]/10', text: 'text-[#1E9658]', border: 'border-[#2BB574]/30' },
-        blue: { bg: 'bg-[#269798]/10', text: 'text-[#1B7778]', border: 'border-[#269798]/30' },
-        indigo: { bg: 'bg-[#0F3144]/5', text: 'text-[#0A2030]', border: 'border-[#0F3144]/30' },
-        amber: { bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]', border: 'border-[#FCB614]/30' },
-    };
-    return map[color] ?? map.blue;
+/**
+ * Resolves a pillar's accent color from brand tokens. Includes the
+ * a11y-correct foreground for the accent's badge: gold needs navy
+ * foreground (gold + white fails WCAG AA), the rest pair with white.
+ */
+const pillarAccent = (key: PillarKey): { hex: string; badgeFg: string } => {
+    switch (key) {
+        case 'green':
+            return { hex: brand.green.hex, badgeFg: '#FFFFFF' };
+        case 'teal':
+            return { hex: brand.teal.hex, badgeFg: '#FFFFFF' };
+        case 'navy':
+            return { hex: brand.navy.hex, badgeFg: '#FFFFFF' };
+        case 'gold':
+            return { hex: brand.gold.hex, badgeFg: brand.navy.hex };
+    }
 };
 
 export const LegalShieldPage: React.FC = () => {
@@ -110,120 +128,164 @@ export const LegalShieldPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white p-6 md:p-10" dir="rtl">
+        <div className="min-h-screen bg-white p-6 md:p-10" dir="rtl">
             <div className="max-w-7xl mx-auto space-y-8">
 
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-white text-white flex items-center justify-center shadow-md">
-                            <Shield className="w-7 h-7" />
+                <PageHeader
+                    title={
+                        <span className="flex items-center gap-3">
+                            <Shield className="w-7 h-7" style={{ color: brand.navy.hex }} />
+                            <span>الدرع القانوني</span>
+                        </span>
+                    }
+                    subtitle="توثيق تلقائي لكل خطوة، وامتثال مُسبق لاتفاقية حقوق الأشخاص ذوي الإعاقة، ونظام حماية البيانات الشخصية، والأمن السيبراني الوطني."
+                    accent="teal"
+                    actions={
+                        <div
+                            className="rounded-xl px-4 py-3 flex items-center gap-3 border"
+                            style={{
+                                backgroundColor: `${brand.green.hex}1A`,
+                                borderColor: `${brand.green.hex}55`,
+                            }}
+                        >
+                            <FileCheck2 className="w-5 h-5" style={{ color: brand.green.hex }} />
+                            <div>
+                                <p className="font-bold text-sm" style={{ color: brand.green.hex }}>سجل التدقيق ١٠٠٪</p>
+                                <p className="text-xs" style={{ color: brand.green.hex }}>كل عملية حساسة موثقة</p>
+                            </div>
                         </div>
-                        <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-hrsd-navy">الدرع القانوني</h1>
-                            <p className="text-hrsd-cool-gray mt-1 max-w-2xl">
-                                توثيق تلقائي لكل خطوة، وامتثال مُسبق لاتفاقية حقوق الأشخاص ذوي الإعاقة، ونظام حماية البيانات الشخصية، والأمن السيبراني الوطني.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="bg-[#2BB574]/10 border border-[#2BB574]/30 rounded-xl px-4 py-3 flex items-center gap-3">
-                        <FileCheck2 className="w-5 h-5 text-[#1E9658]" />
-                        <div>
-                            <p className="text-[#1E9658] font-bold text-sm">سجل التدقيق ١٠٠٪</p>
-                            <p className="text-[#1E9658] text-xs">كل عملية حساسة موثقة</p>
-                        </div>
-                    </div>
-                </div>
+                    }
+                />
 
                 {/* Compliance Pillars */}
-                <section>
-                    <h2 className="text-lg font-bold text-hrsd-navy mb-4">ركائز الامتثال</h2>
+                <Section title="ركائز الامتثال">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {COMPLIANCE_PILLARS.map((p) => {
-                            const c = colorClass(p.color);
+                            const accent = pillarAccent(p.key);
                             const Icon = p.icon;
                             return (
-                                <Card key={p.title} className={`p-5 border ${c.border}`}>
+                                <div
+                                    key={p.title}
+                                    className="p-5 rounded-xl border bg-white"
+                                    style={{ borderColor: `${accent.hex}55` }}
+                                >
                                     <div className="flex items-start gap-4">
-                                        <div className={`w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center shrink-0`}>
-                                            <Icon className={`w-6 h-6 ${c.text}`} />
+                                        <div
+                                            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                                            style={{ backgroundColor: `${accent.hex}1A` }}
+                                        >
+                                            <Icon className="w-6 h-6" style={{ color: accent.hex }} />
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center justify-between gap-3 mb-1">
-                                                <h3 className="font-bold text-hrsd-navy">{p.title}</h3>
-                                                <span className={`text-xs px-2 py-0.5 rounded-full ${c.bg} ${c.text} border ${c.border}`}>
+                                                <h3 className="font-bold" style={{ color: brand.navy.hex }}>{p.title}</h3>
+                                                <span
+                                                    className="text-xs px-2 py-0.5 rounded-full font-medium shrink-0"
+                                                    style={{
+                                                        backgroundColor: accent.hex,
+                                                        color: accent.badgeFg,
+                                                    }}
+                                                >
                                                     {p.status}
                                                 </span>
                                             </div>
-                                            <p className="text-sm text-hrsd-cool-gray leading-relaxed">{p.body}</p>
+                                            <p className="text-sm leading-relaxed" style={{ color: brand.coolGray.hex }}>
+                                                {p.body}
+                                            </p>
                                         </div>
                                     </div>
-                                </Card>
+                                </div>
                             );
                         })}
                     </div>
-                </section>
+                </Section>
 
                 {/* Certificates */}
-                <section>
-                    <h2 className="text-lg font-bold text-hrsd-navy mb-4">إصدار الوثائق المؤسسية</h2>
+                <Section title="إصدار الوثائق المؤسسية">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {CERTIFICATE_TEMPLATES.map((t) => (
-                            <Card key={t.id} className="p-5 border border-gray-200 flex flex-col">
+                            <div
+                                key={t.id}
+                                className="p-5 rounded-xl border border-gray-200 bg-white flex flex-col"
+                            >
                                 <div className="flex items-center gap-3 mb-3">
-                                    <FileText className="w-5 h-5 text-hrsd-cool-gray" />
-                                    <h3 className="font-bold text-hrsd-navy">{t.label}</h3>
+                                    <FileText className="w-5 h-5" style={{ color: brand.coolGray.hex }} />
+                                    <h3 className="font-bold" style={{ color: brand.navy.hex }}>{t.label}</h3>
                                 </div>
-                                <p className="text-sm text-hrsd-cool-gray flex-1">{t.description}</p>
+                                <p className="text-sm flex-1" style={{ color: brand.coolGray.hex }}>{t.description}</p>
                                 <button
                                     onClick={() => handleIssue(t)}
-                                    className="mt-4 w-full bg-white hover:bg-white text-white rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-2 transition-colors"
+                                    className="mt-4 w-full rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-2 transition-colors hover:brightness-95"
+                                    style={{
+                                        backgroundColor: brand.teal.hex,
+                                        color: '#FFFFFF',
+                                    }}
                                 >
                                     <Download className="w-4 h-4" />
                                     إصدار الوثيقة
                                 </button>
-                            </Card>
+                            </div>
                         ))}
                     </div>
                     {issuedNote && (
-                        <div className="mt-4 bg-[#2BB574]/10 border border-[#2BB574]/30 text-[#14532D] rounded-xl px-4 py-3 text-sm">
+                        <div
+                            className="mt-4 rounded-xl px-4 py-3 text-sm border"
+                            style={{
+                                backgroundColor: `${brand.green.hex}1A`,
+                                borderColor: `${brand.green.hex}55`,
+                                color: brand.green.hex,
+                            }}
+                            role="status"
+                        >
                             {issuedNote}
                         </div>
                     )}
-                </section>
+                </Section>
 
                 {/* Audit Trail */}
-                <section>
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-lg font-bold text-hrsd-navy">آخر إجراءات سجل التدقيق</h2>
-                        <a href="/admin/audit-logs" className="text-sm text-hrsd-cool-gray hover:text-hrsd-navy underline-offset-4 hover:underline">
+                <Section
+                    title="آخر إجراءات سجل التدقيق"
+                    actions={
+                        <a
+                            href="/admin/audit-logs"
+                            className="text-sm hover:underline underline-offset-4"
+                            style={{ color: brand.coolGray.hex }}
+                        >
                             عرض السجل الكامل
                         </a>
-                    </div>
-                    <Card className="border border-gray-200 overflow-hidden">
-                        <div className="divide-y divide-slate-100">
-                            {SAMPLE_AUDIT_TRAIL.map((e) => {
-                                const tagColor =
-                                    e.classification === 'confidential' ? 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/30' :
-                                    e.classification === 'sensitive' ? 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/30' :
-                                    'bg-gray-50 text-hrsd-navy border-gray-200';
-                                const label =
-                                    e.classification === 'confidential' ? 'سرّي' :
-                                    e.classification === 'sensitive' ? 'حساس' : 'قياسي';
-                                return (
-                                    <div key={e.id} className="p-4 flex items-start gap-4 hover:bg-gray-50 transition-colors">
-                                        <div className="text-xs text-hrsd-cool-gray w-32 shrink-0 tabular-nums">{e.timestamp}</div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-sm font-medium text-hrsd-navy truncate">{e.action}</p>
-                                            <p className="text-xs text-hrsd-cool-gray mt-0.5">{e.actor} ← {e.target}</p>
-                                        </div>
-                                        <span className={`text-[10px] px-2 py-1 rounded-full border ${tagColor} shrink-0`}>{label}</span>
+                    }
+                >
+                    <ul className="divide-y divide-gray-100">
+                        {SAMPLE_AUDIT_TRAIL.map((e) => {
+                            const tag =
+                                e.classification === 'confidential' ? { fg: '#FFFFFF', bg: '#DC2626', label: 'سرّي' } :
+                                e.classification === 'sensitive' ? { fg: SAFE_PAIRS.badgeOnGold.fg, bg: SAFE_PAIRS.badgeOnGold.bg, label: 'حساس' } :
+                                { fg: brand.coolGray.hex, bg: '#F3F4F6', label: 'قياسي' };
+                            return (
+                                <li key={e.id} className="py-3 flex items-start gap-4">
+                                    <div
+                                        className="text-xs w-32 shrink-0 tabular-nums"
+                                        style={{ color: brand.coolGray.hex }}
+                                    >
+                                        {e.timestamp}
                                     </div>
-                                );
-                            })}
-                        </div>
-                    </Card>
-                </section>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium truncate" style={{ color: brand.navy.hex }}>{e.action}</p>
+                                        <p className="text-xs mt-0.5" style={{ color: brand.coolGray.hex }}>
+                                            {e.actor} ← {e.target}
+                                        </p>
+                                    </div>
+                                    <span
+                                        className="text-[10px] px-2 py-1 rounded-full font-medium shrink-0"
+                                        style={{ color: tag.fg, backgroundColor: tag.bg }}
+                                    >
+                                        {tag.label}
+                                    </span>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </Section>
 
             </div>
         </div>
