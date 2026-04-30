@@ -25,12 +25,12 @@ const OrgNodeCard: React.FC<{ node: OrgNode; level: number }> = ({ node, level }
     let textClass = "text-gray-800";
 
     if (isManager) {
-        bgClass = "bg-[#1B4D3E] text-white"; // Royal Green
-        borderClass = "border-[#d4af37]"; // Gold
+        bgClass = "bg-hrsd-navy text-white"; // Royal Green
+        borderClass = "border-hrsd-gold"; // Gold
     } else if (isDept) {
-        bgClass = "bg-[#f0f5f3]";
-        borderClass = "border-[#1B4D3E]";
-        textClass = "text-[#1B4D3E]";
+        bgClass = "bg-gray-50";
+        borderClass = "border-hrsd-navy";
+        textClass = "text-hrsd-navy";
     }
 
     return (
