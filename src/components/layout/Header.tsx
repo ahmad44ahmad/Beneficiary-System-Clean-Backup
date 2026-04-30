@@ -5,7 +5,7 @@ import { CommandMenu } from '../ui/CommandMenu';
 import { useUserStore } from '../../stores/useUserStore';
 import { useLocation } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
-import { useViewModeStore, ViewMode } from '../../stores/useViewModeStore';
+import { useViewModeStore, type Persona, PERSONA_META, isAggregatePersona } from '../../stores/useViewModeStore';
 import { useTheme } from '../../config/theme';
 
 interface HeaderProps {
@@ -86,22 +86,33 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 <CommandMenu />
             </div>
 
-            {/* View Mode Switcher */}
-            <div className="hidden lg:block relative group">
-                <select
-                    value={currentView}
-                    onChange={(e) => setView(e.target.value as ViewMode)}
-                    className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg ps-8 pe-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
-                    title="تغيير واجهة العرض"
-                >
-                    <option value="ADMIN" className="text-gray-900">الدور: مدير النظام</option>
-                    <option value="DIRECTOR" className="text-gray-900">الدور: مدير المركز</option>
-                    <option value="DEPARTMENT_HEAD" className="text-gray-900">الدور: رئيس قسم</option>
-                    <option value="STAFF" className="text-gray-900">الدور: موظف</option>
-                </select>
-                <div className="absolute start-2 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <Eye className="w-3.5 h-3.5 text-hrsd-gold" />
+            {/* Persona Switcher — surfaces the brand level (formal/default)
+              * derived from the persona's scope. Aggregate-scope personas
+              * (Wakeel, Branch GM) inherit Formal level; operational personas
+              * (Dept Head, Staff) inherit Default. */}
+            <div className="hidden lg:flex items-center gap-2">
+                <div className="relative group">
+                    <select
+                        value={currentView}
+                        onChange={(e) => setView(e.target.value as Persona)}
+                        className="appearance-none bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg ps-8 pe-4 py-1.5 text-xs font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-hrsd-gold/50"
+                        title="تغيير الشخصية"
+                    >
+                        <option value="WAKEEL" className="text-gray-900">{PERSONA_META.WAKEEL.canonical}</option>
+                        <option value="BRANCH_GM" className="text-gray-900">{PERSONA_META.BRANCH_GM.canonical}</option>
+                        <option value="DEPARTMENT_HEAD" className="text-gray-900">{PERSONA_META.DEPARTMENT_HEAD.canonical}</option>
+                        <option value="STAFF" className="text-gray-900">{PERSONA_META.STAFF.canonical}</option>
+                    </select>
+                    <div className="absolute start-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <Eye className="w-3.5 h-3.5 text-hrsd-gold" />
+                    </div>
                 </div>
+                <span
+                    className="text-[10px] font-medium tracking-wide px-2 py-0.5 rounded border border-white/20 text-white/70 select-none"
+                    title="مستوى العرض المُشتق من نطاق الشخصية"
+                >
+                    {isAggregatePersona(currentView) ? 'المستوى: رسمي' : 'المستوى: افتراضي'}
+                </span>
             </div>
 
             {/* Theme Toggle + Notifications + User */}

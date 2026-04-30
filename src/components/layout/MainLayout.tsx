@@ -9,6 +9,7 @@ import { RiskAlertSystem } from '../safety/RiskAlertSystem';
 import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 import { useRealtimeSubscription } from '../../hooks/useRealtimeSubscription';
 import { Breadcrumb } from '../navigation/Breadcrumb';
+import { BrandLevelProvider } from '../../design-system/BrandLevelProvider';
 
 // Lazy-load alert components (render conditionally, not critical path)
 const FallRiskAlertBanner = lazy(() => import('../alerts/FallRiskAlertBanner').then(m => ({ default: m.FallRiskAlertBanner })));
@@ -50,6 +51,7 @@ export const MainLayout = () => {
     };
 
     return (
+        <BrandLevelProvider>
         <div className="flex h-screen bg-hrsd-bg-light dark:bg-white font-sans overflow-hidden transition-colors duration-300" dir="rtl">
             {/* Global Risk Alert System */}
             <RiskAlertSystem />
@@ -97,6 +99,7 @@ export const MainLayout = () => {
             {/* Mobile Bottom Navigation */}
             <MobileNav onMenuClick={handleMenuToggle} />
         </div>
+        </BrandLevelProvider>
     );
 };
 
