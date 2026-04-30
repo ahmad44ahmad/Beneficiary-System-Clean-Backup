@@ -9,8 +9,31 @@ import {
     CheckCircle2, Clock, ArrowLeft, Sparkles, Leaf,
     BarChart3, Star
 } from 'lucide-react';
+import { Formal } from '../design-system/BrandLevelProvider';
+import { brand } from '../design-system/tokens';
+import { chartLabelStyle } from '../design-system/charts';
 
-export const ExecutiveReport: React.FC = () => {
+/**
+ * ExecutiveReport — ministerial-briefing surface.
+ *
+ * Wrapped in <Formal> per the brand guideline (p. 30): briefings to
+ * deputy minister and above use Formal level — gray + primary palette.
+ * Charts inside the wrapper auto-pick the formal palette via the
+ * BrandLevelProvider context.
+ *
+ * Phase 2 carry-over migration:
+ *   - All [rgb(...)] arbitrary literals replaced with brand tokens.
+ *   - Off-palette #ec4899 (pink) on the governance module replaced with
+ *     brand cool-gray.
+ *   - All decorative gradients (pseudo same-color and the single real
+ *     gold→orange on the spending metric) flattened to solid brand
+ *     colors per Formal-level rules ("no gradients on body content").
+ *   - SVG <linearGradient> elements inside the AreaChart preserved —
+ *     they drive a fill-opacity transition (5%→95%), not a hue shift,
+ *     and the brand-book exception for charts applies.
+ */
+
+const ExecutiveReportContent: React.FC = () => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
     const [_activeKPI, setActiveKPI] = useState(0);
@@ -25,19 +48,19 @@ export const ExecutiveReport: React.FC = () => {
 
     // بيانات المخططات
     const moduleProgress = [
-        { name: 'إدارة المستفيدين', progress: 95, color: '#2BB574' },
-        { name: 'الملف الطبي', progress: 88, color: '#269798' },
-        { name: 'درع السلامة (IPC)', progress: 92, color: '#FCB614' },
-        { name: 'محرك التمكين', progress: 85, color: '#FCB614' },
-        { name: 'الحوكمة والمخاطر', progress: 90, color: '#ec4899' },
-        { name: 'المؤشرات الذكية', progress: 94, color: '#269798' },
+        { name: 'إدارة المستفيدين', progress: 95, color: brand.green.hex },
+        { name: 'الملف الطبي', progress: 88, color: brand.teal.hex },
+        { name: 'درع السلامة (IPC)', progress: 92, color: brand.gold.hex },
+        { name: 'محرك التمكين', progress: 85, color: brand.gold.hex },
+        { name: 'الحوكمة والمخاطر', progress: 90, color: brand.coolGray.hex },
+        { name: 'المؤشرات الذكية', progress: 94, color: brand.teal.hex },
     ];
 
     const kpiData = [
-        { name: 'الجودة', value: 94, fill: '#2BB574' },
-        { name: 'السلامة', value: 89, fill: '#269798' },
-        { name: 'الرضا', value: 87, fill: '#FCB614' },
-        { name: 'التمكين', value: 82, fill: '#FCB614' },
+        { name: 'الجودة', value: 94, fill: brand.green.hex },
+        { name: 'السلامة', value: 89, fill: brand.teal.hex },
+        { name: 'الرضا', value: 87, fill: brand.gold.hex },
+        { name: 'التمكين', value: 82, fill: brand.orange.hex },
     ];
 
     const monthlyTrend = [
@@ -50,17 +73,17 @@ export const ExecutiveReport: React.FC = () => {
     ];
 
     const impactMetrics = [
-        { category: 'توفير الوقت', value: 40, unit: '%', icon: Clock, color: 'from-[#269798] to-[#269798]' },
-        { category: 'تقليل الأخطاء', value: 65, unit: '%', icon: Shield, color: 'from-[#2BB574] to-[#2BB574]' },
-        { category: 'رضا المستفيدين', value: 87, unit: '%', icon: Heart, color: 'from-[#DC2626] to-[#DC2626]' },
-        { category: 'كفاءة الإنفاق', value: 35, unit: '%', icon: TrendingUp, color: 'from-[#FCB614] to-[#F7941D]' },
+        { category: 'توفير الوقت', value: 40, unit: '%', icon: Clock, color: brand.teal.hex },
+        { category: 'تقليل الأخطاء', value: 65, unit: '%', icon: Shield, color: brand.green.hex },
+        { category: 'رضا المستفيدين', value: 87, unit: '%', icon: Heart, color: brand.orange.hex },
+        { category: 'كفاءة الإنفاق', value: 35, unit: '%', icon: TrendingUp, color: brand.gold.hex },
     ];
 
     const achievements = [
-        { title: '145 مستفيد نشط', subtitle: 'تتم متابعتهم يومياً', icon: Users, color: 'bg-[#269798]' },
-        { title: '0 حوادث سقوط', subtitle: 'خلال الربع الأخير', icon: Shield, color: 'bg-[#2BB574]' },
-        { title: '94% امتثال', subtitle: 'لمعايير الجودة', icon: Award, color: 'bg-[#FCB614]' },
-        { title: '16 وحدة ذكية', subtitle: 'مفعلة في النظام', icon: Brain, color: 'bg-[#F7941D]' },
+        { title: '145 مستفيد نشط', subtitle: 'تتم متابعتهم يومياً', icon: Users, color: brand.teal.hex },
+        { title: '0 حوادث سقوط', subtitle: 'خلال الربع الأخير', icon: Shield, color: brand.green.hex },
+        { title: '94% امتثال', subtitle: 'لمعايير الجودة', icon: Award, color: brand.gold.hex },
+        { title: '16 وحدة ذكية', subtitle: 'مفعلة في النظام', icon: Brain, color: brand.orange.hex },
     ];
 
     const strategicGoals = [
@@ -71,15 +94,12 @@ export const ExecutiveReport: React.FC = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-[#269798]/10" dir="rtl">
+        <div className="min-h-screen bg-white" dir="rtl">
             {/* Hero Section */}
-            <section className={`relative overflow-hidden bg-gradient-to-br from-[rgb(20,65,90)] via-[rgb(15,55,80)] to-[rgb(10,45,65)] text-white transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                {/* Animated Background */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-10 right-10 w-64 h-64 bg-[rgb(45,180,115)] rounded-full opacity-10 blur-3xl animate-pulse"></div>
-                    <div className="absolute bottom-10 left-10 w-80 h-80 bg-[rgb(245,150,30)] rounded-full opacity-10 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                </div>
-
+            <section
+                className={`relative overflow-hidden text-white transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                style={{ backgroundColor: brand.navy.hex }}
+            >
                 <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
                     {/* Header */}
                     <div className="flex items-center justify-between mb-12">
@@ -88,7 +108,7 @@ export const ExecutiveReport: React.FC = () => {
                                 <img src="/assets/hrsd-logo.png" alt="الشعار" className="w-full h-full object-contain" />
                             </div>
                             <div>
-                                <h3 className="text-[rgb(250,180,20)] font-bold">مركز التأهيل الشامل</h3>
+                                <h3 className="font-bold" style={{ color: brand.gold.hex }}>مركز التأهيل الشامل</h3>
                                 <p className="text-white/60 text-sm">منطقة الباحة</p>
                             </div>
                         </div>
@@ -104,13 +124,11 @@ export const ExecutiveReport: React.FC = () => {
                     {/* Title */}
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20">
-                            <Sparkles className="w-4 h-4 text-[rgb(250,180,20)]" />
+                            <Sparkles className="w-4 h-4" style={{ color: brand.gold.hex }} />
                             <span className="text-sm">نظام بصيرة 3.0 | التقرير التنفيذي</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                            <span className="bg-gradient-to-l from-[rgb(245,150,30)] to-[rgb(45,180,115)] bg-clip-text text-transparent">
-                                لمحة سريعة
-                            </span>
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                            لمحة سريعة
                         </h1>
                         <p className="text-xl text-white/70 max-w-2xl mx-auto">
                             نظرة شاملة على أداء المركز والتحول الرقمي في خدمة المستفيدين
@@ -122,10 +140,13 @@ export const ExecutiveReport: React.FC = () => {
                         {achievements.map((item, index) => (
                             <div
                                 key={index}
-                                className={`bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center transition-all duration-500 hover:bg-white/15 hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                                className={`bg-white/10 rounded-2xl p-6 border border-white/10 text-center transition-all duration-500 hover:bg-white/15 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                                 style={{ transitionDelay: `${index * 100}ms` }}
                             >
-                                <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg`}>
+                                <div
+                                    className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3"
+                                    style={{ backgroundColor: item.color }}
+                                >
                                     <item.icon className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="text-2xl font-bold text-white mb-1">{item.title}</div>
@@ -142,21 +163,24 @@ export const ExecutiveReport: React.FC = () => {
                 {/* KPI Overview */}
                 <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Radial Progress Chart */}
-                    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+                    <div className="bg-white rounded-3xl p-8 border border-gray-100">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 bg-gradient-to-br from-[#269798] to-[#269798] rounded-xl flex items-center justify-center">
+                            <div
+                                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                                style={{ backgroundColor: brand.teal.hex }}
+                            >
                                 <Target className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-bold text-gray-900">مؤشرات الأداء الرئيسية</h2>
-                                <p className="text-gray-500 text-sm">نسب الإنجاز الحالية</p>
+                                <h2 className="text-xl font-bold" style={{ color: brand.navy.hex }}>مؤشرات الأداء الرئيسية</h2>
+                                <p className="text-sm" style={{ color: brand.coolGray.hex }}>نسب الإنجاز الحالية</p>
                             </div>
                         </div>
                         <div className="h-64">
                             <ResponsiveContainer width="100%" height="100%">
                                 <RadialBarChart cx="50%" cy="50%" innerRadius="20%" outerRadius="90%" data={kpiData} startAngle={180} endAngle={0}>
                                     <RadialBar background dataKey="value" cornerRadius={10} />
-                                    <Legend iconSize={10} layout="horizontal" verticalAlign="bottom" />
+                                    <Legend iconSize={10} layout="horizontal" verticalAlign="bottom" wrapperStyle={chartLabelStyle} />
                                     <Tooltip />
                                 </RadialBarChart>
                             </ResponsiveContainer>
@@ -165,21 +189,24 @@ export const ExecutiveReport: React.FC = () => {
                             {kpiData.map((item, index) => (
                                 <div key={index} className="text-center p-2 rounded-lg" style={{ backgroundColor: `${item.fill}15` }}>
                                     <div className="text-2xl font-bold" style={{ color: item.fill }}>{item.value}%</div>
-                                    <div className="text-xs text-gray-600">{item.name}</div>
+                                    <div className="text-xs" style={{ color: brand.coolGray.hex }}>{item.name}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     {/* Trend Chart */}
-                    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+                    <div className="bg-white rounded-3xl p-8 border border-gray-100">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 bg-gradient-to-br from-[#2BB574] to-[#2BB574] rounded-xl flex items-center justify-center">
+                            <div
+                                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                                style={{ backgroundColor: brand.green.hex }}
+                            >
                                 <TrendingUp className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-bold text-gray-900">اتجاه التحسن</h2>
-                                <p className="text-gray-500 text-sm">آخر 6 أشهر</p>
+                                <h2 className="text-xl font-bold" style={{ color: brand.navy.hex }}>اتجاه التحسن</h2>
+                                <p className="text-sm" style={{ color: brand.coolGray.hex }}>آخر 6 أشهر</p>
                             </div>
                         </div>
                         <div className="h-64">
@@ -187,56 +214,59 @@ export const ExecutiveReport: React.FC = () => {
                                 <AreaChart data={monthlyTrend}>
                                     <defs>
                                         <linearGradient id="colorCompliance" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#2BB574" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#2BB574" stopOpacity={0} />
+                                            <stop offset="5%" stopColor={brand.green.hex} stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor={brand.green.hex} stopOpacity={0} />
                                         </linearGradient>
                                         <linearGradient id="colorSatisfaction" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#FCB614" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#FCB614" stopOpacity={0} />
+                                            <stop offset="5%" stopColor={brand.gold.hex} stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor={brand.gold.hex} stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
-                                    <YAxis domain={[60, 100]} axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
+                                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: brand.coolGray.hex }} />
+                                    <YAxis domain={[60, 100]} axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: brand.coolGray.hex }} />
                                     <Tooltip />
-                                    <Area type="monotone" dataKey="امتثال" stroke="#2BB574" strokeWidth={2} fill="url(#colorCompliance)" />
-                                    <Area type="monotone" dataKey="رضا" stroke="#FCB614" strokeWidth={2} fill="url(#colorSatisfaction)" />
-                                    <Area type="monotone" dataKey="سلامة" stroke="#269798" strokeWidth={2} fillOpacity={0} />
+                                    <Area type="monotone" dataKey="امتثال" stroke={brand.green.hex} strokeWidth={2} fill="url(#colorCompliance)" />
+                                    <Area type="monotone" dataKey="رضا" stroke={brand.gold.hex} strokeWidth={2} fill="url(#colorSatisfaction)" />
+                                    <Area type="monotone" dataKey="سلامة" stroke={brand.teal.hex} strokeWidth={2} fillOpacity={0} />
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
                         <div className="flex justify-center gap-6 mt-4">
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-[#2BB574]"></div>
-                                <span className="text-sm text-gray-600">الامتثال</span>
+                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: brand.green.hex }}></div>
+                                <span className="text-sm" style={{ color: brand.coolGray.hex }}>الامتثال</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-[#FCB614]"></div>
-                                <span className="text-sm text-gray-600">الرضا</span>
+                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: brand.gold.hex }}></div>
+                                <span className="text-sm" style={{ color: brand.coolGray.hex }}>الرضا</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-[#269798]"></div>
-                                <span className="text-sm text-gray-600">السلامة</span>
+                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: brand.teal.hex }}></div>
+                                <span className="text-sm" style={{ color: brand.coolGray.hex }}>السلامة</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 {/* Module Progress */}
-                <section className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+                <section className="bg-white rounded-3xl p-8 border border-gray-100">
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="w-10 h-10 bg-gradient-to-br from-[#FCB614] to-[#0F3144] rounded-xl flex items-center justify-center">
+                        <div
+                            className="w-10 h-10 rounded-xl flex items-center justify-center"
+                            style={{ backgroundColor: brand.gold.hex }}
+                        >
                             <BarChart3 className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <h2 className="text-xl font-bold text-gray-900">تقدم الوحدات</h2>
-                            <p className="text-gray-500 text-sm">نسبة اكتمال كل وحدة في النظام</p>
+                            <h2 className="text-xl font-bold" style={{ color: brand.navy.hex }}>تقدم الوحدات</h2>
+                            <p className="text-sm" style={{ color: brand.coolGray.hex }}>نسبة اكتمال كل وحدة في النظام</p>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {moduleProgress.map((module, index) => (
                             <div key={index} className="relative">
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="font-medium text-gray-800">{module.name}</span>
+                                    <span className="font-medium" style={{ color: brand.navy.hex }}>{module.name}</span>
                                     <span className="text-lg font-bold" style={{ color: module.color }}>{module.progress}%</span>
                                 </div>
                                 <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
@@ -257,34 +287,46 @@ export const ExecutiveReport: React.FC = () => {
                 {/* Impact Metrics */}
                 <section>
                     <div className="text-center mb-8">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2">الأثر المحقق</h2>
-                        <p className="text-gray-500">التحسينات الملموسة منذ تفعيل النظام</p>
+                        <h2 className="text-2xl font-bold mb-2" style={{ color: brand.navy.hex }}>الأثر المحقق</h2>
+                        <p style={{ color: brand.coolGray.hex }}>التحسينات الملموسة منذ تفعيل النظام</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {impactMetrics.map((metric, index) => (
                             <div
                                 key={index}
-                                className={`relative overflow-hidden bg-white rounded-3xl p-6 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                                className={`relative overflow-hidden bg-white rounded-3xl p-6 border border-gray-100 transition-all duration-500 hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                                 style={{ transitionDelay: `${index * 100}ms` }}
                             >
-                                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-l ${metric.color}`}></div>
-                                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${metric.color} flex items-center justify-center mb-4 shadow-lg`}>
+                                <div
+                                    className="absolute top-0 left-0 right-0 h-1"
+                                    style={{ backgroundColor: metric.color }}
+                                ></div>
+                                <div
+                                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
+                                    style={{ backgroundColor: metric.color }}
+                                >
                                     <metric.icon className="w-7 h-7 text-white" />
                                 </div>
                                 <div className="flex items-baseline gap-1 mb-2">
-                                    <span className="text-4xl font-bold text-gray-900">{metric.value}</span>
-                                    <span className="text-xl text-gray-500">{metric.unit}</span>
+                                    <span className="text-4xl font-bold" style={{ color: brand.navy.hex }}>{metric.value}</span>
+                                    <span className="text-xl" style={{ color: brand.coolGray.hex }}>{metric.unit}</span>
                                 </div>
-                                <div className="text-gray-600 font-medium">{metric.category}</div>
+                                <div className="font-medium" style={{ color: brand.coolGray.hex }}>{metric.category}</div>
                             </div>
                         ))}
                     </div>
                 </section>
 
                 {/* Strategic Goals */}
-                <section className="bg-gradient-to-br from-[rgb(20,65,90)] to-[rgb(10,45,65)] rounded-3xl p-8 text-white">
+                <section
+                    className="rounded-3xl p-8 text-white"
+                    style={{ backgroundColor: brand.navy.hex }}
+                >
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="w-10 h-10 bg-[rgb(245,150,30)] rounded-xl flex items-center justify-center">
+                        <div
+                            className="w-10 h-10 rounded-xl flex items-center justify-center"
+                            style={{ backgroundColor: brand.orange.hex }}
+                        >
                             <Star className="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -294,22 +336,25 @@ export const ExecutiveReport: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {strategicGoals.map((goal, index) => (
-                            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                            <div key={index} className="bg-white/10 rounded-2xl p-6 border border-white/10">
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center gap-3">
                                         {goal.status === 'achieved' ? (
-                                            <CheckCircle2 className="w-6 h-6 text-[#2BB574]" />
+                                            <CheckCircle2 className="w-6 h-6" style={{ color: brand.green.hex }} />
                                         ) : (
-                                            <Clock className="w-6 h-6 text-[#FCB614]" />
+                                            <Clock className="w-6 h-6" style={{ color: brand.gold.hex }} />
                                         )}
                                         <span className="font-bold text-lg">{goal.goal}</span>
                                     </div>
-                                    <span className="text-2xl font-bold text-[rgb(250,180,20)]">{goal.progress}%</span>
+                                    <span className="text-2xl font-bold" style={{ color: brand.gold.hex }}>{goal.progress}%</span>
                                 </div>
                                 <div className="h-2 bg-white/20 rounded-full overflow-hidden">
                                     <div
-                                        className={`h-full rounded-full transition-all duration-1000 ${goal.status === 'achieved' ? 'bg-[#2BB574]' : 'bg-[rgb(245,150,30)]'}`}
-                                        style={{ width: `${goal.progress}%` }}
+                                        className="h-full rounded-full transition-all duration-1000"
+                                        style={{
+                                            width: `${goal.progress}%`,
+                                            backgroundColor: goal.status === 'achieved' ? brand.green.hex : brand.orange.hex,
+                                        }}
                                     ></div>
                                 </div>
                             </div>
@@ -318,34 +363,46 @@ export const ExecutiveReport: React.FC = () => {
                 </section>
 
                 {/* Vision 2030 Alignment */}
-                <section className="bg-gradient-to-l from-[rgb(45,180,115)]/10 to-[rgb(20,130,135)]/10 rounded-3xl p-8 border border-[rgb(45,180,115)]/20">
+                <section
+                    className="rounded-3xl p-8 border"
+                    style={{
+                        backgroundColor: `${brand.green.hex}0d`,
+                        borderColor: `${brand.green.hex}33`,
+                    }}
+                >
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <div className="flex-1">
-                            <div className="inline-flex items-center gap-2 bg-[rgb(45,180,115)]/20 px-4 py-2 rounded-full mb-4">
-                                <Leaf className="w-4 h-4 text-[rgb(45,180,115)]" />
-                                <span className="text-[rgb(45,180,115)] text-sm font-medium">المواءمة مع رؤية 2030</span>
+                            <div
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4"
+                                style={{ backgroundColor: `${brand.green.hex}33` }}
+                            >
+                                <Leaf className="w-4 h-4" style={{ color: brand.green.hex }} />
+                                <span className="text-sm font-medium" style={{ color: brand.green.hex }}>المواءمة مع رؤية 2030</span>
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">مجتمع حيوي واقتصاد مزدهر</h3>
-                            <p className="text-gray-600 leading-relaxed mb-6">
+                            <h3 className="text-2xl font-bold mb-4" style={{ color: brand.navy.hex }}>مجتمع حيوي واقتصاد مزدهر</h3>
+                            <p className="leading-relaxed mb-6" style={{ color: brand.coolGray.hex }}>
                                 نظام بصيرة يساهم في تحقيق أهداف الرؤية من خلال تمكين ذوي الإعاقة
                                 وتحسين جودة الخدمات وكفاءة الإنفاق الحكومي
                             </p>
                             <div className="flex flex-wrap gap-3">
-                                <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm shadow-sm">
-                                    <Zap className="w-4 h-4 text-[#D49A0A]" />
-                                    كفاءة تشغيلية
+                                <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm border border-gray-100">
+                                    <Zap className="w-4 h-4" style={{ color: brand.gold.hex }} />
+                                    <span style={{ color: brand.coolGray.hex }}>كفاءة تشغيلية</span>
                                 </span>
-                                <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm shadow-sm">
-                                    <Heart className="w-4 h-4 text-[#DC2626]" />
-                                    رعاية إنسانية
+                                <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm border border-gray-100">
+                                    <Heart className="w-4 h-4" style={{ color: brand.orange.hex }} />
+                                    <span style={{ color: brand.coolGray.hex }}>رعاية إنسانية</span>
                                 </span>
-                                <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm shadow-sm">
-                                    <Target className="w-4 h-4 text-[#269798]" />
-                                    تمكين فعّال
+                                <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm border border-gray-100">
+                                    <Target className="w-4 h-4" style={{ color: brand.teal.hex }} />
+                                    <span style={{ color: brand.coolGray.hex }}>تمكين فعّال</span>
                                 </span>
                             </div>
                         </div>
-                        <div className="w-40 h-40 rounded-full bg-gradient-to-br from-[rgb(45,180,115)] to-[rgb(20,130,135)] flex items-center justify-center shadow-2xl flex-shrink-0">
+                        <div
+                            className="w-40 h-40 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: brand.teal.hex }}
+                        >
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-white">2030</div>
                                 <div className="text-white/80 text-sm">رؤية المملكة</div>
@@ -356,13 +413,17 @@ export const ExecutiveReport: React.FC = () => {
 
                 {/* Call to Action */}
                 <section className="text-center py-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">استكشف النظام بالتفصيل</h3>
-                    <p className="text-gray-500 mb-8 max-w-xl mx-auto">
+                    <h3 className="text-2xl font-bold mb-4" style={{ color: brand.navy.hex }}>استكشف النظام بالتفصيل</h3>
+                    <p className="mb-8 max-w-xl mx-auto" style={{ color: brand.coolGray.hex }}>
                         انتقل إلى لوحة القيادة التنفيذية للتعمق في البيانات والتقارير التفصيلية
                     </p>
                     <button
                         onClick={() => navigate('/dashboard')}
-                        className="inline-flex items-center gap-3 bg-gradient-to-l from-[rgb(245,150,30)] to-[rgb(250,180,20)] text-[rgb(20,65,90)] px-8 py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                        className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105"
+                        style={{
+                            backgroundColor: brand.gold.hex,
+                            color: brand.navy.hex,
+                        }}
                     >
                         <span>الدخول للوحة القيادة</span>
                         <ArrowLeft className="w-5 h-5" />
@@ -374,7 +435,7 @@ export const ExecutiveReport: React.FC = () => {
             {/* Footer */}
             <footer className="bg-gray-50 border-t border-gray-200 py-8">
                 <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="text-gray-500 text-sm">
+                    <div className="text-sm" style={{ color: brand.coolGray.hex }}>
                         © 2026 مركز التأهيل الشامل بالباحة | وزارة الموارد البشرية والتنمية الاجتماعية
                     </div>
                     <img
@@ -387,5 +448,11 @@ export const ExecutiveReport: React.FC = () => {
         </div>
     );
 };
+
+export const ExecutiveReport: React.FC = () => (
+    <Formal>
+        <ExecutiveReportContent />
+    </Formal>
+);
 
 export default ExecutiveReport;
