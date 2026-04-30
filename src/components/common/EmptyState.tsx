@@ -68,27 +68,29 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 };
 
 /**
- * Pre-configured empty states for common scenarios
+ * Pre-configured empty states for common scenarios.
+ * Copy is action-framed (dignity-language convention) — describes what
+ * to do next rather than what is "missing".
  */
 export const NoResults: React.FC<{ onClear?: () => void }> = ({ onClear }) => (
     <EmptyState
         icon={Search}
-        title="لا توجد نتائج"
-        description="لم يتم العثور على أي نتائج تطابق بحثك. حاول تغيير معايير البحث."
+        title="لم نعثر على نتائج تطابق البحث"
+        description="جرّب تعديل معايير البحث للحصول على نتائج مختلفة."
         actionText={onClear ? "مسح البحث" : undefined}
         onAction={onClear}
     />
 );
 
 export const NoData: React.FC<{ title?: string; onAdd?: () => void; addText?: string }> = ({
-    title = "لا توجد بيانات",
+    title = "لم تُسجَّل بيانات بعد",
     onAdd,
     addText = "إضافة جديد"
 }) => (
     <EmptyState
         icon={FileX}
         title={title}
-        description="لا توجد بيانات لعرضها حالياً."
+        description="ستظهر هنا البيانات فور إضافتها."
         actionText={onAdd ? addText : undefined}
         onAction={onAdd}
     />
@@ -96,11 +98,11 @@ export const NoData: React.FC<{ title?: string; onAdd?: () => void; addText?: st
 
 export const ErrorState: React.FC<{ onRetry?: () => void; message?: string }> = ({
     onRetry,
-    message = "حدث خطأ أثناء تحميل البيانات"
+    message = "تعذّر تحميل البيانات في هذه اللحظة. يمكنك إعادة المحاولة."
 }) => (
     <EmptyState
         icon={AlertCircle}
-        title="خطأ"
+        title="تعذّر التحميل"
         description={message}
         actionText={onRetry ? "إعادة المحاولة" : undefined}
         onAction={onRetry}
