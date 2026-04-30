@@ -41,6 +41,7 @@ const NcrCapaTracker = lazy(() => import('./quality/NcrCapaTracker').then(m => (
 const StrategicDashboard = lazy(() => import('./reports/StrategicDashboard').then(m => ({ default: m.StrategicDashboard })));
 const ReportsDashboard = lazy(() => import('./reports/ReportsDashboard').then(m => ({ default: m.ReportsDashboard })));
 const ExecutiveReport = lazy(() => import('../pages/ExecutiveReport').then(m => ({ default: m.ExecutiveReport })));
+const AggregateDashboard = lazy(() => import('../pages/AggregateDashboard').then(m => ({ default: m.AggregateDashboard })));
 
 // Dashboard Components
 const InventoryPanel = lazy(() => import('./dashboard/InventoryPanel').then(m => ({ default: m.InventoryPanel })));
@@ -219,6 +220,7 @@ export const App = () => {
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="knowledge" element={<ExternalKnowledgeBase />} />
                     <Route path="executive-report" element={<ExecutiveReport />} />
+                    <Route path="aggregate" element={<AggregateDashboard />} />
 
                     <Route path="beneficiaries" element={
                         <div className="flex gap-4 h-[calc(100vh-8rem)]">
