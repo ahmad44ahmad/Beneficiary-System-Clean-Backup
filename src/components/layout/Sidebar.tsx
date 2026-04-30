@@ -299,7 +299,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
 
     const sidebarClasses = isMobile
         ? `sidebar-drawer ${isOpen ? 'open' : ''}`
-        : 'w-[320px] text-white flex flex-col h-screen border-s-4 border-[rgb(245,150,30)] shadow-xl flex-shrink-0 bg-[rgb(20,65,90)] desktop-only';
+        : 'w-[320px] text-white flex flex-col h-screen border-s-4 border-hrsd-orange shadow-xl flex-shrink-0 bg-hrsd-navy desktop-only';
 
     return (
         <>
@@ -312,9 +312,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
 
             <aside className={sidebarClasses} dir="rtl">
                 {/* Header */}
-                <div className="p-5 border-b-2 border-[rgb(245,150,30)] flex items-center justify-between bg-[rgb(10,45,65)]">
+                <div className="p-5 border-b-2 border-hrsd-orange flex items-center justify-between bg-hrsd-navy-dark">
                     <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 border-2 border-[rgb(45,180,115)]">
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg p-2 border-2 border-hrsd-green">
                             <img
                                 src="/assets/hrsd-logo.png"
                                 alt="شعار وزارة الموارد البشرية"
@@ -325,7 +325,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             <h1 className="font-bold text-lg leading-tight text-white">
                                 مركز التأهيل الشامل بالباحة
                             </h1>
-                            <p className="text-[rgb(130,220,175)] text-[13px] mt-1 font-semibold leading-snug">
+                            <p
+                                className="text-[13px] mt-1 font-semibold leading-snug"
+                                style={{ color: 'var(--hrsd-green-light)' }}
+                            >
                                 وزارة الموارد البشرية والتنمية الاجتماعية
                             </p>
                         </div>
@@ -337,7 +340,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                             className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                             aria-label="إغلاق القائمة"
                         >
-                            <X className="w-6 h-6 text-[rgb(250,180,20)]" />
+                            <X className="w-6 h-6 text-hrsd-gold" />
                         </button>
                     )}
                 </div>
@@ -433,7 +436,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
                 </div>
 
                 {/* Footer */}
-                <div className="px-4 py-3 border-t-2 border-[rgb(245,150,30)] bg-[rgb(10,45,65)] flex flex-col items-center gap-2">
+                <div className="px-4 py-3 border-t-2 border-hrsd-orange bg-hrsd-navy-dark flex flex-col items-center gap-2">
                     <p className="text-white/70 text-[12px] text-center leading-snug">
                         نظام بصيرة — وزارة الموارد البشرية والتنمية الاجتماعية
                     </p>
