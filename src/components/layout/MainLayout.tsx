@@ -10,6 +10,7 @@ import { DebugRoleSwitcher } from '../ui/DebugRoleSwitcher';
 import { useRealtimeSubscription } from '../../hooks/useRealtimeSubscription';
 import { Breadcrumb } from '../navigation/Breadcrumb';
 import { BrandLevelProvider } from '../../design-system/BrandLevelProvider';
+import { usePersonaRouting } from '../../hooks/usePersonaRouting';
 
 // Lazy-load alert components (render conditionally, not critical path)
 const FallRiskAlertBanner = lazy(() => import('../alerts/FallRiskAlertBanner').then(m => ({ default: m.FallRiskAlertBanner })));
@@ -33,6 +34,9 @@ const LoadingFallback = () => (
 export const MainLayout = () => {
     // Enable real-time Supabase subscription for critical data
     useRealtimeSubscription();
+
+    // Aggregate personas (Wakeel, Branch GM) are pinned to /aggregate.
+    usePersonaRouting();
 
     const _location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

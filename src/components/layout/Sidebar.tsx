@@ -26,7 +26,9 @@ import {
     Scale,
     Award,
     Compass,
+    LayoutDashboard,
 } from 'lucide-react';
+import { useViewModeStore, isAggregatePersona } from '../../stores/useViewModeStore';
 
 interface SidebarProps {
     isOpen?: boolean;
@@ -68,6 +70,21 @@ interface NavSection {
     title: string;
     entries: NavEntry[];
 }
+
+/**
+ * Aggregate personas (Wakeel, Branch GM) see only one nav item — the
+ * leadership dashboard. They don't navigate operational surfaces.
+ * Defined as a top-level constant so the structure stays static and
+ * the only thing that varies is which array gets rendered.
+ */
+const AGGREGATE_NAV_SECTIONS: NavSection[] = [
+    {
+        title: 'عرض القيادات',
+        entries: [
+            { kind: 'link', to: '/aggregate', icon: LayoutDashboard, label: 'لوحة القيادة الإشرافية' },
+        ],
+    },
+];
 
 const NAV_SECTIONS: NavSection[] = [
     {
@@ -263,6 +280,9 @@ const SubgroupBranch: React.FC<{
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobile = false }) => {
+    const persona = useViewModeStore(s => s.currentView);
+    const sections = isAggregatePersona(persona) ? AGGREGATE_NAV_SECTIONS : NAV_SECTIONS;
+
     const [expandedSections, setExpandedSections] = useState<string[]>(
         NAV_SECTIONS.map((s) => s.title), // all expanded by default; collapsing is user choice
     );
@@ -349,9 +369,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose, isMobi
 
                 {/* Navigation — spacious, hierarchical */}
                 <nav className="flex-1 px-3 py-4 overflow-y-auto hrsd-scrollbar">
-                    {NAV_SECTIONS.map((section, idx) => {
+                    {sections.map((section, idx) => {
                         const open = expandedSections.includes(section.title);
-                        const isLast = idx === NAV_SECTIONS.length - 1;
+                        const isLast = idx === sections.length - 1;
                         return (
                             <div
                                 key={section.title}
