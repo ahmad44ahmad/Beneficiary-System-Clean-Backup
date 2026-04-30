@@ -4,11 +4,11 @@ import { supaService } from '../../services/supaService';
 import { Beneficiary, CaseStudy, SocialResearch, RehabilitationPlan, VisitLog, MedicalExamination, IndividualEducationalPlan, InjuryReport, FamilyCaseStudy, TrainingReferral, TrainingPlanFollowUp, VocationalEvaluation, FamilyGuidanceReferral, PostCareFollowUp, DignityProfile } from '../../types';
 import { UnifiedBeneficiaryProfile } from '../../types/unified';
 import { MOCK_DIGNITY_PROFILES } from '../../types/dignity-profile';
-import { DetailCard } from '../common/DetailCard';
-import { DetailItem } from '../common/DetailItem';
 import { VisitLogPanel } from '../dashboard/VisitLogPanel';
 import { DignityProfileCard } from './DignityProfileCard';
-import { Card } from '../ui/Card';
+import { Section, EmptyState, DescriptionList } from '../../design-system/primitives';
+import type { DescriptionItem } from '../../design-system/primitives';
+import { brand } from '../../design-system/tokens';
 import { cn } from '../ui/Button';
 import {
     User,
@@ -54,6 +54,13 @@ interface BeneficiaryDetailPanelProps {
     postCareFollowUps: PostCareFollowUp[];
 }
 
+/**
+ * BeneficiaryDetailPanel — operational-persona surface (Department Head,
+ * Staff). Refactored to use design-system primitives: top identity card
+ * via Section + DescriptionList, list cards via Section + EmptyState,
+ * empty messages worded as next-action ("لم تُسجَّل... بعد") rather
+ * than deficit ("لا توجد"). All sub-component contracts unchanged.
+ */
 export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
     beneficiary,
     caseStudies,
@@ -102,11 +109,12 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
 
     if (!beneficiary) {
         return (
-            <main className="flex flex-col items-center justify-center h-full text-center p-8 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                    <User className="w-8 h-8 text-gray-400" />
-                </div>
-                <p className="text-gray-500 font-medium">يرجى اختيار مستفيد من القائمة لعرض بياناته</p>
+            <main className="h-full flex items-center justify-center" aria-live="polite">
+                <EmptyState
+                    icon={<User className="w-6 h-6" />}
+                    title="اختر مستفيداً من القائمة"
+                    description="تظهر هنا بيانات المستفيد التفصيلية فور اختياره."
+                />
             </main>
         );
     }
@@ -154,36 +162,46 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
         { id: 'training', label: 'المتجر والتدريب', icon: BookOpen },
     ] as const;
 
+    const headerItems: DescriptionItem[] = [
+        { label: 'الاسم الكامل', value: beneficiary.fullName },
+        { label: 'رقم المستفيد', value: beneficiary.id },
+        { label: 'العمر', value: beneficiary.age ?? '—' },
+        {
+            label: 'الحالة',
+            value: beneficiary.status === 'active' ? 'نشط' : beneficiary.status === 'discharged' ? 'خروج' : '—',
+        },
+    ];
+
     return (
         <main className="space-y-6 animate-in fade-in duration-300" aria-live="polite">
-            <Card className="bg-white">
-                <div className="p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <DetailItem label="الاسم الكامل" value={beneficiary.fullName} />
-                        <DetailItem label="رقم المستفيد" value={beneficiary.id} />
-                        <DetailItem label="العمر" value={beneficiary.age} />
-                        <DetailItem label="الحالة" value={beneficiary.status === 'active' ? 'نشط' : beneficiary.status === 'discharged' ? 'خروج' : '-'} />
-                    </div>
-                </div>
-            </Card>
+            <Section title="بطاقة المستفيد">
+                <DescriptionList items={headerItems} layout="stacked" className="grid grid-cols-2 md:grid-cols-4 gap-6" />
+            </Section>
 
             <div className="overflow-x-auto pb-2">
                 <div className="flex flex-nowrap gap-2 bg-gray-50 p-1.5 rounded-lg border border-gray-200 min-w-max">
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                            className={cn(
-                                "flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all flex-1 justify-center whitespace-nowrap",
-                                activeTab === tab.id
-                                    ? "bg-white text-[#1B7778] shadow-sm ring-1 ring-gray-200 font-bold"
-                                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                            )}
-                        >
-                            <tab.icon className={cn("w-4 h-4", activeTab === tab.id ? "text-[#1B7778]" : "text-gray-400")} />
-                            {tab.label}
-                        </button>
-                    ))}
+                    {tabs.map((tab) => {
+                        const isActive = activeTab === tab.id;
+                        return (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                                className={cn(
+                                    "flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all flex-1 justify-center whitespace-nowrap",
+                                    isActive
+                                        ? "bg-white shadow-sm ring-1 ring-gray-200 font-bold"
+                                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                                )}
+                                style={isActive ? { color: brand.teal.hex } : undefined}
+                            >
+                                <tab.icon
+                                    className="w-4 h-4"
+                                    style={{ color: isActive ? brand.teal.hex : brand.coolGray.hex }}
+                                />
+                                {tab.label}
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
@@ -192,7 +210,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                     <div className="flex items-center justify-center p-12 h-64 bg-gray-50 rounded-xl border border-dashed border-gray-200">
                         <div className="flex flex-col items-center gap-3">
                             <div className="w-8 h-8 border-4 border-[#269798]/20 border-t-teal-600 rounded-full animate-spin"></div>
-                            <p className="text-gray-500 text-sm font-medium">جاري تحميل البيانات...</p>
+                            <p className="text-sm font-medium" style={{ color: brand.coolGray.hex }}>جاري تحميل البيانات...</p>
                         </div>
                     </div>
                 }>
@@ -258,11 +276,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
 
                     {activeTab === 'rehab' && (
                         <>
-                            <div className="flex flex-wrap gap-3">
-                                {/* Actions removed as part of cleanup */}
-                            </div>
-
-                            <DetailCard title="الخطط التربوية الفردية (IEP)">
+                            <Section title="الخطط التربوية الفردية (IEP)">
                                 {relevantEducationalPlans.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantEducationalPlans.map(ep => (
@@ -273,10 +287,15 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد خطط تربوية مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل خطط تربوية بعد"
+                                        description="تظهر هنا الخطط التربوية الفردية للمستفيد فور إضافتها."
+                                    />
+                                )}
+                            </Section>
 
-                            <DetailCard title="خطط التأهيل العلاجية">
+                            <Section title="خطط التأهيل العلاجية">
                                 {relevantRehabPlans.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantRehabPlans.map(rp => (
@@ -285,8 +304,13 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد خطط تأهيل مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل خطط تأهيل بعد"
+                                        description="ابدأ بإضافة خطة تأهيلية فردية تناسب المستفيد."
+                                    />
+                                )}
+                            </Section>
                         </>
                     )}
 
@@ -305,7 +329,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                 onAddLog={handleUpdate}
                             />
 
-                            <DetailCard title="سجل الإصابات والحوادث">
+                            <Section title="سجل الإصابات والحوادث" subtitle="مصطلح قانوني — يُستخدم في البلاغات الرسمية">
                                 {relevantInjuryReports.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantInjuryReports.map(ir => (
@@ -318,25 +342,31 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد إصابات مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لا أحداث مسجَّلة في الفترة الحالية"
+                                        description="غياب الأحداث مؤشّر إيجابي على بيئة الرعاية."
+                                    />
+                                )}
+                            </Section>
                         </div>
                     )}
 
                     {activeTab === 'family' && (
                         <>
-                            <div className="flex flex-wrap gap-3">
-                                {/* Actions removed as part of cleanup */}
-                            </div>
+                            <Section title="بيانات الأسرة والولي">
+                                <DescriptionList
+                                    layout="two-col"
+                                    items={[
+                                        { label: 'ولي الأمر', value: beneficiary.guardianName ?? '—' },
+                                        { label: 'صلة القرابة', value: beneficiary.guardianRelation ?? '—' },
+                                        { label: 'هاتف التواصل', value: beneficiary.guardianPhone ?? '—' },
+                                        { label: 'مقر الإقامة', value: beneficiary.guardianResidence ?? '—' },
+                                    ]}
+                                />
+                            </Section>
 
-                            <DetailCard title="بيانات الأسرة والولي">
-                                <DetailItem label="ولي الأمر" value={beneficiary.guardianName} />
-                                <DetailItem label="صلة القرابة" value={beneficiary.guardianRelation} />
-                                <DetailItem label="هاتف التواصل" value={beneficiary.guardianPhone} />
-                                <DetailItem label="مقر الإقامة" value={beneficiary.guardianResidence} />
-                            </DetailCard>
-
-                            <DetailCard title="دراسات الحالة الأسرية">
+                            <Section title="دراسات الحالة الأسرية">
                                 {relevantFamilyCaseStudies.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantFamilyCaseStudies.map(fcs => (
@@ -347,10 +377,15 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد دراسات أسرية مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل دراسات أسرية بعد"
+                                        description="تُضاف دراسات الحالة الأسرية بواسطة الأخصائي الاجتماعي."
+                                    />
+                                )}
+                            </Section>
 
-                            <DetailCard title="دراسات الحالة العامة">
+                            <Section title="دراسات الحالة العامة">
                                 {relevantCaseStudies.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantCaseStudies.map(cs => (
@@ -361,10 +396,15 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد دراسات حالة عامة مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل دراسات حالة عامة بعد"
+                                        description="ابدأ من نموذج المقابلة المعتمد لدى المركز."
+                                    />
+                                )}
+                            </Section>
 
-                            <DetailCard title="تحويلات الإرشاد الأسري">
+                            <Section title="تحويلات الإرشاد الأسري">
                                 {relevantFamilyGuidanceReferrals.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantFamilyGuidanceReferrals.map(fg => (
@@ -375,10 +415,15 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد تحويلات مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل تحويلات بعد"
+                                        description="تُسجَّل تحويلات الإرشاد الأسري عند انعقاد جلسة مع الأهل."
+                                    />
+                                )}
+                            </Section>
 
-                            <DetailCard title="متابعة الرعاية اللاحقة">
+                            <Section title="متابعة الرعاية اللاحقة">
                                 {relevantPostCareFollowUps.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantPostCareFollowUps.map(pc => (
@@ -387,18 +432,19 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد متابعات مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل متابعات لاحقة بعد"
+                                        description="تُسجَّل بعد خروج المستفيد لمتابعة استمرارية الدمج المجتمعي."
+                                    />
+                                )}
+                            </Section>
                         </>
                     )}
 
                     {activeTab === 'training' && (
                         <>
-                            <div className="flex flex-wrap gap-3">
-                                {/* Actions removed as part of cleanup */}
-                            </div>
-
-                            <DetailCard title="تحويلات التدريب">
+                            <Section title="تحويلات التدريب">
                                 {relevantTrainingReferrals.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantTrainingReferrals.map(tr => (
@@ -416,10 +462,15 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد تحويلات مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل تحويلات تدريبية بعد"
+                                        description="تُحدَّد التحويلات بناءً على خطة التأهيل المهني والاجتماعي."
+                                    />
+                                )}
+                            </Section>
 
-                            <DetailCard title="متابعة الخطة التدريبية">
+                            <Section title="متابعة الخطة التدريبية">
                                 {relevantTrainingFollowUps.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantTrainingFollowUps.map(tf => (
@@ -428,10 +479,15 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد متابعات مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل متابعات تدريبية بعد"
+                                        description="تُسجَّل المتابعات شهرياً لقياس تطوّر المهارات."
+                                    />
+                                )}
+                            </Section>
 
-                            <DetailCard title="التقييم المهني">
+                            <Section title="التقييم المهني">
                                 {relevantVocationalEvals.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantVocationalEvals.map(ve => (
@@ -442,8 +498,13 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                             </li>
                                         ))}
                                     </ul>
-                                ) : <p className="text-gray-500 text-sm">لا توجد تقييمات مسجلة.</p>}
-                            </DetailCard>
+                                ) : (
+                                    <EmptyState
+                                        title="لم تُسجَّل تقييمات مهنية بعد"
+                                        description="يُجرى التقييم بعد اكتمال جلسات التهيئة المهنية."
+                                    />
+                                )}
+                            </Section>
                         </>
                     )}
                 </Suspense>
