@@ -130,7 +130,7 @@ export const ShiftHandover: React.FC = () => {
                     {!isConfirmed ? (
                         <button
                             onClick={() => setIsConfirmed(true)}
-                            className="px-6 py-3 bg-gradient-to-r from-[#2BB574] to-[#2BB574] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
+                            className="px-6 py-3 bg-[#2BB574] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
                         >
                             <CheckCircle className="w-5 h-5" />
                             تأكيد الاستلام

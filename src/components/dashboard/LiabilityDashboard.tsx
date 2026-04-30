@@ -264,7 +264,7 @@ export const LiabilityDashboard: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-gradient-to-br from-[#269798] to-[#269798] rounded-xl">
+                    <div className="p-3 bg-[#269798] rounded-xl">
                         <Shield className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -288,7 +288,7 @@ export const LiabilityDashboard: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* LEFT COLUMN - Operational (Under Control) */}
                 <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-[#2BB574] to-[#2BB574] text-white p-4 rounded-xl shadow-lg">
+                    <div className="bg-[#2BB574] text-white p-4 rounded-xl shadow-lg">
                         <div className="flex items-center gap-3">
                             <CheckCircle className="w-6 h-6" />
                             <div>
@@ -313,7 +313,7 @@ export const LiabilityDashboard: React.FC = () => {
 
                 {/* RIGHT COLUMN - Structural (External) */}
                 <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white p-4 rounded-xl shadow-lg">
+                    <div className="bg-[#DC2626] text-white p-4 rounded-xl shadow-lg">
                         <div className="flex items-center gap-3">
                             <AlertTriangle className="w-6 h-6" />
                             <div>

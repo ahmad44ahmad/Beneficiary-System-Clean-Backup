@@ -134,7 +134,7 @@ export const IndependenceTracker: React.FC = () => {
 
             {/* Budget Crisis Card */}
             {budget && (
-                <div className="bg-gradient-to-l from-[#DC2626] to-[#DC2626] rounded-2xl p-6 text-white shadow-xl">
+                <div className="bg-[#DC2626] rounded-2xl p-6 text-white shadow-xl">
                     <div className="flex items-center gap-3 mb-4">
                         <AlertTriangle className="w-8 h-8" />
                         <h2 className="text-xl font-bold">فجوة الميزانية الحرجة</h2>

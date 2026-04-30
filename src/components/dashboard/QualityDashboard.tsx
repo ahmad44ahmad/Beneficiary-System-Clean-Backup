@@ -140,7 +140,7 @@ export const QualityDashboard: React.FC = () => {
             </Card>
 
             {/* Just Culture Info Section */}
-            <div className="bg-gradient-to-r from-[#0F3144] to-[#0F3144] rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="bg-[#0F3144] rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
                     <h2 className="text-xl font-bold mb-2">ثقافة العدالة (Just Culture)</h2>
                     <p className="text-[#269798]/10 opacity-90 max-w-2xl">

@@ -209,7 +209,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
             </div>
 
             {/* Action Button */}
-            <div className="mt-8 bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white rounded-xl p-6">
+            <div className="mt-8 bg-[#DC2626] text-white rounded-xl p-6">
                 <h3 className="font-bold text-xl mb-2">🚨 إجراء فوري مطلوب</h3>
                 <p className="mb-4">التناقضات الحالية تتطلب تحقيقاً سريعاً. النظام سيرسل تقريراً تلقائياً إلى:</p>
                 <div className="grid grid-cols-3 gap-3">

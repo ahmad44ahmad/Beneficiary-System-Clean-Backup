@@ -220,7 +220,7 @@ export const CrisisMode: React.FC = () => {
 
                         <button
                             onClick={handleActivation}
-                            className="w-full py-4 bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white font-bold text-lg rounded-xl hover:from-[#DC2626] hover:to-[#7F1D1D] transition-all shadow-lg flex items-center justify-center gap-3 animate-pulse"
+                            className="w-full py-4 bg-[#DC2626] text-white font-bold text-lg rounded-xl hover:from-[#DC2626] hover:to-[#7F1D1D] transition-all shadow-lg flex items-center justify-center gap-3 animate-pulse"
                         >
                             <AlertOctagon className="w-6 h-6" />
                             تفعيل ساعة الصفر
@@ -249,7 +249,7 @@ export const CrisisMode: React.FC = () => {
     return (
         <div className="min-h-screen bg-[#DC2626]/10" dir="rtl">
             {/* Emergency Header */}
-            <div className="bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white p-4 sticky top-0 z-50 shadow-lg">
+            <div className="bg-[#DC2626] text-white p-4 sticky top-0 z-50 shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="animate-pulse">

@@ -55,7 +55,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="bg-gradient-to-br from-[#269798] to-[#269798] text-white">
+                <Card className="bg-[#269798] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -67,7 +67,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-[#F7941D] to-[#F7941D] text-white">
+                <Card className="bg-[#F7941D] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -79,7 +79,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-[#2BB574] to-[#2BB574] text-white">
+                <Card className="bg-[#2BB574] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -91,7 +91,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-[#DC2626] to-[#DC2626] text-white">
+                <Card className="bg-[#DC2626] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>

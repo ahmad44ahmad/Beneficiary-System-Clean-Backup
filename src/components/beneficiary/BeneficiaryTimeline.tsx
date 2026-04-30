@@ -88,7 +88,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                 className="mb-6"
             >
                 <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#269798] to-[#269798] rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-14 h-14 bg-[#269798] rounded-2xl flex items-center justify-center shadow-lg">
                         <Clock className="w-7 h-7 text-white" />
                     </div>
                     <div>

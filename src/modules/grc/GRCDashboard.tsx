@@ -538,10 +538,10 @@ const BCP_SCENARIOS: BCPScenario[] = [
 const RiskMatrixPro = ({ risks, onCellClick }: { risks: Risk[]; onCellClick?: (l: number, i: number) => void }) => {
   const getColor = (likelihood: number, impact: number) => {
     const score = likelihood * impact;
-    if (score >= 15) return 'bg-gradient-to-br from-[#DC2626] to-[#DC2626]';
+    if (score >= 15) return 'bg-[#DC2626]';
     if (score >= 10) return 'bg-gradient-to-br from-[#F7941D] to-[#FCB614]';
-    if (score >= 5) return 'bg-gradient-to-br from-[#FCB614] to-[#FCB614]';
-    return 'bg-gradient-to-br from-[#2BB574] to-[#2BB574]';
+    if (score >= 5) return 'bg-[#FCB614]';
+    return 'bg-[#2BB574]';
   };
 
   const getRisksInCell = (likelihood: number, impact: number) => {

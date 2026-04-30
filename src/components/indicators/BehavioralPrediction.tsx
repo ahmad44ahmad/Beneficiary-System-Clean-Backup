@@ -210,7 +210,7 @@ export const BehavioralPrediction: React.FC = () => {
             </div>
 
             {/* Priority Actions */}
-            <div className="bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white rounded-xl p-6">
+            <div className="bg-[#DC2626] text-white rounded-xl p-6">
                 <h3 className="font-bold text-xl mb-4 flex items-center gap-2">
                     <AlertTriangle className="w-6 h-6" />
                     خطة العمل الوقائية

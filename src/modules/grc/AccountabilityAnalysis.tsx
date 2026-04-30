@@ -286,7 +286,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             </div>
 
             {/* Critical Findings */}
-            <div className="bg-gradient-to-l from-[#DC2626] to-[#DC2626] rounded-xl p-6 text-white">
+            <div className="bg-[#DC2626] rounded-xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                     <AlertTriangle className="w-5 h-5" />
                     النتائج الأكثر خطورة
@@ -316,7 +316,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             </div>
 
             {/* Positive Achievements */}
-            <div className="mt-6 bg-gradient-to-l from-[#2BB574] to-[#2BB574] rounded-xl p-6 text-white">
+            <div className="mt-6 bg-[#2BB574] rounded-xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                     <TrendingUp className="w-5 h-5" />
                     الإنجازات الإيجابية (للتوازن)
