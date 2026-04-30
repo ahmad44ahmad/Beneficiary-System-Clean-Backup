@@ -90,7 +90,7 @@ export const MonthlyInvoice: React.FC = () => {
                 {/* Header with AI Button */}
                 <div className="flex justify-between items-start border-b-2 border-gray-100 pb-8 mb-8">
                     <div>
-                        <h1 className="text-3xl font-bold text-[#14415A] mb-2">المستخلص الشهري للإعاشة</h1>
+                        <h1 className="text-3xl font-bold text-[#0F3144] mb-2">المستخلص الشهري للإعاشة</h1>
                         <p className="text-gray-500">الفترة: {month}</p>
                     </div>
                     <div className="text-left flex flex-col items-end gap-3">
@@ -101,7 +101,7 @@ export const MonthlyInvoice: React.FC = () => {
                         <button
                             onClick={handleAnalyze}
                             disabled={analyzing || !invoiceData}
-                            className="print:hidden px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2 text-sm transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+                            className="print:hidden px-4 py-2 bg-[#D49A0A] text-white rounded-lg hover:bg-[#D49A0A] flex items-center gap-2 text-sm transition-all shadow-md hover:shadow-lg disabled:opacity-50"
                         >
                             {analyzing ? (
                                 <span className="flex items-center gap-2">جاري التحليل <Loader2 className="w-4 h-4 animate-spin" /></span>
@@ -114,18 +114,18 @@ export const MonthlyInvoice: React.FC = () => {
 
                 {/* AI Insight Card */}
                 {aiAnalysis && (
-                    <div className="mb-8 p-6 bg-purple-50 border border-purple-100 rounded-xl relative animate-in fade-in slide-in-from-top-4">
+                    <div className="mb-8 p-6 bg-[#FCB614]/10 border border-[#FCB614]/10 rounded-xl relative animate-in fade-in slide-in-from-top-4">
                         <button
                             onClick={() => setAiAnalysis(null)}
-                            className="absolute top-4 left-4 text-purple-400 hover:text-purple-700"
+                            className="absolute top-4 left-4 text-[#FCB614] hover:text-[#D49A0A]"
                         >
                             <X className="w-5 h-5" />
                         </button>
-                        <h3 className="flex items-center gap-2 font-bold text-purple-800 mb-4">
+                        <h3 className="flex items-center gap-2 font-bold text-[#92400E] mb-4">
                             <BrainCircuit className="w-6 h-6" />
                             تحليل المساعد الذكي (Gemini)
                         </h3>
-                        <div className="prose prose-sm max-w-none text-purple-900 leading-relaxed whitespace-pre-line">
+                        <div className="prose prose-sm max-w-none text-[#92400E] leading-relaxed whitespace-pre-line">
                             {aiAnalysis}
                         </div>
                     </div>
@@ -138,7 +138,7 @@ export const MonthlyInvoice: React.FC = () => {
                         {/* 1. Meal Summary Table */}
                         <div>
                             <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                                <FileText className="w-5 h-5 text-blue-600" />
+                                <FileText className="w-5 h-5 text-[#269798]" />
                                 ملخص الوجبات المقدمة
                             </h3>
                             <table className="w-full border border-gray-200">
@@ -174,16 +174,16 @@ export const MonthlyInvoice: React.FC = () => {
                         </div>
 
                         {/* 2. Penalties Section (Data Linking) */}
-                        <div className="bg-red-50 p-6 rounded-lg border border-red-100">
-                            <h3 className="font-bold text-red-800 mb-2 flex items-center gap-2">
+                        <div className="bg-[#DC2626]/10 p-6 rounded-lg border border-[#DC2626]/10">
+                            <h3 className="font-bold text-[#7F1D1D] mb-2 flex items-center gap-2">
                                 <AlertTriangle className="w-5 h-5" />
                                 الحسومات والغرامات (Quality Control)
                             </h3>
                             <div className="flex justify-between items-center">
-                                <p className="text-sm text-red-600">
+                                <p className="text-sm text-[#DC2626]">
                                     تم احتساب الغرامات بناءً على تقارير الجودة اليومية وسجلات "لجنة الاستلام"
                                 </p>
-                                <span className="text-xl font-bold text-red-700">
+                                <span className="text-xl font-bold text-[#B91C1C]">
                                     - {invoiceData.totalPenalties.toLocaleString()} ر.س
                                 </span>
                             </div>
@@ -193,7 +193,7 @@ export const MonthlyInvoice: React.FC = () => {
                         <div className="border-t-2 border-gray-800 pt-6 flex justify-end">
                             <div className="text-left">
                                 <p className="text-gray-500 mb-1">صافي المبلغ المستحق</p>
-                                <p className="text-4xl font-bold text-[#14415A]">
+                                <p className="text-4xl font-bold text-[#0F3144]">
                                     {invoiceData.netTotal.toLocaleString()} <span className="text-lg">ر.س</span>
                                 </p>
                             </div>

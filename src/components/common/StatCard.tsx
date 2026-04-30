@@ -27,9 +27,9 @@ export const StatCard: React.FC<StatCardProps> = ({
 }) => {
     const getTrendColor = (direction: string) => {
         switch (direction) {
-            case 'up': return 'text-hrsd-green';
-            case 'down': return 'text-red-500';
-            default: return 'text-gray-500';
+            case 'up': return 'text-[#2BB574]';
+            case 'down': return 'text-[#DC2626]';
+            default: return 'text-hrsd-cool-gray';
         }
     };
 
@@ -52,14 +52,14 @@ export const StatCard: React.FC<StatCardProps> = ({
                 </div>
                 <div className="flex-1">
                     <div className="flex items-end gap-2">
-                        <p className="text-2xl font-bold text-gray-800">{value}</p>
+                        <p className="text-2xl font-bold text-hrsd-navy">{value}</p>
                         {trend && (
                             <span className={`text-sm font-semibold ${getTrendColor(trend.direction)}`}>
                                 {getTrendIcon(trend.direction)} {trend.value}
                             </span>
                         )}
                     </div>
-                    <p className="text-xs text-gray-500 font-medium mt-0.5">{label}</p>
+                    <p className="text-xs text-hrsd-cool-gray font-medium mt-0.5">{label}</p>
                 </div>
             </div>
         </div>

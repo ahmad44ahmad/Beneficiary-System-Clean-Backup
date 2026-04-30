@@ -168,12 +168,12 @@ export const QualityControl = () => {
         <div className="bg-gray-50 min-h-screen p-6" dir="rtl">
             <header className="mb-8 flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-bold text-[#14415A]">مراقبة الجودة وتقييم المتعهد</h1>
+                    <h1 className="text-2xl font-bold text-[#0F3144]">مراقبة الجودة وتقييم المتعهد</h1>
                     <p className="text-gray-600">نظام تقييم الأداء اليومي وحساب الحسومات</p>
                 </div>
                 <div className="bg-white p-3 rounded-xl shadow-sm flex items-center gap-4">
                     <span className="text-gray-500 text-sm">إجمالي الحسم المتوقع:</span>
-                    <span className="text-2xl font-bold text-red-600 font-mono">
+                    <span className="text-2xl font-bold text-[#DC2626] font-mono">
                         {calculateTotalDeduction().toFixed(2)} ريال
                     </span>
                 </div>
@@ -197,7 +197,7 @@ export const QualityControl = () => {
                     {/* Criteria Categories */}
                     {Object.entries(groupedCriteria).map(([category, items]) => (
                         <div key={category} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                            <div className="bg-[#14415A] text-white p-4 flex items-center gap-2">
+                            <div className="bg-[#0F3144] text-white p-4 flex items-center gap-2">
                                 <ClipboardCheck className="w-5 h-5" />
                                 <h3 className="font-bold">{category}</h3>
                             </div>
@@ -210,7 +210,7 @@ export const QualityControl = () => {
                                                 <button
                                                     onClick={() => handleResponse(item.id, 'compliant')}
                                                     className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 transition-all ${responses[item.id] === 'compliant'
-                                                        ? 'bg-green-100 text-green-700 ring-2 ring-green-500'
+                                                        ? 'bg-[#2BB574]/15 text-[#1E9658] ring-2 ring-[#2BB574]'
                                                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                                         }`}
                                                 >
@@ -220,7 +220,7 @@ export const QualityControl = () => {
                                                 <button
                                                     onClick={() => handleResponse(item.id, 'non_compliant')}
                                                     className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 transition-all ${responses[item.id] === 'non_compliant'
-                                                        ? 'bg-red-100 text-red-700 ring-2 ring-red-500'
+                                                        ? 'bg-[#DC2626]/15 text-[#B91C1C] ring-2 ring-[#DC2626]'
                                                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                                         }`}
                                                 >
@@ -232,29 +232,29 @@ export const QualityControl = () => {
 
                                         {/* Penalty Section (Shows if non-compliant) */}
                                         {responses[item.id] === 'non_compliant' && (
-                                            <div className="bg-red-50 p-4 rounded-lg mt-2 animate-in fade-in slide-in-from-top-2">
+                                            <div className="bg-[#DC2626]/10 p-4 rounded-lg mt-2 animate-in fade-in slide-in-from-top-2">
                                                 <div className="flex gap-4 items-center">
                                                     <div className="flex-1">
-                                                        <label className="text-xs font-bold text-red-700 block mb-1">ملاحظة المخالفة</label>
+                                                        <label className="text-xs font-bold text-[#B91C1C] block mb-1">ملاحظة المخالفة</label>
                                                         <input
                                                             type="text"
-                                                            className="w-full text-sm border-red-200 rounded-md focus:ring-red-500 focus:border-red-500"
+                                                            className="w-full text-sm border-[#DC2626]/30 rounded-md focus:ring-[#DC2626] focus:border-[#DC2626]"
                                                             placeholder="وصف المخالفة..."
                                                             value={notes[item.id] || ''}
                                                             onChange={e => setNotes({ ...notes, [item.id]: e.target.value })}
                                                         />
                                                     </div>
                                                     <div className="w-32">
-                                                        <label className="text-xs font-bold text-red-700 block mb-1">قيمة الحسم</label>
+                                                        <label className="text-xs font-bold text-[#B91C1C] block mb-1">قيمة الحسم</label>
                                                         <div className="relative">
                                                             <input
                                                                 type="number"
-                                                                className="w-full text-sm border-red-200 rounded-md pl-8 focus:ring-red-500 focus:border-red-500"
+                                                                className="w-full text-sm border-[#DC2626]/30 rounded-md pl-8 focus:ring-[#DC2626] focus:border-[#DC2626]"
                                                                 placeholder="0.00"
                                                                 value={deductions[item.id] || ''}
                                                                 onChange={e => handleDeduction(item.id, e.target.value)}
                                                             />
-                                                            <DollarSign className="w-4 h-4 text-red-400 absolute left-2 top-2" />
+                                                            <DollarSign className="w-4 h-4 text-[#DC2626] absolute left-2 top-2" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -270,7 +270,7 @@ export const QualityControl = () => {
                 {/* Sidebar / Summary */}
                 <div className="space-y-6">
                     <div className="bg-white p-6 rounded-xl shadow-sm sticky top-6">
-                        <h3 className="font-bold text-[#14415A] mb-4 flex items-center gap-2">
+                        <h3 className="font-bold text-[#0F3144] mb-4 flex items-center gap-2">
                             <Save className="w-5 h-5" />
                             ملخص التقييم
                         </h3>
@@ -278,11 +278,11 @@ export const QualityControl = () => {
                         <div className="space-y-4">
                             <div className="flex justify-between text-sm">
                                 <span className="text-gray-600">عدد البنود المطابقة:</span>
-                                <span className="font-bold text-green-600">{Object.values(responses).filter(r => r === 'compliant').length}</span>
+                                <span className="font-bold text-[#1E9658]">{Object.values(responses).filter(r => r === 'compliant').length}</span>
                             </div>
                             <div className="flex justify-between text-sm">
                                 <span className="text-gray-600">عدد المخالفات:</span>
-                                <span className="font-bold text-red-600">{Object.values(responses).filter(r => r === 'non_compliant').length}</span>
+                                <span className="font-bold text-[#DC2626]">{Object.values(responses).filter(r => r === 'non_compliant').length}</span>
                             </div>
                             <div className="border-t pt-4">
                                 <label className="block text-sm font-bold text-gray-700 mb-2">ملاحظات عامة</label>
@@ -297,7 +297,7 @@ export const QualityControl = () => {
                             <button
                                 onClick={handleSubmit}
                                 disabled={submitting}
-                                className="w-full bg-[#14415A] text-white py-3 rounded-lg font-bold hover:bg-[#0e2e40] transition-colors flex justify-center items-center gap-2"
+                                className="w-full bg-[#0F3144] text-white py-3 rounded-lg font-bold hover:bg-[#0e2e40] transition-colors flex justify-center items-center gap-2"
                             >
                                 {submitting ? <Loader2 className="animate-spin w-5 h-5" /> : 'حفظ التقييم واعتماد الحسومات'}
                             </button>

@@ -65,12 +65,12 @@ const SLATimer: React.FC<{ reportedAt: Date; slaHours: number; status: string }>
     }, [reportedAt, slaHours]);
 
     return (
-        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${isOverdue ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
+        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${isOverdue ? 'bg-[#DC2626]/15 text-[#B91C1C]' : 'bg-[#FCB614]/10 text-[#D49A0A]'
             }`}>
             <Clock className="w-4 h-4" />
             <span className="text-sm font-bold">{timeRemaining}</span>
             {isOverdue && status !== 'resolved' && (
-                <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full">تحويل المسؤولية</span>
+                <span className="text-xs bg-[#B91C1C] text-white px-2 py-0.5 rounded-full">تحويل المسؤولية</span>
             )}
         </div>
     );
@@ -79,17 +79,17 @@ const SLATimer: React.FC<{ reportedAt: Date; slaHours: number; status: string }>
 // Metric Card
 const MetricCard: React.FC<{ metric: OperationalMetric }> = ({ metric }) => {
     const statusColors = {
-        excellent: 'border-green-500 bg-green-50',
-        good: 'border-blue-500 bg-blue-50',
-        warning: 'border-yellow-500 bg-yellow-50',
-        critical: 'border-red-500 bg-red-50',
+        excellent: 'border-[#2BB574] bg-[#2BB574]/10',
+        good: 'border-[#269798] bg-[#269798]/10',
+        warning: 'border-[#FCB614] bg-[#FCB614]/10',
+        critical: 'border-[#DC2626] bg-[#DC2626]/10',
     };
 
     const statusIcons = {
-        excellent: <CheckCircle className="w-5 h-5 text-green-600" />,
-        good: <CheckCircle className="w-5 h-5 text-blue-600" />,
-        warning: <AlertTriangle className="w-5 h-5 text-yellow-600" />,
-        critical: <XCircle className="w-5 h-5 text-red-600" />,
+        excellent: <CheckCircle className="w-5 h-5 text-[#1E9658]" />,
+        good: <CheckCircle className="w-5 h-5 text-[#269798]" />,
+        warning: <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />,
+        critical: <XCircle className="w-5 h-5 text-[#DC2626]" />,
     };
 
     return (
@@ -111,7 +111,7 @@ const MetricCard: React.FC<{ metric: OperationalMetric }> = ({ metric }) => {
                 <div>
                     <span className="text-3xl font-bold text-gray-900">{metric.value}%</span>
                 </div>
-                <div className={`flex items-center gap-1 text-sm ${metric.trend >= 0 ? 'text-green-600' : 'text-red-600'
+                <div className={`flex items-center gap-1 text-sm ${metric.trend >= 0 ? 'text-[#1E9658]' : 'text-[#DC2626]'
                     }`}>
                     {metric.trend >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                     <span className="font-medium">{Math.abs(metric.trend)}%</span>
@@ -120,9 +120,9 @@ const MetricCard: React.FC<{ metric: OperationalMetric }> = ({ metric }) => {
 
             <div className="mt-3 h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                    className={`h-full transition-all ${metric.status === 'excellent' ? 'bg-green-500' :
-                            metric.status === 'good' ? 'bg-blue-500' :
-                                metric.status === 'warning' ? 'bg-yellow-500' : 'bg-red-500'
+                    className={`h-full transition-all ${metric.status === 'excellent' ? 'bg-[#2BB574]' :
+                            metric.status === 'good' ? 'bg-[#269798]' :
+                                metric.status === 'warning' ? 'bg-[#FCB614]' : 'bg-[#DC2626]'
                         }`}
                     style={{ width: `${metric.value}%` }}
                 />
@@ -134,15 +134,15 @@ const MetricCard: React.FC<{ metric: OperationalMetric }> = ({ metric }) => {
 // Issue Card
 const IssueCard: React.FC<{ issue: StructuralIssue }> = ({ issue }) => {
     const severityColors = {
-        high: 'border-red-500 bg-red-50',
-        medium: 'border-orange-500 bg-orange-50',
-        low: 'border-yellow-500 bg-yellow-50',
+        high: 'border-[#DC2626] bg-[#DC2626]/10',
+        medium: 'border-[#F7941D] bg-[#F7941D]/10',
+        low: 'border-[#FCB614] bg-[#FCB614]/10',
     };
 
     const statusBadges = {
-        pending: 'bg-yellow-100 text-yellow-700',
-        escalated: 'bg-red-100 text-red-700',
-        resolved: 'bg-green-100 text-green-700',
+        pending: 'bg-[#FCB614]/10 text-[#D49A0A]',
+        escalated: 'bg-[#DC2626]/15 text-[#B91C1C]',
+        resolved: 'bg-[#2BB574]/15 text-[#1E9658]',
     };
 
     return (
@@ -189,7 +189,7 @@ export const LiabilityDashboard: React.FC = () => {
             target: 90,
             status: 'excellent',
             trend: 5,
-            icon: <Users className="w-5 h-5 text-blue-600" />
+            icon: <Users className="w-5 h-5 text-[#269798]" />
         },
         {
             id: '2',
@@ -198,7 +198,7 @@ export const LiabilityDashboard: React.FC = () => {
             target: 85,
             status: 'good',
             trend: 3,
-            icon: <Heart className="w-5 h-5 text-pink-600" />
+            icon: <Heart className="w-5 h-5 text-[#DC2626]" />
         },
         {
             id: '3',
@@ -207,7 +207,7 @@ export const LiabilityDashboard: React.FC = () => {
             target: 80,
             status: 'warning',
             trend: -2,
-            icon: <Activity className="w-5 h-5 text-orange-600" />
+            icon: <Activity className="w-5 h-5 text-[#D67A0A]" />
         },
         {
             id: '4',
@@ -216,7 +216,7 @@ export const LiabilityDashboard: React.FC = () => {
             target: 90,
             status: 'excellent',
             trend: 8,
-            icon: <Utensils className="w-5 h-5 text-green-600" />
+            icon: <Utensils className="w-5 h-5 text-[#1E9658]" />
         },
     ];
 
@@ -230,7 +230,7 @@ export const LiabilityDashboard: React.FC = () => {
             responsible_party: 'إدارة المشاريع',
             status: 'escalated',
             severity: 'high',
-            icon: <Thermometer className="w-5 h-5 text-red-600" />
+            icon: <Thermometer className="w-5 h-5 text-[#DC2626]" />
         },
         {
             id: '2',
@@ -241,7 +241,7 @@ export const LiabilityDashboard: React.FC = () => {
             responsible_party: 'المقاول الخارجي',
             status: 'pending',
             severity: 'medium',
-            icon: <Droplets className="w-5 h-5 text-blue-600" />
+            icon: <Droplets className="w-5 h-5 text-[#269798]" />
         },
         {
             id: '3',
@@ -252,7 +252,7 @@ export const LiabilityDashboard: React.FC = () => {
             responsible_party: 'شركة الصيانة',
             status: 'escalated',
             severity: 'high',
-            icon: <Navigation className="w-5 h-5 text-red-600" />
+            icon: <Navigation className="w-5 h-5 text-[#DC2626]" />
         },
     ];
 
@@ -264,7 +264,7 @@ export const LiabilityDashboard: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-gradient-to-br from-blue-600 to-cyan-700 rounded-xl">
+                    <div className="p-3 bg-gradient-to-br from-[#1B7778] to-[#1B7778] rounded-xl">
                         <Shield className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -274,12 +274,12 @@ export const LiabilityDashboard: React.FC = () => {
                 </div>
 
                 {/* Info Banner */}
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-                    <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <div className="text-sm text-blue-900">
+                <div className="bg-[#269798]/10 border border-[#269798]/30 rounded-xl p-4 flex items-start gap-3">
+                    <Info className="w-5 h-5 text-[#269798] flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-[#0F3144]">
                         <p className="font-bold mb-1">📊 هذه اللوحة تفصل بوضوح:</p>
-                        <p>• <span className="font-bold text-green-600">الأخضر (يسار)</span>: المسؤوليات التشغيلية تحت سيطرتنا</p>
-                        <p>• <span className="font-bold text-red-600">الأحمر (يمين)</span>: المشاكل الهيكلية خارج سيطرتنا - ستُحوّل المسؤولية تلقائياً للجهات المعنية بعد 48 ساعة</p>
+                        <p>• <span className="font-bold text-[#1E9658]">الأخضر (يسار)</span>: المسؤوليات التشغيلية تحت سيطرتنا</p>
+                        <p>• <span className="font-bold text-[#DC2626]">الأحمر (يمين)</span>: المشاكل الهيكلية خارج سيطرتنا - ستُحوّل المسؤولية تلقائياً للجهات المعنية بعد 48 ساعة</p>
                     </div>
                 </div>
             </div>
@@ -288,12 +288,12 @@ export const LiabilityDashboard: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* LEFT COLUMN - Operational (Under Control) */}
                 <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-green-600 to-emerald-700 text-white p-4 rounded-xl shadow-lg">
+                    <div className="bg-gradient-to-r from-[#1E9658] to-[#1E9658] text-white p-4 rounded-xl shadow-lg">
                         <div className="flex items-center gap-3">
                             <CheckCircle className="w-6 h-6" />
                             <div>
                                 <h2 className="text-xl font-bold">المسؤوليات التشغيلية</h2>
-                                <p className="text-sm text-green-100">تحت سيطرتنا المباشرة ✓</p>
+                                <p className="text-sm text-[#2BB574]/40">تحت سيطرتنا المباشرة ✓</p>
                             </div>
                         </div>
                     </div>
@@ -304,8 +304,8 @@ export const LiabilityDashboard: React.FC = () => {
                         ))}
                     </div>
 
-                    <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                        <p className="text-sm text-green-900">
+                    <div className="bg-[#2BB574]/10 border border-[#2BB574]/20 rounded-xl p-4">
+                        <p className="text-sm text-[#14532D]">
                             ✅ <span className="font-bold">الخلاصة:</span> أي قصور في هذه المؤشرات هو مسؤوليتنا المباشرة
                         </p>
                     </div>
@@ -313,12 +313,12 @@ export const LiabilityDashboard: React.FC = () => {
 
                 {/* RIGHT COLUMN - Structural (External) */}
                 <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-red-600 to-rose-700 text-white p-4 rounded-xl shadow-lg">
+                    <div className="bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white p-4 rounded-xl shadow-lg">
                         <div className="flex items-center gap-3">
                             <AlertTriangle className="w-6 h-6" />
                             <div>
                                 <h2 className="text-xl font-bold">المشاكل الهيكلية</h2>
-                                <p className="text-sm text-red-100">خارج سيطرتنا - موثقة ومُصعّدة ⚠️</p>
+                                <p className="text-sm text-[#DC2626]/40">خارج سيطرتنا - موثقة ومُصعّدة ⚠️</p>
                             </div>
                         </div>
                     </div>
@@ -329,8 +329,8 @@ export const LiabilityDashboard: React.FC = () => {
                         ))}
                     </div>
 
-                    <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                        <p className="text-sm text-red-900">
+                    <div className="bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-xl p-4">
+                        <p className="text-sm text-[#7F1D1D]">
                             ⚠️ <span className="font-bold">تنبيه:</span> جميع البلاغات المتأخرة عن 48 ساعة يتم تحويل مسؤوليتها تلقائياً للجهات المعنية مع إشعار الوزارة
                         </p>
                     </div>
@@ -341,25 +341,25 @@ export const LiabilityDashboard: React.FC = () => {
             <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-gray-500 text-sm">مؤشرات تشغيلية ممتازة</p>
-                    <p className="text-2xl font-bold text-green-600">
+                    <p className="text-2xl font-bold text-[#1E9658]">
                         {operationalMetrics.filter(m => m.status === 'excellent').length}/{operationalMetrics.length}
                     </p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-gray-500 text-sm">قضايا هيكلية معلقة</p>
-                    <p className="text-2xl font-bold text-red-600">
+                    <p className="text-2xl font-bold text-[#DC2626]">
                         {structuralIssues.filter(i => i.status !== 'resolved').length}
                     </p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-gray-500 text-sm">تم التصعيد للوزارة</p>
-                    <p className="text-2xl font-bold text-orange-600">
+                    <p className="text-2xl font-bold text-[#D67A0A]">
                         {structuralIssues.filter(i => i.status === 'escalated').length}
                     </p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <p className="text-gray-500 text-sm">متوسط الأداء التشغيلي</p>
-                    <p className="text-2xl font-bold text-blue-600">
+                    <p className="text-2xl font-bold text-[#269798]">
                         {Math.round(operationalMetrics.reduce((sum, m) => sum + m.value, 0) / operationalMetrics.length)}%
                     </p>
                 </div>

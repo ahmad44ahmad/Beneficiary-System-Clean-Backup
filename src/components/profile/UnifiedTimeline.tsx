@@ -37,7 +37,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
             title: `Visit: ${visit.type}`,
             description: visit.notes,
             icon: <Calendar className="w-4 h-4" />,
-            colorClass: 'bg-blue-100 text-blue-600 border-blue-200'
+            colorClass: 'bg-[#269798]/15 text-[#269798] border-[#269798]/30'
         });
     });
 
@@ -51,7 +51,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
             title: `Incident: ${incident.type}`,
             description: incident.description,
             icon: <AlertTriangle className="w-4 h-4" />,
-            colorClass: 'bg-red-100 text-red-600 border-red-200'
+            colorClass: 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]/30'
         });
     });
 
@@ -64,7 +64,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
             title: `Medical Exam: ${exam.diagnosis}`,
             description: `Dr. ${exam.doctorName} - ${exam.recommendations}`,
             icon: <Stethoscope className="w-4 h-4" />,
-            colorClass: 'bg-green-100 text-green-600 border-green-200'
+            colorClass: 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]/20'
         });
     });
 
@@ -78,7 +78,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
             title: 'Rehab Plan Started',
             description: `${(plan.goals as unknown[])?.length ?? 0} Goals Set`,
             icon: <ClipboardCheck className="w-4 h-4" />,
-            colorClass: 'bg-purple-100 text-purple-600 border-purple-200'
+            colorClass: 'bg-[#FCB614]/15 text-[#D49A0A] border-[#FCB614]/20'
         });
     }
 
@@ -102,9 +102,9 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
                     <div
                         className={`
                             absolute -start-[9px] top-0 w-4 h-4 rounded-full border-2 border-white shadow-sm flex items-center justify-center
-                            ${event.type === 'incident' ? 'bg-red-500' :
-                                event.type === 'medical' ? 'bg-green-500' :
-                                    event.type === 'rehab' ? 'bg-purple-500' : 'bg-blue-500'}
+                            ${event.type === 'incident' ? 'bg-[#DC2626]' :
+                                event.type === 'medical' ? 'bg-[#2BB574]' :
+                                    event.type === 'rehab' ? 'bg-[#FCB614]' : 'bg-[#269798]'}
                         `}
                     />
 

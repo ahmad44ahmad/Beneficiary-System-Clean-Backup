@@ -60,10 +60,10 @@ export const LegacyConsultant: React.FC = () => {
     }, [results, loading]);
 
     return (
-        <Card className="h-[600px] flex flex-col overflow-hidden border-orange-200">
+        <Card className="h-[600px] flex flex-col overflow-hidden border-[#F7941D]/30">
             <div className="bg-gradient-to-br from-hrsd-blue to-hrsd-teal p-6 text-white">
                 <h2 className="text-xl font-bold flex items-center gap-2 mb-2">
-                    <Sparkles className="w-5 h-5 text-yellow-300" />
+                    <Sparkles className="w-5 h-5 text-[#FCB614]" />
                     استشر الحكمة المؤسسية
                 </h2>
                 <div className="bg-white/10 rounded-lg p-3 text-sm text-white/90">
@@ -79,15 +79,15 @@ export const LegacyConsultant: React.FC = () => {
                     >
                         <div className={`
                             w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0
-                            ${msg.sender === 'user' ? 'bg-gray-200' : 'bg-orange-100'}
+                            ${msg.sender === 'user' ? 'bg-gray-200' : 'bg-[#F7941D]/15'}
                         `}>
-                            {msg.sender === 'user' ? <User className="w-5 h-5 text-gray-600" /> : <Brain className="w-5 h-5 text-orange-600" />}
+                            {msg.sender === 'user' ? <User className="w-5 h-5 text-gray-600" /> : <Brain className="w-5 h-5 text-[#D67A0A]" />}
                         </div>
                         <div className={`
                             max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed
                             ${msg.sender === 'user'
                                 ? 'bg-white border border-gray-200 text-gray-800 rounded-tl-none'
-                                : 'bg-orange-50 border border-orange-100 text-gray-800 rounded-tr-none shadow-sm'}
+                                : 'bg-[#F7941D]/10 border border-[#F7941D]/10 text-gray-800 rounded-tr-none shadow-sm'}
                         `}>
                             {msg.text}
                             <div className="text-[10px] text-gray-400 mt-1 opacity-70">

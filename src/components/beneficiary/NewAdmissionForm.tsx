@@ -152,12 +152,12 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                             <h3><Activity className="inline-icon" /> العلامات الحيوية (Vital Signs)</h3>
 
                             {validation.warnings.length > 0 && (
-                                <div className="bg-red-50 border-s-4 border-red-500 p-4 mb-4">
+                                <div className="bg-[#DC2626]/10 border-s-4 border-[#DC2626] p-4 mb-4">
                                     <div className="flex">
-                                        <AlertCircle className="h-6 w-6 text-red-500 ms-3" />
+                                        <AlertCircle className="h-6 w-6 text-[#DC2626] ms-3" />
                                         <div>
-                                            <p className="text-sm text-red-700 font-bold">تنبيهات طبية:</p>
-                                            <ul className="list-disc list-inside text-sm text-red-600">
+                                            <p className="text-sm text-[#B91C1C] font-bold">تنبيهات طبية:</p>
+                                            <ul className="list-disc list-inside text-sm text-[#DC2626]">
                                                 {validation.warnings.map((w, i) => <li key={i}>{w}</li>)}
                                             </ul>
                                         </div>
@@ -172,7 +172,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         type="number" step="0.1"
                                         value={vitals.temperature || ''}
                                         onChange={e => setVitals({ ...vitals, temperature: parseFloat(e.target.value) })}
-                                        className={vitals.temperature && vitals.temperature > 38 ? 'border-red-500 bg-red-50' : ''}
+                                        className={vitals.temperature && vitals.temperature > 38 ? 'border-[#DC2626] bg-[#DC2626]/10' : ''}
                                         title="درجة الحرارة"
                                         placeholder="37.0"
                                     />
@@ -231,9 +231,9 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
 
                             {validation.errors['checkup'] && (
                                 <div className="mt-4">
-                                    <p className="text-red-600 text-sm mb-2">{validation.errors['checkup']}</p>
+                                    <p className="text-[#DC2626] text-sm mb-2">{validation.errors['checkup']}</p>
                                     <textarea
-                                        className="w-full p-2 border border-red-300 rounded"
+                                        className="w-full p-2 border border-[#DC2626] rounded"
                                         placeholder="اكتب ملاحظة طبية لتبرير القيم غير الطبيعية..."
                                         value={checkupComment}
                                         onChange={e => setCheckupComment(e.target.value)}
@@ -249,8 +249,8 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                             <h3><FileText className="inline-icon" /> التاريخ المرضي (Past History)</h3>
 
                             {validation.actions.requireSeizureHistory && (
-                                <div className="bg-yellow-50 p-4 rounded border border-yellow-200 mb-4">
-                                    <h4 className="text-yellow-800 font-bold mb-2">مطلوب: تاريخ نوبات الصرع</h4>
+                                <div className="bg-[#FCB614]/10 p-4 rounded border border-[#FCB614]/20 mb-4">
+                                    <h4 className="text-[#D49A0A] font-bold mb-2">مطلوب: تاريخ نوبات الصرع</h4>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="form-group">
                                             <label>تاريخ آخر نوبة</label>
@@ -280,7 +280,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                         </div>
                                     </div>
                                     {validation.errors['seizureHistory'] && (
-                                        <p className="text-red-600 text-sm mt-1">{validation.errors['seizureHistory']}</p>
+                                        <p className="text-[#DC2626] text-sm mt-1">{validation.errors['seizureHistory']}</p>
                                     )}
                                 </div>
                             )}
@@ -333,7 +333,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                         ) : (
                             <button
                                 type="submit"
-                                className="btn-primary bg-green-600 hover:bg-green-700"
+                                className="btn-primary bg-[#1E9658] hover:bg-[#1E9658]"
                                 disabled={!validation.isValid}
                             >
                                 <Save className="inline-icon ms-2" />

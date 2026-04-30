@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 
 // HRSD brand colors
-const NAVY = '#14415A';
+const NAVY = '#0F3144';
 const TEAL = '#1E6B5C';
 
 type TabType = 'dashboard' | 'tracing' | 'protocols';
@@ -182,35 +182,35 @@ const protocols = [
 ];
 
 const severityConfig: Record<Severity, { label: string; bg: string; text: string; border: string }> = {
-  low: { label: 'منخفض', bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-  moderate: { label: 'متوسط', bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-  high: { label: 'مرتفع', bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
-  critical: { label: 'حرج', bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
+  low: { label: 'منخفض', bg: 'bg-[#269798]/10', text: 'text-[#1B7778]', border: 'border-[#269798]/30' },
+  moderate: { label: 'متوسط', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]', border: 'border-[#FCB614]/30' },
+  high: { label: 'مرتفع', bg: 'bg-[#F7941D]/10', text: 'text-[#D67A0A]', border: 'border-[#F7941D]/30' },
+  critical: { label: 'حرج', bg: 'bg-[#DC2626]/10', text: 'text-[#B91C1C]', border: 'border-[#DC2626]/30' },
 };
 
 const containmentLabels: Record<ContainmentStatus, { label: string; color: string }> = {
-  active: { label: 'نشط', color: 'text-red-600' },
-  contained: { label: 'محتوى', color: 'text-amber-600' },
-  resolved: { label: 'منتهي', color: 'text-green-600' },
+  active: { label: 'نشط', color: 'text-[#DC2626]' },
+  contained: { label: 'محتوى', color: 'text-[#D49A0A]' },
+  resolved: { label: 'منتهي', color: 'text-[#1E9658]' },
 };
 
 const contactTypeLabels: Record<ContactType, { label: string; bg: string; text: string }> = {
-  beneficiary: { label: 'مستفيد', bg: 'bg-teal-50', text: 'text-teal-700' },
-  staff: { label: 'موظف', bg: 'bg-blue-50', text: 'text-blue-700' },
-  visitor: { label: 'زائر', bg: 'bg-purple-50', text: 'text-purple-700' },
+  beneficiary: { label: 'مستفيد', bg: 'bg-[#269798]/10', text: 'text-[#1B7778]' },
+  staff: { label: 'موظف', bg: 'bg-[#269798]/10', text: 'text-[#1B7778]' },
+  visitor: { label: 'زائر', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]' },
 };
 
 const exposureLabels: Record<ExposureLevel, { label: string; bg: string; text: string }> = {
-  close: { label: 'مباشر', bg: 'bg-red-50', text: 'text-red-700' },
-  casual: { label: 'عرضي', bg: 'bg-amber-50', text: 'text-amber-700' },
+  close: { label: 'مباشر', bg: 'bg-[#DC2626]/10', text: 'text-[#B91C1C]' },
+  casual: { label: 'عرضي', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]' },
   indirect: { label: 'غير مباشر', bg: 'bg-gray-50', text: 'text-gray-700' },
 };
 
 const contactStatusConfig: Record<ContactStatus, { label: string; bg: string; text: string }> = {
-  active: { label: 'تحت المراقبة', bg: 'bg-amber-50', text: 'text-amber-700' },
-  symptomatic: { label: 'أعراض ظاهرة', bg: 'bg-red-50', text: 'text-red-600' },
-  cleared: { label: 'تم الإخلاء', bg: 'bg-green-50', text: 'text-green-700' },
-  infected: { label: 'مصاب', bg: 'bg-red-100', text: 'text-red-800' },
+  active: { label: 'تحت المراقبة', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]' },
+  symptomatic: { label: 'أعراض ظاهرة', bg: 'bg-[#DC2626]/10', text: 'text-[#DC2626]' },
+  cleared: { label: 'تم الإخلاء', bg: 'bg-[#2BB574]/10', text: 'text-[#1E9658]' },
+  infected: { label: 'مصاب', bg: 'bg-[#DC2626]/15', text: 'text-[#7F1D1D]' },
 };
 
 const PIE_COLORS = [NAVY, TEAL, '#D4AF37', '#DC2626'];
@@ -331,8 +331,8 @@ export const OutbreakManagement: React.FC = () => {
               {activeOutbreaks.length > 0 && (
                 <div className="absolute top-3 left-3">
                   <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DC2626] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#DC2626]" />
                   </span>
                 </div>
               )}
@@ -341,8 +341,8 @@ export const OutbreakManagement: React.FC = () => {
                   <p className="text-gray-500 text-sm mb-1">تفشيات نشطة</p>
                   <p className="text-3xl font-bold text-gray-800">{activeOutbreaks.length}</p>
                 </div>
-                <div className="p-3 rounded-xl bg-red-50">
-                  <AlertOctagon className="w-6 h-6 text-red-500" />
+                <div className="p-3 rounded-xl bg-[#DC2626]/10">
+                  <AlertOctagon className="w-6 h-6 text-[#DC2626]" />
                 </div>
               </div>
             </div>
@@ -354,8 +354,8 @@ export const OutbreakManagement: React.FC = () => {
                   <p className="text-gray-500 text-sm mb-1">إجمالي المخالطين</p>
                   <p className="text-3xl font-bold text-gray-800">{totalContacts}</p>
                 </div>
-                <div className="p-3 rounded-xl bg-blue-50">
-                  <Users className="w-6 h-6 text-blue-500" />
+                <div className="p-3 rounded-xl bg-[#269798]/10">
+                  <Users className="w-6 h-6 text-[#269798]" />
                 </div>
               </div>
             </div>
@@ -367,8 +367,8 @@ export const OutbreakManagement: React.FC = () => {
                   <p className="text-gray-500 text-sm mb-1">مبلّغ لوزارة الصحة</p>
                   <p className="text-3xl font-bold text-gray-800">{mohNotified}</p>
                 </div>
-                <div className="p-3 rounded-xl bg-amber-50">
-                  <Phone className="w-6 h-6 text-amber-500" />
+                <div className="p-3 rounded-xl bg-[#FCB614]/10">
+                  <Phone className="w-6 h-6 text-[#D49A0A]" />
                 </div>
               </div>
             </div>
@@ -380,8 +380,8 @@ export const OutbreakManagement: React.FC = () => {
                   <p className="text-gray-500 text-sm mb-1">محتوى بنجاح</p>
                   <p className="text-3xl font-bold text-gray-800">{containedCount}</p>
                 </div>
-                <div className="p-3 rounded-xl bg-green-50">
-                  <CheckCircle2 className="w-6 h-6 text-green-500" />
+                <div className="p-3 rounded-xl bg-[#2BB574]/10">
+                  <CheckCircle2 className="w-6 h-6 text-[#1E9658]" />
                 </div>
               </div>
             </div>
@@ -392,7 +392,7 @@ export const OutbreakManagement: React.FC = () => {
             {/* Outbreaks List */}
             <div className="lg:col-span-2 space-y-4">
               <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-orange-500" />
+                <AlertTriangle className="w-5 h-5 text-[#D67A0A]" />
                 التفشيات المسجلة
               </h2>
               {outbreaks.map((outbreak) => {
@@ -403,7 +403,7 @@ export const OutbreakManagement: React.FC = () => {
                   <div
                     key={outbreak.code}
                     className={`bg-white rounded-2xl p-5 shadow-sm border ${
-                      outbreak.containment_status === 'active' ? 'border-red-200' : 'border-gray-100'
+                      outbreak.containment_status === 'active' ? 'border-[#DC2626]/30' : 'border-gray-100'
                     } hover:shadow-md transition-shadow`}
                   >
                     <div className="flex items-start justify-between mb-3">
@@ -445,7 +445,7 @@ export const OutbreakManagement: React.FC = () => {
                       </div>
                       <div className="flex items-center gap-1.5">
                         {outbreak.moh_notified ? (
-                          <span className="flex items-center gap-1 text-green-600">
+                          <span className="flex items-center gap-1 text-[#1E9658]">
                             <CheckCircle2 className="w-4 h-4" />
                             مبلّغ للوزارة
                           </span>

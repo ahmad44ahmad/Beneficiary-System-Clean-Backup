@@ -10,16 +10,16 @@ import { LoadingSpinner } from '../../components/common/LoadingSpinner';
 
 // Progress Bar Component
 const PROGRESS_COLORS: Record<string, string> = {
-    emerald: 'bg-emerald-500',
-    blue: 'bg-blue-500',
-    red: 'bg-red-500',
-    orange: 'bg-orange-500',
+    emerald: 'bg-[#2BB574]',
+    blue: 'bg-[#269798]',
+    red: 'bg-[#DC2626]',
+    orange: 'bg-[#F7941D]',
 };
 
 const ProgressBar: React.FC<{ value: number; color?: string }> = ({ value, color = 'emerald' }) => (
     <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <div
-            className={`h-full ${PROGRESS_COLORS[color] || 'bg-emerald-500'} transition-all duration-500`}
+            className={`h-full ${PROGRESS_COLORS[color] || 'bg-[#2BB574]'} transition-all duration-500`}
             style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
         />
     </div>
@@ -29,11 +29,11 @@ const ProgressBar: React.FC<{ value: number; color?: string }> = ({ value, color
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
     const styles: Record<string, string> = {
         planned: 'bg-gray-100 text-gray-600',
-        in_progress: 'bg-blue-100 text-blue-700',
-        achieved: 'bg-green-100 text-green-700',
-        partially_achieved: 'bg-yellow-100 text-yellow-700',
-        on_hold: 'bg-orange-100 text-orange-700',
-        abandoned: 'bg-red-100 text-red-700',
+        in_progress: 'bg-[#269798]/15 text-[#1B7778]',
+        achieved: 'bg-[#2BB574]/15 text-[#1E9658]',
+        partially_achieved: 'bg-[#FCB614]/10 text-[#D49A0A]',
+        on_hold: 'bg-[#F7941D]/15 text-[#D67A0A]',
+        abandoned: 'bg-[#DC2626]/15 text-[#B91C1C]',
     };
 
     const labels: Record<string, string> = {
@@ -59,7 +59,7 @@ const GoalCard: React.FC<{ goal: RehabGoal; onClick: () => void }> = ({ goal, on
     return (
         <div
             onClick={onClick}
-            className="bg-white rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-emerald-300 transition-all cursor-pointer"
+            className="bg-white rounded-xl p-4 shadow-sm border hover:shadow-md hover:border-[#2BB574] transition-all cursor-pointer"
         >
             <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ const GoalCard: React.FC<{ goal: RehabGoal; onClick: () => void }> = ({ goal, on
             <div className="mb-2">
                 <div className="flex justify-between text-sm mb-1">
                     <span className="text-gray-500">التقدم</span>
-                    <span className="font-bold text-emerald-600">{goal.progress_percentage}%</span>
+                    <span className="font-bold text-[#1E9658]">{goal.progress_percentage}%</span>
                 </div>
                 <ProgressBar value={goal.progress_percentage} />
             </div>
@@ -150,8 +150,8 @@ export const EmpowermentDashboard: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-emerald-100 rounded-xl">
-                        <Target className="w-8 h-8 text-emerald-600" />
+                    <div className="p-3 bg-[#2BB574]/15 rounded-xl">
+                        <Target className="w-8 h-8 text-[#1E9658]" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">محرك التمكين</h1>
@@ -166,7 +166,7 @@ export const EmpowermentDashboard: React.FC = () => {
                     </button>
                     <button
                         onClick={() => navigate('/empowerment/goal/new')}
-                        className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 flex items-center gap-2 shadow-md"
+                        className="px-4 py-2 bg-[#1E9658] text-white rounded-lg hover:bg-[#1E9658] flex items-center gap-2 shadow-md"
                     >
                         <Plus className="w-4 h-4" />
                         هدف جديد
@@ -176,24 +176,24 @@ export const EmpowermentDashboard: React.FC = () => {
 
             {/* Three Strategic Tracks */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-gradient-to-br from-emerald-50 to-white p-5 rounded-xl border border-emerald-100">
+                <div className="bg-gradient-to-br from-[#2BB574]/10 to-white p-5 rounded-xl border border-[#2BB574]/10">
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white text-xl">١</div>
-                        <h3 className="font-bold text-emerald-900">تمكين الاستقلال الذاتي</h3>
+                        <div className="w-10 h-10 bg-[#1E9658] rounded-lg flex items-center justify-center text-white text-xl">١</div>
+                        <h3 className="font-bold text-[#14532D]">تمكين الاستقلال الذاتي</h3>
                     </div>
                     <p className="text-sm text-gray-600">تحسين مهارات الحياة اليومية ورفع قدرة المستفيد على القيام بشؤونه باستقلالية.</p>
                 </div>
-                <div className="bg-gradient-to-br from-blue-50 to-white p-5 rounded-xl border border-blue-100">
+                <div className="bg-gradient-to-br from-[#269798]/10 to-white p-5 rounded-xl border border-[#269798]/10">
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl">٢</div>
-                        <h3 className="font-bold text-blue-900">تمكين الدمج المجتمعي</h3>
+                        <div className="w-10 h-10 bg-[#1B7778] rounded-lg flex items-center justify-center text-white text-xl">٢</div>
+                        <h3 className="font-bold text-[#0F3144]">تمكين الدمج المجتمعي</h3>
                     </div>
                     <p className="text-sm text-gray-600">تيسير المشاركة في الأنشطة المجتمعية والتفاعل الاجتماعي خارج المركز.</p>
                 </div>
-                <div className="bg-gradient-to-br from-amber-50 to-white p-5 rounded-xl border border-amber-100">
+                <div className="bg-gradient-to-br from-[#FCB614]/10 to-white p-5 rounded-xl border border-[#FCB614]/10">
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white text-xl">٣</div>
-                        <h3 className="font-bold text-amber-900">تمكين العودة لسوق العمل</h3>
+                        <div className="w-10 h-10 bg-[#D49A0A] rounded-lg flex items-center justify-center text-white text-xl">٣</div>
+                        <h3 className="font-bold text-[#92400E]">تمكين العودة لسوق العمل</h3>
                     </div>
                     <p className="text-sm text-gray-600">تطوير المهارات المهنية وفتح مسارات تأهيل تنتهي بفرص عمل مناسبة.</p>
                 </div>
@@ -201,10 +201,10 @@ export const EmpowermentDashboard: React.FC = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-blue-500">
+                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-[#269798]">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-blue-100 rounded-lg">
-                            <BarChart3 className="w-5 h-5 text-blue-600" />
+                        <div className="p-2 bg-[#269798]/15 rounded-lg">
+                            <BarChart3 className="w-5 h-5 text-[#269798]" />
                         </div>
                         <div>
                             <p className="text-gray-500 text-sm">إجمالي الأهداف</p>
@@ -212,36 +212,36 @@ export const EmpowermentDashboard: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-green-500">
+                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-[#2BB574]">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-green-100 rounded-lg">
-                            <Award className="w-5 h-5 text-green-600" />
+                        <div className="p-2 bg-[#2BB574]/15 rounded-lg">
+                            <Award className="w-5 h-5 text-[#1E9658]" />
                         </div>
                         <div>
                             <p className="text-gray-500 text-sm">أهداف مُحققة</p>
-                            <p className="text-2xl font-bold text-green-600">{stats.achieved}</p>
+                            <p className="text-2xl font-bold text-[#1E9658]">{stats.achieved}</p>
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-yellow-500">
+                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-[#FCB614]">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-yellow-100 rounded-lg">
-                            <Clock className="w-5 h-5 text-yellow-600" />
+                        <div className="p-2 bg-[#FCB614]/10 rounded-lg">
+                            <Clock className="w-5 h-5 text-[#D49A0A]" />
                         </div>
                         <div>
                             <p className="text-gray-500 text-sm">قيد التنفيذ</p>
-                            <p className="text-2xl font-bold text-yellow-600">{stats.inProgress}</p>
+                            <p className="text-2xl font-bold text-[#D49A0A]">{stats.inProgress}</p>
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-emerald-500">
+                <div className="bg-white p-5 rounded-xl shadow-sm border-r-4 border-[#2BB574]">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-emerald-100 rounded-lg">
-                            <TrendingUp className="w-5 h-5 text-emerald-600" />
+                        <div className="p-2 bg-[#2BB574]/15 rounded-lg">
+                            <TrendingUp className="w-5 h-5 text-[#1E9658]" />
                         </div>
                         <div>
                             <p className="text-gray-500 text-sm">متوسط التقدم</p>
-                            <p className="text-2xl font-bold text-emerald-600">{stats.avgProgress}%</p>
+                            <p className="text-2xl font-bold text-[#1E9658]">{stats.avgProgress}%</p>
                         </div>
                     </div>
                 </div>
@@ -253,7 +253,7 @@ export const EmpowermentDashboard: React.FC = () => {
                 <div className="flex gap-2 flex-wrap">
                     <button
                         onClick={() => setFilterDomain('all')}
-                        className={`px-3 py-1.5 rounded-lg text-sm transition-all ${filterDomain === 'all' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-3 py-1.5 rounded-lg text-sm transition-all ${filterDomain === 'all' ? 'bg-[#2BB574]/15 text-[#1E9658]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         الكل
                     </button>
@@ -261,7 +261,7 @@ export const EmpowermentDashboard: React.FC = () => {
                         <button
                             key={d.value}
                             onClick={() => setFilterDomain(d.value)}
-                            className={`px-3 py-1.5 rounded-lg text-sm transition-all flex items-center gap-1 ${filterDomain === d.value ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600'}`}
+                            className={`px-3 py-1.5 rounded-lg text-sm transition-all flex items-center gap-1 ${filterDomain === d.value ? 'bg-[#2BB574]/15 text-[#1E9658]' : 'bg-gray-100 text-gray-600'}`}
                         >
                             <span>{d.icon}</span>
                             {d.label}
@@ -300,7 +300,7 @@ export const EmpowermentDashboard: React.FC = () => {
                     <p className="text-gray-500 mb-4">لا توجد أهداف مطابقة</p>
                     <button
                         onClick={() => navigate('/empowerment/goal/new')}
-                        className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+                        className="px-6 py-2 bg-[#1E9658] text-white rounded-lg hover:bg-[#1E9658]"
                     >
                         إنشاء هدف جديد
                     </button>

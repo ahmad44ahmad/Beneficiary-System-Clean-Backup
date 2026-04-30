@@ -23,9 +23,9 @@ export const STRENGTH_LABELS: Record<SignalStrength, string> = {
 };
 
 export const STRENGTH_TONES: Record<SignalStrength, { bg: string; text: string; border: string; icon: string }> = {
-    monitoring:      { bg: 'bg-slate-100',   text: 'text-slate-700',     border: 'border-slate-300', icon: '👁' },
-    approaching:     { bg: 'bg-amber-50',    text: 'text-amber-800',     border: 'border-amber-400', icon: '⏳' },
-    requires_action: { bg: 'bg-rose-50',     text: 'text-rose-800',      border: 'border-rose-500',  icon: '🔔' },
+    monitoring:      { bg: 'bg-gray-100',   text: 'text-hrsd-navy',     border: 'border-gray-300', icon: '👁' },
+    approaching:     { bg: 'bg-[#FCB614]/10',    text: 'text-[#92400E]',     border: 'border-[#FCB614]', icon: '⏳' },
+    requires_action: { bg: 'bg-[#DC2626]/10',     text: 'text-[#7F1D1D]',      border: 'border-[#DC2626]',  icon: '🔔' },
 };
 
 export interface PolicySignal {

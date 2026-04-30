@@ -48,9 +48,9 @@ export const BehavioralPrediction: React.FC = () => {
 
     const getRiskColor = (level: string) => {
         switch (level) {
-            case 'high': return 'bg-red-50 border-red-500 text-red-900';
-            case 'medium': return 'bg-orange-50 border-orange-500 text-orange-900';
-            case 'low': return 'bg-green-50 border-green-500 text-green-900';
+            case 'high': return 'bg-[#DC2626]/10 border-[#DC2626] text-[#7F1D1D]';
+            case 'medium': return 'bg-[#F7941D]/10 border-[#F7941D] text-[#92400E]';
+            case 'low': return 'bg-[#2BB574]/10 border-[#2BB574] text-[#14532D]';
             default: return 'bg-gray-50 border-gray-500 text-gray-900';
         }
     };
@@ -126,21 +126,21 @@ export const BehavioralPrediction: React.FC = () => {
                         <Bar
                             yAxisId="left"
                             dataKey="incidents"
-                            fill="#ef4444"
+                            fill="#DC2626"
                             name="عدد الحوادث"
                         />
                         <Line
                             yAxisId="right"
                             type="monotone"
                             dataKey="temperature"
-                            stroke="rgb(20, 130, 135)" /* HRSD Teal */
+                            stroke="rgb(38, 151, 152)" /* HRSD Teal */
                             strokeWidth={2}
                             name="درجة الحرارة (°م)"
                         />
                     </BarChart>
                 </ResponsiveContainer>
-                <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-                    <p className="text-sm text-yellow-800">
+                <div className="mt-4 bg-[#FCB614]/10 border border-[#FCB614]/20 rounded-lg p-3">
+                    <p className="text-sm text-[#92400E]">
                         🔥 <span className="font-bold">نمط مكتشف:</span> عندما ترتفع الحرارة فوق 26°م، تزيد الحوادث السلوكية بنسبة 300%
                     </p>
                 </div>
@@ -150,58 +150,58 @@ export const BehavioralPrediction: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div className="bg-white rounded-xl p-5 shadow-sm">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                        <Wind className="w-5 h-5 text-cyan-600" />
+                        <Wind className="w-5 h-5 text-[#1B7778]" />
                         حالة أنظمة التبريد
                     </h3>
                     <div className="space-y-3">
-                        <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg border-e-2 border-red-500">
+                        <div className="flex items-center justify-between p-3 bg-[#DC2626]/10 rounded-lg border-e-2 border-[#DC2626]">
                             <div>
-                                <p className="font-bold text-red-900">مكيف الجناح الشرقي</p>
-                                <p className="text-sm text-red-700">معطل منذ 3 أيام</p>
+                                <p className="font-bold text-[#7F1D1D]">مكيف الجناح الشرقي</p>
+                                <p className="text-sm text-[#B91C1C]">معطل منذ 3 أيام</p>
                             </div>
-                            <span className="px-3 py-1 bg-red-600 text-white rounded-full text-xs font-bold">حرج</span>
+                            <span className="px-3 py-1 bg-[#B91C1C] text-white rounded-full text-xs font-bold">حرج</span>
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border-e-2 border-yellow-500">
+                        <div className="flex items-center justify-between p-3 bg-[#FCB614]/10 rounded-lg border-e-2 border-[#FCB614]">
                             <div>
-                                <p className="font-bold text-yellow-900">مكيف الجناح الغربي</p>
-                                <p className="text-sm text-yellow-700">يعمل بطاقة 60%</p>
+                                <p className="font-bold text-[#92400E]">مكيف الجناح الغربي</p>
+                                <p className="text-sm text-[#D49A0A]">يعمل بطاقة 60%</p>
                             </div>
-                            <span className="px-3 py-1 bg-yellow-600 text-white rounded-full text-xs font-bold">متوسط</span>
+                            <span className="px-3 py-1 bg-[#D49A0A] text-white rounded-full text-xs font-bold">متوسط</span>
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border-e-2 border-green-500">
+                        <div className="flex items-center justify-between p-3 bg-[#2BB574]/10 rounded-lg border-e-2 border-[#2BB574]">
                             <div>
-                                <p className="font-bold text-green-900">مكيف الجناح الشمالي</p>
-                                <p className="text-sm text-green-700">يعمل بكفاءة</p>
+                                <p className="font-bold text-[#14532D]">مكيف الجناح الشمالي</p>
+                                <p className="text-sm text-[#1E9658]">يعمل بكفاءة</p>
                             </div>
-                            <span className="px-3 py-1 bg-green-600 text-white rounded-full text-xs font-bold">جيد</span>
+                            <span className="px-3 py-1 bg-[#1E9658] text-white rounded-full text-xs font-bold">جيد</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="bg-white rounded-xl p-5 shadow-sm">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                        <Sun className="w-5 h-5 text-orange-600" />
+                        <Sun className="w-5 h-5 text-[#D67A0A]" />
                         توقعات الطقس القادمة
                     </h3>
                     <div className="space-y-2">
                         <div className="flex items-center justify-between py-2 border-b">
                             <span className="text-gray-700">اليوم</span>
                             <div className="flex items-center gap-2">
-                                <Sun className="w-5 h-5 text-orange-500" />
+                                <Sun className="w-5 h-5 text-[#D67A0A]" />
                                 <span className="font-bold">32°م</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-between py-2 border-b">
                             <span className="text-gray-700">غداً</span>
                             <div className="flex items-center gap-2">
-                                <Sun className="w-5 h-5 text-red-500" />
-                                <span className="font-bold text-red-600">35°م ⚠️</span>
+                                <Sun className="w-5 h-5 text-[#DC2626]" />
+                                <span className="font-bold text-[#DC2626]">35°م ⚠️</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-between py-2">
                             <span className="text-gray-700">بعد غد</span>
                             <div className="flex items-center gap-2">
-                                <CloudRain className="w-5 h-5 text-blue-500" />
+                                <CloudRain className="w-5 h-5 text-[#269798]" />
                                 <span className="font-bold">24°م</span>
                             </div>
                         </div>
@@ -210,7 +210,7 @@ export const BehavioralPrediction: React.FC = () => {
             </div>
 
             {/* Priority Actions */}
-            <div className="bg-gradient-to-r from-red-600 to-rose-700 text-white rounded-xl p-6">
+            <div className="bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white rounded-xl p-6">
                 <h3 className="font-bold text-xl mb-4 flex items-center gap-2">
                     <AlertTriangle className="w-6 h-6" />
                     خطة العمل الوقائية
@@ -239,11 +239,11 @@ export const BehavioralPrediction: React.FC = () => {
             {/* Stats */}
             <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-white rounded-xl p-4 shadow-sm text-center">
-                    <p className="text-3xl font-bold text-red-600">+300%</p>
+                    <p className="text-3xl font-bold text-[#DC2626]">+300%</p>
                     <p className="text-sm text-gray-600">زيادة الحوادث فوق 26°م</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm text-center">
-                    <p className="text-3xl font-bold text-orange-600">{currentTemp}°م</p>
+                    <p className="text-3xl font-bold text-[#D67A0A]">{currentTemp}°م</p>
                     <p className="text-sm text-gray-600">درجة الحرارة الحالية</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm text-center">
@@ -251,7 +251,7 @@ export const BehavioralPrediction: React.FC = () => {
                     <p className="text-sm text-gray-600">دقة التنبؤ</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm text-center">
-                    <p className="text-3xl font-bold text-green-600">0</p>
+                    <p className="text-3xl font-bold text-[#1E9658]">0</p>
                     <p className="text-sm text-gray-600">حوادث مع تكييف سليم</p>
                 </div>
             </div>

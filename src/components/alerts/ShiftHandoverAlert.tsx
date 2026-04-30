@@ -99,9 +99,9 @@ export const ShiftHandoverAlert: React.FC = () => {
                 className="fixed bottom-24 start-4 z-50 w-80"
                 dir="rtl"
             >
-                <div className="bg-white rounded-2xl shadow-xl border border-blue-200 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-xl border border-[#269798]/30 overflow-hidden">
                     {/* Header */}
-                    <div className="px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-between text-white">
+                    <div className="px-4 py-3 bg-gradient-to-r from-[#269798] to-[#0F3144] flex items-center justify-between text-white">
                         <div className="flex items-center gap-2">
                             <div className="p-2 bg-white/20 rounded-lg">
                                 <Users className="w-5 h-5" />
@@ -124,8 +124,8 @@ export const ShiftHandoverAlert: React.FC = () => {
                     {/* Content */}
                     <div className="p-4">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="p-2 bg-blue-100 rounded-lg">
-                                <Bell className="w-4 h-4 text-blue-600" />
+                            <div className="p-2 bg-[#269798]/15 rounded-lg">
+                                <Bell className="w-4 h-4 text-[#269798]" />
                             </div>
                             <div>
                                 <p className="font-medium text-gray-800">
@@ -138,14 +138,14 @@ export const ShiftHandoverAlert: React.FC = () => {
                         </div>
 
                         {alert.notes_count > 0 && (
-                            <p className="text-sm text-amber-600 mb-3">
+                            <p className="text-sm text-[#D49A0A] mb-3">
                                 ⚠️ {alert.notes_count} ملاحظات تحتاج متابعة
                             </p>
                         )}
 
                         <button
                             onClick={handleNavigate}
-                            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2 transition-colors"
+                            className="w-full px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] flex items-center justify-center gap-2 transition-colors"
                         >
                             عرض التسليم
                             <ChevronRight className="w-4 h-4" />

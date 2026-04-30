@@ -29,7 +29,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-teal-100 text-teal-600">
+                        <div className="p-3 rounded-full bg-[#269798]/10 text-[#1B7778]">
                             <Brain size={24} />
                         </div>
                         <div className="ms-4">
@@ -42,7 +42,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-blue-100 text-blue-600">
+                        <div className="p-3 rounded-full bg-[#269798]/15 text-[#269798]">
                             <FileText size={24} />
                         </div>
                         <div className="ms-4">
@@ -55,7 +55,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-red-100 text-red-600">
+                        <div className="p-3 rounded-full bg-[#DC2626]/15 text-[#DC2626]">
                             <AlertOctagon size={24} />
                         </div>
                         <div className="ms-4">

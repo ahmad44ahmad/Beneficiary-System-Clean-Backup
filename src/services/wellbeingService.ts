@@ -211,8 +211,8 @@ export const wellbeingService = {
 
     // Get color for score
     getScoreColor(score: number): string {
-        if (score >= 80) return '#2DB473'; // Green
-        if (score >= 60) return '#FAB414'; // Yellow
+        if (score >= 80) return '#2BB574'; // Green
+        if (score >= 60) return '#FCB614'; // Yellow
         return '#DC2626'; // Red
     },
 

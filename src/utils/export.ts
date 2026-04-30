@@ -85,7 +85,7 @@ export function exportToExcel(options: ExportOptions): void {
 <Styles>
     <Style ss:ID="Header">
         <Font ss:Bold="1" ss:Size="12"/>
-        <Interior ss:Color="#148287" ss:Pattern="Solid"/>
+        <Interior ss:Color="#269798" ss:Pattern="Solid"/>
         <Font ss:Color="#FFFFFF"/>
         <Alignment ss:Horizontal="Center" ss:ReadingOrder="RightToLeft"/>
     </Style>
@@ -195,10 +195,10 @@ export function exportToPDF(options: ExportOptions): void {
         .header {
             text-align: center;
             margin-bottom: 20px;
-            border-bottom: 2px solid #148287;
+            border-bottom: 2px solid #269798;
             padding-bottom: 15px;
         }
-        .title { font-size: 24px; font-weight: bold; color: #14415a; }
+        .title { font-size: 24px; font-weight: bold; color: #0F3144; }
         .timestamp { font-size: 12px; color: #666; margin-top: 5px; }
         table {
             width: 100%;
@@ -206,7 +206,7 @@ export function exportToPDF(options: ExportOptions): void {
             margin-top: 15px;
         }
         th {
-            background: #148287;
+            background: #269798;
             color: white;
             padding: 10px;
             border: 1px solid #0d6567;

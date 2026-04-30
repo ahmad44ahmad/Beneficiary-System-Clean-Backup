@@ -26,18 +26,18 @@ interface Appointment {
 }
 
 const TYPE_CONFIG: Record<AppointmentType, { icon: React.ElementType; color: string; bgColor: string; label: string }> = {
-    therapy: { icon: Activity, color: 'text-green-400', bgColor: 'bg-green-500/20', label: 'علاج طبيعي' },
-    checkup: { icon: Stethoscope, color: 'text-blue-400', bgColor: 'bg-blue-500/20', label: 'فحص طبي' },
-    visit: { icon: Users, color: 'text-pink-400', bgColor: 'bg-pink-500/20', label: 'زيارة عائلية' },
+    therapy: { icon: Activity, color: 'text-[#2BB574]', bgColor: 'bg-[#2BB574]/20', label: 'علاج طبيعي' },
+    checkup: { icon: Stethoscope, color: 'text-[#269798]', bgColor: 'bg-[#269798]/20', label: 'فحص طبي' },
+    visit: { icon: Users, color: 'text-[#DC2626]', bgColor: 'bg-[#DC2626]/20', label: 'زيارة عائلية' },
 };
 
 const STATUS_CONFIG: Record<AppointmentStatus, { color: string; bgColor: string; label: string }> = {
-    scheduled: { color: 'text-slate-400', bgColor: 'bg-slate-500/20', label: 'مجدول' },
-    confirmed: { color: 'text-blue-400', bgColor: 'bg-blue-500/20', label: 'مؤكد' },
-    in_progress: { color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', label: 'جاري' },
-    completed: { color: 'text-green-400', bgColor: 'bg-green-500/20', label: 'مكتمل' },
-    cancelled: { color: 'text-red-400', bgColor: 'bg-red-500/20', label: 'ملغي' },
-    no_show: { color: 'text-orange-400', bgColor: 'bg-orange-500/20', label: 'لم يحضر' },
+    scheduled: { color: 'text-hrsd-cool-gray', bgColor: 'bg-slate-500/20', label: 'مجدول' },
+    confirmed: { color: 'text-[#269798]', bgColor: 'bg-[#269798]/20', label: 'مؤكد' },
+    in_progress: { color: 'text-[#FCB614]', bgColor: 'bg-[#FCB614]/20', label: 'جاري' },
+    completed: { color: 'text-[#2BB574]', bgColor: 'bg-[#2BB574]/20', label: 'مكتمل' },
+    cancelled: { color: 'text-[#DC2626]', bgColor: 'bg-[#DC2626]/20', label: 'ملغي' },
+    no_show: { color: 'text-[#F7941D]', bgColor: 'bg-[#F7941D]/20', label: 'لم يحضر' },
 };
 
 const mockAppointments: Appointment[] = [
@@ -76,11 +76,11 @@ const MiniCalendar: React.FC<{ selectedDate: Date; onDateChange: (date: Date) =>
     const today = new Date();
 
     return (
-        <div className="bg-slate-800/50 rounded-xl p-4">
+        <div className="bg-white/50 rounded-xl p-4">
             <div className="flex items-center justify-between mb-4">
                 <button
                     onClick={() => setCurrentMonth(new Date(currentMonth.setMonth(currentMonth.getMonth() - 1)))}
-                    className="p-1 hover:bg-slate-700 rounded"
+                    className="p-1 hover:bg-gray-50 rounded"
                 >
                     <ChevronRight className="w-5 h-5" />
                 </button>
@@ -89,12 +89,12 @@ const MiniCalendar: React.FC<{ selectedDate: Date; onDateChange: (date: Date) =>
                 </span>
                 <button
                     onClick={() => setCurrentMonth(new Date(currentMonth.setMonth(currentMonth.getMonth() + 1)))}
-                    className="p-1 hover:bg-slate-700 rounded"
+                    className="p-1 hover:bg-gray-50 rounded"
                 >
                     <ChevronLeft className="w-5 h-5" />
                 </button>
             </div>
-            <div className="grid grid-cols-7 gap-1 text-center text-xs text-slate-500 mb-2">
+            <div className="grid grid-cols-7 gap-1 text-center text-xs text-hrsd-cool-gray mb-2">
                 {['أحد', 'اثن', 'ثلا', 'أرب', 'خمي', 'جمع', 'سبت'].map(d => <div key={d}>{d}</div>)}
             </div>
             <div className="grid grid-cols-7 gap-1">
@@ -108,12 +108,12 @@ const MiniCalendar: React.FC<{ selectedDate: Date; onDateChange: (date: Date) =>
                             key={i}
                             onClick={() => onDateChange(day)}
                             className={`w-8 h-8 rounded-lg text-sm transition-colors ${isSelected
-                                ? 'bg-blue-500 text-white'
+                                ? 'bg-[#269798] text-white'
                                 : isToday
-                                    ? 'bg-blue-500/30 text-blue-400'
+                                    ? 'bg-[#269798]/30 text-[#269798]'
                                     : isCurrentMonth
-                                        ? 'hover:bg-slate-700 text-white'
-                                        : 'text-slate-600'}`}
+                                        ? 'hover:bg-gray-50 text-white'
+                                        : 'text-hrsd-cool-gray'}`}
                         >
                             {day.getDate()}
                         </button>
@@ -141,7 +141,7 @@ export const SchedulingSystem: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-br from-white via-white to-white text-white p-6" dir="rtl">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -154,7 +154,7 @@ export const SchedulingSystem: React.FC = () => {
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold">نظام المواعيد الذكي</h1>
-                        <p className="text-slate-400 text-sm">إدارة جدولة العلاج والزيارات والفحوصات</p>
+                        <p className="text-hrsd-cool-gray text-sm">إدارة جدولة العلاج والزيارات والفحوصات</p>
                     </div>
                 </div>
                 <button className="px-6 py-3 bg-gradient-to-r from-[rgb(20,130,135)] to-[rgb(45,180,115)] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
@@ -168,10 +168,10 @@ export const SchedulingSystem: React.FC = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-slate-800/50 rounded-xl p-4 text-center"
+                    className="bg-white/50 rounded-xl p-4 text-center"
                 >
                     <p className="text-3xl font-bold text-white">{stats.total}</p>
-                    <p className="text-slate-400 text-sm">إجمالي المواعيد</p>
+                    <p className="text-hrsd-cool-gray text-sm">إجمالي المواعيد</p>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -213,11 +213,11 @@ export const SchedulingSystem: React.FC = () => {
                     <MiniCalendar selectedDate={selectedDate} onDateChange={setSelectedDate} />
 
                     {/* Type Filters */}
-                    <div className="bg-slate-800/50 rounded-xl p-4 space-y-2">
-                        <p className="text-slate-400 text-sm mb-3">تصفية حسب النوع</p>
+                    <div className="bg-white/50 rounded-xl p-4 space-y-2">
+                        <p className="text-hrsd-cool-gray text-sm mb-3">تصفية حسب النوع</p>
                         <button
                             onClick={() => setFilterType('all')}
-                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors text-right ${filterType === 'all' ? 'bg-[rgb(20,130,135)] text-white' : 'bg-slate-700 text-slate-400 hover:bg-slate-600'}`}
+                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors text-right ${filterType === 'all' ? 'bg-[rgb(20,130,135)] text-white' : 'bg-gray-50 text-hrsd-cool-gray hover:bg-gray-200'}`}
                         >
                             جميع المواعيد
                         </button>
@@ -225,7 +225,7 @@ export const SchedulingSystem: React.FC = () => {
                             <button
                                 key={type}
                                 onClick={() => setFilterType(type as AppointmentType)}
-                                className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${filterType === type ? `${config.bgColor} ${config.color}` : 'bg-slate-700 text-slate-400 hover:bg-slate-600'}`}
+                                className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${filterType === type ? `${config.bgColor} ${config.color}` : 'bg-gray-50 text-hrsd-cool-gray hover:bg-gray-200'}`}
                             >
                                 <config.icon className="w-4 h-4" />
                                 {config.label}
@@ -241,11 +241,11 @@ export const SchedulingSystem: React.FC = () => {
                             مواعيد {selectedDate.toLocaleDateString('ar-SA', { weekday: 'long', day: 'numeric', month: 'long' })}
                         </h2>
                         <div className="relative">
-                            <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                            <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-4 h-4 text-hrsd-cool-gray" />
                             <input
                                 type="text"
                                 placeholder="بحث..."
-                                className="bg-slate-800 border border-slate-700 rounded-lg pe-9 ps-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[rgb(20,130,135)]"
+                                className="bg-white border border-gray-200 rounded-lg pe-9 ps-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[rgb(20,130,135)]"
                             />
                         </div>
                     </div>
@@ -262,12 +262,12 @@ export const SchedulingSystem: React.FC = () => {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className={`flex gap-4 p-4 rounded-xl border ${apt.status === 'in_progress' ? 'bg-[rgb(245,150,30)]/10 border-[rgb(245,150,30)]/30' : 'bg-slate-800/50 border-slate-700'}`}
+                                    className={`flex gap-4 p-4 rounded-xl border ${apt.status === 'in_progress' ? 'bg-[rgb(245,150,30)]/10 border-[rgb(245,150,30)]/30' : 'bg-white/50 border-gray-200'}`}
                                 >
                                     {/* Time */}
                                     <div className="text-center w-20 flex-shrink-0">
                                         <p className="text-lg font-bold">{apt.startTime}</p>
-                                        <p className="text-slate-500 text-xs">{apt.endTime}</p>
+                                        <p className="text-hrsd-cool-gray text-xs">{apt.endTime}</p>
                                     </div>
 
                                     {/* Divider */}
@@ -275,7 +275,7 @@ export const SchedulingSystem: React.FC = () => {
                                         <div className={`w-10 h-10 rounded-full ${typeConfig.bgColor} flex items-center justify-center`}>
                                             <typeConfig.icon className={`w-5 h-5 ${typeConfig.color}`} />
                                         </div>
-                                        <div className="flex-1 w-px bg-slate-700 my-2"></div>
+                                        <div className="flex-1 w-px bg-gray-50 my-2"></div>
                                     </div>
 
                                     {/* Content */}
@@ -288,16 +288,16 @@ export const SchedulingSystem: React.FC = () => {
                                                         {statusConfig.label}
                                                     </span>
                                                 </div>
-                                                <p className="text-slate-400 text-sm mt-1">
+                                                <p className="text-hrsd-cool-gray text-sm mt-1">
                                                     <User className="w-3 h-3 inline ms-1" />
                                                     {apt.beneficiaryName}
                                                 </p>
-                                                <p className="text-slate-500 text-sm">
+                                                <p className="text-hrsd-cool-gray text-sm">
                                                     {apt.staffName !== '-' && `${apt.staffName} • `}{apt.location}
                                                 </p>
                                             </div>
-                                            <button className="p-2 hover:bg-slate-700 rounded-lg transition-colors">
-                                                <MoreHorizontal className="w-5 h-5 text-slate-400" />
+                                            <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors">
+                                                <MoreHorizontal className="w-5 h-5 text-hrsd-cool-gray" />
                                             </button>
                                         </div>
                                     </div>

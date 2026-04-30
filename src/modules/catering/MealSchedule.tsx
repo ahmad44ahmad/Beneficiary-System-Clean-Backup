@@ -44,7 +44,7 @@ export const MealSchedule: React.FC<MealScheduleProps> = ({ preview }) => {
             </div>
             {preview && (
                 <div className="mt-4 text-center">
-                    <span className="text-sm text-blue-600 hover:underline cursor-pointer">عرض الجدول الكامل</span>
+                    <span className="text-sm text-[#269798] hover:underline cursor-pointer">عرض الجدول الكامل</span>
                 </div>
             )}
         </Card>

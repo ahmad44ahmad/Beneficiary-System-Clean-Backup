@@ -138,10 +138,10 @@ export const RiskRegister: React.FC = () => {
 
     const getRiskLevelBadge = (level: string) => {
         const config: Record<string, { bg: string; text: string; label: string }> = {
-            critical: { bg: 'bg-red-600', text: 'text-white', label: 'حرج' },
-            high: { bg: 'bg-orange-500', text: 'text-white', label: 'عالي' },
-            medium: { bg: 'bg-yellow-400', text: 'text-gray-800', label: 'متوسط' },
-            low: { bg: 'bg-green-500', text: 'text-white', label: 'منخفض' }
+            critical: { bg: 'bg-[#B91C1C]', text: 'text-white', label: 'حرج' },
+            high: { bg: 'bg-[#F7941D]', text: 'text-white', label: 'عالي' },
+            medium: { bg: 'bg-[#FCB614]', text: 'text-gray-800', label: 'متوسط' },
+            low: { bg: 'bg-[#2BB574]', text: 'text-white', label: 'منخفض' }
         };
         const { bg, text, label } = config[level] || config.low;
         return <span className={`px-3 py-1 rounded-full text-xs font-bold ${bg} ${text}`}>{label}</span>;
@@ -157,12 +157,12 @@ export const RiskRegister: React.FC = () => {
             escalated: 'تم التصعيد'
         };
         const colors: Record<string, string> = {
-            identified: 'bg-blue-100 text-blue-800',
-            analyzing: 'bg-purple-100 text-purple-800',
-            mitigating: 'bg-amber-100 text-amber-800',
-            monitoring: 'bg-cyan-100 text-cyan-800',
-            closed: 'bg-green-100 text-green-800',
-            escalated: 'bg-red-100 text-red-800'
+            identified: 'bg-[#269798]/15 text-[#1B7778]',
+            analyzing: 'bg-[#FCB614]/15 text-[#92400E]',
+            mitigating: 'bg-[#FCB614]/15 text-[#92400E]',
+            monitoring: 'bg-[#269798]/10 text-[#0F3144]',
+            closed: 'bg-[#2BB574]/15 text-[#14532D]',
+            escalated: 'bg-[#DC2626]/15 text-[#7F1D1D]'
         };
         return <span className={`px-2 py-1 rounded text-xs ${colors[status] || 'bg-gray-100'}`}>{labels[status] || status}</span>;
     };
@@ -233,8 +233,8 @@ export const RiskRegister: React.FC = () => {
                     <p className="text-3xl font-bold text-[rgb(20,65,90)]">{risks.length}</p>
                     <p className="text-sm text-gray-500">إجمالي المخاطر</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-red-500">
-                    <p className="text-3xl font-bold text-red-600">{risks.filter(r => getRiskLevel(r.risk_score) === 'critical').length}</p>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[#DC2626]">
+                    <p className="text-3xl font-bold text-[#DC2626]">{risks.filter(r => getRiskLevel(r.risk_score) === 'critical').length}</p>
                     <p className="text-sm text-gray-500">حرجة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[rgb(245,150,30)]">

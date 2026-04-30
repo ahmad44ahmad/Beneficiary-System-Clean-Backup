@@ -24,28 +24,28 @@ const INITIAL_ROLES: Role[] = [
         id: '1',
         name: 'admin',
         nameAr: 'مدير النظام',
-        color: 'bg-red-500',
+        color: 'bg-[#DC2626]',
         permissions: { view_beneficiaries: true, edit_beneficiaries: true, view_medical: true, edit_medical: true, view_reports: true, manage_users: true, manage_settings: true }
     },
     {
         id: '2',
         name: 'director',
         nameAr: 'مدير المركز',
-        color: 'bg-blue-500',
+        color: 'bg-[#269798]',
         permissions: { view_beneficiaries: true, edit_beneficiaries: true, view_medical: true, edit_medical: false, view_reports: true, manage_users: false, manage_settings: true }
     },
     {
         id: '3',
         name: 'nurse',
         nameAr: 'ممرض/ة',
-        color: 'bg-green-500',
+        color: 'bg-[#2BB574]',
         permissions: { view_beneficiaries: true, edit_beneficiaries: false, view_medical: true, edit_medical: true, view_reports: false, manage_users: false, manage_settings: false }
     },
     {
         id: '4',
         name: 'social_worker',
         nameAr: 'أخصائي اجتماعي',
-        color: 'bg-purple-500',
+        color: 'bg-[#FCB614]',
         permissions: { view_beneficiaries: true, edit_beneficiaries: true, view_medical: false, edit_medical: false, view_reports: true, manage_users: false, manage_settings: false }
     },
 ];
@@ -73,8 +73,8 @@ export const PermissionsPage: React.FC = () => {
         <div className="p-6 space-y-6" dir="rtl">
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold text-[#14415A] flex items-center gap-3">
-                    <Shield className="w-7 h-7 text-[#148287]" />
+                <h1 className="text-2xl font-bold text-[#0F3144] flex items-center gap-3">
+                    <Shield className="w-7 h-7 text-[#269798]" />
                     إدارة الصلاحيات
                 </h1>
                 <p className="text-gray-500 mt-1">تحديد صلاحيات الوصول لكل دور</p>
@@ -85,7 +85,7 @@ export const PermissionsPage: React.FC = () => {
                 {roles.map(role => (
                     <div
                         key={role.id}
-                        className={`bg-white rounded-xl shadow-lg p-4 cursor-pointer transition-all ${selectedRole === role.id ? 'ring-2 ring-[#148287]' : 'hover:shadow-xl'
+                        className={`bg-white rounded-xl shadow-lg p-4 cursor-pointer transition-all ${selectedRole === role.id ? 'ring-2 ring-[#269798]' : 'hover:shadow-xl'
                             }`}
                         onClick={() => setSelectedRole(selectedRole === role.id ? null : role.id)}
                     >
@@ -108,7 +108,7 @@ export const PermissionsPage: React.FC = () => {
             {/* Permissions Matrix */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <table className="w-full">
-                    <thead className="bg-[#14415A] text-white">
+                    <thead className="bg-[#0F3144] text-white">
                         <tr>
                             <th className="p-4 text-right">الصلاحية</th>
                             {roles.map(role => (
@@ -129,7 +129,7 @@ export const PermissionsPage: React.FC = () => {
                                         <button
                                             onClick={() => togglePermission(role.id, perm.key)}
                                             className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${role.permissions[perm.key]
-                                                    ? 'bg-[#2DB473] text-white'
+                                                    ? 'bg-[#2BB574] text-white'
                                                     : 'bg-gray-200 text-gray-400 hover:bg-gray-300'
                                                 }`}
                                         >

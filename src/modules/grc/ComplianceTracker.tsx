@@ -131,10 +131,10 @@ export const ComplianceTracker: React.FC = () => {
 
     const getStatusBadge = (status: string) => {
         const config: Record<string, { icon: React.ElementType; bg: string; text: string; label: string }> = {
-            compliant: { icon: CheckCircle2, bg: 'bg-green-100', text: 'text-green-700', label: 'ممتثل' },
-            partial: { icon: AlertCircle, bg: 'bg-yellow-100', text: 'text-yellow-700', label: 'جزئي' },
-            non_compliant: { icon: XCircle, bg: 'bg-red-100', text: 'text-red-700', label: 'غير ممتثل' },
-            pending: { icon: AlertCircle, bg: 'bg-blue-100', text: 'text-blue-700', label: 'قيد المراجعة' },
+            compliant: { icon: CheckCircle2, bg: 'bg-[#2BB574]/15', text: 'text-[#1E9658]', label: 'ممتثل' },
+            partial: { icon: AlertCircle, bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]', label: 'جزئي' },
+            non_compliant: { icon: XCircle, bg: 'bg-[#DC2626]/15', text: 'text-[#B91C1C]', label: 'غير ممتثل' },
+            pending: { icon: AlertCircle, bg: 'bg-[#269798]/15', text: 'text-[#1B7778]', label: 'قيد المراجعة' },
             not_applicable: { icon: AlertCircle, bg: 'bg-gray-100', text: 'text-gray-700', label: 'لا ينطبق' }
         };
         const { icon: Icon, bg, text, label } = config[status] || config.pending;
@@ -163,14 +163,14 @@ export const ComplianceTracker: React.FC = () => {
                         <ArrowLeft className="w-4 h-4" />
                         العودة للحوكمة
                     </Link>
-                    <h1 className="text-2xl font-bold flex items-center gap-3 text-[#14415A]">
-                        <ClipboardCheck className="w-7 h-7 text-[#148287]" />
+                    <h1 className="text-2xl font-bold flex items-center gap-3 text-[#0F3144]">
+                        <ClipboardCheck className="w-7 h-7 text-[#269798]" />
                         متتبع الامتثال
                     </h1>
                     <p className="text-gray-500 mt-1">تتبع الامتثال للمعايير واللوائح</p>
                 </div>
                 <button
-                    className="px-5 py-2.5 text-white rounded-xl flex items-center gap-2 shadow-lg bg-[#148287]"
+                    className="px-5 py-2.5 text-white rounded-xl flex items-center gap-2 shadow-lg bg-[#269798]"
                 >
                     <Plus className="w-5 h-5" />
                     إضافة متطلب
@@ -179,7 +179,7 @@ export const ComplianceTracker: React.FC = () => {
 
             {/* Compliance Score Hero */}
             <div
-                className="rounded-2xl p-8 text-white shadow-xl bg-gradient-to-br from-[#14415A] to-[#148287]"
+                className="rounded-2xl p-8 text-white shadow-xl bg-gradient-to-br from-[#0F3144] to-[#269798]"
             >
                 <div className="grid grid-cols-4 gap-8 items-center">
                     {/* Circular Progress */}
@@ -199,7 +199,7 @@ export const ComplianceTracker: React.FC = () => {
                                     cy="50"
                                     r="45"
                                     fill="none"
-                                    stroke={compliancePercentage >= 80 ? HRSD.green : compliancePercentage >= 50 ? HRSD.gold : '#ef4444'}
+                                    stroke={compliancePercentage >= 80 ? HRSD.green : compliancePercentage >= 50 ? HRSD.gold : '#DC2626'}
                                     strokeWidth="8"
                                     strokeDasharray={`${compliancePercentage * 2.83} 283`}
                                     strokeLinecap="round"
@@ -230,7 +230,7 @@ export const ComplianceTracker: React.FC = () => {
                             <p className="text-xs opacity-70">جزئي</p>
                         </div>
                         <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-center">
-                            <XCircle className="w-8 h-8 mx-auto mb-2 text-red-400" />
+                            <XCircle className="w-8 h-8 mx-auto mb-2 text-[#DC2626]" />
                             <p className="text-3xl font-bold">{stats.nonCompliant}</p>
                             <p className="text-xs opacity-70">غير ممتثل</p>
                         </div>
@@ -254,7 +254,7 @@ export const ComplianceTracker: React.FC = () => {
                             key={opt.value}
                             onClick={() => setFilterStatus(opt.value)}
                             className={`px-4 py-2 rounded-lg text-sm transition-colors ${filterStatus === opt.value
-                                ? 'text-white bg-[#148287]'
+                                ? 'text-white bg-[#269798]'
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                 }`}
                         >
@@ -275,7 +275,7 @@ export const ComplianceTracker: React.FC = () => {
                     </div>
                 ) : (
                     <table className="w-full">
-                        <thead className="text-gray-600 text-sm bg-[#148287]/10">
+                        <thead className="text-gray-600 text-sm bg-[#269798]/10">
                             <tr>
                                 <th className="p-4 text-right">المتطلب</th>
                                 <th className="p-4 text-right">المعيار</th>
@@ -293,7 +293,7 @@ export const ComplianceTracker: React.FC = () => {
                                         <div className="text-sm text-gray-500">{req.requirement_code}</div>
                                     </td>
                                     <td className="p-4">
-                                        <span className="px-2 py-1 rounded text-xs bg-[#14415A]/20 text-[#14415A]">
+                                        <span className="px-2 py-1 rounded text-xs bg-[#0F3144]/20 text-[#0F3144]">
                                             {req.standard?.code || req.section || '-'}
                                         </span>
                                     </td>

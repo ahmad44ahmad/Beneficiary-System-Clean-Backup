@@ -44,9 +44,9 @@ export const IntegratedDashboard: React.FC = () => {
     const getScoreColor = (score: number) => wellbeingService.getScoreColor(score);
     const getStatusBg = (color: string) => {
         switch (color) {
-            case 'أخضر': return 'bg-green-100 text-green-800';
-            case 'أصفر': return 'bg-yellow-100 text-yellow-800';
-            case 'أحمر': return 'bg-red-100 text-red-800';
+            case 'أخضر': return 'bg-[#2BB574]/15 text-[#14532D]';
+            case 'أصفر': return 'bg-[#FCB614]/10 text-[#D49A0A]';
+            case 'أحمر': return 'bg-[#DC2626]/15 text-[#7F1D1D]';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
@@ -67,7 +67,7 @@ export const IntegratedDashboard: React.FC = () => {
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
-                        <h1 className="text-2xl font-bold text-[#14415A]">لوحة الرفاهية المتكاملة</h1>
+                        <h1 className="text-2xl font-bold text-[#0F3144]">لوحة الرفاهية المتكاملة</h1>
                     </div>
                     <p className="text-gray-600">مؤشر شامل يدمج بيانات الصحة والتغذية والسلامة</p>
                 </div>
@@ -83,7 +83,7 @@ export const IntegratedDashboard: React.FC = () => {
                         <Printer className="w-4 h-4" />
                         طباعة
                     </button>
-                    <button className="px-4 py-2 bg-[#14415A] text-white rounded-lg hover:bg-[#0f3246] flex items-center gap-2">
+                    <button className="px-4 py-2 bg-[#0F3144] text-white rounded-lg hover:bg-[#0f3246] flex items-center gap-2">
                         <Download className="w-4 h-4" />
                         تصدير Excel
                     </button>
@@ -94,13 +94,13 @@ export const IntegratedDashboard: React.FC = () => {
             {stats && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
                     {/* Total */}
-                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-[#14415A]">
+                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-[#0F3144]">
                         <div className="flex justify-between items-start">
                             <div>
                                 <p className="text-sm text-gray-500 mb-1">إجمالي المستفيدين</p>
-                                <h3 className="text-3xl font-bold text-[#14415A]">{stats.total_beneficiaries}</h3>
+                                <h3 className="text-3xl font-bold text-[#0F3144]">{stats.total_beneficiaries}</h3>
                             </div>
-                            <Users className="w-8 h-8 text-[#14415A] opacity-50" />
+                            <Users className="w-8 h-8 text-[#0F3144] opacity-50" />
                         </div>
                     </div>
 
@@ -118,35 +118,35 @@ export const IntegratedDashboard: React.FC = () => {
                     </div>
 
                     {/* Green */}
-                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-green-500">
+                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-[#2BB574]">
                         <div className="flex justify-between items-start">
                             <div>
                                 <p className="text-sm text-gray-500 mb-1">حالة ممتازة 🟢</p>
-                                <h3 className="text-3xl font-bold text-green-600">{stats.green_count}</h3>
+                                <h3 className="text-3xl font-bold text-[#1E9658]">{stats.green_count}</h3>
                             </div>
-                            <TrendingUp className="w-8 h-8 text-green-500 opacity-50" />
+                            <TrendingUp className="w-8 h-8 text-[#1E9658] opacity-50" />
                         </div>
                     </div>
 
                     {/* Yellow */}
-                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-yellow-500">
+                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-[#FCB614]">
                         <div className="flex justify-between items-start">
                             <div>
                                 <p className="text-sm text-gray-500 mb-1">تحتاج متابعة 🟡</p>
-                                <h3 className="text-3xl font-bold text-yellow-600">{stats.yellow_count}</h3>
+                                <h3 className="text-3xl font-bold text-[#D49A0A]">{stats.yellow_count}</h3>
                             </div>
-                            <AlertTriangle className="w-8 h-8 text-yellow-500 opacity-50" />
+                            <AlertTriangle className="w-8 h-8 text-[#D49A0A] opacity-50" />
                         </div>
                     </div>
 
                     {/* Red */}
-                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-red-500">
+                    <div className="bg-white p-5 rounded-xl shadow-sm border-t-4 border-[#DC2626]">
                         <div className="flex justify-between items-start">
                             <div>
                                 <p className="text-sm text-gray-500 mb-1">حالة حرجة 🔴</p>
-                                <h3 className="text-3xl font-bold text-red-600">{stats.red_count}</h3>
+                                <h3 className="text-3xl font-bold text-[#DC2626]">{stats.red_count}</h3>
                             </div>
-                            <TrendingDown className="w-8 h-8 text-red-500 opacity-50" />
+                            <TrendingDown className="w-8 h-8 text-[#DC2626] opacity-50" />
                         </div>
                     </div>
                 </div>
@@ -156,8 +156,8 @@ export const IntegratedDashboard: React.FC = () => {
             {stats && (
                 <div className="grid grid-cols-4 gap-4 mb-8">
                     <div className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
-                        <div className="p-3 bg-red-100 rounded-lg">
-                            <Heart className="w-6 h-6 text-red-600" />
+                        <div className="p-3 bg-[#DC2626]/15 rounded-lg">
+                            <Heart className="w-6 h-6 text-[#DC2626]" />
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">متوسط الصحة</p>
@@ -165,8 +165,8 @@ export const IntegratedDashboard: React.FC = () => {
                         </div>
                     </div>
                     <div className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
-                        <div className="p-3 bg-orange-100 rounded-lg">
-                            <Utensils className="w-6 h-6 text-orange-600" />
+                        <div className="p-3 bg-[#F7941D]/15 rounded-lg">
+                            <Utensils className="w-6 h-6 text-[#D67A0A]" />
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">متوسط التغذية</p>
@@ -174,8 +174,8 @@ export const IntegratedDashboard: React.FC = () => {
                         </div>
                     </div>
                     <div className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
-                        <div className="p-3 bg-blue-100 rounded-lg">
-                            <Shield className="w-6 h-6 text-blue-600" />
+                        <div className="p-3 bg-[#269798]/15 rounded-lg">
+                            <Shield className="w-6 h-6 text-[#269798]" />
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">متوسط السلامة</p>
@@ -183,8 +183,8 @@ export const IntegratedDashboard: React.FC = () => {
                         </div>
                     </div>
                     <div className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
-                        <div className="p-3 bg-purple-100 rounded-lg">
-                            <Smile className="w-6 h-6 text-purple-600" />
+                        <div className="p-3 bg-[#FCB614]/15 rounded-lg">
+                            <Smile className="w-6 h-6 text-[#D49A0A]" />
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">متوسط المزاج</p>
@@ -225,7 +225,7 @@ export const IntegratedDashboard: React.FC = () => {
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-right">
-                        <thead className="bg-[#14415A] text-white">
+                        <thead className="bg-[#0F3144] text-white">
                             <tr>
                                 <th className="px-4 py-3 font-medium">م</th>
                                 <th className="px-4 py-3 font-medium">الاسم</th>
@@ -287,7 +287,7 @@ export const IntegratedDashboard: React.FC = () => {
                                     <td className="px-4 py-3 text-center">
                                         <button
                                             onClick={() => setSelectedBeneficiary(score)}
-                                            className="p-2 hover:bg-gray-100 rounded-lg text-[#14415A]"
+                                            className="p-2 hover:bg-gray-100 rounded-lg text-[#0F3144]"
                                             title="عرض التفاصيل"
                                         >
                                             <Eye className="w-5 h-5" />
@@ -306,7 +306,7 @@ export const IntegratedDashboard: React.FC = () => {
                     <div className="bg-white rounded-2xl p-6 w-[500px] max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
                         <div className="flex justify-between items-start mb-6">
                             <div>
-                                <h2 className="text-xl font-bold text-[#14415A]">{selectedBeneficiary.full_name}</h2>
+                                <h2 className="text-xl font-bold text-[#0F3144]">{selectedBeneficiary.full_name}</h2>
                                 <p className="text-gray-500">{selectedBeneficiary.file_number} | {selectedBeneficiary.section}</p>
                             </div>
                             <div
@@ -324,9 +324,9 @@ export const IntegratedDashboard: React.FC = () => {
                             {[
                                 { label: 'الصحة', score: selectedBeneficiary.health_score, icon: Heart, color: '#DC2626', weight: '30%' },
                                 { label: 'التغذية', score: selectedBeneficiary.nutrition_score, icon: Utensils, color: '#F97316', weight: '20%' },
-                                { label: 'السلامة', score: selectedBeneficiary.safety_score, icon: Shield, color: '#3B82F6', weight: '20%' },
-                                { label: 'المزاج', score: selectedBeneficiary.mood_score, icon: Smile, color: '#8B5CF6', weight: '15%' },
-                                { label: 'النشاط', score: selectedBeneficiary.activity_score, icon: Activity, color: '#10B981', weight: '15%' },
+                                { label: 'السلامة', score: selectedBeneficiary.safety_score, icon: Shield, color: '#269798', weight: '20%' },
+                                { label: 'المزاج', score: selectedBeneficiary.mood_score, icon: Smile, color: '#FCB614', weight: '15%' },
+                                { label: 'النشاط', score: selectedBeneficiary.activity_score, icon: Activity, color: '#2BB574', weight: '15%' },
                             ].map((item) => (
                                 <div key={item.label} className="bg-gray-50 p-4 rounded-lg">
                                     <div className="flex items-center justify-between mb-2">
@@ -353,15 +353,15 @@ export const IntegratedDashboard: React.FC = () => {
                         </div>
 
                         {selectedBeneficiary.requires_followup && (
-                            <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center gap-3">
-                                <AlertTriangle className="w-5 h-5 text-yellow-600" />
-                                <span className="text-yellow-800">يحتاج متابعة خاصة</span>
+                            <div className="mt-4 p-4 bg-[#FCB614]/10 border border-[#FCB614]/20 rounded-lg flex items-center gap-3">
+                                <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
+                                <span className="text-[#D49A0A]">يحتاج متابعة خاصة</span>
                             </div>
                         )}
 
                         <button
                             onClick={() => setSelectedBeneficiary(null)}
-                            className="mt-6 w-full py-2 bg-[#14415A] text-white rounded-lg hover:bg-[#0f3246]"
+                            className="mt-6 w-full py-2 bg-[#0F3144] text-white rounded-lg hover:bg-[#0f3246]"
                         >
                             إغلاق
                         </button>

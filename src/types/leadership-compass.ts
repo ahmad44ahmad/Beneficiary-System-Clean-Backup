@@ -78,10 +78,10 @@ export const URGENCY_LABELS: Record<DecisionUrgency, string> = {
 export const URGENCY_TONES: Record<DecisionUrgency, {
     bg: string; text: string; border: string;
 }> = {
-    low:      { bg: 'bg-slate-50',   text: 'text-slate-600',   border: 'border-slate-300' },
-    medium:   { bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-amber-300' },
-    high:     { bg: 'bg-orange-50',  text: 'text-orange-700',  border: 'border-orange-400' },
-    critical: { bg: 'bg-rose-50',    text: 'text-rose-700',    border: 'border-rose-400' },
+    low:      { bg: 'bg-gray-50',   text: 'text-hrsd-cool-gray',   border: 'border-gray-300' },
+    medium:   { bg: 'bg-[#FCB614]/10',   text: 'text-[#D49A0A]',   border: 'border-[#FCB614]' },
+    high:     { bg: 'bg-[#F7941D]/10',  text: 'text-[#D67A0A]',  border: 'border-[#F7941D]' },
+    critical: { bg: 'bg-[#DC2626]/10',    text: 'text-[#B91C1C]',    border: 'border-[#DC2626]' },
 };
 
 // ─── Alternative option ───────────────────────────────────────────────────────
@@ -187,10 +187,10 @@ export const MIRROR_SEVERITY_LABELS: Record<MirrorSeverity, string> = {
 export const MIRROR_SEVERITY_TONES: Record<MirrorSeverity, {
     bg: string; text: string; border: string; icon: string;
 }> = {
-    info:    { bg: 'bg-slate-50',   text: 'text-slate-700',   border: 'border-slate-300', icon: 'ℹ️' },
-    watch:   { bg: 'bg-sky-50',     text: 'text-sky-700',     border: 'border-sky-300',   icon: '👁️' },
-    concern: { bg: 'bg-amber-50',   text: 'text-amber-800',   border: 'border-amber-400', icon: '⚠️' },
-    urgent:  { bg: 'bg-rose-50',    text: 'text-rose-800',    border: 'border-rose-500',  icon: '🔴' },
+    info:    { bg: 'bg-gray-50',   text: 'text-hrsd-navy',   border: 'border-gray-300', icon: 'ℹ️' },
+    watch:   { bg: 'bg-[#269798]/10',     text: 'text-[#1B7778]',     border: 'border-[#269798]',   icon: '👁️' },
+    concern: { bg: 'bg-[#FCB614]/10',   text: 'text-[#92400E]',   border: 'border-[#FCB614]', icon: '⚠️' },
+    urgent:  { bg: 'bg-[#DC2626]/10',    text: 'text-[#7F1D1D]',    border: 'border-[#DC2626]',  icon: '🔴' },
 };
 
 export interface HonestMirrorFinding {

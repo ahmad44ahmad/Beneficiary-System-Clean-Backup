@@ -31,14 +31,14 @@ export const CustodyPanel: React.FC = () => {
                 <div className="flex bg-gray-100 p-1 rounded-lg">
                     <button
                         onClick={() => setActiveTab('custody')}
-                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'custody' ? 'bg-white shadow text-teal-700' : 'text-gray-500 hover:text-gray-700'
+                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'custody' ? 'bg-white shadow text-[#1B7778]' : 'text-gray-500 hover:text-gray-700'
                             }`}
                     >
                         سجل العهد (لمن سلمت؟)
                     </button>
                     <button
                         onClick={() => setActiveTab('inventory')}
-                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'inventory' ? 'bg-white shadow text-teal-700' : 'text-gray-500 hover:text-gray-700'
+                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'inventory' ? 'bg-white shadow text-[#1B7778]' : 'text-gray-500 hover:text-gray-700'
                             }`}
                     >
                         المخزون والأصول
@@ -51,12 +51,12 @@ export const CustodyPanel: React.FC = () => {
                         <input
                             type="text"
                             placeholder="بحث برقم التسلسل، الاسم..."
-                            className="w-full pe-9 ps-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 outline-none text-sm"
+                            className="w-full pe-9 ps-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#269798] outline-none text-sm"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
-                    <Button className="bg-teal-600 hover:bg-teal-700 text-white flex items-center gap-2">
+                    <Button className="bg-[#1B7778] hover:bg-[#1B7778] text-white flex items-center gap-2">
                         <Plus className="w-4 h-4" />
                         {activeTab === 'custody' ? 'تسليم عهدة' : 'إضافة أصل'}
                     </Button>
@@ -70,7 +70,7 @@ export const CustodyPanel: React.FC = () => {
                         <Card key={record.id} className="p-4 border-e-4 border-e-teal-500">
                             <div className="flex justify-between items-start mb-3">
                                 <div className="flex items-center gap-2">
-                                    <div className="p-2 bg-teal-50 rounded-lg text-teal-600">
+                                    <div className="p-2 bg-[#269798]/10 rounded-lg text-[#1B7778]">
                                         <User className="w-5 h-5" />
                                     </div>
                                     <div>
@@ -78,7 +78,7 @@ export const CustodyPanel: React.FC = () => {
                                         <p className="text-xs text-gray-500">{record.type === 'personal' ? 'عهدة شخصية' : 'عهدة قسم'}</p>
                                     </div>
                                 </div>
-                                <span className={`text-xs px-2 py-1 rounded-full ${record.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
+                                <span className={`text-xs px-2 py-1 rounded-full ${record.status === 'active' ? 'bg-[#2BB574]/15 text-[#1E9658]' : 'bg-gray-100 text-gray-700'}`}>
                                     {record.status === 'active' ? 'نشطة' : 'مرتجعة'}
                                 </span>
                             </div>
@@ -93,7 +93,7 @@ export const CustodyPanel: React.FC = () => {
 
                             <div className="flex gap-2">
                                 <Button variant="outline" className="w-full text-xs h-8">نقل العهدة</Button>
-                                <Button variant="outline" className="w-full text-xs h-8 text-red-600 hover:bg-red-50 hover:text-red-700">إخلاء طرف</Button>
+                                <Button variant="outline" className="w-full text-xs h-8 text-[#DC2626] hover:bg-[#DC2626]/10 hover:text-[#B91C1C]">إخلاء طرف</Button>
                             </div>
                         </Card>
                     ))}
@@ -125,8 +125,8 @@ export const CustodyPanel: React.FC = () => {
                                     </td>
                                     <td className="p-4 text-gray-600">{asset.location}</td>
                                     <td className="p-4">
-                                        <span className={`px-2 py-1 rounded-full text-xs ${asset.state === 'good' || asset.state === 'new' ? 'bg-green-100 text-green-700' :
-                                                asset.state === 'fair' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+                                        <span className={`px-2 py-1 rounded-full text-xs ${asset.state === 'good' || asset.state === 'new' ? 'bg-[#2BB574]/15 text-[#1E9658]' :
+                                                asset.state === 'fair' ? 'bg-[#FCB614]/10 text-[#D49A0A]' : 'bg-[#DC2626]/15 text-[#B91C1C]'
                                             }`}>
                                             {asset.state === 'new' ? 'جديد' :
                                                 asset.state === 'good' ? 'جيد' :
@@ -134,7 +134,7 @@ export const CustodyPanel: React.FC = () => {
                                         </span>
                                     </td>
                                     <td className="p-4">
-                                        <button className="text-teal-600 hover:text-teal-800 text-xs font-bold">عرض التفاصيل</button>
+                                        <button className="text-[#1B7778] hover:text-[#0F3144] text-xs font-bold">عرض التفاصيل</button>
                                     </td>
                                 </tr>
                             ))}

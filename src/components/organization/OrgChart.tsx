@@ -73,7 +73,7 @@ const OrgNodeCard: React.FC<{ node: OrgNode; level: number }> = ({ node, level }
 
 export const OrgChart: React.FC = () => {
     return (
-        <div className="p-8 overflow-x-auto min-h-[600px] flex justify-center items-start bg-slate-50 rounded-3xl">
+        <div className="p-8 overflow-x-auto min-h-[600px] flex justify-center items-start bg-gray-50 rounded-3xl">
             <OrgNodeCard node={CENTER_STRUCTURE} level={0} />
         </div>
     );

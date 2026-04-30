@@ -71,8 +71,18 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </div>
             </div>
 
-            {/* Desktop: Command Menu Search */}
-            <div className="hidden md:flex items-center gap-4 flex-1 max-w-md">
+            {/* Desktop: HRSD ministry logo + Command Menu Search.
+              * Per brand book, the ministry logo must appear unaltered on
+              * Arabic content surfaces. On desktop it sits at the start of
+              * the header (RTL: right edge after the sidebar). */}
+            <div className="hidden md:flex items-center gap-4 flex-1 max-w-2xl">
+                <img
+                    src="/assets/hrsd-logo.png"
+                    alt="شعار وزارة الموارد البشرية والتنمية الاجتماعية"
+                    className="h-8 w-auto bg-white rounded p-1 flex-shrink-0"
+                    title="وزارة الموارد البشرية والتنمية الاجتماعية"
+                />
+                <div className="h-7 w-px bg-white/15" aria-hidden="true" />
                 <CommandMenu />
             </div>
 

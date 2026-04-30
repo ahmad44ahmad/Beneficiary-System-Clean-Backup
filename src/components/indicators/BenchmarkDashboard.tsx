@@ -64,7 +64,7 @@ export const BenchmarkDashboard: React.FC = () => {
             case 'excellent': return <CheckCircle className="w-5 h-5 text-hrsd-green" />;
             case 'good': return <CheckCircle className="w-5 h-5 text-hrsd-teal" />;
             case 'acceptable': return <AlertCircle className="w-5 h-5 text-hrsd-gold" />;
-            default: return <XCircle className="w-5 h-5 text-red-600" />;
+            default: return <XCircle className="w-5 h-5 text-[#DC2626]" />;
         }
     };
 
@@ -150,7 +150,7 @@ export const BenchmarkDashboard: React.FC = () => {
                             <p className="text-hierarchy-small text-gray-500">مقبول</p>
                         </div>
                         <div className="hrsd-card text-center">
-                            <p className="text-2xl font-bold text-red-600">{summary.poor || 0}</p>
+                            <p className="text-2xl font-bold text-[#DC2626]">{summary.poor || 0}</p>
                             <p className="text-hierarchy-small text-gray-500">ضعيف</p>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ export const BenchmarkDashboard: React.FC = () => {
                                                     <div
                                                         className={`h-3 rounded-full transition-all ${status === 'excellent' ? 'bg-hrsd-green' :
                                                                 status === 'good' ? 'bg-hrsd-teal' :
-                                                                    status === 'acceptable' ? 'bg-hrsd-gold' : 'bg-red-500'
+                                                                    status === 'acceptable' ? 'bg-hrsd-gold' : 'bg-[#DC2626]'
                                                             }`}
                                                         style={{ width: `${Math.min(100, progress)}%` }}
                                                     ></div>

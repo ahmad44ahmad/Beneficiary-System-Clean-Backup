@@ -1,5 +1,11 @@
 // src/config/theme/colors.ts
 // HRSD Official Colors and Design Tokens
+//
+// Source of truth: src/design-system/tokens.ts (built from PDF page 25-28).
+// This file is a legacy facade for components that still consume `colors.x.y`.
+// New code should import from `src/design-system/tokens.ts` directly.
+
+import { brand, semantic as brandSemantic } from '../../design-system/tokens';
 
 /**
  * ألوان وزارة الموارد البشرية والتنمية الاجتماعية الرسمية
@@ -8,24 +14,24 @@
 export const colors = {
     // الألوان الأساسية (Primary Colors)
     primary: {
-        teal: '#14b8a6',      // Primary action color
-        emerald: '#10b981',   // Success/positive
-        navy: '#14415A',      // HRSD official navy
+        teal: brand.teal.hex,         // #269798 — Pantone 2235C
+        emerald: brand.green.hex,     // #2BB574 — Pantone 2414C
+        navy: brand.navy.hex,         // #0F3144 — Pantone 2189C
     },
 
     // ألوان التمييز (Accent Colors) - HRSD Brand
     accent: {
-        orange: '#F5961E',    // HRSD Orange
-        gold: '#FAB414',      // HRSD Gold
-        green: '#2D9B4E',     // HRSD Green
+        orange: brand.orange.hex,     // #F7941D — Pantone 2011C
+        gold: brand.gold.hex,         // #FCB614 — Pantone 7409C
+        green: brand.green.hex,       // #2BB574 — Pantone 2414C
     },
 
-    // ألوان الدلالة (Semantic Colors)
+    // ألوان الدلالة (Semantic Colors) — NOT brand colors. Reserved for status states.
     semantic: {
-        success: '#22c55e',   // نجاح
-        warning: '#f59e0b',   // تحذير
-        danger: '#ef4444',    // خطر
-        info: '#3b82f6',      // معلومات
+        success: brandSemantic.success,
+        warning: brandSemantic.warning,
+        danger: brandSemantic.danger,
+        info: brandSemantic.info,
     },
 
     // الوضع الداكن (Dark Mode - Default)
@@ -67,23 +73,23 @@ export const colors = {
     },
 };
 
-// التدرجات (Gradients)
+// التدرجات (Gradients) — using corrected HRSD palette
 export const gradients = {
     // HRSD Brand Gradients
-    hrsdPrimary: 'from-[#14415A] to-[#1e5a7a]',
-    hrsdGold: 'from-[#FAB414] to-[#F5961E]',
-    hrsdGreen: 'from-[#2D9B4E] to-[#22c55e]',
+    hrsdPrimary: 'from-[#0F3144] to-[#1F4A60]',
+    hrsdGold: 'from-[#FCB614] to-[#F7941D]',
+    hrsdGreen: 'from-[#2BB574] to-[#269798]',
 
-    // Semantic Gradients
-    primary: 'from-teal-500 to-emerald-600',
-    danger: 'from-red-500 to-rose-600',
-    warning: 'from-amber-500 to-orange-600',
-    success: 'from-green-500 to-emerald-600',
-    info: 'from-blue-500 to-cyan-600',
+    // Semantic Gradients (status only, not brand)
+    primary: 'from-[#269798] to-[#1B7778]',
+    danger: 'from-[#DC2626] to-[#B91C1C]',
+    warning: 'from-[#FCB614] to-[#F7941D]',
+    success: 'from-[#2BB574] to-[#1E9658]',
+    info: 'from-[#269798] to-[#0F3144]',
 
-    // Card Gradients
-    cardDark: 'from-slate-800 to-slate-900',
-    cardLight: 'from-white to-slate-50',
+    // Card Gradients (light mode preferred per brand book)
+    cardDark: 'from-[#0A2030] to-[#0F3144]',
+    cardLight: 'from-white to-[#F9FAFB]',
 };
 
 // الظلال (Shadows)
@@ -93,9 +99,9 @@ export const shadows = {
     lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
     xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
     glow: {
-        teal: '0 0 20px rgba(20, 184, 166, 0.3)',
-        gold: '0 0 20px rgba(250, 180, 20, 0.3)',
-        danger: '0 0 20px rgba(239, 68, 68, 0.3)',
+        teal: '0 0 20px rgba(38, 151, 152, 0.3)',
+        gold: '0 0 20px rgba(252, 182, 20, 0.3)',
+        danger: '0 0 20px rgba(220, 38, 38, 0.3)',
     },
 };
 

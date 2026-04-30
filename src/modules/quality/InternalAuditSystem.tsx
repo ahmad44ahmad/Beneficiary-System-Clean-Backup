@@ -35,7 +35,7 @@ import {
 // ─── HRSD Brand Colors ────────────────────────────────────────────────────────
 const HRSD = {
   teal: '#1E6B5C',
-  navy: '#14415A',
+  navy: '#0F3144',
   gold: '#F59601',
 };
 
@@ -247,26 +247,26 @@ const DEMO_FINDINGS: AuditFinding[] = [
 // ─── Status Helpers ───────────────────────────────────────────────────────────
 const CYCLE_STATUS_MAP: Record<AuditCycle['status'], { label: string; color: string }> = {
   planned: { label: 'مخطط', color: 'bg-gray-100 text-gray-700' },
-  in_progress: { label: 'قيد التنفيذ', color: 'bg-blue-100 text-blue-700' },
-  completed: { label: 'مكتمل', color: 'bg-emerald-100 text-emerald-700' },
-  cancelled: { label: 'ملغي', color: 'bg-red-100 text-red-700' },
+  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#269798]/15 text-[#1B7778]' },
+  completed: { label: 'مكتمل', color: 'bg-[#2BB574]/15 text-[#1E9658]' },
+  cancelled: { label: 'ملغي', color: 'bg-[#DC2626]/15 text-[#B91C1C]' },
 };
 
 const FINDING_STATUS_MAP: Record<AuditFinding['status'], { label: string; color: string }> = {
-  open: { label: 'مفتوح', color: 'bg-red-100 text-red-700' },
-  action_planned: { label: 'إجراء مخطط', color: 'bg-orange-100 text-orange-700' },
-  in_progress: { label: 'قيد التنفيذ', color: 'bg-yellow-100 text-yellow-700' },
-  completed: { label: 'مكتمل', color: 'bg-blue-100 text-blue-700' },
-  verified: { label: 'تم التحقق', color: 'bg-emerald-100 text-emerald-700' },
+  open: { label: 'مفتوح', color: 'bg-[#DC2626]/15 text-[#B91C1C]' },
+  action_planned: { label: 'إجراء مخطط', color: 'bg-[#F7941D]/15 text-[#D67A0A]' },
+  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#FCB614]/10 text-[#D49A0A]' },
+  completed: { label: 'مكتمل', color: 'bg-[#269798]/15 text-[#1B7778]' },
+  verified: { label: 'تم التحقق', color: 'bg-[#2BB574]/15 text-[#1E9658]' },
   closed: { label: 'مغلق', color: 'bg-gray-100 text-gray-600' },
 };
 
 const FINDING_TYPE_MAP: Record<AuditFinding['finding_type'], { label: string; icon: React.ReactNode; color: string }> = {
-  major_nc: { label: 'عدم مطابقة رئيسي', icon: <AlertOctagon className="w-4 h-4" />, color: 'bg-red-100 text-red-800' },
-  minor_nc: { label: 'عدم مطابقة بسيط', icon: <AlertTriangle className="w-4 h-4" />, color: 'bg-amber-100 text-amber-800' },
-  observation: { label: 'ملاحظة', icon: <Info className="w-4 h-4" />, color: 'bg-blue-100 text-blue-800' },
-  opportunity: { label: 'فرصة تحسين', icon: <Lightbulb className="w-4 h-4" />, color: 'bg-purple-100 text-purple-800' },
-  strength: { label: 'نقطة قوة', icon: <CheckCircle2 className="w-4 h-4" />, color: 'bg-emerald-100 text-emerald-800' },
+  major_nc: { label: 'عدم مطابقة رئيسي', icon: <AlertOctagon className="w-4 h-4" />, color: 'bg-[#DC2626]/15 text-[#7F1D1D]' },
+  minor_nc: { label: 'عدم مطابقة بسيط', icon: <AlertTriangle className="w-4 h-4" />, color: 'bg-[#FCB614]/15 text-[#92400E]' },
+  observation: { label: 'ملاحظة', icon: <Info className="w-4 h-4" />, color: 'bg-[#269798]/15 text-[#1B7778]' },
+  opportunity: { label: 'فرصة تحسين', icon: <Lightbulb className="w-4 h-4" />, color: 'bg-[#FCB614]/15 text-[#92400E]' },
+  strength: { label: 'نقطة قوة', icon: <CheckCircle2 className="w-4 h-4" />, color: 'bg-[#2BB574]/15 text-[#14532D]' },
 };
 
 // ─── Tab Type ─────────────────────────────────────────────────────────────────
@@ -377,11 +377,11 @@ export const InternalAuditSystem: React.FC = () => {
 
   const getResultColor = (result?: string): string => {
     const map: Record<string, string> = {
-      conforming: 'bg-emerald-100 text-emerald-800',
-      minor_nc: 'bg-amber-100 text-amber-800',
-      major_nc: 'bg-red-100 text-red-800',
-      observation: 'bg-blue-100 text-blue-800',
-      opportunity: 'bg-purple-100 text-purple-800',
+      conforming: 'bg-[#2BB574]/15 text-[#14532D]',
+      minor_nc: 'bg-[#FCB614]/15 text-[#92400E]',
+      major_nc: 'bg-[#DC2626]/15 text-[#7F1D1D]',
+      observation: 'bg-[#269798]/15 text-[#1B7778]',
+      opportunity: 'bg-[#FCB614]/15 text-[#92400E]',
     };
     return result ? map[result] || 'bg-gray-100 text-gray-600' : 'bg-gray-100 text-gray-600';
   };
@@ -684,10 +684,10 @@ export const InternalAuditSystem: React.FC = () => {
           {/* Summary Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {([
-              { type: 'major_nc' as const, count: findingSummary.major_nc, label: 'عدم مطابقة رئيسي', color: '#DC2626', bg: 'bg-red-50', icon: <AlertOctagon className="w-5 h-5" /> },
-              { type: 'minor_nc' as const, count: findingSummary.minor_nc, label: 'عدم مطابقة بسيط', color: '#F59E0B', bg: 'bg-amber-50', icon: <AlertTriangle className="w-5 h-5" /> },
-              { type: 'observation' as const, count: findingSummary.observation, label: 'ملاحظة', color: '#3B82F6', bg: 'bg-blue-50', icon: <Info className="w-5 h-5" /> },
-              { type: 'opportunity' as const, count: findingSummary.opportunity, label: 'فرصة تحسين', color: '#8B5CF6', bg: 'bg-purple-50', icon: <Lightbulb className="w-5 h-5" /> },
+              { type: 'major_nc' as const, count: findingSummary.major_nc, label: 'عدم مطابقة رئيسي', color: '#DC2626', bg: 'bg-[#DC2626]/10', icon: <AlertOctagon className="w-5 h-5" /> },
+              { type: 'minor_nc' as const, count: findingSummary.minor_nc, label: 'عدم مطابقة بسيط', color: '#FCB614', bg: 'bg-[#FCB614]/10', icon: <AlertTriangle className="w-5 h-5" /> },
+              { type: 'observation' as const, count: findingSummary.observation, label: 'ملاحظة', color: '#269798', bg: 'bg-[#269798]/10', icon: <Info className="w-5 h-5" /> },
+              { type: 'opportunity' as const, count: findingSummary.opportunity, label: 'فرصة تحسين', color: '#FCB614', bg: 'bg-[#FCB614]/10', icon: <Lightbulb className="w-5 h-5" /> },
             ]).map((card) => (
               <div key={card.type} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
                 <div className="flex items-center justify-between mb-3">
@@ -810,7 +810,7 @@ export const InternalAuditSystem: React.FC = () => {
                                           isCurrent
                                             ? 'text-white'
                                             : isDone
-                                            ? 'bg-emerald-100 text-emerald-700'
+                                            ? 'bg-[#2BB574]/15 text-[#1E9658]'
                                             : 'bg-gray-100 text-gray-400'
                                         }`}
                                         style={isCurrent ? { backgroundColor: HRSD.teal } : undefined}
@@ -847,7 +847,7 @@ export const InternalAuditSystem: React.FC = () => {
             </div>
             <div className="p-5 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">اسم الدورة <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">اسم الدورة <span className="text-[#DC2626]">*</span></label>
                 <input
                   type="text"
                   value={cycleForm.cycle_name}
@@ -859,7 +859,7 @@ export const InternalAuditSystem: React.FC = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">السنة <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">السنة <span className="text-[#DC2626]">*</span></label>
                   <input
                     type="number"
                     value={cycleForm.cycle_year}
@@ -869,7 +869,7 @@ export const InternalAuditSystem: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">الربع <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">الربع <span className="text-[#DC2626]">*</span></label>
                   <select
                     value={cycleForm.cycle_quarter}
                     onChange={(e) => setCycleForm((f) => ({ ...f, cycle_quarter: parseInt(e.target.value) }))}
@@ -885,7 +885,7 @@ export const InternalAuditSystem: React.FC = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">تاريخ البداية المخطط <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">تاريخ البداية المخطط <span className="text-[#DC2626]">*</span></label>
                   <input
                     type="date"
                     value={cycleForm.planned_start_date}
@@ -895,7 +895,7 @@ export const InternalAuditSystem: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">تاريخ النهاية المخطط <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">تاريخ النهاية المخطط <span className="text-[#DC2626]">*</span></label>
                   <input
                     type="date"
                     value={cycleForm.planned_end_date}
@@ -906,7 +906,7 @@ export const InternalAuditSystem: React.FC = () => {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">المدقق الرئيسي <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">المدقق الرئيسي <span className="text-[#DC2626]">*</span></label>
                 <input
                   type="text"
                   value={cycleForm.lead_auditor}
@@ -960,7 +960,7 @@ export const InternalAuditSystem: React.FC = () => {
             </div>
             <div className="p-5 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">دورة التدقيق <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">دورة التدقيق <span className="text-[#DC2626]">*</span></label>
                 <select
                   value={auditForm.cycle_id}
                   onChange={(e) => setAuditForm((f) => ({ ...f, cycle_id: e.target.value }))}
@@ -974,7 +974,7 @@ export const InternalAuditSystem: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">بند ISO <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">بند ISO <span className="text-[#DC2626]">*</span></label>
                 <select
                   value={auditForm.iso_clause}
                   onChange={(e) => setAuditForm((f) => ({ ...f, iso_clause: e.target.value }))}
@@ -988,7 +988,7 @@ export const InternalAuditSystem: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">القسم <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">القسم <span className="text-[#DC2626]">*</span></label>
                 <select
                   value={auditForm.department}
                   onChange={(e) => setAuditForm((f) => ({ ...f, department: e.target.value }))}
@@ -1002,7 +1002,7 @@ export const InternalAuditSystem: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">اسم المدقق <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">اسم المدقق <span className="text-[#DC2626]">*</span></label>
                 <input
                   type="text"
                   value={auditForm.auditor_name}
@@ -1013,7 +1013,7 @@ export const InternalAuditSystem: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">التاريخ المخطط <span className="text-red-500">*</span></label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">التاريخ المخطط <span className="text-[#DC2626]">*</span></label>
                 <input
                   type="date"
                   value={auditForm.planned_date}

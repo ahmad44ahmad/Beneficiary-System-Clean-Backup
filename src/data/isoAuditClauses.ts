@@ -228,10 +228,10 @@ export const ISO_AUDIT_CLAUSES: ISOClause[] = [
 
 export const AUDIT_RESULT_OPTIONS = [
     { value: 'conforming', label: 'مطابق', color: '#22C55E', icon: 'check-circle' },
-    { value: 'minor_nc', label: 'عدم مطابقة بسيط', color: '#F59E0B', icon: 'alert-triangle' },
+    { value: 'minor_nc', label: 'عدم مطابقة بسيط', color: '#FCB614', icon: 'alert-triangle' },
     { value: 'major_nc', label: 'عدم مطابقة رئيسي', color: '#DC2626', icon: 'alert-octagon' },
-    { value: 'observation', label: 'ملاحظة', color: '#3B82F6', icon: 'info' },
-    { value: 'opportunity', label: 'فرصة تحسين', color: '#8B5CF6', icon: 'lightbulb' },
+    { value: 'observation', label: 'ملاحظة', color: '#269798', icon: 'info' },
+    { value: 'opportunity', label: 'فرصة تحسين', color: '#FCB614', icon: 'lightbulb' },
 ] as const;
 
 export const DEPARTMENTS = [

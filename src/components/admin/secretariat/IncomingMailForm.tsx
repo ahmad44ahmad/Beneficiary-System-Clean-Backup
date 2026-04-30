@@ -40,7 +40,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSave, onCa
                         <FileText className="w-6 h-6 text-primary-600" />
                         تسجيل وارد جديد
                     </h2>
-                    <button onClick={onCancel} className="text-gray-500 hover:text-red-500">
+                    <button onClick={onCancel} className="text-gray-500 hover:text-[#DC2626]">
                         <X className="w-6 h-6" />
                     </button>
                 </div>

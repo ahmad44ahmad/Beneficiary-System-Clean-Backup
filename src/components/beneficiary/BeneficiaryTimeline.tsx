@@ -21,14 +21,14 @@ interface TimelineEvent {
 }
 
 const EVENT_CONFIG: Record<EventType, { icon: React.ElementType; color: string; bgColor: string; borderColor: string; label: string }> = {
-    admission: { icon: Users, color: 'text-blue-400', bgColor: 'bg-blue-500/20', borderColor: 'border-blue-400', label: 'دخول' },
-    medication: { icon: Pill, color: 'text-purple-400', bgColor: 'bg-purple-500/20', borderColor: 'border-purple-400', label: 'دواء' },
-    therapy: { icon: Activity, color: 'text-green-400', bgColor: 'bg-green-500/20', borderColor: 'border-green-400', label: 'علاج' },
-    meal: { icon: Utensils, color: 'text-orange-400', bgColor: 'bg-orange-500/20', borderColor: 'border-orange-400', label: 'وجبة' },
-    incident: { icon: AlertTriangle, color: 'text-red-400', bgColor: 'bg-red-500/20', borderColor: 'border-red-400', label: 'حادث' },
-    assessment: { icon: FileText, color: 'text-cyan-400', bgColor: 'bg-cyan-500/20', borderColor: 'border-cyan-400', label: 'تقييم' },
-    visit: { icon: Heart, color: 'text-pink-400', bgColor: 'bg-pink-500/20', borderColor: 'border-pink-400', label: 'زيارة' },
-    achievement: { icon: Award, color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-400', label: 'إنجاز' },
+    admission: { icon: Users, color: 'text-[#269798]', bgColor: 'bg-[#269798]/20', borderColor: 'border-[#269798]', label: 'دخول' },
+    medication: { icon: Pill, color: 'text-[#FCB614]', bgColor: 'bg-[#FCB614]/20', borderColor: 'border-[#FCB614]', label: 'دواء' },
+    therapy: { icon: Activity, color: 'text-[#2BB574]', bgColor: 'bg-[#2BB574]/20', borderColor: 'border-[#2BB574]', label: 'علاج' },
+    meal: { icon: Utensils, color: 'text-[#F7941D]', bgColor: 'bg-[#F7941D]/20', borderColor: 'border-[#F7941D]', label: 'وجبة' },
+    incident: { icon: AlertTriangle, color: 'text-[#DC2626]', bgColor: 'bg-[#DC2626]/20', borderColor: 'border-[#DC2626]', label: 'حادث' },
+    assessment: { icon: FileText, color: 'text-[#269798]', bgColor: 'bg-[#269798]/20', borderColor: 'border-[#269798]', label: 'تقييم' },
+    visit: { icon: Heart, color: 'text-[#DC2626]', bgColor: 'bg-[#DC2626]/20', borderColor: 'border-[#DC2626]', label: 'زيارة' },
+    achievement: { icon: Award, color: 'text-[#FCB614]', bgColor: 'bg-[#FCB614]/20', borderColor: 'border-[#FCB614]', label: 'إنجاز' },
 };
 
 const mockEvents: TimelineEvent[] = [
@@ -80,7 +80,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-br from-white via-white to-white text-white p-6" dir="rtl">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -88,12 +88,12 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                 className="mb-6"
             >
                 <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-14 h-14 bg-gradient-to-br from-[#269798] to-[#1B7778] rounded-2xl flex items-center justify-center shadow-lg">
                         <Clock className="w-7 h-7 text-white" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold">الجدول الزمني</h1>
-                        <p className="text-slate-400 text-sm">{beneficiaryName}</p>
+                        <p className="text-hrsd-cool-gray text-sm">{beneficiaryName}</p>
                     </div>
                 </div>
 
@@ -105,11 +105,11 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                             <button
                                 key={type}
                                 onClick={() => setFilterType(filterType === type ? 'all' : type as EventType)}
-                                className={`p-3 rounded-xl border transition-colors ${filterType === type ? `${config.bgColor} ${config.borderColor}` : 'bg-slate-800/50 border-slate-700 hover:bg-slate-700'}`}
+                                className={`p-3 rounded-xl border transition-colors ${filterType === type ? `${config.bgColor} ${config.borderColor}` : 'bg-white/50 border-gray-200 hover:bg-gray-50'}`}
                             >
                                 <config.icon className={`w-5 h-5 ${config.color} mx-auto mb-1`} />
                                 <p className="text-lg font-bold">{count}</p>
-                                <p className="text-xs text-slate-400">{config.label}</p>
+                                <p className="text-xs text-hrsd-cool-gray">{config.label}</p>
                             </button>
                         );
                     })}
@@ -120,7 +120,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
             <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
                 <button
                     onClick={() => setFilterType('all')}
-                    className={`px-4 py-2 rounded-xl whitespace-nowrap transition-colors ${filterType === 'all' ? 'bg-blue-500 text-white' : 'bg-slate-800 text-slate-400'}`}
+                    className={`px-4 py-2 rounded-xl whitespace-nowrap transition-colors ${filterType === 'all' ? 'bg-[#269798] text-white' : 'bg-white text-hrsd-cool-gray'}`}
                 >
                     الكل
                 </button>
@@ -128,7 +128,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                     <button
                         key={type}
                         onClick={() => setFilterType(type as EventType)}
-                        className={`px-4 py-2 rounded-xl whitespace-nowrap flex items-center gap-2 transition-colors ${filterType === type ? `${config.bgColor} ${config.color}` : 'bg-slate-800 text-slate-400'}`}
+                        className={`px-4 py-2 rounded-xl whitespace-nowrap flex items-center gap-2 transition-colors ${filterType === type ? `${config.bgColor} ${config.color}` : 'bg-white text-hrsd-cool-gray'}`}
                     >
                         <config.icon className="w-4 h-4" />
                         {config.label}
@@ -142,13 +142,13 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                     <div key={date}>
                         {/* Date Header */}
                         <div className="flex items-center gap-3 mb-4">
-                            <Calendar className="w-5 h-5 text-slate-500" />
-                            <h3 className="text-lg font-bold text-slate-300">{formatDate(date)}</h3>
-                            <div className="flex-1 h-px bg-slate-700"></div>
+                            <Calendar className="w-5 h-5 text-hrsd-cool-gray" />
+                            <h3 className="text-lg font-bold text-hrsd-navy">{formatDate(date)}</h3>
+                            <div className="flex-1 h-px bg-gray-50"></div>
                         </div>
 
                         {/* Events */}
-                        <div className="space-y-3 me-6 border-e-2 border-slate-700 pe-6">
+                        <div className="space-y-3 me-6 border-e-2 border-gray-200 pe-6">
                             {dateEvents.map((event, index) => {
                                 const config = EVENT_CONFIG[event.type];
                                 const isExpanded = expandedEvent === event.id;
@@ -180,8 +180,8 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                                                                 {config.label}
                                                             </span>
                                                         </div>
-                                                        <p className="text-slate-400 text-sm mt-1">{event.description}</p>
-                                                        <div className="flex items-center gap-3 mt-2 text-slate-500 text-xs">
+                                                        <p className="text-hrsd-cool-gray text-sm mt-1">{event.description}</p>
+                                                        <div className="flex items-center gap-3 mt-2 text-hrsd-cool-gray text-xs">
                                                             <span className="flex items-center gap-1">
                                                                 <Clock className="w-3 h-3" />
                                                                 {event.timestamp}
@@ -206,13 +206,13 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                                                         initial={{ height: 0, opacity: 0 }}
                                                         animate={{ height: 'auto', opacity: 1 }}
                                                         exit={{ height: 0, opacity: 0 }}
-                                                        className="mt-4 pt-4 border-t border-slate-600/50"
+                                                        className="mt-4 pt-4 border-t border-gray-300/50"
                                                     >
                                                         {event.details && (
                                                             <div className="grid grid-cols-2 gap-3 mb-3">
                                                                 {Object.entries(event.details).map(([key, value]) => (
-                                                                    <div key={key} className="bg-slate-800/50 rounded-lg p-2">
-                                                                        <p className="text-slate-500 text-xs">{key}</p>
+                                                                    <div key={key} className="bg-white/50 rounded-lg p-2">
+                                                                        <p className="text-hrsd-cool-gray text-xs">{key}</p>
                                                                         <p className="text-white font-medium">{value}</p>
                                                                     </div>
                                                                 ))}
@@ -223,7 +223,7 @@ export const BeneficiaryTimeline: React.FC<BeneficiaryTimelineProps> = ({
                                                                 {event.attachments.map((att, i) => (
                                                                     <button
                                                                         key={i}
-                                                                        className="flex items-center gap-2 px-3 py-2 bg-slate-800/50 rounded-lg hover:bg-slate-700 transition-colors"
+                                                                        className="flex items-center gap-2 px-3 py-2 bg-white/50 rounded-lg hover:bg-gray-50 transition-colors"
                                                                     >
                                                                         {att.type === 'image' ? <Camera className="w-4 h-4" /> : <FileText className="w-4 h-4" />}
                                                                         <span className="text-sm">{att.name}</span>

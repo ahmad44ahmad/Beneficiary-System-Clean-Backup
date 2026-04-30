@@ -114,11 +114,11 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
         <div className="flex items-center justify-center gap-2 mb-6">
             {[1, 2, 3].map(s => (
                 <React.Fragment key={s}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${step >= s ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-500'
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${step >= s ? 'bg-[#1E9658] text-white' : 'bg-gray-200 text-gray-500'
                         }`}>
                         {step > s ? <CheckCircle className="w-5 h-5" /> : s}
                     </div>
-                    {s < 3 && <ArrowRight className={`w-5 h-5 ${step > s ? 'text-emerald-600' : 'text-gray-300'}`} />}
+                    {s < 3 && <ArrowRight className={`w-5 h-5 ${step > s ? 'text-[#1E9658]' : 'text-gray-300'}`} />}
                 </React.Fragment>
             ))}
         </div>
@@ -127,7 +127,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
     return (
         <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-emerald-600 via-teal-600 to-cyan-700 rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#1E9658] via-[#1B7778] to-[#1B7778] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center gap-3">
                     <button onClick={() => step > 1 ? setStep(step - 1) : navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
@@ -146,7 +146,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
             {step === 1 && (
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Sparkles className="w-5 h-5 text-emerald-600" />
+                        <Sparkles className="w-5 h-5 text-[#1E9658]" />
                         اختر المجال التأهيلي
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -155,8 +155,8 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                 key={d.value}
                                 onClick={() => { setDomain(d.value); setStep(2); }}
                                 className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${domain === d.value
-                                        ? 'border-emerald-500 bg-emerald-50'
-                                        : 'border-gray-200 hover:border-emerald-300'
+                                        ? 'border-[#2BB574] bg-[#2BB574]/10'
+                                        : 'border-gray-200 hover:border-[#2BB574]'
                                     }`}
                             >
                                 <span className="text-3xl block mb-2">{d.icon}</span>
@@ -173,7 +173,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                     {/* Templates */}
                     <div className="bg-white rounded-2xl p-6 shadow-sm">
                         <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <BookOpen className="w-5 h-5 text-blue-600" />
+                            <BookOpen className="w-5 h-5 text-[#269798]" />
                             اختر من مكتبة الأهداف أو أنشئ هدفاً جديداً
                         </h2>
 
@@ -186,8 +186,8 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                         key={temp.id}
                                         onClick={() => { applyTemplate(temp); setStep(3); }}
                                         className={`p-4 rounded-xl border-2 text-right transition-all ${selectedTemplate?.id === temp.id
-                                                ? 'border-blue-500 bg-blue-50'
-                                                : 'border-gray-200 hover:border-blue-300'
+                                                ? 'border-[#269798] bg-[#269798]/10'
+                                                : 'border-gray-200 hover:border-[#269798]'
                                             }`}
                                     >
                                         <p className="font-bold text-gray-800">{temp.goal_title}</p>
@@ -204,7 +204,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
 
                         <button
                             onClick={() => setStep(3)}
-                            className="w-full p-4 rounded-xl border-2 border-dashed border-gray-300 text-gray-500 hover:border-emerald-500 hover:text-emerald-600 transition-all"
+                            className="w-full p-4 rounded-xl border-2 border-dashed border-gray-300 text-gray-500 hover:border-[#2BB574] hover:text-[#1E9658] transition-all"
                         >
                             <span className="text-xl">+</span> إنشاء هدف مخصص
                         </button>
@@ -226,7 +226,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                     type="text"
                                     value={goalTitle}
                                     onChange={e => setGoalTitle(e.target.value)}
-                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none"
                                     placeholder="مثال: المشي باستقلالية لمسافة 50 متر"
                                 />
                             </div>
@@ -236,7 +236,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                 <textarea
                                     value={goalDescription}
                                     onChange={e => setGoalDescription(e.target.value)}
-                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none min-h-[80px] resize-none"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none min-h-[80px] resize-none"
                                     placeholder="وصف تفصيلي للهدف وكيفية تحقيقه..."
                                 />
                             </div>
@@ -253,8 +253,8 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                     key={m.value}
                                     onClick={() => setMeasurementType(m.value)}
                                     className={`p-3 rounded-xl border text-sm transition-all ${measurementType === m.value
-                                            ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
-                                            : 'border-gray-200 hover:border-emerald-300'
+                                            ? 'border-[#2BB574] bg-[#2BB574]/10 text-[#1E9658]'
+                                            : 'border-gray-200 hover:border-[#2BB574]'
                                         }`}
                                 >
                                     <p className="font-medium">{m.label}</p>
@@ -271,7 +271,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                         type="text"
                                         value={measurementUnit}
                                         onChange={e => setMeasurementUnit(e.target.value)}
-                                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none"
                                         placeholder="متر، كلمة..."
                                     />
                                 </div>
@@ -281,7 +281,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                         type="number"
                                         value={baselineValue}
                                         onChange={e => setBaselineValue(e.target.value)}
-                                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none"
                                     />
                                 </div>
                                 <div>
@@ -290,7 +290,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                         type="number"
                                         value={targetValue}
                                         onChange={e => setTargetValue(e.target.value)}
-                                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none"
                                     />
                                 </div>
                             </div>
@@ -300,7 +300,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                     {/* Timeline */}
                     <div className="bg-white rounded-2xl p-6 shadow-sm">
                         <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <Calendar className="w-5 h-5 text-blue-500" />
+                            <Calendar className="w-5 h-5 text-[#269798]" />
                             الإطار الزمني (T - Time-bound)
                         </h3>
 
@@ -311,7 +311,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                     type="date"
                                     value={startDate}
                                     onChange={e => setStartDate(e.target.value)}
-                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none"
                                 />
                             </div>
                             <div>
@@ -320,7 +320,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                     type="date"
                                     value={targetDate}
                                     onChange={e => setTargetDate(e.target.value)}
-                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none"
                                 />
                             </div>
                         </div>
@@ -373,7 +373,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                     <button
                         onClick={handleSubmit}
                         disabled={submitting}
-                        className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3"
+                        className="w-full bg-[#1E9658] hover:bg-[#1E9658] disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3"
                     >
                         {submitting ? (
                             <><Loader2 className="w-5 h-5 animate-spin" /> جاري الحفظ...</>

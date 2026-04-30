@@ -157,13 +157,13 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
 
     return (
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden" dir="rtl">
-            <div className="border-b border-slate-100 bg-slate-50/50 p-4 flex justify-between items-center">
-                <h2 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-                    <Files className="w-5 h-5 text-teal-600" />
+            <div className="border-b border-slate-100 bg-gray-50/50 p-4 flex justify-between items-center">
+                <h2 className="text-lg font-semibold text-hrsd-navy flex items-center gap-2">
+                    <Files className="w-5 h-5 text-[#1B7778]" />
                     الملف الطبي الشامل (Person-Centered Care)
                 </h2>
                 {successMessage && (
-                    <div className="flex items-center gap-2 text-green-600 bg-green-50 px-3 py-1 rounded-full text-sm">
+                    <div className="flex items-center gap-2 text-[#1E9658] bg-[#2BB574]/10 px-3 py-1 rounded-full text-sm">
                         <CheckCircle2 className="w-4 h-4" />
                         {successMessage}
                     </div>
@@ -172,18 +172,18 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
 
             <div className="flex flex-col md:flex-row min-h-[600px]">
                 {/* Sidebar Tabs */}
-                <div className="w-full md:w-64 bg-slate-50 border-s border-slate-100">
+                <div className="w-full md:w-64 bg-gray-50 border-s border-slate-100">
                     {tabs.map(tab => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`w-full text-right px-4 py-4 flex items-center gap-3 transition-colors
                 ${activeTab === tab.id
-                                    ? 'bg-white text-teal-700 border-e-4 border-teal-600 font-medium shadow-sm'
-                                    : 'text-slate-500 hover:bg-slate-100 hover:text-slate-700'
+                                    ? 'bg-white text-[#1B7778] border-e-4 border-[#1B7778] font-medium shadow-sm'
+                                    : 'text-hrsd-cool-gray hover:bg-gray-100 hover:text-hrsd-navy'
                                 }`}
                         >
-                            <tab.icon className={`w-5 h-5 ${activeTab === tab.id ? 'text-teal-600' : 'text-slate-400'}`} />
+                            <tab.icon className={`w-5 h-5 ${activeTab === tab.id ? 'text-[#1B7778]' : 'text-hrsd-cool-gray'}`} />
                             {tab.label}
                         </button>
                     ))}
@@ -195,10 +195,10 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                     {/* 1. Classification */}
                     {activeTab === 'classification' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <h3 className="text-lg font-medium text-slate-800 border-b pb-2">تصنيف الحالة والإعاقة</h3>
+                            <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">تصنيف الحالة والإعاقة</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">تصنيف الإعاقة الأساسي</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">تصنيف الإعاقة الأساسي</label>
                                     <select
                                         className="w-full p-2 border rounded-lg"
                                         value={formData.disability_classification}
@@ -213,7 +213,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">مستوى الإعاقة العقلية</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">مستوى الإعاقة العقلية</label>
                                     <select
                                         className="w-full p-2 border rounded-lg"
                                         value={formData.mental_disability_level}
@@ -227,10 +227,10 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                 </div>
 
                                 <div className="col-span-2">
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">نوع الإعاقة الحركية (يمكن اختيار أكثر من خيار)</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">نوع الإعاقة الحركية (يمكن اختيار أكثر من خيار)</label>
                                     <div className="grid grid-cols-2 gap-3">
                                         {['شلل رباعي', 'شلل نصفي', 'ضعف طرفين', 'شلل دماغي'].map(type => (
-                                            <label key={type} className="flex items-center gap-2 p-3 border rounded-lg hover:bg-slate-50 cursor-pointer">
+                                            <label key={type} className="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
                                                 <input
                                                     type="checkbox"
                                                     checked={formData.motor_disability_type.includes(type)}
@@ -238,9 +238,9 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                                         if (e.target.checked) setFormData({ ...formData, motor_disability_type: [...formData.motor_disability_type, type] });
                                                         else setFormData({ ...formData, motor_disability_type: formData.motor_disability_type.filter(t => t !== type) });
                                                     }}
-                                                    className="rounded text-teal-600 focus:ring-teal-500"
+                                                    className="rounded text-[#1B7778] focus:ring-[#269798]"
                                                 />
-                                                <span className="text-sm text-slate-700">{type}</span>
+                                                <span className="text-sm text-hrsd-navy">{type}</span>
                                             </label>
                                         ))}
                                     </div>
@@ -252,10 +252,10 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                     {/* 2. Mobility */}
                     {activeTab === 'mobility' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <h3 className="text-lg font-medium text-slate-800 border-b pb-2">الحالة الحركية و GMFCS</h3>
+                            <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">الحالة الحركية و GMFCS</h3>
                             <div className="grid grid-cols-1 gap-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">مستوى GMFCS (نظام تصنيف الوظائف الحركية الكبرى)</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">مستوى GMFCS (نظام تصنيف الوظائف الحركية الكبرى)</label>
                                     <select
                                         className="w-full p-2 border rounded-lg"
                                         value={formData.gmfcs_level}
@@ -271,7 +271,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">وضع التنقل العام</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">وضع التنقل العام</label>
                                     <select
                                         className="w-full p-2 border rounded-lg"
                                         value={formData.mobility_status}
@@ -286,15 +286,15 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                     </select>
                                 </div>
 
-                                <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-100 rounded-lg">
+                                <div className="flex items-center gap-3 p-4 bg-[#DC2626]/10 border border-[#DC2626]/10 rounded-lg">
                                     <input
                                         type="checkbox"
                                         id="bedridden"
                                         checked={formData.is_bedridden}
                                         onChange={(e) => setFormData({ ...formData, is_bedridden: e.target.checked })}
-                                        className="w-5 h-5 text-red-600 rounded focus:ring-red-500"
+                                        className="w-5 h-5 text-[#DC2626] rounded focus:ring-[#DC2626]"
                                     />
-                                    <label htmlFor="bedridden" className="font-medium text-red-800">الحالة طريحة فراش (تنبيه لقرح الفراش)</label>
+                                    <label htmlFor="bedridden" className="font-medium text-[#7F1D1D]">الحالة طريحة فراش (تنبيه لقرح الفراش)</label>
                                 </div>
                             </div>
                         </div>
@@ -303,11 +303,11 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                     {/* 3. Vitals & Nutrition */}
                     {activeTab === 'vitals' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <h3 className="text-lg font-medium text-slate-800 border-b pb-2">العلامات الحيوية والتغذية</h3>
+                            <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">العلامات الحيوية والتغذية</h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="col-span-1 border p-4 rounded-lg bg-blue-50/50">
-                                    <h4 className="font-medium text-blue-800 mb-4">حساب كتلة الجسم (BMI)</h4>
+                                <div className="col-span-1 border p-4 rounded-lg bg-[#269798]/10/50">
+                                    <h4 className="font-medium text-[#1B7778] mb-4">حساب كتلة الجسم (BMI)</h4>
                                     <div className="space-y-3">
                                         <input
                                             type="number"
@@ -345,7 +345,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                 </div>
 
                                 <div className="col-span-2">
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">نوع التغذية والحمية</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">نوع التغذية والحمية</label>
                                     <div className="grid grid-cols-1 gap-3">
                                         {['فموي طبيعي', 'مهروس', 'سائل كثيف', 'أنبوبي معدي (PEG)', 'أنبوبي أنفي (NG Tube)'].map(diet => (
                                             <label key={diet} className="flex items-center gap-2">
@@ -354,9 +354,9 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                                     name="diet"
                                                     checked={formData.diet_type === diet}
                                                     onChange={() => setFormData({ ...formData, diet_type: diet })}
-                                                    className="text-teal-600"
+                                                    className="text-[#1B7778]"
                                                 />
-                                                <span className="text-slate-700">{diet}</span>
+                                                <span className="text-hrsd-navy">{diet}</span>
                                             </label>
                                         ))}
                                     </div>
@@ -368,12 +368,12 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                     {/* 4. Chronic Diseases */}
                     {activeTab === 'chronic' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <h3 className="text-lg font-medium text-slate-800 border-b pb-2">الأمراض المزمنة</h3>
+                            <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">الأمراض المزمنة</h3>
 
                             {/* Hypertension */}
-                            <div className="bg-slate-50 p-4 rounded-lg border">
+                            <div className="bg-gray-50 p-4 rounded-lg border">
                                 <div className="flex items-center justify-between mb-2">
-                                    <label className="font-semibold text-slate-700">ارتفاع ضغط الدم</label>
+                                    <label className="font-semibold text-hrsd-navy">ارتفاع ضغط الدم</label>
                                     <select
                                         className="p-1 border rounded text-sm"
                                         value={formData.chronic_conditions.hypertension.status}
@@ -393,9 +393,9 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                             </div>
 
                             {/* Diabetes */}
-                            <div className="bg-slate-50 p-4 rounded-lg border">
+                            <div className="bg-gray-50 p-4 rounded-lg border">
                                 <div className="flex items-center justify-between mb-2">
-                                    <label className="font-semibold text-slate-700">داء السكري</label>
+                                    <label className="font-semibold text-hrsd-navy">داء السكري</label>
                                     <select
                                         className="p-1 border rounded text-sm"
                                         value={formData.chronic_conditions.diabetes.status}
@@ -432,9 +432,9 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                             </div>
 
                             {/* Epilepsy */}
-                            <div className="bg-slate-50 p-4 rounded-lg border">
+                            <div className="bg-gray-50 p-4 rounded-lg border">
                                 <div className="flex items-center justify-between mb-2">
-                                    <label className="font-semibold text-slate-700">الصرع / التشنجات</label>
+                                    <label className="font-semibold text-hrsd-navy">الصرع / التشنجات</label>
                                     <select
                                         className="p-1 border rounded text-sm"
                                         value={formData.chronic_conditions.epilepsy.status}
@@ -475,10 +475,10 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                     {/* 5. Injuries & Infections - Simplified for now */}
                     {activeTab === 'injuries' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <h3 className="text-lg font-medium text-slate-800 border-b pb-2">الإصابات والعدوى</h3>
+                            <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">الإصابات والعدوى</h3>
 
                             <div className="grid grid-cols-1 gap-4">
-                                <label className="block text-sm font-medium text-slate-700">الأمراض المعدية</label>
+                                <label className="block text-sm font-medium text-hrsd-navy">الأمراض المعدية</label>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     <label className="flex items-center gap-2 p-2 border rounded bg-white">
                                         <input
@@ -520,9 +520,9 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                     {/* 6. Psychological - Simplified */}
                     {activeTab === 'psych' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <h3 className="text-lg font-medium text-slate-800 border-b pb-2">الحالة النفسية</h3>
+                            <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">الحالة النفسية</h3>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-2">التشخيص النفسي (فيكتور)</label>
+                                <label className="block text-sm font-medium text-hrsd-navy mb-2">التشخيص النفسي (فيكتور)</label>
                                 <select
                                     className="w-full p-2 border rounded-lg mb-2"
                                     onChange={(e) => {
@@ -547,7 +547,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                 </select>
                                 <div className="flex flex-wrap gap-2">
                                     {formData.psychological_profile.diagnosis.map(diag => (
-                                        <span key={diag} className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm flex items-center gap-2">
+                                        <span key={diag} className="bg-[#0F3144]/10 text-[#0A2030] px-3 py-1 rounded-full text-sm flex items-center gap-2">
                                             {diag}
                                             <button
                                                 onClick={() => setFormData({
@@ -557,7 +557,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                                                         diagnosis: formData.psychological_profile.diagnosis.filter(d => d !== diag)
                                                     }
                                                 })}
-                                                className="hover:text-red-500"
+                                                className="hover:text-[#DC2626]"
                                             >
                                                 ×
                                             </button>
@@ -571,11 +571,11 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                 </div>
             </div>
 
-            <div className="border-t p-4 bg-slate-50 flex justify-end gap-3">
+            <div className="border-t p-4 bg-gray-50 flex justify-end gap-3">
                 <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 flex items-center gap-2 disabled:bg-slate-400"
+                    className="bg-[#1B7778] text-white px-6 py-2 rounded-lg hover:bg-[#1B7778] flex items-center gap-2 disabled:bg-slate-400"
                 >
                     <Save className="w-4 h-4" />
                     {saving ? 'جاري الحفظ...' : 'حفظ التغييرات'}

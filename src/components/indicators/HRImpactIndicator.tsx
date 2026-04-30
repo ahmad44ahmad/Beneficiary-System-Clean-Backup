@@ -102,9 +102,9 @@ export const HRImpactIndicator: React.FC = () => {
 
                         <div className="hrsd-card">
                             <div className="flex items-center gap-3">
-                                <UserMinus className="w-10 h-10 text-red-600" />
+                                <UserMinus className="w-10 h-10 text-[#DC2626]" />
                                 <div>
-                                    <p className="text-3xl font-bold text-red-600">{totalAbsent}</p>
+                                    <p className="text-3xl font-bold text-[#DC2626]">{totalAbsent}</p>
                                     <p className="text-hierarchy-small text-gray-500">غائبين اليوم</p>
                                 </div>
                             </div>
@@ -120,13 +120,13 @@ export const HRImpactIndicator: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="hrsd-card bg-red-50">
+                        <div className="hrsd-card bg-[#DC2626]/10">
                             <div className="flex items-center gap-2 mb-2">
-                                <TrendingDown className="w-5 h-5 text-red-600" />
-                                <span className="text-sm font-medium text-red-800">ارتباط الغياب بالجودة</span>
+                                <TrendingDown className="w-5 h-5 text-[#DC2626]" />
+                                <span className="text-sm font-medium text-[#7F1D1D]">ارتباط الغياب بالجودة</span>
                             </div>
-                            <p className="text-2xl font-bold text-red-600">{Math.abs(correlationInsight.value * 100).toFixed(0)}%</p>
-                            <p className="text-xs text-red-700 mt-1">{correlationInsight.interpretation}</p>
+                            <p className="text-2xl font-bold text-[#DC2626]">{Math.abs(correlationInsight.value * 100).toFixed(0)}%</p>
+                            <p className="text-xs text-[#B91C1C] mt-1">{correlationInsight.interpretation}</p>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@ export const HRImpactIndicator: React.FC = () => {
                                     <Tooltip formatter={(value: number) => `${value}%`} />
                                     <Bar
                                         dataKey="attendance_rate"
-                                        fill="rgb(20, 130, 135)"
+                                        fill="rgb(38, 151, 152)"
                                         radius={[0, 4, 4, 0]}
                                         name="نسبة الحضور"
                                     />
@@ -158,8 +158,8 @@ export const HRImpactIndicator: React.FC = () => {
                                     <XAxis dataKey="day" />
                                     <YAxis domain={[0, 100]} />
                                     <Tooltip />
-                                    <Line type="monotone" dataKey="attendance" stroke="rgb(20, 130, 135)" strokeWidth={2} name="الحضور %" />
-                                    <Line type="monotone" dataKey="care_quality" stroke="rgb(245, 150, 30)" strokeWidth={2} name="جودة العناية %" />
+                                    <Line type="monotone" dataKey="attendance" stroke="rgb(38, 151, 152)" strokeWidth={2} name="الحضور %" />
+                                    <Line type="monotone" dataKey="care_quality" stroke="rgb(247, 148, 29)" strokeWidth={2} name="جودة العناية %" />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
@@ -169,20 +169,20 @@ export const HRImpactIndicator: React.FC = () => {
                     {criticalDepartments.length > 0 && (
                         <div className="hrsd-card mb-6">
                             <h3 className="text-hierarchy-subheading text-gray-800 mb-4 flex items-center gap-2">
-                                <AlertTriangle className="w-5 h-5 text-red-600" />
+                                <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
                                 أقسام تحتاج دعم عاجل
                             </h3>
                             <div className="space-y-3">
                                 {criticalDepartments.map((dept, idx) => (
-                                    <div key={idx} className="p-4 bg-red-50 rounded-xl border-e-4 border-red-500">
+                                    <div key={idx} className="p-4 bg-[#DC2626]/10 rounded-xl border-e-4 border-[#DC2626]">
                                         <div className="flex items-center justify-between mb-2">
-                                            <span className="font-bold text-red-900">{dept.department}</span>
+                                            <span className="font-bold text-[#7F1D1D]">{dept.department}</span>
                                             <span className="badge-danger">تأثير {dept.impact_score}%</span>
                                         </div>
                                         <div className="grid grid-cols-3 gap-4 text-sm">
                                             <div>
                                                 <p className="text-gray-500">الحضور</p>
-                                                <p className="font-bold text-red-600">{dept.attendance_rate}%</p>
+                                                <p className="font-bold text-[#DC2626]">{dept.attendance_rate}%</p>
                                             </div>
                                             <div>
                                                 <p className="text-gray-500">الغياب</p>
@@ -190,10 +190,10 @@ export const HRImpactIndicator: React.FC = () => {
                                             </div>
                                             <div>
                                                 <p className="text-gray-500">جودة العناية</p>
-                                                <p className="font-bold text-red-600">{dept.care_completion_rate}%</p>
+                                                <p className="font-bold text-[#DC2626]">{dept.care_completion_rate}%</p>
                                             </div>
                                         </div>
-                                        <p className="text-xs text-red-700 mt-2">
+                                        <p className="text-xs text-[#B91C1C] mt-2">
                                             ⚠️ توصية: تعيين دعم طارئ من قسم آخر
                                         </p>
                                     </div>
@@ -220,19 +220,19 @@ export const HRImpactIndicator: React.FC = () => {
                                 </thead>
                                 <tbody>
                                     {departmentStats.map((dept, idx) => (
-                                        <tr key={idx} className={`border-b ${dept.impact_score >= 20 ? 'bg-red-50' : ''}`}>
+                                        <tr key={idx} className={`border-b ${dept.impact_score >= 20 ? 'bg-[#DC2626]/10' : ''}`}>
                                             <td className="p-3 font-medium">{dept.department}</td>
                                             <td className="p-3 text-center">{dept.total_staff}</td>
                                             <td className="p-3 text-center text-hrsd-green">{dept.present}</td>
-                                            <td className="p-3 text-center text-red-600">{dept.absent}</td>
+                                            <td className="p-3 text-center text-[#DC2626]">{dept.absent}</td>
                                             <td className="p-3 text-center text-hrsd-gold">{dept.on_leave}</td>
                                             <td className="p-3 text-center">
-                                                <span className={dept.attendance_rate >= 85 ? 'text-hrsd-green' : 'text-red-600'}>
+                                                <span className={dept.attendance_rate >= 85 ? 'text-hrsd-green' : 'text-[#DC2626]'}>
                                                     {dept.attendance_rate}%
                                                 </span>
                                             </td>
                                             <td className="p-3 text-center">
-                                                <span className={dept.care_completion_rate >= 80 ? 'text-hrsd-green' : 'text-red-600'}>
+                                                <span className={dept.care_completion_rate >= 80 ? 'text-hrsd-green' : 'text-[#DC2626]'}>
                                                     {dept.care_completion_rate}%
                                                 </span>
                                             </td>

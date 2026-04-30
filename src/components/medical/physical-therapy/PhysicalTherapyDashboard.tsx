@@ -31,7 +31,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-blue-100 text-blue-600">
+                        <div className="p-3 rounded-full bg-[#269798]/15 text-[#269798]">
                             <Activity size={24} />
                         </div>
                         <div className="me-4">
@@ -44,7 +44,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-green-100 text-green-600">
+                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#1E9658]">
                             <ClipboardList size={24} />
                         </div>
                         <div className="me-4">
@@ -57,7 +57,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-purple-100 text-purple-600">
+                        <div className="p-3 rounded-full bg-[#FCB614]/15 text-[#D49A0A]">
                             <PenTool size={24} />
                         </div>
                         <div className="me-4">
@@ -73,14 +73,14 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                 <nav className="-mb-px flex space-x-8">
                     <button
                         onClick={() => setActiveTab('assessment')}
-                        className={`${activeTab === 'assessment' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
+                        className={`${activeTab === 'assessment' ? 'border-[#0F3144] text-[#0F3144]' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
                     whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
                     >
                         التقييم والخطة
                     </button>
                     <button
                         onClick={() => setActiveTab('notes')}
-                        className={`${activeTab === 'notes' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
+                        className={`${activeTab === 'notes' ? 'border-[#0F3144] text-[#0F3144]' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
                     whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
                     >
                         ملاحظات التقدم

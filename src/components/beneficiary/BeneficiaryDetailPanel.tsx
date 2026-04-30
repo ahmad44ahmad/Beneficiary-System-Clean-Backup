@@ -176,11 +176,11 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                             className={cn(
                                 "flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all flex-1 justify-center whitespace-nowrap",
                                 activeTab === tab.id
-                                    ? "bg-white text-teal-600 shadow-sm ring-1 ring-gray-200 font-bold"
+                                    ? "bg-white text-[#1B7778] shadow-sm ring-1 ring-gray-200 font-bold"
                                     : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                             )}
                         >
-                            <tab.icon className={cn("w-4 h-4", activeTab === tab.id ? "text-teal-600" : "text-gray-400")} />
+                            <tab.icon className={cn("w-4 h-4", activeTab === tab.id ? "text-[#1B7778]" : "text-gray-400")} />
                             {tab.label}
                         </button>
                     ))}
@@ -191,7 +191,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                 <Suspense fallback={
                     <div className="flex items-center justify-center p-12 h-64 bg-gray-50 rounded-xl border border-dashed border-gray-200">
                         <div className="flex flex-col items-center gap-3">
-                            <div className="w-8 h-8 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin"></div>
+                            <div className="w-8 h-8 border-4 border-[#269798]/20 border-t-teal-600 rounded-full animate-spin"></div>
                             <p className="text-gray-500 text-sm font-medium">جاري تحميل البيانات...</p>
                         </div>
                     </div>
@@ -309,7 +309,7 @@ export const BeneficiaryDetailPanel: React.FC<BeneficiaryDetailPanelProps> = ({
                                 {relevantInjuryReports.length > 0 ? (
                                     <ul className="space-y-3">
                                         {relevantInjuryReports.map(ir => (
-                                            <li key={ir.id} className="p-3 bg-red-50 rounded-lg border-e-4 border-e-red-500 text-sm">
+                                            <li key={ir.id} className="p-3 bg-[#DC2626]/10 rounded-lg border-e-4 border-e-red-500 text-sm">
                                                 <strong>التاريخ:</strong> {ir.date} {ir.time}
                                                 <br />
                                                 <strong>النوع:</strong> {ir.injuryType} | <strong>المكان:</strong> {ir.location}

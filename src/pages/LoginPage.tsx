@@ -2,10 +2,23 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
-    Shield, Eye, EyeOff, Lock, User, Building2,
-    Fingerprint, Users, Clock, CheckCircle, ArrowLeft
+    Eye, EyeOff, Lock, User,
+    Fingerprint, Brain, Award, ShieldCheck, ArrowLeft
 } from 'lucide-react';
 
+/**
+ * Login page — Phase 1 sovereign surface.
+ * Brand level: Default (light mode, full secondary palette).
+ *
+ * Per HRSD Brand Guidelines:
+ * - Light-mode background (white)
+ * - HRSD ministry logo prominent, top-right (RTL)
+ * - Body text in cool gray; headlines in navy
+ * - Maximum 2-3 brand colors per surface (navy + gold + teal here)
+ * - No fabricated "100% أمان" claim — replaced with the three pillars
+ *   the user explicitly requested 2026-04-30:
+ *   AI · المؤسسي التميز · الامتثال
+ */
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: '', password: '' });
@@ -16,11 +29,10 @@ export const LoginPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        // Simulate login
         setTimeout(() => {
             setIsLoading(false);
             navigate('/dashboard');
-        }, 1500);
+        }, 1200);
     };
 
     const handleNafathLogin = () => {
@@ -28,127 +40,179 @@ export const LoginPage: React.FC = () => {
         setTimeout(() => {
             setIsLoading(false);
             navigate('/dashboard');
-        }, 2000);
+        }, 1500);
     };
 
-    const stats = [
-        { icon: Users, value: '145', label: 'مستفيد', color: 'from-blue-500 to-cyan-500' },
-        { icon: Clock, value: '24/7', label: 'رعاية', color: 'from-green-500 to-emerald-500' },
-        { icon: Shield, value: '100%', label: 'أمان', color: 'from-purple-500 to-indigo-500' },
+    /**
+     * The three pillars Ahmad requested as the system's value proposition.
+     * They replace the prior "145 / 24/7 / 100%" stat strip — that was
+     * marketing-style, this is institutional positioning.
+     */
+    const pillars = [
+        {
+            icon: Brain,
+            title: 'الذكاء الاصطناعي',
+            blurb: 'نماذج تنبؤيّة لخدمة المستفيدين',
+        },
+        {
+            icon: Award,
+            title: 'التميّز المؤسسي',
+            blurb: 'متوافق مع منظومة جودة الوزارة',
+        },
+        {
+            icon: ShieldCheck,
+            title: 'الامتثال والحوكمة',
+            blurb: 'حماية البيانات والأمن السيبراني الوطني',
+        },
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex" dir="rtl">
-            {/* Left Side - Branding */}
-            <motion.div
-                initial={{ opacity: 0, x: -50 }}
+        <div className="min-h-screen bg-white flex" dir="rtl">
+            {/* Right side (Arabic-first): Branding pane */}
+            <motion.aside
+                initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
+                transition={{ duration: 0.5 }}
+                className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-hrsd-navy"
             >
-                {/* Background Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgb(20,65,90)] via-[rgb(45,180,115)] to-[rgb(20,130,135)] opacity-90" />
-                <div className="absolute inset-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
+                {/* Subtle wave pattern in HRSD teal at low opacity (brand-book wave element) */}
+                <div className="absolute inset-0 hrsd-wave-bg opacity-40" />
+                <div
+                    className="absolute inset-0 opacity-[0.06]"
+                    style={{
+                        backgroundImage:
+                            'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+                    }}
+                />
 
-                <div className="relative z-10 flex flex-col justify-center px-16 text-white">
-                    {/* Logo */}
+                <div className="relative z-10 flex flex-col justify-between px-12 xl:px-16 py-14 text-white w-full max-w-2xl">
+                    {/* Top: HRSD ministry logo + title */}
                     <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
+                        initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="mb-12"
+                        transition={{ delay: 0.15 }}
+                        className="flex flex-col gap-6"
                     >
-                        <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
-                            <Building2 className="w-10 h-10 text-white" />
+                        <div className="flex items-center gap-4">
+                            <img
+                                src="/assets/hrsd-logo.png"
+                                alt="شعار وزارة الموارد البشرية والتنمية الاجتماعية"
+                                className="h-14 w-auto bg-white rounded-lg p-2"
+                            />
+                            <div className="text-sm leading-relaxed text-white/85">
+                                <p className="font-semibold">المملكة العربية السعودية</p>
+                                <p>وزارة الموارد البشرية والتنمية الاجتماعية</p>
+                            </div>
                         </div>
-                        <h1 className="text-4xl font-bold mb-2">نظام بصيرة</h1>
-                        <p className="text-xl text-white/80">مركز التأهيل الشامل بالباحة</p>
+
+                        <div className="border-t border-white/20 pt-6">
+                            <h1 className="text-4xl xl:text-5xl font-bold tracking-tight mb-2">
+                                نظام <span className="text-hrsd-gold">بصيرة</span>
+                            </h1>
+                            <p className="text-lg text-white/80">
+                                مركز التأهيل الشامل بالباحة
+                            </p>
+                        </div>
                     </motion.div>
 
-                    {/* Description */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                        className="text-lg text-white/70 mb-12 leading-relaxed max-w-md"
-                    >
-                        منظومة رقمية لإدارة خدمات التأهيل والمتابعة وفق معايير وزارة الموارد البشرية والتنمية الاجتماعية،
-                        تلتزم بضوابط حماية البيانات الشخصية ومعايير الأمن السيبراني الوطنية.
-                    </motion.p>
-
-                    {/* Stats */}
+                    {/* Middle: Three pillars (replaces the stat strip) */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        className="flex gap-6"
+                        transition={{ delay: 0.4 }}
+                        className="space-y-5 my-12"
                     >
-                        {stats.map((stat, index) => (
+                        {pillars.map((p, idx) => (
                             <motion.div
-                                key={stat.label}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.7 + index * 0.1 }}
-                                className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 text-center min-w-[100px]"
+                                key={p.title}
+                                initial={{ opacity: 0, x: 12 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5 + idx * 0.1 }}
+                                className="flex items-start gap-4"
                             >
-                                <stat.icon className="w-6 h-6 mx-auto mb-2 text-white/80" />
-                                <p className="text-2xl font-bold">{stat.value}</p>
-                                <p className="text-sm text-white/60">{stat.label}</p>
+                                <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0">
+                                    <p.icon className="w-5 h-5 text-hrsd-gold" />
+                                </div>
+                                <div>
+                                    <h3 className="text-base font-semibold mb-1">{p.title}</h3>
+                                    <p className="text-sm text-white/65 leading-relaxed">{p.blurb}</p>
+                                </div>
                             </motion.div>
                         ))}
                     </motion.div>
 
-                    {/* Footer */}
+                    {/* Bottom: Footer */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1 }}
-                        className="absolute bottom-8 left-16 right-16"
+                        className="text-xs text-white/45 leading-relaxed"
                     >
-                        <div className="flex items-center gap-2 text-white/50 text-sm">
-                            <CheckCircle className="w-4 h-4" />
-                            <span>وزارة الموارد البشرية والتنمية الاجتماعية</span>
-                        </div>
+                        منظومة رقمية لإدارة خدمات التأهيل والمتابعة وفق ضوابط الوزارة
+                        <br />
+                        ومعايير حماية البيانات الشخصية والأمن السيبراني الوطنية.
                     </motion.div>
                 </div>
-            </motion.div>
+            </motion.aside>
 
-            {/* Right Side - Login Form */}
-            <motion.div
+            {/* Left side: Login form (light surface) */}
+            <motion.section
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="w-full lg:w-1/2 flex items-center justify-center p-8"
+                className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 bg-white"
             >
                 <div className="w-full max-w-md">
-                    {/* Mobile Logo */}
+                    {/* Mobile logo strip — visible only when branding pane is hidden */}
                     <div className="lg:hidden text-center mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-[rgb(45,180,115)] to-[rgb(20,130,135)] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <Building2 className="w-8 h-8 text-white" />
-                        </div>
-                        <h1 className="text-2xl font-bold text-white">نظام بصيرة</h1>
+                        <img
+                            src="/assets/hrsd-logo.png"
+                            alt="شعار الوزارة"
+                            className="h-12 w-auto mx-auto mb-4"
+                        />
+                        <h1 className="text-2xl font-bold text-hrsd-navy">
+                            نظام بصيرة
+                        </h1>
+                        <p className="text-sm text-hrsd-cool-gray mt-1">
+                            مركز التأهيل الشامل بالباحة
+                        </p>
                     </div>
 
                     {/* Login Card */}
                     <motion.div
-                        initial={{ y: 20, opacity: 0 }}
+                        initial={{ y: 16, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        className="bg-slate-800/50 backdrop-blur-sm rounded-3xl p-8 border border-slate-700"
+                        transition={{ delay: 0.25 }}
+                        className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm"
                     >
-                        <h2 className="text-2xl font-bold text-white mb-2">تسجيل الدخول</h2>
-                        <p className="text-slate-400 mb-8">أدخل بياناتك للوصول إلى النظام</p>
+                        <h2 className="text-2xl font-bold text-hrsd-navy mb-1">
+                            تسجيل الدخول
+                        </h2>
+                        <p className="text-sm text-hrsd-cool-gray mb-7">
+                            أدخل بياناتك للوصول إلى النظام
+                        </p>
 
-                        {/* Login Method Toggle */}
-                        <div className="flex gap-2 mb-8 bg-slate-700/50 rounded-xl p-1">
+                        {/* Login method toggle */}
+                        <div className="flex gap-1.5 mb-7 bg-gray-100 rounded-xl p-1">
                             <button
+                                type="button"
                                 onClick={() => setLoginMethod('credentials')}
-                                className={`flex-1 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${loginMethod === 'credentials' ? 'bg-white text-slate-900' : 'text-slate-400 hover:text-white'}`}
+                                className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2 ${
+                                    loginMethod === 'credentials'
+                                        ? 'bg-white text-hrsd-navy shadow-sm'
+                                        : 'text-hrsd-cool-gray hover:text-hrsd-navy'
+                                }`}
                             >
                                 <Lock className="w-4 h-4" />
                                 اسم المستخدم
                             </button>
                             <button
+                                type="button"
                                 onClick={() => setLoginMethod('nafath')}
-                                className={`flex-1 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${loginMethod === 'nafath' ? 'bg-white text-slate-900' : 'text-slate-400 hover:text-white'}`}
+                                className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2 ${
+                                    loginMethod === 'nafath'
+                                        ? 'bg-white text-hrsd-navy shadow-sm'
+                                        : 'text-hrsd-cool-gray hover:text-hrsd-navy'
+                                }`}
                             >
                                 <Fingerprint className="w-4 h-4" />
                                 نفاذ
@@ -157,83 +221,97 @@ export const LoginPage: React.FC = () => {
 
                         {loginMethod === 'credentials' ? (
                             <form onSubmit={handleSubmit} className="space-y-5">
-                                {/* Username */}
                                 <div>
-                                    <label className="block text-slate-400 text-sm mb-2">اسم المستخدم</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">
+                                        اسم المستخدم
+                                    </label>
                                     <div className="relative">
-                                        <User className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                        <User className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-hrsd-cool-gray" />
                                         <input
                                             type="text"
                                             value={formData.username}
-                                            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                                            onChange={(e) =>
+                                                setFormData({ ...formData, username: e.target.value })
+                                            }
                                             placeholder="أدخل اسم المستخدم"
-                                            className="w-full bg-slate-700/50 border border-slate-600 rounded-xl pr-12 pl-4 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                                            className="w-full bg-white border border-gray-300 rounded-xl pr-10 pl-3.5 py-3 text-hrsd-navy placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/30 focus:border-hrsd-teal transition-colors"
                                         />
                                     </div>
                                 </div>
 
-                                {/* Password */}
                                 <div>
-                                    <label className="block text-slate-400 text-sm mb-2">كلمة المرور</label>
+                                    <label className="block text-sm font-medium text-hrsd-navy mb-2">
+                                        كلمة المرور
+                                    </label>
                                     <div className="relative">
-                                        <Lock className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                        <Lock className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-hrsd-cool-gray" />
                                         <input
                                             type={showPassword ? 'text' : 'password'}
                                             value={formData.password}
-                                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                            onChange={(e) =>
+                                                setFormData({ ...formData, password: e.target.value })
+                                            }
                                             placeholder="أدخل كلمة المرور"
-                                            className="w-full bg-slate-700/50 border border-slate-600 rounded-xl pr-12 pl-12 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+                                            className="w-full bg-white border border-gray-300 rounded-xl pr-10 pl-10 py-3 text-hrsd-navy placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/30 focus:border-hrsd-teal transition-colors"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
+                                            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-hrsd-cool-gray hover:text-hrsd-navy transition-colors"
+                                            aria-label={showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'}
                                         >
-                                            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                         </button>
                                     </div>
                                 </div>
 
-                                {/* Remember Me */}
                                 <div className="flex items-center justify-between text-sm">
                                     <label className="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" className="w-4 h-4 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500" />
-                                        <span className="text-slate-400">تذكرني</span>
+                                        <input
+                                            type="checkbox"
+                                            className="w-4 h-4 rounded border-gray-300 text-hrsd-teal focus:ring-hrsd-teal"
+                                        />
+                                        <span className="text-hrsd-cool-gray">تذكّرني</span>
                                     </label>
-                                    <a href="#" className="text-emerald-400 hover:text-emerald-300">نسيت كلمة المرور؟</a>
+                                    <a href="#" className="text-hrsd-teal hover:text-hrsd-navy font-medium">
+                                        نسيت كلمة المرور؟
+                                    </a>
                                 </div>
 
-                                {/* Submit */}
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                                    className="w-full py-3.5 bg-hrsd-navy hover:bg-hrsd-navy-light text-white rounded-xl font-bold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                                 >
                                     {isLoading ? (
                                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                     ) : (
                                         <>
                                             دخول
-                                            <ArrowLeft className="w-5 h-5" />
+                                            <ArrowLeft className="w-4 h-4" />
                                         </>
                                     )}
                                 </button>
                             </form>
                         ) : (
-                            <div className="text-center py-8">
+                            <div className="text-center py-6">
                                 <motion.div
                                     initial={{ scale: 0.9 }}
                                     animate={{ scale: 1 }}
-                                    className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg"
+                                    className="w-20 h-20 bg-hrsd-navy rounded-2xl flex items-center justify-center mx-auto mb-5"
                                 >
-                                    <Fingerprint className="w-12 h-12 text-white" />
+                                    <Fingerprint className="w-10 h-10 text-hrsd-gold" />
                                 </motion.div>
-                                <h3 className="text-xl font-bold text-white mb-2">الدخول عبر نفاذ</h3>
-                                <p className="text-slate-400 mb-6">استخدم تطبيق نفاذ للمصادقة الآمنة</p>
+                                <h3 className="text-lg font-bold text-hrsd-navy mb-1">
+                                    الدخول عبر نفاذ
+                                </h3>
+                                <p className="text-sm text-hrsd-cool-gray mb-6">
+                                    استخدم تطبيق نفاذ للمصادقة الآمنة
+                                </p>
                                 <button
                                     onClick={handleNafathLogin}
                                     disabled={isLoading}
-                                    className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                                    className="w-full py-3.5 bg-hrsd-navy hover:bg-hrsd-navy-light text-white rounded-xl font-bold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                                 >
                                     {isLoading ? (
                                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -248,12 +326,11 @@ export const LoginPage: React.FC = () => {
                         )}
                     </motion.div>
 
-                    {/* Footer */}
-                    <p className="text-center text-slate-500 text-sm mt-8">
-                        © 2026 نظام بصيرة - مركز التأهيل الشامل بالباحة
+                    <p className="text-center text-xs text-hrsd-cool-gray mt-7">
+                        © 2026 نظام بصيرة — مركز التأهيل الشامل بالباحة
                     </p>
                 </div>
-            </motion.div>
+            </motion.section>
         </div>
     );
 };

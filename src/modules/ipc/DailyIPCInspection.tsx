@@ -211,16 +211,16 @@ export const DailyIPCInspection: React.FC = () => {
 
     // Score color
     const getScoreColor = () => {
-        if (complianceScore >= 85) return 'text-green-600 border-green-500';
-        if (complianceScore >= 60) return 'text-yellow-600 border-yellow-500';
-        return 'text-red-600 border-red-500';
+        if (complianceScore >= 85) return 'text-[#1E9658] border-[#2BB574]';
+        if (complianceScore >= 60) return 'text-[#D49A0A] border-[#FCB614]';
+        return 'text-[#DC2626] border-[#DC2626]';
     };
 
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-50">
                 <div className="text-center">
-                    <Loader2 className="w-8 h-8 animate-spin text-emerald-600 mx-auto mb-4" />
+                    <Loader2 className="w-8 h-8 animate-spin text-[#1E9658] mx-auto mb-4" />
                     <p className="text-gray-600">جاري تحميل نموذج التفتيش...</p>
                 </div>
             </div>
@@ -230,7 +230,7 @@ export const DailyIPCInspection: React.FC = () => {
     return (
         <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-emerald-600 via-emerald-700 to-teal-800 rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#1E9658] via-[#1E9658] to-[#0F3144] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button
@@ -260,7 +260,7 @@ export const DailyIPCInspection: React.FC = () => {
                     type="button"
                     onClick={() => { setShowHistory(!showHistory); if (!showHistory && inspectionHistory.length === 0) loadHistory(); }}
                     className={`px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 transition-all ${
-                        showHistory ? 'bg-emerald-600 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-emerald-50'
+                        showHistory ? 'bg-[#1E9658] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-[#2BB574]/10'
                     }`}
                 >
                     <History className="w-4 h-4" />
@@ -272,12 +272,12 @@ export const DailyIPCInspection: React.FC = () => {
             {showHistory && (
                 <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm animate-in fade-in duration-300">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-emerald-600" />
+                        <Calendar className="w-5 h-5 text-[#1E9658]" />
                         سجل التفتيشات السابقة
                     </h3>
                     {loadingHistory ? (
                         <div className="text-center py-8">
-                            <Loader2 className="w-6 h-6 animate-spin text-emerald-600 mx-auto" />
+                            <Loader2 className="w-6 h-6 animate-spin text-[#1E9658] mx-auto" />
                         </div>
                     ) : (
                         <div className="divide-y divide-gray-100">
@@ -285,9 +285,9 @@ export const DailyIPCInspection: React.FC = () => {
                                 <div key={record.id} className="flex items-center justify-between py-3 hover:bg-gray-50 px-2 rounded-lg transition-colors">
                                     <div className="flex items-center gap-3">
                                         <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
-                                            record.compliance_score >= 85 ? 'bg-green-100 text-green-700' :
-                                            record.compliance_score >= 60 ? 'bg-yellow-100 text-yellow-700' :
-                                            'bg-red-100 text-red-700'
+                                            record.compliance_score >= 85 ? 'bg-[#2BB574]/15 text-[#1E9658]' :
+                                            record.compliance_score >= 60 ? 'bg-[#FCB614]/10 text-[#D49A0A]' :
+                                            'bg-[#DC2626]/15 text-[#B91C1C]'
                                         }`}>
                                             {record.compliance_score}%
                                         </div>
@@ -316,14 +316,14 @@ export const DailyIPCInspection: React.FC = () => {
                     {/* Inspector Name */}
                     <div>
                         <label className="block text-gray-700 font-semibold mb-2">
-                            اسم المفتش <span className="text-red-500">*</span>
+                            اسم المفتش <span className="text-[#DC2626]">*</span>
                         </label>
                         <input
                             type="text"
                             value={inspectorName}
                             onChange={(e) => setInspectorName(e.target.value)}
                             placeholder="أدخل اسمك"
-                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] focus:border-transparent outline-none"
                         />
                     </div>
 
@@ -331,12 +331,12 @@ export const DailyIPCInspection: React.FC = () => {
                     <div>
                         <label className="block text-gray-700 font-semibold mb-2">
                             <MapPin className="w-4 h-4 inline ml-1" />
-                            الموقع <span className="text-red-500">*</span>
+                            الموقع <span className="text-[#DC2626]">*</span>
                         </label>
                         <select
                             value={selectedLocation}
                             onChange={(e) => setSelectedLocation(e.target.value)}
-                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none bg-white"
+                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] focus:border-transparent outline-none bg-white"
                         >
                             <option value="">-- اختر الموقع --</option>
                             {locations.map(loc => (
@@ -356,8 +356,8 @@ export const DailyIPCInspection: React.FC = () => {
                                     key={shift}
                                     onClick={() => setSelectedShift(shift)}
                                     className={`flex-1 py-3 px-2 rounded-xl font-medium transition-all text-sm ${selectedShift === shift
-                                            ? 'bg-emerald-600 text-white shadow-md'
-                                            : 'bg-gray-100 text-gray-600 hover:bg-emerald-50'
+                                            ? 'bg-[#1E9658] text-white shadow-md'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-[#2BB574]/10'
                                         }`}
                                 >
                                     {shift}
@@ -373,8 +373,8 @@ export const DailyIPCInspection: React.FC = () => {
                 {groupedChecklist.map(group => (
                     <div key={group.category} className="bg-white rounded-2xl shadow-sm overflow-hidden">
                         {/* Category Header */}
-                        <div className="bg-emerald-50 px-5 py-3 border-b border-emerald-100">
-                            <h3 className="font-bold text-emerald-700 flex items-center gap-2">
+                        <div className="bg-[#2BB574]/10 px-5 py-3 border-b border-[#2BB574]/10">
+                            <h3 className="font-bold text-[#1E9658] flex items-center gap-2">
                                 <span className="text-xl">{group.icon}</span>
                                 {group.label}
                             </h3>
@@ -394,8 +394,8 @@ export const DailyIPCInspection: React.FC = () => {
                                         <button
                                             onClick={() => handleToggle(item.id, true)}
                                             className={`p-2.5 rounded-full transition-all duration-200 ${item.isCompliant === true
-                                                    ? 'bg-green-500 text-white ring-2 ring-offset-2 ring-green-500 scale-110'
-                                                    : 'bg-gray-100 text-gray-400 hover:bg-green-100 hover:text-green-600'
+                                                    ? 'bg-[#2BB574] text-white ring-2 ring-offset-2 ring-[#2BB574] scale-110'
+                                                    : 'bg-gray-100 text-gray-400 hover:bg-[#2BB574]/15 hover:text-[#1E9658]'
                                                 }`}
                                             title="ممتثل"
                                         >
@@ -406,8 +406,8 @@ export const DailyIPCInspection: React.FC = () => {
                                         <button
                                             onClick={() => handleToggle(item.id, false)}
                                             className={`p-2.5 rounded-full transition-all duration-200 ${item.isCompliant === false
-                                                    ? 'bg-red-500 text-white ring-2 ring-offset-2 ring-red-500 scale-110'
-                                                    : 'bg-gray-100 text-gray-400 hover:bg-red-100 hover:text-red-600'
+                                                    ? 'bg-[#DC2626] text-white ring-2 ring-offset-2 ring-[#DC2626] scale-110'
+                                                    : 'bg-gray-100 text-gray-400 hover:bg-[#DC2626]/15 hover:text-[#DC2626]'
                                                 }`}
                                             title="غير ممتثل"
                                         >
@@ -425,13 +425,13 @@ export const DailyIPCInspection: React.FC = () => {
             {complianceScore < 100 && (
                 <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                     <label className="block text-gray-700 font-semibold mb-2 flex items-center gap-2">
-                        <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                        <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
                         تفاصيل المخالفات
                     </label>
                     <textarea
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none min-h-[100px] resize-none"
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] focus:border-transparent outline-none min-h-[100px] resize-none"
                         placeholder="صف المخالفات المكتشفة بالتفصيل..."
                     />
 
@@ -441,7 +441,7 @@ export const DailyIPCInspection: React.FC = () => {
                     <textarea
                         value={correctiveActions}
                         onChange={(e) => setCorrectiveActions(e.target.value)}
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none min-h-[80px] resize-none"
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] focus:border-transparent outline-none min-h-[80px] resize-none"
                         placeholder="ما الإجراءات التي تم اتخاذها فوراً؟"
                     />
 
@@ -458,7 +458,7 @@ export const DailyIPCInspection: React.FC = () => {
                         <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 transition-colors font-medium"
+                            className="flex items-center gap-2 text-[#1E9658] hover:text-[#1E9658] transition-colors font-medium"
                         >
                             <Camera size={20} />
                             <span>إرفاق صور توثيقية</span>
@@ -466,12 +466,12 @@ export const DailyIPCInspection: React.FC = () => {
                         {photos.length > 0 && (
                             <div className="flex gap-3 mt-3 flex-wrap">
                                 {photos.map((photo, idx) => (
-                                    <div key={idx} className="relative w-20 h-20 rounded-lg overflow-hidden border-2 border-emerald-200 group">
+                                    <div key={idx} className="relative w-20 h-20 rounded-lg overflow-hidden border-2 border-[#2BB574]/30 group">
                                         <img src={photo.preview} alt={photo.name} className="w-full h-full object-cover" />
                                         <button
                                             type="button"
                                             onClick={() => removePhoto(idx)}
-                                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="absolute top-0 right-0 bg-[#DC2626] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
                                         >
                                             <X className="w-3 h-3" />
                                         </button>
@@ -496,7 +496,7 @@ export const DailyIPCInspection: React.FC = () => {
                     </div>
                     <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
-                            className="h-full bg-emerald-500 transition-all duration-300"
+                            className="h-full bg-[#2BB574] transition-all duration-300"
                             style={{ width: `${(answeredCount / checklist.length) * 100}%` }}
                         />
                     </div>
@@ -506,7 +506,7 @@ export const DailyIPCInspection: React.FC = () => {
                 <button
                     onClick={handleSubmit}
                     disabled={submitting || !selectedLocation || !inspectorName.trim()}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transform active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+                    className="w-full bg-[#1E9658] hover:bg-[#1E9658] disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transform active:scale-[0.98] transition-all flex items-center justify-center gap-3"
                 >
                     {submitting ? (
                         <>

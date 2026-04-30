@@ -25,7 +25,7 @@ interface ThemeProviderProps {
  */
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     children,
-    defaultMode = 'dark'
+    defaultMode = 'light'
 }) => {
     // Initialize with default, then sync with localStorage in useEffect
     const [mode, setModeState] = useState<ThemeMode>(defaultMode);

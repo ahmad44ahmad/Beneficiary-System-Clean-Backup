@@ -11,7 +11,8 @@ interface SroiMetricsCardProps {
     trend?: 'up' | 'down' | 'neutral';
     trendValue?: string;
     summary?: string;
-    color?: 'teal' | 'orange' | 'blue' | 'purple';
+    /** HRSD palette tones — `blue` and `purple` are deprecated aliases (mapped to teal/gold). */
+    color?: 'teal' | 'orange' | 'gold' | 'green' | 'navy' | 'blue' | 'purple';
 }
 
 export const SroiMetricsCard: React.FC<SroiMetricsCardProps> = ({
@@ -24,11 +25,16 @@ export const SroiMetricsCard: React.FC<SroiMetricsCardProps> = ({
     summary,
     color = 'teal'
 }) => {
-    const iconColorStyles = {
-        teal: 'bg-teal-100 text-teal-700',
-        orange: 'bg-orange-100 text-orange-700',
-        blue: 'bg-blue-100 text-blue-700',
-        purple: 'bg-purple-100 text-purple-700'
+    // HRSD palette mapping. Legacy `blue`/`purple` aliases map to nearest brand tone
+    // so old call-sites keep working while new code uses brand names directly.
+    const iconColorStyles: Record<string, string> = {
+        teal:   'bg-[#269798]/10 text-[#269798]',
+        orange: 'bg-[#F7941D]/10 text-[#D67A0A]',
+        gold:   'bg-[#FCB614]/10 text-[#D49A0A]',
+        green:  'bg-[#2BB574]/10 text-[#1E9658]',
+        navy:   'bg-[#0F3144]/10 text-[#0F3144]',
+        blue:   'bg-[#0F3144]/10 text-[#0F3144]',   // legacy alias → navy
+        purple: 'bg-[#FCB614]/10 text-[#D49A0A]',   // legacy alias → gold
     };
 
     return (
@@ -41,9 +47,9 @@ export const SroiMetricsCard: React.FC<SroiMetricsCardProps> = ({
                     {trend && (
                         <div className={cn(
                             "flex items-center gap-1 text-sm font-medium px-2 py-1 rounded-full",
-                            trend === 'up' ? "bg-green-100 text-green-700" :
-                                trend === 'down' ? "bg-red-100 text-red-700" :
-                                    "bg-gray-100 text-gray-700"
+                            trend === 'up' ? "bg-[#2BB574]/10 text-[#1E9658]" :
+                                trend === 'down' ? "bg-[#DC2626]/10 text-[#DC2626]" :
+                                    "bg-gray-100 text-hrsd-cool-gray"
                         )}>
                             {trend === 'up' ? '↗' : trend === 'down' ? '↘' : '−'}
                             {trendValue}
@@ -51,14 +57,14 @@ export const SroiMetricsCard: React.FC<SroiMetricsCardProps> = ({
                     )}
                 </div>
 
-                <h3 className="text-gray-500 text-sm font-medium mb-1">{title}</h3>
+                <h3 className="text-hrsd-cool-gray text-sm font-medium mb-1">{title}</h3>
                 <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-gray-900">{value}</span>
-                    {subtitle && <span className="text-gray-400 text-xs">{subtitle}</span>}
+                    <span className="text-2xl font-bold text-hrsd-navy tabular-nums">{value}</span>
+                    {subtitle && <span className="text-hrsd-cool-gray text-xs">{subtitle}</span>}
                 </div>
 
                 {summary && (
-                    <p className="mt-3 text-sm text-gray-500 leading-relaxed border-t border-gray-100 pt-3">
+                    <p className="mt-3 text-sm text-hrsd-cool-gray leading-relaxed border-t border-gray-100 pt-3">
                         {summary}
                     </p>
                 )}

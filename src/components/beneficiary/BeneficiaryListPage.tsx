@@ -326,9 +326,9 @@ export const BeneficiaryListPage: React.FC = () => {
                     </div>
                     <div className="hrsd-card-stat border-s-red-500">
                         <div className="flex items-center gap-3">
-                            <Activity className="w-6 h-6 text-red-600" />
+                            <Activity className="w-6 h-6 text-[#DC2626]" />
                             <div>
-                                <p className="text-2xl font-bold text-red-600">{stats.critical}</p>
+                                <p className="text-2xl font-bold text-[#DC2626]">{stats.critical}</p>
                                 <p className="text-hierarchy-label text-gray-500">حرج</p>
                             </div>
                         </div>
@@ -468,7 +468,7 @@ export const BeneficiaryListPage: React.FC = () => {
                         className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
                         style={{ minWidth: '400px', maxWidth: '90vw' }}
                     >
-                        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 
+                        <div className="bg-gradient-to-r from-white via-white to-white 
                                         text-white rounded-2xl shadow-2xl border border-white/10 
                                         backdrop-blur-xl p-4 flex items-center gap-4">
 
@@ -497,8 +497,8 @@ export const BeneficiaryListPage: React.FC = () => {
                                 <button
                                     onClick={() => executeAction('export')}
                                     disabled={isExecuting}
-                                    className="flex items-center gap-2 px-3 py-2 bg-emerald-600 
-                                               hover:bg-emerald-700 rounded-lg transition-all 
+                                    className="flex items-center gap-2 px-3 py-2 bg-[#1E9658] 
+                                               hover:bg-[#1E9658] rounded-lg transition-all 
                                                active:scale-95 disabled:opacity-50 text-sm font-medium"
                                 >
                                     <Download className="w-4 h-4" />
@@ -513,8 +513,8 @@ export const BeneficiaryListPage: React.FC = () => {
                                         }
                                     }}
                                     disabled={isExecuting}
-                                    className="flex items-center gap-2 px-3 py-2 bg-amber-600 
-                                               hover:bg-amber-700 rounded-lg transition-all 
+                                    className="flex items-center gap-2 px-3 py-2 bg-[#D49A0A] 
+                                               hover:bg-[#D49A0A] rounded-lg transition-all 
                                                active:scale-95 disabled:opacity-50 text-sm font-medium"
                                 >
                                     <Archive className="w-4 h-4" />
@@ -529,8 +529,8 @@ export const BeneficiaryListPage: React.FC = () => {
                                         }
                                     }}
                                     disabled={isExecuting}
-                                    className="flex items-center gap-2 px-3 py-2 bg-red-600 
-                                               hover:bg-red-700 rounded-lg transition-all 
+                                    className="flex items-center gap-2 px-3 py-2 bg-[#B91C1C] 
+                                               hover:bg-[#B91C1C] rounded-lg transition-all 
                                                active:scale-95 disabled:opacity-50 text-sm font-medium"
                                 >
                                     <Trash className="w-4 h-4" />

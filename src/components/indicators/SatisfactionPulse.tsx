@@ -49,12 +49,12 @@ export const SatisfactionPulse: React.FC = () => {
     const getScoreBg = (score: number) => {
         if (score >= 80) return 'from-hrsd-green to-hrsd-green-dark';
         if (score >= 60) return 'from-hrsd-gold to-hrsd-gold-dark';
-        return 'from-red-500 to-red-600';
+        return 'from-[#DC2626] to-[#B91C1C]';
     };
 
     const pieData = [
-        { name: 'راضي', value: 72, color: 'rgb(45, 180, 115)' },
-        { name: 'محايد', value: 18, color: 'rgb(250, 180, 20)' },
+        { name: 'راضي', value: 72, color: 'rgb(43, 181, 116)' },
+        { name: 'محايد', value: 18, color: 'rgb(252, 182, 20)' },
         { name: 'غير راضي', value: 10, color: 'rgb(239, 68, 68)' },
     ];
 
@@ -137,12 +137,12 @@ export const SatisfactionPulse: React.FC = () => {
                         <div className="hrsd-card">
                             <h4 className="text-hierarchy-small text-gray-500 mb-3">إحصائيات الشهر</h4>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="text-center p-3 bg-red-50 rounded-lg">
-                                    <ThumbsDown className="w-6 h-6 text-red-600 mx-auto mb-1" />
-                                    <p className="text-2xl font-bold text-red-600">5</p>
+                                <div className="text-center p-3 bg-[#DC2626]/10 rounded-lg">
+                                    <ThumbsDown className="w-6 h-6 text-[#DC2626] mx-auto mb-1" />
+                                    <p className="text-2xl font-bold text-[#DC2626]">5</p>
                                     <p className="text-xs text-gray-500">شكاوى</p>
                                 </div>
-                                <div className="text-center p-3 bg-green-50 rounded-lg">
+                                <div className="text-center p-3 bg-[#2BB574]/10 rounded-lg">
                                     <ThumbsUp className="w-6 h-6 text-hrsd-green mx-auto mb-1" />
                                     <p className="text-2xl font-bold text-hrsd-green">4</p>
                                     <p className="text-xs text-gray-500">إشادات</p>
@@ -167,7 +167,7 @@ export const SatisfactionPulse: React.FC = () => {
                                 }} />
                                 <YAxis domain={[0, 100]} />
                                 <Tooltip />
-                                <Line type="monotone" dataKey="satisfaction_score" stroke="rgb(20, 130, 135)" strokeWidth={3} name="نسبة الرضا" />
+                                <Line type="monotone" dataKey="satisfaction_score" stroke="rgb(38, 151, 152)" strokeWidth={3} name="نسبة الرضا" />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -176,13 +176,13 @@ export const SatisfactionPulse: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="hrsd-card">
                             <h3 className="text-hierarchy-subheading text-gray-800 mb-4 flex items-center gap-2">
-                                <AlertTriangle className="w-5 h-5 text-red-600" />
+                                <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
                                 خطر تصعيد للوزارة
                             </h3>
                             {escalationRisks.length > 0 ? (
                                 <div className="space-y-3">
                                     {escalationRisks.map((risk, idx) => (
-                                        <div key={idx} className={`p-4 rounded-lg border-e-4 ${risk.risk_level === 'high' ? 'bg-red-50 border-red-500' : 'bg-yellow-50 border-yellow-500'}`}>
+                                        <div key={idx} className={`p-4 rounded-lg border-e-4 ${risk.risk_level === 'high' ? 'bg-[#DC2626]/10 border-[#DC2626]' : 'bg-[#FCB614]/10 border-[#FCB614]'}`}>
                                             <div className="flex items-center justify-between">
                                                 <div>
                                                     <p className="font-medium">{risk.family}</p>
@@ -212,10 +212,10 @@ export const SatisfactionPulse: React.FC = () => {
                             </h3>
                             <div className="space-y-3 max-h-64 overflow-y-auto">
                                 {recentFeedback.map((feedback, idx) => (
-                                    <div key={idx} className={`p-3 rounded-lg ${feedback.type === 'complaint' ? 'bg-red-50' : 'bg-green-50'}`}>
+                                    <div key={idx} className={`p-3 rounded-lg ${feedback.type === 'complaint' ? 'bg-[#DC2626]/10' : 'bg-[#2BB574]/10'}`}>
                                         <div className="flex items-start gap-2">
                                             {feedback.type === 'complaint' ? (
-                                                <ThumbsDown className="w-4 h-4 text-red-600 mt-1" />
+                                                <ThumbsDown className="w-4 h-4 text-[#DC2626] mt-1" />
                                             ) : (
                                                 <ThumbsUp className="w-4 h-4 text-hrsd-green mt-1" />
                                             )}

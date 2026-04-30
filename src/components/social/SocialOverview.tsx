@@ -28,11 +28,11 @@ export const SocialOverview: React.FC = () => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <Link to="/social/leaves" className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors flex items-center gap-2">
+                    <Link to="/social/leaves" className="px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] transition-colors flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         طلبات الإجازات
                     </Link>
-                    <Link to="/social/research/new" className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center gap-2">
+                    <Link to="/social/research/new" className="px-4 py-2 bg-[#F7941D] text-white rounded-lg hover:bg-[#D67A0A] transition-colors flex items-center gap-2">
                         <FileText className="w-4 h-4" />
                         بحث اجتماعي جديد
                     </Link>
@@ -95,7 +95,7 @@ export const SocialOverview: React.FC = () => {
                 <Card title="إدارة الإجازات">
                     <div className="p-4 space-y-3">
                         <Link to="/social/leaves" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-teal-100 text-teal-600 group-hover:bg-teal-200 group-hover:scale-105 transition-all duration-200">
+                            <div className="p-2 rounded-lg bg-[#269798]/10 text-[#1B7778] group-hover:bg-[#269798]/20 group-hover:scale-105 transition-all duration-200">
                                 <Calendar className="w-5 h-5" />
                             </div>
                             <div>
@@ -104,7 +104,7 @@ export const SocialOverview: React.FC = () => {
                             </div>
                         </Link>
                         <Link to="/social/research/new" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-orange-100 text-orange-600 group-hover:bg-orange-200 group-hover:scale-105 transition-all duration-200">
+                            <div className="p-2 rounded-lg bg-[#F7941D]/15 text-[#D67A0A] group-hover:bg-[#F7941D]/20 group-hover:scale-105 transition-all duration-200">
                                 <FileText className="w-5 h-5" />
                             </div>
                             <div>
@@ -118,7 +118,7 @@ export const SocialOverview: React.FC = () => {
                 <Card title="الأنشطة والفعاليات">
                     <div className="p-4 space-y-3">
                         <Link to="/social/activities" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-green-100 text-green-600 group-hover:bg-green-200 group-hover:scale-105 transition-all duration-200">
+                            <div className="p-2 rounded-lg bg-[#2BB574]/15 text-[#1E9658] group-hover:bg-[#2BB574]/20 group-hover:scale-105 transition-all duration-200">
                                 <Heart className="w-5 h-5" />
                             </div>
                             <div>
@@ -127,7 +127,7 @@ export const SocialOverview: React.FC = () => {
                             </div>
                         </Link>
                         <Link to="/clothing" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 group-hover:scale-105 transition-all duration-200">
+                            <div className="p-2 rounded-lg bg-[#FCB614]/10 text-[#D49A0A] group-hover:bg-[#FCB614]/20 group-hover:scale-105 transition-all duration-200">
                                 <Shirt className="w-5 h-5" />
                             </div>
                             <div>
@@ -140,8 +140,8 @@ export const SocialOverview: React.FC = () => {
 
                 <Card title="التواصل والمتابعة">
                     <div className="p-4 space-y-3">
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-teal-50">
-                            <div className="p-2 rounded-lg bg-teal-100 text-hrsd-teal">
+                        <div className="flex items-center gap-3 p-3 rounded-lg bg-[#269798]/10">
+                            <div className="p-2 rounded-lg bg-[#269798]/10 text-hrsd-teal">
                                 <MessageSquare className="w-5 h-5" />
                             </div>
                             <div>
@@ -149,8 +149,8 @@ export const SocialOverview: React.FC = () => {
                                 <p className="text-sm text-gray-500">متابعة الزيارات والاتصالات</p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-indigo-50">
-                            <div className="p-2 rounded-lg bg-indigo-100 text-indigo-600">
+                        <div className="flex items-center gap-3 p-3 rounded-lg bg-[#0F3144]/5">
+                            <div className="p-2 rounded-lg bg-[#0F3144]/10 text-[#0F3144]">
                                 <Users className="w-5 h-5" />
                             </div>
                             <div>
@@ -167,34 +167,34 @@ export const SocialOverview: React.FC = () => {
                 <div className="p-4">
                     <div className="space-y-3">
                         <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-e-2 border-hrsd-teal">
-                            <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center">
-                                <Calendar className="w-5 h-5 text-teal-600" />
+                            <div className="w-10 h-10 rounded-full bg-[#269798]/10 flex items-center justify-center">
+                                <Calendar className="w-5 h-5 text-[#1B7778]" />
                             </div>
                             <div className="flex-1">
                                 <p className="font-medium text-gray-900">طلب إجازة جديد</p>
                                 <p className="text-sm text-gray-500">أحمد محمد السيد - زيارة عائلية</p>
                             </div>
-                            <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">قيد المراجعة</span>
+                            <span className="text-xs bg-[#FCB614]/10 text-[#D49A0A] px-2 py-1 rounded-full">قيد المراجعة</span>
                         </div>
                         <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-e-2 border-hrsd-teal">
-                            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                                <Heart className="w-5 h-5 text-green-600" />
+                            <div className="w-10 h-10 rounded-full bg-[#2BB574]/15 flex items-center justify-center">
+                                <Heart className="w-5 h-5 text-[#1E9658]" />
                             </div>
                             <div className="flex-1">
                                 <p className="font-medium text-gray-900">نشاط رياضي</p>
                                 <p className="text-sm text-gray-500">مشاركة 15 مستفيد</p>
                             </div>
-                            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">مكتمل</span>
+                            <span className="text-xs bg-[#2BB574]/15 text-[#1E9658] px-2 py-1 rounded-full">مكتمل</span>
                         </div>
                         <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg border-e-2 border-hrsd-teal">
-                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                                <FileText className="w-5 h-5 text-orange-600" />
+                            <div className="w-10 h-10 rounded-full bg-[#F7941D]/15 flex items-center justify-center">
+                                <FileText className="w-5 h-5 text-[#D67A0A]" />
                             </div>
                             <div className="flex-1">
                                 <p className="font-medium text-gray-900">بحث اجتماعي</p>
                                 <p className="text-sm text-gray-500">خالد ناصر العتيبي - مكتمل</p>
                             </div>
-                            <span className="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full">موثق</span>
+                            <span className="text-xs bg-[#269798]/10 text-[#1B7778] px-2 py-1 rounded-full">موثق</span>
                         </div>
                     </div>
                 </div>

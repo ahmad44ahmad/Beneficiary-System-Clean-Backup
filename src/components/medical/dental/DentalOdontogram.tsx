@@ -31,10 +31,10 @@ export const DentalOdontogram: React.FC<{
 
     const getToothColor = (status: string) => {
         switch (status) {
-            case 'Decayed': return 'bg-red-500';
+            case 'Decayed': return 'bg-[#DC2626]';
             case 'Missing': return 'bg-gray-800';
-            case 'Filled': return 'bg-blue-500';
-            case 'Crown': return 'bg-yellow-500';
+            case 'Filled': return 'bg-[#269798]';
+            case 'Crown': return 'bg-[#FCB614]';
             default: return 'bg-white border-gray-400';
         }
     };
@@ -68,9 +68,9 @@ export const DentalOdontogram: React.FC<{
                     </div>
 
                     <div className="flex gap-4 mt-4 text-sm">
-                        <span className="flex items-center"><div className="w-3 h-3 bg-red-500 me-1"></div> Decayed</span>
-                        <span className="flex items-center"><div className="w-3 h-3 bg-blue-500 me-1"></div> Filled</span>
-                        <span className="flex items-center"><div className="w-3 h-3 bg-yellow-500 me-1"></div> Crown</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-[#DC2626] me-1"></div> Decayed</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-[#269798] me-1"></div> Filled</span>
+                        <span className="flex items-center"><div className="w-3 h-3 bg-[#FCB614] me-1"></div> Crown</span>
                         <span className="flex items-center"><div className="w-3 h-3 bg-gray-800 me-1"></div> Missing</span>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ const SelectField = ({ label, value, options, onChange }: { label: string; value
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] sm:text-sm p-2 border">
             {options.map((opt: string) => (
                 <option key={opt} value={opt}>{opt}</option>
             ))}

@@ -38,7 +38,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
             {/* Identity */}
             <div className="space-y-4">
                 <h4 className="font-semibold text-gray-700 flex items-center gap-2">
-                    <User className="w-5 h-5 text-indigo-500" /> الهوية الشخصية
+                    <User className="w-5 h-5 text-[#0F3144]" /> الهوية الشخصية
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -48,7 +48,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             type="text"
                             value={formData.preferredName || ''}
                             onChange={e => setFormData({ ...formData, preferredName: e.target.value })}
-                            className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-[#0F3144]"
                             placeholder="مثال: أبو خالد"
                         />
                     </div>
@@ -58,7 +58,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
                             id="personalityType"
                             value={formData.personalityType}
                             onChange={e => setFormData({ ...formData, personalityType: e.target.value as DignityProfile['personalityType'] })}
-                            className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                            className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-[#0F3144]"
                             title="نمط الشخصية"
                         >
                             <option value="social">اجتماعي ومحبوب</option>
@@ -73,7 +73,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
             {/* Sensory */}
             <div className="space-y-4 pt-4 border-t">
                 <h4 className="font-semibold text-gray-700 flex items-center gap-2">
-                    <Sun className="w-5 h-5 text-amber-500" /> التفضيلات الحسية
+                    <Sun className="w-5 h-5 text-[#D49A0A]" /> التفضيلات الحسية
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
@@ -135,7 +135,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
             {/* Micro Preferences */}
             <div className="space-y-4 pt-4 border-t">
                 <h4 className="font-semibold text-gray-700 flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-rose-500" /> المسرات الصغيرة
+                    <Heart className="w-5 h-5 text-[#DC2626]" /> المسرات الصغيرة
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>

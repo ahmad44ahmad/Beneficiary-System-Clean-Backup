@@ -243,7 +243,7 @@ export const CateringReports: React.FC = () => {
         <div className="p-6 bg-gray-50 min-h-screen" dir="rtl">
             <header className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-2xl font-bold text-[#14415A]">جداول الإعاشة (مستخرجة)</h1>
+                    <h1 className="text-2xl font-bold text-[#0F3144]">جداول الإعاشة (مستخرجة)</h1>
                     <p className="text-gray-600">مركز التأهيل الشامل بالباحة</p>
                 </div>
                 <div className="flex gap-3">
@@ -257,7 +257,7 @@ export const CateringReports: React.FC = () => {
                     <button
                         onClick={handlePrint}
                         disabled={isPrinting || attendanceData.length === 0}
-                        className="px-4 py-2 bg-[#148287] text-white rounded-lg hover:bg-[#0e6b6f] flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#269798] text-white rounded-lg hover:bg-[#0e6b6f] flex items-center gap-2 disabled:opacity-50"
                         aria-label="طباعة التقرير"
                     >
                         <Printer className="w-5 h-5" />
@@ -266,7 +266,7 @@ export const CateringReports: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || attendanceData.length === 0}
-                        className="px-4 py-2 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#2BB574]/10 text-[#1E9658] border border-[#2BB574]/30 rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-5 h-5" />
@@ -300,17 +300,17 @@ export const CateringReports: React.FC = () => {
             {/* Sub-Filters (Gender/Day) */}
             <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex items-center gap-6">
                 <div className="flex items-center gap-2">
-                    <label className="font-bold text-[#14415A]">القسم:</label>
+                    <label className="font-bold text-[#0F3144]">القسم:</label>
                     <div className="flex bg-gray-100 rounded-lg p-1">
                         <button
                             onClick={() => setSelectedGender('male')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${selectedGender === 'male' ? 'bg-white text-[#14415A] shadow-sm' : 'text-gray-500'}`}
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${selectedGender === 'male' ? 'bg-white text-[#0F3144] shadow-sm' : 'text-gray-500'}`}
                         >
                             ذكور
                         </button>
                         <button
                             onClick={() => setSelectedGender('female')}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${selectedGender === 'female' ? 'bg-white text-[#14415A] shadow-sm' : 'text-gray-500'}`}
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${selectedGender === 'female' ? 'bg-white text-[#0F3144] shadow-sm' : 'text-gray-500'}`}
                         >
                             إناث
                         </button>
@@ -319,11 +319,11 @@ export const CateringReports: React.FC = () => {
 
                 {activeTab === 'daily_log' && (
                     <div className="flex items-center gap-2">
-                        <label className="font-bold text-[#14415A]">اليوم:</label>
+                        <label className="font-bold text-[#0F3144]">اليوم:</label>
                         <select
                             value={selectedDay}
                             onChange={(e) => setSelectedDay(e.target.value as DayOfWeek)}
-                            className="bg-gray-50 border-gray-200 rounded-lg px-4 py-2 text-sm focus:ring-[#F5961E] focus:border-[#F5961E]"
+                            className="bg-gray-50 border-gray-200 rounded-lg px-4 py-2 text-sm focus:ring-[#F7941D] focus:border-[#F7941D]"
                         >
                             {['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'].map(day => (
                                 <option key={day} value={day}>{day}</option>
@@ -343,7 +343,7 @@ export const CateringReports: React.FC = () => {
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="w-full text-center border-collapse text-xs">
-                                <thead className="bg-[#14415A] text-white">
+                                <thead className="bg-[#0F3144] text-white">
                                     <tr>
                                         <th className="p-2 border border-white/10 w-10">م</th>
                                         <th className="p-2 border border-white/10 w-48 text-right px-4">الاسم</th>
@@ -359,7 +359,7 @@ export const CateringReports: React.FC = () => {
                                             <td className="p-2 border border-gray-100 text-right px-4 font-medium">{row.name}</td>
                                             {row.days.map((present: boolean, idx: number) => (
                                                 <td key={idx} className="p-2 border border-gray-100">
-                                                    <div className={`w-4 h-4 rounded-full mx-auto ${present ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                                                    <div className={`w-4 h-4 rounded-full mx-auto ${present ? 'bg-[#2BB574]/20' : 'bg-[#DC2626]/20'}`}>
                                                         {present ? '✓' : ''}
                                                     </div>
                                                 </td>
@@ -378,9 +378,9 @@ export const CateringReports: React.FC = () => {
                         <table className="w-full text-center border border-gray-300">
                             <thead>
                                 {/* Top Header Group */}
-                                <tr className="bg-[#14415A] text-white">
+                                <tr className="bg-[#0F3144] text-white">
                                     <th colSpan={3} className="p-3 border border-white/20">الكميات المقررة</th>
-                                    <th rowSpan={2} className="p-3 border border-white/20 bg-[#148287] w-48">المادة</th>
+                                    <th rowSpan={2} className="p-3 border border-white/20 bg-[#269798] w-48">المادة</th>
                                     <th colSpan={3} className="p-3 border border-white/20">الكميات المنصرفة</th>
                                 </tr>
                                 {/* Sub Header Group */}
@@ -396,8 +396,8 @@ export const CateringReports: React.FC = () => {
                             <tbody className="divide-y divide-gray-200">
                                 {dailyItems.map((section, idx) => (
                                     <React.Fragment key={idx}>
-                                        <tr className="bg-yellow-50">
-                                            <td colSpan={7} className="p-3 text-right font-bold text-[#F5961E] border border-gray-200">
+                                        <tr className="bg-[#FCB614]/10">
+                                            <td colSpan={7} className="p-3 text-right font-bold text-[#F7941D] border border-gray-200">
                                                 {section.section}
                                             </td>
                                         </tr>
@@ -411,12 +411,12 @@ export const CateringReports: React.FC = () => {
                                                 </td>
 
                                                 {/* Item Name */}
-                                                <td className="p-3 border-x-4 border-gray-300 font-bold text-[#14415A]">
+                                                <td className="p-3 border-x-4 border-gray-300 font-bold text-[#0F3144]">
                                                     {item.name} <span className="text-xs text-gray-400 font-normal">({item.unit})</span>
                                                 </td>
 
                                                 {/* Disbursed */}
-                                                <td className="p-3 border border-gray-200 font-bold text-blue-700">
+                                                <td className="p-3 border border-gray-200 font-bold text-[#1B7778]">
                                                     {item.nursery.disbursed + item.adults.disbursed}
                                                 </td>
                                                 <td className="p-3 border border-gray-200 text-gray-400">-</td>
@@ -432,15 +432,15 @@ export const CateringReports: React.FC = () => {
 
                     <div className="mt-8 grid grid-cols-3 gap-8 text-center print:mt-12 break-inside-avoid">
                         <div className="border-t-2 border-gray-300 pt-4">
-                            <p className="font-bold text-[#14415A] mb-2">أخصائي التغذية</p>
+                            <p className="font-bold text-[#0F3144] mb-2">أخصائي التغذية</p>
                             <p className="text-gray-500">..................</p>
                         </div>
                         <div className="border-t-2 border-gray-300 pt-4">
-                            <p className="font-bold text-[#14415A] mb-2">ممثل الشركة المتعهدة</p>
+                            <p className="font-bold text-[#0F3144] mb-2">ممثل الشركة المتعهدة</p>
                             <p className="text-gray-500">..................</p>
                         </div>
                         <div className="border-t-2 border-gray-300 pt-4">
-                            <p className="font-bold text-[#14415A] mb-2">لجنة استلام الإعاشة</p>
+                            <p className="font-bold text-[#0F3144] mb-2">لجنة استلام الإعاشة</p>
                             <p className="text-gray-500">..................</p>
                         </div>
                     </div>
@@ -450,7 +450,7 @@ export const CateringReports: React.FC = () => {
             {/* SUMMARY VIEW */}
             {activeTab === 'summary' && (
                 <div className="bg-white rounded-xl shadow-sm p-8 text-center">
-                    <h2 className="text-xl font-bold text-[#14415A] mb-4">خلاصة شهر (ديسمبر)</h2>
+                    <h2 className="text-xl font-bold text-[#0F3144] mb-4">خلاصة شهر (ديسمبر)</h2>
                     <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
                         <div className="border rounded-xl p-6">
                             <h3 className="text-lg font-bold mb-4">قسم الذكور</h3>
@@ -460,7 +460,7 @@ export const CateringReports: React.FC = () => {
                             </div>
                             <div className="flex justify-between items-center py-2 border-b">
                                 <span className="text-gray-600">أيام الحضور الكامل</span>
-                                <span className="font-bold text-green-600">22 يوم</span>
+                                <span className="font-bold text-[#1E9658]">22 يوم</span>
                             </div>
                         </div>
                         <div className="border rounded-xl p-6">
@@ -471,7 +471,7 @@ export const CateringReports: React.FC = () => {
                             </div>
                             <div className="flex justify-between items-center py-2 border-b">
                                 <span className="text-gray-600">أيام الحضور الكامل</span>
-                                <span className="font-bold text-green-600">25 يوم</span>
+                                <span className="font-bold text-[#1E9658]">25 يوم</span>
                             </div>
                         </div>
                     </div>

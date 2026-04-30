@@ -28,10 +28,10 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
                         <div className="flex items-center gap-1" title="Gown"><Shirt className="w-4 h-4" /> Gown</div>
                     </div>
                     <div className="mt-3 flex gap-2">
-                        <Button size="sm" variant="outline" className="bg-red-100 border-red-200 hover:bg-red-200 text-red-800" onClick={() => alert('Laundry notified: Wash separately')}>
+                        <Button size="sm" variant="outline" className="bg-[#DC2626]/15 border-[#DC2626]/30 hover:bg-[#DC2626]/20 text-[#7F1D1D]" onClick={() => alert('Laundry notified: Wash separately')}>
                             <Shirt className="w-3 h-3 me-1" /> Notify Laundry
                         </Button>
-                        <Button size="sm" variant="outline" className="bg-red-100 border-red-200 hover:bg-red-200 text-red-800" onClick={() => alert('Kitchen notified: Disposable utensils')}>
+                        <Button size="sm" variant="outline" className="bg-[#DC2626]/15 border-[#DC2626]/30 hover:bg-[#DC2626]/20 text-[#7F1D1D]" onClick={() => alert('Kitchen notified: Disposable utensils')}>
                             <Utensils className="w-3 h-3 me-1" /> Disposable Utensils
                         </Button>
                     </div>
@@ -85,9 +85,9 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
                     key={alert.id}
                     className={`
                         p-4 rounded-md border flex items-start gap-3 shadow-sm
-                        ${alert.type === 'critical' ? 'bg-red-50 border-red-200 text-red-800' : ''}
-                        ${alert.type === 'warning' ? 'bg-orange-50 border-orange-200 text-orange-800' : ''}
-                        ${alert.type === 'info' ? 'bg-blue-50 border-blue-200 text-blue-800' : ''}
+                        ${alert.type === 'critical' ? 'bg-[#DC2626]/10 border-[#DC2626]/30 text-[#7F1D1D]' : ''}
+                        ${alert.type === 'warning' ? 'bg-[#F7941D]/10 border-[#F7941D]/30 text-[#92400E]' : ''}
+                        ${alert.type === 'info' ? 'bg-[#269798]/10 border-[#269798]/30 text-[#1B7778]' : ''}
                     `}
                 >
                     <div className="mt-0.5 shrink-0">

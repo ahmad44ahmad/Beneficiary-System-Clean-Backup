@@ -8,10 +8,10 @@ export const ViolationReport: React.FC = () => {
 
     return (
         <div className="max-w-2xl mx-auto">
-            <Card className="border-red-100 shadow-lg">
-                <div className="p-6 border-b border-gray-100 bg-red-50 rounded-t-xl flex items-center gap-3">
-                    <div className="p-2 bg-red-100 rounded-full">
-                        <AlertTriangle className="w-6 h-6 text-red-600" />
+            <Card className="border-[#DC2626]/10 shadow-lg">
+                <div className="p-6 border-b border-gray-100 bg-[#DC2626]/10 rounded-t-xl flex items-center gap-3">
+                    <div className="p-2 bg-[#DC2626]/15 rounded-full">
+                        <AlertTriangle className="w-6 h-6 text-[#DC2626]" />
                     </div>
                     <div>
                         <h3 className="text-lg font-bold text-gray-900">تسجيل مخالفة إعاشة</h3>
@@ -23,7 +23,7 @@ export const ViolationReport: React.FC = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">نوع المخالفة</label>
                         <select
-                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500"
+                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#DC2626]"
                             value={audit.type}
                             onChange={(e) => setAudit({ ...audit, type: e.target.value })}
                         >
@@ -43,7 +43,7 @@ export const ViolationReport: React.FC = () => {
                                 <label key={level} className={`
                                     flex-1 flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all
                                     ${audit.severity === level
-                                        ? 'bg-red-50 border-red-500 text-red-700 font-bold'
+                                        ? 'bg-[#DC2626]/10 border-[#DC2626] text-[#B91C1C] font-bold'
                                         : 'border-gray-200 hover:bg-gray-50'}
                                 `}>
                                     <input
@@ -66,7 +66,7 @@ export const ViolationReport: React.FC = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">وصف المخالفة</label>
                         <textarea
-                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-500 min-h-[100px]"
+                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#DC2626] min-h-[100px]"
                             placeholder="اكتب تفاصيل المخالفة هنا..."
                             value={audit.description}
                             onChange={(e) => setAudit({ ...audit, description: e.target.value })}
@@ -83,7 +83,7 @@ export const ViolationReport: React.FC = () => {
 
                     <div className="pt-4 flex justify-end gap-3">
                         <Button variant="ghost">إلغاء</Button>
-                        <Button variant="danger" className="bg-red-600 hover:bg-red-700 text-white">
+                        <Button variant="danger" className="bg-[#B91C1C] hover:bg-[#B91C1C] text-white">
                             إرسال التقرير
                         </Button>
                     </div>

@@ -89,25 +89,25 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
                             العلامات الحيوية الأخيرة
                         </h3>
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-xl border border-red-200 hover-lift">
-                                <HeartPulse className="w-6 h-6 text-red-600 mx-auto mb-2" />
-                                <span className="text-xs text-red-600 block font-semibold">ضغط الدم</span>
-                                <span className="text-2xl font-bold text-red-700">120/80</span>
+                            <div className="text-center p-4 bg-gradient-to-br from-[#DC2626]/10 to-[#DC2626]/10 rounded-xl border border-[#DC2626]/30 hover-lift">
+                                <HeartPulse className="w-6 h-6 text-[#DC2626] mx-auto mb-2" />
+                                <span className="text-xs text-[#DC2626] block font-semibold">ضغط الدم</span>
+                                <span className="text-2xl font-bold text-[#B91C1C]">120/80</span>
                             </div>
-                            <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border border-blue-200 hover-lift">
-                                <Activity className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-                                <span className="text-xs text-blue-600 block font-semibold">النبض</span>
-                                <span className="text-2xl font-bold text-blue-700">72</span>
+                            <div className="text-center p-4 bg-gradient-to-br from-[#269798]/10 to-[#269798]/10 rounded-xl border border-[#269798]/30 hover-lift">
+                                <Activity className="w-6 h-6 text-[#269798] mx-auto mb-2" />
+                                <span className="text-xs text-[#269798] block font-semibold">النبض</span>
+                                <span className="text-2xl font-bold text-[#1B7778]">72</span>
                             </div>
-                            <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 hover-lift">
-                                <HeartPulse className="w-6 h-6 text-green-600 mx-auto mb-2" />
-                                <span className="text-xs text-green-600 block font-semibold">الأكسجين</span>
-                                <span className="text-2xl font-bold text-green-700">98%</span>
+                            <div className="text-center p-4 bg-gradient-to-br from-[#2BB574]/10 to-[#2BB574]/10 rounded-xl border border-[#2BB574]/20 hover-lift">
+                                <HeartPulse className="w-6 h-6 text-[#1E9658] mx-auto mb-2" />
+                                <span className="text-xs text-[#1E9658] block font-semibold">الأكسجين</span>
+                                <span className="text-2xl font-bold text-[#1E9658]">98%</span>
                             </div>
-                            <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl border border-orange-200 hover-lift">
-                                <Activity className="w-6 h-6 text-orange-600 mx-auto mb-2" />
-                                <span className="text-xs text-orange-600 block font-semibold">الحرارة</span>
-                                <span className="text-2xl font-bold text-orange-700">37.0°</span>
+                            <div className="text-center p-4 bg-gradient-to-br from-[#F7941D]/10 to-[#F7941D]/10 rounded-xl border border-[#F7941D]/30 hover-lift">
+                                <Activity className="w-6 h-6 text-[#D67A0A] mx-auto mb-2" />
+                                <span className="text-xs text-[#D67A0A] block font-semibold">الحرارة</span>
+                                <span className="text-2xl font-bold text-[#D67A0A]">37.0°</span>
                             </div>
                         </div>
                     </div>
@@ -118,14 +118,14 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
                             التشخيصات الطبية
                         </h3>
                         <div className="space-y-3">
-                            <div className="p-3 bg-gradient-to-r from-blue-50 to-transparent rounded-lg border-e-4 border-blue-500 hover-lift">
+                            <div className="p-3 bg-gradient-to-r from-[#269798]/10 to-transparent rounded-lg border-e-4 border-[#269798] hover-lift">
                                 <div className="flex justify-between items-center">
                                     <span className="font-semibold text-gray-900">{beneficiary.medicalDiagnosis}</span>
                                     <span className="badge badge-info">أساسي</span>
                                 </div>
                             </div>
                             {beneficiary.psychiatricDiagnosis && (
-                                <div className="p-3 bg-gradient-to-r from-purple-50 to-transparent rounded-lg border-e-4 border-purple-500 hover-lift">
+                                <div className="p-3 bg-gradient-to-r from-[#FCB614]/10 to-transparent rounded-lg border-e-4 border-[#FCB614] hover-lift">
                                     <div className="flex justify-between items-center">
                                         <span className="font-semibold text-gray-900">{beneficiary.psychiatricDiagnosis}</span>
                                         <span className="badge" style={{ background: '#f3e8ff', color: '#6b21a8' }}>نفسي</span>
@@ -162,8 +162,8 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
 
             {activeSubTab === 'careplan' && (
                 <div className="hrsd-card text-center py-12">
-                    <div className="w-20 h-20 bg-gradient-to-br from-pink-100 to-red-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <HeartPulse className="w-10 h-10 text-red-600" />
+                    <div className="w-20 h-20 bg-gradient-to-br from-[#DC2626]/10 to-[#DC2626]/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <HeartPulse className="w-10 h-10 text-[#DC2626]" />
                     </div>
                     <h4 className="text-lg font-semibold text-gray-700 mb-2">خطط الرعاية والتأهيل</h4>
                     <p className="text-gray-500 text-sm">تُعرض هنا الخطط الفردية للمستفيد ومستوى تحقيق أهدافها</p>
@@ -172,8 +172,8 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
 
             {activeSubTab === 'notes' && (
                 <div className="hrsd-card text-center py-12">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <FileText className="w-10 h-10 text-blue-600" />
+                    <div className="w-20 h-20 bg-gradient-to-br from-[#269798]/10 to-[#0F3144]/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <FileText className="w-10 h-10 text-[#269798]" />
                     </div>
                     <h4 className="text-lg font-semibold text-gray-700 mb-2">الملاحظات اليومية</h4>
                     <p className="text-gray-500 text-sm">يُسجَّل في هذا القسم تطور الحالة والملاحظات اليومية لفريق الرعاية</p>

@@ -93,10 +93,10 @@ const CERTIFICATE_TEMPLATES = [
 
 const colorClass = (color: string): { bg: string; text: string; border: string } => {
     const map: Record<string, { bg: string; text: string; border: string }> = {
-        emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-        blue: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-        indigo: { bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200' },
-        amber: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
+        emerald: { bg: 'bg-[#2BB574]/10', text: 'text-[#1E9658]', border: 'border-[#2BB574]/30' },
+        blue: { bg: 'bg-[#269798]/10', text: 'text-[#1B7778]', border: 'border-[#269798]/30' },
+        indigo: { bg: 'bg-[#0F3144]/5', text: 'text-[#0A2030]', border: 'border-[#0F3144]/30' },
+        amber: { bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]', border: 'border-[#FCB614]/30' },
     };
     return map[color] ?? map.blue;
 };
@@ -116,28 +116,28 @@ export const LegalShieldPage: React.FC = () => {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 text-white flex items-center justify-center shadow-md">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-white text-white flex items-center justify-center shadow-md">
                             <Shield className="w-7 h-7" />
                         </div>
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-slate-900">الدرع القانوني</h1>
-                            <p className="text-slate-500 mt-1 max-w-2xl">
+                            <h1 className="text-2xl md:text-3xl font-bold text-hrsd-navy">الدرع القانوني</h1>
+                            <p className="text-hrsd-cool-gray mt-1 max-w-2xl">
                                 توثيق تلقائي لكل خطوة، وامتثال مُسبق لاتفاقية حقوق الأشخاص ذوي الإعاقة، ونظام حماية البيانات الشخصية، والأمن السيبراني الوطني.
                             </p>
                         </div>
                     </div>
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-3">
-                        <FileCheck2 className="w-5 h-5 text-emerald-600" />
+                    <div className="bg-[#2BB574]/10 border border-[#2BB574]/30 rounded-xl px-4 py-3 flex items-center gap-3">
+                        <FileCheck2 className="w-5 h-5 text-[#1E9658]" />
                         <div>
-                            <p className="text-emerald-700 font-bold text-sm">سجل التدقيق ١٠٠٪</p>
-                            <p className="text-emerald-600 text-xs">كل عملية حساسة موثقة</p>
+                            <p className="text-[#1E9658] font-bold text-sm">سجل التدقيق ١٠٠٪</p>
+                            <p className="text-[#1E9658] text-xs">كل عملية حساسة موثقة</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Compliance Pillars */}
                 <section>
-                    <h2 className="text-lg font-bold text-slate-800 mb-4">ركائز الامتثال</h2>
+                    <h2 className="text-lg font-bold text-hrsd-navy mb-4">ركائز الامتثال</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {COMPLIANCE_PILLARS.map((p) => {
                             const c = colorClass(p.color);
@@ -150,12 +150,12 @@ export const LegalShieldPage: React.FC = () => {
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center justify-between gap-3 mb-1">
-                                                <h3 className="font-bold text-slate-800">{p.title}</h3>
+                                                <h3 className="font-bold text-hrsd-navy">{p.title}</h3>
                                                 <span className={`text-xs px-2 py-0.5 rounded-full ${c.bg} ${c.text} border ${c.border}`}>
                                                     {p.status}
                                                 </span>
                                             </div>
-                                            <p className="text-sm text-slate-600 leading-relaxed">{p.body}</p>
+                                            <p className="text-sm text-hrsd-cool-gray leading-relaxed">{p.body}</p>
                                         </div>
                                     </div>
                                 </Card>
@@ -166,18 +166,18 @@ export const LegalShieldPage: React.FC = () => {
 
                 {/* Certificates */}
                 <section>
-                    <h2 className="text-lg font-bold text-slate-800 mb-4">إصدار الوثائق المؤسسية</h2>
+                    <h2 className="text-lg font-bold text-hrsd-navy mb-4">إصدار الوثائق المؤسسية</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {CERTIFICATE_TEMPLATES.map((t) => (
-                            <Card key={t.id} className="p-5 border border-slate-200 flex flex-col">
+                            <Card key={t.id} className="p-5 border border-gray-200 flex flex-col">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <FileText className="w-5 h-5 text-slate-500" />
-                                    <h3 className="font-bold text-slate-800">{t.label}</h3>
+                                    <FileText className="w-5 h-5 text-hrsd-cool-gray" />
+                                    <h3 className="font-bold text-hrsd-navy">{t.label}</h3>
                                 </div>
-                                <p className="text-sm text-slate-600 flex-1">{t.description}</p>
+                                <p className="text-sm text-hrsd-cool-gray flex-1">{t.description}</p>
                                 <button
                                     onClick={() => handleIssue(t)}
-                                    className="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-2 transition-colors"
+                                    className="mt-4 w-full bg-white hover:bg-white text-white rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-2 transition-colors"
                                 >
                                     <Download className="w-4 h-4" />
                                     إصدار الوثيقة
@@ -186,7 +186,7 @@ export const LegalShieldPage: React.FC = () => {
                         ))}
                     </div>
                     {issuedNote && (
-                        <div className="mt-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl px-4 py-3 text-sm">
+                        <div className="mt-4 bg-[#2BB574]/10 border border-[#2BB574]/30 text-[#14532D] rounded-xl px-4 py-3 text-sm">
                             {issuedNote}
                         </div>
                     )}
@@ -195,27 +195,27 @@ export const LegalShieldPage: React.FC = () => {
                 {/* Audit Trail */}
                 <section>
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-lg font-bold text-slate-800">آخر إجراءات سجل التدقيق</h2>
-                        <a href="/admin/audit-logs" className="text-sm text-slate-600 hover:text-slate-900 underline-offset-4 hover:underline">
+                        <h2 className="text-lg font-bold text-hrsd-navy">آخر إجراءات سجل التدقيق</h2>
+                        <a href="/admin/audit-logs" className="text-sm text-hrsd-cool-gray hover:text-hrsd-navy underline-offset-4 hover:underline">
                             عرض السجل الكامل
                         </a>
                     </div>
-                    <Card className="border border-slate-200 overflow-hidden">
+                    <Card className="border border-gray-200 overflow-hidden">
                         <div className="divide-y divide-slate-100">
                             {SAMPLE_AUDIT_TRAIL.map((e) => {
                                 const tagColor =
-                                    e.classification === 'confidential' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                                    e.classification === 'sensitive' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                                    'bg-slate-50 text-slate-700 border-slate-200';
+                                    e.classification === 'confidential' ? 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/30' :
+                                    e.classification === 'sensitive' ? 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/30' :
+                                    'bg-gray-50 text-hrsd-navy border-gray-200';
                                 const label =
                                     e.classification === 'confidential' ? 'سرّي' :
                                     e.classification === 'sensitive' ? 'حساس' : 'قياسي';
                                 return (
-                                    <div key={e.id} className="p-4 flex items-start gap-4 hover:bg-slate-50 transition-colors">
-                                        <div className="text-xs text-slate-400 w-32 shrink-0 tabular-nums">{e.timestamp}</div>
+                                    <div key={e.id} className="p-4 flex items-start gap-4 hover:bg-gray-50 transition-colors">
+                                        <div className="text-xs text-hrsd-cool-gray w-32 shrink-0 tabular-nums">{e.timestamp}</div>
                                         <div className="flex-1 min-w-0">
-                                            <p className="text-sm font-medium text-slate-800 truncate">{e.action}</p>
-                                            <p className="text-xs text-slate-500 mt-0.5">{e.actor} ← {e.target}</p>
+                                            <p className="text-sm font-medium text-hrsd-navy truncate">{e.action}</p>
+                                            <p className="text-xs text-hrsd-cool-gray mt-0.5">{e.actor} ← {e.target}</p>
                                         </div>
                                         <span className={`text-[10px] px-2 py-1 rounded-full border ${tagColor} shrink-0`}>{label}</span>
                                     </div>

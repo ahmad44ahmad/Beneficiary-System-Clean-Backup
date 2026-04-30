@@ -24,21 +24,21 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
     }, [beneficiaries]);
 
     const getTensionColor = (score: number) => {
-        if (score < 30) return 'text-green-500';
-        if (score < 60) return 'text-orange-500';
-        return 'text-red-500';
+        if (score < 30) return 'text-[#1E9658]';
+        if (score < 60) return 'text-[#D67A0A]';
+        return 'text-[#DC2626]';
     };
 
     return (
-        <Card className="h-full border-red-50 shadow-sm relative overflow-hidden">
+        <Card className="h-full border-[#DC2626]/10 shadow-sm relative overflow-hidden">
             {/* Background Pulse Effect */}
-            <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-green-500 via-orange-500 to-red-500 opacity-20" />
+            <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-[#2BB574] via-[#F7941D] to-[#DC2626] opacity-20" />
 
             <div className="p-5">
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h3 className="font-bold text-gray-800 flex items-center gap-2">
-                            <Activity className="w-5 h-5 text-red-500" />
+                            <Activity className="w-5 h-5 text-[#DC2626]" />
                             النبض الحيوي (Vital Pulse)
                         </h3>
                         <p className="text-xs text-gray-500">مؤشر المخاطر التنبؤي (Ehsan AI)</p>
@@ -51,7 +51,7 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                 {/* Ward Status Bar */}
                 <div className="w-full h-2 bg-gray-100 rounded-full mb-6 overflow-hidden">
                     <div
-                        className={`h-full rounded-full transition-all duration-1000 ${wardTension < 30 ? 'bg-green-500' : wardTension < 60 ? 'bg-orange-500' : 'bg-red-500'
+                        className={`h-full rounded-full transition-all duration-1000 ${wardTension < 30 ? 'bg-[#2BB574]' : wardTension < 60 ? 'bg-[#F7941D]' : 'bg-[#DC2626]'
                             }`}
                         style={{ width: `${wardTension}%` }}
                     />
@@ -67,28 +67,28 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                             <div
                                 key={item.id}
                                 onClick={() => navigate(`/beneficiaries/${item.id}`)}
-                                className="flex items-center gap-3 p-3 rounded-xl bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer border border-transparent hover:border-red-100 group"
+                                className="flex items-center gap-3 p-3 rounded-xl bg-[#DC2626]/10/50 hover:bg-[#DC2626]/10 transition-colors cursor-pointer border border-transparent hover:border-[#DC2626]/10 group"
                             >
                                 <div className="relative">
-                                    <div className="w-10 h-10 rounded-full bg-white border border-red-100 p-1 flex items-center justify-center">
-                                        <User className={`w-6 h-6 ${item.gender === 'female' ? 'text-pink-400' : 'text-blue-400'}`} />
+                                    <div className="w-10 h-10 rounded-full bg-white border border-[#DC2626]/10 p-1 flex items-center justify-center">
+                                        <User className={`w-6 h-6 ${item.gender === 'female' ? 'text-[#DC2626]' : 'text-[#269798]'}`} />
                                     </div>
                                     <span className="absolute -bottom-1 -end-1 flex h-4 w-4">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DC2626] opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-4 w-4 bg-[#DC2626] border-2 border-white"></span>
                                     </span>
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h5 className="font-bold text-gray-800 text-sm truncate group-hover:text-red-700 transition-colors">
+                                    <h5 className="font-bold text-gray-800 text-sm truncate group-hover:text-[#B91C1C] transition-colors">
                                         {item.fullName}
                                     </h5>
-                                    <div className="text-xs text-red-600 truncate flex items-center gap-1">
+                                    <div className="text-xs text-[#DC2626] truncate flex items-center gap-1">
                                         <TrendingUp className="w-3 h-3" />
                                         {item.risk.factors[0] || 'عوامل متعددة'}
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <span className="block text-lg font-bold text-red-600 leading-none">
+                                    <span className="block text-lg font-bold text-[#DC2626] leading-none">
                                         {item.risk.score}
                                     </span>
                                     <span className="text-[10px] text-gray-400">نقاط</span>
@@ -97,7 +97,7 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                         ))
                     ) : (
                         <div className="text-center py-6 text-gray-400 bg-gray-50 rounded-xl border border-dashed border-gray-200">
-                            <ShieldCheck className="w-8 h-8 mx-auto mb-2 text-green-400" />
+                            <ShieldCheck className="w-8 h-8 mx-auto mb-2 text-[#2BB574]" />
                             <p className="text-sm">لا توجد حالات حرجة حالياً</p>
                         </div>
                     )}

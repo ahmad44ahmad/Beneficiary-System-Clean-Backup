@@ -45,7 +45,7 @@ export const ISOComplianceTracker: React.FC = () => {
             case 'verified': return <CheckCircle className="w-5 h-5 text-hrsd-green" />;
             case 'implemented': return <CheckCircle className="w-5 h-5 text-hrsd-teal" />;
             case 'in_progress': return <Clock className="w-5 h-5 text-hrsd-gold" />;
-            case 'non_conformity': return <XCircle className="w-5 h-5 text-red-600" />;
+            case 'non_conformity': return <XCircle className="w-5 h-5 text-[#DC2626]" />;
             default: return <AlertCircle className="w-5 h-5 text-gray-400" />;
         }
     };
@@ -55,7 +55,7 @@ export const ISOComplianceTracker: React.FC = () => {
             case 'verified': return 'bg-hrsd-green';
             case 'implemented': return 'bg-hrsd-teal';
             case 'in_progress': return 'bg-hrsd-gold';
-            case 'non_conformity': return 'bg-red-500';
+            case 'non_conformity': return 'bg-[#DC2626]';
             default: return 'bg-gray-300';
         }
     };
@@ -80,9 +80,9 @@ export const ISOComplianceTracker: React.FC = () => {
     }, {} as Record<string, number>);
 
     const pieData = [
-        { name: 'موثق', value: statusSummary.verified || 0, color: 'rgb(45, 180, 115)' },
-        { name: 'مطبق', value: statusSummary.implemented || 0, color: 'rgb(20, 130, 135)' },
-        { name: 'قيد التنفيذ', value: statusSummary.in_progress || 0, color: 'rgb(250, 180, 20)' },
+        { name: 'موثق', value: statusSummary.verified || 0, color: 'rgb(43, 181, 116)' },
+        { name: 'مطبق', value: statusSummary.implemented || 0, color: 'rgb(38, 151, 152)' },
+        { name: 'قيد التنفيذ', value: statusSummary.in_progress || 0, color: 'rgb(252, 182, 20)' },
         { name: 'لم يبدأ', value: statusSummary.not_started || 0, color: 'rgb(209, 213, 219)' },
         { name: 'عدم مطابقة', value: statusSummary.non_conformity || 0, color: 'rgb(239, 68, 68)' },
     ].filter(d => d.value > 0);
@@ -172,7 +172,7 @@ export const ISOComplianceTracker: React.FC = () => {
                             {criticalItems.length > 0 ? (
                                 <div className="space-y-2">
                                     {criticalItems.slice(0, 3).map((item, idx) => (
-                                        <div key={idx} className="p-2 bg-red-50 rounded-lg text-sm">
+                                        <div key={idx} className="p-2 bg-[#DC2626]/10 rounded-lg text-sm">
                                             <span className="font-bold">{item.iso_clause}</span>: {item.requirement_ar}
                                         </div>
                                     ))}

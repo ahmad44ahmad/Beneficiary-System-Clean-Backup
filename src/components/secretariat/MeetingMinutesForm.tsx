@@ -85,7 +85,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                 name="date"
                                 value={formData.date}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                             />
                         </div>
@@ -96,7 +96,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                 name="time"
                                 value={formData.time}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                             />
                         </div>
@@ -107,7 +107,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                 name="location"
                                 value={formData.location}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                                 placeholder="قاعة الاجتماعات، مكتب المدير..."
                             />
@@ -122,7 +122,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             value={formData.agenda}
                             onChange={handleChange}
                             rows={4}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                             required
                             placeholder="- مناقشة الخطة السنوية
 - مراجعة تقارير الأداء..."
@@ -136,7 +136,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             value={formData.decisions}
                             onChange={handleChange}
                             rows={4}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                             placeholder="تم الاتفاق على..."
                         />
                     </div>
@@ -148,7 +148,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             <button
                                 type="button"
                                 onClick={addAttendee}
-                                className="me-auto text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 flex items-center"
+                                className="me-auto text-sm bg-[#269798]/15 text-[#269798] px-2 py-1 rounded hover:bg-[#269798]/20 flex items-center"
                             >
                                 <Plus size={14} className="ms-1" />
                                 إضافة
@@ -161,14 +161,14 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                         type="text"
                                         value={attendee}
                                         onChange={(e) => handleAttendeeChange(index, e.target.value)}
-                                        className="flex-1 p-2 border rounded-r-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="flex-1 p-2 border rounded-r-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                         placeholder={`اسم الحاضر ${index + 1}`}
                                         required
                                     />
                                     <button
                                         type="button"
                                         onClick={() => removeAttendee(index)}
-                                        className="bg-red-50 text-red-500 px-3 border border-s-0 rounded-l-md hover:bg-red-100"
+                                        className="bg-[#DC2626]/10 text-[#DC2626] px-3 border border-s-0 rounded-l-md hover:bg-[#DC2626]/15"
                                     >
                                         <Trash2 size={16} />
                                     </button>
@@ -184,7 +184,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                             <button
                                 type="button"
                                 onClick={addActionItem}
-                                className="me-auto text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 flex items-center"
+                                className="me-auto text-sm bg-[#269798]/15 text-[#269798] px-2 py-1 rounded hover:bg-[#269798]/20 flex items-center"
                             >
                                 <Plus size={14} className="ms-1" />
                                 إضافة مهمة
@@ -198,7 +198,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                             type="text"
                                             value={item.task}
                                             onChange={(e) => handleActionItemChange(index, 'task', e.target.value)}
-                                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                             placeholder="المهمة المطلوبة"
                                             required
                                         />
@@ -208,7 +208,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                             type="text"
                                             value={item.assignee}
                                             onChange={(e) => handleActionItemChange(index, 'assignee', e.target.value)}
-                                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                             placeholder="المسؤول"
                                         />
                                     </div>
@@ -217,13 +217,13 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                             type="date"
                                             value={item.dueDate}
                                             onChange={(e) => handleActionItemChange(index, 'dueDate', e.target.value)}
-                                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                         />
                                     </div>
                                     <button
                                         type="button"
                                         onClick={() => removeActionItem(index)}
-                                        className="text-red-500 hover:text-red-700 p-2"
+                                        className="text-[#DC2626] hover:text-[#B91C1C] p-2"
                                     >
                                         <Trash2 size={18} />
                                     </button>
@@ -242,7 +242,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                         </button>
                         <button
                             type="submit"
-                            className="flex items-center px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                            className="flex items-center px-4 py-2 text-white bg-[#1B7778] rounded-md hover:bg-[#1B7778]"
                         >
                             <Save size={18} className="ms-2" />
                             حفظ

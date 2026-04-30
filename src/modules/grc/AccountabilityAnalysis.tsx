@@ -13,7 +13,7 @@ const evasionPatterns = {
         label: 'هروب للأمام',
         count: 9,
         percentage: 52.9,
-        color: 'bg-orange-500',
+        color: 'bg-[#F7941D]',
         phrases: [
             'مرتبط بمشروع قادم',
             'جاري العمل على الموضوع',
@@ -27,7 +27,7 @@ const evasionPatterns = {
         label: 'تحويل لجهة أخرى',
         count: 3,
         percentage: 17.6,
-        color: 'bg-red-500',
+        color: 'bg-[#DC2626]',
         phrases: [
             'هذا من اختصاص جهة أخرى',
             'تم تحويله للجهة المختصة',
@@ -39,7 +39,7 @@ const evasionPatterns = {
         label: 'وعد كاذب',
         count: 1,
         percentage: 5.9,
-        color: 'bg-purple-500',
+        color: 'bg-[#FCB614]',
         phrases: [
             'تم الحل مؤقتاً',
             'معالجة مؤقتة'
@@ -143,7 +143,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             {/* Header */}
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                    <FileSearch className="w-8 h-8 text-[#148287]" />
+                    <FileSearch className="w-8 h-8 text-[#269798]" />
                     تحليل فجوة المساءلة الشامل
                 </h1>
                 <p className="text-gray-500 mt-1 mr-11">
@@ -153,20 +153,20 @@ export const AccountabilityAnalysis: React.FC = () => {
 
             {/* Summary Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-red-500">
-                    <div className="text-3xl font-bold text-red-600">{summaryStats.critical_issues}</div>
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#DC2626]">
+                    <div className="text-3xl font-bold text-[#DC2626]">{summaryStats.critical_issues}</div>
                     <div className="text-sm text-gray-500">قضايا حرجة</div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-orange-500">
-                    <div className="text-3xl font-bold text-orange-600">{summaryStats.high_severity}</div>
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#F7941D]">
+                    <div className="text-3xl font-bold text-[#D67A0A]">{summaryStats.high_severity}</div>
                     <div className="text-sm text-gray-500">عالية الخطورة</div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-yellow-500">
-                    <div className="text-3xl font-bold text-yellow-600">{summaryStats.issues_over_2_years}</div>
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#FCB614]">
+                    <div className="text-3xl font-bold text-[#D49A0A]">{summaryStats.issues_over_2_years}</div>
                     <div className="text-sm text-gray-500">أكثر من سنتين</div>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-blue-500">
-                    <div className="text-3xl font-bold text-blue-600">{summaryStats.average_pending_days}</div>
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#269798]">
+                    <div className="text-3xl font-bold text-[#269798]">{summaryStats.average_pending_days}</div>
                     <div className="text-sm text-gray-500">متوسط أيام الانتظار</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-gray-500">
@@ -183,7 +183,7 @@ export const AccountabilityAnalysis: React.FC = () => {
                 >
                     <div className="flex items-center gap-3">
                         <div className="p-2 rounded-lg bg-[#20655A]/20">
-                            <BarChart3 className="w-6 h-6 text-[#F5961E]" />
+                            <BarChart3 className="w-6 h-6 text-[#F7941D]" />
                         </div>
                         <div>
                             <h3 className="font-bold text-lg text-gray-800">تحليل أنماط التنصل</h3>
@@ -238,8 +238,8 @@ export const AccountabilityAnalysis: React.FC = () => {
                     onClick={() => toggleSection('albaha')}
                 >
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-[#148287]/20">
-                            <MapPin className="w-6 h-6 text-[#148287]" />
+                        <div className="p-2 rounded-lg bg-[#269798]/20">
+                            <MapPin className="w-6 h-6 text-[#269798]" />
                         </div>
                         <div>
                             <h3 className="font-bold text-lg text-gray-800">خصوصية الباحة</h3>
@@ -261,11 +261,11 @@ export const AccountabilityAnalysis: React.FC = () => {
                                         <div className="flex-1">
                                             <h4 className="font-bold text-gray-800 mb-2">{gap.title}</h4>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                                                <div className="flex items-center gap-2 text-blue-600">
+                                                <div className="flex items-center gap-2 text-[#269798]">
                                                     <ArrowRight className="w-4 h-4" />
                                                     <span>مقارنة: {gap.comparison}</span>
                                                 </div>
-                                                <div className="flex items-center gap-2 text-red-600">
+                                                <div className="flex items-center gap-2 text-[#DC2626]">
                                                     <AlertTriangle className="w-4 h-4" />
                                                     <span>الأثر: {gap.impact}</span>
                                                 </div>
@@ -286,7 +286,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             </div>
 
             {/* Critical Findings */}
-            <div className="bg-gradient-to-l from-red-600 to-red-500 rounded-xl p-6 text-white">
+            <div className="bg-gradient-to-l from-[#B91C1C] to-[#DC2626] rounded-xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                     <AlertTriangle className="w-5 h-5" />
                     النتائج الأكثر خطورة
@@ -316,7 +316,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             </div>
 
             {/* Positive Achievements */}
-            <div className="mt-6 bg-gradient-to-l from-green-600 to-green-500 rounded-xl p-6 text-white">
+            <div className="mt-6 bg-gradient-to-l from-[#1E9658] to-[#2BB574] rounded-xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                     <TrendingUp className="w-5 h-5" />
                     الإنجازات الإيجابية (للتوازن)

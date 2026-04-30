@@ -19,10 +19,10 @@ interface Incident {
 }
 
 const SEVERITY_CONFIG = {
-    low: { label: 'منخفض', color: 'bg-blue-500', bgLight: 'bg-blue-100', text: 'text-blue-600' },
-    medium: { label: 'متوسط', color: 'bg-amber-500', bgLight: 'bg-amber-100', text: 'text-amber-600' },
-    high: { label: 'مرتفع', color: 'bg-orange-500', bgLight: 'bg-orange-100', text: 'text-orange-600' },
-    critical: { label: 'حرج', color: 'bg-red-500', bgLight: 'bg-red-100', text: 'text-red-600' }
+    low: { label: 'منخفض', color: 'bg-[#269798]', bgLight: 'bg-[#269798]/15', text: 'text-[#269798]' },
+    medium: { label: 'متوسط', color: 'bg-[#FCB614]', bgLight: 'bg-[#FCB614]/15', text: 'text-[#D49A0A]' },
+    high: { label: 'مرتفع', color: 'bg-[#F7941D]', bgLight: 'bg-[#F7941D]/15', text: 'text-[#D67A0A]' },
+    critical: { label: 'حرج', color: 'bg-[#DC2626]', bgLight: 'bg-[#DC2626]/15', text: 'text-[#DC2626]' }
 };
 
 const INCIDENT_TYPES: Record<string, string> = {
@@ -118,7 +118,7 @@ export const IncidentNotificationAlert: React.FC = () => {
                 className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4"
                 dir="rtl"
             >
-                <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl shadow-xl overflow-hidden">
+                <div className="bg-gradient-to-r from-[#DC2626] to-[#F7941D] rounded-2xl shadow-xl overflow-hidden">
                     {/* Header */}
                     <div className="px-4 py-3 flex items-center justify-between text-white">
                         <div className="flex items-center gap-2">
@@ -153,7 +153,7 @@ export const IncidentNotificationAlert: React.FC = () => {
                                     key={incident.id}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    className={`flex items-start justify-between p-3 ${config.bgLight} rounded-xl border ${incident.severity === 'critical' ? 'border-red-200' : 'border-orange-200'}`}
+                                    className={`flex items-start justify-between p-3 ${config.bgLight} rounded-xl border ${incident.severity === 'critical' ? 'border-[#DC2626]/30' : 'border-[#F7941D]/30'}`}
                                 >
                                     <div className="flex items-start gap-3">
                                         <div className={`p-2 ${config.color} rounded-lg`}>
@@ -188,7 +188,7 @@ export const IncidentNotificationAlert: React.FC = () => {
                     {/* Action Footer */}
                     <button
                         onClick={handleNavigate}
-                        className="w-full px-4 py-3 bg-red-600 text-white font-medium flex items-center justify-center gap-2 hover:bg-red-700 transition-colors"
+                        className="w-full px-4 py-3 bg-[#B91C1C] text-white font-medium flex items-center justify-center gap-2 hover:bg-[#B91C1C] transition-colors"
                     >
                         عرض جميع الحوادث
                         <ChevronRight className="w-4 h-4" />

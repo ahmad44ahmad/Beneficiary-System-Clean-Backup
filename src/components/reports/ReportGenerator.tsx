@@ -61,10 +61,10 @@ const ReportCard: React.FC<{
     const Icon = report.icon;
 
     const colorClasses: Record<string, { bg: string; icon: string; button: string }> = {
-        blue: { bg: 'bg-blue-50', icon: 'text-blue-600', button: 'bg-blue-600 hover:bg-blue-700' },
-        green: { bg: 'bg-green-50', icon: 'text-green-600', button: 'bg-green-600 hover:bg-green-700' },
-        purple: { bg: 'bg-purple-50', icon: 'text-purple-600', button: 'bg-purple-600 hover:bg-purple-700' },
-        teal: { bg: 'bg-teal-50', icon: 'text-teal-600', button: 'bg-teal-600 hover:bg-teal-700' },
+        blue: { bg: 'bg-[#269798]/10', icon: 'text-[#269798]', button: 'bg-[#1B7778] hover:bg-[#1B7778]' },
+        green: { bg: 'bg-[#2BB574]/10', icon: 'text-[#1E9658]', button: 'bg-[#1E9658] hover:bg-[#1E9658]' },
+        purple: { bg: 'bg-[#FCB614]/10', icon: 'text-[#D49A0A]', button: 'bg-[#D49A0A] hover:bg-[#D49A0A]' },
+        teal: { bg: 'bg-[#269798]/10', icon: 'text-[#1B7778]', button: 'bg-[#1B7778] hover:bg-[#1B7778]' },
     };
 
     const colors = colorClasses[report.color] || colorClasses.blue;
@@ -130,7 +130,7 @@ const ReportCard: React.FC<{
 
                     {generatedReport && (
                         <div className="mt-2 text-xs text-gray-500 flex items-center gap-1">
-                            <CheckCircle className="w-3 h-3 text-green-500" />
+                            <CheckCircle className="w-3 h-3 text-[#1E9658]" />
                             تم الإنشاء - {generatedReport.mode === 'html-fallback' ? 'وضع المعاينة' : 'PDF جاهز'}
                         </div>
                     )}
@@ -218,16 +218,16 @@ export const ReportGenerator: React.FC = () => {
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
         * { font-family: 'Cairo', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
         body { padding: 40px; background: white; color: #1f2937; }
-        .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #0d9488; }
-        .header h1 { font-size: 22px; color: #14415a; margin-bottom: 8px; font-weight: 900; }
-        .header h2 { font-size: 16px; color: #0d9488; }
+        .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #269798; }
+        .header h1 { font-size: 22px; color: #0F3144; margin-bottom: 8px; font-weight: 900; }
+        .header h2 { font-size: 16px; color: #269798; }
         .header p { color: #6b7280; font-size: 12px; }
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
         .stat { background: #f0fdfa; padding: 15px; border-radius: 10px; text-align: center; }
-        .stat .v { font-size: 24px; font-weight: 900; color: #14415a; }
+        .stat .v { font-size: 24px; font-weight: 900; color: #0F3144; }
         .stat .l { font-size: 10px; color: #6b7280; }
         table { width: 100%; border-collapse: collapse; }
-        th { background: #14415a; color: white; padding: 10px; text-align: right; }
+        th { background: #0F3144; color: white; padding: 10px; text-align: right; }
         td { padding: 8px 10px; border-bottom: 1px solid #e5e7eb; }
         tr:nth-child(even) { background: #f9fafb; }
         .footer { margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: center; font-size: 10px; color: #9ca3af; }
@@ -284,8 +284,8 @@ export const ReportGenerator: React.FC = () => {
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-purple-100 rounded-xl">
-                        <FileText className="w-8 h-8 text-purple-600" />
+                    <div className="p-3 bg-[#FCB614]/15 rounded-xl">
+                        <FileText className="w-8 h-8 text-[#D49A0A]" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">مولد التقارير المؤسسية</h1>
@@ -297,7 +297,7 @@ export const ReportGenerator: React.FC = () => {
             {/* Date Range Filter */}
             <div className="bg-white rounded-2xl p-5 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-purple-600" />
+                    <Calendar className="w-5 h-5 text-[#D49A0A]" />
                     نطاق التاريخ
                 </h3>
                 <div className="flex gap-4 items-center flex-wrap">

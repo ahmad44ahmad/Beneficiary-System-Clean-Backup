@@ -55,9 +55,9 @@ export const BiologicalAuditIndicator: React.FC = () => {
     ];
 
     const severityColors = {
-        critical: 'bg-red-50 border-red-500 text-red-900',
-        high: 'bg-orange-50 border-orange-500 text-orange-900',
-        medium: 'bg-yellow-50 border-yellow-500 text-yellow-900',
+        critical: 'bg-[#DC2626]/10 border-[#DC2626] text-[#7F1D1D]',
+        high: 'bg-[#F7941D]/10 border-[#F7941D] text-[#92400E]',
+        medium: 'bg-[#FCB614]/10 border-[#FCB614] text-[#92400E]',
     };
 
     const severityIcons = {
@@ -110,7 +110,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                             yAxisId="left"
                             type="monotone"
                             dataKey="inventory_out"
-                            stroke="rgb(20, 130, 135)" /* HRSD Teal */
+                            stroke="rgb(38, 151, 152)" /* HRSD Teal */
                             strokeWidth={2}
                             name="خروج من المخزن (كجم)"
                         />
@@ -127,14 +127,14 @@ export const BiologicalAuditIndicator: React.FC = () => {
                             yAxisId="right"
                             type="monotone"
                             dataKey="weight_avg"
-                            stroke="rgb(45, 180, 115)" /* HRSD Green */
+                            stroke="rgb(43, 181, 116)" /* HRSD Green */
                             strokeWidth={2}
                             name="متوسط الوزن (كجم)"
                         />
                     </LineChart>
                 </ResponsiveContainer>
-                <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3">
-                    <p className="text-sm text-red-800">
+                <div className="mt-4 bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg p-3">
+                    <p className="text-sm text-[#7F1D1D]">
                         🚨 <span className="font-bold">تنبيه خطير:</span> المخزون يُظهر خروج كميات طبيعية، لكن أوزان المستفيدين في انخفاض مستمر منذ شهرين!
                     </p>
                 </div>
@@ -143,7 +143,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
             {/* Alerts */}
             <div className="space-y-4">
                 <h3 className="font-bold text-lg flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-red-600" />
+                    <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
                     التنبيهات النشطة ({alerts.length})
                 </h3>
                 {alerts.map(alert => (
@@ -181,7 +181,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <Heart className="w-10 h-10 text-red-600" />
+                        <Heart className="w-10 h-10 text-[#DC2626]" />
                         <div>
                             <p className="text-2xl font-bold text-gray-900">11.2</p>
                             <p className="text-sm text-gray-500">متوسط الهيموجلوبين</p>
@@ -190,18 +190,18 @@ export const BiologicalAuditIndicator: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <Scale className="w-10 h-10 text-green-600" />
+                        <Scale className="w-10 h-10 text-[#1E9658]" />
                         <div>
-                            <p className="text-2xl font-bold text-red-600">68.5 كجم</p>
+                            <p className="text-2xl font-bold text-[#DC2626]">68.5 كجم</p>
                             <p className="text-sm text-gray-500">متوسط الوزن (منخفض)</p>
                         </div>
                     </div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <TrendingDown className="w-10 h-10 text-orange-600" />
+                        <TrendingDown className="w-10 h-10 text-[#D67A0A]" />
                         <div>
-                            <p className="text-2xl font-bold text-orange-600">-24%</p>
+                            <p className="text-2xl font-bold text-[#D67A0A]">-24%</p>
                             <p className="text-sm text-gray-500">فجوة غير مبررة</p>
                         </div>
                     </div>
@@ -209,7 +209,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
             </div>
 
             {/* Action Button */}
-            <div className="mt-8 bg-gradient-to-r from-red-600 to-rose-700 text-white rounded-xl p-6">
+            <div className="mt-8 bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white rounded-xl p-6">
                 <h3 className="font-bold text-xl mb-2">🚨 إجراء فوري مطلوب</h3>
                 <p className="mb-4">التناقضات الحالية تتطلب تحقيقاً سريعاً. النظام سيرسل تقريراً تلقائياً إلى:</p>
                 <div className="grid grid-cols-3 gap-3">

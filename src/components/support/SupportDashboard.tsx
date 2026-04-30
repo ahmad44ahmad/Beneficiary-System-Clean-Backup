@@ -37,21 +37,21 @@ export const SupportDashboard: React.FC = () => {
             <div className="flex gap-2 border-b overflow-x-auto pb-1">
                 <button
                     onClick={() => setActiveTab('overview')}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'overview' ? 'bg-teal-50 text-teal-700 font-bold border-b-2 border-teal-600' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'overview' ? 'bg-[#269798]/10 text-[#1B7778] font-bold border-b-2 border-[#1B7778]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
                 >
                     <PieChart className="w-4 h-4" />
                     لوحة المعلومات
                 </button>
                 <button
                     onClick={() => setActiveTab('custody')}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'custody' ? 'bg-teal-50 text-teal-700 font-bold border-b-2 border-teal-600' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'custody' ? 'bg-[#269798]/10 text-[#1B7778] font-bold border-b-2 border-[#1B7778]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
                 >
                     <Box className="w-4 h-4" />
                     العهد والمستودعات
                 </button>
                 <button
                     onClick={() => setActiveTab('maintenance')}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'maintenance' ? 'bg-teal-50 text-teal-700 font-bold border-b-2 border-teal-600' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'maintenance' ? 'bg-[#269798]/10 text-[#1B7778] font-bold border-b-2 border-[#1B7778]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
                 >
                     <Wrench className="w-4 h-4" />
                     طلبات الصيانة
@@ -71,7 +71,7 @@ export const SupportDashboard: React.FC = () => {
                                         <h3 className="text-3xl font-bold text-gray-800">{stats.totalAssets}</h3>
                                         <p className="text-xs text-gray-400 mt-2">قطعة مسجلة</p>
                                     </div>
-                                    <div className="p-3 bg-blue-50 rounded-lg text-blue-600">
+                                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#269798]">
                                         <Box className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@ export const SupportDashboard: React.FC = () => {
                                         <h3 className="text-3xl font-bold text-gray-800">2.5M</h3>
                                         <p className="text-xs text-gray-400 mt-2">ريال سعودي</p>
                                     </div>
-                                    <div className="p-3 bg-teal-50 rounded-lg text-teal-600">
+                                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#1B7778]">
                                         <Wallet className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -95,9 +95,9 @@ export const SupportDashboard: React.FC = () => {
                                     <div>
                                         <p className="text-gray-500 text-sm mb-1">في الصيانة</p>
                                         <h3 className="text-3xl font-bold text-gray-800">{stats.activeMaintenance}</h3>
-                                        <p className="text-xs text-red-500 mt-2">{stats.criticalMaintenance} طلب حرج</p>
+                                        <p className="text-xs text-[#DC2626] mt-2">{stats.criticalMaintenance} طلب حرج</p>
                                     </div>
-                                    <div className="p-3 bg-orange-50 rounded-lg text-orange-600">
+                                    <div className="p-3 bg-[#F7941D]/10 rounded-lg text-[#D67A0A]">
                                         <Wrench className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@ export const SupportDashboard: React.FC = () => {
                                         <h3 className="text-3xl font-bold text-gray-800">{stats.activeCustody}</h3>
                                         <p className="text-xs text-gray-400 mt-2">عهدة نشطة</p>
                                     </div>
-                                    <div className="p-3 bg-purple-50 rounded-lg text-purple-600">
+                                    <div className="p-3 bg-[#FCB614]/10 rounded-lg text-[#D49A0A]">
                                         <Briefcase className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -125,28 +125,28 @@ export const SupportDashboard: React.FC = () => {
                                     حالة المباني والمرافق
                                 </h3>
                                 <div className="space-y-4">
-                                    <div className="flex justify-between items-center p-3 bg-green-50 rounded border border-green-100">
+                                    <div className="flex justify-between items-center p-3 bg-[#2BB574]/10 rounded border border-[#2BB574]/10">
                                         <span className="font-medium text-gray-700">المبنى الرئيسي (الإدارة)</span>
-                                        <span className="text-green-700 text-sm font-bold">ممتاز 100%</span>
+                                        <span className="text-[#1E9658] text-sm font-bold">ممتاز 100%</span>
                                     </div>
-                                    <div className="flex justify-between items-center p-3 bg-yellow-50 rounded border border-yellow-100">
+                                    <div className="flex justify-between items-center p-3 bg-[#FCB614]/10 rounded border border-[#FCB614]/10">
                                         <span className="font-medium text-gray-700">مبنى الضيافة (أ)</span>
-                                        <span className="text-yellow-700 text-sm font-bold">يحتاج صيانة طفيفة</span>
+                                        <span className="text-[#D49A0A] text-sm font-bold">يحتاج صيانة طفيفة</span>
                                     </div>
-                                    <div className="flex justify-between items-center p-3 bg-green-50 rounded border border-green-100">
+                                    <div className="flex justify-between items-center p-3 bg-[#2BB574]/10 rounded border border-[#2BB574]/10">
                                         <span className="font-medium text-gray-700">المسجد والساحات</span>
-                                        <span className="text-green-700 text-sm font-bold">ممتاز 100%</span>
+                                        <span className="text-[#1E9658] text-sm font-bold">ممتاز 100%</span>
                                     </div>
                                 </div>
                             </Card>
 
-                            <div className="bg-gradient-to-br from-teal-800 to-teal-600 rounded-xl p-6 text-white flex flex-col justify-center items-center text-center">
+                            <div className="bg-gradient-to-br from-[#0F3144] to-[#1B7778] rounded-xl p-6 text-white flex flex-col justify-center items-center text-center">
                                 <Wrench className="w-16 h-16 mb-4 opacity-80" />
                                 <h3 className="text-2xl font-bold mb-2">الإبلاغ السريع</h3>
                                 <p className="opacity-90 max-w-sm mb-6">
                                     يمكنك الإبلاغ عن الأعطال الطارئة في المباني أو الأجهزة الطبية مباشرة من هنا ليتم توجيهها للفريق المختص.
                                 </p>
-                                <button className="bg-white text-teal-800 px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-colors w-full md:w-auto">
+                                <button className="bg-white text-[#0F3144] px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-colors w-full md:w-auto">
                                     + بلاغ صيانة طارئ
                                 </button>
                             </div>

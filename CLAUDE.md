@@ -10,6 +10,8 @@ Arabic RTL **social-model rehabilitation operations system** for HRSD Al-Baha Co
 
 ## Branches
 
+**Active development branch: `v2`** — always checkout v2 for new work.
+
 - `main` — Basira v1 / مبادرة صفر ورق — MHRSD-endorsed 2025 achievement (approved 2025-12-03 by Ali Al-Qarni). Tagged `v1.0.0-zero-paper`. Frozen as the record-of-endorsement; hotfixes only.
 - `v2` — social-model / Trust-Ground / Dignity Index work. All new features land here. See `PLAN-comprehensive-2026.md` for the 12-month plan.
 
@@ -33,6 +35,11 @@ cd /c/dev/basira && ./node_modules/.bin/vite --port 5175 --strictPort --host
 ```
 
 Opens at `http://localhost:5175/dashboard`. Correct UI shows "مركز التأهيل الشامل بالباحة" in light theme. If dark theme with FHIR engine cards, STOP — wrong codebase.
+
+### Key routes (v2)
+
+- `/dashboard` — main dashboard (landing)
+- `/leadership-compass` — بوصلة القيادة (strategic decision surface, 7 tabs, shipped 2026-04-22)
 
 ## Verification before "done"
 
@@ -205,7 +212,7 @@ src/
 `index.tsx` — Provider stack order:
 1. React.StrictMode
 2. ErrorBoundary
-3. ThemeProvider (dark mode default)
+3. ThemeProvider (light mode default on v2)
 4. QueryProvider (TanStack Query, 5min staleTime)
 5. BrowserRouter (React Router v7)
 6. AuthProvider (Supabase auth + demo mode)
@@ -222,6 +229,7 @@ Client state (app, notifications, toast, UI, user, view mode) lives in Zustand s
 - **RTL:** Arabic-first with Tajawal/Cairo fonts
 - **Theming:** HRSD branding (navy #1a365d, teal #0d9488, gold #eab308)
 - **Audit trail:** `startAuditService()` runs on app initialization
+- **Sidebar:** 320px wide, 9 sections including القيادة الاستراتيّة (v2)
 
 ### Environment Variables
 

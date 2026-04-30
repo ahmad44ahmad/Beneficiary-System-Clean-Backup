@@ -17,8 +17,8 @@ export const CONFIDENCE_LABELS: Record<DiscoveryConfidence, string> = {
 export const CONFIDENCE_TONES: Record<DiscoveryConfidence, {
     bg: string; text: string; border: string;
 }> = {
-    preliminary: { bg: 'bg-slate-100',   text: 'text-slate-700',     border: 'border-slate-300' },
-    moderate:    { bg: 'bg-sky-100',     text: 'text-sky-800',       border: 'border-sky-400' },
+    preliminary: { bg: 'bg-gray-100',   text: 'text-hrsd-navy',     border: 'border-gray-300' },
+    moderate:    { bg: 'bg-[#269798]/10',     text: 'text-[#0F3144]',       border: 'border-[#269798]' },
     strong:      { bg: 'bg-hrsd-green/15', text: 'text-hrsd-green-dark', border: 'border-hrsd-green/50' },
 };
 

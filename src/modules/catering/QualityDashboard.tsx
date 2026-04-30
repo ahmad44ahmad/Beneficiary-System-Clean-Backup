@@ -72,40 +72,40 @@ export const QualityDashboard = () => {
 
     return (
         <div className="bg-gray-50 min-h-screen p-6" dir="rtl">
-            <h1 className="text-2xl font-bold text-[#14415A] mb-6">لوحة قيادة الجودة</h1>
+            <h1 className="text-2xl font-bold text-[#0F3144] mb-6">لوحة قيادة الجودة</h1>
 
             {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-red-500">
+                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-[#DC2626]">
                     <p className="text-gray-500 text-sm font-medium mb-1">إجمالي الحسومات (شهري)</p>
-                    <h3 className="text-3xl font-bold text-[#14415A]">{stats.totalDeductions} ريال</h3>
-                    <div className="flex items-center gap-1 text-red-500 text-xs mt-2">
+                    <h3 className="text-3xl font-bold text-[#0F3144]">{stats.totalDeductions} ريال</h3>
+                    <div className="flex items-center gap-1 text-[#DC2626] text-xs mt-2">
                         <TrendingDown className="w-4 h-4" />
                         <span>+12% عن الشهر الماضي</span>
                     </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-green-500">
+                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-[#2BB574]">
                     <p className="text-gray-500 text-sm font-medium mb-1">نسبة الامتثال</p>
-                    <h3 className="text-3xl font-bold text-[#14415A]">{stats.compliantPercentage}%</h3>
-                    <div className="flex items-center gap-1 text-green-500 text-xs mt-2">
+                    <h3 className="text-3xl font-bold text-[#0F3144]">{stats.compliantPercentage}%</h3>
+                    <div className="flex items-center gap-1 text-[#1E9658] text-xs mt-2">
                         <CheckCircle className="w-4 h-4" />
                         <span>أداء جيد جداً</span>
                     </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-yellow-500">
+                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-[#FCB614]">
                     <p className="text-gray-500 text-sm font-medium mb-1">عدد المخالفات</p>
-                    <h3 className="text-3xl font-bold text-[#14415A]">
+                    <h3 className="text-3xl font-bold text-[#0F3144]">
                         {stats.topViolations.reduce((a, b) => a + b.count, 0)}
                     </h3>
                 </div>
 
-                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-blue-500">
+                <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-[#269798]">
                     <p className="text-gray-500 text-sm font-medium mb-1">التقييم العام للمتعهد</p>
                     <div className="flex items-center gap-2">
-                        <h3 className="text-3xl font-bold text-[#14415A]">4.5/5</h3>
-                        <Award className="w-8 h-8 text-yellow-500" />
+                        <h3 className="text-3xl font-bold text-[#0F3144]">4.5/5</h3>
+                        <Award className="w-8 h-8 text-[#D49A0A]" />
                     </div>
                 </div>
             </div>
@@ -113,16 +113,16 @@ export const QualityDashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Chart */}
                 <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 className="font-bold text-[#14415A] mb-6">أكثر المخالفات شيوعاً</h3>
+                    <h3 className="font-bold text-[#0F3144] mb-6">أكثر المخالفات شيوعاً</h3>
                     <div className="h-64">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={stats.topViolations}>
                                 <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip />
-                                <Bar dataKey="count" fill="#14415A" radius={[5, 5, 0, 0]}>
+                                <Bar dataKey="count" fill="#0F3144" radius={[5, 5, 0, 0]}>
                                     {stats.topViolations.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#14415A' : '#F5961E'} />
+                                        <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#0F3144' : '#F7941D'} />
                                     ))}
                                 </Bar>
                             </BarChart>
@@ -132,7 +132,7 @@ export const QualityDashboard = () => {
 
                 {/* Recent Evals */}
                 <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 className="font-bold text-[#14415A] mb-6">آخر التقييمات</h3>
+                    <h3 className="font-bold text-[#0F3144] mb-6">آخر التقييمات</h3>
                     <table className="w-full text-right text-sm">
                         <thead className="bg-gray-50 text-gray-600">
                             <tr>
@@ -146,7 +146,7 @@ export const QualityDashboard = () => {
                                 <tr key={ev.id}>
                                     <td className="p-3">{new Date(ev.evaluation_date).toLocaleDateString('ar-SA')}</td>
                                     <td className="p-3 font-medium">{ev.supplier?.name}</td>
-                                    <td className="p-3 text-red-600 font-bold">{ev.total_penalty_amount} ريال</td>
+                                    <td className="p-3 text-[#DC2626] font-bold">{ev.total_penalty_amount} ريال</td>
                                 </tr>
                             ))}
                             {stats.recentEvals.length === 0 && (

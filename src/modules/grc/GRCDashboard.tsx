@@ -92,64 +92,64 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
   clinical: {
     label: 'سريري',
     labelEn: 'Clinical',
-    color: 'text-rose-400',
-    bg: 'bg-rose-500/20',
-    gradient: 'from-rose-500 to-pink-600',
+    color: 'text-[#DC2626]',
+    bg: 'bg-[#DC2626]/20',
+    gradient: 'from-[#DC2626] to-[#B91C1C]',
     icon: Stethoscope
   },
   safety: {
     label: 'سلامة',
     labelEn: 'Safety',
-    color: 'text-red-400',
-    bg: 'bg-red-500/20',
-    gradient: 'from-red-500 to-orange-600',
+    color: 'text-[#DC2626]',
+    bg: 'bg-[#DC2626]/20',
+    gradient: 'from-[#DC2626] to-[#D67A0A]',
     icon: Flame
   },
   social: {
     label: 'اجتماعي',
     labelEn: 'Social',
-    color: 'text-violet-400',
-    bg: 'bg-violet-500/20',
-    gradient: 'from-violet-500 to-purple-600',
+    color: 'text-[#FCB614]',
+    bg: 'bg-[#FCB614]/20',
+    gradient: 'from-[#FCB614] to-[#D49A0A]',
     icon: Users
   },
   infrastructure: {
     label: 'بنية تحتية',
     labelEn: 'Infrastructure',
-    color: 'text-amber-400',
-    bg: 'bg-amber-500/20',
-    gradient: 'from-amber-500 to-yellow-600',
+    color: 'text-[#FCB614]',
+    bg: 'bg-[#FCB614]/20',
+    gradient: 'from-[#FCB614] to-[#D49A0A]',
     icon: Building2
   },
   compliance: {
     label: 'امتثال',
     labelEn: 'Compliance',
-    color: 'text-blue-400',
-    bg: 'bg-blue-500/20',
-    gradient: 'from-blue-500 to-cyan-600',
+    color: 'text-[#269798]',
+    bg: 'bg-[#269798]/20',
+    gradient: 'from-[#269798] to-[#1B7778]',
     icon: Scale
   },
   contractual: {
     label: 'تعاقدي',
     labelEn: 'Contractual',
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/20',
-    gradient: 'from-emerald-500 to-teal-600',
+    color: 'text-[#2BB574]',
+    bg: 'bg-[#2BB574]/20',
+    gradient: 'from-[#2BB574] to-[#1B7778]',
     icon: FileCheck
   },
 };
 
 const STATUS_CONFIG: Record<RiskStatus, { label: string; color: string; bg: string; icon: React.ElementType }> = {
-  open: { label: 'مفتوح', color: 'text-red-400', bg: 'bg-red-500/20', icon: AlertOctagon },
-  mitigating: { label: 'قيد المعالجة', color: 'text-amber-400', bg: 'bg-amber-500/20', icon: Zap },
-  monitoring: { label: 'تحت المراقبة', color: 'text-blue-400', bg: 'bg-blue-500/20', icon: Eye },
-  closed: { label: 'مغلق', color: 'text-emerald-400', bg: 'bg-emerald-500/20', icon: CheckCircle },
+  open: { label: 'مفتوح', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20', icon: AlertOctagon },
+  mitigating: { label: 'قيد المعالجة', color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', icon: Zap },
+  monitoring: { label: 'تحت المراقبة', color: 'text-[#269798]', bg: 'bg-[#269798]/20', icon: Eye },
+  closed: { label: 'مغلق', color: 'text-[#2BB574]', bg: 'bg-[#2BB574]/20', icon: CheckCircle },
 };
 
 const NCR_SEVERITY_CONFIG: Record<NCRSeverity, { label: string; color: string; bg: string }> = {
-  critical: { label: 'حرج', color: 'text-red-400', bg: 'bg-red-500/20' },
-  major: { label: 'رئيسي', color: 'text-amber-400', bg: 'bg-amber-500/20' },
-  minor: { label: 'ثانوي', color: 'text-blue-400', bg: 'bg-blue-500/20' },
+  critical: { label: 'حرج', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20' },
+  major: { label: 'رئيسي', color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20' },
+  minor: { label: 'ثانوي', color: 'text-[#269798]', bg: 'bg-[#269798]/20' },
 };
 
 // 📦 البيانات الحقيقية من سجل المخاطر
@@ -538,10 +538,10 @@ const BCP_SCENARIOS: BCPScenario[] = [
 const RiskMatrixPro = ({ risks, onCellClick }: { risks: Risk[]; onCellClick?: (l: number, i: number) => void }) => {
   const getColor = (likelihood: number, impact: number) => {
     const score = likelihood * impact;
-    if (score >= 15) return 'bg-gradient-to-br from-red-500 to-rose-600';
-    if (score >= 10) return 'bg-gradient-to-br from-orange-500 to-amber-600';
-    if (score >= 5) return 'bg-gradient-to-br from-yellow-500 to-amber-500';
-    return 'bg-gradient-to-br from-emerald-500 to-green-600';
+    if (score >= 15) return 'bg-gradient-to-br from-[#DC2626] to-[#B91C1C]';
+    if (score >= 10) return 'bg-gradient-to-br from-[#F7941D] to-[#D49A0A]';
+    if (score >= 5) return 'bg-gradient-to-br from-[#FCB614] to-[#FCB614]';
+    return 'bg-gradient-to-br from-[#2BB574] to-[#1E9658]';
   };
 
   const getRisksInCell = (likelihood: number, impact: number) => {
@@ -552,10 +552,10 @@ const RiskMatrixPro = ({ risks, onCellClick }: { risks: Risk[]; onCellClick?: (l
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-6 border border-white/10"
+      className="bg-gradient-to-br from-white/50 to-white/50 backdrop-blur-xl rounded-3xl p-6 border border-white/10"
     >
       <h3 className="text-white font-bold mb-4 flex items-center gap-2 text-lg">
-        <Target className="w-5 h-5 text-teal-400" />
+        <Target className="w-5 h-5 text-[#269798]" />
         مصفوفة المخاطر 5×5
       </h3>
 
@@ -603,10 +603,10 @@ const RiskMatrixPro = ({ risks, onCellClick }: { risks: Risk[]; onCellClick?: (l
       {/* المفتاح */}
       <div className="flex flex-wrap justify-center gap-3 mt-4 pt-4 border-t border-white/10">
         {[
-          { color: 'bg-red-500', label: 'حرج (15-25)' },
-          { color: 'bg-orange-500', label: 'عالي (10-14)' },
-          { color: 'bg-yellow-500', label: 'متوسط (5-9)' },
-          { color: 'bg-emerald-500', label: 'منخفض (1-4)' },
+          { color: 'bg-[#DC2626]', label: 'حرج (15-25)' },
+          { color: 'bg-[#F7941D]', label: 'عالي (10-14)' },
+          { color: 'bg-[#FCB614]', label: 'متوسط (5-9)' },
+          { color: 'bg-[#2BB574]', label: 'منخفض (1-4)' },
         ].map(({ color, label }) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className={`w-3 h-3 rounded ${color}`} />
@@ -627,17 +627,17 @@ const RiskCardPro = ({ risk, index }: { risk: Risk; index: number }) => {
   const StatusIcon = statusConfig.icon;
 
   const getRiskColor = (score: number) => {
-    if (score >= 15) return 'border-r-red-500 bg-red-500/5';
-    if (score >= 10) return 'border-r-orange-500 bg-orange-500/5';
-    if (score >= 5) return 'border-r-amber-500 bg-amber-500/5';
-    return 'border-r-emerald-500 bg-emerald-500/5';
+    if (score >= 15) return 'border-r-red-500 bg-[#DC2626]/5';
+    if (score >= 10) return 'border-r-orange-500 bg-[#F7941D]/5';
+    if (score >= 5) return 'border-r-amber-500 bg-[#FCB614]/5';
+    return 'border-r-emerald-500 bg-[#2BB574]/5';
   };
 
   const getScoreGradient = (score: number) => {
-    if (score >= 15) return 'from-red-500 to-rose-600';
-    if (score >= 10) return 'from-orange-500 to-amber-600';
-    if (score >= 5) return 'from-amber-500 to-yellow-600';
-    return 'from-emerald-500 to-green-600';
+    if (score >= 15) return 'from-[#DC2626] to-[#B91C1C]';
+    if (score >= 10) return 'from-[#F7941D] to-[#D49A0A]';
+    if (score >= 5) return 'from-[#FCB614] to-[#D49A0A]';
+    return 'from-[#2BB574] to-[#1E9658]';
   };
 
   return (
@@ -667,7 +667,7 @@ const RiskCardPro = ({ risk, index }: { risk: Risk; index: number }) => {
           {/* المحتوى */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-teal-400 font-mono text-sm">{risk.code}</span>
+              <span className="text-[#269798] font-mono text-sm">{risk.code}</span>
               <span className={`px-2 py-0.5 rounded-full text-xs ${statusConfig.bg} ${statusConfig.color} flex items-center gap-1`}>
                 <StatusIcon className="w-3 h-3" />
                 {statusConfig.label}
@@ -682,7 +682,7 @@ const RiskCardPro = ({ risk, index }: { risk: Risk; index: number }) => {
                 {risk.owner}
               </span>
               {risk.dueDate && (
-                <span className="flex items-center gap-1 text-amber-400">
+                <span className="flex items-center gap-1 text-[#FCB614]">
                   <Calendar className="w-3.5 h-3.5" />
                   {risk.dueDate}
                 </span>
@@ -762,12 +762,12 @@ const NCRCard = ({ ncr, index }: { ncr: NCR; index: number }) => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl p-4 border border-white/10"
+      className="bg-gradient-to-br from-white/50 to-white/50 rounded-2xl p-4 border border-white/10"
     >
       <div className="flex items-start justify-between mb-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-rose-400 font-mono font-bold">{ncr.code}</span>
+            <span className="text-[#DC2626] font-mono font-bold">{ncr.code}</span>
             <span className={`px-2 py-0.5 rounded-full text-xs ${severityConfig.bg} ${severityConfig.color}`}>
               {severityConfig.label}
             </span>
@@ -775,7 +775,7 @@ const NCRCard = ({ ncr, index }: { ncr: NCR; index: number }) => {
           <h4 className="text-white font-bold">{ncr.title}</h4>
         </div>
         <div className="text-left">
-          <div className="text-2xl font-black text-teal-400">{ncr.progress}%</div>
+          <div className="text-2xl font-black text-[#269798]">{ncr.progress}%</div>
           <div className="text-gray-500 text-xs">الإنجاز</div>
         </div>
       </div>
@@ -786,7 +786,7 @@ const NCRCard = ({ ncr, index }: { ncr: NCR; index: number }) => {
           initial={{ width: 0 }}
           animate={{ width: `${ncr.progress}%` }}
           transition={{ duration: 1, delay: index * 0.1 }}
-          className="h-full bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full"
+          className="h-full bg-gradient-to-r from-[#269798] to-[#2BB574] rounded-full"
         />
       </div>
 
@@ -804,7 +804,7 @@ const NCRCard = ({ ncr, index }: { ncr: NCR; index: number }) => {
             <Users className="w-3.5 h-3.5" />
             {ncr.owner}
           </span>
-          <span className="text-amber-400 flex items-center gap-1">
+          <span className="text-[#FCB614] flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
             {ncr.dueDate}
           </span>
@@ -818,10 +818,10 @@ const NCRCard = ({ ncr, index }: { ncr: NCR; index: number }) => {
 const ComplianceCard = ({ req, index }: { req: ComplianceRequirement; index: number }) => {
   const getStatusConfig = (status: ComplianceStatus) => {
     switch (status) {
-      case 'compliant': return { label: 'متوافق', color: 'text-emerald-400', bg: 'bg-emerald-500/20', icon: CheckCircle };
-      case 'non_compliant': return { label: 'غير متوافق', color: 'text-red-400', bg: 'bg-red-500/20', icon: XCircle };
-      case 'partial': return { label: 'جزئي', color: 'text-amber-400', bg: 'bg-amber-500/20', icon: AlertTriangle };
-      case 'in_progress': return { label: 'قيد التنفيذ', color: 'text-blue-400', bg: 'bg-blue-500/20', icon: Clock };
+      case 'compliant': return { label: 'متوافق', color: 'text-[#2BB574]', bg: 'bg-[#2BB574]/20', icon: CheckCircle };
+      case 'non_compliant': return { label: 'غير متوافق', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20', icon: XCircle };
+      case 'partial': return { label: 'جزئي', color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', icon: AlertTriangle };
+      case 'in_progress': return { label: 'قيد التنفيذ', color: 'text-[#269798]', bg: 'bg-[#269798]/20', icon: Clock };
     }
   };
 
@@ -838,7 +838,7 @@ const ComplianceCard = ({ req, index }: { req: ComplianceRequirement; index: num
       <div className="flex items-start justify-between mb-2">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-blue-400 font-mono text-sm font-bold">{req.code}</span>
+            <span className="text-[#269798] font-mono text-sm font-bold">{req.code}</span>
             <span className="text-gray-500 text-xs">{req.standard}</span>
           </div>
           <h4 className="text-white font-medium">{req.title}</h4>
@@ -850,8 +850,8 @@ const ComplianceCard = ({ req, index }: { req: ComplianceRequirement; index: num
       </div>
 
       {req.gap && (
-        <div className="mt-2 p-2 bg-red-500/10 rounded-lg text-sm">
-          <span className="text-red-400 font-medium">الفجوة: </span>
+        <div className="mt-2 p-2 bg-[#DC2626]/10 rounded-lg text-sm">
+          <span className="text-[#DC2626] font-medium">الفجوة: </span>
           <span className="text-gray-300">{req.gap}</span>
         </div>
       )}
@@ -866,7 +866,7 @@ const ComplianceCard = ({ req, index }: { req: ComplianceRequirement; index: num
       {req.evidence && req.evidence.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-1">
           {req.evidence.map((e, i) => (
-            <span key={i} className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-xs">
+            <span key={i} className="px-2 py-0.5 bg-[#2BB574]/20 text-[#2BB574] rounded text-xs">
               ✓ {e}
             </span>
           ))}
@@ -880,18 +880,18 @@ const ComplianceCard = ({ req, index }: { req: ComplianceRequirement; index: num
 const BCPScenarioCard = ({ scenario, index }: { scenario: BCPScenario; index: number }) => {
   const getTypeConfig = (type: BCPScenario['type']) => {
     switch (type) {
-      case 'evacuation': return { icon: Siren, color: 'text-red-400', bg: 'bg-red-500/20', gradient: 'from-red-500 to-rose-600' };
-      case 'pandemic': return { icon: Heart, color: 'text-violet-400', bg: 'bg-violet-500/20', gradient: 'from-violet-500 to-purple-600' };
-      case 'infrastructure': return { icon: Zap, color: 'text-amber-400', bg: 'bg-amber-500/20', gradient: 'from-amber-500 to-yellow-600' };
-      case 'supply': return { icon: Droplets, color: 'text-blue-400', bg: 'bg-blue-500/20', gradient: 'from-blue-500 to-cyan-600' };
+      case 'evacuation': return { icon: Siren, color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20', gradient: 'from-[#DC2626] to-[#B91C1C]' };
+      case 'pandemic': return { icon: Heart, color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', gradient: 'from-[#FCB614] to-[#D49A0A]' };
+      case 'infrastructure': return { icon: Zap, color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', gradient: 'from-[#FCB614] to-[#D49A0A]' };
+      case 'supply': return { icon: Droplets, color: 'text-[#269798]', bg: 'bg-[#269798]/20', gradient: 'from-[#269798] to-[#1B7778]' };
     }
   };
 
   const getStatusConfig = (status: BCPScenario['status']) => {
     switch (status) {
-      case 'ready': return { label: 'جاهز', color: 'text-emerald-400', bg: 'bg-emerald-500/20' };
-      case 'needs_update': return { label: 'يحتاج تحديث', color: 'text-amber-400', bg: 'bg-amber-500/20' };
-      case 'not_tested': return { label: 'لم يُختبر', color: 'text-red-400', bg: 'bg-red-500/20' };
+      case 'ready': return { label: 'جاهز', color: 'text-[#2BB574]', bg: 'bg-[#2BB574]/20' };
+      case 'needs_update': return { label: 'يحتاج تحديث', color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20' };
+      case 'not_tested': return { label: 'لم يُختبر', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20' };
     }
   };
 
@@ -905,7 +905,7 @@ const BCPScenarioCard = ({ scenario, index }: { scenario: BCPScenario; index: nu
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
-      className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl overflow-hidden border border-white/10 group"
+      className="bg-gradient-to-br from-white/80 to-white/80 rounded-2xl overflow-hidden border border-white/10 group"
     >
       {/* الهيدر */}
       <div className={`bg-gradient-to-r ${typeConfig.gradient} p-4`}>
@@ -1002,7 +1002,7 @@ export default function GRCDashboardPro() {
   }, [filterCategory, filterStatus]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-white via-white to-white p-6" dir="rtl">
       {/* الهيدر */}
       <motion.header
         initial={{ opacity: 0, y: -20 }}
@@ -1012,7 +1012,7 @@ export default function GRCDashboardPro() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl font-black text-white flex items-center gap-3">
-              <div className="p-3 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl shadow-lg shadow-teal-500/30">
+              <div className="p-3 bg-gradient-to-br from-[#269798] to-[#1E9658] rounded-2xl shadow-lg shadow-teal-500/30">
                 <Shield className="w-8 h-8 text-white" />
               </div>
               الحوكمة والمخاطر والامتثال
@@ -1045,7 +1045,7 @@ export default function GRCDashboardPro() {
               label: 'المخاطر الحرجة',
               value: stats.criticalRisks,
               total: stats.totalRisks,
-              color: 'from-red-500 to-rose-600',
+              color: 'from-[#DC2626] to-[#B91C1C]',
               icon: AlertOctagon,
               trend: 'down',
               trendValue: '-2'
@@ -1053,7 +1053,7 @@ export default function GRCDashboardPro() {
             {
               label: 'معدل الامتثال',
               value: `${stats.complianceRate}%`,
-              color: 'from-emerald-500 to-teal-600',
+              color: 'from-[#2BB574] to-[#1B7778]',
               icon: CheckCircle,
               trend: 'up',
               trendValue: '+5%'
@@ -1062,13 +1062,13 @@ export default function GRCDashboardPro() {
               label: 'NCRs مفتوحة',
               value: stats.openNCRs,
               subValue: `${stats.avgNCRProgress}% متوسط الإنجاز`,
-              color: 'from-amber-500 to-orange-600',
+              color: 'from-[#FCB614] to-[#D67A0A]',
               icon: FileText,
             },
             {
               label: 'خطط BCP جاهزة',
               value: `${stats.bcpReady}/${BCP_SCENARIOS.length}`,
-              color: 'from-blue-500 to-cyan-600',
+              color: 'from-[#269798] to-[#1B7778]',
               icon: Siren,
             },
           ].map(({ label, value, total, subValue, color, icon: Icon, trend, trendValue }) => (
@@ -1084,7 +1084,7 @@ export default function GRCDashboardPro() {
                   <p className="text-3xl font-black">{value}</p>
                   {total && <span className="text-white/60 text-lg mb-0.5">/{total}</span>}
                   {trend && (
-                    <span className={`flex items-center text-xs ${trend === 'up' ? 'text-emerald-300' : 'text-rose-300'}`}>
+                    <span className={`flex items-center text-xs ${trend === 'up' ? 'text-[#2BB574]' : 'text-[#DC2626]'}`}>
                       {trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                       {trendValue}
                     </span>
@@ -1112,7 +1112,7 @@ export default function GRCDashboardPro() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all whitespace-nowrap ${activeTab === key
-              ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-lg shadow-teal-500/30'
+              ? 'bg-gradient-to-r from-[#269798] to-[#1E9658] text-white shadow-lg shadow-teal-500/30'
               : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >
@@ -1143,7 +1143,7 @@ export default function GRCDashboardPro() {
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => setFilterCategory('all')}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${filterCategory === 'all' ? 'bg-teal-500 text-white' : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${filterCategory === 'all' ? 'bg-[#269798] text-white' : 'bg-white/10 text-gray-300 hover:bg-white/20'
                       }`}
                   >
                     جميع الفئات
@@ -1185,11 +1185,11 @@ export default function GRCDashboardPro() {
                     { status: 'partial', label: 'جزئي', count: REAL_COMPLIANCE.filter(c => c.status === 'partial').length },
                     { status: 'non_compliant', label: 'غير متوافق', count: REAL_COMPLIANCE.filter(c => c.status === 'non_compliant').length },
                   ].map(({ status, label, count }) => (
-                    <div key={status} className={`p-3 rounded-xl text-center ${status === 'compliant' ? 'bg-emerald-500/20' :
-                      status === 'partial' ? 'bg-amber-500/20' : 'bg-red-500/20'
+                    <div key={status} className={`p-3 rounded-xl text-center ${status === 'compliant' ? 'bg-[#2BB574]/20' :
+                      status === 'partial' ? 'bg-[#FCB614]/20' : 'bg-[#DC2626]/20'
                       }`}>
-                      <div className={`text-2xl font-bold ${status === 'compliant' ? 'text-emerald-400' :
-                        status === 'partial' ? 'text-amber-400' : 'text-red-400'
+                      <div className={`text-2xl font-bold ${status === 'compliant' ? 'text-[#2BB574]' :
+                        status === 'partial' ? 'text-[#FCB614]' : 'text-[#DC2626]'
                         }`}>{count}</div>
                       <div className="text-gray-400 text-sm">{label}</div>
                     </div>
@@ -1214,9 +1214,9 @@ export default function GRCDashboardPro() {
                 exit={{ opacity: 0, x: 20 }}
                 className="space-y-4"
               >
-                <div className="bg-gradient-to-r from-rose-500/20 to-red-500/20 rounded-2xl p-4 border border-rose-500/30">
+                <div className="bg-gradient-to-r from-[#DC2626]/20 to-[#DC2626]/20 rounded-2xl p-4 border border-[#DC2626]/30">
                   <h3 className="text-white font-bold mb-2 flex items-center gap-2">
-                    <AlertOctagon className="w-5 h-5 text-rose-400" />
+                    <AlertOctagon className="w-5 h-5 text-[#DC2626]" />
                     حالات عدم المطابقة الرئيسية (NCRs)
                   </h3>
                   <p className="text-gray-400 text-sm">
@@ -1242,9 +1242,9 @@ export default function GRCDashboardPro() {
                 exit={{ opacity: 0, x: 20 }}
                 className="space-y-4"
               >
-                <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl p-4 border border-blue-500/30">
+                <div className="bg-gradient-to-r from-[#269798]/20 to-[#269798]/20 rounded-2xl p-4 border border-[#269798]/30">
                   <h3 className="text-white font-bold mb-2 flex items-center gap-2">
-                    <Siren className="w-5 h-5 text-blue-400" />
+                    <Siren className="w-5 h-5 text-[#269798]" />
                     خطط استمرارية الأعمال (BCP) - ISO 22301
                   </h3>
                   <p className="text-gray-400 text-sm">
@@ -1273,10 +1273,10 @@ export default function GRCDashboardPro() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-6 border border-white/10"
+            className="bg-gradient-to-br from-white/50 to-white/50 backdrop-blur-xl rounded-3xl p-6 border border-white/10"
           >
             <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-              <PieChart className="w-5 h-5 text-purple-400" />
+              <PieChart className="w-5 h-5 text-[#FCB614]" />
               ملخص الامتثال ISO 9001
             </h3>
 
@@ -1297,8 +1297,8 @@ export default function GRCDashboardPro() {
                   />
                   <defs>
                     <linearGradient id="complianceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#14b8a6" />
-                      <stop offset="100%" stopColor="#10b981" />
+                      <stop offset="0%" stopColor="#269798" />
+                      <stop offset="100%" stopColor="#2BB574" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -1313,10 +1313,10 @@ export default function GRCDashboardPro() {
 
             <div className="space-y-2 mt-4">
               {[
-                { label: 'متوافق', count: REAL_COMPLIANCE.filter(r => r.status === 'compliant').length, color: 'bg-emerald-500' },
-                { label: 'جزئي', count: REAL_COMPLIANCE.filter(r => r.status === 'partial').length, color: 'bg-amber-500' },
-                { label: 'غير متوافق', count: REAL_COMPLIANCE.filter(r => r.status === 'non_compliant').length, color: 'bg-red-500' },
-                { label: 'قيد التنفيذ', count: REAL_COMPLIANCE.filter(r => r.status === 'in_progress').length, color: 'bg-blue-500' },
+                { label: 'متوافق', count: REAL_COMPLIANCE.filter(r => r.status === 'compliant').length, color: 'bg-[#2BB574]' },
+                { label: 'جزئي', count: REAL_COMPLIANCE.filter(r => r.status === 'partial').length, color: 'bg-[#FCB614]' },
+                { label: 'غير متوافق', count: REAL_COMPLIANCE.filter(r => r.status === 'non_compliant').length, color: 'bg-[#DC2626]' },
+                { label: 'قيد التنفيذ', count: REAL_COMPLIANCE.filter(r => r.status === 'in_progress').length, color: 'bg-[#269798]' },
               ].map(({ label, count, color }) => (
                 <div key={label} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -1333,10 +1333,10 @@ export default function GRCDashboardPro() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-6 border border-white/10"
+            className="bg-gradient-to-br from-white/50 to-white/50 backdrop-blur-xl rounded-3xl p-6 border border-white/10"
           >
             <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-amber-400" />
+              <Calendar className="w-5 h-5 text-[#FCB614]" />
               خارطة الطريق للاعتماد
             </h3>
 
@@ -1350,10 +1350,10 @@ export default function GRCDashboardPro() {
                 { month: 'يونيو', task: 'مراجعة الإدارة + الجاهزية النهائية', status: 'pending' },
               ].map(({ month, task, status }, _i) => (
                 <div key={month} className="flex items-start gap-3">
-                  <div className={`w-3 h-3 rounded-full mt-1.5 ${status === 'current' ? 'bg-teal-500 animate-pulse' : 'bg-white/20'
+                  <div className={`w-3 h-3 rounded-full mt-1.5 ${status === 'current' ? 'bg-[#269798] animate-pulse' : 'bg-white/20'
                     }`} />
                   <div className="flex-1">
-                    <div className={`font-medium ${status === 'current' ? 'text-teal-400' : 'text-gray-400'}`}>
+                    <div className={`font-medium ${status === 'current' ? 'text-[#269798]' : 'text-gray-400'}`}>
                       {month}
                     </div>
                     <div className="text-gray-500 text-sm">{task}</div>

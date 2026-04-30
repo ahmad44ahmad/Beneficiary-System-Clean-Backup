@@ -182,7 +182,7 @@ export function CommandMenu() {
                             initial={{ opacity: 0, scale: 0.95, y: -20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-lg bg-slate-900 border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden"
+                            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-lg bg-white border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden"
                             dir="rtl"
                         >
                             {/* Search input */}
@@ -223,7 +223,7 @@ export function CommandMenu() {
                                                     onClick={() => handleSelect(cmd.path)}
                                                     onMouseEnter={() => setSelectedIndex(globalIndex)}
                                                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${globalIndex === selectedIndex
-                                                        ? 'bg-teal-500/20 text-white'
+                                                        ? 'bg-[#269798]/20 text-white'
                                                         : 'text-gray-400 hover:bg-white/5'
                                                         }`}
                                                 >

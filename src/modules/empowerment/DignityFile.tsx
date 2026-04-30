@@ -46,10 +46,10 @@ const TagInput: React.FC<{
                 {value.map(tag => (
                     <span
                         key={tag}
-                        className="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm flex items-center gap-1"
+                        className="px-3 py-1 bg-[#DC2626]/10 text-[#B91C1C] rounded-full text-sm flex items-center gap-1"
                     >
                         {tag}
-                        <button onClick={() => removeTag(tag)} className="text-pink-500 hover:text-pink-700">×</button>
+                        <button onClick={() => removeTag(tag)} className="text-[#DC2626] hover:text-[#B91C1C]">×</button>
                     </span>
                 ))}
             </div>
@@ -60,7 +60,7 @@ const TagInput: React.FC<{
                     <button
                         key={suggestion}
                         onClick={() => addTag(suggestion)}
-                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-pink-100 hover:text-pink-700 transition-colors"
+                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-[#DC2626]/10 hover:text-[#B91C1C] transition-colors"
                     >
                         + {suggestion}
                     </button>
@@ -74,7 +74,7 @@ const TagInput: React.FC<{
                 onChange={e => setInputValue(e.target.value)}
                 onKeyPress={e => e.key === 'Enter' && (e.preventDefault(), addTag(inputValue))}
                 placeholder="أضف خيار آخر..."
-                className="mt-2 w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 outline-none text-sm"
+                className="mt-2 w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#DC2626] outline-none text-sm"
             />
         </div>
     );
@@ -184,9 +184,9 @@ export const DignityFile: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white p-6" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-b from-[#DC2626]/10 to-white p-6" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-pink-500 via-rose-500 to-red-500 rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#DC2626] via-[#DC2626] to-[#DC2626] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button onClick={() => navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg" title="رجوع" aria-label="رجوع">
@@ -211,7 +211,7 @@ export const DignityFile: React.FC = () => {
                         <button
                             onClick={handleSave}
                             disabled={saving}
-                            className="px-4 py-2 bg-white text-pink-600 rounded-lg hover:bg-pink-50 flex items-center gap-2"
+                            className="px-4 py-2 bg-white text-[#DC2626] rounded-lg hover:bg-[#DC2626]/10 flex items-center gap-2"
                         >
                             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                             حفظ
@@ -223,7 +223,7 @@ export const DignityFile: React.FC = () => {
             {/* Identity Section */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <User className="w-5 h-5 text-pink-500" />
+                    <User className="w-5 h-5 text-[#DC2626]" />
                     هويتي
                 </h3>
 
@@ -235,7 +235,7 @@ export const DignityFile: React.FC = () => {
                             value={preferredName}
                             onChange={e => setPreferredName(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
                             placeholder="كيف تحب أن تُنادى؟"
                         />
                     </div>
@@ -246,7 +246,7 @@ export const DignityFile: React.FC = () => {
                             value={preferredTitle}
                             onChange={e => setPreferredTitle(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
                             placeholder="أبو... / أم... / أستاذ..."
                         />
                     </div>
@@ -258,7 +258,7 @@ export const DignityFile: React.FC = () => {
                         value={communicationStyle}
                         onChange={e => setCommunicationStyle(e.target.value)}
                         disabled={!editMode}
-                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50 min-h-[60px] resize-none"
+                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[60px] resize-none"
                         placeholder="كيف تفضل أن يتحدث معك الآخرون؟"
                     />
                 </div>
@@ -267,14 +267,14 @@ export const DignityFile: React.FC = () => {
             {/* Daily Routine */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <Sun className="w-5 h-5 text-yellow-500" />
+                    <Sun className="w-5 h-5 text-[#D49A0A]" />
                     روتيني اليومي
                 </h3>
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Sun className="w-4 h-4 text-yellow-500" />
+                            <Sun className="w-4 h-4 text-[#D49A0A]" />
                             وقت الاستيقاظ
                         </label>
                         <input
@@ -282,14 +282,14 @@ export const DignityFile: React.FC = () => {
                             value={wakeUpTime}
                             onChange={e => setWakeUpTime(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
                             title="وقت الاستيقاظ"
                             aria-label="وقت الاستيقاظ"
                         />
                     </div>
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Moon className="w-4 h-4 text-indigo-500" />
+                            <Moon className="w-4 h-4 text-[#0F3144]" />
                             وقت النوم
                         </label>
                         <input
@@ -297,7 +297,7 @@ export const DignityFile: React.FC = () => {
                             value={sleepTime}
                             onChange={e => setSleepTime(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
                             title="وقت النوم"
                             aria-label="وقت النوم"
                         />
@@ -313,7 +313,7 @@ export const DignityFile: React.FC = () => {
                         onChange={setPreferredActivities}
                         suggestions={ACTIVITIES}
                         label="الأنشطة المفضلة"
-                        icon={<Sparkles className="w-5 h-5 text-purple-500" />}
+                        icon={<Sparkles className="w-5 h-5 text-[#D49A0A]" />}
                     />
 
                     <TagInput
@@ -321,7 +321,7 @@ export const DignityFile: React.FC = () => {
                         onChange={setCalmingStrategies}
                         suggestions={CALMING_STRATEGIES}
                         label="ما يساعدني على الهدوء"
-                        icon={<Coffee className="w-5 h-5 text-teal-500" />}
+                        icon={<Coffee className="w-5 h-5 text-[#269798]" />}
                     />
 
                     <TagInput
@@ -329,7 +329,7 @@ export const DignityFile: React.FC = () => {
                         onChange={setMotivators}
                         suggestions={MOTIVATORS}
                         label="ما يحفزني"
-                        icon={<Star className="w-5 h-5 text-yellow-500" />}
+                        icon={<Star className="w-5 h-5 text-[#D49A0A]" />}
                     />
                 </div>
             )}
@@ -342,7 +342,7 @@ export const DignityFile: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2 flex items-center gap-1"><Sparkles className="w-4 h-4" /> الأنشطة المفضلة</p>
                             <div className="flex flex-wrap gap-2">
                                 {preferredActivities.map(a => (
-                                    <span key={a} className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">{a}</span>
+                                    <span key={a} className="px-3 py-1 bg-[#FCB614]/15 text-[#D49A0A] rounded-full text-sm">{a}</span>
                                 ))}
                             </div>
                         </div>
@@ -353,7 +353,7 @@ export const DignityFile: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2 flex items-center gap-1"><Coffee className="w-4 h-4" /> ما يساعدني على الهدوء</p>
                             <div className="flex flex-wrap gap-2">
                                 {calmingStrategies.map(s => (
-                                    <span key={s} className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm">{s}</span>
+                                    <span key={s} className="px-3 py-1 bg-[#269798]/10 text-[#1B7778] rounded-full text-sm">{s}</span>
                                 ))}
                             </div>
                         </div>
@@ -364,7 +364,7 @@ export const DignityFile: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2 flex items-center gap-1"><Star className="w-4 h-4" /> ما يحفزني</p>
                             <div className="flex flex-wrap gap-2">
                                 {motivators.map(m => (
-                                    <span key={m} className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">{m}</span>
+                                    <span key={m} className="px-3 py-1 bg-[#FCB614]/10 text-[#D49A0A] rounded-full text-sm">{m}</span>
                                 ))}
                             </div>
                         </div>
@@ -375,49 +375,49 @@ export const DignityFile: React.FC = () => {
             {/* Emotional Insights */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <MessageCircle className="w-5 h-5 text-blue-500" />
+                    <MessageCircle className="w-5 h-5 text-[#269798]" />
                     ما يهم معرفته عني
                 </h3>
 
                 <div className="space-y-4">
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Smile className="w-4 h-4 text-green-500" />
+                            <Smile className="w-4 h-4 text-[#1E9658]" />
                             ما يسعدني
                         </label>
                         <textarea
                             value={whatMakesMeHappy}
                             onChange={e => setWhatMakesMeHappy(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
                             placeholder="الأشياء التي تجلب لي الفرح..."
                         />
                     </div>
 
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Frown className="w-4 h-4 text-red-500" />
+                            <Frown className="w-4 h-4 text-[#DC2626]" />
                             ما يزعجني
                         </label>
                         <textarea
                             value={whatMakesMeUpset}
                             onChange={e => setWhatMakesMeUpset(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
                             placeholder="الأشياء التي يجب تجنبها..."
                         />
                     </div>
 
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Star className="w-4 h-4 text-yellow-500" />
+                            <Star className="w-4 h-4 text-[#D49A0A]" />
                             أحلامي وتطلعاتي
                         </label>
                         <textarea
                             value={myDreams}
                             onChange={e => setMyDreams(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
                             placeholder="ما أتمنى تحقيقه..."
                         />
                     </div>

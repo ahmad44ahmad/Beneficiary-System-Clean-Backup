@@ -21,10 +21,10 @@ export const CateringDashboard: React.FC = () => {
 
     // Stats
     const stats = [
-        { label: 'وجبات اليوم', value: meals.filter(m => m.scheduled_date === new Date().toISOString().split('T')[0]).length || '0', icon: Utensils, color: 'text-blue-600', bg: 'bg-blue-100' },
-        { label: 'نسبة الرضا', value: '94%', icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-100' },
-        { label: 'المخالفات', value: violations.filter(v => v.status === 'open').length.toString(), icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' },
-        { label: 'التكلفة اليومية', value: '5,220', unit: 'ر.س', icon: FileText, color: 'text-purple-600', bg: 'bg-purple-100' },
+        { label: 'وجبات اليوم', value: meals.filter(m => m.scheduled_date === new Date().toISOString().split('T')[0]).length || '0', icon: Utensils, color: 'text-[#269798]', bg: 'bg-[#269798]/15' },
+        { label: 'نسبة الرضا', value: '94%', icon: CheckCircle, color: 'text-[#1E9658]', bg: 'bg-[#2BB574]/15' },
+        { label: 'المخالفات', value: violations.filter(v => v.status === 'open').length.toString(), icon: AlertTriangle, color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/15' },
+        { label: 'التكلفة اليومية', value: '5,220', unit: 'ر.س', icon: FileText, color: 'text-[#D49A0A]', bg: 'bg-[#FCB614]/15' },
     ];
 
     return (

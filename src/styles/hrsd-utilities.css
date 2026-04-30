@@ -352,12 +352,12 @@
 
 .status-dot-warning {
     background: var(--hrsd-gold);
-    box-shadow: 0 0 0 3px rgba(250, 180, 20, 0.2);
+    box-shadow: 0 0 0 3px rgba(252, 182, 20, 0.2);
 }
 
 .status-dot-success {
     background: var(--hrsd-green);
-    box-shadow: 0 0 0 3px rgba(45, 180, 115, 0.2);
+    box-shadow: 0 0 0 3px rgba(43, 181, 116, 0.2);
 }
 
 /* ===== Progress Bar Component ===== */
@@ -368,20 +368,22 @@
 }
 
 .progress-bar-success {
-    background-color: #2DB473;
+    background-color: #2BB574;
+    /* Pantone 2414C */
 }
 
 .progress-bar-warning {
-    background-color: #FAB414;
+    background-color: #FCB614;
+    /* Pantone 7409C */
 }
 
 .progress-bar-danger {
-    background-color: #ef4444;
+    background-color: #DC2626;
+    /* Semantic only — not in HRSD palette */
 }
 
-.progress-bar-purple {
-    background-color: #8b5cf6;
-}
+/* Removed: progress-bar-purple. Purple is not in the HRSD palette.
+ * Use progress-bar-warning or another brand color instead. */
 
 /* Modal Sizes */
 .modal-max-width-900 {

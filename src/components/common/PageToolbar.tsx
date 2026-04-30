@@ -114,7 +114,7 @@ export const PageToolbar: React.FC<PageToolbarProps> = ({
                     ) : (
                         <button
                             onClick={onSelectAll}
-                            className="flex items-center gap-1 px-2 py-1 text-xs bg-blue-50 text-blue-600 rounded hover:bg-blue-100"
+                            className="flex items-center gap-1 px-2 py-1 text-xs bg-[#269798]/10 text-[#269798] rounded hover:bg-[#269798]/15"
                         >
                             <CheckSquare className="w-3 h-3" />
                             تحديد الكل
@@ -140,7 +140,7 @@ export const PageToolbar: React.FC<PageToolbarProps> = ({
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || data.length === 0}
-                        className="px-3 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 text-sm disabled:opacity-50 transition-colors"
+                        className="px-3 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50 transition-colors"
                         aria-label="تصدير إلى Excel"
                     >
                         {isExporting ? (
@@ -156,7 +156,7 @@ export const PageToolbar: React.FC<PageToolbarProps> = ({
                     <button
                         onClick={handleExportCsv}
                         disabled={isExporting || data.length === 0}
-                        className="px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 flex items-center gap-2 text-sm disabled:opacity-50 transition-colors"
+                        className="px-3 py-2 bg-[#269798]/10 text-[#269798] rounded-lg hover:bg-[#269798]/15 flex items-center gap-2 text-sm disabled:opacity-50 transition-colors"
                         aria-label="تصدير إلى CSV"
                     >
                         <Download className="w-4 h-4" />

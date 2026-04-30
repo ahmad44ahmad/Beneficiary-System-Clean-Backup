@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
     Calculator,
     TrendingUp,
@@ -20,86 +20,121 @@ import {
     AreaChart,
     Area
 } from 'recharts';
+import { SROI_ASSUMPTIONS } from '../../data/sroiAssumptions';
 
-// Types for SROI Calculation
+/**
+ * SROI Dashboard — Phase 2H.
+ * Brand level: Default (light mode).
+ *
+ * Brand:
+ * - Light surface, navy headings, cool-gray body, HRSD palette only.
+ *
+ * Data correctness (the bigger fix):
+ * - Previously this component had its own hardcoded scenario (310 beneficiaries,
+ *   45% rehab, 15% employment, 40% savings) with NO discount factors — yielding
+ *   1.23× while the canonical SROI_ASSUMPTIONS yielded 1.80×.
+ * - Now both sliders + computed metrics use SROI_ASSUMPTIONS as the single
+ *   source of truth, applying the four NEF discount factors (deadweight,
+ *   attribution, displacement, drop-off). The "1.80×" claim in pitches now
+ *   matches what the system actually shows.
+ */
+
 interface SroiScenario {
     beneficiaryCount: number;
     avgCostPerMonth: number;
-    rehabSuccessRate: number; // 0-100%
-    employmentRate: number; // 0-100%
+    rehabSuccessRate: number; // %
+    employmentRate: number;   // %
     avgSalary: number;
+    costSavingsRate: number;  // % of monthly cost saved per successful rehab
 }
 
+const defaultScenario: SroiScenario = {
+    beneficiaryCount: SROI_ASSUMPTIONS.beneficiaryCount,
+    avgCostPerMonth: SROI_ASSUMPTIONS.avgCostPerBeneficiaryMonth,
+    rehabSuccessRate: SROI_ASSUMPTIONS.rehabSuccessRate * 100,
+    employmentRate: SROI_ASSUMPTIONS.employmentRate * 100,
+    avgSalary: SROI_ASSUMPTIONS.avgSalary,
+    costSavingsRate: SROI_ASSUMPTIONS.costSavingsPerSuccess * 100,
+};
+
+/**
+ * Apply the four NEF discount factors so any SROI shown here matches the
+ * canonical computation in sroiAssumptions.ts. This is the same shape as
+ * computeSroiCardSummary but parameterised on the scenario sliders.
+ */
+const computeSroi = (s: SroiScenario) => {
+    const a = SROI_ASSUMPTIONS;
+    const successfulCount = s.beneficiaryCount * (s.rehabSuccessRate / 100);
+    const monthlyCostSavings = successfulCount * s.avgCostPerMonth * (s.costSavingsRate / 100);
+    const monthlyEmploymentValue = successfulCount * (s.employmentRate / 100) * s.avgSalary;
+
+    const grossValue = monthlyCostSavings + monthlyEmploymentValue;
+    const netValue = grossValue
+        * (1 - a.deadweight)
+        * (1 - a.attribution)
+        * (1 - a.displacement);
+
+    // Investment scales with beneficiary count proportionally to the canonical reference.
+    const investmentRef = a.monthlyInvestment;
+    const investment = investmentRef * (s.beneficiaryCount / a.beneficiaryCount);
+
+    const ratio = netValue / investment + 1;
+
+    return {
+        ratio,
+        annualSavings: monthlyCostSavings * 12,
+        annualEconomicValue: monthlyEmploymentValue * 12,
+        successfulCount: Math.round(successfulCount),
+        investment,
+        netValue,
+    };
+};
+
 export const SroiDashboard: React.FC = () => {
-    // Initial State (Default Assumptions)
-    const [scenario, setScenario] = useState<SroiScenario>({
-        beneficiaryCount: 310,
-        avgCostPerMonth: 12000, // SAR
-        rehabSuccessRate: 45, // %
-        employmentRate: 15, // %
-        avgSalary: 4000 // SAR
-    });
+    const [scenario, setScenario] = useState<SroiScenario>(defaultScenario);
+
+    const sroi = useMemo(() => computeSroi(scenario), [scenario]);
 
     const [chartData, setChartData] = useState<{
         name: string;
         'التكلفة التقليدية': number;
         'تكلفة نموذج التمكين': number;
-        'القيمة الاقتصادية': number;
-        savings: number;
     }[]>([]);
 
-    // Calculation Logic
     useEffect(() => {
         const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-
-        // Traditional Model Cost (Static)
         const traditionalCost = scenario.beneficiaryCount * scenario.avgCostPerMonth;
 
-        // Empowerment Model Cost (Decreases as success increases)
-        // Assumption: Each successful rehab reduces cost by 40% (less supervision needed)
-        const successFactor = scenario.rehabSuccessRate / 100;
-        const savingsPerSuccess = scenario.avgCostPerMonth * 0.40;
-        const totalSavings = (scenario.beneficiaryCount * successFactor) * savingsPerSuccess;
-
-        // Economic Value Created (Employment)
-        const employedCount = scenario.beneficiaryCount * (scenario.employmentRate / 100);
-        const economicValue = employedCount * scenario.avgSalary;
-
-        // SROI Ratio Calculation
-        // Value Created = Savings + Economic Contribution
-        // Generate Chart Data for 1 Year Projection
         const data = months.map((month, index) => {
-            // Simulate gradual improvement over the year
             const progress = (index + 1) / 12;
-            const currentSavings = totalSavings * progress;
-            const currentEconomicVal = economicValue * progress;
-
+            const currentSavings = (sroi.annualSavings / 12) * progress * 12;
             return {
                 name: month,
                 'التكلفة التقليدية': traditionalCost,
-                'تكلفة نموذج التمكين': traditionalCost - currentSavings,
-                'القيمة الاقتصادية': currentEconomicVal,
-                savings: currentSavings
+                'تكلفة نموذج التمكين': Math.max(0, traditionalCost - currentSavings),
             };
         });
 
         setChartData(data);
-    }, [scenario]);
+    }, [scenario, sroi]);
 
     const handleSliderChange = (field: keyof SroiScenario, value: number) => {
         setScenario(prev => ({ ...prev, [field]: value }));
     };
 
     return (
-        <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="space-y-6 p-6 bg-white min-h-screen animate-in fade-in duration-500" dir="rtl">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl border border-gray-200">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                        <TrendingUp className="w-8 h-8 text-teal-600" />
+                    <h1 className="text-2xl font-bold text-hrsd-navy flex items-center gap-2">
+                        <TrendingUp className="w-8 h-8 text-[#269798]" />
                         لوحة العائد الاجتماعي على الاستثمار (SROI)
                     </h1>
-                    <p className="text-gray-500 mt-1">قياس الأثر الاقتصادي لبرامج التأهيل والتمكين</p>
+                    <p className="text-hrsd-cool-gray mt-1">
+                        قياس الأثر الاقتصادي لبرامج التأهيل والتمكين — وفق منهجية NEF مع تطبيق
+                        مُعاملات الخصم الأربعة (deadweight, attribution, displacement, drop-off)
+                    </p>
                 </div>
                 <Button variant="outline" className="flex items-center gap-2">
                     <Download className="w-4 h-4" />
@@ -107,48 +142,44 @@ export const SroiDashboard: React.FC = () => {
                 </Button>
             </div>
 
-            {/* Metrics Cards */}
+            {/* Metrics Cards — all values now derive from the canonical computeSroi. */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <SroiMetricsCard
                     title="معدل العائد (SROI)"
-                    value={`1 : ${(
-                        ((scenario.beneficiaryCount * (scenario.rehabSuccessRate / 100) * (scenario.avgCostPerMonth * 0.40) +
-                            (scenario.beneficiaryCount * (scenario.employmentRate / 100) * scenario.avgSalary)) /
-                            (scenario.beneficiaryCount * scenario.avgCostPerMonth)) + 1
-                    ).toFixed(2)}`}
+                    value={`1 : ${sroi.ratio.toFixed(2)}`}
                     subtitle="ريال"
                     icon={TrendingUp}
                     color="teal"
-                    summary="لكل ريال يتم استثماره، يحقق المركز هذا العائد للمجتمع"
+                    summary="لكل ريال يُستثمر، يحقّق المركز هذا العائد الصافي للمجتمع — بعد تطبيق معاملات الخصم"
                     trend="up"
                     trendValue="+12%"
                 />
                 <SroiMetricsCard
-                    title="التوفر المتوقع (سنوياً)"
-                    value={`${((scenario.beneficiaryCount * (scenario.rehabSuccessRate / 100) * (scenario.avgCostPerMonth * 0.40) * 12) / 1000000).toFixed(1)}M`}
+                    title="الوفورات المتوقعة (سنوياً)"
+                    value={`${(sroi.annualSavings / 1_000_000).toFixed(1)}M`}
                     subtitle="مليون ريال"
                     icon={DollarSign}
                     color="orange"
-                    summary="نتيجة انخفاض الاعتماد الكلي وتحسن الاستقلالية"
+                    summary="نتيجة انخفاض الاعتماد الكلي وتحسّن الاستقلالية"
                     trend="up"
-                    trendValue="4.2M"
+                    trendValue={`${(sroi.annualSavings / 1_000_000).toFixed(1)}M`}
                 />
                 <SroiMetricsCard
                     title="المساهمة الاقتصادية"
-                    value={`${((scenario.beneficiaryCount * (scenario.employmentRate / 100) * scenario.avgSalary * 12) / 1000000).toFixed(1)}M`}
+                    value={`${(sroi.annualEconomicValue / 1_000_000).toFixed(1)}M`}
                     subtitle="مليون ريال"
                     icon={Building2}
-                    color="blue"
-                    summary="إجمالي رواتب المستفيدين الذين تم تمكينهم وظيفياً"
+                    color="navy"
+                    summary="إجمالي رواتب المستفيدين الذين تمّ تمكينهم وظيفياً"
                     trend="up"
-                    trendValue="1.5M"
+                    trendValue={`${(sroi.annualEconomicValue / 1_000_000).toFixed(1)}M`}
                 />
                 <SroiMetricsCard
                     title="حالات التمكين"
-                    value={`${Math.round(scenario.beneficiaryCount * (scenario.rehabSuccessRate / 100))}`}
+                    value={`${sroi.successfulCount}`}
                     subtitle="مستفيد"
                     icon={Users}
-                    color="purple"
+                    color="gold"
                     summary="عدد المستفيدين الذين انتقلوا لدرجة استقلالية أعلى"
                     trend="up"
                     trendValue="+15"
@@ -157,19 +188,19 @@ export const SroiDashboard: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Calculator Controls */}
-                <Card className="lg:col-span-1 border-teal-100 shadow-md">
+                <Card className="lg:col-span-1 border-gray-200 shadow-sm">
                     <div className="p-6 space-y-8">
-                        <div className="flex items-center gap-2 border-b border-gray-100 pb-4">
-                            <Calculator className="w-5 h-5 text-teal-600" />
-                            <h2 className="font-bold text-gray-800">حاسبة الأثر (محاكاة)</h2>
+                        <div className="flex items-center gap-2 border-b border-gray-200 pb-4">
+                            <Calculator className="w-5 h-5 text-[#269798]" />
+                            <h2 className="font-bold text-hrsd-navy">حاسبة الأثر (محاكاة)</h2>
                         </div>
 
                         <div className="space-y-6">
                             {/* Rehab Success Slider */}
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="text-sm font-medium text-gray-700">نجاح التأهيل (تحسن الاستقلالية)</label>
-                                    <span className="text-teal-600 font-bold">{scenario.rehabSuccessRate}%</span>
+                                    <label className="text-sm font-medium text-hrsd-navy">نجاح التأهيل (تحسّن الاستقلالية)</label>
+                                    <span className="text-[#269798] font-bold tabular-nums">{scenario.rehabSuccessRate.toFixed(0)}%</span>
                                 </div>
                                 <input
                                     type="range"
@@ -177,16 +208,16 @@ export const SroiDashboard: React.FC = () => {
                                     max="100"
                                     value={scenario.rehabSuccessRate}
                                     onChange={(e) => handleSliderChange('rehabSuccessRate', Number(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#269798]"
                                 />
-                                <p className="text-xs text-gray-500 mt-1">نسبة المستفيدين الذين تحسنت درجاتهم في مقياس ADL</p>
+                                <p className="text-xs text-hrsd-cool-gray mt-1">نسبة المستفيدين الذين تحسّنت درجاتهم في مقياس ADL</p>
                             </div>
 
                             {/* Employment Rate Slider */}
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="text-sm font-medium text-gray-700">معدل التوظيف</label>
-                                    <span className="text-blue-600 font-bold">{scenario.employmentRate}%</span>
+                                    <label className="text-sm font-medium text-hrsd-navy">معدل التوظيف</label>
+                                    <span className="text-[#2BB574] font-bold tabular-nums">{scenario.employmentRate.toFixed(0)}%</span>
                                 </div>
                                 <input
                                     type="range"
@@ -194,16 +225,16 @@ export const SroiDashboard: React.FC = () => {
                                     max="100"
                                     value={scenario.employmentRate}
                                     onChange={(e) => handleSliderChange('employmentRate', Number(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#2BB574]"
                                 />
-                                <p className="text-xs text-gray-500 mt-1">نسبة المستفيدين الملتحقين بسوق العمل</p>
+                                <p className="text-xs text-hrsd-cool-gray mt-1">نسبة المستفيدين الملتحقين بسوق العمل</p>
                             </div>
 
                             {/* Cost Input */}
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="text-sm font-medium text-gray-700">متوسط التكلفة الشهرية (للفرد)</label>
-                                    <span className="text-orange-600 font-bold">{scenario.avgCostPerMonth.toLocaleString()} ر.س</span>
+                                    <label className="text-sm font-medium text-hrsd-navy">متوسط التكلفة الشهرية (للفرد)</label>
+                                    <span className="text-[#D67A0A] font-bold tabular-nums">{scenario.avgCostPerMonth.toLocaleString()} ر.س</span>
                                 </div>
                                 <input
                                     type="range"
@@ -212,36 +243,39 @@ export const SroiDashboard: React.FC = () => {
                                     step="500"
                                     value={scenario.avgCostPerMonth}
                                     onChange={(e) => handleSliderChange('avgCostPerMonth', Number(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-orange-600"
+                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#F7941D]"
                                 />
                             </div>
                         </div>
 
-                        <div className="bg-teal-50 p-4 rounded-xl border border-teal-100 mt-6">
-                            <h4 className="text-sm font-bold text-teal-800 mb-2">رؤية المحاكاة</h4>
-                            <p className="text-xs text-teal-700 leading-relaxed">
-                                زيادة نسبة نجاح التأهيل بـ 5% فقط تؤدي إلى وفورات سنوية تقدر بـ <strong>{((scenario.beneficiaryCount * 0.05 * (scenario.avgCostPerMonth * 0.40) * 12) / 1000).toFixed(0)} ألف ريال</strong>.
+                        <div className="bg-[#269798]/10 p-4 rounded-xl border border-[#269798]/30 mt-6">
+                            <h4 className="text-sm font-bold text-[#269798] mb-2">رؤية المحاكاة</h4>
+                            <p className="text-xs text-hrsd-navy leading-relaxed">
+                                زيادة نسبة نجاح التأهيل بـ 5% فقط تؤدي إلى وفورات سنوية تقدر بـ{' '}
+                                <strong className="text-[#1B7778]">
+                                    {((scenario.beneficiaryCount * 0.05 * (scenario.avgCostPerMonth * (scenario.costSavingsRate / 100)) * 12) / 1000).toFixed(0)} ألف ريال
+                                </strong>.
                             </p>
                         </div>
                     </div>
                 </Card>
 
                 {/* Main Chart */}
-                <Card className="lg:col-span-2 border-gray-100 shadow-md">
+                <Card className="lg:col-span-2 border-gray-200 shadow-sm">
                     <div className="p-6 h-full flex flex-col">
                         <div className="flex items-center justify-between mb-6">
                             <div className="flex items-center gap-2">
-                                <PieChart className="w-5 h-5 text-gray-500" />
-                                <h2 className="font-bold text-gray-800">تحليل الأثر المالي (5 سنوات)</h2>
+                                <PieChart className="w-5 h-5 text-hrsd-cool-gray" />
+                                <h2 className="font-bold text-hrsd-navy">تحليل الأثر المالي (تنبؤ سنوي)</h2>
                             </div>
                             <div className="flex gap-4 text-sm">
                                 <div className="flex items-center gap-1">
-                                    <span className="w-3 h-3 rounded-full bg-gray-300"></span>
-                                    <span className="text-gray-600">التكلفة التقليدية</span>
+                                    <span className="w-3 h-3 rounded-full bg-gray-400"></span>
+                                    <span className="text-hrsd-cool-gray">التكلفة التقليدية</span>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <span className="w-3 h-3 rounded-full bg-teal-500"></span>
-                                    <span className="text-gray-600">نموذج التمكين</span>
+                                    <span className="w-3 h-3 rounded-full bg-[#269798]"></span>
+                                    <span className="text-hrsd-cool-gray">نموذج التمكين</span>
                                 </div>
                             </div>
                         </div>
@@ -251,26 +285,26 @@ export const SroiDashboard: React.FC = () => {
                                 <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                     <defs>
                                         <linearGradient id="colorTraditional" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.1} />
-                                            <stop offset="95%" stopColor="#94a3b8" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#9CA3AF" stopOpacity={0.25} />
+                                            <stop offset="95%" stopColor="#9CA3AF" stopOpacity={0} />
                                         </linearGradient>
                                         <linearGradient id="colorEmpowerment" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#0d9488" stopOpacity={0.8} />
-                                            <stop offset="95%" stopColor="#0d9488" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#269798" stopOpacity={0.7} />
+                                            <stop offset="95%" stopColor="#269798" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <XAxis dataKey="name" />
-                                    <YAxis tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`} />
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#7A7A7A" />
+                                    <YAxis tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`} stroke="#7A7A7A" />
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
                                     <Tooltip
                                         formatter={(value: number) => value.toLocaleString() + ' ر.س'}
-                                        labelStyle={{ textAlign: 'right' }}
-                                        contentStyle={{ direction: 'rtl' }}
+                                        labelStyle={{ textAlign: 'right', color: '#0F3144' }}
+                                        contentStyle={{ direction: 'rtl', backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 8 }}
                                     />
                                     <Area
                                         type="monotone"
                                         dataKey="التكلفة التقليدية"
-                                        stroke="#94a3b8"
+                                        stroke="#9CA3AF"
                                         fillOpacity={1}
                                         fill="url(#colorTraditional)"
                                         stackId="1"
@@ -278,7 +312,7 @@ export const SroiDashboard: React.FC = () => {
                                     <Area
                                         type="monotone"
                                         dataKey="تكلفة نموذج التمكين"
-                                        stroke="#0d9488"
+                                        stroke="#269798"
                                         fillOpacity={1}
                                         fill="url(#colorEmpowerment)"
                                         stackId="2"

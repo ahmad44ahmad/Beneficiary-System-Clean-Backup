@@ -14,7 +14,7 @@ export const Discover: React.FC = () => {
         <section className="space-y-5" dir="rtl">
             <div className="bg-hrsd-teal/5 border-r-4 border-hrsd-teal rounded-xl p-4 flex items-start gap-3">
                 <Info className="w-5 h-5 text-hrsd-teal mt-0.5 shrink-0" />
-                <div className="text-[13.5px] text-slate-700 dark:text-slate-200 leading-relaxed">
+                <div className="text-[13.5px] text-hrsd-navy dark:text-slate-200 leading-relaxed">
                     <span className="font-bold text-hrsd-navy">فلسفة هذه الأداة:</span>{' '}
                     لا نَعرض «المركز الأفضل» — هذه منافسة. نَعرض «الممارسة التي تَستحقّ النَسخ» —
                     هذه منهجيّة. كلّ اكتشافٍ مرفقٌ بدرجة ثقةٍ صريحةٍ وخطواتٍ مقترَحةٍ للتحقّق قبل التعميم.
@@ -35,7 +35,7 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
 
     return (
         <article
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700
+            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
         >
             {/* الشريط العلويّ */}
@@ -45,12 +45,12 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
                     <span className={`font-bold uppercase tracking-wider ${conf.text}`}>
                         ثقة {CONFIDENCE_LABELS[discovery.confidence]}
                     </span>
-                    <span className="text-slate-400">·</span>
-                    <span className="text-slate-700 dark:text-slate-300 font-semibold">
+                    <span className="text-hrsd-cool-gray">·</span>
+                    <span className="text-hrsd-navy dark:text-hrsd-navy font-semibold">
                         {STAGE_LABELS[discovery.stage]}
                     </span>
                 </div>
-                <span className="text-[12px] text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                <span className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray flex items-center gap-1.5">
                     <Users className="w-3.5 h-3.5" />
                     عيّنة: {discovery.sampleSize}
                 </span>
@@ -59,20 +59,20 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
             <div className="p-5 md:p-6 space-y-4">
                 {/* العنوان */}
                 <header>
-                    <h3 className="text-[17px] font-bold text-slate-900 dark:text-white leading-tight mb-1.5">
+                    <h3 className="text-[17px] font-bold text-hrsd-navy dark:text-white leading-tight mb-1.5">
                         {discovery.title}
                     </h3>
-                    <p className="text-[12.5px] text-slate-500 dark:text-slate-400">
+                    <p className="text-[12.5px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                         {discovery.originCenter} · منذ {discovery.observedSince}
                     </p>
                 </header>
 
                 {/* التدخل */}
                 <div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray dark:text-hrsd-cool-gray mb-1.5">
                         التدخُّل
                     </div>
-                    <p className="text-[14px] text-slate-700 dark:text-slate-200 leading-relaxed">
+                    <p className="text-[14px] text-hrsd-navy dark:text-slate-200 leading-relaxed">
                         {discovery.intervention}
                     </p>
                 </div>
@@ -85,30 +85,30 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
                             ما يُلفت النظر
                         </span>
                     </div>
-                    <p className="text-[15px] font-bold text-slate-900 dark:text-white mb-1">
+                    <p className="text-[15px] font-bold text-hrsd-navy dark:text-white mb-1">
                         {discovery.outcomeDelta}
                     </p>
-                    <p className="text-[12.5px] text-slate-600 dark:text-slate-300">
+                    <p className="text-[12.5px] text-hrsd-cool-gray dark:text-hrsd-navy">
                         المقياس: {discovery.outcomeMetric}
                     </p>
-                    <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-1 font-mono">
+                    <p className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-1 font-mono">
                         {discovery.baselineComparison}
                     </p>
                 </div>
 
                 {/* الإجراءات المقترحة */}
                 <div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray dark:text-hrsd-cool-gray mb-2">
                         خطواتٌ مقترَحةٌ
                     </div>
                     <div className="grid md:grid-cols-3 gap-2">
                         {discovery.proposedActions.map((a, i) => (
-                            <div key={i} className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3">
+                            <div key={i} className="bg-slate-50 dark:bg-white border border-gray-200 dark:border-gray-200 rounded-lg p-3">
                                 <div className="flex items-center gap-1.5 text-hrsd-teal text-[13px] font-bold mb-1">
                                     <CheckCircle2 className="w-3.5 h-3.5" />
                                     {a.title}
                                 </div>
-                                <p className="text-[12px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                                <p className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-navy leading-relaxed">
                                     {a.detail}
                                 </p>
                             </div>
@@ -118,14 +118,14 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
 
                 {/* المخاطر */}
                 {discovery.risks.length > 0 && (
-                    <div className="bg-amber-50 border-r-4 border-amber-400 rounded-lg p-3">
+                    <div className="bg-[#FCB614]/10 border-r-4 border-[#FCB614] rounded-lg p-3">
                         <div className="flex items-center gap-1.5 mb-1.5">
-                            <AlertTriangle className="w-4 h-4 text-amber-700" />
-                            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-800">
+                            <AlertTriangle className="w-4 h-4 text-[#D49A0A]" />
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-[#92400E]">
                                 مخاطرُ التعميم
                             </span>
                         </div>
-                        <ul className="space-y-0.5 text-[12.5px] text-amber-900 leading-relaxed">
+                        <ul className="space-y-0.5 text-[12.5px] text-[#92400E] leading-relaxed">
                             {discovery.risks.map((r, i) => (
                                 <li key={i} className="flex gap-1.5"><span>•</span><span>{r}</span></li>
                             ))}
@@ -134,8 +134,8 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
                 )}
 
                 {/* أسفل — عوائق + زر */}
-                <div className="flex items-center justify-between gap-3 pt-3 border-t border-slate-200 dark:border-slate-700">
-                    <div className="text-[12.5px] text-slate-600 dark:text-slate-300">
+                <div className="flex items-center justify-between gap-3 pt-3 border-t border-gray-200 dark:border-gray-200">
+                    <div className="text-[12.5px] text-hrsd-cool-gray dark:text-hrsd-navy">
                         <span className="font-semibold">عوائقُ مُستهدَفة:</span>{' '}
                         {discovery.barriersAddressed.join(' · ')}
                     </div>

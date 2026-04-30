@@ -9,40 +9,54 @@
 @import url('./print.css');
 
 :root {
-  /* ===== HRSD Official Colors (Exact RGB from Pantone) ===== */
-  /* Pantone 1375 C - Orange */
-  --hrsd-orange: rgb(245, 150, 30);
-  --hrsd-orange-light: rgb(255, 180, 80);
+  /* ===== HRSD Official Colors (from PDF, page 25-28) =====
+   * Source of truth: src/design-system/tokens.ts.
+   * Pantone numbers are the OFFICIAL ones from the brand book —
+   * any prior values referencing PMS 1375/1235/3385/2237/3025 were fabricated. */
 
-  /* Pantone 1235 C - Gold */
-  --hrsd-gold: rgb(250, 180, 20);
-  --hrsd-gold-light: rgb(255, 200, 60);
-  --hrsd-gold-dark: rgb(200, 140, 10);
+  /* Pantone 2011C - Orange */
+  --hrsd-orange: rgb(247, 148, 29);
+  --hrsd-orange-light: rgb(250, 170, 80);
+  --hrsd-orange-dark: rgb(214, 122, 10);
 
-  /* Pantone 3385 C - Green */
-  --hrsd-green: rgb(45, 180, 115);
-  --hrsd-green-light: rgb(80, 200, 140);
+  /* Pantone 7409C - Gold/Yellow */
+  --hrsd-gold: rgb(252, 182, 20);
+  --hrsd-gold-light: rgb(253, 200, 70);
+  --hrsd-gold-dark: rgb(212, 154, 10);
+
+  /* Pantone 2414C - Green */
+  --hrsd-green: rgb(43, 181, 116);
+  --hrsd-green-light: rgb(85, 205, 145);
   --hrsd-green-dark: rgb(30, 150, 90);
 
-  /* Pantone 2237 C - Teal */
-  --hrsd-teal: rgb(20, 130, 135);
-  --hrsd-teal-light: rgb(40, 160, 165);
-  --hrsd-teal-dark: rgb(10, 100, 105);
+  /* Pantone 2235C - Teal */
+  --hrsd-teal: rgb(38, 151, 152);
+  --hrsd-teal-light: rgb(63, 177, 178);
+  --hrsd-teal-dark: rgb(27, 119, 120);
 
-  /* Pantone 3025 C - Navy Blue */
-  --hrsd-navy: rgb(20, 65, 90);
-  --hrsd-navy-light: rgb(40, 90, 120);
-  --hrsd-navy-dark: rgb(10, 45, 65);
+  /* Pantone 2189C - Navy (primary, dark mode background) */
+  --hrsd-navy: rgb(15, 49, 68);
+  --hrsd-navy-light: rgb(31, 74, 96);
+  --hrsd-navy-dark: rgb(10, 32, 48);
+
+  /* Pantone Cool Gray 9 — body text per brand book (CRITICAL: was missing) */
+  --hrsd-cool-gray: rgb(122, 122, 122);
 
   /* ===== Background Colors ===== */
-  --hrsd-bg-light: #f8fafc;
+  --hrsd-bg-light: #ffffff;
+  /* Brand book: light-mode background = pure white */
   --hrsd-bg-white: #ffffff;
-  --hrsd-bg-gray: #f1f5f9;
+  --hrsd-bg-gray: #f9fafb;
+  /* Subtle off-white for elevated surfaces only */
 
-  /* ===== Text Colors (High Contrast) ===== */
-  --hrsd-text-primary: rgb(20, 65, 90);
-  --hrsd-text-secondary: rgb(60, 100, 130);
-  --hrsd-text-on-dark: rgb(250, 180, 20);
+  /* ===== Text Colors ===== */
+  --hrsd-text-primary: rgb(15, 49, 68);
+  /* HRSD navy — for headings only */
+  --hrsd-text-body: rgb(122, 122, 122);
+  /* Cool Gray 9 — body text per brand book */
+  --hrsd-text-secondary: rgb(156, 163, 175);
+  --hrsd-text-muted: rgb(156, 163, 175);
+  --hrsd-text-on-dark: rgb(252, 182, 20);
   /* Gold on dark backgrounds */
   --hrsd-text-white: #ffffff;
 
@@ -84,7 +98,7 @@
 
   /* Tree-guide for nested hierarchy */
   --nav-tree-indent: 1rem;                /* 16px indent per depth */
-  --nav-tree-line: rgba(250, 180, 20, 0.35); /* muted gold guide-line */
+  --nav-tree-line: rgba(252, 182, 20, 0.35); /* muted gold guide-line — Pantone 7409C */
 
   /* ===== Shadows ===== */
   --hrsd-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -188,7 +202,8 @@ body {
 
 /* ===== Wave Pattern Background ===== */
 .hrsd-wave-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230d9488' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  /* Wave pattern uses HRSD teal #269798 (Pantone 2235C) at 10% opacity. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23269798' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -262,7 +277,7 @@ body {
 .hrsd-input:focus {
   outline: none;
   border-color: var(--hrsd-teal);
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+  box-shadow: 0 0 0 3px rgba(38, 151, 152, 0.15);
 }
 
 /* ===== Status Badges ===== */
@@ -634,11 +649,11 @@ body {
 
   0%,
   100% {
-    box-shadow: 0 0 5px rgba(20, 130, 135, 0.3);
+    box-shadow: 0 0 5px rgba(38, 151, 152, 0.3);
   }
 
   50% {
-    box-shadow: 0 0 20px rgba(20, 130, 135, 0.6), 0 0 30px rgba(20, 130, 135, 0.4);
+    box-shadow: 0 0 20px rgba(38, 151, 152, 0.6), 0 0 30px rgba(38, 151, 152, 0.4);
   }
 }
 
@@ -813,7 +828,7 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(20, 130, 135, 0.4);
+  box-shadow: 0 0 20px rgba(38, 151, 152, 0.4);
 }
 
 /* ===== Button Ripple Effect ===== */

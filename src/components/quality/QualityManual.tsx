@@ -40,8 +40,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'مقدمة الدليل',
     titleEn: 'Introduction',
     icon: BookOpen,
-    color: 'text-teal-400',
-    gradient: 'from-teal-500 to-emerald-600',
+    color: 'text-[#269798]',
+    gradient: 'from-[#269798] to-[#1E9658]',
     status: 'complete',
     lastUpdated: '01 ديسمبر 2025',
     subsections: [
@@ -74,8 +74,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'سياق المنظمة',
     titleEn: 'Context of the Organization',
     icon: Building2,
-    color: 'text-blue-400',
-    gradient: 'from-blue-500 to-cyan-600',
+    color: 'text-[#269798]',
+    gradient: 'from-[#269798] to-[#1B7778]',
     status: 'complete',
     lastUpdated: '15 ديسمبر 2025',
     subsections: [
@@ -133,8 +133,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'القيادة',
     titleEn: 'Leadership',
     icon: Award,
-    color: 'text-amber-400',
-    gradient: 'from-amber-500 to-orange-600',
+    color: 'text-[#FCB614]',
+    gradient: 'from-[#FCB614] to-[#D67A0A]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -180,8 +180,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'التخطيط',
     titleEn: 'Planning',
     icon: Target,
-    color: 'text-violet-400',
-    gradient: 'from-violet-500 to-purple-600',
+    color: 'text-[#FCB614]',
+    gradient: 'from-[#FCB614] to-[#D49A0A]',
     status: 'complete',
     lastUpdated: '25 ديسمبر 2025',
     subsections: [
@@ -229,8 +229,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'الدعم',
     titleEn: 'Support',
     icon: Settings,
-    color: 'text-red-400',
-    gradient: 'from-red-500 to-rose-600',
+    color: 'text-[#DC2626]',
+    gradient: 'from-[#DC2626] to-[#B91C1C]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -298,8 +298,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'العمليات',
     titleEn: 'Operation',
     icon: Zap,
-    color: 'text-emerald-400',
-    gradient: 'from-emerald-500 to-green-600',
+    color: 'text-[#2BB574]',
+    gradient: 'from-[#2BB574] to-[#1E9658]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -396,8 +396,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'تقييم الأداء',
     titleEn: 'Performance Evaluation',
     icon: BarChart3,
-    color: 'text-cyan-400',
-    gradient: 'from-cyan-500 to-blue-600',
+    color: 'text-[#269798]',
+    gradient: 'from-[#269798] to-[#1B7778]',
     status: 'complete',
     lastUpdated: '05 يناير 2026',
     subsections: [
@@ -445,8 +445,8 @@ const MANUAL_SECTIONS: ManualSection[] = [
     title: 'التحسين',
     titleEn: 'Improvement',
     icon: TrendingUp,
-    color: 'text-pink-400',
-    gradient: 'from-pink-500 to-rose-600',
+    color: 'text-[#DC2626]',
+    gradient: 'from-[#DC2626] to-[#B91C1C]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -519,9 +519,9 @@ const SectionCard = ({
             <span className={`font-mono text-sm ${isActive ? 'text-white/80' : 'text-gray-500'}`}>
               {section.number}
             </span>
-            <span className={`px-2 py-0.5 rounded-full text-xs ${section.status === 'complete' ? 'bg-emerald-500/20 text-emerald-400' :
-              section.status === 'partial' ? 'bg-amber-500/20 text-amber-400' :
-                'bg-red-500/20 text-red-400'
+            <span className={`px-2 py-0.5 rounded-full text-xs ${section.status === 'complete' ? 'bg-[#2BB574]/20 text-[#2BB574]' :
+              section.status === 'partial' ? 'bg-[#FCB614]/20 text-[#FCB614]' :
+                'bg-[#DC2626]/20 text-[#DC2626]'
               }`}>
               {section.status === 'complete' ? 'مكتمل' : section.status === 'partial' ? 'جزئي' : 'معلق'}
             </span>
@@ -554,7 +554,7 @@ const SubsectionContent = ({ subsection, index }: { subsection: ManualSection['s
         className="w-full p-4 flex items-center justify-between hover:bg-white/5 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <span className="text-teal-400 font-mono font-bold">{subsection.number}</span>
+          <span className="text-[#269798] font-mono font-bold">{subsection.number}</span>
           <h4 className="text-white font-medium text-right">{subsection.title}</h4>
         </div>
         <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
@@ -577,12 +577,12 @@ const SubsectionContent = ({ subsection, index }: { subsection: ManualSection['s
                   <li key={i} className="flex items-start gap-2 text-sm">
                     {item.startsWith('⚠️') ? (
                       <>
-                        <AlertCircle className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-amber-300">{item.replace('⚠️ ', '')}</span>
+                        <AlertCircle className="w-4 h-4 text-[#FCB614] mt-0.5 flex-shrink-0" />
+                        <span className="text-[#FCB614]">{item.replace('⚠️ ', '')}</span>
                       </>
                     ) : (
                       <>
-                        <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-[#2BB574] mt-0.5 flex-shrink-0" />
                         <span className="text-gray-300">{item}</span>
                       </>
                     )}
@@ -599,7 +599,7 @@ const SubsectionContent = ({ subsection, index }: { subsection: ManualSection['s
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {subsection.documents.map((doc, i) => (
-                      <span key={i} className="px-2 py-1 bg-teal-500/20 text-teal-400 rounded text-xs">
+                      <span key={i} className="px-2 py-1 bg-[#269798]/20 text-[#269798] rounded text-xs">
                         {doc}
                       </span>
                     ))}
@@ -645,8 +645,8 @@ const CircularProgress = ({ value, size = 120, strokeWidth = 10 }: { value: numb
         />
         <defs>
           <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#14b8a6" />
-            <stop offset="100%" stopColor="#10b981" />
+            <stop offset="0%" stopColor="#269798" />
+            <stop offset="100%" stopColor="#2BB574" />
           </linearGradient>
         </defs>
       </svg>
@@ -680,9 +680,9 @@ export default function QualityManualPro() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-white via-white to-white" dir="rtl">
       {/* الهيدر */}
-      <header className="bg-gradient-to-r from-teal-600 to-emerald-700 px-6 py-8">
+      <header className="bg-gradient-to-r from-[#1B7778] to-[#1E9658] px-6 py-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -691,18 +691,18 @@ export default function QualityManualPro() {
               </div>
               <div>
                 <h1 className="text-3xl font-black text-white">دليل الجودة الشامل</h1>
-                <p className="text-teal-100">Quality Manual - ISO 9001:2015</p>
-                <p className="text-teal-200/80 text-sm mt-1">مركز التأهيل الشامل بمنطقة الباحة</p>
+                <p className="text-[#269798]/10">Quality Manual - ISO 9001:2015</p>
+                <p className="text-[#269798]/20/80 text-sm mt-1">مركز التأهيل الشامل بمنطقة الباحة</p>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <div className="text-left">
-                <div className="text-teal-100 text-sm">الإصدار</div>
+                <div className="text-[#269798]/10 text-sm">الإصدار</div>
                 <div className="text-white font-bold">v3.0</div>
               </div>
               <div className="text-left">
-                <div className="text-teal-100 text-sm">آخر تحديث</div>
+                <div className="text-[#269798]/10 text-sm">آخر تحديث</div>
                 <div className="text-white font-bold">فبراير 2026</div>
               </div>
               <div className="flex gap-2">
@@ -738,7 +738,7 @@ export default function QualityManualPro() {
                 placeholder="بحث في الدليل..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl pe-10 ps-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full bg-white/5 border border-white/10 rounded-xl pe-10 ps-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#269798]"
               />
             </div>
 
@@ -746,21 +746,21 @@ export default function QualityManualPro() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl p-6 border border-white/10 text-center"
+              className="bg-gradient-to-br from-white/50 to-white/50 rounded-2xl p-6 border border-white/10 text-center"
             >
               <h3 className="text-white font-bold mb-4">حالة الدليل</h3>
               <CircularProgress value={completionRate} />
               <div className="grid grid-cols-3 gap-2 mt-4 text-xs">
-                <div className="bg-emerald-500/20 rounded-lg p-2">
-                  <div className="text-emerald-400 font-bold">{MANUAL_SECTIONS.filter(s => s.status === 'complete').length}</div>
+                <div className="bg-[#2BB574]/20 rounded-lg p-2">
+                  <div className="text-[#2BB574] font-bold">{MANUAL_SECTIONS.filter(s => s.status === 'complete').length}</div>
                   <div className="text-gray-500">مكتمل</div>
                 </div>
-                <div className="bg-amber-500/20 rounded-lg p-2">
-                  <div className="text-amber-400 font-bold">{MANUAL_SECTIONS.filter(s => s.status === 'partial').length}</div>
+                <div className="bg-[#FCB614]/20 rounded-lg p-2">
+                  <div className="text-[#FCB614] font-bold">{MANUAL_SECTIONS.filter(s => s.status === 'partial').length}</div>
                   <div className="text-gray-500">جزئي</div>
                 </div>
-                <div className="bg-red-500/20 rounded-lg p-2">
-                  <div className="text-red-400 font-bold">{MANUAL_SECTIONS.filter(s => s.status === 'pending').length}</div>
+                <div className="bg-[#DC2626]/20 rounded-lg p-2">
+                  <div className="text-[#DC2626] font-bold">{MANUAL_SECTIONS.filter(s => s.status === 'pending').length}</div>
                   <div className="text-gray-500">معلق</div>
                 </div>
               </div>
@@ -801,8 +801,8 @@ export default function QualityManualPro() {
                         <div className="flex items-center gap-3 mb-1">
                           <span className="text-white/80 font-mono text-lg">البند {currentSection.number}</span>
                           <span className={`px-3 py-1 rounded-full text-sm ${currentSection.status === 'complete' ? 'bg-white/20 text-white' :
-                            currentSection.status === 'partial' ? 'bg-amber-400/20 text-amber-100' :
-                              'bg-red-400/20 text-red-100'
+                            currentSection.status === 'partial' ? 'bg-[#FCB614]/20 text-[#FCB614]/40' :
+                              'bg-[#DC2626]/20 text-[#DC2626]/40'
                             }`}>
                             {currentSection.status === 'complete' ? '✓ مكتمل' :
                               currentSection.status === 'partial' ? '⚠ جزئي' : '✗ معلق'}

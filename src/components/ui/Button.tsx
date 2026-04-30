@@ -13,12 +13,18 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
+        // Variants use HRSD palette only.
+        // - primary:   teal #269798 (Pantone 2235C)
+        // - secondary: gold #FCB614 (Pantone 7409C)
+        // - danger:    semantic red (life-safety only)
+        // - outline:   teal border on white
+        // - ghost:     neutral, hover gray
         const variants = {
-            primary: 'bg-primary text-white hover:bg-primary-600 shadow-sm',
-            secondary: 'bg-secondary text-white hover:bg-secondary-600 shadow-sm',
-            danger: 'bg-red-600 text-white hover:bg-red-700 shadow-sm',
-            outline: 'border border-primary text-primary hover:bg-primary-50 dark:text-primary-light dark:hover:bg-slate-800',
-            ghost: 'bg-transparent hover:bg-gray-100 text-gray-700 dark:text-slate-300 dark:hover:bg-slate-700',
+            primary: 'bg-[#269798] text-white hover:bg-[#1B7778] shadow-sm',
+            secondary: 'bg-[#FCB614] text-[#0F3144] hover:bg-[#D49A0A] shadow-sm',
+            danger: 'bg-[#DC2626] text-white hover:bg-[#B91C1C] shadow-sm',
+            outline: 'border border-[#269798] text-[#269798] hover:bg-[#269798]/10 dark:hover:bg-slate-800',
+            ghost: 'bg-transparent hover:bg-gray-100 text-hrsd-cool-gray hover:text-[#0F3144] dark:text-slate-300 dark:hover:bg-slate-700',
         };
 
         const sizes = {
@@ -31,7 +37,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <button
                 ref={ref}
                 className={cn(
-                    'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5961E] disabled:pointer-events-none disabled:opacity-50',
+                    'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#269798] disabled:pointer-events-none disabled:opacity-50',
                     variants[variant],
                     sizes[size],
                     className

@@ -29,7 +29,7 @@ const STRATEGIES: Record<Strategy, StrategySpec> = {
         code: 'vocational',
         titleAr: 'التمكين المهنيّ',
         icon: Briefcase,
-        color: '#F5961E',
+        color: '#F7941D',
         costPerOutcome: 25_000,
         sroi: 3.0,
         confidence: 0.6,
@@ -41,7 +41,7 @@ const STRATEGIES: Record<Strategy, StrategySpec> = {
         code: 'reintegration',
         titleAr: 'الدمج الأسريّ',
         icon: Home,
-        color: '#2DB473',
+        color: '#2BB574',
         costPerOutcome: 15_000,
         sroi: 2.5,
         confidence: 0.7,
@@ -53,7 +53,7 @@ const STRATEGIES: Record<Strategy, StrategySpec> = {
         code: 'staff',
         titleAr: 'بناء قدرات الكادر',
         icon: Users,
-        color: '#148287',
+        color: '#269798',
         costPerOutcome: 10_000,
         sroi: 1.5,
         confidence: 0.5,
@@ -162,9 +162,9 @@ export const ScenarioSimulator: React.FC = () => {
     return (
         <section className="space-y-5" dir="rtl">
             {/* ملاحظة افتتاحيّة — تواضع معرفيّ */}
-            <div className="bg-amber-50 border-r-4 border-amber-400 rounded-xl p-4 flex items-start gap-3">
-                <Info className="w-5 h-5 text-amber-700 mt-0.5 shrink-0" />
-                <div className="text-[13.5px] text-amber-900 leading-relaxed">
+            <div className="bg-[#FCB614]/10 border-r-4 border-[#FCB614] rounded-xl p-4 flex items-start gap-3">
+                <Info className="w-5 h-5 text-[#D49A0A] mt-0.5 shrink-0" />
+                <div className="text-[13.5px] text-[#92400E] leading-relaxed">
                     <strong>هذه محاكاةٌ تقديريّةٌ، ليست تنبُّؤاً دقيقاً.</strong>{' '}
                     النموذج مبنيٌّ على فرضيّاتٍ من بيانات مركز الباحة (2-3 حالات توظيف سابقة، ومعدّلات دمجٍ أسريٍّ محدودة).
                     درجة الثقة موزونةٌ حسب الاستراتيجيّة. السيناريوهات مفيدةٌ لتأطير النقاش، لا لالتزام مالي.
@@ -172,14 +172,14 @@ export const ScenarioSimulator: React.FC = () => {
             </div>
 
             {/* شريط الإدخال */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 md:p-6 shadow-sm">
+            <div className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 md:p-6 shadow-sm">
                 <header className="flex items-center gap-3 mb-5">
                     <div className="w-11 h-11 bg-hrsd-teal/10 rounded-xl flex items-center justify-center">
                         <Calculator className="w-6 h-6 text-hrsd-teal" />
                     </div>
                     <div>
-                        <h3 className="text-[16px] font-bold text-slate-900 dark:text-white">محرّك المحاكاة</h3>
-                        <p className="text-[12.5px] text-slate-500 dark:text-slate-400">
+                        <h3 className="text-[16px] font-bold text-hrsd-navy dark:text-white">محرّك المحاكاة</h3>
+                        <p className="text-[12.5px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                             حدِّد الميزانيّة والأفق الزمنيّ وتوزيع التخصيص
                         </p>
                     </div>
@@ -188,7 +188,7 @@ export const ScenarioSimulator: React.FC = () => {
                 <div className="grid md:grid-cols-3 gap-5 mb-5">
                     {/* الميزانيّة */}
                     <div>
-                        <label className="text-[13px] font-bold text-slate-700 dark:text-slate-200 block mb-2">
+                        <label className="text-[13px] font-bold text-hrsd-navy dark:text-slate-200 block mb-2">
                             إجمالي الميزانيّة (ريال)
                         </label>
                         <input
@@ -197,18 +197,18 @@ export const ScenarioSimulator: React.FC = () => {
                             onChange={(e) => setBudget(Math.max(0, parseInt(e.target.value) || 0))}
                             step={100_000}
                             min={0}
-                            className="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600
-                                rounded-xl bg-white dark:bg-slate-900 text-[15px] font-semibold
-                                text-slate-900 dark:text-white focus:border-hrsd-teal focus:outline-none"
+                            className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-300
+                                rounded-xl bg-white dark:bg-white text-[15px] font-semibold
+                                text-hrsd-navy dark:text-white focus:border-hrsd-teal focus:outline-none"
                         />
-                        <p className="text-[11.5px] text-slate-500 mt-1.5">
+                        <p className="text-[11.5px] text-hrsd-cool-gray mt-1.5">
                             {budget.toLocaleString('ar-SA')} ريال
                         </p>
                     </div>
 
                     {/* الأفق الزمنيّ */}
                     <div>
-                        <label className="text-[13px] font-bold text-slate-700 dark:text-slate-200 block mb-2">
+                        <label className="text-[13px] font-bold text-hrsd-navy dark:text-slate-200 block mb-2">
                             الأفق الزمنيّ
                         </label>
                         <div className="flex gap-2">
@@ -220,7 +220,7 @@ export const ScenarioSimulator: React.FC = () => {
                                     className={`flex-1 py-2.5 rounded-xl text-[14px] font-bold transition-all border-2 ${
                                         horizon === h
                                             ? 'bg-hrsd-navy text-white border-hrsd-navy'
-                                            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-hrsd-teal'
+                                            : 'bg-white dark:bg-white border-gray-200 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy hover:border-hrsd-teal'
                                     }`}
                                 >
                                     {h} شهر
@@ -231,13 +231,13 @@ export const ScenarioSimulator: React.FC = () => {
 
                     {/* تحقّق من المجموع */}
                     <div>
-                        <label className="text-[13px] font-bold text-slate-700 dark:text-slate-200 block mb-2">
+                        <label className="text-[13px] font-bold text-hrsd-navy dark:text-slate-200 block mb-2">
                             مجموع التخصيص
                         </label>
                         <div className={`px-4 py-2.5 rounded-xl border-2 text-[15px] font-black ${
                             Math.abs(splitTotal - 100) < 0.1
                                 ? 'border-hrsd-green bg-hrsd-green/5 text-hrsd-green-dark'
-                                : 'border-rose-400 bg-rose-50 text-rose-700'
+                                : 'border-[#DC2626] bg-[#DC2626]/10 text-[#B91C1C]'
                         }`}>
                             {splitTotal}% {Math.abs(splitTotal - 100) < 0.1 ? '✓' : '— يجب أن يساوي 100'}
                         </div>
@@ -246,7 +246,7 @@ export const ScenarioSimulator: React.FC = () => {
 
                 {/* أزرار التخصيصات المُسبَقة */}
                 <div className="mb-5">
-                    <div className="text-[13px] font-bold text-slate-700 dark:text-slate-200 mb-2">
+                    <div className="text-[13px] font-bold text-hrsd-navy dark:text-slate-200 mb-2">
                         تخصيصاتٌ مُسبَقة:
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -258,7 +258,7 @@ export const ScenarioSimulator: React.FC = () => {
                                 className={`px-3.5 py-1.5 rounded-lg text-[13px] font-semibold transition-all border ${
                                     activePreset === key
                                         ? 'bg-hrsd-teal text-white border-hrsd-teal'
-                                        : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-hrsd-teal hover:text-hrsd-teal'
+                                        : 'bg-white dark:bg-white border-gray-300 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy hover:border-hrsd-teal hover:text-hrsd-teal'
                                 }`}
                             >
                                 {preset.label}
@@ -274,16 +274,16 @@ export const ScenarioSimulator: React.FC = () => {
                         const Icon = spec.icon;
                         const allocated = budget * (split[code] / 100);
                         return (
-                            <div key={code} className="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                            <div key={code} className="bg-slate-50 dark:bg-white rounded-xl p-4 border border-gray-200 dark:border-gray-200">
                                 <div className="flex items-center gap-2.5 mb-2.5">
                                     <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${spec.color}20` }}>
                                         <Icon className="w-5 h-5" style={{ color: spec.color }} />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="text-[14px] font-bold text-slate-900 dark:text-white leading-tight">
+                                        <h4 className="text-[14px] font-bold text-hrsd-navy dark:text-white leading-tight">
                                             {spec.titleAr}
                                         </h4>
-                                        <p className="text-[11.5px] text-slate-500 dark:text-slate-400 leading-snug mt-0.5">
+                                        <p className="text-[11.5px] text-hrsd-cool-gray dark:text-hrsd-cool-gray leading-snug mt-0.5">
                                             {spec.description}
                                         </p>
                                     </div>
@@ -302,7 +302,7 @@ export const ScenarioSimulator: React.FC = () => {
                                         {split[code]}%
                                     </div>
                                 </div>
-                                <div className="text-[11.5px] text-slate-500 dark:text-slate-400 mt-1.5">
+                                <div className="text-[11.5px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-1.5">
                                     التخصيص: {allocated.toLocaleString('ar-SA')} ريال
                                 </div>
                             </div>
@@ -316,7 +316,7 @@ export const ScenarioSimulator: React.FC = () => {
                 <div>
                     <div className="flex items-center gap-2 mb-4">
                         <ArrowLeftRight className="w-5 h-5 text-hrsd-navy" />
-                        <h3 className="text-[16px] font-bold text-slate-900 dark:text-white">
+                        <h3 className="text-[16px] font-bold text-hrsd-navy dark:text-white">
                             مقارنة السيناريوهات ({horizon} شهراً · ميزانيّة {(budget / 1_000_000).toFixed(1)} م.ر)
                         </h3>
                     </div>
@@ -328,8 +328,8 @@ export const ScenarioSimulator: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div className="bg-slate-50 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-8 text-center">
-                    <p className="text-[14px] text-slate-500 dark:text-slate-400">
+                <div className="bg-slate-50 dark:bg-white border-2 border-dashed border-gray-300 dark:border-gray-300 rounded-xl p-8 text-center">
+                    <p className="text-[14px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                         صحِّح مجموع التخصيص إلى 100% لرؤية نتائج المحاكاة.
                     </p>
                 </div>
@@ -350,24 +350,24 @@ const ScenarioCard: React.FC<{ scenario: ScenarioOutput; isUserScenario: boolean
             className={`rounded-2xl p-5 border-2 transition-shadow hover:shadow-md ${
                 isUserScenario
                     ? 'bg-hrsd-navy text-white border-hrsd-navy shadow-md'
-                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
+                    : 'bg-white dark:bg-white border-gray-200 dark:border-gray-200'
             }`}
         >
             <header className="mb-4">
                 <div className={`text-[11px] font-bold uppercase tracking-wider ${
-                    isUserScenario ? 'text-hrsd-gold' : 'text-slate-500 dark:text-slate-400'
+                    isUserScenario ? 'text-hrsd-gold' : 'text-hrsd-cool-gray dark:text-hrsd-cool-gray'
                 }`}>
                     {isUserScenario ? 'سيناريوك المُقتَرح' : 'بديلٌ للمقارنة'}
                 </div>
                 <h4 className={`text-[17px] font-bold mt-0.5 ${
-                    isUserScenario ? 'text-white' : 'text-slate-900 dark:text-white'
+                    isUserScenario ? 'text-white' : 'text-hrsd-navy dark:text-white'
                 }`}>
                     {scenario.label}
                 </h4>
             </header>
 
             {/* التخصيص */}
-            <div className={`mb-4 ${isUserScenario ? 'text-white/80' : 'text-slate-600 dark:text-slate-300'} text-[12px] space-y-1`}>
+            <div className={`mb-4 ${isUserScenario ? 'text-white/80' : 'text-hrsd-cool-gray dark:text-hrsd-navy'} text-[12px] space-y-1`}>
                 <div className="flex justify-between"><span>تمكين مهنيّ</span><span className="font-mono font-bold">{scenario.split.vocational}%</span></div>
                 <div className="flex justify-between"><span>دمج أسريّ</span><span className="font-mono font-bold">{scenario.split.reintegration}%</span></div>
                 <div className="flex justify-between"><span>بناء قدرات</span><span className="font-mono font-bold">{scenario.split.staff}%</span></div>
@@ -375,10 +375,10 @@ const ScenarioCard: React.FC<{ scenario: ScenarioOutput; isUserScenario: boolean
 
             {/* المُخرَجات المُتوقَّعة */}
             <div className={`rounded-xl p-3 mb-3 ${
-                isUserScenario ? 'bg-white/10' : 'bg-slate-50 dark:bg-slate-900'
+                isUserScenario ? 'bg-white/10' : 'bg-slate-50 dark:bg-white'
             }`}>
                 <div className={`text-[11px] font-bold uppercase tracking-wider mb-2 ${
-                    isUserScenario ? 'text-hrsd-gold' : 'text-slate-500 dark:text-slate-400'
+                    isUserScenario ? 'text-hrsd-gold' : 'text-hrsd-cool-gray dark:text-hrsd-cool-gray'
                 }`}>
                     مُخرَجاتٌ مُتوقَّعة
                 </div>
@@ -429,7 +429,7 @@ const ScenarioCard: React.FC<{ scenario: ScenarioOutput; isUserScenario: boolean
 
             {/* تغطية العوائق */}
             <div className={`text-[11.5px] ${
-                isUserScenario ? 'text-white/80' : 'text-slate-600 dark:text-slate-300'
+                isUserScenario ? 'text-white/80' : 'text-hrsd-cool-gray dark:text-hrsd-navy'
             }`}>
                 <span className="font-semibold">عوائق مستهدَفة:</span>{' '}
                 {scenario.barrierCoverage.join(' · ')}
@@ -437,7 +437,7 @@ const ScenarioCard: React.FC<{ scenario: ScenarioOutput; isUserScenario: boolean
 
             {/* إجمالي المخرجات */}
             <div className={`mt-3 pt-3 border-t flex items-center gap-2 ${
-                isUserScenario ? 'border-white/20 text-white' : 'border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white'
+                isUserScenario ? 'border-white/20 text-white' : 'border-gray-200 dark:border-gray-200 text-hrsd-navy dark:text-white'
             }`}>
                 <TrendingUp className={`w-4 h-4 ${isUserScenario ? 'text-hrsd-gold' : 'text-hrsd-green-dark'}`} />
                 <span className="text-[13px] font-bold">إجمالي الأثر المباشر:</span>
@@ -455,12 +455,12 @@ const OutcomeRow: React.FC<{
     isHighlighted: boolean;
 }> = ({ label, range, isHighlighted }) => (
     <div className="flex items-baseline justify-between py-1 text-[12.5px]">
-        <span className={isHighlighted ? 'text-white/85' : 'text-slate-600 dark:text-slate-300'}>{label}</span>
+        <span className={isHighlighted ? 'text-white/85' : 'text-hrsd-cool-gray dark:text-hrsd-navy'}>{label}</span>
         <div className="flex items-baseline gap-1">
-            <span className={`font-black text-[15px] ${isHighlighted ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
+            <span className={`font-black text-[15px] ${isHighlighted ? 'text-white' : 'text-hrsd-navy dark:text-white'}`}>
                 {range.count}
             </span>
-            <span className={`text-[10px] ${isHighlighted ? 'text-white/60' : 'text-slate-400'}`}>
+            <span className={`text-[10px] ${isHighlighted ? 'text-white/60' : 'text-hrsd-cool-gray'}`}>
                 ({range.lower}–{range.upper})
             </span>
         </div>

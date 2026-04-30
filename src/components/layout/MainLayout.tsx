@@ -24,7 +24,7 @@ const LoadingFallback = () => (
     <div className="flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
             <div className="w-10 h-10 border-4 border-hrsd-teal border-t-transparent rounded-full animate-spin" />
-            <span className="text-slate-500 dark:text-slate-400 text-sm">جاري التحميل...</span>
+            <span className="text-hrsd-cool-gray dark:text-hrsd-cool-gray text-sm">جاري التحميل...</span>
         </div>
     </div>
 );
@@ -50,7 +50,7 @@ export const MainLayout = () => {
     };
 
     return (
-        <div className="flex h-screen bg-hrsd-bg-light dark:bg-slate-900 font-sans overflow-hidden transition-colors duration-300" dir="rtl">
+        <div className="flex h-screen bg-hrsd-bg-light dark:bg-white font-sans overflow-hidden transition-colors duration-300" dir="rtl">
             {/* Global Risk Alert System */}
             <RiskAlertSystem />
 
@@ -79,7 +79,7 @@ export const MainLayout = () => {
                 <Header onMenuClick={handleMenuToggle} />
 
                 {/* Page Content */}
-                <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 hrsd-scrollbar bg-[#f1f5f9] dark:bg-slate-900 transition-colors duration-300">
+                <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 hrsd-scrollbar bg-[#f1f5f9] dark:bg-white transition-colors duration-300">
                     <div className="max-w-7xl mx-auto animate-fade-in min-h-full">
                         <Breadcrumb className="mb-4" />
                         <Suspense fallback={<LoadingFallback />}>

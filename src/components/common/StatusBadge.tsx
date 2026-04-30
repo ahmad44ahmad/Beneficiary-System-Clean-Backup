@@ -12,6 +12,15 @@ interface StatusBadgeProps {
     showIcon?: boolean;
 }
 
+/**
+ * Status → HRSD-compliant tones.
+ * - good states (active, completed, consumed, low risk): HRSD green #2BB574
+ * - in-progress / informational (preparing, ready, delivered): HRSD teal #269798
+ * - warning (medium risk): HRSD gold #FCB614
+ * - elevated (high risk): HRSD orange #F7941D
+ * - critical / refused / cancelled: semantic red #DC2626 (life-safety exception)
+ * - neutral (pending, inactive): HRSD cool gray #7A7A7A
+ */
 const statusConfig: Record<string, {
     label: string;
     bgColor: string;
@@ -19,24 +28,24 @@ const statusConfig: Record<string, {
     icon?: React.ElementType
 }> = {
     // Meal statuses
-    pending: { label: 'معلق', bgColor: 'bg-gray-100', textColor: 'text-gray-500', icon: Clock },
-    preparing: { label: 'قيد التحضير', bgColor: 'bg-yellow-50', textColor: 'text-yellow-600', icon: Clock },
-    ready: { label: 'جاهز', bgColor: 'bg-blue-50', textColor: 'text-blue-600', icon: Check },
-    delivered: { label: 'تم التسليم', bgColor: 'bg-blue-50', textColor: 'text-blue-600', icon: Check },
-    consumed: { label: 'تم الاستهلاك', bgColor: 'bg-green-50', textColor: 'text-green-600', icon: CheckCircle2 },
-    refused: { label: 'رفض الوجبة', bgColor: 'bg-red-50', textColor: 'text-red-600', icon: X },
+    pending: { label: 'معلق', bgColor: 'bg-gray-100', textColor: 'text-hrsd-cool-gray', icon: Clock },
+    preparing: { label: 'قيد التحضير', bgColor: 'bg-[#FCB614]/10', textColor: 'text-[#D49A0A]', icon: Clock },
+    ready: { label: 'جاهز', bgColor: 'bg-[#269798]/10', textColor: 'text-[#269798]', icon: Check },
+    delivered: { label: 'تم التسليم', bgColor: 'bg-[#269798]/10', textColor: 'text-[#269798]', icon: Check },
+    consumed: { label: 'تم الاستهلاك', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]', icon: CheckCircle2 },
+    refused: { label: 'رفض الوجبة', bgColor: 'bg-[#DC2626]/10', textColor: 'text-[#DC2626]', icon: X },
 
     // General statuses
-    active: { label: 'نشط', bgColor: 'bg-green-50', textColor: 'text-green-600', icon: CheckCircle2 },
-    inactive: { label: 'غير نشط', bgColor: 'bg-gray-100', textColor: 'text-gray-500' },
-    completed: { label: 'مكتمل', bgColor: 'bg-green-50', textColor: 'text-green-600', icon: CheckCircle2 },
-    cancelled: { label: 'ملغى', bgColor: 'bg-red-50', textColor: 'text-red-600', icon: X },
+    active: { label: 'نشط', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]', icon: CheckCircle2 },
+    inactive: { label: 'غير نشط', bgColor: 'bg-gray-100', textColor: 'text-hrsd-cool-gray' },
+    completed: { label: 'مكتمل', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]', icon: CheckCircle2 },
+    cancelled: { label: 'ملغى', bgColor: 'bg-[#DC2626]/10', textColor: 'text-[#DC2626]', icon: X },
 
     // Risk levels
-    low: { label: 'منخفض', bgColor: 'bg-green-50', textColor: 'text-green-600' },
-    medium: { label: 'متوسط', bgColor: 'bg-yellow-50', textColor: 'text-yellow-600' },
-    high: { label: 'عالي', bgColor: 'bg-orange-50', textColor: 'text-orange-600', icon: AlertCircle },
-    critical: { label: 'حرج', bgColor: 'bg-red-50', textColor: 'text-red-600', icon: AlertCircle }
+    low: { label: 'منخفض', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]' },
+    medium: { label: 'متوسط', bgColor: 'bg-[#FCB614]/10', textColor: 'text-[#D49A0A]' },
+    high: { label: 'عالي', bgColor: 'bg-[#F7941D]/10', textColor: 'text-[#D67A0A]', icon: AlertCircle },
+    critical: { label: 'حرج', bgColor: 'bg-[#DC2626]/10', textColor: 'text-[#DC2626]', icon: AlertCircle }
 };
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({

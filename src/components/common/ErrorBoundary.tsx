@@ -46,14 +46,14 @@ export class ErrorBoundary extends Component<Props, State> {
             }
 
             return (
-                <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6" dir="rtl">
+                <div className="min-h-screen bg-white flex items-center justify-center p-6" dir="rtl">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="bg-slate-800 rounded-2xl p-8 max-w-md w-full text-center border border-red-500/30"
+                        className="bg-white rounded-2xl p-8 max-w-md w-full text-center border border-[#DC2626]/30"
                     >
-                        <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <AlertTriangle className="w-8 h-8 text-red-400" />
+                        <div className="w-16 h-16 bg-[#DC2626]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <AlertTriangle className="w-8 h-8 text-[#DC2626]" />
                         </div>
 
                         <h2 className="text-xl font-bold text-white mb-2">
@@ -65,7 +65,7 @@ export class ErrorBoundary extends Component<Props, State> {
                         </p>
 
                         {import.meta.env.DEV && this.state.error && (
-                            <pre className="bg-slate-900 p-4 rounded-lg text-left text-xs text-red-400 mb-6 overflow-auto max-h-32">
+                            <pre className="bg-white p-4 rounded-lg text-left text-xs text-[#DC2626] mb-6 overflow-auto max-h-32">
                                 {this.state.error.message}
                             </pre>
                         )}
@@ -73,7 +73,7 @@ export class ErrorBoundary extends Component<Props, State> {
                         <div className="flex gap-3 justify-center">
                             <button
                                 onClick={this.handleRetry}
-                                className="flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-600 
+                                className="flex items-center gap-2 px-4 py-2 bg-[#269798] hover:bg-[#1B7778] 
                          text-white rounded-xl transition-colors cursor-pointer"
                             >
                                 <RefreshCw className="w-4 h-4" />
@@ -82,7 +82,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
                             <button
                                 onClick={this.handleGoHome}
-                                className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 
+                                className="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-200 
                          text-white rounded-xl transition-colors cursor-pointer"
                             >
                                 <Home className="w-4 h-4" />

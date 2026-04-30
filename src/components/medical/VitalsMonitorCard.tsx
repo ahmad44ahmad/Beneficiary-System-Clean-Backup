@@ -18,7 +18,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
             <Card className="h-64 flex flex-col items-center justify-center text-gray-400 bg-gray-50 border-dashed animate-pulse">
                 <WifiOff className="w-10 h-10 mb-3" />
                 <p>جاري البحث عن أجهزة طبية ذكية...</p>
-                <span className="text-xs text-blue-500 mt-2">Connecting to IoMT Gateway...</span>
+                <span className="text-xs text-[#269798] mt-2">Connecting to IoMT Gateway...</span>
             </Card>
         );
     }
@@ -26,21 +26,21 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
     const isAbnormalHR = latestVitals && (latestVitals.heartRate > 100 || latestVitals.heartRate < 60);
 
     return (
-        <Card className="overflow-hidden border-teal-100 shadow-sm relative">
+        <Card className="overflow-hidden border-[#269798]/10 shadow-sm relative">
             {/* Live Indicator Pulse */}
             <div className="absolute top-4 end-4 flex items-center gap-2 z-10">
                 <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2BB574] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#2BB574]"></span>
                 </span>
-                <span className="text-xs font-mono text-green-700 font-bold">LIVE</span>
+                <span className="text-xs font-mono text-[#1E9658] font-bold">LIVE</span>
             </div>
 
             {/* Header / Device Info */}
-            <div className="p-4 border-b bg-teal-50/50 flex justify-between items-center">
+            <div className="p-4 border-b bg-[#269798]/10/50 flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                    <div className="bg-white p-2 rounded-lg border border-teal-100 shadow-sm">
-                        <Smartphone className="w-5 h-5 text-teal-600" />
+                    <div className="bg-white p-2 rounded-lg border border-[#269798]/10 shadow-sm">
+                        <Smartphone className="w-5 h-5 text-[#1B7778]" />
                     </div>
                     <div>
                         <h3 className="font-bold text-gray-800 text-sm">VitalWatch Series 5</h3>
@@ -55,9 +55,9 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
 
             {/* Main Vitals Display */}
             <div className="grid grid-cols-2 divide-x divide-x-reverse border-b">
-                <div className={`p-6 text-center transition-colors ${isAbnormalHR ? 'bg-red-50' : 'bg-white'}`}>
+                <div className={`p-6 text-center transition-colors ${isAbnormalHR ? 'bg-[#DC2626]/10' : 'bg-white'}`}>
                     <div className="flex items-center justify-center gap-2 text-gray-500 mb-2">
-                        <Heart className={`w-5 h-5 ${isAbnormalHR ? 'text-red-500 animate-pulse' : 'text-gray-400'}`} />
+                        <Heart className={`w-5 h-5 ${isAbnormalHR ? 'text-[#DC2626] animate-pulse' : 'text-gray-400'}`} />
                         <span className="text-xs font-semibold">نبض القلب</span>
                     </div>
                     <div className="text-4xl font-bold font-mono text-gray-900">
@@ -68,7 +68,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
 
                 <div className="p-6 text-center bg-white">
                     <div className="flex items-center justify-center gap-2 text-gray-500 mb-2">
-                        <Activity className="w-5 h-5 text-blue-400" />
+                        <Activity className="w-5 h-5 text-[#269798]" />
                         <span className="text-xs font-semibold">الأكسجين</span>
                     </div>
                     <div className="text-4xl font-bold font-mono text-gray-900">
@@ -90,7 +90,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
                         <Line
                             type="monotone"
                             dataKey="heartRate"
-                            stroke="#ef4444"
+                            stroke="#DC2626"
                             strokeWidth={2}
                             dot={false}
                             animationDuration={300}
@@ -98,7 +98,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
                         <Line
                             type="monotone"
                             dataKey="oxygenSaturation"
-                            stroke="#3b82f6"
+                            stroke="#269798"
                             strokeWidth={2}
                             dot={false}
                             animationDuration={300}

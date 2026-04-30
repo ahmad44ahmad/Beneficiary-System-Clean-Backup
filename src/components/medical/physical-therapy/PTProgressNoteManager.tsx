@@ -37,7 +37,7 @@ export const PTProgressNoteManager: React.FC<{
                         <select
                             value={newNote.sessionType}
                             onChange={(e) => setNewNote(prev => ({ ...prev, sessionType: e.target.value as PTProgressNote['sessionType'] }))}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                         >
                             <option value="Individual">Individual</option>
                             <option value="Group">Group</option>
@@ -48,7 +48,7 @@ export const PTProgressNoteManager: React.FC<{
                         <select
                             value={newNote.response}
                             onChange={(e) => setNewNote(prev => ({ ...prev, response: e.target.value as PTProgressNote['response'] }))}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                         >
                             <option value="Cooperative">Cooperative</option>
                             <option value="Resistant">Resistant</option>
@@ -62,7 +62,7 @@ export const PTProgressNoteManager: React.FC<{
                     <textarea
                         value={newNote.notes || ''}
                         onChange={(e) => setNewNote(prev => ({ ...prev, notes: e.target.value }))}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                         rows={3}
                         placeholder="Describe interventions and progress..."
                     />
@@ -85,8 +85,8 @@ export const PTProgressNoteManager: React.FC<{
                                 <span className="ms-2 text-sm text-gray-500">{new Date(note.date).toLocaleTimeString()}</span>
                             </div>
                             <span className={`px-2 py-1 rounded text-xs font-medium 
-                        ${note.response === 'Cooperative' ? 'bg-green-100 text-green-800' :
-                                    note.response === 'Resistant' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                        ${note.response === 'Cooperative' ? 'bg-[#2BB574]/15 text-[#14532D]' :
+                                    note.response === 'Resistant' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' : 'bg-[#FCB614]/10 text-[#D49A0A]'}`}>
                                 {note.response}
                             </span>
                         </div>

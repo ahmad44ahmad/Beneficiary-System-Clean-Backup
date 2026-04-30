@@ -60,6 +60,16 @@ scripts/local-diag-*.mjs
 # (contains full audit_logs, RLS policies, beneficiary data even if demo)
 backups/
 
+# Heavy media assets (video voiceovers, walkthrough PNGs) — keep out of repo
+video-production/
+walkthrough-screenshots/
+
+# Tool-local screenshot/snapshot artifacts produced by Playwright MCP
+.playwright-mcp/
+*.png
+!public/**/*.png
+!docs/**/*.png
+
 # skills CLI scaffolding (symlinks for many AI coding assistants).
 # `.mcp.json` is committed (project MCP config), everything else is tool-local.
 .agents/

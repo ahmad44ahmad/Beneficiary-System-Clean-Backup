@@ -54,16 +54,16 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
     const renderStep1_Discovery = () => (
         <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" dir="rtl">
             <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Lightbulb className="w-8 h-8 text-yellow-600" />
+                <div className="w-16 h-16 bg-[#FCB614]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Lightbulb className="w-8 h-8 text-[#D49A0A]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">اكتشف إمكاناتك</h3>
                 <p className="text-gray-500">ما الذي تُجيده؟ وما الذي تستمتع به؟</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="p-4 border-blue-100 bg-blue-50/50">
-                    <h4 className="font-bold text-blue-900 mb-3 flex items-center gap-2">
+                <Card className="p-4 border-[#269798]/10 bg-[#269798]/10/50">
+                    <h4 className="font-bold text-[#0F3144] mb-3 flex items-center gap-2">
                         <Zap className="w-5 h-5" /> نقاط القوة
                     </h4>
                     <div className="flex gap-2 mb-3">
@@ -79,15 +79,15 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {profile.strengths?.map((s, i) => (
-                            <span key={i} className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm shadow-sm border border-blue-100 flex items-center gap-1">
-                                {s} <button onClick={() => setProfile(prev => ({ ...prev, strengths: prev.strengths?.filter((_, idx) => idx !== i) }))} className="hover:text-red-500 ms-1">×</button>
+                            <span key={i} className="bg-white text-[#1B7778] px-3 py-1 rounded-full text-sm shadow-sm border border-[#269798]/10 flex items-center gap-1">
+                                {s} <button onClick={() => setProfile(prev => ({ ...prev, strengths: prev.strengths?.filter((_, idx) => idx !== i) }))} className="hover:text-[#DC2626] ms-1">×</button>
                             </span>
                         ))}
                     </div>
                 </Card>
 
-                <Card className="p-4 border-purple-100 bg-purple-50/50">
-                    <h4 className="font-bold text-purple-900 mb-3 flex items-center gap-2">
+                <Card className="p-4 border-[#FCB614]/10 bg-[#FCB614]/10/50">
+                    <h4 className="font-bold text-[#92400E] mb-3 flex items-center gap-2">
                         <Target className="w-5 h-5" /> التطلّعات
                     </h4>
                     <div className="flex gap-2 mb-3">
@@ -103,8 +103,8 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {profile.aspirations?.map((s, i) => (
-                            <span key={i} className="bg-white text-purple-700 px-3 py-1 rounded-full text-sm shadow-sm border border-purple-100 flex items-center gap-1">
-                                {s} <button onClick={() => setProfile(prev => ({ ...prev, aspirations: prev.aspirations?.filter((_, idx) => idx !== i) }))} className="hover:text-red-500 ms-1">×</button>
+                            <span key={i} className="bg-white text-[#D49A0A] px-3 py-1 rounded-full text-sm shadow-sm border border-[#FCB614]/10 flex items-center gap-1">
+                                {s} <button onClick={() => setProfile(prev => ({ ...prev, aspirations: prev.aspirations?.filter((_, idx) => idx !== i) }))} className="hover:text-[#DC2626] ms-1">×</button>
                             </span>
                         ))}
                     </div>
@@ -122,17 +122,17 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {suggestedTracks.map((track) => (
-                    <div key={track.name} className="border rounded-xl p-4 hover:border-blue-500 hover:shadow-md transition-all cursor-pointer bg-white group">
+                    <div key={track.name} className="border rounded-xl p-4 hover:border-[#269798] hover:shadow-md transition-all cursor-pointer bg-white group">
                         <div className="flex items-start justify-between">
                             <div className="flex items-center gap-3">
                                 <span className="text-3xl">{track.icon}</span>
                                 <div>
-                                    <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{track.name}</h4>
+                                    <h4 className="font-bold text-gray-900 group-hover:text-[#269798] transition-colors">{track.name}</h4>
                                     <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">المطابقة: {track.match}</span>
                                 </div>
                             </div>
-                            <div className="w-6 h-6 rounded-full border-2 border-gray-200 group-hover:border-blue-500 group-hover:bg-blue-50 flex items-center justify-center">
-                                <ArrowRight className="w-3 h-3 text-gray-300 group-hover:text-blue-500" />
+                            <div className="w-6 h-6 rounded-full border-2 border-gray-200 group-hover:border-[#269798] group-hover:bg-[#269798]/10 flex items-center justify-center">
+                                <ArrowRight className="w-3 h-3 text-gray-300 group-hover:text-[#269798]" />
                             </div>
                         </div>
                     </div>
@@ -144,14 +144,14 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
     const renderStep3_Goals = () => (
         <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" dir="rtl">
             <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-8 h-8 text-green-600" />
+                <div className="w-16 h-16 bg-[#2BB574]/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-8 h-8 text-[#1E9658]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">حدِّد الهدف الأول</h3>
                 <p className="text-gray-500">يجب أن يكون الهدف ذكياً (محدد، قابل للقياس، قابل للتحقيق، واقعي، مرتبط بزمن)</p>
             </div>
 
-            <Card className="p-6 max-w-lg mx-auto border-green-100 shadow-sm">
+            <Card className="p-6 max-w-lg mx-auto border-[#2BB574]/10 shadow-sm">
                 <div className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">عنوان الهدف</label>
@@ -179,21 +179,21 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
     return (
         <div className="bg-white rounded-xl shadow-lg border overflow-hidden max-w-4xl mx-auto my-8" dir="rtl">
             {/* Wizard Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+            <div className="bg-gradient-to-r from-[#1B7778] to-[#D49A0A] p-6 text-white">
                 <h2 className="text-2xl font-bold flex items-center gap-2">
-                    <Zap className="w-6 h-6 text-yellow-300" />
+                    <Zap className="w-6 h-6 text-[#FCB614]" />
                     بناء خطة التمكين
                 </h2>
-                <p className="text-blue-100 mt-1">بناء مستقبل قائم على القدرة، لا على الإعاقة</p>
+                <p className="text-[#269798]/40 mt-1">بناء مستقبل قائم على القدرة، لا على الإعاقة</p>
 
                 {/* Progress Steps */}
                 <div className="flex items-center mt-6 gap-2">
                     {[1, 2, 3].map(i => (
                         <div key={i} className="flex items-center">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${step >= i ? 'bg-white text-blue-600' : 'bg-blue-800/50 text-blue-200'}`}>
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${step >= i ? 'bg-white text-[#269798]' : 'bg-[#0F3144]/50 text-[#269798]/60'}`}>
                                 {step > i ? <Check className="w-5 h-5" /> : i}
                             </div>
-                            {i < 3 && <div className={`w-12 h-1 bg-blue-800/50 mx-2 ${step > i ? 'bg-white/50' : ''}`} />}
+                            {i < 3 && <div className={`w-12 h-1 bg-[#0F3144]/50 mx-2 ${step > i ? 'bg-white/50' : ''}`} />}
                         </div>
                     ))}
                 </div>
@@ -221,7 +221,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                         الخطوة التالية <ArrowRight className="w-4 h-4 ms-2" />
                     </Button>
                 ) : (
-                    <Button onClick={() => onSave(profile as EmpowermentProfile)} className="bg-green-600 hover:bg-green-700 text-white">
+                    <Button onClick={() => onSave(profile as EmpowermentProfile)} className="bg-[#1E9658] hover:bg-[#1E9658] text-white">
                         إنهاء وحفظ الخطة <Check className="w-4 h-4 ms-2" />
                     </Button>
                 )}

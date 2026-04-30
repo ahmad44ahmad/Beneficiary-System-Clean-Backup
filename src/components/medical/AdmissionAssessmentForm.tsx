@@ -85,9 +85,9 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
             <div className="flex justify-between items-center mb-6 border-b pb-4">
                 <h2 className="text-xl font-bold text-gray-800">تقييم تمريضي جديد (Admission Assessment)</h2>
                 <div className="flex gap-2">
-                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>1. العلامات الحيوية</span>
-                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>2. الفحص البدني</span>
-                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 3 ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}>3. المخاطر والوظائف</span>
+                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 1 ? 'bg-[#1B7778] text-white' : 'bg-gray-100'}`}>1. العلامات الحيوية</span>
+                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 2 ? 'bg-[#1B7778] text-white' : 'bg-gray-100'}`}>2. الفحص البدني</span>
+                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 3 ? 'bg-[#1B7778] text-white' : 'bg-gray-100'}`}>3. المخاطر والوظائف</span>
                 </div>
             </div>
 
@@ -102,7 +102,7 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                                     type="number"
                                     value={formData.vitals?.temperature}
                                     onChange={e => handleVitalChange('temperature', parseFloat(e.target.value))}
-                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-[#269798]"
                                     placeholder="°C"
                                 />
                             </div>
@@ -112,7 +112,7 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                                     type="number"
                                     value={formData.vitals?.pulse}
                                     onChange={e => handleVitalChange('pulse', parseFloat(e.target.value))}
-                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-[#269798]"
                                     placeholder="bpm"
                                 />
                             </div>
@@ -122,7 +122,7 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                                     type="number"
                                     value={formData.vitals?.respiration}
                                     onChange={e => handleVitalChange('respiration', parseFloat(e.target.value))}
-                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-[#269798]"
                                     placeholder="cpm"
                                 />
                             </div>
@@ -188,15 +188,15 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                                 <h4 className="font-bold mb-3">المظهر العام (General Appearance)</h4>
                                 <div className="space-y-3">
                                     <label className="flex items-center gap-2">
-                                        <input type="checkbox" className="rounded text-blue-600" />
+                                        <input type="checkbox" className="rounded text-[#269798]" />
                                         <span>شاحب (Pallor)</span>
                                     </label>
                                     <label className="flex items-center gap-2">
-                                        <input type="checkbox" className="rounded text-blue-600" />
+                                        <input type="checkbox" className="rounded text-[#269798]" />
                                         <span>يرقان (Jaundice)</span>
                                     </label>
                                     <label className="flex items-center gap-2">
-                                        <input type="checkbox" className="rounded text-blue-600" />
+                                        <input type="checkbox" className="rounded text-[#269798]" />
                                         <span>زراق (Cyanosis)</span>
                                     </label>
                                 </div>
@@ -206,11 +206,11 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                                 <h4 className="font-bold mb-3">الجلد (Skin Integrity)</h4>
                                 <div className="space-y-3">
                                     <label className="flex items-center gap-2">
-                                        <input type="radio" name="skin" className="text-blue-600" defaultChecked />
+                                        <input type="radio" name="skin" className="text-[#269798]" defaultChecked />
                                         <span>سليم (Intact)</span>
                                     </label>
                                     <label className="flex items-center gap-2">
-                                        <input type="radio" name="skin" className="text-blue-600" />
+                                        <input type="radio" name="skin" className="text-[#269798]" />
                                         <span>جاف / متشقق (Dry/Cracked)</span>
                                     </label>
                                     <div className="mt-2">
@@ -284,31 +284,31 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                             </div>
 
                             <div className="space-y-4">
-                                <h4 className="font-bold border-b pb-2 text-red-700">تقييم المخاطر (Risk Assessment)</h4>
+                                <h4 className="font-bold border-b pb-2 text-[#B91C1C]">تقييم المخاطر (Risk Assessment)</h4>
                                 <div className="space-y-2">
-                                    <label className="flex items-center justify-between p-3 border rounded hover:bg-red-50 cursor-pointer">
+                                    <label className="flex items-center justify-between p-3 border rounded hover:bg-[#DC2626]/10 cursor-pointer">
                                         <span>خطر السقوط (Fall Risk - Morse)</span>
                                         <input
                                             type="checkbox"
-                                            className="w-5 h-5 text-red-600"
+                                            className="w-5 h-5 text-[#DC2626]"
                                             checked={formData.risks?.fallRisk}
                                             onChange={e => setFormData(prev => ({ ...prev, risks: { ...prev.risks!, fallRisk: e.target.checked } }))}
                                         />
                                     </label>
-                                    <label className="flex items-center justify-between p-3 border rounded hover:bg-red-50 cursor-pointer">
+                                    <label className="flex items-center justify-between p-3 border rounded hover:bg-[#DC2626]/10 cursor-pointer">
                                         <span>قرح الفراش (Braden Scale Risk)</span>
                                         <input
                                             type="checkbox"
-                                            className="w-5 h-5 text-red-600"
+                                            className="w-5 h-5 text-[#DC2626]"
                                             checked={formData.risks?.pressureUlcerRisk}
                                             onChange={e => setFormData(prev => ({ ...prev, risks: { ...prev.risks!, pressureUlcerRisk: e.target.checked } }))}
                                         />
                                     </label>
-                                    <label className="flex items-center justify-between p-3 border rounded hover:bg-red-50 cursor-pointer">
+                                    <label className="flex items-center justify-between p-3 border rounded hover:bg-[#DC2626]/10 cursor-pointer">
                                         <span>خطر الشرق (Aspiration Risk)</span>
                                         <input
                                             type="checkbox"
-                                            className="w-5 h-5 text-red-600"
+                                            className="w-5 h-5 text-[#DC2626]"
                                             checked={formData.risks?.aspirationRisk}
                                             onChange={e => setFormData(prev => ({ ...prev, risks: { ...prev.risks!, aspirationRisk: e.target.checked } }))}
                                         />

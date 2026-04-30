@@ -52,10 +52,10 @@ export interface DignityProfile {
 export const MOCK_DIGNITY_PROFILES: DignityProfile[] = [
     {
         id: 'dp1',
-        beneficiaryId: '101', // Linked to 'أحمد محمد' or similar active beneficiary
+        beneficiaryId: '5001', // أحمد سالم
         nickname: 'أبو حميد',
         personalityType: 'social',
-        personalityDescription: 'يحب التحدث مع الجميع، ويبادر بالسلام. ابتسامته دائمة وتنعكس إيجابياً على من حوله.',
+        personalityDescription: 'اجتماعي بفطرته، يَلتفت لمن حوله ويَحرص على إشراك الآخرين في فرحه. يَعشق الإيقاعات الشعبية والشيلات، ويَنزعج من الصمت المطبق في غرفته.',
         sensoryPreferences: {
             lighting: 'bright',
             noise: 'lively',
@@ -64,18 +64,18 @@ export const MOCK_DIGNITY_PROFILES: DignityProfile[] = [
         },
         favorites: {
             food: ['كبسة دجاج', 'فواكه', 'عصير برتقال'],
-            activities: ['كرة القدم', 'مشاهدة التلفاز', 'جلسات الشاي'],
-            places: ['الحديقة الخارجية', 'المصلى'],
+            activities: ['الإيقاعات الشعبية', 'الشيلات', 'الحفلات الشعبية الحماسية', 'كرة القدم — مشجّع للهلال'],
+            places: ['الحديقة الخارجية', 'صالة المشاهدة الجماعية', 'المصلى'],
             people: ['المشرف خالد', 'الزميل سعيد'],
             colors: ['أزرق', 'أخضر']
         },
         dislikes: {
             food: ['باذنجان', 'سمك'],
-            triggers: ['الصوت العالي المفاجئ', 'تأخير الوجبات'],
+            triggers: ['الصمت التام في الغرفة', 'كتم الصوت لفترات طويلة', 'تأخير الوجبات'],
             fears: ['الظلام']
         },
         communicationStyle: 'verbal',
-        bestWayToEngage: 'ابدأ بالسلام واسأله عن أخبار فريقه المفضل.',
+        bestWayToEngage: 'ناده بكنيته «أبا حميد». لا تُسكت الصوت تماماً في غرفته؛ يَستجيب فوراً لشيلة معروفة أو إيقاع شعبي. اسأله عن مباراة الهلال — يَنطلق.',
         deeds: [
             {
                 id: 'd1',
@@ -83,7 +83,7 @@ export const MOCK_DIGNITY_PROFILES: DignityProfile[] = [
                 title: 'مساعدة زميل',
                 description: 'قام بمساعدة زميله المقعد في الوصول إلى صالة الطعام.',
                 category: 'helping_others',
-                impactLevel: 'high',
+                impactLevel: 'medium',
                 verifiedBy: 'أ. صالح'
             },
             {
@@ -94,9 +94,18 @@ export const MOCK_DIGNITY_PROFILES: DignityProfile[] = [
                 category: 'spiritual',
                 impactLevel: 'medium',
                 verifiedBy: 'أ. محمد'
+            },
+            {
+                id: 'd3',
+                date: '2026-04-28',
+                title: 'إيثار: تَنازُل عن جهاز التحكم لأجل زملائه',
+                description: 'بَحث «أبو حميد» في الصالات عن المُستفيدين من مُحبّي نادي الهلال، نَاداهم بأسمائهم واحداً واحداً، وجَمَعهم في صالة المشاهدة الجماعية ليُتابعوا المباراة. ثم سَلَّمهم جهاز التحكم — رغم أنه كان منغمساً قبل قليل في حفلٍ شعبيٍّ حماسيٍّ يَعشقه ولا يَستغني عنه عادةً. آثَر فرحة زملائه على شَغَفه الشخصي. لحظة كرامة وحضور إنساني نَادر.',
+                category: 'helping_others',
+                impactLevel: 'high',
+                verifiedBy: 'أ. المشرف الاجتماعي'
             }
         ],
-        lastUpdated: '2025-12-18'
+        lastUpdated: '2026-04-28'
     },
     {
         id: 'dp2',

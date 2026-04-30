@@ -45,8 +45,8 @@ const pillars = [
         num: '01',
         title: 'التحول الرقمي',
         description: 'رقمنة شاملة لجميع العمليات التشغيلية والإدارية بالمركز',
-        color: '#148287',
-        colorDark: '#0d6b6e',
+        color: '#269798',
+        colorDark: '#1B7778',
         tags: ['أتمتة', 'رقمنة', 'كفاءة']
     },
     {
@@ -54,8 +54,8 @@ const pillars = [
         num: '02',
         title: 'الذكاء الاصطناعي',
         description: 'تنبؤات ذكية بالمخاطر وأنظمة إنذار مبكر مدعومة بالذكاء الاصطناعي',
-        color: '#8b5cf6',
-        colorDark: '#6d28d9',
+        color: '#269798',
+        colorDark: '#1B7778',
         tags: ['تعلم آلي', 'تنبؤ', 'إنذار مبكر']
     },
     {
@@ -63,8 +63,8 @@ const pillars = [
         num: '03',
         title: 'إدارة الجودة',
         description: 'منظومة جودة شاملة متوافقة مع معايير ISO 9001:2015',
-        color: '#2DB473',
-        colorDark: '#1a8a55',
+        color: '#2BB574',
+        colorDark: '#1E9658',
         tags: ['ISO 9001', 'تحسين مستمر', 'CAPA']
     },
     {
@@ -72,8 +72,8 @@ const pillars = [
         num: '04',
         title: 'التميز المؤسسي',
         description: 'حوكمة رشيدة ومؤشرات أداء استراتيجية لتحقيق التميز',
-        color: '#FAB414',
-        colorDark: '#d49a0e',
+        color: '#FCB614',
+        colorDark: '#D49A0A',
         tags: ['حوكمة', 'KPI', 'مساءلة']
     },
     {
@@ -81,18 +81,18 @@ const pillars = [
         num: '05',
         title: 'الامتثال والمعايير',
         description: 'التزام كامل بمعايير وزارة الموارد البشرية والمعايير الدولية',
-        color: '#F5961E',
-        colorDark: '#d07a10',
+        color: '#F7941D',
+        colorDark: '#D67A0A',
         tags: ['PDPL', 'رؤية 2030', 'HRSD']
     }
 ];
 
 const trustBadges = [
     { icon: null, img: '/assets/hrsd-logo.png', label: 'وزارة الموارد البشرية' },
-    { icon: null, text: 'ISO', label: 'ISO 9001:2015', color: '#148287' },
-    { icon: Leaf, label: 'رؤية 2030', color: '#2DB473' },
-    { icon: Lock, label: 'PDPL متوافق', color: '#FAB414' },
-    { icon: Globe, label: 'معايير دولية', color: '#F5961E' }
+    { icon: null, text: 'ISO', label: 'ISO 9001:2015', color: '#269798' },
+    { icon: Leaf, label: 'رؤية 2030', color: '#2BB574' },
+    { icon: Lock, label: 'PDPL متوافق', color: '#FCB614' },
+    { icon: Globe, label: 'معايير دولية', color: '#F7941D' }
 ];
 
 // ─── Animation Variants ──────────────────────────────────────────────────────
@@ -177,28 +177,28 @@ export const WelcomePage: React.FC = () => {
     const complianceCount = useCounter(liveStats.complianceRate || 94, 1200, statsReady);
 
     const stats = [
-        { value: liveStats.loading ? '...' : `${beneficiaryCount}+`, label: 'مستفيد نشط', icon: Users, color: '#148287' },
-        { value: liveStats.loading ? '...' : `${complianceCount}%`, label: 'نسبة الامتثال', icon: CheckCircle2, color: '#2DB473' },
-        { value: 'ISO', label: 'معايير الجودة العالمية', icon: Shield, color: '#FAB414' },
-        { value: '24/7', label: 'مراقبة مستمرة', icon: Activity, color: '#F5961E' }
+        { value: liveStats.loading ? '...' : `${beneficiaryCount}+`, label: 'مستفيد نشط', icon: Users, color: '#269798' },
+        { value: liveStats.loading ? '...' : `${complianceCount}%`, label: 'نسبة الامتثال', icon: CheckCircle2, color: '#2BB574' },
+        { value: 'ISO', label: 'معايير الجودة العالمية', icon: Shield, color: '#FCB614' },
+        { value: '24/7', label: 'مراقبة مستمرة', icon: Activity, color: '#F7941D' }
     ];
 
     return (
-        <div className="min-h-screen bg-[#0a1628] overflow-x-hidden" dir="rtl">
+        <div className="min-h-screen bg-[#0F3144] overflow-x-hidden" dir="rtl">
             {/* ═══ Background Layer ═══ */}
             <div className="fixed inset-0 z-0 overflow-hidden">
                 {/* Gradient Mesh */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'radial-gradient(ellipse 600px 600px at 80% 10%, rgba(20,130,135,0.15) 0%, transparent 70%), radial-gradient(ellipse 500px 500px at 15% 85%, rgba(45,180,115,0.1) 0%, transparent 70%), radial-gradient(ellipse 800px 800px at 50% 50%, rgba(20,65,90,0.2) 0%, transparent 70%)'
+                        background: 'radial-gradient(ellipse 600px 600px at 80% 10%, rgba(38,151,152,0.15) 0%, transparent 70%), radial-gradient(ellipse 500px 500px at 15% 85%, rgba(43,181,116,0.1) 0%, transparent 70%), radial-gradient(ellipse 800px 800px at 50% 50%, rgba(15,49,68,0.2) 0%, transparent 70%)'
                     }}
                 />
                 {/* Tech Grid */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        backgroundImage: 'linear-gradient(rgba(20,130,135,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(20,130,135,0.04) 1px, transparent 1px)',
+                        backgroundImage: 'linear-gradient(rgba(38,151,152,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(38,151,152,0.04) 1px, transparent 1px)',
                         backgroundSize: '60px 60px'
                     }}
                 />
@@ -208,7 +208,7 @@ export const WelcomePage: React.FC = () => {
                     style={{
                         top: '-100px',
                         right: '-100px',
-                        background: 'radial-gradient(circle, rgba(20,130,135,0.2) 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, rgba(38,151,152,0.2) 0%, transparent 70%)',
                         animation: 'orbFloat 20s ease-in-out infinite'
                     }}
                 />
@@ -217,7 +217,7 @@ export const WelcomePage: React.FC = () => {
                     style={{
                         bottom: '-50px',
                         left: '10%',
-                        background: 'radial-gradient(circle, rgba(45,180,115,0.15) 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, rgba(43,181,116,0.15) 0%, transparent 70%)',
                         animation: 'orbFloat 25s ease-in-out infinite reverse'
                     }}
                 />
@@ -226,7 +226,7 @@ export const WelcomePage: React.FC = () => {
                     style={{
                         top: '40%',
                         left: '50%',
-                        background: 'radial-gradient(circle, rgba(250,180,20,0.1) 0%, transparent 70%)',
+                        background: 'radial-gradient(circle, rgba(252,182,20,0.1) 0%, transparent 70%)',
                         animation: 'orbFloat 18s ease-in-out infinite 5s'
                     }}
                 />
@@ -234,7 +234,7 @@ export const WelcomePage: React.FC = () => {
                 <div
                     className="absolute inset-x-0 h-[1px]"
                     style={{
-                        background: 'linear-gradient(to right, transparent, rgba(20,130,135,0.3), transparent)',
+                        background: 'linear-gradient(to right, transparent, rgba(38,151,152,0.3), transparent)',
                         animation: 'scanLine 8s linear infinite'
                     }}
                 />
@@ -244,7 +244,7 @@ export const WelcomePage: React.FC = () => {
             <div className="relative z-10">
 
                 {/* ─── Section 1: Ministry Bar ─── */}
-                <header className="sticky top-0 z-20 bg-[#0a1628]/80 backdrop-blur-xl border-b border-white/5">
+                <header className="sticky top-0 z-20 bg-[#0F3144]/80 backdrop-blur-xl border-b border-white/5">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <div className="bg-white/10 rounded-xl p-1.5 flex-shrink-0">
@@ -256,17 +256,17 @@ export const WelcomePage: React.FC = () => {
                             </div>
                             <div className="hidden sm:block">
                                 <p className="text-white/70 text-xs font-medium">وزارة الموارد البشرية والتنمية الاجتماعية</p>
-                                <p className="text-[#FAB414] text-[13px] font-bold">مركز التأهيل الشامل بالباحة</p>
+                                <p className="text-[#FCB614] text-[13px] font-bold">مركز التأهيل الشامل بالباحة</p>
                             </div>
-                            <p className="sm:hidden text-[#FAB414] text-sm font-bold">مركز التأهيل الشامل</p>
+                            <p className="sm:hidden text-[#FCB614] text-sm font-bold">مركز التأهيل الشامل</p>
                         </div>
                         <div className="flex items-center gap-3 md:gap-4">
                             <div className="flex items-center gap-2">
                                 <span className="relative flex h-2 w-2">
-                                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#2DB473]" style={{ animation: 'pulseRing 1.5s cubic-bezier(0,0,0.2,1) infinite' }} />
-                                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#2DB473]" />
+                                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#2BB574]" style={{ animation: 'pulseRing 1.5s cubic-bezier(0,0,0.2,1) infinite' }} />
+                                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#2BB574]" />
                                 </span>
-                                <span className="text-[#2DB473] text-xs hidden sm:inline">متصل</span>
+                                <span className="text-[#2BB574] text-xs hidden sm:inline">متصل</span>
                             </div>
                             <span className="text-white/40 text-xs hidden md:inline">منطقة الباحة</span>
                         </div>
@@ -282,7 +282,7 @@ export const WelcomePage: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <Sparkles className="w-4 h-4 text-[#FAB414]" />
+                        <Sparkles className="w-4 h-4 text-[#FCB614]" />
                         <span className="text-white/70 text-sm">منظومة إدارة خدمات التأهيل والمتابعة</span>
                     </motion.div>
 
@@ -290,13 +290,13 @@ export const WelcomePage: React.FC = () => {
                     <motion.h1
                         className="text-[80px] md:text-[120px] lg:text-[150px] font-bold leading-none mb-4 overflow-visible will-change-[background-position]"
                         style={{
-                            background: 'linear-gradient(120deg, #FAB414 0%, #F5961E 25%, #FFD700 50%, #FAB414 75%, #F5961E 100%)',
+                            background: 'linear-gradient(120deg, #FCB614 0%, #F7941D 25%, #FFD700 50%, #FCB614 75%, #F7941D 100%)',
                             backgroundSize: '200% auto',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
                             animation: 'shimmerGold 4s linear infinite',
-                            filter: 'drop-shadow(0 0 40px rgba(250,180,20,0.3))'
+                            filter: 'drop-shadow(0 0 40px rgba(252,182,20,0.3))'
                         }}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -318,7 +318,7 @@ export const WelcomePage: React.FC = () => {
                     {/* CTA Button */}
                     <motion.button
                         onClick={() => navigate('/system-entry')}
-                        className="group relative overflow-hidden bg-gradient-to-l from-[#F5961E] to-[#FAB414] text-[#0a1628] font-bold text-lg px-10 py-4 rounded-2xl shadow-2xl shadow-[#FAB414]/20 hover:shadow-[#FAB414]/40 hover:scale-105 transition-all duration-300 inline-flex items-center gap-3"
+                        className="group relative overflow-hidden bg-gradient-to-l from-[#F7941D] to-[#FCB614] text-[#0F3144] font-bold text-lg px-10 py-4 rounded-2xl shadow-2xl shadow-[#FCB614]/20 hover:shadow-[#FCB614]/40 hover:scale-105 transition-all duration-300 inline-flex items-center gap-3"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -342,7 +342,7 @@ export const WelcomePage: React.FC = () => {
                 </section>
 
                 {/* ─── Section 3: Live Statistics Ribbon ─── */}
-                <section className="py-12 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-transparent via-[#148287]/5 to-transparent">
+                <section className="py-12 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-transparent via-[#269798]/5 to-transparent">
                     <motion.div
                         className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
                         variants={staggerContainer}
@@ -353,7 +353,7 @@ export const WelcomePage: React.FC = () => {
                         {stats.map((stat, index) => (
                             <motion.div
                                 key={index}
-                                className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] hover:border-[#148287]/30 rounded-2xl p-6 text-center transition-all duration-500 hover:bg-white/[0.06]"
+                                className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] hover:border-[#269798]/30 rounded-2xl p-6 text-center transition-all duration-500 hover:bg-white/[0.06]"
                                 variants={staggerChild}
                             >
                                 <div
@@ -385,9 +385,9 @@ export const WelcomePage: React.FC = () => {
                             viewport={{ once: true, margin: '-50px' }}
                             transition={{ duration: 0.6 }}
                         >
-                            <div className="inline-flex items-center gap-2 bg-[#148287]/10 border border-[#148287]/20 rounded-full px-4 py-1.5 mb-6">
-                                <Award className="w-4 h-4 text-[#148287]" />
-                                <span className="text-[#148287] text-sm font-medium">ركائز التميز المؤسسي</span>
+                            <div className="inline-flex items-center gap-2 bg-[#269798]/10 border border-[#269798]/20 rounded-full px-4 py-1.5 mb-6">
+                                <Award className="w-4 h-4 text-[#269798]" />
+                                <span className="text-[#269798] text-sm font-medium">ركائز التميز المؤسسي</span>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">خمس ركائز للتحول الرقمي</h2>
                             <p className="text-white/50 text-lg max-w-2xl mx-auto">خمس ركائز رقمية تدعم خدمات التأهيل وفق معايير الوزارة</p>
@@ -433,7 +433,7 @@ export const WelcomePage: React.FC = () => {
                         {trustBadges.map((badge, index) => (
                             <React.Fragment key={index}>
                                 <div className="group flex flex-col items-center gap-2">
-                                    <div className="w-16 h-16 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center group-hover:border-[#148287]/30 group-hover:bg-white/[0.06] transition-all duration-300">
+                                    <div className="w-16 h-16 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center group-hover:border-[#269798]/30 group-hover:bg-white/[0.06] transition-all duration-300">
                                         {badge.img ? (
                                             <img src={badge.img} alt={badge.label} className="w-8 h-8 object-contain" />
                                         ) : badge.text ? (
@@ -463,7 +463,7 @@ export const WelcomePage: React.FC = () => {
                         <motion.div
                             className="relative overflow-hidden rounded-3xl p-12 border border-white/[0.06]"
                             style={{
-                                background: 'linear-gradient(135deg, rgba(20,130,135,0.1), transparent, rgba(45,180,115,0.1))'
+                                background: 'linear-gradient(135deg, rgba(38,151,152,0.1), transparent, rgba(43,181,116,0.1))'
                             }}
                             variants={fadeUp}
                             custom={0}
@@ -478,7 +478,7 @@ export const WelcomePage: React.FC = () => {
 
                             <button
                                 onClick={() => navigate('/system-entry')}
-                                className="group relative overflow-hidden inline-flex items-center gap-3 bg-gradient-to-l from-[#F5961E] to-[#FAB414] text-[#0a1628] font-bold text-lg px-10 py-4 rounded-2xl shadow-2xl shadow-[#FAB414]/20 hover:shadow-[#FAB414]/40 hover:scale-105 transition-all duration-300"
+                                className="group relative overflow-hidden inline-flex items-center gap-3 bg-gradient-to-l from-[#F7941D] to-[#FCB614] text-[#0F3144] font-bold text-lg px-10 py-4 rounded-2xl shadow-2xl shadow-[#FCB614]/20 hover:shadow-[#FCB614]/40 hover:scale-105 transition-all duration-300"
                             >
                                 <span>ابدأ الآن</span>
                                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -488,10 +488,10 @@ export const WelcomePage: React.FC = () => {
                             {/* Live Status */}
                             <div className="mt-6 flex items-center justify-center gap-2 text-xs">
                                 <span className="relative flex h-1.5 w-1.5">
-                                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#2DB473] animate-ping opacity-75" />
-                                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DB473]" />
+                                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#2BB574] animate-ping opacity-75" />
+                                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2BB574]" />
                                 </span>
-                                <span className="text-[#2DB473]">النظام يعمل الآن</span>
+                                <span className="text-[#2BB574]">النظام يعمل الآن</span>
                                 <span className="text-white/20">|</span>
                                 <span className="text-white/30">{new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}</span>
                             </div>

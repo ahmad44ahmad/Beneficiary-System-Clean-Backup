@@ -100,9 +100,9 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                         {selectedGoals.map(goal => (
                             <div
                                 key={goal.code}
-                                className="flex items-center gap-2 bg-[#148287]/10 border border-[#148287]/30 rounded-lg px-3 py-2"
+                                className="flex items-center gap-2 bg-[#269798]/10 border border-[#269798]/30 rounded-lg px-3 py-2"
                             >
-                                <span className="text-sm font-medium text-[#14415A]">
+                                <span className="text-sm font-medium text-[#0F3144]">
                                     {goal.arabicLabel}
                                 </span>
                                 <select
@@ -122,7 +122,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                                 <button
                                     type="button"
                                     onClick={() => handleRemoveGoal(goal.code)}
-                                    className="text-gray-400 hover:text-red-500 transition-colors"
+                                    className="text-gray-400 hover:text-[#DC2626] transition-colors"
                                     disabled={disabled}
                                     title="إزالة الهدف"
                                     aria-label="إزالة الهدف"
@@ -140,7 +140,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                 <button
                     type="button"
                     onClick={() => !disabled && setIsOpen(!isOpen)}
-                    className={`w-full flex items-center justify-between px-4 py-3 bg-white border-2 rounded-xl transition-colors ${isOpen ? 'border-[#148287]' : 'border-gray-200'
+                    className={`w-full flex items-center justify-between px-4 py-3 bg-white border-2 rounded-xl transition-colors ${isOpen ? 'border-[#269798]' : 'border-gray-200'
                         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-gray-300'}`}
                 >
                     <span className="text-gray-600">
@@ -162,7 +162,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                                     placeholder="بحث عن رمز ICF..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pe-10 ps-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#148287]"
+                                    className="w-full pe-10 ps-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#269798]"
                                 />
                             </div>
                         </div>
@@ -198,7 +198,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                                         )}
                                         className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors border-b border-gray-100"
                                     >
-                                        <span className="font-medium text-[#14415A]">
+                                        <span className="font-medium text-[#0F3144]">
                                             {ICF_CATEGORY_LABELS[category as ICFCategory]} ({codes.length})
                                         </span>
                                         <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedCategory === category ? 'rotate-180' : ''
@@ -216,7 +216,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                                                         onClick={() => !isSelected && handleSelectCode(code)}
                                                         disabled={isSelected || selectedGoals.length >= maxGoals}
                                                         className={`w-full flex items-center justify-between px-4 py-2 text-right transition-colors ${isSelected
-                                                            ? 'bg-[#148287]/5 cursor-not-allowed'
+                                                            ? 'bg-[#269798]/5 cursor-not-allowed'
                                                             : 'hover:bg-gray-50'
                                                             }`}
                                                     >
@@ -228,7 +228,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                                                             <span className="text-xs text-gray-400">{code.englishLabel}</span>
                                                         </div>
                                                         {isSelected && (
-                                                            <Check className="w-4 h-4 text-[#2DB473]" />
+                                                            <Check className="w-4 h-4 text-[#2BB574]" />
                                                         )}
                                                     </button>
                                                 );
@@ -250,7 +250,7 @@ export const ICFGoalSelector: React.FC<ICFGoalSelectorProps> = ({
                             <button
                                 type="button"
                                 onClick={() => setIsOpen(false)}
-                                className="px-4 py-2 bg-[#148287] text-white rounded-lg text-sm hover:bg-[#0f6b6f] transition-colors"
+                                className="px-4 py-2 bg-[#269798] text-white rounded-lg text-sm hover:bg-[#0f6b6f] transition-colors"
                             >
                                 تم
                             </button>

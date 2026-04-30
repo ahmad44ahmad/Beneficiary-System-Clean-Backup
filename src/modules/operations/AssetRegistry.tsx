@@ -99,9 +99,9 @@ export const AssetRegistry: React.FC = () => {
 
     const getStatusIcon = (status: string) => {
         switch (status) {
-            case 'active': return <CheckCircle2 className="w-4 h-4 text-green-500" />;
-            case 'under_maintenance': return <Wrench className="w-4 h-4 text-amber-500" />;
-            case 'out_of_service': return <AlertTriangle className="w-4 h-4 text-red-500" />;
+            case 'active': return <CheckCircle2 className="w-4 h-4 text-[#1E9658]" />;
+            case 'under_maintenance': return <Wrench className="w-4 h-4 text-[#D49A0A]" />;
+            case 'out_of_service': return <AlertTriangle className="w-4 h-4 text-[#DC2626]" />;
             case 'disposed': return <XCircle className="w-4 h-4 text-gray-400" />;
             default: return null;
         }
@@ -120,12 +120,12 @@ export const AssetRegistry: React.FC = () => {
 
     const getConditionBadge = (condition: string) => {
         const styles: Record<string, string> = {
-            excellent: 'bg-green-100 text-green-800',
-            new: 'bg-emerald-100 text-emerald-800',
-            good: 'bg-blue-100 text-blue-800',
-            fair: 'bg-yellow-100 text-yellow-800',
-            poor: 'bg-orange-100 text-orange-800',
-            damaged: 'bg-red-100 text-red-800',
+            excellent: 'bg-[#2BB574]/15 text-[#14532D]',
+            new: 'bg-[#2BB574]/15 text-[#14532D]',
+            good: 'bg-[#269798]/15 text-[#1B7778]',
+            fair: 'bg-[#FCB614]/10 text-[#D49A0A]',
+            poor: 'bg-[#F7941D]/15 text-[#92400E]',
+            damaged: 'bg-[#DC2626]/15 text-[#7F1D1D]',
             unusable: 'bg-gray-100 text-gray-800'
         };
         const labels: Record<string, string> = {
@@ -206,7 +206,7 @@ export const AssetRegistry: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || filteredAssets.length === 0}
-                        className="px-3 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 text-sm disabled:opacity-50"
+                        className="px-3 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-4 h-4" />
@@ -227,15 +227,15 @@ export const AssetRegistry: React.FC = () => {
             {/* Stats Bar */}
             <div className="grid grid-cols-4 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-blue-600">{assets.filter(a => a.status === 'active').length}</p>
+                    <p className="text-2xl font-bold text-[#269798]">{assets.filter(a => a.status === 'active').length}</p>
                     <p className="text-sm text-gray-500">أصول نشطة</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-amber-600">{assets.filter(a => a.status === 'under_maintenance').length}</p>
+                    <p className="text-2xl font-bold text-[#D49A0A]">{assets.filter(a => a.status === 'under_maintenance').length}</p>
                     <p className="text-sm text-gray-500">تحت الصيانة</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-red-600">{assets.filter(a => a.status === 'out_of_service').length}</p>
+                    <p className="text-2xl font-bold text-[#DC2626]">{assets.filter(a => a.status === 'out_of_service').length}</p>
                     <p className="text-sm text-gray-500">خارج الخدمة</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
@@ -294,13 +294,13 @@ export const AssetRegistry: React.FC = () => {
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-center gap-2">
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-blue-600">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#269798]">
                                                 <Eye className="w-4 h-4" />
                                             </button>
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-amber-600">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#D49A0A]">
                                                 <Edit className="w-4 h-4" />
                                             </button>
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-red-600">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#DC2626]">
                                                 <Trash2 className="w-4 h-4" />
                                             </button>
                                         </div>

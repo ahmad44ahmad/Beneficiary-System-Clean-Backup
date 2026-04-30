@@ -80,11 +80,11 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
 
     return (
         <div
-            className="bg-white rounded-xl shadow-lg border border-indigo-100 overflow-hidden font-readex"
+            className="bg-white rounded-xl shadow-lg border border-[#0F3144]/10 overflow-hidden font-readex"
             dir="rtl"
         >
             {/* Header */}
-            <div className="bg-gradient-to-l from-indigo-600 to-purple-600 p-5 text-white">
+            <div className="bg-gradient-to-l from-[#0A2030] to-[#D49A0A] p-5 text-white">
                 <h3 className="text-lg font-bold flex items-center gap-2">
                     <Mic className="h-5 w-5" />
                     المساعد الصوتي السريري
@@ -109,10 +109,10 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             disabled:opacity-50 disabled:cursor-not-allowed
                             ${
                                 isRecording
-                                    ? 'bg-red-500 hover:bg-red-600 focus:ring-red-200 shadow-lg shadow-red-200'
+                                    ? 'bg-[#DC2626] hover:bg-[#B91C1C] focus:ring-[#DC2626]/20 shadow-lg shadow-red-200'
                                     : isProcessing
                                       ? 'bg-gray-400 cursor-wait'
-                                      : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-200 shadow-lg shadow-indigo-200'
+                                      : 'bg-[#0F3144] hover:bg-[#0A2030] focus:ring-[#0F3144]/20 shadow-lg shadow-indigo-200'
                             }
                         `}
                         aria-label={isRecording ? 'إيقاف التسجيل' : 'بدء التسجيل'}
@@ -128,8 +128,8 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                         {/* Pulse animation ring while recording */}
                         {isRecording && (
                             <>
-                                <span className="absolute inset-0 rounded-full bg-red-400 opacity-40 animate-ping" />
-                                <span className="absolute inset-[-4px] rounded-full border-2 border-red-300 opacity-60 animate-pulse" />
+                                <span className="absolute inset-0 rounded-full bg-[#DC2626] opacity-40 animate-ping" />
+                                <span className="absolute inset-[-4px] rounded-full border-2 border-[#DC2626] opacity-60 animate-pulse" />
                             </>
                         )}
                     </button>
@@ -137,10 +137,10 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                     {/* Status Text */}
                     <div className="text-center">
                         {isRecording && (
-                            <div className="flex items-center gap-2 text-red-600 font-semibold">
+                            <div className="flex items-center gap-2 text-[#DC2626] font-semibold">
                                 <span className="relative flex h-3 w-3">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DC2626] opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#DC2626]" />
                                 </span>
                                 جار التسجيل...
                                 <span className="font-mono text-sm text-gray-600 me-2" dir="ltr">
@@ -149,7 +149,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             </div>
                         )}
                         {isProcessing && (
-                            <div className="flex items-center gap-2 text-indigo-600 font-semibold">
+                            <div className="flex items-center gap-2 text-[#0F3144] font-semibold">
                                 <Loader2 className="h-4 w-4 animate-spin" />
                                 جار تحليل التسجيل الصوتي بالذكاء الاصطناعي...
                             </div>
@@ -164,14 +164,14 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
 
                 {/* Error Display */}
                 {error && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-                        <AlertCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+                    <div className="bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg p-4 flex items-start gap-3">
+                        <AlertCircle className="h-5 w-5 text-[#DC2626] shrink-0 mt-0.5" />
                         <div className="flex-1">
-                            <p className="text-red-800 font-medium text-sm">{error}</p>
+                            <p className="text-[#7F1D1D] font-medium text-sm">{error}</p>
                             <button
                                 type="button"
                                 onClick={reset}
-                                className="mt-2 text-sm text-red-600 hover:text-red-800 underline flex items-center gap-1"
+                                className="mt-2 text-sm text-[#DC2626] hover:text-[#7F1D1D] underline flex items-center gap-1"
                             >
                                 <RotateCcw className="h-3.5 w-3.5" />
                                 إعادة المحاولة
@@ -183,7 +183,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                 {/* Result Preview Card */}
                 {result && (
                     <div className="space-y-4 animate-in fade-in duration-500">
-                        <div className="flex items-center gap-2 text-emerald-700 font-bold">
+                        <div className="flex items-center gap-2 text-[#1E9658] font-bold">
                             <CheckCircle2 className="h-5 w-5" />
                             تم استخراج البيانات بنجاح
                         </div>
@@ -294,15 +294,15 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             {/* Incidents */}
                             {result.incidents && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
-                                    <p className="text-xs text-red-500 mb-1">حوادث:</p>
-                                    <p className="text-sm text-red-700">{result.incidents}</p>
+                                    <p className="text-xs text-[#DC2626] mb-1">حوادث:</p>
+                                    <p className="text-sm text-[#B91C1C]">{result.incidents}</p>
                                 </div>
                             )}
 
                             {/* Followup flag */}
                             {result.requires_followup && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
-                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#DC2626]/15 text-[#B91C1C] text-xs font-semibold">
                                         <AlertCircle className="h-3.5 w-3.5" />
                                         يحتاج متابعة طبية
                                     </span>
@@ -323,7 +323,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             <button
                                 type="button"
                                 onClick={handleFill}
-                                className="px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2 font-bold"
+                                className="px-6 py-2 bg-gradient-to-r from-[#1E9658] to-[#1B7778] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2 font-bold"
                             >
                                 <ClipboardCheck className="h-5 w-5" />
                                 تعبئة النموذج
@@ -342,15 +342,15 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
 
 /** Color variants for DataCard */
 const COLOR_CLASSES: Record<string, string> = {
-    red: 'bg-red-50 text-red-700 border-red-200',
-    pink: 'bg-pink-50 text-pink-700 border-pink-200',
-    blue: 'bg-blue-50 text-blue-700 border-blue-200',
-    cyan: 'bg-cyan-50 text-cyan-700 border-cyan-200',
-    orange: 'bg-orange-50 text-orange-700 border-orange-200',
-    green: 'bg-green-50 text-green-700 border-green-200',
-    teal: 'bg-teal-50 text-teal-700 border-teal-200',
-    indigo: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-    purple: 'bg-purple-50 text-purple-700 border-purple-200',
+    red: 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/30',
+    pink: 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/20',
+    blue: 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/30',
+    cyan: 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/20',
+    orange: 'bg-[#F7941D]/10 text-[#D67A0A] border-[#F7941D]/30',
+    green: 'bg-[#2BB574]/10 text-[#1E9658] border-[#2BB574]/20',
+    teal: 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/20',
+    indigo: 'bg-[#0F3144]/5 text-[#0A2030] border-[#0F3144]/30',
+    purple: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20',
 };
 
 interface DataCardProps {

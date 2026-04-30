@@ -29,15 +29,15 @@ export const SettingsPage: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-[#14415A] flex items-center gap-3">
-                        <Settings className="w-7 h-7 text-[#148287]" />
+                    <h1 className="text-2xl font-bold text-[#0F3144] flex items-center gap-3">
+                        <Settings className="w-7 h-7 text-[#269798]" />
                         الإعدادات
                     </h1>
                     <p className="text-gray-500 mt-1">تخصيص تجربة استخدام النظام</p>
                 </div>
                 <button
                     onClick={handleSave}
-                    className="px-5 py-2.5 bg-[#148287] text-white rounded-xl flex items-center gap-2 shadow-lg hover:bg-[#0f6b6f] transition-colors"
+                    className="px-5 py-2.5 bg-[#269798] text-white rounded-xl flex items-center gap-2 shadow-lg hover:bg-[#0f6b6f] transition-colors"
                 >
                     {saved ? <CheckCircle className="w-5 h-5" /> : <Save className="w-5 h-5" />}
                     {saved ? 'تم الحفظ!' : 'حفظ التغييرات'}
@@ -46,8 +46,8 @@ export const SettingsPage: React.FC = () => {
 
             {/* Theme Settings */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-lg font-bold text-[#14415A] mb-4 flex items-center gap-2">
-                    <Palette className="w-5 h-5 text-[#F5961E]" />
+                <h2 className="text-lg font-bold text-[#0F3144] mb-4 flex items-center gap-2">
+                    <Palette className="w-5 h-5 text-[#F7941D]" />
                     المظهر
                 </h2>
                 <div className="grid grid-cols-3 gap-4">
@@ -60,12 +60,12 @@ export const SettingsPage: React.FC = () => {
                             key={value}
                             onClick={() => setSettings({ ...settings, theme: value as SettingsState['theme'] })}
                             className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 transition-all ${settings.theme === value
-                                ? 'border-[#148287] bg-[#148287]/10'
+                                ? 'border-[#269798] bg-[#269798]/10'
                                 : 'border-gray-200 hover:border-gray-300'
                                 }`}
                         >
-                            <Icon className={`w-8 h-8 ${settings.theme === value ? 'text-[#148287]' : 'text-gray-400'}`} />
-                            <span className={settings.theme === value ? 'text-[#148287] font-bold' : 'text-gray-600'}>{label}</span>
+                            <Icon className={`w-8 h-8 ${settings.theme === value ? 'text-[#269798]' : 'text-gray-400'}`} />
+                            <span className={settings.theme === value ? 'text-[#269798] font-bold' : 'text-gray-600'}>{label}</span>
                         </button>
                     ))}
                 </div>
@@ -73,8 +73,8 @@ export const SettingsPage: React.FC = () => {
 
             {/* Notifications */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-lg font-bold text-[#14415A] mb-4 flex items-center gap-2">
-                    <Bell className="w-5 h-5 text-[#F5961E]" />
+                <h2 className="text-lg font-bold text-[#0F3144] mb-4 flex items-center gap-2">
+                    <Bell className="w-5 h-5 text-[#F7941D]" />
                     الإشعارات
                 </h2>
                 <div className="flex items-center justify-between">
@@ -85,7 +85,7 @@ export const SettingsPage: React.FC = () => {
                     <button
                         onClick={() => setSettings({ ...settings, notifications: !settings.notifications })}
                         title={settings.notifications ? 'تعطيل الإشعارات' : 'تفعيل الإشعارات'}
-                        className={`w-14 h-8 rounded-full p-1 transition-colors ${settings.notifications ? 'bg-[#2DB473]' : 'bg-gray-300'
+                        className={`w-14 h-8 rounded-full p-1 transition-colors ${settings.notifications ? 'bg-[#2BB574]' : 'bg-gray-300'
                             }`}
                     >
                         <div className={`w-6 h-6 bg-white rounded-full shadow transition-transform ${settings.notifications ? '' : 'translate-x-6'
@@ -96,8 +96,8 @@ export const SettingsPage: React.FC = () => {
 
             {/* Language */}
             <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-lg font-bold text-[#14415A] mb-4 flex items-center gap-2">
-                    <Globe className="w-5 h-5 text-[#F5961E]" />
+                <h2 className="text-lg font-bold text-[#0F3144] mb-4 flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-[#F7941D]" />
                     اللغة
                 </h2>
                 <div className="grid grid-cols-2 gap-4">
@@ -109,12 +109,12 @@ export const SettingsPage: React.FC = () => {
                             key={value}
                             onClick={() => setSettings({ ...settings, language: value as SettingsState['language'] })}
                             className={`p-4 rounded-xl border-2 flex items-center gap-3 transition-all ${settings.language === value
-                                ? 'border-[#148287] bg-[#148287]/10'
+                                ? 'border-[#269798] bg-[#269798]/10'
                                 : 'border-gray-200 hover:border-gray-300'
                                 }`}
                         >
                             <span className="text-2xl">{flag}</span>
-                            <span className={settings.language === value ? 'text-[#148287] font-bold' : 'text-gray-600'}>{label}</span>
+                            <span className={settings.language === value ? 'text-[#269798] font-bold' : 'text-gray-600'}>{label}</span>
                         </button>
                     ))}
                 </div>

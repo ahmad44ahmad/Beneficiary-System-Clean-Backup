@@ -60,10 +60,10 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
                         <div>
                             <p className="text-sm text-gray-500">المتواجدون حالياً</p>
                             <h3 className="text-2xl font-bold text-gray-900">{activeCases - externalVisits}</h3>
-                            <span className="text-xs text-green-600 font-medium">داخل المركز</span>
+                            <span className="text-xs text-[#1E9658] font-medium">داخل المركز</span>
                         </div>
-                        <div className="p-3 bg-green-50 rounded-full">
-                            <Home className="w-6 h-6 text-green-600" />
+                        <div className="p-3 bg-[#2BB574]/10 rounded-full">
+                            <Home className="w-6 h-6 text-[#1E9658]" />
                         </div>
                     </div>
                 </Card>
@@ -86,10 +86,10 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
                         <div>
                             <p className="text-sm text-gray-500">تنبيهات المخزون</p>
                             <h3 className="text-2xl font-bold text-gray-900">{lowStockItems}</h3>
-                            <span className="text-xs text-red-600 font-medium">أصناف قاربت على النفاذ</span>
+                            <span className="text-xs text-[#DC2626] font-medium">أصناف قاربت على النفاذ</span>
                         </div>
-                        <div className="p-3 bg-red-50 rounded-full">
-                            <AlertTriangle className="w-6 h-6 text-red-600" />
+                        <div className="p-3 bg-[#DC2626]/10 rounded-full">
+                            <AlertTriangle className="w-6 h-6 text-[#DC2626]" />
                         </div>
                     </div>
                 </Card>

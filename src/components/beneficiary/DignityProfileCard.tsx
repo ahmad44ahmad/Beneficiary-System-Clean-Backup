@@ -36,7 +36,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 {onUpdate && (
                     <button
                         onClick={() => setIsEditing(true)}
-                        className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium text-sm flex items-center gap-2"
+                        className="px-4 py-2 bg-[#0F3144] text-white rounded-lg hover:bg-[#0A2030] font-medium text-sm flex items-center gap-2"
                     >
                         + إنشاء ملف الكرامة
                     </button>
@@ -77,18 +77,18 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
 
     const getPersonalityIcon = (type: DignityProfile['personalityType']) => {
         switch (type) {
-            case 'social': return <Users className="w-5 h-5 text-blue-500" />;
-            case 'energetic': return <Zap className="w-5 h-5 text-yellow-500" />;
-            case 'calm': return <Moon className="w-5 h-5 text-indigo-500" />;
-            case 'observer': return <Smile className="w-5 h-5 text-green-500" />;
+            case 'social': return <Users className="w-5 h-5 text-[#269798]" />;
+            case 'energetic': return <Zap className="w-5 h-5 text-[#D49A0A]" />;
+            case 'calm': return <Moon className="w-5 h-5 text-[#0F3144]" />;
+            case 'observer': return <Smile className="w-5 h-5 text-[#1E9658]" />;
             default: return <Smile className="w-5 h-5 text-gray-500" />;
         }
     };
 
     const getImpactColor = (level: 'high' | 'medium' | 'low') => {
         switch (level) {
-            case 'high': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-            case 'medium': return 'bg-blue-100 text-blue-800 border-blue-200';
+            case 'high': return 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20';
+            case 'medium': return 'bg-[#269798]/15 text-[#1B7778] border-[#269798]/30';
             case 'low': return 'bg-gray-100 text-gray-800 border-gray-200';
         }
     };
@@ -96,24 +96,24 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
     return (
         <div className="space-y-6" dir="rtl">
             {/* Header / Identity Section */}
-            <div className="bg-gradient-to-l from-indigo-50 to-white p-6 rounded-xl border border-indigo-100 flex flex-col md:flex-row gap-6 items-start relative group">
+            <div className="bg-gradient-to-l from-[#0F3144]/10 to-white p-6 rounded-xl border border-[#0F3144]/10 flex flex-col md:flex-row gap-6 items-start relative group">
                 {onUpdate && (
                     <button
                         onClick={() => setIsEditing(true)}
-                        className="absolute top-4 start-4 p-2 bg-white rounded-full shadow-sm text-gray-400 hover:text-indigo-600 transition-colors opacity-0 group-hover:opacity-100"
+                        className="absolute top-4 start-4 p-2 bg-white rounded-full shadow-sm text-gray-400 hover:text-[#0F3144] transition-colors opacity-0 group-hover:opacity-100"
                         title="تعديل الملف"
                     >
                         <Edit2 className="w-4 h-4" />
                     </button>
                 )}
 
-                <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center shrink-0 border-4 border-white shadow-sm">
+                <div className="w-24 h-24 bg-[#0F3144]/10 rounded-full flex items-center justify-center shrink-0 border-4 border-white shadow-sm">
                     {getPersonalityIcon(profile.personalityType)}
                 </div>
                 <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                         <h2 className="text-2xl font-bold text-gray-800">{profile.nickname || 'الاسم المفضل'}</h2>
-                        <span className="px-3 py-1 bg-white border rounded-full text-sm font-medium text-indigo-600 shadow-sm flex items-center gap-2">
+                        <span className="px-3 py-1 bg-white border rounded-full text-sm font-medium text-[#0F3144] shadow-sm flex items-center gap-2">
                             {getPersonalityIcon(profile.personalityType)}
                             {profile.personalityType === 'social' ? 'اجتماعي ومحبوب' :
                                 profile.personalityType === 'energetic' ? 'حيوي ونشيط' :
@@ -134,7 +134,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                             }
                         </span>
                         <span className="flex items-center gap-1 bg-white px-2 py-1 rounded border">
-                            <Heart className="w-4 h-4 text-rose-400" />
+                            <Heart className="w-4 h-4 text-[#DC2626]" />
                             كيف تسعده: {profile.bestWayToEngage || 'غير محدد'}
                         </span>
                     </div>
@@ -145,13 +145,13 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 {/* Sensory Preferences (My Comfort) */}
                 <Card className="p-6">
                     <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Star className="w-5 h-5 text-amber-500" />
+                        <Star className="w-5 h-5 text-[#D49A0A]" />
                         تفضيلات "راحتي"
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="p-3 bg-gray-50 rounded-lg text-center">
                             <div className="flex justify-center mb-2">
-                                {sensoryPreferences.lighting === 'bright' ? <Sun className="text-orange-500" /> : <Moon className="text-indigo-500" />}
+                                {sensoryPreferences.lighting === 'bright' ? <Sun className="text-[#D67A0A]" /> : <Moon className="text-[#0F3144]" />}
                             </div>
                             <span className="text-sm font-medium text-gray-700">الإضاءة</span>
                             <p className="text-xs text-gray-500">
@@ -160,7 +160,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                         </div>
                         <div className="p-3 bg-gray-50 rounded-lg text-center">
                             <div className="flex justify-center mb-2">
-                                {sensoryPreferences.noise === 'quiet' ? <Volume2 className="text-gray-400" /> : <Volume2 className="text-green-500" />}
+                                {sensoryPreferences.noise === 'quiet' ? <Volume2 className="text-gray-400" /> : <Volume2 className="text-[#1E9658]" />}
                             </div>
                             <span className="text-sm font-medium text-gray-700">الصوت</span>
                             <p className="text-xs text-gray-500">
@@ -169,7 +169,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                         </div>
                         <div className="p-3 bg-gray-50 rounded-lg text-center">
                             <div className="flex justify-center mb-2">
-                                <Thermometer className={sensoryPreferences.temperature === 'cool' ? 'text-blue-500' : 'text-red-500'} />
+                                <Thermometer className={sensoryPreferences.temperature === 'cool' ? 'text-[#269798]' : 'text-[#DC2626]'} />
                             </div>
                             <span className="text-sm font-medium text-gray-700">الحرارة</span>
                             <p className="text-xs text-gray-500">
@@ -179,7 +179,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                         {sensoryPreferences.smells && sensoryPreferences.smells.length > 0 && (
                             <div className="p-3 bg-gray-50 rounded-lg text-center">
                                 <div className="flex justify-center mb-2">
-                                    <Award className="text-purple-500" />
+                                    <Award className="text-[#D49A0A]" />
                                 </div>
                                 <span className="text-sm font-medium text-gray-700">الروائح</span>
                                 <p className="text-xs text-gray-500 truncate">
@@ -194,22 +194,22 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 <Card className="p-6 space-y-6">
                     <div>
                         <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-                            <ThumbsUp className="w-5 h-5 text-green-600" />
+                            <ThumbsUp className="w-5 h-5 text-[#1E9658]" />
                             ما يحبه
                         </h3>
                         <div className="flex flex-wrap gap-2">
                             {favorites.food.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-full border border-green-200">
+                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#1E9658] text-xs rounded-full border border-[#2BB574]/20">
                                     {item}
                                 </span>
                             ))}
                             {favorites.activities.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-full border border-green-200">
+                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#1E9658] text-xs rounded-full border border-[#2BB574]/20">
                                     {item}
                                 </span>
                             ))}
                             {favorites.colors.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-full border border-green-200">
+                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#1E9658] text-xs rounded-full border border-[#2BB574]/20">
                                     {item}
                                 </span>
                             ))}
@@ -221,12 +221,12 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
 
                     <div className="border-t pt-4">
                         <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-                            <ThumbsDown className="w-5 h-5 text-red-500" />
+                            <ThumbsDown className="w-5 h-5 text-[#DC2626]" />
                             ما يزعجه
                         </h3>
                         <div className="flex flex-wrap gap-2">
                             {dislikes.triggers.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-red-50 text-red-700 text-xs rounded-full border border-red-200">
+                                <span key={i} className="px-2 py-1 bg-[#DC2626]/10 text-[#B91C1C] text-xs rounded-full border border-[#DC2626]/30">
                                     {item}
                                 </span>
                             ))}
@@ -242,10 +242,10 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
             <Card className="p-6">
                 <div className="flex justify-between items-center mb-6">
                     <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                        <HandHeart className="w-5 h-5 text-teal-600" />
+                        <HandHeart className="w-5 h-5 text-[#1B7778]" />
                         سجل الحسنات والإنجازات اليومية
                     </h3>
-                    <button className="text-sm text-teal-600 hover:text-teal-700 font-medium">
+                    <button className="text-sm text-[#1B7778] hover:text-[#1B7778] font-medium">
                         + إضافة إنجاز
                     </button>
                 </div>
@@ -253,7 +253,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 <div className="relative border-e-2 border-gray-200 me-3 pe-6 space-y-6">
                     {deeds.length > 0 ? deeds.map((deed) => (
                         <div key={deed.id} className="relative">
-                            <div className="absolute -end-[31px] top-1 w-4 h-4 rounded-full bg-teal-500 border-4 border-white shadow-sm"></div>
+                            <div className="absolute -end-[31px] top-1 w-4 h-4 rounded-full bg-[#269798] border-4 border-white shadow-sm"></div>
 
                             <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 dark:border-gray-800">
                                 <div className="flex justify-between items-start mb-2">

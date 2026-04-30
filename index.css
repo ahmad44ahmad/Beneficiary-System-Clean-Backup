@@ -15,38 +15,46 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    /* ===== Colors: HRSD Official Brand ===== */
-    --color-hrsd-navy: #1a365d;
-    --color-hrsd-navy-dark: #0f2744;
-    --color-hrsd-navy-light: #2d4a7c;
+    /* ===== Colors: HRSD Official Brand =====
+     * Source of truth: src/design-system/tokens.ts (built from PDF, page 25-28).
+     * Pantone numbers in comments are from the official guideline.
+     * DO NOT modify these values without updating tokens.ts and the PDF reference.
+     */
 
-    --color-hrsd-teal: #0d9488;
-    --color-hrsd-teal-dark: #0a7469;
-    --color-hrsd-teal-light: #14b8a6;
+    /* Primary palette */
+    --color-hrsd-navy: #0F3144;        /* Pantone 2189C */
+    --color-hrsd-navy-dark: #0A2030;
+    --color-hrsd-navy-light: #1F4A60;
 
-    --color-hrsd-gold: #eab308;
-    --color-hrsd-gold-dark: #ca8a04;
-    --color-hrsd-gold-light: #facc15;
+    /* Secondary palette */
+    --color-hrsd-orange: #F7941D;      /* Pantone 2011C */
+    --color-hrsd-gold: #FCB614;        /* Pantone 7409C */
+    --color-hrsd-gold-dark: #D49A0A;
+    --color-hrsd-gold-light: #FDC846;
+    --color-hrsd-teal: #269798;        /* Pantone 2235C */
+    --color-hrsd-teal-dark: #1B7778;
+    --color-hrsd-teal-light: #3FB1B2;
+    --color-hrsd-green: #2BB574;       /* Pantone 2414C */
+    --color-hrsd-cool-gray: #7A7A7A;   /* Pantone Cool Gray 9 — body text color */
 
-    --color-hrsd-orange: #f97316;
-    --color-hrsd-green: #22c55e;
-    --color-hrsd-red: #ef4444;
+    /* Semantic (NOT brand colors — reserved for status states) */
+    --color-hrsd-red: #DC2626;
 
-    /* ===== Colors: Legacy / Compatibility ===== */
-    --color-primary: #0d9488;
-    --color-primary-light: #14b8a6;
-    --color-primary-dark: #0a7469;
+    /* ===== Colors: Legacy aliases (kept for compatibility, point to brand) ===== */
+    --color-primary: #269798;
+    --color-primary-light: #3FB1B2;
+    --color-primary-dark: #1B7778;
 
-    --color-secondary: #eab308;
-    --color-secondary-bg: #fefce8;
+    --color-secondary: #FCB614;
+    --color-secondary-bg: #FFF8E6;
 
-    --color-accent: #0d9488;
-    --color-accent-teal: #0d9488;
-    --color-accent-green: #22c55e;
-    --color-accent-blue: #1a365d;
-    --color-accent-dark-blue: #1a365d;
+    --color-accent: #269798;
+    --color-accent-teal: #269798;
+    --color-accent-green: #2BB574;
+    --color-accent-blue: #0F3144;
+    --color-accent-dark-blue: #0F3144;
 
-    --color-surface: #ffffff;
+    --color-surface: #FFFFFF;
 
     /* ===== Box Shadows ===== */
     --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -93,25 +101,30 @@
 }
 
 :root {
-    /* HRSD Brand Identity - Official Colors */
-    --primary-color: #F5961E;
-    /* Energy */
-    --primary-light: #FFB75E;
-    --primary-dark: #D48200;
+    /* HRSD Brand Identity - Official Colors (from PDF page 25-28).
+     * These are the legacy CSS variables consumed by older modules.
+     * Mirror src/design-system/tokens.ts. */
+    --primary-color: #F7941D;
+    /* Pantone 2011C — Orange */
+    --primary-light: #FAA94D;
+    --primary-dark: #D67A0A;
 
-    --secondary-color: #FAB414;
-    /* Clarity */
-    --secondary-bg: #F3F4F6;
-    /* Lighter Gray for better contrast */
+    --secondary-color: #FCB614;
+    /* Pantone 7409C — Gold */
+    --secondary-bg: #FFFFFF;
+    /* Pure white per brand book (light-mode background) */
 
     /* Balancing Colors */
-    --accent-teal: #148287;
-    --accent-green: #2DB473;
-    --accent-dark-blue: #14415A;
+    --accent-teal: #269798;
+    /* Pantone 2235C */
+    --accent-green: #2BB574;
+    /* Pantone 2414C */
+    --accent-dark-blue: #0F3144;
+    /* Pantone 2189C — Primary navy */
 
-    --text-color: #111827;
-    /* Darker for better readability */
-    --light-text-color: #4B5563;
+    --text-color: #7A7A7A;
+    /* Pantone Cool Gray 9 — official body text per brand book */
+    --light-text-color: #9CA3AF;
     --white-color: #ffffff;
     --border-color: #E5E7EB;
 
@@ -132,7 +145,7 @@
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    --shadow-glow: 0 0 20px rgba(20, 130, 135, 0.3);
+    --shadow-glow: 0 0 20px rgba(38, 151, 152, 0.3);
 
     /* Animations */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -241,129 +254,147 @@ body {
 /* PREMIUM GRADIENTS - HRSD Brand Identity */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
+/* All gradients use the official palette only.
+ * Note: the brand book restricts gradients on the logo, but allows them as
+ * decorative backgrounds for cards and headers. */
 .gradient-primary {
-    background: linear-gradient(135deg, #148287 0%, #0d9488 100%);
+    background: linear-gradient(135deg, #1B7778 0%, #269798 100%);
 }
 
 .gradient-secondary {
-    background: linear-gradient(135deg, #eab308 0%, #facc15 100%);
+    background: linear-gradient(135deg, #FCB614 0%, #FDC846 100%);
 }
 
 .gradient-navy-teal {
-    background: linear-gradient(135deg, #1a365d 0%, #148287 50%, #0d9488 100%);
+    background: linear-gradient(135deg, #0F3144 0%, #269798 100%);
 }
 
 .gradient-teal-green {
-    background: linear-gradient(135deg, #0d9488 0%, #22c55e 100%);
+    background: linear-gradient(135deg, #269798 0%, #2BB574 100%);
 }
 
+/* IPC: previously red→orange. Now: orange-only with tints (red is not in palette). */
 .gradient-ipc {
-    background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f97316 100%);
+    background: linear-gradient(135deg, #D67A0A 0%, #F7941D 100%);
 }
 
+/* Empowerment: previously off-palette purple. Now: gold→orange (warmth + ambition). */
 .gradient-empowerment {
-    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c026d3 100%);
+    background: linear-gradient(135deg, #FCB614 0%, #F7941D 100%);
 }
 
+/* Family: previously sky-blue. Now: teal→green (welcoming + growth). */
 .gradient-family {
-    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #14b8a6 100%);
+    background: linear-gradient(135deg, #269798 0%, #2BB574 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /* HRSD BRAND COLOR UTILITIES */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
+/* HRSD utility classes — corrected hex values from PDF.
+ * Note: !important kept for backwards compatibility; long-term these
+ * should resolve via @theme but cleanup happens in Phase 2. */
+
 /* Text Colors */
 .text-hrsd-navy {
-    color: #14415A !important;
+    color: #0F3144 !important;
 }
 
 .text-hrsd-teal {
-    color: #148287 !important;
+    color: #269798 !important;
 }
 
 .text-hrsd-green {
-    color: #2DB473 !important;
+    color: #2BB574 !important;
 }
 
 .text-hrsd-gold {
-    color: #DEBA43 !important;
+    color: #FCB614 !important;
 }
 
 .text-hrsd-orange {
-    color: #F5961E !important;
+    color: #F7941D !important;
+}
+
+.text-hrsd-cool-gray {
+    color: #7A7A7A !important;
 }
 
 /* Background Colors */
 .bg-hrsd-navy {
-    background-color: #14415A !important;
+    background-color: #0F3144 !important;
 }
 
 .bg-hrsd-teal {
-    background-color: #148287 !important;
+    background-color: #269798 !important;
 }
 
 .bg-hrsd-green {
-    background-color: #2DB473 !important;
+    background-color: #2BB574 !important;
 }
 
 .bg-hrsd-gold {
-    background-color: #DEBA43 !important;
+    background-color: #FCB614 !important;
 }
 
 .bg-hrsd-orange {
-    background-color: #F5961E !important;
+    background-color: #F7941D !important;
+}
+
+.bg-hrsd-cool-gray {
+    background-color: #7A7A7A !important;
 }
 
 /* Border Colors */
 .border-hrsd-navy {
-    border-color: #14415A !important;
+    border-color: #0F3144 !important;
 }
 
 .border-hrsd-teal {
-    border-color: #148287 !important;
+    border-color: #269798 !important;
 }
 
 .border-hrsd-green {
-    border-color: #2DB473 !important;
+    border-color: #2BB574 !important;
 }
 
 .border-hrsd-gold {
-    border-color: #DEBA43 !important;
+    border-color: #FCB614 !important;
 }
 
 .border-hrsd-orange {
-    border-color: #F5961E !important;
+    border-color: #F7941D !important;
 }
 
 /* Border Right Accent Utilities */
 .border-r-hrsd-navy {
-    border-right: 4px solid #14415A !important;
+    border-right: 4px solid #0F3144 !important;
 }
 
 .border-r-hrsd-teal {
-    border-right: 4px solid #148287 !important;
+    border-right: 4px solid #269798 !important;
 }
 
 .border-r-hrsd-green {
-    border-right: 4px solid #2DB473 !important;
+    border-right: 4px solid #2BB574 !important;
 }
 
 .border-r-hrsd-gold {
-    border-right: 4px solid #DEBA43 !important;
+    border-right: 4px solid #FCB614 !important;
 }
 
 .border-r-hrsd-orange {
-    border-right: 4px solid #F5961E !important;
+    border-right: 4px solid #F7941D !important;
 }
 
 /* Ring/Focus Colors */
 .ring-hrsd-teal {
-    --tw-ring-color: #148287 !important;
+    --tw-ring-color: #269798 !important;
 }
 
 .focus-hrsd-teal:focus {
-    outline-color: #148287 !important;
+    outline-color: #269798 !important;
 }
 
 .gradient-soft {
@@ -421,15 +452,15 @@ body {
 }
 
 .border-l-hrsd-teal {
-    border-left-color: #0d9488;
+    border-left-color: #269798;
 }
 
 .border-l-hrsd-green {
-    border-left-color: #22c55e;
+    border-left-color: #2BB574;
 }
 
 .border-l-hrsd-gold {
-    border-left-color: #eab308;
+    border-left-color: #FCB614;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
@@ -1451,10 +1482,10 @@ legend {
  * Add `.daily-follow-up-panel` alongside `.clothing-panel` on the wrapper.
  */
 .daily-follow-up-panel {
-    --primary-color: #148287;         /* HRSD teal */
-    --primary-light: #28a0a5;
-    --primary-dark: #0a6469;
-    --secondary-color: #e6f4f4;       /* muted teal wash replaces the yellow tab-tray */
+    --primary-color: #269798;         /* HRSD teal — Pantone 2235C */
+    --primary-light: #3FB1B2;
+    --primary-dark: #1B7778;
+    --secondary-color: rgba(38, 151, 152, 0.08); /* muted teal wash */
 }
 .daily-follow-up-panel .tabs {
     background: #f1f5f9;              /* neutral slate tray */
@@ -1462,10 +1493,10 @@ legend {
 .daily-follow-up-panel .tabs button.active {
     color: #ffffff;
     background: var(--primary-color);
-    box-shadow: 0 2px 6px rgba(20, 130, 135, 0.3);
+    box-shadow: 0 2px 6px rgba(38, 151, 152, 0.3);
 }
 .daily-follow-up-panel .panel-header h2 {
-    color: #14415A;                   /* HRSD navy — readable, not the orange default */
+    color: #0F3144;                   /* HRSD navy — Pantone 2189C */
 }
 
 .data-table {

@@ -25,19 +25,19 @@ export const ExecutiveReport: React.FC = () => {
 
     // بيانات المخططات
     const moduleProgress = [
-        { name: 'إدارة المستفيدين', progress: 95, color: '#10b981' },
-        { name: 'الملف الطبي', progress: 88, color: '#3b82f6' },
-        { name: 'درع السلامة (IPC)', progress: 92, color: '#8b5cf6' },
-        { name: 'محرك التمكين', progress: 85, color: '#f59e0b' },
+        { name: 'إدارة المستفيدين', progress: 95, color: '#2BB574' },
+        { name: 'الملف الطبي', progress: 88, color: '#269798' },
+        { name: 'درع السلامة (IPC)', progress: 92, color: '#FCB614' },
+        { name: 'محرك التمكين', progress: 85, color: '#FCB614' },
         { name: 'الحوكمة والمخاطر', progress: 90, color: '#ec4899' },
-        { name: 'المؤشرات الذكية', progress: 94, color: '#06b6d4' },
+        { name: 'المؤشرات الذكية', progress: 94, color: '#269798' },
     ];
 
     const kpiData = [
-        { name: 'الجودة', value: 94, fill: '#10b981' },
-        { name: 'السلامة', value: 89, fill: '#3b82f6' },
-        { name: 'الرضا', value: 87, fill: '#f59e0b' },
-        { name: 'التمكين', value: 82, fill: '#8b5cf6' },
+        { name: 'الجودة', value: 94, fill: '#2BB574' },
+        { name: 'السلامة', value: 89, fill: '#269798' },
+        { name: 'الرضا', value: 87, fill: '#FCB614' },
+        { name: 'التمكين', value: 82, fill: '#FCB614' },
     ];
 
     const monthlyTrend = [
@@ -50,17 +50,17 @@ export const ExecutiveReport: React.FC = () => {
     ];
 
     const impactMetrics = [
-        { category: 'توفير الوقت', value: 40, unit: '%', icon: Clock, color: 'from-blue-500 to-cyan-500' },
-        { category: 'تقليل الأخطاء', value: 65, unit: '%', icon: Shield, color: 'from-green-500 to-emerald-500' },
-        { category: 'رضا المستفيدين', value: 87, unit: '%', icon: Heart, color: 'from-rose-500 to-pink-500' },
-        { category: 'كفاءة الإنفاق', value: 35, unit: '%', icon: TrendingUp, color: 'from-amber-500 to-orange-500' },
+        { category: 'توفير الوقت', value: 40, unit: '%', icon: Clock, color: 'from-[#269798] to-[#269798]' },
+        { category: 'تقليل الأخطاء', value: 65, unit: '%', icon: Shield, color: 'from-[#2BB574] to-[#2BB574]' },
+        { category: 'رضا المستفيدين', value: 87, unit: '%', icon: Heart, color: 'from-[#DC2626] to-[#DC2626]' },
+        { category: 'كفاءة الإنفاق', value: 35, unit: '%', icon: TrendingUp, color: 'from-[#FCB614] to-[#F7941D]' },
     ];
 
     const achievements = [
-        { title: '145 مستفيد نشط', subtitle: 'تتم متابعتهم يومياً', icon: Users, color: 'bg-blue-500' },
-        { title: '0 حوادث سقوط', subtitle: 'خلال الربع الأخير', icon: Shield, color: 'bg-green-500' },
-        { title: '94% امتثال', subtitle: 'لمعايير الجودة', icon: Award, color: 'bg-purple-500' },
-        { title: '16 وحدة ذكية', subtitle: 'مفعلة في النظام', icon: Brain, color: 'bg-orange-500' },
+        { title: '145 مستفيد نشط', subtitle: 'تتم متابعتهم يومياً', icon: Users, color: 'bg-[#269798]' },
+        { title: '0 حوادث سقوط', subtitle: 'خلال الربع الأخير', icon: Shield, color: 'bg-[#2BB574]' },
+        { title: '94% امتثال', subtitle: 'لمعايير الجودة', icon: Award, color: 'bg-[#FCB614]' },
+        { title: '16 وحدة ذكية', subtitle: 'مفعلة في النظام', icon: Brain, color: 'bg-[#F7941D]' },
     ];
 
     const strategicGoals = [
@@ -71,7 +71,7 @@ export const ExecutiveReport: React.FC = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-[#269798]/10" dir="rtl">
             {/* Hero Section */}
             <section className={`relative overflow-hidden bg-gradient-to-br from-[rgb(20,65,90)] via-[rgb(15,55,80)] to-[rgb(10,45,65)] text-white transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
                 {/* Animated Background */}
@@ -144,7 +144,7 @@ export const ExecutiveReport: React.FC = () => {
                     {/* Radial Progress Chart */}
                     <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                            <div className="w-10 h-10 bg-gradient-to-br from-[#269798] to-[#269798] rounded-xl flex items-center justify-center">
                                 <Target className="w-5 h-5 text-white" />
                             </div>
                             <div>
@@ -174,7 +174,7 @@ export const ExecutiveReport: React.FC = () => {
                     {/* Trend Chart */}
                     <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                            <div className="w-10 h-10 bg-gradient-to-br from-[#2BB574] to-[#2BB574] rounded-xl flex items-center justify-center">
                                 <TrendingUp className="w-5 h-5 text-white" />
                             </div>
                             <div>
@@ -187,34 +187,34 @@ export const ExecutiveReport: React.FC = () => {
                                 <AreaChart data={monthlyTrend}>
                                     <defs>
                                         <linearGradient id="colorCompliance" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#2BB574" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#2BB574" stopOpacity={0} />
                                         </linearGradient>
                                         <linearGradient id="colorSatisfaction" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
-                                            <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
+                                            <stop offset="5%" stopColor="#FCB614" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#FCB614" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
                                     <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
                                     <YAxis domain={[60, 100]} axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
                                     <Tooltip />
-                                    <Area type="monotone" dataKey="امتثال" stroke="#10b981" strokeWidth={2} fill="url(#colorCompliance)" />
-                                    <Area type="monotone" dataKey="رضا" stroke="#f59e0b" strokeWidth={2} fill="url(#colorSatisfaction)" />
-                                    <Area type="monotone" dataKey="سلامة" stroke="#3b82f6" strokeWidth={2} fillOpacity={0} />
+                                    <Area type="monotone" dataKey="امتثال" stroke="#2BB574" strokeWidth={2} fill="url(#colorCompliance)" />
+                                    <Area type="monotone" dataKey="رضا" stroke="#FCB614" strokeWidth={2} fill="url(#colorSatisfaction)" />
+                                    <Area type="monotone" dataKey="سلامة" stroke="#269798" strokeWidth={2} fillOpacity={0} />
                                 </AreaChart>
                             </ResponsiveContainer>
                         </div>
                         <div className="flex justify-center gap-6 mt-4">
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                <div className="w-3 h-3 rounded-full bg-[#2BB574]"></div>
                                 <span className="text-sm text-gray-600">الامتثال</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+                                <div className="w-3 h-3 rounded-full bg-[#FCB614]"></div>
                                 <span className="text-sm text-gray-600">الرضا</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                                <div className="w-3 h-3 rounded-full bg-[#269798]"></div>
                                 <span className="text-sm text-gray-600">السلامة</span>
                             </div>
                         </div>
@@ -224,7 +224,7 @@ export const ExecutiveReport: React.FC = () => {
                 {/* Module Progress */}
                 <section className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl flex items-center justify-center">
+                        <div className="w-10 h-10 bg-gradient-to-br from-[#FCB614] to-[#0F3144] rounded-xl flex items-center justify-center">
                             <BarChart3 className="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -298,9 +298,9 @@ export const ExecutiveReport: React.FC = () => {
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center gap-3">
                                         {goal.status === 'achieved' ? (
-                                            <CheckCircle2 className="w-6 h-6 text-green-400" />
+                                            <CheckCircle2 className="w-6 h-6 text-[#2BB574]" />
                                         ) : (
-                                            <Clock className="w-6 h-6 text-amber-400" />
+                                            <Clock className="w-6 h-6 text-[#FCB614]" />
                                         )}
                                         <span className="font-bold text-lg">{goal.goal}</span>
                                     </div>
@@ -308,7 +308,7 @@ export const ExecutiveReport: React.FC = () => {
                                 </div>
                                 <div className="h-2 bg-white/20 rounded-full overflow-hidden">
                                     <div
-                                        className={`h-full rounded-full transition-all duration-1000 ${goal.status === 'achieved' ? 'bg-green-400' : 'bg-[rgb(245,150,30)]'}`}
+                                        className={`h-full rounded-full transition-all duration-1000 ${goal.status === 'achieved' ? 'bg-[#2BB574]' : 'bg-[rgb(245,150,30)]'}`}
                                         style={{ width: `${goal.progress}%` }}
                                     ></div>
                                 </div>
@@ -332,15 +332,15 @@ export const ExecutiveReport: React.FC = () => {
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm shadow-sm">
-                                    <Zap className="w-4 h-4 text-amber-500" />
+                                    <Zap className="w-4 h-4 text-[#D49A0A]" />
                                     كفاءة تشغيلية
                                 </span>
                                 <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm shadow-sm">
-                                    <Heart className="w-4 h-4 text-rose-500" />
+                                    <Heart className="w-4 h-4 text-[#DC2626]" />
                                     رعاية إنسانية
                                 </span>
                                 <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm shadow-sm">
-                                    <Target className="w-4 h-4 text-blue-500" />
+                                    <Target className="w-4 h-4 text-[#269798]" />
                                     تمكين فعّال
                                 </span>
                             </div>

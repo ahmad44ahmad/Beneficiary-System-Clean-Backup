@@ -9,10 +9,10 @@ import { shiftService } from '../../services/shiftService';
 import { ShiftHandoverItem, ShiftCategory, ShiftSummary } from '../../types/shift';
 
 const CATEGORY_CONFIG = {
-    critical: { icon: AlertTriangle, color: 'text-red-400', bgColor: 'bg-red-500/20', borderColor: 'border-red-500/50', label: 'حرج' },
-    medication: { icon: Pill, color: 'text-purple-400', bgColor: 'bg-purple-500/20', borderColor: 'border-purple-500/50', label: 'أدوية' },
-    care: { icon: Heart, color: 'text-pink-400', bgColor: 'bg-pink-500/20', borderColor: 'border-pink-500/50', label: 'رعاية' },
-    pending: { icon: Clock, color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-500/50', label: 'معلق' },
+    critical: { icon: AlertTriangle, color: 'text-[#DC2626]', bgColor: 'bg-[#DC2626]/20', borderColor: 'border-[#DC2626]/50', label: 'حرج' },
+    medication: { icon: Pill, color: 'text-[#FCB614]', bgColor: 'bg-[#FCB614]/20', borderColor: 'border-[#FCB614]/50', label: 'أدوية' },
+    care: { icon: Heart, color: 'text-[#DC2626]', bgColor: 'bg-[#DC2626]/20', borderColor: 'border-[#DC2626]/50', label: 'رعاية' },
+    pending: { icon: Clock, color: 'text-[#FCB614]', bgColor: 'bg-[#FCB614]/20', borderColor: 'border-[#FCB614]/50', label: 'معلق' },
 };
 
 const initialSummary: ShiftSummary = {
@@ -110,7 +110,7 @@ export const ShiftHandover: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-br from-white via-white to-white text-white p-6" dir="rtl">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -119,24 +119,24 @@ export const ShiftHandover: React.FC = () => {
             >
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-14 h-14 bg-gradient-to-br from-[#FCB614] to-[#D67A0A] rounded-2xl flex items-center justify-center shadow-lg">
                             <ArrowLeftRight className="w-7 h-7 text-white" />
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold">تسليم الوردية الذكية</h1>
-                            <p className="text-slate-400 text-sm">{getShiftLabel(summary.shiftType)} • {summary.startTime} - {summary.endTime}</p>
+                            <p className="text-hrsd-cool-gray text-sm">{getShiftLabel(summary.shiftType)} • {summary.startTime} - {summary.endTime}</p>
                         </div>
                     </div>
                     {!isConfirmed ? (
                         <button
                             onClick={() => setIsConfirmed(true)}
-                            className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
+                            className="px-6 py-3 bg-gradient-to-r from-[#2BB574] to-[#1E9658] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
                         >
                             <CheckCircle className="w-5 h-5" />
                             تأكيد الاستلام
                         </button>
                     ) : (
-                        <div className="px-6 py-3 bg-green-500/20 text-green-400 border border-green-500/50 rounded-xl font-bold flex items-center gap-2">
+                        <div className="px-6 py-3 bg-[#2BB574]/20 text-[#2BB574] border border-[#2BB574]/50 rounded-xl font-bold flex items-center gap-2">
                             <CheckCircle className="w-5 h-5" />
                             تم تأكيد الاستلام
                         </div>
@@ -148,35 +148,35 @@ export const ShiftHandover: React.FC = () => {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-gradient-to-r from-amber-900/30 to-orange-900/30 rounded-2xl p-6 mb-6 border border-amber-500/30"
+                className="bg-gradient-to-r from-[#92400E]/30 to-[#92400E]/30 rounded-2xl p-6 mb-6 border border-[#FCB614]/30"
             >
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-amber-400" />
+                        <FileText className="w-5 h-5 text-[#FCB614]" />
                         ملخص الوردية
                     </h3>
-                    <span className="text-slate-400 text-sm">بواسطة: {summary.staffName}</span>
+                    <span className="text-hrsd-cool-gray text-sm">بواسطة: {summary.staffName}</span>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-                        <User className="w-6 h-6 text-blue-400 mx-auto mb-2" />
+                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                        <User className="w-6 h-6 text-[#269798] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.totalBeneficiaries}</p>
-                        <p className="text-slate-400 text-sm">مستفيد</p>
+                        <p className="text-hrsd-cool-gray text-sm">مستفيد</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-                        <Pill className="w-6 h-6 text-purple-400 mx-auto mb-2" />
+                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                        <Pill className="w-6 h-6 text-[#FCB614] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.medicationsGiven}</p>
-                        <p className="text-slate-400 text-sm">دواء أُعطي</p>
+                        <p className="text-hrsd-cool-gray text-sm">دواء أُعطي</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-                        <AlertTriangle className="w-6 h-6 text-red-400 mx-auto mb-2" />
+                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                        <AlertTriangle className="w-6 h-6 text-[#DC2626] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.incidentsReported}</p>
-                        <p className="text-slate-400 text-sm">حادثة</p>
+                        <p className="text-hrsd-cool-gray text-sm">حادثة</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-                        <Activity className="w-6 h-6 text-green-400 mx-auto mb-2" />
+                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                        <Activity className="w-6 h-6 text-[#2BB574] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.assessmentsCompleted}</p>
-                        <p className="text-slate-400 text-sm">تقييم</p>
+                        <p className="text-hrsd-cool-gray text-sm">تقييم</p>
                     </div>
                 </div>
             </motion.div>
@@ -185,7 +185,7 @@ export const ShiftHandover: React.FC = () => {
             <div className="flex gap-3 mb-6 flex-wrap">
                 <button
                     onClick={() => setSelectedCategory('all')}
-                    className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${selectedCategory === 'all' ? 'bg-blue-500 text-white' : 'bg-slate-800 text-slate-400'}`}
+                    className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${selectedCategory === 'all' ? 'bg-[#269798] text-white' : 'bg-white text-hrsd-cool-gray'}`}
                 >
                     الكل ({items.length})
                 </button>
@@ -193,7 +193,7 @@ export const ShiftHandover: React.FC = () => {
                     <button
                         key={key}
                         onClick={() => setSelectedCategory(key as ShiftCategory)}
-                        className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${selectedCategory === key ? `${config.bgColor} ${config.color}` : 'bg-slate-800 text-slate-400'}`}
+                        className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${selectedCategory === key ? `${config.bgColor} ${config.color}` : 'bg-white text-hrsd-cool-gray'}`}
                     >
                         <config.icon className="w-4 h-4" />
                         {config.label} ({categoryCounts[key as ShiftCategory]})
@@ -201,7 +201,7 @@ export const ShiftHandover: React.FC = () => {
                 ))}
                 <button
                     onClick={() => setIsAddingItem(true)}
-                    className="px-4 py-2 rounded-xl bg-green-500/20 text-green-400 flex items-center gap-2 hover:bg-green-500/30 transition-colors me-auto"
+                    className="px-4 py-2 rounded-xl bg-[#2BB574]/20 text-[#2BB574] flex items-center gap-2 hover:bg-[#2BB574]/30 transition-colors me-auto"
                 >
                     <Plus className="w-4 h-4" />
                     إضافة بند
@@ -215,11 +215,11 @@ export const ShiftHandover: React.FC = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="bg-slate-800/50 rounded-2xl p-6 mb-6 border border-slate-700"
+                        className="bg-white/50 rounded-2xl p-6 mb-6 border border-gray-200"
                     >
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="font-bold">إضافة بند جديد</h3>
-                            <button onClick={() => setIsAddingItem(false)} className="p-2 hover:bg-slate-700 rounded-lg" title="إغلاق" aria-label="إغلاق">
+                            <button onClick={() => setIsAddingItem(false)} className="p-2 hover:bg-gray-50 rounded-lg" title="إغلاق" aria-label="إغلاق">
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
@@ -229,7 +229,7 @@ export const ShiftHandover: React.FC = () => {
                                     <button
                                         key={key}
                                         onClick={() => setNewItem(prev => ({ ...prev, category: key as ShiftCategory }))}
-                                        className={`px-3 py-2 rounded-lg flex items-center gap-2 transition-colors ${newItem.category === key ? `${config.bgColor} ${config.color} border ${config.borderColor}` : 'bg-slate-700 text-slate-400'}`}
+                                        className={`px-3 py-2 rounded-lg flex items-center gap-2 transition-colors ${newItem.category === key ? `${config.bgColor} ${config.color} border ${config.borderColor}` : 'bg-gray-50 text-hrsd-cool-gray'}`}
                                     >
                                         <config.icon className="w-4 h-4" />
                                         {config.label}
@@ -241,23 +241,23 @@ export const ShiftHandover: React.FC = () => {
                                 placeholder="عنوان البند..."
                                 value={newItem.title}
                                 onChange={(e) => setNewItem(prev => ({ ...prev, title: e.target.value }))}
-                                className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#FCB614]"
                             />
                             <textarea
                                 placeholder="التفاصيل..."
                                 value={newItem.description}
                                 onChange={(e) => setNewItem(prev => ({ ...prev, description: e.target.value }))}
-                                className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 h-24 resize-none"
+                                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#FCB614] h-24 resize-none"
                             />
                             <div className="flex gap-3">
                                 <button
                                     onClick={handleAddItem}
-                                    className="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
+                                    className="flex-1 py-3 bg-[#FCB614] hover:bg-[#D49A0A] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
                                 >
                                     <Send className="w-5 h-5" />
                                     إضافة
                                 </button>
-                                <button className="p-3 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors" title="تسجيل صوتي">
+                                <button className="p-3 bg-gray-50 hover:bg-gray-200 rounded-xl transition-colors" title="تسجيل صوتي">
                                     <Mic className="w-5 h-5" />
                                 </button>
                             </div>
@@ -298,11 +298,11 @@ export const ShiftHandover: React.FC = () => {
                                                     {config.label}
                                                 </span>
                                                 {item.priority === 'high' && (
-                                                    <span className="px-2 py-0.5 rounded text-xs bg-red-500/30 text-red-300">عاجل</span>
+                                                    <span className="px-2 py-0.5 rounded text-xs bg-[#DC2626]/30 text-[#DC2626]">عاجل</span>
                                                 )}
                                             </div>
-                                            <p className="text-slate-400 text-sm mt-1">{item.description}</p>
-                                            <div className="flex items-center gap-3 mt-2 text-slate-500 text-xs">
+                                            <p className="text-hrsd-cool-gray text-sm mt-1">{item.description}</p>
+                                            <div className="flex items-center gap-3 mt-2 text-hrsd-cool-gray text-xs">
                                                 <span className="flex items-center gap-1">
                                                     <Clock className="w-3 h-3" />
                                                     {timeString}
@@ -314,7 +314,7 @@ export const ShiftHandover: React.FC = () => {
                                     <div className="flex items-center gap-2">
                                         <button
                                             onClick={(e) => { e.stopPropagation(); handleRemoveItem(item.id); }}
-                                            className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors text-slate-500 hover:text-red-400"
+                                            className="p-2 hover:bg-gray-50/50 rounded-lg transition-colors text-hrsd-cool-gray hover:text-[#DC2626]"
                                             title="حذف البند"
                                             aria-label="حذف البند"
                                         >
@@ -334,7 +334,7 @@ export const ShiftHandover: React.FC = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="fixed bottom-6 start-6 end-6 bg-green-500 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-center gap-3"
+                    className="fixed bottom-6 start-6 end-6 bg-[#2BB574] text-white p-4 rounded-2xl shadow-2xl flex items-center justify-center gap-3"
                 >
                     <CheckCircle className="w-6 h-6" />
                     <span className="font-bold">تم تأكيد استلام الوردية بنجاح</span>

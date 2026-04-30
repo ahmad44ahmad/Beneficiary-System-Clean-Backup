@@ -31,7 +31,7 @@ export const ClothingSeasonalCalendar: React.FC = () => {
     return (
         <section
             dir="rtl"
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm"
+            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
         >
             <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
@@ -39,10 +39,10 @@ export const ClothingSeasonalCalendar: React.FC = () => {
                         <CalendarDays className="w-6 h-6 text-hrsd-gold-dark" />
                     </div>
                     <div>
-                        <h2 className="text-[17px] font-bold text-slate-900 dark:text-white">
+                        <h2 className="text-[17px] font-bold text-hrsd-navy dark:text-white">
                             المواعيد الموسمية للكسوة
                         </h2>
-                        <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-0.5">
+                        <p className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-0.5">
                             أربعة مواسم رفع — ضوابط الكسوة 2020
                         </p>
                     </div>
@@ -78,18 +78,18 @@ export const ClothingSeasonalCalendar: React.FC = () => {
                                 )}
                             </div>
                             <div>
-                                <h3 className="text-[15px] font-bold text-slate-900 dark:text-white leading-tight">
+                                <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white leading-tight">
                                     {season.labelAr}
                                 </h3>
-                                <p className="text-[13px] text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                                <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-navy mt-2 leading-relaxed">
                                     {season.noteAr}
                                 </p>
                             </div>
                             <div className="mt-auto pt-3 border-t border-white/60">
-                                <span className="text-[12px] text-slate-500 dark:text-slate-400">
+                                <span className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                                     التقويم:
                                 </span>
-                                <span className="text-[13px] font-semibold text-slate-700 dark:text-slate-200 me-1">
+                                <span className="text-[13px] font-semibold text-hrsd-navy dark:text-hrsd-navy me-1">
                                     {season.requestDate.calendar === 'gregorian' ? 'ميلادي' : 'هجري'}
                                 </span>
                             </div>

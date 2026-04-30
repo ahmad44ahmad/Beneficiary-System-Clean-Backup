@@ -95,7 +95,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
 
                 <form onSubmit={handleSubmit} className="p-6 space-y-8">
                     {/* Header Section: Beneficiary Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#269798]/10 p-4 rounded-lg border border-[#269798]/10">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">اسم المستفيد</label>
                             <select
@@ -146,7 +146,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
 
                     {/* Section 1: Referral Goals */}
                     <div className="space-y-4">
-                        <h3 className="text-lg font-bold text-green-700 border-b pb-2">1. أهداف التحويل</h3>
+                        <h3 className="text-lg font-bold text-[#1E9658] border-b pb-2">1. أهداف التحويل</h3>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {[
                                 { k: 'communityIntegration', label: 'دمج مجتمعي' },
@@ -161,7 +161,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                                         type="checkbox"
                                         checked={formData.goals![k as keyof typeof formData.goals]}
                                         onChange={() => handleGoalChange(k as keyof typeof formData.goals)}
-                                        className="w-5 h-5 text-green-600 rounded"
+                                        className="w-5 h-5 text-[#1E9658] rounded"
                                     />
                                     <span className="font-medium text-gray-700">{label}</span>
                                 </label>
@@ -171,7 +171,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
 
                     {/* Section 2: Current Performance Assessment Table */}
                     <div className="space-y-4">
-                        <h3 className="text-lg font-bold text-green-700 border-b pb-2">2. مستوى الأداء الحالي</h3>
+                        <h3 className="text-lg font-bold text-[#1E9658] border-b pb-2">2. مستوى الأداء الحالي</h3>
                         <div className="overflow-x-auto">
                             <table className="w-full border-collapse border border-gray-200">
                                 <thead className="bg-gray-100">
@@ -258,7 +258,7 @@ export const TrainingReferralForm: React.FC<TrainingReferralFormProps> = ({ bene
                     {/* Actions */}
                     <div className="flex justify-end gap-3 pt-6 border-t">
                         <Button variant="outline" onClick={onCancel} type="button">إلغاء</Button>
-                        <Button className="bg-green-600 hover:bg-green-700 text-white" type="submit">
+                        <Button className="bg-[#1E9658] hover:bg-[#1E9658] text-white" type="submit">
                             حفظ واعتماد النموذج
                         </Button>
                     </div>

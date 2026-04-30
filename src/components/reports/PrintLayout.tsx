@@ -23,7 +23,7 @@ export const PrintLayout: React.FC<PrintLayoutProps> = ({ title, subtitle, child
             {/* Toolbar - Hidden in Print */}
             <div className="max-w-4xl mx-auto mb-6 flex justify-between items-center print:hidden">
                 <h2 className="text-xl font-bold text-gray-800">معاينة التقرير</h2>
-                <Button onClick={handlePrint} className="bg-blue-600 text-white hover:bg-blue-700">
+                <Button onClick={handlePrint} className="bg-[#1B7778] text-white hover:bg-[#1B7778]">
                     <Printer className="w-4 h-4 ms-2" />
                     طباعة / تصدير PDF
                 </Button>

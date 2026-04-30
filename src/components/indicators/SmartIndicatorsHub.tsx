@@ -23,7 +23,7 @@ interface IndicatorCard {
 }
 
 // Mini Sparkline Component
-const Sparkline: React.FC<{ data: number[]; color?: string }> = ({ data, color = 'rgba(20, 130, 135, 0.8)' }) => {
+const Sparkline: React.FC<{ data: number[]; color?: string }> = ({ data, color = 'rgba(38, 151, 152, 0.8)' }) => {
     const max = Math.max(...data);
     const heights = data.map(v => (v / max) * 100);
 
@@ -46,8 +46,8 @@ const HealthGauge: React.FC<{ score: number; label: string }> = ({ score, label 
     const offset = circumference - (score / 100) * circumference;
 
     const getColor = (s: number) => {
-        if (s >= 70) return 'rgb(45, 180, 115)';
-        if (s >= 50) return 'rgb(250, 180, 20)';
+        if (s >= 70) return 'rgb(43, 181, 116)';
+        if (s >= 50) return 'rgb(252, 182, 20)';
         return 'rgb(239, 68, 68)';
     };
 
@@ -233,7 +233,7 @@ export const SmartIndicatorsHub: React.FC = () => {
             case 'up':
                 return <ArrowUpRight className="w-4 h-4 text-hrsd-green" />;
             case 'down':
-                return <ArrowDownRight className="w-4 h-4 text-red-500" />;
+                return <ArrowDownRight className="w-4 h-4 text-[#DC2626]" />;
             default:
                 return null;
         }
@@ -295,21 +295,21 @@ export const SmartIndicatorsHub: React.FC = () => {
                                     <p className="text-3xl font-bold text-gray-900">{indicators.length}</p>
                                     <p className="text-xs text-gray-500">مؤشرات نشطة</p>
                                 </div>
-                                <div className="text-center p-3 bg-red-50 rounded-xl">
+                                <div className="text-center p-3 bg-[#DC2626]/10 rounded-xl">
                                     <div className="flex items-center justify-center gap-1">
                                         <span className="status-dot status-dot-critical"></span>
-                                        <p className="text-3xl font-bold text-red-600">{criticalCount}</p>
+                                        <p className="text-3xl font-bold text-[#DC2626]">{criticalCount}</p>
                                     </div>
                                     <p className="text-xs text-gray-500">حرج</p>
                                 </div>
-                                <div className="text-center p-3 bg-yellow-50 rounded-xl">
+                                <div className="text-center p-3 bg-[#FCB614]/10 rounded-xl">
                                     <div className="flex items-center justify-center gap-1">
                                         <span className="status-dot status-dot-warning"></span>
                                         <p className="text-3xl font-bold text-hrsd-gold">{warningCount}</p>
                                     </div>
                                     <p className="text-xs text-gray-500">تحذير</p>
                                 </div>
-                                <div className="text-center p-3 bg-green-50 rounded-xl">
+                                <div className="text-center p-3 bg-[#2BB574]/10 rounded-xl">
                                     <div className="flex items-center justify-center gap-1">
                                         <span className="status-dot status-dot-success"></span>
                                         <p className="text-3xl font-bold text-hrsd-green">{goodCount}</p>
@@ -369,7 +369,7 @@ export const SmartIndicatorsHub: React.FC = () => {
                                     {indicator.trend && (
                                         <div className="flex items-center gap-1">
                                             {getTrendIcon(indicator.trend)}
-                                            <span className={`text-xs font-medium ${indicator.trend === 'up' ? 'text-hrsd-green' : indicator.trend === 'down' ? 'text-red-500' : 'text-gray-500'}`}>
+                                            <span className={`text-xs font-medium ${indicator.trend === 'up' ? 'text-hrsd-green' : indicator.trend === 'down' ? 'text-[#DC2626]' : 'text-gray-500'}`}>
                                                 {indicator.trendValue}
                                             </span>
                                         </div>
@@ -381,7 +381,7 @@ export const SmartIndicatorsHub: React.FC = () => {
                                     <div className="mb-3">
                                         <Sparkline
                                             data={indicator.sparklineData}
-                                            color={indicator.status === 'critical' ? 'rgba(239, 68, 68, 0.6)' : indicator.status === 'warning' ? 'rgba(250, 180, 20, 0.6)' : 'rgba(45, 180, 115, 0.6)'}
+                                            color={indicator.status === 'critical' ? 'rgba(220, 38, 38, 0.6)' : indicator.status === 'warning' ? 'rgba(252, 182, 20, 0.6)' : 'rgba(43, 181, 116, 0.6)'}
                                         />
                                     </div>
                                 )}

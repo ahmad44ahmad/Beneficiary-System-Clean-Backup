@@ -80,10 +80,10 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                         key={tag.id}
                                         className={`
                                             inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium border
-                                            ${tag.color === 'red' ? 'bg-red-50 text-red-700 border-red-200' : ''}
-                                            ${tag.color === 'orange' ? 'bg-orange-50 text-orange-700 border-orange-200' : ''}
-                                            ${tag.color === 'blue' ? 'bg-blue-50 text-blue-700 border-blue-200' : ''}
-                                            ${tag.color === 'purple' ? 'bg-purple-50 text-purple-700 border-purple-200' : ''}
+                                            ${tag.color === 'red' ? 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/30' : ''}
+                                            ${tag.color === 'orange' ? 'bg-[#F7941D]/10 text-[#D67A0A] border-[#F7941D]/30' : ''}
+                                            ${tag.color === 'blue' ? 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/30' : ''}
+                                            ${tag.color === 'purple' ? 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20' : ''}
                                             ${tag.color === 'gray' ? 'bg-gray-50 text-gray-700 border-gray-200' : ''}
                                         `}
                                         title={tag.description}
@@ -98,7 +98,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
 
                     {/* Quick Actions */}
                     <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="text-red-600 border-red-200 hover:bg-red-50">
+                        <Button variant="outline" size="sm" className="text-[#DC2626] border-[#DC2626]/30 hover:bg-[#DC2626]/10">
                             <AlertTriangle className="w-4 h-4 me-2" />
                             Report Incident
                         </Button>
@@ -127,7 +127,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                             className={`
                                 pb-3 px-1 text-sm font-medium flex items-center gap-2 border-b-2 transition-colors whitespace-nowrap
                                 ${activeTab === tab.id
-                                    ? 'border-blue-600 text-blue-600'
+                                    ? 'border-[#1B7778] text-[#269798]'
                                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
                             `}
                         >
@@ -154,7 +154,7 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                 </div>
                                 <div>
                                     <label className="text-xs text-gray-500 uppercase">Key Notes</label>
-                                    <p className="text-sm text-gray-600 bg-yellow-50 p-2 rounded border border-yellow-100">
+                                    <p className="text-sm text-gray-600 bg-[#FCB614]/10 p-2 rounded border border-[#FCB614]/10">
                                         {profile.notes}
                                     </p>
                                 </div>
@@ -165,15 +165,15 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center p-3 bg-white rounded border">
                                     <span className="text-sm text-gray-600">Rehab Plan</span>
-                                    <span className={`px-2 py-1 rounded text-xs font-bold ${profile.activeRehabPlan?.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+                                    <span className={`px-2 py-1 rounded text-xs font-bold ${profile.activeRehabPlan?.status === 'active' ? 'bg-[#2BB574]/15 text-[#1E9658]' : 'bg-gray-100 text-gray-600'}`}>
                                         {profile.activeRehabPlan?.status || 'No Plan'}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center p-3 bg-white rounded border">
                                     <span className="text-sm text-gray-600">Risk Level</span>
                                     <span className={`px-2 py-1 rounded text-xs font-bold 
-                                        ${profile.riskLevel === 'high' ? 'bg-red-100 text-red-700' :
-                                            profile.riskLevel === 'medium' ? 'bg-orange-100 text-orange-700' : 'bg-green-100 text-green-700'}
+                                        ${profile.riskLevel === 'high' ? 'bg-[#DC2626]/15 text-[#B91C1C]' :
+                                            profile.riskLevel === 'medium' ? 'bg-[#F7941D]/15 text-[#D67A0A]' : 'bg-[#2BB574]/15 text-[#1E9658]'}
                                     `}>
                                         {profile.riskLevel.toUpperCase()}
                                     </span>
@@ -211,13 +211,13 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                     </div>
                                     <div>
                                         <label className="text-xs text-gray-500">Hydration Goal</label>
-                                        <p className="font-bold text-blue-600">{profile.nutritionPlan.hydrationGoal}</p>
+                                        <p className="font-bold text-[#269798]">{profile.nutritionPlan.hydrationGoal}</p>
                                     </div>
                                     <div className="col-span-2">
                                         <label className="text-xs text-gray-500">Restrictions</label>
                                         <div className="flex gap-2 mt-1">
                                             {profile.nutritionPlan.restrictions.map((r, i) => (
-                                                <span key={i} className="px-2 py-1 bg-red-50 text-red-700 text-xs rounded border border-red-100">
+                                                <span key={i} className="px-2 py-1 bg-[#DC2626]/10 text-[#B91C1C] text-xs rounded border border-[#DC2626]/10">
                                                     {r}
                                                 </span>
                                             ))}
@@ -237,8 +237,8 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                     {profile.clothingRequests.map(req => (
                                         <div key={req.id} className="flex justify-between items-center p-3 bg-white rounded border shadow-sm">
                                             <div className="flex items-center gap-3">
-                                                <div className="p-2 bg-blue-50 rounded-full">
-                                                    <Shirt className="w-4 h-4 text-blue-600" />
+                                                <div className="p-2 bg-[#269798]/10 rounded-full">
+                                                    <Shirt className="w-4 h-4 text-[#269798]" />
                                                 </div>
                                                 <div>
                                                     <p className="font-medium text-gray-900">{req.item}</p>
@@ -246,9 +246,9 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                                 </div>
                                             </div>
                                             <span className={`px-2 py-1 rounded text-xs font-bold 
-                                                ${req.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                                                    req.status === 'approved' ? 'bg-blue-100 text-blue-700' :
-                                                        req.status === 'delivered' ? 'bg-green-100 text-green-700' : 'bg-gray-100'}
+                                                ${req.status === 'pending' ? 'bg-[#FCB614]/10 text-[#D49A0A]' :
+                                                    req.status === 'approved' ? 'bg-[#269798]/15 text-[#1B7778]' :
+                                                        req.status === 'delivered' ? 'bg-[#2BB574]/15 text-[#1E9658]' : 'bg-gray-100'}
                                             `}>
                                                 {req.status.toUpperCase()}
                                             </span>
@@ -274,9 +274,9 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Card title="التشخيصات">
                                 <ul className="space-y-2">
-                                    <li className="p-3 bg-red-50 rounded-lg border border-red-100 flex justify-between">
+                                    <li className="p-3 bg-[#DC2626]/10 rounded-lg border border-[#DC2626]/10 flex justify-between">
                                         <span className="font-bold text-gray-800">{profile.medicalProfile?.primaryDiagnosis || 'غير محدد'}</span>
-                                        <span className="text-xs bg-red-200 text-red-800 px-2 py-0.5 rounded-full">تشخيص أساسي</span>
+                                        <span className="text-xs bg-[#DC2626]/20 text-[#7F1D1D] px-2 py-0.5 rounded-full">تشخيص أساسي</span>
                                     </li>
                                     {profile.medicalProfile?.secondaryDiagnoses?.map((d, i) => (
                                         <li key={i} className="p-3 bg-gray-50 rounded-lg border border-gray-100 text-gray-700">
@@ -289,12 +289,12 @@ export const BeneficiaryMasterView: React.FC<BeneficiaryMasterViewProps> = ({
                                 {profile.medicalProfile?.currentMedications?.length ? (
                                     <div className="space-y-2">
                                         {profile.medicalProfile.currentMedications.map((m, i) => (
-                                            <div key={i} className="p-3 bg-blue-50 rounded-lg border border-blue-100 flex justify-between items-center">
+                                            <div key={i} className="p-3 bg-[#269798]/10 rounded-lg border border-[#269798]/10 flex justify-between items-center">
                                                 <div>
-                                                    <div className="font-bold text-blue-900">{m.name}</div>
-                                                    <div className="text-xs text-blue-700">{m.dosage} - {m.frequency}</div>
+                                                    <div className="font-bold text-[#0F3144]">{m.name}</div>
+                                                    <div className="text-xs text-[#1B7778]">{m.dosage} - {m.frequency}</div>
                                                 </div>
-                                                <Activity className="w-5 h-5 text-blue-400" />
+                                                <Activity className="w-5 h-5 text-[#269798]" />
                                             </div>
                                         ))}
                                     </div>

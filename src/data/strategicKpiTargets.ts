@@ -164,10 +164,10 @@ export const STRATEGIC_KPIS: StrategicKPI[] = [
 
 export const KPI_CATEGORIES = [
     { key: 'all', labelAr: 'الكل', color: '#6B7280' },
-    { key: 'care', labelAr: 'الرعاية', color: '#10B981' },
-    { key: 'safety', labelAr: 'السلامة', color: '#F59E0B' },
-    { key: 'satisfaction', labelAr: 'الرضا', color: '#8B5CF6' },
-    { key: 'operations', labelAr: 'العمليات', color: '#3B82F6' },
+    { key: 'care', labelAr: 'الرعاية', color: '#2BB574' },
+    { key: 'safety', labelAr: 'السلامة', color: '#FCB614' },
+    { key: 'satisfaction', labelAr: 'الرضا', color: '#FCB614' },
+    { key: 'operations', labelAr: 'العمليات', color: '#269798' },
 ] as const;
 
 // Monthly trend data for charts

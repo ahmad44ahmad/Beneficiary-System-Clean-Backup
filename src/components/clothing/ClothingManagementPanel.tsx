@@ -40,10 +40,10 @@ export const ClothingManagementPanel: React.FC = () => {
 
     // Stats
     const stats = [
-        { label: 'إجمالي الجرد', value: wardrobeInventories.length, icon: Package, bgClass: 'bg-teal-50', iconColor: 'text-[#148287]' },
-        { label: 'بيانات الاحتياج', value: needsAssessments.length, icon: ClipboardList, bgClass: 'bg-amber-50', iconColor: 'text-[#FAB414]' },
-        { label: 'عمليات الصرف', value: dispensations.length, icon: Truck, bgClass: 'bg-emerald-50', iconColor: 'text-[#2DB473]' },
-        { label: 'محاضر الشراء', value: procurements.length, icon: ShoppingCart, bgClass: 'bg-blue-50', iconColor: 'text-[#14415A]' },
+        { label: 'إجمالي الجرد', value: wardrobeInventories.length, icon: Package, bgClass: 'bg-[#269798]/10', iconColor: 'text-[#269798]' },
+        { label: 'بيانات الاحتياج', value: needsAssessments.length, icon: ClipboardList, bgClass: 'bg-[#FCB614]/10', iconColor: 'text-[#FCB614]' },
+        { label: 'عمليات الصرف', value: dispensations.length, icon: Truck, bgClass: 'bg-[#2BB574]/10', iconColor: 'text-[#2BB574]' },
+        { label: 'محاضر الشراء', value: procurements.length, icon: ShoppingCart, bgClass: 'bg-[#269798]/10', iconColor: 'text-[#0F3144]' },
     ];
 
     // Export function
@@ -136,7 +136,7 @@ export const ClothingManagementPanel: React.FC = () => {
                             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold
                                         whitespace-nowrap transition-all duration-200
                                         ${activeTab === tab.id
-                                    ? 'bg-white text-[#148287] shadow-sm'
+                                    ? 'bg-white text-[#269798] shadow-sm'
                                     : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
                                 }`}
                         >
@@ -144,7 +144,7 @@ export const ClothingManagementPanel: React.FC = () => {
                             <span>{tab.label}</span>
                             {tab.formNum && (
                                 <span className={`text-xs px-1.5 py-0.5 rounded-md
-                                    ${activeTab === tab.id ? 'bg-[#148287]/10 text-[#148287]' : 'bg-gray-200 text-gray-500'}`}>
+                                    ${activeTab === tab.id ? 'bg-[#269798]/10 text-[#269798]' : 'bg-gray-200 text-gray-500'}`}>
                                     {tab.formNum}
                                 </span>
                             )}
@@ -161,7 +161,7 @@ export const ClothingManagementPanel: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setIsCreatingInventory(true)}
-                                className="px-5 py-2.5 bg-[#148287] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
+                                className="px-5 py-2.5 bg-[#269798] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
                             >
                                 <Plus className="w-5 h-5" />
                                 إضافة جرد جديد
@@ -188,12 +188,12 @@ export const ClothingManagementPanel: React.FC = () => {
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="bg-gradient-to-l from-[#148287]/5 to-[#14415A]/5 border-b border-gray-200">
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">المستفيد</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">العام</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">الموسم</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">التاريخ</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">عدد الأصناف</th>
+                                            <tr className="bg-gradient-to-l from-[#269798]/5 to-[#0F3144]/5 border-b border-gray-200">
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">المستفيد</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">العام</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">الموسم</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">التاريخ</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">عدد الأصناف</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100">
@@ -204,7 +204,7 @@ export const ClothingManagementPanel: React.FC = () => {
                                                     <td className="px-5 py-4 text-sm text-gray-600">{inv.season}</td>
                                                     <td className="px-5 py-4 text-sm text-gray-600">{inv.date}</td>
                                                     <td className="px-5 py-4 text-sm">
-                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#148287]">
+                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#269798]/10 text-[#269798]">
                                                             {inv.items.length}
                                                         </span>
                                                     </td>
@@ -224,7 +224,7 @@ export const ClothingManagementPanel: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setIsCreatingNeeds(true)}
-                                className="px-5 py-2.5 bg-[#148287] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
+                                className="px-5 py-2.5 bg-[#269798] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
                             >
                                 <Plus className="w-5 h-5" />
                                 إضافة بيان احتياج
@@ -240,8 +240,8 @@ export const ClothingManagementPanel: React.FC = () => {
 
                         {needsAssessments.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-16 px-4 bg-white rounded-xl border border-gray-100">
-                                <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-4">
-                                    <ClipboardList className="w-10 h-10 text-amber-300" />
+                                <div className="w-20 h-20 bg-[#FCB614]/10 rounded-full flex items-center justify-center mb-4">
+                                    <ClipboardList className="w-10 h-10 text-[#FCB614]" />
                                 </div>
                                 <h3 className="text-lg font-semibold text-gray-400 mb-2">لا توجد بيانات احتياج</h3>
                                 <p className="text-sm text-gray-400">ابدأ بإضافة بيان احتياج جديد</p>
@@ -251,12 +251,12 @@ export const ClothingManagementPanel: React.FC = () => {
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="bg-gradient-to-l from-[#148287]/5 to-[#14415A]/5 border-b border-gray-200">
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">القسم</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">العام</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">الموسم</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">عدد الأصناف</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">الحالة</th>
+                                            <tr className="bg-gradient-to-l from-[#269798]/5 to-[#0F3144]/5 border-b border-gray-200">
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">القسم</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">العام</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">الموسم</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">عدد الأصناف</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">الحالة</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100">
@@ -266,15 +266,15 @@ export const ClothingManagementPanel: React.FC = () => {
                                                     <td className="px-5 py-4 text-sm text-gray-600">{need.year}</td>
                                                     <td className="px-5 py-4 text-sm text-gray-600">{need.season}</td>
                                                     <td className="px-5 py-4 text-sm">
-                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#148287]">
+                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#269798]/10 text-[#269798]">
                                                             {need.items.length}
                                                         </span>
                                                     </td>
                                                     <td className="px-5 py-4 text-sm">
                                                         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                                             ${need.status === 'draft'
-                                                                ? 'bg-amber-50 text-amber-700'
-                                                                : 'bg-emerald-50 text-[#2DB473]'}`}>
+                                                                ? 'bg-[#FCB614]/10 text-[#D49A0A]'
+                                                                : 'bg-[#2BB574]/10 text-[#2BB574]'}`}>
                                                             {need.status === 'draft' ? 'مسودة' : 'معتمد'}
                                                         </span>
                                                     </td>
@@ -294,7 +294,7 @@ export const ClothingManagementPanel: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setIsCreatingDispensation(true)}
-                                className="px-5 py-2.5 bg-[#148287] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
+                                className="px-5 py-2.5 bg-[#269798] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
                             >
                                 <Plus className="w-5 h-5" />
                                 صرف إضافي جديد
@@ -310,8 +310,8 @@ export const ClothingManagementPanel: React.FC = () => {
 
                         {dispensations.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-16 px-4 bg-white rounded-xl border border-gray-100">
-                                <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mb-4">
-                                    <Truck className="w-10 h-10 text-emerald-300" />
+                                <div className="w-20 h-20 bg-[#2BB574]/10 rounded-full flex items-center justify-center mb-4">
+                                    <Truck className="w-10 h-10 text-[#2BB574]" />
                                 </div>
                                 <h3 className="text-lg font-semibold text-gray-400 mb-2">لا توجد عمليات صرف</h3>
                                 <p className="text-sm text-gray-400">ابدأ بإضافة عملية صرف إضافي جديدة</p>
@@ -321,12 +321,12 @@ export const ClothingManagementPanel: React.FC = () => {
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="bg-gradient-to-l from-[#148287]/5 to-[#14415A]/5 border-b border-gray-200">
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">المستفيد</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">التاريخ</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">الموسم</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">المستلم</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">عدد الأصناف</th>
+                                            <tr className="bg-gradient-to-l from-[#269798]/5 to-[#0F3144]/5 border-b border-gray-200">
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">المستفيد</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">التاريخ</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">الموسم</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">المستلم</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">عدد الأصناف</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100">
@@ -337,7 +337,7 @@ export const ClothingManagementPanel: React.FC = () => {
                                                     <td className="px-5 py-4 text-sm text-gray-600">{disp.season}</td>
                                                     <td className="px-5 py-4 text-sm text-gray-600">{disp.receiverName}</td>
                                                     <td className="px-5 py-4 text-sm">
-                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#148287]">
+                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#269798]/10 text-[#269798]">
                                                             {disp.items.length}
                                                         </span>
                                                     </td>
@@ -357,7 +357,7 @@ export const ClothingManagementPanel: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setIsCreatingProcurement(true)}
-                                className="px-5 py-2.5 bg-[#148287] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
+                                className="px-5 py-2.5 bg-[#269798] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
                             >
                                 <Plus className="w-5 h-5" />
                                 إضافة محضر تأمين
@@ -373,8 +373,8 @@ export const ClothingManagementPanel: React.FC = () => {
 
                         {procurements.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-16 px-4 bg-white rounded-xl border border-gray-100">
-                                <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-4">
-                                    <ShoppingCart className="w-10 h-10 text-blue-300" />
+                                <div className="w-20 h-20 bg-[#269798]/10 rounded-full flex items-center justify-center mb-4">
+                                    <ShoppingCart className="w-10 h-10 text-[#269798]" />
                                 </div>
                                 <h3 className="text-lg font-semibold text-gray-400 mb-2">لا توجد محاضر شراء</h3>
                                 <p className="text-sm text-gray-400">ابدأ بإضافة محضر تأمين جديد</p>
@@ -384,11 +384,11 @@ export const ClothingManagementPanel: React.FC = () => {
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="bg-gradient-to-l from-[#148287]/5 to-[#14415A]/5 border-b border-gray-200">
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">التاريخ</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">رقم الفاتورة</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">عدد الأصناف</th>
-                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#14415A] whitespace-nowrap">الإجمالي</th>
+                                            <tr className="bg-gradient-to-l from-[#269798]/5 to-[#0F3144]/5 border-b border-gray-200">
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">التاريخ</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">رقم الفاتورة</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">عدد الأصناف</th>
+                                                <th className="text-right px-5 py-4 text-sm font-bold text-[#0F3144] whitespace-nowrap">الإجمالي</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100">
@@ -397,7 +397,7 @@ export const ClothingManagementPanel: React.FC = () => {
                                                     <td className="px-5 py-4 text-sm text-gray-600">{proc.date}</td>
                                                     <td className="px-5 py-4 text-sm text-gray-600">{proc.invoiceNumber || '-'}</td>
                                                     <td className="px-5 py-4 text-sm">
-                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-[#148287]">
+                                                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#269798]/10 text-[#269798]">
                                                             {proc.items.length}
                                                         </span>
                                                     </td>
@@ -415,8 +415,8 @@ export const ClothingManagementPanel: React.FC = () => {
                 {/* Placeholder Tabs (Discard, Warehouse) */}
                 {['discard', 'warehouse'].includes(activeTab) && (
                     <div className="flex flex-col items-center justify-center py-16 px-4 bg-white rounded-xl border border-gray-100">
-                        <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-4">
-                            <FileText className="w-10 h-10 text-amber-300" />
+                        <div className="w-20 h-20 bg-[#FCB614]/10 rounded-full flex items-center justify-center mb-4">
+                            <FileText className="w-10 h-10 text-[#FCB614]" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-400 mb-2">قريباً</h3>
                         <p className="text-sm text-gray-400">سيتم إضافة هذا القسم قريباً</p>
@@ -429,7 +429,7 @@ export const ClothingManagementPanel: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                                 <div className="p-6">
-                                    <h3 className="text-lg font-bold text-[#14415A] mb-4">استمارة حصر احتياج الكسوة (نموذج 18)</h3>
+                                    <h3 className="text-lg font-bold text-[#0F3144] mb-4">استمارة حصر احتياج الكسوة (نموذج 18)</h3>
                                     <div className="mb-4 bg-gray-50 border border-gray-100 rounded-xl p-3 flex justify-center">
                                         <img
                                             src="/assets/clothing-needs-form.png"
@@ -447,7 +447,7 @@ export const ClothingManagementPanel: React.FC = () => {
                                             تحميل النموذج
                                         </a>
                                         <button
-                                            className="px-5 py-2.5 bg-[#148287] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
+                                            className="px-5 py-2.5 bg-[#269798] text-white rounded-xl font-medium hover:bg-[#0a6465] transition-colors flex items-center gap-2 shadow-sm"
                                             onClick={() => {
                                                 const printWindow = window.open('', '_blank');
                                                 if (printWindow) {

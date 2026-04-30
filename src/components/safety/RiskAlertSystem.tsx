@@ -92,19 +92,19 @@ export const RiskAlertSystem: React.FC = () => {
             {alerts.map((alert) => (
                 <div
                     key={alert.id}
-                    className="bg-red-600 text-white p-4 rounded-xl shadow-2xl flex items-center justify-between border-4 border-red-400 animate-bounce pointer-events-auto"
+                    className="bg-[#B91C1C] text-white p-4 rounded-xl shadow-2xl flex items-center justify-between border-4 border-[#DC2626] animate-bounce pointer-events-auto"
                     dir="rtl"
                 >
                     <div className="flex items-center gap-4">
                         <div className="bg-white/20 p-2 rounded-full">
-                            <ShieldAlert className="w-8 h-8 text-yellow-300" />
+                            <ShieldAlert className="w-8 h-8 text-[#FCB614]" />
                         </div>
                         <div>
                             <h4 className="font-bold text-lg leading-tight">تحذير: خطر سقوط مرتفع!</h4>
-                            <p className="text-red-100 text-sm mt-1">
+                            <p className="text-[#DC2626]/40 text-sm mt-1">
                                 المستفيد: <span className="font-bold text-white">{alert.beneficiaryName || alert.beneficiary_id}</span>
                             </p>
-                            <p className="text-xs text-red-200 mt-0.5">
+                            <p className="text-xs text-[#DC2626]/60 mt-0.5">
                                 درجة الخطر: {alert.risk_score} (High Risk)
                             </p>
                         </div>

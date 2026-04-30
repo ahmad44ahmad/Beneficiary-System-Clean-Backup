@@ -19,10 +19,10 @@ const INCIDENT_CATEGORIES = [
 ];
 
 const SEVERITY_LEVELS = [
-    { value: 'mild', label: 'خفيف', color: 'bg-green-100 text-green-700 border-green-300' },
-    { value: 'moderate', label: 'متوسط', color: 'bg-yellow-100 text-yellow-700 border-yellow-300' },
-    { value: 'severe', label: 'شديد', color: 'bg-orange-100 text-orange-700 border-orange-300' },
-    { value: 'critical', label: 'حرج', color: 'bg-red-100 text-red-700 border-red-300' },
+    { value: 'mild', label: 'خفيف', color: 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]' },
+    { value: 'moderate', label: 'متوسط', color: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]' },
+    { value: 'severe', label: 'شديد', color: 'bg-[#F7941D]/15 text-[#D67A0A] border-[#F7941D]' },
+    { value: 'critical', label: 'حرج', color: 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]' },
 ];
 
 const AFFECTED_TYPES = [
@@ -154,7 +154,7 @@ export const IncidentReportForm: React.FC = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-50">
-                <Loader2 className="w-8 h-8 animate-spin text-red-600" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#DC2626]" />
             </div>
         );
     }
@@ -162,7 +162,7 @@ export const IncidentReportForm: React.FC = () => {
     return (
         <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-red-600 via-red-700 to-rose-800 rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#B91C1C] via-[#B91C1C] to-[#7F1D1D] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => navigate('/ipc')}
@@ -181,8 +181,8 @@ export const IncidentReportForm: React.FC = () => {
             {/* Category Selection */}
             <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                 <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
-                    <AlertCircle className="w-5 h-5 text-red-500" />
-                    نوع الحادثة <span className="text-red-500">*</span>
+                    <AlertCircle className="w-5 h-5 text-[#DC2626]" />
+                    نوع الحادثة <span className="text-[#DC2626]">*</span>
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {INCIDENT_CATEGORIES.map(cat => (
@@ -190,8 +190,8 @@ export const IncidentReportForm: React.FC = () => {
                             key={cat.value}
                             onClick={() => setCategory(cat.value)}
                             className={`p-4 rounded-xl border-2 transition-all text-right ${category === cat.value
-                                    ? 'border-red-500 bg-red-50 ring-2 ring-red-200'
-                                    : 'border-gray-200 hover:border-red-300 hover:bg-red-50'
+                                    ? 'border-[#DC2626] bg-[#DC2626]/10 ring-2 ring-[#DC2626]/20'
+                                    : 'border-gray-200 hover:border-[#DC2626] hover:bg-[#DC2626]/10'
                                 }`}
                         >
                             <span className="text-2xl block mb-1">{cat.icon}</span>
@@ -204,8 +204,8 @@ export const IncidentReportForm: React.FC = () => {
             {/* Affected Person */}
             <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                 <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
-                    <User className="w-5 h-5 text-blue-500" />
-                    الشخص المتأثر <span className="text-red-500">*</span>
+                    <User className="w-5 h-5 text-[#269798]" />
+                    الشخص المتأثر <span className="text-[#DC2626]">*</span>
                 </label>
                 <div className="flex gap-3 mb-4">
                     {AFFECTED_TYPES.map(type => (
@@ -213,8 +213,8 @@ export const IncidentReportForm: React.FC = () => {
                             key={type.value}
                             onClick={() => setAffectedType(type.value)}
                             className={`flex-1 p-3 rounded-xl border-2 transition-all ${affectedType === type.value
-                                    ? 'border-blue-500 bg-blue-50'
-                                    : 'border-gray-200 hover:border-blue-300'
+                                    ? 'border-[#269798] bg-[#269798]/10'
+                                    : 'border-gray-200 hover:border-[#269798]'
                                 }`}
                         >
                             <span className="text-xl ml-2">{type.icon}</span>
@@ -228,7 +228,7 @@ export const IncidentReportForm: React.FC = () => {
                         value={affectedName}
                         onChange={e => setAffectedName(e.target.value)}
                         placeholder={`اسم ${AFFECTED_TYPES.find(t => t.value === affectedType)?.label}`}
-                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none"
                     />
                 )}
             </div>
@@ -238,13 +238,13 @@ export const IncidentReportForm: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-700 font-bold mb-2 flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-green-500" />
+                            <MapPin className="w-4 h-4 text-[#1E9658]" />
                             الموقع
                         </label>
                         <select
                             value={locationId}
                             onChange={e => setLocationId(e.target.value)}
-                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 outline-none bg-white"
+                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none bg-white"
                         >
                             <option value="">-- اختر الموقع --</option>
                             {locations.map(loc => (
@@ -256,15 +256,15 @@ export const IncidentReportForm: React.FC = () => {
                     </div>
                     <div>
                         <label className="block text-gray-700 font-bold mb-2 flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-purple-500" />
-                            اسم المُبلِّغ <span className="text-red-500">*</span>
+                            <FileText className="w-4 h-4 text-[#D49A0A]" />
+                            اسم المُبلِّغ <span className="text-[#DC2626]">*</span>
                         </label>
                         <input
                             type="text"
                             value={reporterName}
                             onChange={e => setReporterName(e.target.value)}
                             placeholder="اسمك"
-                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none"
+                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#FCB614] outline-none"
                         />
                     </div>
                 </div>
@@ -273,7 +273,7 @@ export const IncidentReportForm: React.FC = () => {
             {/* Clinical Details */}
             <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                 <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
-                    <Thermometer className="w-5 h-5 text-orange-500" />
+                    <Thermometer className="w-5 h-5 text-[#D67A0A]" />
                     البيانات السريرية
                 </label>
 
@@ -286,8 +286,8 @@ export const IncidentReportForm: React.FC = () => {
                                 key={site}
                                 onClick={() => setInfectionSite(site)}
                                 className={`px-3 py-1.5 rounded-full text-sm transition-all ${infectionSite === site
-                                        ? 'bg-orange-500 text-white'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-orange-100'
+                                        ? 'bg-[#F7941D] text-white'
+                                        : 'bg-gray-100 text-gray-600 hover:bg-[#F7941D]/15'
                                     }`}
                             >
                                 {site}
@@ -305,8 +305,8 @@ export const IncidentReportForm: React.FC = () => {
                                 key={symptom}
                                 onClick={() => toggleSymptom(symptom)}
                                 className={`px-3 py-1.5 rounded-full text-sm transition-all ${symptoms.includes(symptom)
-                                        ? 'bg-red-500 text-white'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-red-100'
+                                        ? 'bg-[#DC2626] text-white'
+                                        : 'bg-gray-100 text-gray-600 hover:bg-[#DC2626]/15'
                                     }`}
                             >
                                 {symptom}
@@ -326,7 +326,7 @@ export const IncidentReportForm: React.FC = () => {
                             type="date"
                             value={onsetDate}
                             onChange={e => setOnsetDate(e.target.value)}
-                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none"
+                            className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#F7941D] outline-none"
                         />
                     </div>
                     <div>
@@ -352,7 +352,7 @@ export const IncidentReportForm: React.FC = () => {
             {/* Immediate Actions */}
             <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                 <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-green-500" />
+                    <Shield className="w-5 h-5 text-[#1E9658]" />
                     الإجراءات الفورية المتخذة
                 </label>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -361,8 +361,8 @@ export const IncidentReportForm: React.FC = () => {
                             key={action}
                             onClick={() => toggleAction(action)}
                             className={`px-3 py-2 rounded-xl text-sm transition-all border ${immediateActions.includes(action)
-                                    ? 'bg-green-500 text-white border-green-500'
-                                    : 'bg-white text-gray-600 border-gray-200 hover:border-green-300'
+                                    ? 'bg-[#2BB574] text-white border-[#2BB574]'
+                                    : 'bg-white text-gray-600 border-gray-200 hover:border-[#2BB574]'
                                 }`}
                         >
                             {action}
@@ -371,14 +371,14 @@ export const IncidentReportForm: React.FC = () => {
                 </div>
 
                 {/* Isolation Required */}
-                <label className="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl cursor-pointer">
+                <label className="flex items-center gap-3 p-3 bg-[#FCB614]/10 rounded-xl cursor-pointer">
                     <input
                         type="checkbox"
                         checked={isolationRequired}
                         onChange={e => setIsolationRequired(e.target.checked)}
-                        className="w-5 h-5 rounded text-yellow-500 focus:ring-yellow-500"
+                        className="w-5 h-5 rounded text-[#D49A0A] focus:ring-[#FCB614]"
                     />
-                    <span className="font-medium text-yellow-800">يتطلب عزل فوري</span>
+                    <span className="font-medium text-[#D49A0A]">يتطلب عزل فوري</span>
                 </label>
             </div>
 
@@ -390,7 +390,7 @@ export const IncidentReportForm: React.FC = () => {
                     className="w-full flex items-center justify-between"
                 >
                     <label className="block text-gray-700 font-bold flex items-center gap-2 cursor-pointer">
-                        <Search className="w-5 h-5 text-amber-500" />
+                        <Search className="w-5 h-5 text-[#D49A0A]" />
                         تحليل السبب الجذري (RCA)
                         <span className="text-xs font-normal text-gray-400 mr-2">- اختياري</span>
                     </label>
@@ -410,8 +410,8 @@ export const IncidentReportForm: React.FC = () => {
                                         onClick={() => setRcaCategory(cat.value)}
                                         className={`p-3 rounded-xl border-2 transition-all text-right ${
                                             rcaCategory === cat.value
-                                                ? 'border-amber-500 bg-amber-50 ring-2 ring-amber-200'
-                                                : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                                                ? 'border-[#FCB614] bg-[#FCB614]/10 ring-2 ring-[#FCB614]/20'
+                                                : 'border-gray-200 hover:border-[#FCB614] hover:bg-[#FCB614]/10'
                                         }`}
                                     >
                                         <span className="text-xl block mb-1">{cat.icon}</span>
@@ -429,10 +429,10 @@ export const IncidentReportForm: React.FC = () => {
                             <label className="block text-gray-600 text-sm mb-2 flex items-center gap-1">
                                 🔍 تحليل الأسباب (5 لماذا)
                             </label>
-                            <div className="bg-amber-50/50 rounded-xl p-4 border border-amber-100 space-y-3">
+                            <div className="bg-[#FCB614]/10/50 rounded-xl p-4 border border-[#FCB614]/10 space-y-3">
                                 {rcaWhyChain.map((why, idx) => (
                                     <div key={idx} className="flex items-center gap-3">
-                                        <div className="w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                                        <div className="w-8 h-8 bg-[#FCB614] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                                             {idx + 1}
                                         </div>
                                         <input
@@ -444,7 +444,7 @@ export const IncidentReportForm: React.FC = () => {
                                                 setRcaWhyChain(updated);
                                             }}
                                             placeholder={idx === 0 ? 'لماذا حدثت المشكلة؟' : `لماذا؟ (المستوى ${idx + 1})`}
-                                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm"
+                                            className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#FCB614] outline-none text-sm"
                                         />
                                     </div>
                                 ))}
@@ -458,7 +458,7 @@ export const IncidentReportForm: React.FC = () => {
                                 value={rcaRootCause}
                                 onChange={e => setRcaRootCause(e.target.value)}
                                 placeholder="ما هو السبب الجذري النهائي المحدد؟"
-                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none min-h-[70px] resize-none text-sm"
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#FCB614] outline-none min-h-[70px] resize-none text-sm"
                             />
                         </div>
 
@@ -472,7 +472,7 @@ export const IncidentReportForm: React.FC = () => {
                                     value={rcaCorrectiveAction}
                                     onChange={e => setRcaCorrectiveAction(e.target.value)}
                                     placeholder="ما الإجراء لمعالجة السبب الحالي؟"
-                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 outline-none min-h-[70px] resize-none text-sm"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BB574] outline-none min-h-[70px] resize-none text-sm"
                                 />
                             </div>
                             <div>
@@ -483,7 +483,7 @@ export const IncidentReportForm: React.FC = () => {
                                     value={rcaPreventiveAction}
                                     onChange={e => setRcaPreventiveAction(e.target.value)}
                                     placeholder="ما الإجراء لمنع التكرار مستقبلاً؟"
-                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none min-h-[70px] resize-none text-sm"
+                                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none min-h-[70px] resize-none text-sm"
                                 />
                             </div>
                         </div>
@@ -506,7 +506,7 @@ export const IncidentReportForm: React.FC = () => {
             <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3 sticky bottom-4"
+                className="w-full bg-[#B91C1C] hover:bg-[#B91C1C] disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3 sticky bottom-4"
             >
                 {submitting ? (
                     <>

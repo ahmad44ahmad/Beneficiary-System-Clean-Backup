@@ -53,7 +53,7 @@ export const SocialResearchWizard: React.FC = () => {
         }, 500);
     };
 
-    const inputClasses = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#148287]/20 focus:border-[#148287] transition-all duration-200";
+    const inputClasses = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#269798]/20 focus:border-[#269798] transition-all duration-200";
 
     const _renderRadioGroup = (name: string, value: string | undefined, onChange: (val: string) => void) => (
         <div className="flex gap-3 flex-wrap">
@@ -62,7 +62,7 @@ export const SocialResearchWizard: React.FC = () => {
                     key={opt}
                     className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border cursor-pointer transition-all duration-200
                         ${value === opt
-                            ? 'border-[#148287] bg-teal-50 text-[#148287]'
+                            ? 'border-[#269798] bg-[#269798]/10 text-[#269798]'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                 >
@@ -74,8 +74,8 @@ export const SocialResearchWizard: React.FC = () => {
                         onChange={() => onChange(opt)}
                     />
                     <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center
-                        ${value === opt ? 'border-[#148287]' : 'border-gray-300'}`}>
-                        {value === opt && <span className="w-2 h-2 rounded-full bg-[#148287]" />}
+                        ${value === opt ? 'border-[#269798]' : 'border-gray-300'}`}>
+                        {value === opt && <span className="w-2 h-2 rounded-full bg-[#269798]" />}
                     </span>
                     <span className="text-sm font-medium">
                         {opt === 'yes' ? 'على قيد الحياة' : opt === 'no' ? 'متوفى' : 'مجهول'}
@@ -90,8 +90,8 @@ export const SocialResearchWizard: React.FC = () => {
             case 1:
                 return (
                     <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
-                        <div className="bg-teal-50 p-5 rounded-xl border border-teal-100">
-                            <h3 className="font-bold text-[#14415A] mb-3">البيانات الأساسية (تعبئة تلقائية)</h3>
+                        <div className="bg-[#269798]/10 p-5 rounded-xl border border-[#269798]/10">
+                            <h3 className="font-bold text-[#0F3144] mb-3">البيانات الأساسية (تعبئة تلقائية)</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium mb-2 text-gray-700">المستفيد</label>
@@ -222,12 +222,12 @@ export const SocialResearchWizard: React.FC = () => {
             case 4:
                 return (
                     <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
-                        <div className="bg-amber-50 p-5 rounded-xl border border-amber-100">
-                            <h4 className="font-bold text-amber-800 flex items-center gap-2">
+                        <div className="bg-[#FCB614]/10 p-5 rounded-xl border border-[#FCB614]/10">
+                            <h4 className="font-bold text-[#92400E] flex items-center gap-2">
                                 <FileText className="w-4 h-4" />
                                 ملخص الباحث الاجتماعي
                             </h4>
-                            <p className="text-sm text-amber-700 mt-1">
+                            <p className="text-sm text-[#D49A0A] mt-1">
                                 هذا الملخص سيظهر في الملف الرئيسي للمستفيد وسيطلع عليه الفريق الطبي والإداري.
                             </p>
                         </div>
@@ -262,7 +262,7 @@ export const SocialResearchWizard: React.FC = () => {
         <div className="max-w-4xl mx-auto pb-10" dir="rtl">
             {/* Header */}
             <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#148287] to-[#14415A] rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#269798] to-[#0F3144] rounded-2xl flex items-center justify-center shadow-lg">
                     <FileText className="w-7 h-7 text-white" />
                 </div>
                 <div>
@@ -277,7 +277,7 @@ export const SocialResearchWizard: React.FC = () => {
                     {/* Progress Line Background */}
                     <div className="absolute start-0 end-0 top-6 h-1 bg-gray-200 -z-10 rounded-full">
                         <div
-                            className="h-full bg-gradient-to-l from-[#148287] to-[#2DB473] rounded-full transition-all duration-500"
+                            className="h-full bg-gradient-to-l from-[#269798] to-[#2BB574] rounded-full transition-all duration-500"
                             style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
                         />
                     </div>
@@ -289,14 +289,14 @@ export const SocialResearchWizard: React.FC = () => {
                         return (
                             <div key={step.id} className="flex flex-col items-center bg-white px-3">
                                 <div
-                                    className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive ? 'border-[#148287] bg-teal-50 text-[#148287] shadow-md' :
-                                        isCompleted ? 'border-[#2DB473] bg-emerald-50 text-[#2DB473]' :
+                                    className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isActive ? 'border-[#269798] bg-[#269798]/10 text-[#269798] shadow-md' :
+                                        isCompleted ? 'border-[#2BB574] bg-[#2BB574]/10 text-[#2BB574]' :
                                             'border-gray-300 text-gray-400'
                                         }`}
                                 >
                                     {isCompleted ? <CheckCircle className="w-6 h-6" /> : <Icon className="w-5 h-5" />}
                                 </div>
-                                <span className={`text-xs font-medium mt-2 ${isActive ? 'text-[#148287]' : isCompleted ? 'text-[#2DB473]' : 'text-gray-500'}`}>
+                                <span className={`text-xs font-medium mt-2 ${isActive ? 'text-[#269798]' : isCompleted ? 'text-[#2BB574]' : 'text-gray-500'}`}>
                                     {step.title}
                                 </span>
                             </div>
@@ -328,7 +328,7 @@ export const SocialResearchWizard: React.FC = () => {
                             <ChevronLeft className="w-4 h-4 me-2" />
                         </Button>
                     ) : (
-                        <Button className="bg-[#2DB473] hover:bg-[#1e9a5c]" onClick={handleSubmit}>
+                        <Button className="bg-[#2BB574] hover:bg-[#1e9a5c]" onClick={handleSubmit}>
                             <Save className="w-4 h-4 ms-2" />
                             حفظ واعتماد البحث
                         </Button>

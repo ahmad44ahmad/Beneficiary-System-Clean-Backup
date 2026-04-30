@@ -56,15 +56,15 @@ const AlertItem: React.FC<{
     time: string;
 }> = ({ type, severity, title, time }) => {
     const severityColors = {
-        high: 'border-e-red-500 bg-gradient-to-l from-red-50 to-transparent',
-        medium: 'border-e-yellow-500 bg-gradient-to-l from-yellow-50 to-transparent',
-        low: 'border-e-blue-500 bg-gradient-to-l from-blue-50 to-transparent',
+        high: 'border-e-red-500 bg-gradient-to-l from-[#DC2626]/10 to-transparent',
+        medium: 'border-e-yellow-500 bg-gradient-to-l from-[#FCB614]/10 to-transparent',
+        low: 'border-e-blue-500 bg-gradient-to-l from-[#269798]/10 to-transparent',
     };
 
     const icons = {
-        infection: <Shield className="w-5 h-5 text-red-600" />,
-        fall: <AlertCircle className="w-5 h-5 text-orange-600" />,
-        goal: <Target className="w-5 h-5 text-green-600" />,
+        infection: <Shield className="w-5 h-5 text-[#DC2626]" />,
+        fall: <AlertCircle className="w-5 h-5 text-[#D67A0A]" />,
+        goal: <Target className="w-5 h-5 text-[#1E9658]" />,
     };
 
     return (
@@ -138,8 +138,8 @@ export const CrossModuleDashboard: React.FC = () => {
             {/* Section Title */}
             <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-                    <div className="p-2 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl">
-                        <Activity className="w-7 h-7 text-emerald-600" />
+                    <div className="p-2 bg-gradient-to-br from-[#2BB574]/10 to-[#269798]/10 rounded-xl">
+                        <Activity className="w-7 h-7 text-[#1E9658]" />
                     </div>
                     نظرة شاملة على الوحدات
                 </h2>
@@ -200,12 +200,12 @@ export const CrossModuleDashboard: React.FC = () => {
             <div className="hrsd-card">
                 <div className="flex items-center justify-between mb-5">
                     <h3 className="font-bold text-gray-800 flex items-center gap-2 text-lg">
-                        <AlertCircle className="w-6 h-6 text-red-500" />
+                        <AlertCircle className="w-6 h-6 text-[#DC2626]" />
                         التنبيهات الأخيرة
                     </h3>
                     <button
                         onClick={() => {/* Open alerts panel */ }}
-                        className="text-sm text-emerald-600 hover:text-emerald-700 font-semibold hover:underline transition-colors"
+                        className="text-sm text-[#1E9658] hover:text-[#1E9658] font-semibold hover:underline transition-colors"
                     >
                         عرض الكل
                     </button>
@@ -236,8 +236,8 @@ export const CrossModuleDashboard: React.FC = () => {
             {/* Quick Stats Summary */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="hrsd-card p-4 flex items-center gap-3">
-                    <div className="p-3 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl">
-                        <CheckCircle className="w-6 h-6 text-green-600" />
+                    <div className="p-3 bg-gradient-to-br from-[#2BB574]/10 to-[#2BB574]/10 rounded-xl">
+                        <CheckCircle className="w-6 h-6 text-[#1E9658]" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">
@@ -247,8 +247,8 @@ export const CrossModuleDashboard: React.FC = () => {
                     </div>
                 </div>
                 <div className="hrsd-card p-4 flex items-center gap-3">
-                    <div className="p-3 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-xl">
-                        <Clock className="w-6 h-6 text-yellow-600" />
+                    <div className="p-3 bg-gradient-to-br from-[#FCB614]/10 to-[#FCB614]/10 rounded-xl">
+                        <Clock className="w-6 h-6 text-[#D49A0A]" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">
@@ -258,8 +258,8 @@ export const CrossModuleDashboard: React.FC = () => {
                     </div>
                 </div>
                 <div className="hrsd-card p-4 flex items-center gap-3">
-                    <div className="p-3 bg-gradient-to-br from-red-100 to-pink-100 rounded-xl">
-                        <AlertCircle className="w-6 h-6 text-red-600" />
+                    <div className="p-3 bg-gradient-to-br from-[#DC2626]/10 to-[#DC2626]/10 rounded-xl">
+                        <AlertCircle className="w-6 h-6 text-[#DC2626]" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">{ipcStats?.activeIncidents || 0}</p>
@@ -267,8 +267,8 @@ export const CrossModuleDashboard: React.FC = () => {
                     </div>
                 </div>
                 <div className="hrsd-card p-4 flex items-center gap-3">
-                    <div className="p-3 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-xl">
-                        <TrendingUp className="w-6 h-6 text-blue-600" />
+                    <div className="p-3 bg-gradient-to-br from-[#269798]/10 to-[#269798]/10 rounded-xl">
+                        <TrendingUp className="w-6 h-6 text-[#269798]" />
                     </div>
                     <div>
                         <p className="text-2xl font-bold text-gray-800">

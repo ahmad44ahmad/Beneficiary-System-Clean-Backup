@@ -86,13 +86,17 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
         }
     };
 
+    /**
+     * Severity → HRSD palette + one semantic exception.
+     * critical = semantic red (life-safety), the rest stay in brand.
+     */
     const getSeverityColor = (severity: string) => {
         switch (severity) {
-            case 'critical': return 'bg-red-500';
-            case 'high': return 'bg-orange-500';
-            case 'medium': return 'bg-yellow-500';
-            case 'low': return 'bg-blue-500';
-            default: return 'bg-gray-500';
+            case 'critical': return 'bg-[#DC2626]';
+            case 'high':     return 'bg-[#F7941D]'; // HRSD orange
+            case 'medium':   return 'bg-[#FCB614]'; // HRSD gold
+            case 'low':      return 'bg-[#269798]'; // HRSD teal
+            default:         return 'bg-[#7A7A7A]'; // HRSD cool gray
         }
     };
 
@@ -100,24 +104,28 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
 
     const criticalCount = gaps.filter(g => g.severity === 'critical').length;
     const highCount = gaps.filter(g => g.severity === 'high').length;
+    // The top strip uses HRSD navy as the authoritative surface, with a
+    // semantic-red badge ONLY when there are critical items. This avoids
+    // the previous "wall of red" that overwhelmed the dashboard.
+    const hasCritical = criticalCount > 0;
 
     return (
-        <div className="bg-gradient-to-l from-red-600 to-red-500 rounded-xl shadow-lg overflow-hidden mb-6" dir="rtl">
+        <div className="bg-hrsd-navy rounded-xl shadow-md overflow-hidden mb-6" dir="rtl">
             {/* Header */}
             <div
-                className="p-4 flex items-center justify-between cursor-pointer hover:bg-red-600/50 transition-colors"
+                className="p-4 flex items-center justify-between cursor-pointer hover:bg-hrsd-navy-light transition-colors"
                 onClick={() => setExpanded(!expanded)}
             >
                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-white/20 rounded-lg">
+                    <div className={`p-2 rounded-lg ${hasCritical ? 'bg-[#DC2626]' : 'bg-hrsd-gold'}`}>
                         <AlertTriangle className="w-6 h-6 text-white" />
                     </div>
                     <div className="text-white">
                         <h3 className="font-bold text-lg">تنبيهات المساءلة</h3>
-                        <p className="text-sm opacity-90">
+                        <p className="text-sm text-white/75">
                             {gaps.length} قضية تستدعي النظر
-                            {criticalCount > 0 && ` • ${criticalCount} حرجة`}
-                            {highCount > 0 && ` • ${highCount} عالية`}
+                            {criticalCount > 0 && ` · ${criticalCount} حرجة`}
+                            {highCount > 0 && ` · ${highCount} عالية`}
                         </p>
                     </div>
                 </div>
@@ -126,17 +134,17 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
                     {onDismiss && (
                         <button
                             onClick={(e) => { e.stopPropagation(); onDismiss(); }}
-                            className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                             title="إخفاء التنبيهات"
                             aria-label="إخفاء التنبيهات"
                         >
-                            <EyeOff className="w-5 h-5 text-white" />
+                            <EyeOff className="w-5 h-5 text-white/80" />
                         </button>
                     )}
                     {expanded ? (
-                        <ChevronUp className="w-5 h-5 text-white" />
+                        <ChevronUp className="w-5 h-5 text-white/80" />
                     ) : (
-                        <ChevronDown className="w-5 h-5 text-white" />
+                        <ChevronDown className="w-5 h-5 text-white/80" />
                     )}
                 </div>
             </div>
@@ -172,7 +180,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
                                             {gap.is_misdirected && gap.redirected_to && (
                                                 <>
                                                     <ArrowRight className="w-3 h-3" />
-                                                    <span className="text-orange-600">أُحيل لـ: {gap.redirected_to}</span>
+                                                    <span className="text-[#D67A0A]">أُحيل لـ: {gap.redirected_to}</span>
                                                 </>
                                             )}
                                         </div>
@@ -186,7 +194,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
                                     </div>
 
                                     {gap.evidence_quote && (
-                                        <div className="mt-2 p-2 bg-gray-50 rounded text-xs text-gray-600 italic border-r-2 border-orange-400">
+                                        <div className="mt-2 p-2 bg-gray-50 rounded text-xs text-hrsd-cool-gray italic border-r-2 border-[#F7941D]">
                                             "{gap.evidence_quote}"
                                         </div>
                                     )}
@@ -194,7 +202,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
 
                                 <button
                                     onClick={() => acknowledgeGap(gap.id)}
-                                    className="p-2 hover:bg-green-100 rounded-lg transition-colors text-green-600"
+                                    className="p-2 hover:bg-[#2BB574]/10 rounded-lg transition-colors text-[#2BB574]"
                                     title="تم الاطلاع"
                                 >
                                     <CheckCircle2 className="w-5 h-5" />

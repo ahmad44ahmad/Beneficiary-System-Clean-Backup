@@ -21,19 +21,19 @@ export const GoldenThreadView: React.FC = () => {
 
         const getIcon = (level: string) => {
             switch (level) {
-                case 'national': return <Target className="w-5 h-5 text-indigo-600" />;
-                case 'ministry': return <Building2 className="w-5 h-5 text-blue-600" />;
-                case 'department': return <Users className="w-5 h-5 text-teal-600" />;
-                case 'operational': return <CheckCircle2 className="w-5 h-5 text-green-600" />;
+                case 'national': return <Target className="w-5 h-5 text-[#0F3144]" />;
+                case 'ministry': return <Building2 className="w-5 h-5 text-[#269798]" />;
+                case 'department': return <Users className="w-5 h-5 text-[#1B7778]" />;
+                case 'operational': return <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />;
                 default: return <Target className="w-5 h-5" />;
             }
         };
 
         const getStatusColor = (status: string) => {
             switch (status) {
-                case 'on_track': return 'bg-green-100 text-green-700 border-green-200';
-                case 'at_risk': return 'bg-amber-100 text-amber-700 border-amber-200';
-                case 'delayed': return 'bg-red-100 text-red-700 border-red-200';
+                case 'on_track': return 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]/20';
+                case 'at_risk': return 'bg-[#FCB614]/15 text-[#D49A0A] border-[#FCB614]/30';
+                case 'delayed': return 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]/30';
                 default: return 'bg-gray-100 text-gray-700';
             }
         };
@@ -98,8 +98,8 @@ export const GoldenThreadView: React.FC = () => {
                         <div className="w-24 mt-2 hidden sm:block">
                             <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
                                 <div
-                                    className={`h-full rounded-full ${node.progress >= 80 ? 'bg-green-500' :
-                                            node.progress >= 50 ? 'bg-amber-500' : 'bg-red-500'
+                                    className={`h-full rounded-full ${node.progress >= 80 ? 'bg-[#2BB574]' :
+                                            node.progress >= 50 ? 'bg-[#FCB614]' : 'bg-[#DC2626]'
                                         }`}
                                     style={{ width: `${node.progress}%` }}
                                 />
@@ -125,7 +125,7 @@ export const GoldenThreadView: React.FC = () => {
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                        <Network className="w-8 h-8 text-indigo-600" />
+                        <Network className="w-8 h-8 text-[#0F3144]" />
                         الحوكمة: الخيط الذهبي (The Golden Thread)
                     </h1>
                     <p className="text-gray-500 mt-1">تتبع المواءمة الاستراتيجية من رؤية 2030 وصولاً للمهام اليومية</p>
@@ -135,7 +135,7 @@ export const GoldenThreadView: React.FC = () => {
                         <Share2 className="w-4 h-4" />
                         مشاركة
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 shadow-sm">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-[#0F3144] text-white rounded-lg text-sm font-medium hover:bg-[#0A2030] shadow-sm">
                         + هدف جديد
                     </button>
                 </div>
@@ -148,17 +148,17 @@ export const GoldenThreadView: React.FC = () => {
             </div>
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="p-6 bg-indigo-50 border-indigo-100">
-                    <h3 className="font-bold text-indigo-900 mb-2">الرؤية الوطنية</h3>
-                    <p className="text-sm text-indigo-700 opacity-80">المستوى الاستراتيجي الأعلى. يحدد التوجه العام للدولة (مثل رؤية 2030).</p>
+                <Card className="p-6 bg-[#0F3144]/5 border-[#0F3144]/10">
+                    <h3 className="font-bold text-[#0A2030] mb-2">الرؤية الوطنية</h3>
+                    <p className="text-sm text-[#0A2030] opacity-80">المستوى الاستراتيجي الأعلى. يحدد التوجه العام للدولة (مثل رؤية 2030).</p>
                 </Card>
-                <Card className="p-6 bg-teal-50 border-teal-100">
-                    <h3 className="font-bold text-teal-900 mb-2">أهداف المركز</h3>
-                    <p className="text-sm text-teal-700 opacity-80">ترجمة الرؤية إلى أهداف تشغيلية خاصة بالمركز والأقسام.</p>
+                <Card className="p-6 bg-[#269798]/10 border-[#269798]/10">
+                    <h3 className="font-bold text-[#0F3144] mb-2">أهداف المركز</h3>
+                    <p className="text-sm text-[#1B7778] opacity-80">ترجمة الرؤية إلى أهداف تشغيلية خاصة بالمركز والأقسام.</p>
                 </Card>
-                <Card className="p-6 bg-green-50 border-green-100">
-                    <h3 className="font-bold text-green-900 mb-2">الخطط الفردية</h3>
-                    <p className="text-sm text-green-700 opacity-80">المهام اليومية مع المستفيدين. يجب أن ترتبط بهدف أعلى.</p>
+                <Card className="p-6 bg-[#2BB574]/10 border-[#2BB574]/10">
+                    <h3 className="font-bold text-[#14532D] mb-2">الخطط الفردية</h3>
+                    <p className="text-sm text-[#1E9658] opacity-80">المهام اليومية مع المستفيدين. يجب أن ترتبط بهدف أعلى.</p>
                 </Card>
             </div>
         </div>

@@ -143,21 +143,21 @@ export const MaintenanceRequests: React.FC = () => {
 
     const getPriorityColor = (priority: string) => {
         switch (priority) {
-            case 'critical': return 'bg-red-100 text-red-800';
-            case 'high': return 'bg-orange-100 text-orange-800';
-            case 'medium': return 'bg-yellow-100 text-yellow-800';
-            case 'low': return 'bg-green-100 text-green-800';
+            case 'critical': return 'bg-[#DC2626]/15 text-[#7F1D1D]';
+            case 'high': return 'bg-[#F7941D]/15 text-[#92400E]';
+            case 'medium': return 'bg-[#FCB614]/10 text-[#D49A0A]';
+            case 'low': return 'bg-[#2BB574]/15 text-[#14532D]';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case 'completed': return 'bg-green-100 text-green-800';
-            case 'in_progress': return 'bg-blue-100 text-blue-800';
-            case 'pending': return 'bg-yellow-100 text-yellow-800';
+            case 'completed': return 'bg-[#2BB574]/15 text-[#14532D]';
+            case 'in_progress': return 'bg-[#269798]/15 text-[#1B7778]';
+            case 'pending': return 'bg-[#FCB614]/10 text-[#D49A0A]';
             case 'cancelled':
-            case 'rejected': return 'bg-red-100 text-red-800';
+            case 'rejected': return 'bg-[#DC2626]/15 text-[#7F1D1D]';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
@@ -223,7 +223,7 @@ export const MaintenanceRequests: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || requests.length === 0}
-                        className="px-3 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 text-sm disabled:opacity-50"
+                        className="px-3 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-4 h-4" />
@@ -244,23 +244,23 @@ export const MaintenanceRequests: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-5 gap-4">
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-blue-600">{requests.length}</p>
+                    <p className="text-2xl font-bold text-[#269798]">{requests.length}</p>
                     <p className="text-sm text-gray-500">إجمالي الطلبات</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-yellow-600">{requests.filter(r => r.status === 'pending').length}</p>
+                    <p className="text-2xl font-bold text-[#D49A0A]">{requests.filter(r => r.status === 'pending').length}</p>
                     <p className="text-sm text-gray-500">قيد الانتظار</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-indigo-600">{requests.filter(r => r.status === 'in_progress').length}</p>
+                    <p className="text-2xl font-bold text-[#0F3144]">{requests.filter(r => r.status === 'in_progress').length}</p>
                     <p className="text-sm text-gray-500">قيد التنفيذ</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-green-600">{requests.filter(r => r.status === 'completed').length}</p>
+                    <p className="text-2xl font-bold text-[#1E9658]">{requests.filter(r => r.status === 'completed').length}</p>
                     <p className="text-sm text-gray-500">مكتملة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-red-600">{requests.filter(r => r.priority === 'critical').length}</p>
+                    <p className="text-2xl font-bold text-[#DC2626]">{requests.filter(r => r.priority === 'critical').length}</p>
                     <p className="text-sm text-gray-500">حرجة</p>
                 </div>
             </div>
@@ -315,10 +315,10 @@ export const MaintenanceRequests: React.FC = () => {
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-center gap-2">
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-blue-600">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#269798]">
                                                 <Eye className="w-4 h-4" />
                                             </button>
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-amber-600">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#D49A0A]">
                                                 <Edit className="w-4 h-4" />
                                             </button>
                                         </div>

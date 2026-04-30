@@ -51,11 +51,11 @@ const ProgressCard: React.FC<{ goal: RehabGoal }> = ({ goal }) => {
             <div className="mt-2">
                 <div className="flex justify-between text-xs mb-1">
                     <span className="text-gray-500">التقدم</span>
-                    <span className="font-bold text-emerald-600">{goal.progress_percentage}%</span>
+                    <span className="font-bold text-[#1E9658]">{goal.progress_percentage}%</span>
                 </div>
                 <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-emerald-500 transition-all"
+                        className="h-full bg-[#2BB574] transition-all"
                         style={{ width: `${goal.progress_percentage}%` }}
                     />
                 </div>
@@ -91,9 +91,9 @@ export const FamilyPortal: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-b from-[#269798]/10 to-white" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-blue-600 via-indigo-600 to-purple-700 p-6 pb-20 text-white">
+            <div className="bg-gradient-to-l from-[#1B7778] via-[#0A2030] to-[#D49A0A] p-6 pb-20 text-white">
                 <div className="flex items-center gap-3 mb-4">
                     <button onClick={() => navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
@@ -110,7 +110,7 @@ export const FamilyPortal: React.FC = () => {
             <div className="px-4 -mt-14">
                 <div className="bg-white rounded-2xl p-4 shadow-lg">
                     <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-2xl text-white font-bold">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[#269798] to-[#FCB614] rounded-full flex items-center justify-center text-2xl text-white font-bold">
                             {FAMILY_MEMBER.beneficiary_name.charAt(0)}
                         </div>
                         <div className="flex-1">
@@ -119,29 +119,29 @@ export const FamilyPortal: React.FC = () => {
                                 مرحباً {FAMILY_MEMBER.name} ({FAMILY_MEMBER.relation})
                             </p>
                         </div>
-                        <button className="p-2 bg-blue-100 rounded-full">
-                            <Settings className="w-5 h-5 text-blue-600" />
+                        <button className="p-2 bg-[#269798]/15 rounded-full">
+                            <Settings className="w-5 h-5 text-[#269798]" />
                         </button>
                     </div>
 
                     {/* Quick Stats */}
                     <div className="grid grid-cols-3 gap-3 mt-4">
-                        <div className="bg-emerald-50 rounded-xl p-3 text-center">
-                            <TrendingUp className="w-5 h-5 mx-auto text-emerald-600 mb-1" />
-                            <p className="text-lg font-bold text-emerald-700">{goals.filter(g => g.status === 'in_progress').length}</p>
-                            <p className="text-xs text-emerald-600">أهداف نشطة</p>
+                        <div className="bg-[#2BB574]/10 rounded-xl p-3 text-center">
+                            <TrendingUp className="w-5 h-5 mx-auto text-[#1E9658] mb-1" />
+                            <p className="text-lg font-bold text-[#1E9658]">{goals.filter(g => g.status === 'in_progress').length}</p>
+                            <p className="text-xs text-[#1E9658]">أهداف نشطة</p>
                         </div>
-                        <div className="bg-blue-50 rounded-xl p-3 text-center">
-                            <Calendar className="w-5 h-5 mx-auto text-blue-600 mb-1" />
-                            <p className="text-sm font-bold text-blue-700">{FAMILY_MEMBER.next_visit}</p>
-                            <p className="text-xs text-blue-600">الزيارة القادمة</p>
+                        <div className="bg-[#269798]/10 rounded-xl p-3 text-center">
+                            <Calendar className="w-5 h-5 mx-auto text-[#269798] mb-1" />
+                            <p className="text-sm font-bold text-[#1B7778]">{FAMILY_MEMBER.next_visit}</p>
+                            <p className="text-xs text-[#269798]">الزيارة القادمة</p>
                         </div>
-                        <div className="bg-purple-50 rounded-xl p-3 text-center">
-                            <Star className="w-5 h-5 mx-auto text-purple-600 mb-1" />
-                            <p className="text-lg font-bold text-purple-700">
+                        <div className="bg-[#FCB614]/10 rounded-xl p-3 text-center">
+                            <Star className="w-5 h-5 mx-auto text-[#D49A0A] mb-1" />
+                            <p className="text-lg font-bold text-[#D49A0A]">
                                 {Math.round(goals.reduce((sum, g) => sum + g.progress_percentage, 0) / (goals.length || 1))}%
                             </p>
-                            <p className="text-xs text-purple-600">متوسط التقدم</p>
+                            <p className="text-xs text-[#D49A0A]">متوسط التقدم</p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ export const FamilyPortal: React.FC = () => {
             {/* NEW: Quick Action & Media Feed Section */}
             <div className="px-4 mt-6">
                 <div className="flex gap-3 mb-6">
-                    <button className="flex-1 py-3 bg-purple-600 text-white rounded-xl shadow-lg shadow-purple-200 flex items-center justify-center gap-2 hover:bg-purple-700 transition-colors">
+                    <button className="flex-1 py-3 bg-[#D49A0A] text-white rounded-xl shadow-lg shadow-purple-200 flex items-center justify-center gap-2 hover:bg-[#D49A0A] transition-colors">
                         <Video className="w-5 h-5" />
                         <span className="font-bold">حجز مكالمة فيديو</span>
                     </button>
@@ -162,7 +162,7 @@ export const FamilyPortal: React.FC = () => {
 
                 <div className="mb-6">
                     <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
-                        <Heart className="w-5 h-5 text-red-500 fill-current" />
+                        <Heart className="w-5 h-5 text-[#DC2626] fill-current" />
                         يوميات {FAMILY_MEMBER.beneficiary_name.split(' ')[0]}
                     </h3>
                     <FamilyMediaFeed />
@@ -181,8 +181,8 @@ export const FamilyPortal: React.FC = () => {
                         key={tab.key}
                         onClick={() => setActiveTab(tab.key as typeof activeTab)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${activeTab === tab.key
-                            ? 'bg-blue-600 text-white shadow-md'
-                            : 'bg-white text-gray-600 border hover:border-blue-300'
+                            ? 'bg-[#1B7778] text-white shadow-md'
+                            : 'bg-white text-gray-600 border hover:border-[#269798]'
                             }`}
                     >
                         <tab.icon className="w-4 h-4" />
@@ -199,8 +199,8 @@ export const FamilyPortal: React.FC = () => {
                         <h3 className="font-bold text-gray-800 mb-3">آخر التحديثات</h3>
                         {RECENT_UPDATES.map(update => (
                             <div key={update.id} className="bg-white rounded-xl p-4 shadow-sm border mb-3 flex items-start gap-3">
-                                <div className="p-2 bg-blue-100 rounded-full">
-                                    <update.icon className="w-4 h-4 text-blue-600" />
+                                <div className="p-2 bg-[#269798]/15 rounded-full">
+                                    <update.icon className="w-4 h-4 text-[#269798]" />
                                 </div>
                                 <div className="flex-1">
                                     <p className="text-gray-800">{update.message}</p>
@@ -247,11 +247,11 @@ export const FamilyPortal: React.FC = () => {
                             <MessageCircle className="w-12 h-12 mx-auto text-gray-300 mb-3" />
                             <p className="text-gray-500 mb-4">لا توجد رسائل جديدة</p>
                             <div className="flex gap-3 justify-center">
-                                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700">
+                                <button className="px-4 py-2 bg-[#1B7778] text-white rounded-lg flex items-center gap-2 hover:bg-[#1B7778]">
                                     <MessageCircle className="w-4 h-4" />
                                     إرسال رسالة
                                 </button>
-                                <button className="px-4 py-2 bg-green-600 text-white rounded-lg flex items-center gap-2 hover:bg-green-700">
+                                <button className="px-4 py-2 bg-[#1E9658] text-white rounded-lg flex items-center gap-2 hover:bg-[#1E9658]">
                                     <Phone className="w-4 h-4" />
                                     اتصال
                                 </button>

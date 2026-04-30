@@ -160,19 +160,19 @@ export const PreventiveMaintenance: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-4 gap-4">
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-blue-600">{tasks.length}</p>
+                    <p className="text-2xl font-bold text-[#269798]">{tasks.length}</p>
                     <p className="text-sm text-gray-500">مهام هذا الشهر</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-green-600">{tasks.filter(t => t.status === 'completed').length}</p>
+                    <p className="text-2xl font-bold text-[#1E9658]">{tasks.filter(t => t.status === 'completed').length}</p>
                     <p className="text-sm text-gray-500">مكتملة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-amber-600">{tasks.filter(t => t.status === 'active' && !isOverdue(t.next_due_date)).length}</p>
+                    <p className="text-2xl font-bold text-[#D49A0A]">{tasks.filter(t => t.status === 'active' && !isOverdue(t.next_due_date)).length}</p>
                     <p className="text-sm text-gray-500">قادمة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-red-600">{tasks.filter(t => isOverdue(t.next_due_date) && t.status === 'active').length}</p>
+                    <p className="text-2xl font-bold text-[#DC2626]">{tasks.filter(t => isOverdue(t.next_due_date) && t.status === 'active').length}</p>
                     <p className="text-sm text-gray-500">متأخرة</p>
                 </div>
             </div>
@@ -192,22 +192,22 @@ export const PreventiveMaintenance: React.FC = () => {
                             <div
                                 key={idx}
                                 className={`min-h-[80px] p-2 rounded-lg border ${day === null ? 'bg-gray-50 border-transparent' :
-                                        isToday(day) ? 'bg-blue-50 border-blue-300' :
+                                        isToday(day) ? 'bg-[#269798]/10 border-[#269798]' :
                                             'bg-white border-gray-100 hover:border-hrsd-primary/30'
                                     }`}
                             >
                                 {day && (
                                     <>
-                                        <span className={`text-sm font-medium ${isToday(day) ? 'text-blue-600' : 'text-gray-700'}`}>
+                                        <span className={`text-sm font-medium ${isToday(day) ? 'text-[#269798]' : 'text-gray-700'}`}>
                                             {day}
                                         </span>
                                         <div className="mt-1 space-y-1">
                                             {getTasksForDay(day).map(task => (
                                                 <div
                                                     key={task.id}
-                                                    className={`text-xs px-2 py-1 rounded truncate ${task.status === 'completed' ? 'bg-green-100 text-green-800' :
-                                                            isOverdue(task.next_due_date) ? 'bg-red-100 text-red-800' :
-                                                                'bg-amber-100 text-amber-800'
+                                                    className={`text-xs px-2 py-1 rounded truncate ${task.status === 'completed' ? 'bg-[#2BB574]/15 text-[#14532D]' :
+                                                            isOverdue(task.next_due_date) ? 'bg-[#DC2626]/15 text-[#7F1D1D]' :
+                                                                'bg-[#FCB614]/15 text-[#92400E]'
                                                         }`}
                                                     title={task.task_name}
                                                 >
@@ -262,27 +262,27 @@ export const PreventiveMaintenance: React.FC = () => {
                                             </span>
                                         </td>
                                         <td className="p-4 text-center">
-                                            <span className={`${isOverdue(task.next_due_date) && task.status === 'active' ? 'text-red-600 font-medium' : ''}`}>
+                                            <span className={`${isOverdue(task.next_due_date) && task.status === 'active' ? 'text-[#DC2626] font-medium' : ''}`}>
                                                 {new Date(task.next_due_date).toLocaleDateString('ar-SA')}
                                             </span>
                                         </td>
                                         <td className="p-4 text-center">
                                             {task.status === 'completed' ? (
-                                                <span className="flex items-center justify-center gap-1 text-green-600">
+                                                <span className="flex items-center justify-center gap-1 text-[#1E9658]">
                                                     <CheckCircle2 className="w-4 h-4" /> مكتمل
                                                 </span>
                                             ) : isOverdue(task.next_due_date) ? (
-                                                <span className="flex items-center justify-center gap-1 text-red-600">
+                                                <span className="flex items-center justify-center gap-1 text-[#DC2626]">
                                                     <AlertTriangle className="w-4 h-4" /> متأخر
                                                 </span>
                                             ) : (
-                                                <span className="flex items-center justify-center gap-1 text-amber-600">
+                                                <span className="flex items-center justify-center gap-1 text-[#D49A0A]">
                                                     <Clock className="w-4 h-4" /> قادم
                                                 </span>
                                             )}
                                         </td>
                                         <td className="p-4 text-center">
-                                            <button className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600">
+                                            <button className="px-3 py-1 bg-[#2BB574] text-white rounded text-sm hover:bg-[#1E9658]">
                                                 تم التنفيذ
                                             </button>
                                         </td>

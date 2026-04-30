@@ -183,7 +183,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
                                     value={newInternal}
                                     onChange={e => setNewInternal(e.target.value)}
                                 />
-                                <button type="button" onClick={addInternal} className="bg-blue-100 text-blue-600 px-2 rounded">+</button>
+                                <button type="button" onClick={addInternal} className="bg-[#269798]/15 text-[#269798] px-2 rounded">+</button>
                             </div>
                             <ul className="text-xs list-disc pe-4 h-24 overflow-y-auto">
                                 {formData.internalParticipants?.map((p, i) => <li key={i}>{p}</li>)}
@@ -198,7 +198,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
                                     value={newExternal}
                                     onChange={e => setNewExternal(e.target.value)}
                                 />
-                                <button type="button" onClick={addExternal} className="bg-blue-100 text-blue-600 px-2 rounded">+</button>
+                                <button type="button" onClick={addExternal} className="bg-[#269798]/15 text-[#269798] px-2 rounded">+</button>
                             </div>
                             <ul className="text-xs list-disc pe-4 h-24 overflow-y-auto">
                                 {formData.externalParticipants?.map((p, i) => <li key={i}>{p}</li>)}
@@ -216,7 +216,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
                             multiple
                             accept="image/*"
                             onChange={handleImageUpload}
-                            className="mb-2 w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                            className="mb-2 w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#269798]/10 file:text-[#1B7778] hover:file:bg-[#269798]/15"
                         />
                         <div className="flex gap-2 flex-wrap">
                             {formData.images?.map((img, i) => (
@@ -225,7 +225,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
                                     <button
                                         type="button"
                                         onClick={() => removeImage(i)}
-                                        className="absolute top-0 end-0 bg-red-500 text-white p-0.5 rounded-bl-md"
+                                        className="absolute top-0 end-0 bg-[#DC2626] text-white p-0.5 rounded-bl-md"
                                     >
                                         <X size={12} />
                                     </button>
@@ -236,7 +236,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
 
                     <div className="flex justify-end gap-3 pt-4">
                         <button type="button" onClick={onCancel} className="px-4 py-2 border rounded hover:bg-gray-50">إلغاء</button>
-                        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">حفظ التوثيق</button>
+                        <button type="submit" className="px-4 py-2 bg-[#1B7778] text-white rounded hover:bg-[#1B7778]">حفظ التوثيق</button>
                     </div>
                 </form>
             </div>

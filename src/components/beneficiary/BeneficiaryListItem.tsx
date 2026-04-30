@@ -86,7 +86,7 @@ export const BeneficiaryListItem: React.FC<BeneficiaryListItemProps> = ({ benefi
                 <button
                     type="button"
                     onClick={handleQuickView}
-                    className="p-2 hover:bg-gray-100 rounded-full text-gray-500 hover:text-blue-600 transition-colors"
+                    className="p-2 hover:bg-gray-100 rounded-full text-gray-500 hover:text-[#269798] transition-colors"
                     title="Quick View"
                     aria-label="Quick View"
                 >

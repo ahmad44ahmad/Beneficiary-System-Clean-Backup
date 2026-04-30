@@ -33,7 +33,7 @@ export const QualityChecklist: React.FC<QualityChecklistProps> = ({ preview }) =
                     >
                         <span className={`text-sm ${item.checked ? 'text-gray-700' : 'text-gray-500'}`}>{item.label}</span>
                         {item.checked ? (
-                            <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />
                         ) : (
                             <Circle className="w-5 h-5 text-gray-300" />
                         )}
@@ -42,7 +42,7 @@ export const QualityChecklist: React.FC<QualityChecklistProps> = ({ preview }) =
             </div>
             {preview && (
                 <div className="mt-4 text-center">
-                    <span className="text-sm text-blue-600 hover:underline cursor-pointer">عرض القائمة الكاملة</span>
+                    <span className="text-sm text-[#269798] hover:underline cursor-pointer">عرض القائمة الكاملة</span>
                 </div>
             )}
         </Card>

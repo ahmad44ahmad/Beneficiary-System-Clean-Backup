@@ -62,17 +62,17 @@ export const LeadershipCompass: React.FC = () => {
                         <Compass className="w-8 h-8 text-hrsd-gold" />
                     </div>
                     <div>
-                        <h1 className="text-[24px] font-bold text-slate-900 dark:text-white leading-tight">
+                        <h1 className="text-[24px] font-bold text-hrsd-navy dark:text-white leading-tight">
                             بوصلة القيادة
                         </h1>
-                        <p className="text-[14px] text-slate-500 dark:text-slate-400 mt-0.5">
+                        <p className="text-[14px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-0.5">
                             مساحةُ عملٍ قراريّة — لمساعد التنمية والمدير العام فأعلى
                         </p>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className="inline-block text-[11px] font-bold uppercase tracking-wider
-                        bg-amber-100 text-amber-800 px-2.5 py-1 rounded">
+                        bg-[#FCB614]/15 text-[#92400E] px-2.5 py-1 rounded">
                         نموذج تجريبيّ (v0)
                     </span>
                 </div>
@@ -81,7 +81,7 @@ export const LeadershipCompass: React.FC = () => {
             {/* الفلسفة — ملاحظة افتتاحيّة */}
             <div className="bg-hrsd-navy/5 border-r-4 border-hrsd-gold rounded-xl p-4 flex items-start gap-3">
                 <Compass className="w-5 h-5 text-hrsd-navy mt-0.5 shrink-0" />
-                <p className="text-[13.5px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                <p className="text-[13.5px] text-hrsd-navy dark:text-hrsd-navy leading-relaxed">
                     <span className="font-bold text-hrsd-navy">فلسفة هذه المساحة:</span>{' '}
                     القرار قبل البيانات. تُقدَّم لكم هنا قراراتٌ مُصاغةٌ بأدلّة، مع بدائل وتبعات،
                     بدلاً من لوحاتِ بياناتٍ تَنتظر تَفسيركم لها. كلّ قرارٍ يَبقى في السجلّ —
@@ -91,7 +91,7 @@ export const LeadershipCompass: React.FC = () => {
 
             {/* أشرطة التبويب */}
             <nav
-                className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-1.5
+                className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-1.5
                     flex flex-wrap gap-1 shadow-sm"
                 aria-label="أقسام بوصلة القيادة"
             >
@@ -109,8 +109,8 @@ export const LeadershipCompass: React.FC = () => {
                                 ${isActive
                                     ? 'bg-hrsd-navy text-white shadow-md'
                                     : tab.available
-                                        ? 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
-                                        : 'text-slate-400 dark:text-slate-500 cursor-not-allowed opacity-60'}`}
+                                        ? 'text-hrsd-cool-gray dark:text-hrsd-navy hover:bg-slate-100 dark:hover:bg-gray-50'
+                                        : 'text-hrsd-cool-gray dark:text-hrsd-cool-gray cursor-not-allowed opacity-60'}`}
                         >
                             <Icon className="w-4 h-4" />
                             <span>{tab.label}</span>
@@ -122,7 +122,7 @@ export const LeadershipCompass: React.FC = () => {
                                 </span>
                             )}
                             {!tab.available && (
-                                <span className="text-[10px] font-semibold bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded">
+                                <span className="text-[10px] font-semibold bg-slate-200 text-hrsd-cool-gray px-1.5 py-0.5 rounded">
                                     قريباً
                                 </span>
                             )}
@@ -135,10 +135,10 @@ export const LeadershipCompass: React.FC = () => {
             {activeTab === 'decisions' && (
                 <section aria-labelledby="decisions-title" className="space-y-5">
                     <div className="flex items-center justify-between flex-wrap gap-2">
-                        <h2 id="decisions-title" className="text-[18px] font-bold text-slate-900 dark:text-white">
+                        <h2 id="decisions-title" className="text-[18px] font-bold text-hrsd-navy dark:text-white">
                             القرارات المُعلَّقة ({pendingCount})
                         </h2>
-                        <p className="text-[13px] text-slate-500 dark:text-slate-400">
+                        <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                             مُرتَّبة حسب العاجليّة × الموعد النهائيّ
                         </p>
                     </div>
@@ -163,10 +163,10 @@ export const LeadershipCompass: React.FC = () => {
             {activeTab === 'mirror' && (
                 <section aria-labelledby="mirror-title" className="space-y-5">
                     <div className="flex items-center justify-between flex-wrap gap-2">
-                        <h2 id="mirror-title" className="text-[18px] font-bold text-slate-900 dark:text-white">
+                        <h2 id="mirror-title" className="text-[18px] font-bold text-hrsd-navy dark:text-white">
                             المرآة الصادقة ({openFindings})
                         </h2>
-                        <p className="text-[13px] text-slate-500 dark:text-slate-400">
+                        <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                             أنماطٌ بنيويّةٌ يَراها النظام ويَرى أنّها تَستحقّ نظركم
                         </p>
                     </div>

@@ -49,7 +49,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                                 name="date"
                                 value={formData.date}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                             />
                         </div>
@@ -62,7 +62,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                                 name="letterNumber"
                                 value={formData.letterNumber}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                                 placeholder="رقم الخطاب الخارجي"
                             />
@@ -76,7 +76,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                                 name="sender"
                                 value={formData.sender}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                                 placeholder="مثال: وزارة الموارد البشرية"
                             />
@@ -89,7 +89,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                                 name="receiverDept"
                                 value={formData.receiverDept}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                                 required
                             >
                                 <option value="">ختر القسم</option>
@@ -110,7 +110,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                                 name="priority"
                                 value={formData.priority}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                             >
                                 <option value="normal">عادي</option>
                                 <option value="urgent">عاجل</option>
@@ -127,7 +127,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                             name="subject"
                             value={formData.subject}
                             onChange={handleChange}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                             required
                             placeholder="عنوان أو ملخص الخطاب"
                         />
@@ -141,7 +141,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                             value={formData.notes}
                             onChange={handleChange}
                             rows={3}
-                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-[#269798] focus:border-[#269798]"
                         />
                     </div>
 
@@ -170,7 +170,7 @@ export const IncomingMailForm: React.FC<IncomingMailFormProps> = ({ onSubmit, on
                         </button>
                         <button
                             type="submit"
-                            className="flex items-center px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                            className="flex items-center px-4 py-2 text-white bg-[#1B7778] rounded-md hover:bg-[#1B7778]"
                         >
                             <Save size={18} className="ms-2" />
                             حفظ

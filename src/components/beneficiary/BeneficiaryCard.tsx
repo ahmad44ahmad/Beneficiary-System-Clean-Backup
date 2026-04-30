@@ -38,7 +38,7 @@ export const BeneficiaryCard: React.FC<BeneficiaryCardProps> = ({
     const ipcColors = {
         safe: 'border-hrsd-green',
         monitor: 'border-hrsd-gold',
-        alert: 'border-red-500',
+        alert: 'border-[#DC2626]',
     };
 
     const formatDate = (dateString: string) => {

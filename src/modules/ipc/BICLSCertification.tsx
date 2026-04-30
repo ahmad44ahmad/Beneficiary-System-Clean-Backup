@@ -20,7 +20,7 @@ import {
 // Supabase access via getSupabaseClient() from hooks/queries when needed
 
 // HRSD brand colors
-const NAVY = '#14415A';
+const NAVY = '#0F3144';
 const TEAL = '#1E6B5C';
 const GOLD = '#F59601';
 
@@ -183,26 +183,26 @@ function getStatusBadge(status: CertificationStatus) {
   const map: Record<CertificationStatus, { label: string; bg: string; text: string; icon: React.ReactNode }> = {
     certified: {
       label: 'حاصل على الرخصة',
-      bg: 'bg-emerald-100',
-      text: 'text-emerald-700',
+      bg: 'bg-[#2BB574]/15',
+      text: 'text-[#1E9658]',
       icon: <CheckCircle2 className="w-4 h-4" />,
     },
     expired: {
       label: 'منتهية الصلاحية',
-      bg: 'bg-red-100',
-      text: 'text-red-700',
+      bg: 'bg-[#DC2626]/15',
+      text: 'text-[#B91C1C]',
       icon: <XCircle className="w-4 h-4" />,
     },
     pending: {
       label: 'قيد الإصدار',
-      bg: 'bg-amber-100',
-      text: 'text-amber-700',
+      bg: 'bg-[#FCB614]/15',
+      text: 'text-[#D49A0A]',
       icon: <Clock className="w-4 h-4" />,
     },
     expiring_soon: {
       label: 'تنتهي قريباً',
-      bg: 'bg-orange-100',
-      text: 'text-orange-700',
+      bg: 'bg-[#F7941D]/15',
+      text: 'text-[#D67A0A]',
       icon: <AlertTriangle className="w-4 h-4" />,
     },
   };
@@ -212,22 +212,22 @@ function getStatusBadge(status: CertificationStatus) {
 function getCompetencyStatusStyle(status: CompetencyStatus) {
   const map: Record<CompetencyStatus, { bg: string; text: string; label: string; icon: React.ReactNode }> = {
     passed: {
-      bg: 'bg-emerald-100',
-      text: 'text-emerald-700',
+      bg: 'bg-[#2BB574]/15',
+      text: 'text-[#1E9658]',
       label: 'ناجح',
-      icon: <CheckCircle2 className="w-4 h-4 text-emerald-600" />,
+      icon: <CheckCircle2 className="w-4 h-4 text-[#1E9658]" />,
     },
     failed: {
-      bg: 'bg-red-100',
-      text: 'text-red-700',
+      bg: 'bg-[#DC2626]/15',
+      text: 'text-[#B91C1C]',
       label: 'غير ناجح',
-      icon: <XCircle className="w-4 h-4 text-red-600" />,
+      icon: <XCircle className="w-4 h-4 text-[#DC2626]" />,
     },
     pending: {
-      bg: 'bg-amber-100',
-      text: 'text-amber-700',
+      bg: 'bg-[#FCB614]/15',
+      text: 'text-[#D49A0A]',
       label: 'معلّق',
-      icon: <Clock className="w-4 h-4 text-amber-600" />,
+      icon: <Clock className="w-4 h-4 text-[#D49A0A]" />,
     },
   };
   return map[status];
@@ -307,28 +307,28 @@ export const BICLSCertification: React.FC = () => {
           <p className="text-3xl font-bold" style={{ color: NAVY }}>{stats.total}</p>
         </div>
         {/* Certified */}
-        <div className="bg-white rounded-xl shadow-sm border border-emerald-200 p-4">
+        <div className="bg-white rounded-xl shadow-sm border border-[#2BB574]/30 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+            <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />
             <span className="text-sm text-gray-500">حاصلون على الرخصة</span>
           </div>
-          <p className="text-3xl font-bold text-emerald-600">{stats.certified}</p>
+          <p className="text-3xl font-bold text-[#1E9658]">{stats.certified}</p>
         </div>
         {/* Expired */}
-        <div className="bg-white rounded-xl shadow-sm border border-red-200 p-4">
+        <div className="bg-white rounded-xl shadow-sm border border-[#DC2626]/30 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <XCircle className="w-5 h-5 text-red-600" />
+            <XCircle className="w-5 h-5 text-[#DC2626]" />
             <span className="text-sm text-gray-500">منتهية الصلاحية</span>
           </div>
-          <p className="text-3xl font-bold text-red-600">{stats.expired}</p>
+          <p className="text-3xl font-bold text-[#DC2626]">{stats.expired}</p>
         </div>
         {/* Expiring Soon */}
-        <div className="bg-white rounded-xl shadow-sm border border-amber-200 p-4">
+        <div className="bg-white rounded-xl shadow-sm border border-[#FCB614]/30 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-5 h-5 text-amber-600" />
+            <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
             <span className="text-sm text-gray-500">تنتهي خلال 90 يوم</span>
           </div>
-          <p className="text-3xl font-bold text-amber-600">{stats.expiringSoon}</p>
+          <p className="text-3xl font-bold text-[#D49A0A]">{stats.expiringSoon}</p>
         </div>
       </div>
 
@@ -444,7 +444,7 @@ export const BICLSCertification: React.FC = () => {
                       style={{
                         width: `${compPercent}%`,
                         backgroundColor:
-                          compPercent === 100 ? '#059669' : compPercent >= 50 ? GOLD : '#ef4444',
+                          compPercent === 100 ? '#059669' : compPercent >= 50 ? GOLD : '#DC2626',
                       }}
                     />
                   </div>

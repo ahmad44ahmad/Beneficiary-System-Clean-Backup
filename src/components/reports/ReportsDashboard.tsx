@@ -11,7 +11,7 @@ export const ReportsDashboard: React.FC = () => {
         return (
             <div>
                 <div className="p-4 bg-gray-100 border-b flex justify-between items-center print:hidden">
-                    <button onClick={() => setSelectedReport(null)} className="text-blue-600 font-bold hover:underline">
+                    <button onClick={() => setSelectedReport(null)} className="text-[#269798] font-bold hover:underline">
                         &larr; العودة للتقارير
                     </button>
                     <span className="text-gray-500 text-sm">وضع المعاينة والطباعة</span>
@@ -25,7 +25,7 @@ export const ReportsDashboard: React.FC = () => {
         return (
             <div>
                 <div className="p-4 bg-gray-100 border-b flex justify-between items-center print:hidden">
-                    <button onClick={() => setSelectedReport(null)} className="text-blue-600 font-bold hover:underline">
+                    <button onClick={() => setSelectedReport(null)} className="text-[#269798] font-bold hover:underline">
                         &larr; العودة للتقارير
                     </button>
                     <span className="text-gray-500 text-sm">وضع المعاينة والطباعة</span>
@@ -49,8 +49,8 @@ export const ReportsDashboard: React.FC = () => {
                 {/* ISO Report Card */}
                 <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-t-4 border-t-blue-600 group" onClick={() => setSelectedReport('iso')}>
                     <div className="flex items-start justify-between mb-4">
-                        <div className="bg-blue-50 p-3 rounded-full group-hover:bg-blue-100 transition-colors">
-                            <FileText className="w-8 h-8 text-blue-600" />
+                        <div className="bg-[#269798]/10 p-3 rounded-full group-hover:bg-[#269798]/15 transition-colors">
+                            <FileText className="w-8 h-8 text-[#269798]" />
                         </div>
                         <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">رسمي / ISO</span>
                     </div>
@@ -58,7 +58,7 @@ export const ReportsDashboard: React.FC = () => {
                     <p className="text-gray-500 text-sm mb-4">
                         تقرير تفصيلي يوضح نتائج التدقيق الداخلي، حالات عدم المطابقة، وحالة الإجراءات التصحيحية. مطلوب للمدقق الخارجي.
                     </p>
-                    <div className="text-blue-600 font-bold text-sm flex items-center">
+                    <div className="text-[#269798] font-bold text-sm flex items-center">
                         عرض وطباعة التقرير &larr;
                     </div>
                 </Card>
@@ -66,8 +66,8 @@ export const ReportsDashboard: React.FC = () => {
                 {/* Sustainability Report Card */}
                 <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-t-4 border-t-green-600 group" onClick={() => setSelectedReport('sustainability')}>
                     <div className="flex items-start justify-between mb-4">
-                        <div className="bg-green-50 p-3 rounded-full group-hover:bg-green-100 transition-colors">
-                            <BarChart2 className="w-8 h-8 text-green-600" />
+                        <div className="bg-[#2BB574]/10 p-3 rounded-full group-hover:bg-[#2BB574]/15 transition-colors">
+                            <BarChart2 className="w-8 h-8 text-[#1E9658]" />
                         </div>
                         <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">استراتيجي / SROI</span>
                     </div>
@@ -75,7 +75,7 @@ export const ReportsDashboard: React.FC = () => {
                     <p className="text-gray-500 text-sm mb-4">
                         قياس العائد الاجتماعي (SROI)، كفاءة استخدام الموارد، ومؤشرات السلامة. يدعم تقارير الأداء الاستراتيجي.
                     </p>
-                    <div className="text-green-600 font-bold text-sm flex items-center">
+                    <div className="text-[#1E9658] font-bold text-sm flex items-center">
                         عرض وطباعة التقرير &larr;
                     </div>
                 </Card>

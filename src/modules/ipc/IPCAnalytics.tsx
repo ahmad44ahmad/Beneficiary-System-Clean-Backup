@@ -25,9 +25,9 @@ const WEEKLY_COMPLIANCE_DATA = [
 
 const INCIDENT_BY_CATEGORY = [
     { name: 'عدوى تنفسية', value: 35, color: '#DC2626' },
-    { name: 'عدوى بولية', value: 25, color: '#F59E0B' },
-    { name: 'عدوى جلدية', value: 20, color: '#0EA5E9' },
-    { name: 'وخز إبرة', value: 12, color: '#8B5CF6' },
+    { name: 'عدوى بولية', value: 25, color: '#FCB614' },
+    { name: 'عدوى جلدية', value: 20, color: '#269798' },
+    { name: 'وخز إبرة', value: 12, color: '#FCB614' },
     { name: 'أخرى', value: 8, color: '#6B7280' },
 ];
 
@@ -137,8 +137,8 @@ export const IPCAnalytics: React.FC = () => {
                     <button onClick={() => navigate('/ipc')} className="p-2 hover:bg-gray-100 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-purple-100 rounded-xl">
-                        <BarChart3 className="w-8 h-8 text-purple-600" />
+                    <div className="p-3 bg-[#FCB614]/15 rounded-xl">
+                        <BarChart3 className="w-8 h-8 text-[#D49A0A]" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">تحليلات مكافحة العدوى</h1>
@@ -154,7 +154,7 @@ export const IPCAnalytics: React.FC = () => {
                                 key={range}
                                 onClick={() => setDateRange(range)}
                                 className={`px-3 py-1.5 rounded-md text-sm transition-all ${dateRange === range
-                                        ? 'bg-purple-600 text-white'
+                                        ? 'bg-[#D49A0A] text-white'
                                         : 'text-gray-600 hover:bg-gray-100'
                                     }`}
                             >
@@ -164,7 +164,7 @@ export const IPCAnalytics: React.FC = () => {
                     </div>
                     <button
                         onClick={handleExportAll}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2 shadow-sm"
+                        className="px-4 py-2 bg-[#1E9658] text-white rounded-lg hover:bg-[#1E9658] flex items-center gap-2 shadow-sm"
                     >
                         <Download className="w-4 h-4" />
                         تصدير CSV
@@ -181,21 +181,21 @@ export const IPCAnalytics: React.FC = () => {
 
             {/* Summary Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-blue-500">
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#269798]">
                     <p className="text-gray-500 text-sm">إجمالي التفتيشات</p>
                     <p className="text-2xl font-bold text-gray-800">{stats.totalInspections}</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-red-500">
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#DC2626]">
                     <p className="text-gray-500 text-sm">إجمالي الحوادث</p>
-                    <p className="text-2xl font-bold text-red-600">{stats.totalIncidents}</p>
+                    <p className="text-2xl font-bold text-[#DC2626]">{stats.totalIncidents}</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-green-500">
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#2BB574]">
                     <p className="text-gray-500 text-sm">متوسط الامتثال</p>
-                    <p className="text-2xl font-bold text-green-600">{stats.avgCompliance}%</p>
+                    <p className="text-2xl font-bold text-[#1E9658]">{stats.avgCompliance}%</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-orange-500">
+                <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#F7941D]">
                     <p className="text-gray-500 text-sm">حوادث مفتوحة</p>
-                    <p className="text-2xl font-bold text-orange-600">{stats.openIncidents}</p>
+                    <p className="text-2xl font-bold text-[#D67A0A]">{stats.openIncidents}</p>
                 </div>
             </div>
 
@@ -205,7 +205,7 @@ export const IPCAnalytics: React.FC = () => {
                 {/* Compliance Trend Chart */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5 text-emerald-600" />
+                        <TrendingUp className="w-5 h-5 text-[#1E9658]" />
                         اتجاه الامتثال الأسبوعي
                     </h3>
                     <ResponsiveContainer width="100%" height={280}>
@@ -235,7 +235,7 @@ export const IPCAnalytics: React.FC = () => {
                 {/* Incidents by Category Pie Chart */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <PieChartIcon className="w-5 h-5 text-red-600" />
+                        <PieChartIcon className="w-5 h-5 text-[#DC2626]" />
                         توزيع الحالات حسب النوع
                     </h3>
                     <ResponsiveContainer width="100%" height={280}>
@@ -264,7 +264,7 @@ export const IPCAnalytics: React.FC = () => {
                 {/* Location Compliance Bar Chart */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <MapPin className="w-5 h-5 text-blue-600" />
+                        <MapPin className="w-5 h-5 text-[#269798]" />
                         الامتثال حسب الموقع
                     </h3>
                     <ResponsiveContainer width="100%" height={280}>
@@ -281,7 +281,7 @@ export const IPCAnalytics: React.FC = () => {
                                 {LOCATION_COMPLIANCE.map((entry, index) => (
                                     <Cell
                                         key={`cell-${index}`}
-                                        fill={entry.compliance >= 90 ? '#22C55E' : entry.compliance >= 80 ? '#F59E0B' : '#DC2626'}
+                                        fill={entry.compliance >= 90 ? '#22C55E' : entry.compliance >= 80 ? '#FCB614' : '#DC2626'}
                                     />
                                 ))}
                             </Bar>
@@ -292,7 +292,7 @@ export const IPCAnalytics: React.FC = () => {
                 {/* Category Trend Line Chart */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-orange-600" />
+                        <Calendar className="w-5 h-5 text-[#D67A0A]" />
                         اتجاه الامتثال حسب الفئة
                     </h3>
                     <ResponsiveContainer width="100%" height={280}>
@@ -305,25 +305,25 @@ export const IPCAnalytics: React.FC = () => {
                             <Line
                                 type="monotone"
                                 dataKey="handHygiene"
-                                stroke="#0EA5E9"
+                                stroke="#269798"
                                 strokeWidth={2}
-                                dot={{ fill: '#0EA5E9', r: 4 }}
+                                dot={{ fill: '#269798', r: 4 }}
                                 name="نظافة الأيدي"
                             />
                             <Line
                                 type="monotone"
                                 dataKey="ppe"
-                                stroke="#8B5CF6"
+                                stroke="#FCB614"
                                 strokeWidth={2}
-                                dot={{ fill: '#8B5CF6', r: 4 }}
+                                dot={{ fill: '#FCB614', r: 4 }}
                                 name="معدات الوقاية"
                             />
                             <Line
                                 type="monotone"
                                 dataKey="waste"
-                                stroke="#F59E0B"
+                                stroke="#FCB614"
                                 strokeWidth={2}
-                                dot={{ fill: '#F59E0B', r: 4 }}
+                                dot={{ fill: '#FCB614', r: 4 }}
                                 name="إدارة النفايات"
                             />
                         </LineChart>
@@ -334,20 +334,20 @@ export const IPCAnalytics: React.FC = () => {
             {/* Alert Locations */}
             <div className="mt-6 bg-white rounded-2xl p-6 shadow-sm">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-yellow-600" />
+                    <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
                     المواقع التي تحتاج اهتماماً
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {LOCATION_COMPLIANCE.filter(l => l.compliance < 85).map((loc, idx) => (
                         <div
                             key={idx}
-                            className="p-4 rounded-xl border-2 border-yellow-200 bg-yellow-50 flex justify-between items-center"
+                            className="p-4 rounded-xl border-2 border-[#FCB614]/20 bg-[#FCB614]/10 flex justify-between items-center"
                         >
                             <div>
                                 <p className="font-bold text-gray-800">{loc.location}</p>
-                                <p className="text-sm text-yellow-700">امتثال: {loc.compliance}%</p>
+                                <p className="text-sm text-[#D49A0A]">امتثال: {loc.compliance}%</p>
                             </div>
-                            <button className="px-3 py-1.5 bg-yellow-500 text-white rounded-lg text-sm hover:bg-yellow-600">
+                            <button className="px-3 py-1.5 bg-[#FCB614] text-white rounded-lg text-sm hover:bg-[#D49A0A]">
                                 عرض
                             </button>
                         </div>

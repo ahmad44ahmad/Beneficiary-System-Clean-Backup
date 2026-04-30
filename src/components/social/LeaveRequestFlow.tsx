@@ -198,13 +198,13 @@ export const LeaveRequestFlow: React.FC = () => {
     const getStatusBadge = (status: LeaveRequestStatus) => {
         const styles = {
             PENDING_SOCIAL: 'bg-gray-100 text-gray-800',
-            PENDING_MEDICAL: 'bg-blue-100 text-blue-800',
-            PENDING_DIRECTOR: 'bg-purple-100 text-purple-800',
-            APPROVED: 'bg-green-100 text-green-800',
-            REJECTED: 'bg-red-100 text-red-800',
-            ACTIVE: 'bg-green-500 text-white',
+            PENDING_MEDICAL: 'bg-[#269798]/15 text-[#1B7778]',
+            PENDING_DIRECTOR: 'bg-[#FCB614]/15 text-[#92400E]',
+            APPROVED: 'bg-[#2BB574]/15 text-[#14532D]',
+            REJECTED: 'bg-[#DC2626]/15 text-[#7F1D1D]',
+            ACTIVE: 'bg-[#2BB574] text-white',
             COMPLETED: 'bg-gray-500 text-white',
-            OVERDUE: 'bg-red-500 text-white',
+            OVERDUE: 'bg-[#DC2626] text-white',
         };
         const labels = {
             PENDING_SOCIAL: 'بانتظار الاجتماعي',
@@ -243,8 +243,8 @@ export const LeaveRequestFlow: React.FC = () => {
                 {visibleRequests.map(request => (
                     <Card key={request.id} className="p-4 flex justify-between items-center hover:shadow-md transition-shadow">
                         <div className="flex items-center gap-4">
-                            <div className="p-3 bg-blue-50 rounded-full">
-                                <FileText className="w-6 h-6 text-blue-600" />
+                            <div className="p-3 bg-[#269798]/10 rounded-full">
+                                <FileText className="w-6 h-6 text-[#269798]" />
                             </div>
                             <div>
                                 <h3 className="font-bold text-gray-900">{request.beneficiaryName}</h3>
@@ -316,18 +316,18 @@ export const LeaveRequestFlow: React.FC = () => {
 
                         {/* Medical Warning (Smart Integration) */}
                         {currentUser?.role === 'doctor' && selectedRequest.status === 'PENDING_MEDICAL' && (
-                            <div className={`p-4 rounded-lg border ${mockMedicalStatus[selectedRequest.beneficiaryId]?.infection ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200'}`}>
+                            <div className={`p-4 rounded-lg border ${mockMedicalStatus[selectedRequest.beneficiaryId]?.infection ? 'bg-[#DC2626]/10 border-[#DC2626]/30' : 'bg-[#2BB574]/10 border-[#2BB574]/20'}`}>
                                 <h4 className="font-bold flex items-center gap-2 mb-2">
                                     <Activity className="w-5 h-5" />
                                     الحالة الطبية (تحقق تلقائي)
                                 </h4>
                                 {mockMedicalStatus[selectedRequest.beneficiaryId]?.infection ? (
-                                    <div className="text-red-700">
+                                    <div className="text-[#B91C1C]">
                                         <div className="flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> <strong>تحذير:</strong> يوجد اشتباه عدوى أو حالة غير مستقرة.</div>
                                         <p className="mt-1 text-sm">{mockMedicalStatus[selectedRequest.beneficiaryId]?.notes}</p>
                                     </div>
                                 ) : (
-                                    <div className="text-green-700">
+                                    <div className="text-[#1E9658]">
                                         <div className="flex items-center gap-2"><Check className="w-4 h-4" /> الحالة مستقرة. لا توجد موانع طبية ظاهرة.</div>
                                     </div>
                                 )}
@@ -361,7 +361,7 @@ export const LeaveRequestFlow: React.FC = () => {
                                         onChange={(e) => setActionNote(e.target.value)}
                                     />
                                     <div className="flex gap-3">
-                                        <Button className="flex-1 bg-green-600 hover:bg-green-700" onClick={() => handleApprove(selectedRequest)}>
+                                        <Button className="flex-1 bg-[#1E9658] hover:bg-[#1E9658]" onClick={() => handleApprove(selectedRequest)}>
                                             <Check className="w-4 h-4 ms-2" />
                                             موافقة واعتماد
                                         </Button>

@@ -21,10 +21,10 @@ export const TabButton: React.FC<TabButtonProps> = ({
 
     const variantClasses = {
         primary: active
-            ? 'bg-[#14415A] text-white shadow-lg'
+            ? 'bg-[#0F3144] text-white shadow-lg'
             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700',
         secondary: active
-            ? 'bg-[#148287] text-white shadow-lg'
+            ? 'bg-[#269798] text-white shadow-lg'
             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
     };
 
@@ -36,7 +36,7 @@ export const TabButton: React.FC<TabButtonProps> = ({
             {Icon && <Icon className="w-5 h-5" />}
             <span>{label}</span>
             {badge !== undefined && badge > 0 && (
-                <span className="bg-[#F5961E] text-white text-xs px-2 py-0.5 rounded-full">
+                <span className="bg-[#F7941D] text-white text-xs px-2 py-0.5 rounded-full">
                     {badge}
                 </span>
             )}

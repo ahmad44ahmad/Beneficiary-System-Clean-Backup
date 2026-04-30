@@ -30,7 +30,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-indigo-100 text-indigo-600">
+                        <div className="p-3 rounded-full bg-[#0F3144]/10 text-[#0F3144]">
                             <MessageCircle size={24} />
                         </div>
                         <div className="me-4">
@@ -41,7 +41,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-pink-100 text-pink-600">
+                        <div className="p-3 rounded-full bg-[#DC2626]/10 text-[#DC2626]">
                             <Mic size={24} />
                         </div>
                         <div className="me-4">
@@ -54,7 +54,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-orange-100 text-orange-600">
+                        <div className="p-3 rounded-full bg-[#F7941D]/15 text-[#D67A0A]">
                             <AlertTriangle size={24} />
                         </div>
                         <div className="me-4">

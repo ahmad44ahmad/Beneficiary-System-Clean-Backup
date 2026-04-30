@@ -39,13 +39,13 @@ export const SystemEntryPage: React.FC = () => {
 
     return (
         <div
-            className="min-h-screen bg-[#0a1628] flex items-center justify-center cursor-pointer select-none overflow-hidden"
+            className="min-h-screen bg-[#0F3144] flex items-center justify-center cursor-pointer select-none overflow-hidden"
             dir="rtl"
             onClick={handleClick}
         >
             {/* Background subtle radial */}
             <div className="absolute inset-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#148287]/5 blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#269798]/5 blur-3xl" />
             </div>
 
             <motion.div
@@ -58,7 +58,7 @@ export const SystemEntryPage: React.FC = () => {
                 <motion.img
                     src="/assets/hrsd-logo.png"
                     alt="شعار وزارة الموارد البشرية والتنمية الاجتماعية"
-                    className="w-28 h-28 md:w-36 md:h-36 mb-8 drop-shadow-[0_0_30px_rgba(250,180,20,0.3)]"
+                    className="w-28 h-28 md:w-36 md:h-36 mb-8 drop-shadow-[0_0_30px_rgba(252,182,20,0.3)]"
                     variants={scaleIn}
                 />
 
@@ -72,7 +72,7 @@ export const SystemEntryPage: React.FC = () => {
 
                 {/* Center Name */}
                 <motion.h2
-                    className="text-[#FAB414] text-xl md:text-2xl font-bold mb-8"
+                    className="text-[#FCB614] text-xl md:text-2xl font-bold mb-8"
                     variants={fadeUp}
                 >
                     مركز التأهيل الشامل بالباحة
@@ -80,7 +80,7 @@ export const SystemEntryPage: React.FC = () => {
 
                 {/* Divider */}
                 <motion.div
-                    className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#148287] to-transparent mb-8"
+                    className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#269798] to-transparent mb-8"
                     variants={fadeUp}
                 />
 
@@ -109,7 +109,7 @@ export const SystemEntryPage: React.FC = () => {
                 transition={{ delay: 1.5, duration: 0.3 }}
             >
                 <div
-                    className="h-full bg-gradient-to-r from-[#148287] to-[#2DB473] rounded-full"
+                    className="h-full bg-gradient-to-r from-[#269798] to-[#2BB574] rounded-full"
                     style={{ animation: 'progressFill 3s linear forwards', animationDelay: '0.5s', width: '0%' }}
                 />
             </motion.div>

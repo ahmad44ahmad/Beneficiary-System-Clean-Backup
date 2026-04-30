@@ -22,15 +22,15 @@ export const ISOComplianceReport: React.FC = () => {
                 <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
                         <p className="text-sm text-gray-500">نسبة الامتثال العام</p>
-                        <p className={`text-2xl font-bold ${complianceRate >= 85 ? 'text-green-600' : 'text-red-600'}`}>{complianceRate}%</p>
+                        <p className={`text-2xl font-bold ${complianceRate >= 85 ? 'text-[#1E9658]' : 'text-[#DC2626]'}`}>{complianceRate}%</p>
                     </div>
                     <div>
                         <p className="text-sm text-gray-500">عدد حالات عدم المطابقة</p>
-                        <p className="text-2xl font-bold text-orange-600">{totalFindings - compliantFindings}</p>
+                        <p className="text-2xl font-bold text-[#D67A0A]">{totalFindings - compliantFindings}</p>
                     </div>
                     <div>
                         <p className="text-sm text-gray-500">الإجراءات التصحيحية المفتوحة</p>
-                        <p className="text-2xl font-bold text-blue-600">{openCAPAs}</p>
+                        <p className="text-2xl font-bold text-[#269798]">{openCAPAs}</p>
                     </div>
                 </div>
             </div>
@@ -60,11 +60,11 @@ export const ISOComplianceReport: React.FC = () => {
                                         <td className="border p-2">{finding.criterion}</td>
                                         <td className="border p-2 text-center">
                                             {finding.isCompliant ? (
-                                                <span className="flex items-center justify-center gap-1 text-green-700 font-medium">
+                                                <span className="flex items-center justify-center gap-1 text-[#1E9658] font-medium">
                                                     <CheckCircle className="w-4 h-4" /> مطابق
                                                 </span>
                                             ) : (
-                                                <span className="flex items-center justify-center gap-1 text-red-700 font-medium">
+                                                <span className="flex items-center justify-center gap-1 text-[#B91C1C] font-medium">
                                                     <XCircle className="w-4 h-4" /> غير مطابق
                                                 </span>
                                             )}
@@ -99,7 +99,7 @@ export const ISOComplianceReport: React.FC = () => {
                                 <td className="border p-2">{capa.assignedTo}</td>
                                 <td className="border p-2 text-center">{capa.dueDate}</td>
                                 <td className="border p-2 text-center">
-                                    <span className={`px-2 py-1 rounded text-xs font-bold ${capa.status === 'closed' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
+                                    <span className={`px-2 py-1 rounded text-xs font-bold ${capa.status === 'closed' ? 'bg-[#2BB574]/15 text-[#14532D]' : 'bg-[#F7941D]/15 text-[#92400E]'
                                         }`}>
                                         {capa.status.toUpperCase()}
                                     </span>

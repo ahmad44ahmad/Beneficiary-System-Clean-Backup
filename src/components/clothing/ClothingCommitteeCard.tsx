@@ -57,7 +57,7 @@ const MemberCard: React.FC<{
                         <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-[15px] font-bold text-slate-900 dark:text-white leading-tight">
+                        <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white leading-tight">
                             {member.roleLabelAr}
                         </h3>
                         <span
@@ -70,14 +70,14 @@ const MemberCard: React.FC<{
             </header>
 
             <div>
-                <h4 className="text-[13px] font-semibold text-slate-600 dark:text-slate-300 mb-2">
+                <h4 className="text-[13px] font-semibold text-hrsd-cool-gray dark:text-hrsd-navy mb-2">
                     المهام الرئيسية
                 </h4>
                 <ul className="space-y-1.5">
                     {member.duties.map((duty, i) => (
                         <li
                             key={i}
-                            className="text-[13px] text-slate-700 dark:text-slate-200 leading-relaxed flex gap-2"
+                            className="text-[13px] text-hrsd-navy dark:text-hrsd-navy leading-relaxed flex gap-2"
                         >
                             <span className={`${tone.accent} mt-1`}>●</span>
                             <span>{duty}</span>
@@ -86,20 +86,20 @@ const MemberCard: React.FC<{
                 </ul>
             </div>
 
-            <footer className="mt-auto pt-3 border-t border-slate-200/60 dark:border-slate-700">
+            <footer className="mt-auto pt-3 border-t border-gray-200/60 dark:border-gray-200">
                 {assignee ? (
                     <div>
-                        <span className="text-[12px] text-slate-500 dark:text-slate-400">
+                        <span className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                             الموظف المُكلَّف
                         </span>
-                        <p className="text-[14px] font-bold text-slate-900 dark:text-white mt-0.5">
+                        <p className="text-[14px] font-bold text-hrsd-navy dark:text-white mt-0.5">
                             {assignee.name}
                         </p>
                     </div>
                 ) : (
                     <button
                         type="button"
-                        className={`w-full py-2 rounded-lg border border-dashed border-slate-300 dark:border-slate-600 text-[13px] font-medium text-slate-500 dark:text-slate-400 hover:bg-white hover:${tone.accent} transition-colors`}
+                        className={`w-full py-2 rounded-lg border border-dashed border-gray-300 dark:border-gray-300 text-[13px] font-medium text-hrsd-cool-gray dark:text-hrsd-cool-gray hover:bg-white hover:${tone.accent} transition-colors`}
                     >
                         تكليف موظف…
                     </button>
@@ -116,7 +116,7 @@ const MemberCard: React.FC<{
 export const ClothingCommitteeCard: React.FC<Props> = ({ assignments = {} }) => (
     <section
         dir="rtl"
-        className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm"
+        className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
     >
         <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">
@@ -124,10 +124,10 @@ export const ClothingCommitteeCard: React.FC<Props> = ({ assignments = {} }) => 
                     <Users className="w-6 h-6 text-hrsd-navy" />
                 </div>
                 <div>
-                    <h2 className="text-[17px] font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-[17px] font-bold text-hrsd-navy dark:text-white">
                         لجنة تأمين الكسوة
                     </h2>
-                    <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    <p className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-0.5">
                         تشكّل بقرار من مدير المركز — ضوابط الكسوة 2020 §المرحلة الثانية
                     </p>
                 </div>

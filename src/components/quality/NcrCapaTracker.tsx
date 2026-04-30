@@ -157,26 +157,26 @@ const NCR_DATA: NCR[] = [
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const severityConfig = {
-  critical: { label: 'حرج', color: 'bg-red-100 text-red-700 border-red-200', dot: 'bg-red-500' },
-  major: { label: 'رئيسي', color: 'bg-orange-100 text-orange-700 border-orange-200', dot: 'bg-orange-500' },
-  minor: { label: 'ثانوي', color: 'bg-yellow-100 text-yellow-700 border-yellow-200', dot: 'bg-yellow-500' },
-  observation: { label: 'ملاحظة', color: 'bg-blue-100 text-blue-700 border-blue-200', dot: 'bg-blue-500' },
+  critical: { label: 'حرج', color: 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]/30', dot: 'bg-[#DC2626]' },
+  major: { label: 'رئيسي', color: 'bg-[#F7941D]/15 text-[#D67A0A] border-[#F7941D]/30', dot: 'bg-[#F7941D]' },
+  minor: { label: 'ثانوي', color: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20', dot: 'bg-[#FCB614]' },
+  observation: { label: 'ملاحظة', color: 'bg-[#269798]/15 text-[#1B7778] border-[#269798]/30', dot: 'bg-[#269798]' },
 };
 
 const statusConfig = {
-  open: { label: 'مفتوح', color: 'bg-red-50 text-red-600', icon: AlertCircle },
-  investigating: { label: 'تحقيق', color: 'bg-purple-50 text-purple-600', icon: Search },
-  action_planned: { label: 'خطة إجراءات', color: 'bg-blue-50 text-blue-600', icon: ClipboardCheck },
-  in_progress: { label: 'قيد التنفيذ', color: 'bg-amber-50 text-amber-600', icon: Clock },
-  verification: { label: 'تحقق', color: 'bg-cyan-50 text-cyan-600', icon: Eye },
-  closed: { label: 'مغلق', color: 'bg-green-50 text-green-600', icon: CheckCircle2 },
+  open: { label: 'مفتوح', color: 'bg-[#DC2626]/10 text-[#DC2626]', icon: AlertCircle },
+  investigating: { label: 'تحقيق', color: 'bg-[#FCB614]/10 text-[#D49A0A]', icon: Search },
+  action_planned: { label: 'خطة إجراءات', color: 'bg-[#269798]/10 text-[#269798]', icon: ClipboardCheck },
+  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#FCB614]/10 text-[#D49A0A]', icon: Clock },
+  verification: { label: 'تحقق', color: 'bg-[#269798]/10 text-[#1B7778]', icon: Eye },
+  closed: { label: 'مغلق', color: 'bg-[#2BB574]/10 text-[#1E9658]', icon: CheckCircle2 },
 };
 
 const capaStatusConfig = {
   pending: { label: 'معلق', color: 'text-gray-500 bg-gray-100' },
-  in_progress: { label: 'جاري', color: 'text-blue-600 bg-blue-50' },
-  completed: { label: 'مكتمل', color: 'text-green-600 bg-green-50' },
-  verified: { label: 'تم التحقق', color: 'text-emerald-600 bg-emerald-50' },
+  in_progress: { label: 'جاري', color: 'text-[#269798] bg-[#269798]/10' },
+  completed: { label: 'مكتمل', color: 'text-[#1E9658] bg-[#2BB574]/10' },
+  verified: { label: 'تم التحقق', color: 'text-[#1E9658] bg-[#2BB574]/10' },
 };
 
 function daysUntil(dateStr: string): number {
@@ -187,11 +187,11 @@ function daysUntil(dateStr: string): number {
 
 function DueDateBadge({ date }: { date: string }) {
   const days = daysUntil(date);
-  let color = 'text-green-600 bg-green-50';
+  let color = 'text-[#1E9658] bg-[#2BB574]/10';
   let text = `${days} يوم متبقي`;
-  if (days < 0) { color = 'text-red-600 bg-red-50'; text = `متأخر ${Math.abs(days)} يوم`; }
-  else if (days <= 14) { color = 'text-amber-600 bg-amber-50'; text = `${days} يوم متبقي`; }
-  else if (days <= 30) { color = 'text-yellow-600 bg-yellow-50'; }
+  if (days < 0) { color = 'text-[#DC2626] bg-[#DC2626]/10'; text = `متأخر ${Math.abs(days)} يوم`; }
+  else if (days <= 14) { color = 'text-[#D49A0A] bg-[#FCB614]/10'; text = `${days} يوم متبقي`; }
+  else if (days <= 30) { color = 'text-[#D49A0A] bg-[#FCB614]/10'; }
 
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium ${color}`}>
@@ -232,13 +232,13 @@ export const NcrCapaTracker: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-3 text-[#14415A]">
-            <Shield className="w-8 h-8 text-red-500" />
+          <h1 className="text-2xl font-bold flex items-center gap-3 text-[#0F3144]">
+            <Shield className="w-8 h-8 text-[#DC2626]" />
             سجل عدم المطابقة والإجراءات التصحيحية
           </h1>
           <p className="text-gray-500 mt-1">NCR & CAPA Register — ISO 9001:2015 Clause 10.2</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-[#14415A] text-white rounded-lg hover:bg-[#1a5270] transition-colors">
+        <button className="flex items-center gap-2 px-4 py-2 bg-[#0F3144] text-white rounded-lg hover:bg-[#1a5270] transition-colors">
           <Plus className="w-4 h-4" />
           تسجيل NCR جديد
         </button>
@@ -247,11 +247,11 @@ export const NcrCapaTracker: React.FC = () => {
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {[
-          { label: 'إجمالي NCRs', value: stats.total, icon: FileText, color: 'text-blue-600 bg-blue-50' },
-          { label: 'مفتوحة', value: stats.open, icon: AlertCircle, color: 'text-red-600 bg-red-50' },
-          { label: 'متأخرة', value: stats.overdue, icon: XCircle, color: stats.overdue > 0 ? 'text-red-600 bg-red-100' : 'text-green-600 bg-green-50' },
-          { label: 'إجراءات CAPA', value: `${stats.completedCapas}/${stats.totalCapas}`, icon: ClipboardCheck, color: 'text-purple-600 bg-purple-50' },
-          { label: 'نسبة الإنجاز', value: `${stats.totalCapas > 0 ? Math.round((stats.completedCapas / stats.totalCapas) * 100) : 0}%`, icon: TrendingUp, color: 'text-green-600 bg-green-50' },
+          { label: 'إجمالي NCRs', value: stats.total, icon: FileText, color: 'text-[#269798] bg-[#269798]/10' },
+          { label: 'مفتوحة', value: stats.open, icon: AlertCircle, color: 'text-[#DC2626] bg-[#DC2626]/10' },
+          { label: 'متأخرة', value: stats.overdue, icon: XCircle, color: stats.overdue > 0 ? 'text-[#DC2626] bg-[#DC2626]/15' : 'text-[#1E9658] bg-[#2BB574]/10' },
+          { label: 'إجراءات CAPA', value: `${stats.completedCapas}/${stats.totalCapas}`, icon: ClipboardCheck, color: 'text-[#D49A0A] bg-[#FCB614]/10' },
+          { label: 'نسبة الإنجاز', value: `${stats.totalCapas > 0 ? Math.round((stats.completedCapas / stats.totalCapas) * 100) : 0}%`, icon: TrendingUp, color: 'text-[#1E9658] bg-[#2BB574]/10' },
         ].map((stat, idx) => (
           <div key={idx} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-2">
@@ -260,7 +260,7 @@ export const NcrCapaTracker: React.FC = () => {
               </div>
               <span className="text-xs text-gray-500">{stat.label}</span>
             </div>
-            <div className="text-2xl font-bold text-[#14415A]">{stat.value}</div>
+            <div className="text-2xl font-bold text-[#0F3144]">{stat.value}</div>
           </div>
         ))}
       </div>
@@ -275,7 +275,7 @@ export const NcrCapaTracker: React.FC = () => {
             placeholder="بحث..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full ps-4 pe-9 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#14415A]"
+            className="w-full ps-4 pe-9 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0F3144]"
           />
         </div>
         <select
@@ -329,7 +329,7 @@ export const NcrCapaTracker: React.FC = () => {
                 {/* Main info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <span className="font-mono text-sm font-bold text-[#14415A]">{ncr.id}</span>
+                    <span className="font-mono text-sm font-bold text-[#0F3144]">{ncr.id}</span>
                     <span className={`px-2 py-0.5 rounded text-xs font-medium border ${sevCfg.color}`}>
                       {sevCfg.label}
                     </span>
@@ -352,7 +352,7 @@ export const NcrCapaTracker: React.FC = () => {
                   <div className="text-xs text-gray-500 text-center mb-1">{capaProgress}%</div>
                   <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
                     <div
-                      className={`h-full rounded-full transition-all duration-500 ${capaProgress === 100 ? 'bg-green-500' : capaProgress > 0 ? 'bg-blue-500' : 'bg-gray-200'}`}
+                      className={`h-full rounded-full transition-all duration-500 ${capaProgress === 100 ? 'bg-[#2BB574]' : capaProgress > 0 ? 'bg-[#269798]' : 'bg-gray-200'}`}
                       style={{ width: `${capaProgress}%` }}
                     />
                   </div>
@@ -392,7 +392,7 @@ export const NcrCapaTracker: React.FC = () => {
 
                   {/* CAPA Actions */}
                   <div>
-                    <h4 className="text-sm font-bold text-[#14415A] mb-3 flex items-center gap-2">
+                    <h4 className="text-sm font-bold text-[#0F3144] mb-3 flex items-center gap-2">
                       <ClipboardCheck className="w-4 h-4" />
                       الإجراءات التصحيحية والوقائية (CAPA)
                     </h4>
@@ -404,9 +404,9 @@ export const NcrCapaTracker: React.FC = () => {
                             {/* Step number */}
                             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
                               capa.status === 'completed' || capa.status === 'verified'
-                                ? 'bg-green-100 text-green-700'
+                                ? 'bg-[#2BB574]/15 text-[#1E9658]'
                                 : capa.status === 'in_progress'
-                                  ? 'bg-blue-100 text-blue-700'
+                                  ? 'bg-[#269798]/15 text-[#1B7778]'
                                   : 'bg-gray-100 text-gray-500'
                             }`}>
                               {capa.status === 'completed' || capa.status === 'verified' ? '✓' : idx + 1}
@@ -419,7 +419,7 @@ export const NcrCapaTracker: React.FC = () => {
                                   {capaCfg.label}
                                 </span>
                                 <span className={`px-2 py-0.5 rounded text-xs font-medium ${
-                                  capa.type === 'corrective' ? 'bg-red-50 text-red-600' : 'bg-blue-50 text-blue-600'
+                                  capa.type === 'corrective' ? 'bg-[#DC2626]/10 text-[#DC2626]' : 'bg-[#269798]/10 text-[#269798]'
                                 }`}>
                                   {capa.type === 'corrective' ? 'تصحيحي' : 'وقائي'}
                                 </span>
@@ -430,12 +430,12 @@ export const NcrCapaTracker: React.FC = () => {
                                 <span className="flex items-center gap-1"><User className="w-3 h-3" /> {capa.assignedTo}</span>
                                 <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {capa.dueDate}</span>
                                 {capa.completionDate && (
-                                  <span className="flex items-center gap-1 text-green-600">
+                                  <span className="flex items-center gap-1 text-[#1E9658]">
                                     <CheckCircle2 className="w-3 h-3" /> أُنجز: {capa.completionDate}
                                   </span>
                                 )}
                                 {capa.evidence && (
-                                  <span className="flex items-center gap-1 text-blue-600">
+                                  <span className="flex items-center gap-1 text-[#269798]">
                                     <FileText className="w-3 h-3" /> {capa.evidence}
                                   </span>
                                 )}

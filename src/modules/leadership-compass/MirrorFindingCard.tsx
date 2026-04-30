@@ -21,7 +21,7 @@ export const MirrorFindingCard: React.FC<{
     return (
         <article
             dir="rtl"
-            className={`bg-white dark:bg-slate-800 rounded-2xl border-2 ${tone.border}
+            className={`bg-white dark:bg-white rounded-2xl border-2 ${tone.border}
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
         >
             <div className={`${tone.bg} px-4 py-2 flex items-center justify-between`}>
@@ -31,18 +31,18 @@ export const MirrorFindingCard: React.FC<{
                         {MIRROR_SEVERITY_LABELS[finding.severity]}
                     </span>
                 </div>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                <span className="text-[11px] text-hrsd-cool-gray dark:text-hrsd-cool-gray font-mono">
                     {finding.ruleCode}
                 </span>
             </div>
 
             <div className="p-5 space-y-3">
                 <header>
-                    <h3 className="text-[15px] font-bold text-slate-900 dark:text-white leading-snug mb-2">
+                    <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white leading-snug mb-2">
                         {finding.findingHeadline}
                     </h3>
                     {finding.findingDetail && (
-                        <p className="text-[13.5px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <p className="text-[13.5px] text-hrsd-cool-gray dark:text-hrsd-navy leading-relaxed">
                             {finding.findingDetail}
                         </p>
                     )}
@@ -50,13 +50,13 @@ export const MirrorFindingCard: React.FC<{
 
                 {/* بيانات مُساندة */}
                 {finding.supportingData && Object.keys(finding.supportingData).length > 0 && (
-                    <div className="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-3">
-                        <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5">
+                    <div className="bg-slate-50 dark:bg-white/50 rounded-lg p-3">
+                        <div className="text-[11px] font-semibold text-hrsd-cool-gray dark:text-hrsd-cool-gray uppercase tracking-wider mb-1.5">
                             بيانات مُساندة
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[12px]">
                             {Object.entries(finding.supportingData).map(([key, value]) => (
-                                <div key={key} className="text-slate-700 dark:text-slate-300">
+                                <div key={key} className="text-hrsd-navy dark:text-hrsd-navy">
                                     <span className="font-semibold">{humanizeKey(key)}:</span> {String(value)}
                                 </div>
                             ))}
@@ -71,15 +71,15 @@ export const MirrorFindingCard: React.FC<{
                             <div className="text-[11px] font-bold text-hrsd-teal uppercase tracking-wider mb-0.5">
                                 إجراءٌ مُقترَح
                             </div>
-                            <p className="text-[13px] text-slate-700 dark:text-slate-200 leading-relaxed">
+                            <p className="text-[13px] text-hrsd-navy dark:text-slate-200 leading-relaxed">
                                 {finding.suggestedAction}
                             </p>
                         </div>
                     </div>
                 )}
 
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-gray-200">
+                    <span className="text-[11px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                         قاعدة: {finding.ruleDescription}
                     </span>
                     {finding.status === 'open' && onAcknowledge && (

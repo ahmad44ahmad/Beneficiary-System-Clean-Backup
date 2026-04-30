@@ -37,7 +37,7 @@ export const PsychProfileForm: React.FC<{
                         <textarea
                             value={formData.mentalStatus?.appearance}
                             onChange={(e) => handleMSEChange('appearance', e.target.value)}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                             placeholder="General appearance, grooming, dress..."
                             rows={2}
                         />
@@ -46,7 +46,7 @@ export const PsychProfileForm: React.FC<{
                         <label className="block text-sm font-medium text-gray-700">Behavior</label>
                         <select value={formData.mentalStatus?.behavior}
                             onChange={(e) => handleMSEChange('behavior', e.target.value)}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2">
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2">
                             {['Cooperative', 'Agitated', 'Withdrawn', 'Aggressive'].map(o => <option key={o}>{o}</option>)}
                         </select>
                     </div>
@@ -63,7 +63,7 @@ export const PsychProfileForm: React.FC<{
                     <div className="flex items-center mt-6">
                         <input type="checkbox" checked={formData.mentalStatus?.perceptualDisturbances}
                             onChange={(e) => handleMSEChange('perceptualDisturbances', e.target.checked)}
-                            className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            className="h-4 w-4 text-[#0F3144] border-gray-300 rounded" />
                         <label className="ms-2 block text-sm text-gray-900">Perceptual Disturbances (Hallucinations)</label>
                     </div>
                 </div>
@@ -77,14 +77,14 @@ export const PsychProfileForm: React.FC<{
                         <input type="number"
                             value={formData.mentalStatus?.cognition.orientation}
                             onChange={(e) => setFormData(prev => ({ ...prev, mentalStatus: { ...prev.mentalStatus!, cognition: { ...prev.mentalStatus!.cognition, orientation: parseInt(e.target.value) } } }))}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                         />
                     </div>
                     <div className="md:col-span-2">
                         <label className="block text-sm font-medium text-gray-700">Diagnosis</label>
                         <input type="text" value={formData.diagnosis || ''}
                             onChange={(e) => setFormData(prev => ({ ...prev, diagnosis: e.target.value }))}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                             placeholder="e.g. Moderate Intellectual Disability (F71)"
                         />
                     </div>
@@ -104,7 +104,7 @@ const SelectField = ({ label, value, options, onChange }: { label: string; value
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] sm:text-sm p-2 border">
             {options.map((opt: string) => (
                 <option key={opt} value={opt}>{opt}</option>
             ))}

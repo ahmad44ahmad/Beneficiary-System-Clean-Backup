@@ -112,11 +112,11 @@ const getRiskLevel = (exposureType: string, sourceStatus: string): 'high' | 'mod
 const getRiskBadge = (risk: string) => {
   switch (risk) {
     case 'high':
-      return { label: 'مرتفع', className: 'bg-red-100 text-red-700 border border-red-300' };
+      return { label: 'مرتفع', className: 'bg-[#DC2626]/15 text-[#B91C1C] border border-[#DC2626]' };
     case 'moderate':
-      return { label: 'متوسط', className: 'bg-yellow-100 text-yellow-700 border border-yellow-300' };
+      return { label: 'متوسط', className: 'bg-[#FCB614]/10 text-[#D49A0A] border border-[#FCB614]' };
     case 'low':
-      return { label: 'منخفض', className: 'bg-green-100 text-green-700 border border-green-300' };
+      return { label: 'منخفض', className: 'bg-[#2BB574]/15 text-[#1E9658] border border-[#2BB574]' };
     default:
       return { label: '-', className: 'bg-gray-100 text-gray-600' };
   }
@@ -125,13 +125,13 @@ const getRiskBadge = (risk: string) => {
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'monitoring':
-      return { label: 'تحت المتابعة', className: 'bg-blue-100 text-blue-700 border border-blue-300', icon: Clock };
+      return { label: 'تحت المتابعة', className: 'bg-[#269798]/15 text-[#1B7778] border border-[#269798]', icon: Clock };
     case 'cleared':
-      return { label: 'تم التعافي', className: 'bg-green-100 text-green-700 border border-green-300', icon: CheckCircle2 };
+      return { label: 'تم التعافي', className: 'bg-[#2BB574]/15 text-[#1E9658] border border-[#2BB574]', icon: CheckCircle2 };
     case 'labs_pending':
-      return { label: 'بانتظار الفحوصات', className: 'bg-orange-100 text-orange-700 border border-orange-300', icon: Activity };
+      return { label: 'بانتظار الفحوصات', className: 'bg-[#F7941D]/15 text-[#D67A0A] border border-[#F7941D]', icon: Activity };
     case 'reported':
-      return { label: 'تم الإبلاغ', className: 'bg-purple-100 text-purple-700 border border-purple-300', icon: FileText };
+      return { label: 'تم الإبلاغ', className: 'bg-[#FCB614]/15 text-[#D49A0A] border border-[#FCB614]', icon: FileText };
     default:
       return { label: '-', className: 'bg-gray-100 text-gray-600', icon: Clock };
   }
@@ -140,7 +140,7 @@ const getStatusBadge = (status: string) => {
 const getPepLabel = (pep: string) => {
   switch (pep) {
     case 'started':
-      return { label: 'تم البدء', className: 'text-teal-700 font-medium' };
+      return { label: 'تم البدء', className: 'text-[#1B7778] font-medium' };
     case 'not_needed':
       return { label: 'غير مطلوب', className: 'text-gray-500' };
     default:
@@ -236,21 +236,21 @@ export const OccupationalExposure: React.FC = () => {
       label: 'إجمالي الحوادث',
       value: demoIncidents.length,
       icon: Syringe,
-      color: 'bg-[#14415A]',
+      color: 'bg-[#0F3144]',
       iconColor: 'text-white',
     },
     {
       label: 'حالات نشطة',
       value: demoIncidents.filter((i) => i.status === 'monitoring' || i.status === 'reported').length,
       icon: Activity,
-      color: 'bg-blue-500',
+      color: 'bg-[#269798]',
       iconColor: 'text-white',
     },
     {
       label: 'بانتظار الفحوصات',
       value: demoIncidents.filter((i) => i.status === 'labs_pending').length,
       icon: Clock,
-      color: 'bg-orange-500',
+      color: 'bg-[#F7941D]',
       iconColor: 'text-white',
     },
     {
@@ -284,7 +284,7 @@ export const OccupationalExposure: React.FC = () => {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
                   isActive
-                    ? 'bg-[#14415A] text-white shadow-lg'
+                    ? 'bg-[#0F3144] text-white shadow-lg'
                     : isComplete
                     ? 'bg-[#1E6B5C] text-white'
                     : 'bg-gray-200 text-gray-500'
@@ -294,7 +294,7 @@ export const OccupationalExposure: React.FC = () => {
               </div>
               <span
                 className={`text-xs whitespace-nowrap ${
-                  isActive ? 'text-[#14415A] font-bold' : 'text-gray-400'
+                  isActive ? 'text-[#0F3144] font-bold' : 'text-gray-400'
                 }`}
               >
                 {label}
@@ -315,7 +315,7 @@ export const OccupationalExposure: React.FC = () => {
 
   const renderStep1 = () => (
     <div className="space-y-5">
-      <h3 className="text-lg font-bold text-[#14415A] flex items-center gap-2">
+      <h3 className="text-lg font-bold text-[#0F3144] flex items-center gap-2">
         <User size={20} />
         معلومات الحادثة
       </h3>
@@ -328,7 +328,7 @@ export const OccupationalExposure: React.FC = () => {
             value={formData.employee_name}
             onChange={(e) => updateFormField('employee_name', e.target.value)}
             placeholder="أدخل اسم الموظف المتعرض"
-            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#14415A] focus:border-transparent outline-none transition"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#0F3144] focus:border-transparent outline-none transition"
           />
         </div>
 
@@ -337,7 +337,7 @@ export const OccupationalExposure: React.FC = () => {
           <select
             value={formData.department}
             onChange={(e) => updateFormField('department', e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#14415A] focus:border-transparent outline-none transition bg-white"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#0F3144] focus:border-transparent outline-none transition bg-white"
           >
             <option value="">اختر القسم</option>
             {DEPARTMENTS.map((dept) => (
@@ -354,7 +354,7 @@ export const OccupationalExposure: React.FC = () => {
             type="date"
             value={formData.incident_date}
             onChange={(e) => updateFormField('incident_date', e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#14415A] focus:border-transparent outline-none transition"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#0F3144] focus:border-transparent outline-none transition"
           />
         </div>
 
@@ -364,7 +364,7 @@ export const OccupationalExposure: React.FC = () => {
             type="time"
             value={formData.incident_time}
             onChange={(e) => updateFormField('incident_time', e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#14415A] focus:border-transparent outline-none transition"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#0F3144] focus:border-transparent outline-none transition"
           />
         </div>
       </div>
@@ -373,7 +373,7 @@ export const OccupationalExposure: React.FC = () => {
 
   const renderStep2 = () => (
     <div className="space-y-6">
-      <h3 className="text-lg font-bold text-[#14415A] flex items-center gap-2">
+      <h3 className="text-lg font-bold text-[#0F3144] flex items-center gap-2">
         <Droplets size={20} />
         تفاصيل التعرض
       </h3>
@@ -387,7 +387,7 @@ export const OccupationalExposure: React.FC = () => {
               key={et}
               className={`flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all text-sm ${
                 formData.exposure_type === et
-                  ? 'border-[#14415A] bg-[#14415A]/5 text-[#14415A] font-medium shadow-sm'
+                  ? 'border-[#0F3144] bg-[#0F3144]/5 text-[#0F3144] font-medium shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 text-gray-600'
               }`}
             >
@@ -397,7 +397,7 @@ export const OccupationalExposure: React.FC = () => {
                 value={et}
                 checked={formData.exposure_type === et}
                 onChange={(e) => updateFormField('exposure_type', e.target.value)}
-                className="accent-[#14415A]"
+                className="accent-[#0F3144]"
               />
               {et}
             </label>
@@ -413,7 +413,7 @@ export const OccupationalExposure: React.FC = () => {
           value={formData.body_part}
           onChange={(e) => updateFormField('body_part', e.target.value)}
           placeholder="مثال: إصبع السبابة - اليد اليمنى"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#14415A] focus:border-transparent outline-none transition"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#0F3144] focus:border-transparent outline-none transition"
         />
       </div>
 
@@ -475,7 +475,7 @@ export const OccupationalExposure: React.FC = () => {
                   key={ss.value}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg border cursor-pointer transition-all text-sm ${
                     formData.source_status === ss.value
-                      ? 'border-[#14415A] bg-[#14415A]/5 text-[#14415A] font-medium'
+                      ? 'border-[#0F3144] bg-[#0F3144]/5 text-[#0F3144] font-medium'
                       : 'border-gray-200 hover:border-gray-300 text-gray-600'
                   }`}
                 >
@@ -485,7 +485,7 @@ export const OccupationalExposure: React.FC = () => {
                     value={ss.value}
                     checked={formData.source_status === ss.value}
                     onChange={(e) => updateFormField('source_status', e.target.value)}
-                    className="accent-[#14415A]"
+                    className="accent-[#0F3144]"
                   />
                   {ss.label}
                 </label>
@@ -499,14 +499,14 @@ export const OccupationalExposure: React.FC = () => {
 
   const renderStep3 = () => (
     <div className="space-y-5">
-      <h3 className="text-lg font-bold text-[#14415A] flex items-center gap-2">
+      <h3 className="text-lg font-bold text-[#0F3144] flex items-center gap-2">
         <Heart size={20} />
         الإسعافات الأولية
       </h3>
 
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
-        <AlertTriangle size={20} className="text-amber-600 mt-0.5 shrink-0" />
-        <p className="text-sm text-amber-800">
+      <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-lg p-4 flex items-start gap-3">
+        <AlertTriangle size={20} className="text-[#D49A0A] mt-0.5 shrink-0" />
+        <p className="text-sm text-[#92400E]">
           يرجى التأكد من تنفيذ جميع خطوات الإسعافات الأولية التالية فور وقوع الحادثة.
           وضع علامة على الخطوات التي تم تنفيذها.
         </p>
@@ -529,7 +529,7 @@ export const OccupationalExposure: React.FC = () => {
               className="mt-1 w-5 h-5 accent-[#1E6B5C] rounded shrink-0"
             />
             <div className="flex-1">
-              <span className="text-sm font-medium text-[#14415A] ml-1">{idx + 1}.</span>
+              <span className="text-sm font-medium text-[#0F3144] ml-1">{idx + 1}.</span>
               <span className={`text-sm ${formData.first_aid_steps[idx] ? 'text-[#1E6B5C]' : 'text-gray-700'}`}>
                 {step}
               </span>
@@ -553,14 +553,14 @@ export const OccupationalExposure: React.FC = () => {
 
     return (
       <div className="space-y-6">
-        <h3 className="text-lg font-bold text-[#14415A] flex items-center gap-2">
+        <h3 className="text-lg font-bold text-[#0F3144] flex items-center gap-2">
           <Shield size={20} />
           المتابعة والتقييم
         </h3>
 
         {/* Risk Assessment */}
         <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
-          <h4 className="font-semibold text-[#14415A] text-sm">تقييم مستوى الخطورة</h4>
+          <h4 className="font-semibold text-[#0F3144] text-sm">تقييم مستوى الخطورة</h4>
           <div className="flex items-center gap-4">
             <div
               className={`px-5 py-3 rounded-lg text-base font-bold ${riskBadge.className}`}
@@ -579,14 +579,14 @@ export const OccupationalExposure: React.FC = () => {
         <div
           className={`rounded-xl p-5 border ${
             pepRecommended
-              ? 'bg-red-50 border-red-200'
-              : 'bg-green-50 border-green-200'
+              ? 'bg-[#DC2626]/10 border-[#DC2626]/30'
+              : 'bg-[#2BB574]/10 border-[#2BB574]/20'
           }`}
         >
           <div className="flex items-center gap-3">
             <Shield
               size={24}
-              className={pepRecommended ? 'text-red-600' : 'text-green-600'}
+              className={pepRecommended ? 'text-[#DC2626]' : 'text-[#1E9658]'}
             />
             <div>
               <h4 className="font-semibold text-sm">
@@ -594,7 +594,7 @@ export const OccupationalExposure: React.FC = () => {
               </h4>
               <p
                 className={`text-base font-bold mt-1 ${
-                  pepRecommended ? 'text-red-700' : 'text-green-700'
+                  pepRecommended ? 'text-[#B91C1C]' : 'text-[#1E9658]'
                 }`}
               >
                 {pepRecommended ? 'مُوصى به' : 'غير مطلوب'}
@@ -605,7 +605,7 @@ export const OccupationalExposure: React.FC = () => {
 
         {/* Follow-up Schedule */}
         <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
-          <h4 className="font-semibold text-[#14415A] text-sm flex items-center gap-2">
+          <h4 className="font-semibold text-[#0F3144] text-sm flex items-center gap-2">
             <Calendar size={16} />
             جدول المتابعة
           </h4>
@@ -615,25 +615,25 @@ export const OccupationalExposure: React.FC = () => {
                 time: 'فوري',
                 desc: 'فحوصات أساسية (HBV, HCV, HIV)',
                 icon: AlertTriangle,
-                color: 'text-red-600 bg-red-50 border-red-200',
+                color: 'text-[#DC2626] bg-[#DC2626]/10 border-[#DC2626]/30',
               },
               {
                 time: '6 أسابيع',
                 desc: 'فحوصات متابعة',
                 icon: Clock,
-                color: 'text-orange-600 bg-orange-50 border-orange-200',
+                color: 'text-[#D67A0A] bg-[#F7941D]/10 border-[#F7941D]/30',
               },
               {
                 time: '3 أشهر',
                 desc: 'فحوصات متابعة',
                 icon: Clock,
-                color: 'text-yellow-600 bg-yellow-50 border-yellow-200',
+                color: 'text-[#D49A0A] bg-[#FCB614]/10 border-[#FCB614]/20',
               },
               {
                 time: '6 أشهر',
                 desc: 'فحوصات نهائية',
                 icon: CheckCircle2,
-                color: 'text-green-600 bg-green-50 border-green-200',
+                color: 'text-[#1E9658] bg-[#2BB574]/10 border-[#2BB574]/20',
               },
             ].map((item, idx) => (
               <div
@@ -667,7 +667,7 @@ export const OccupationalExposure: React.FC = () => {
   return (
     <div dir="rtl" className="min-h-screen bg-gray-50 pb-10">
       {/* Header */}
-      <div className="bg-gradient-to-l from-[#14415A] to-[#1E6B5C] text-white px-6 py-5">
+      <div className="bg-gradient-to-l from-[#0F3144] to-[#1E6B5C] text-white px-6 py-5">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -701,7 +701,7 @@ export const OccupationalExposure: React.FC = () => {
             }}
             className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2 ${
               activeTab === 'registry'
-                ? 'bg-[#14415A] text-white shadow-md'
+                ? 'bg-[#0F3144] text-white shadow-md'
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
             }`}
           >
@@ -712,7 +712,7 @@ export const OccupationalExposure: React.FC = () => {
             onClick={() => setActiveTab('new_report')}
             className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2 ${
               activeTab === 'new_report'
-                ? 'bg-[#14415A] text-white shadow-md'
+                ? 'bg-[#0F3144] text-white shadow-md'
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
             }`}
           >
@@ -735,7 +735,7 @@ export const OccupationalExposure: React.FC = () => {
                     <stat.icon size={20} className={stat.iconColor} />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-[#14415A]">{stat.value}</p>
+                    <p className="text-2xl font-bold text-[#0F3144]">{stat.value}</p>
                     <p className="text-xs text-gray-500">{stat.label}</p>
                   </div>
                 </div>
@@ -752,7 +752,7 @@ export const OccupationalExposure: React.FC = () => {
                     placeholder="بحث بالاسم أو رقم الحادثة أو نوع التعرض..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg pr-10 pl-4 py-2.5 text-sm focus:ring-2 focus:ring-[#14415A] focus:border-transparent outline-none transition"
+                    className="w-full border border-gray-300 rounded-lg pr-10 pl-4 py-2.5 text-sm focus:ring-2 focus:ring-[#0F3144] focus:border-transparent outline-none transition"
                   />
                 </div>
                 <button className="p-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-gray-500">
@@ -767,14 +767,14 @@ export const OccupationalExposure: React.FC = () => {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-gray-50 border-b border-gray-200">
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">رقم الحادثة</th>
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">التاريخ</th>
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">الموظف</th>
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">نوع التعرض</th>
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">تقييم الخطورة</th>
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">حالة PEP</th>
-                      <th className="text-right px-4 py-3 font-semibold text-[#14415A]">الحالة</th>
-                      <th className="text-center px-4 py-3 font-semibold text-[#14415A]">إجراء</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">رقم الحادثة</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">التاريخ</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">الموظف</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">نوع التعرض</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">تقييم الخطورة</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">حالة PEP</th>
+                      <th className="text-right px-4 py-3 font-semibold text-[#0F3144]">الحالة</th>
+                      <th className="text-center px-4 py-3 font-semibold text-[#0F3144]">إجراء</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -789,7 +789,7 @@ export const OccupationalExposure: React.FC = () => {
                           key={incident.id}
                           className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
                         >
-                          <td className="px-4 py-3 font-mono text-xs text-[#14415A] font-medium">
+                          <td className="px-4 py-3 font-mono text-xs text-[#0F3144] font-medium">
                             {incident.id}
                           </td>
                           <td className="px-4 py-3 text-gray-600">{incident.date}</td>
@@ -814,7 +814,7 @@ export const OccupationalExposure: React.FC = () => {
                             </span>
                           </td>
                           <td className="px-4 py-3 text-center">
-                            <button className="p-1.5 text-[#14415A] hover:bg-[#14415A]/10 rounded-lg transition">
+                            <button className="p-1.5 text-[#0F3144] hover:bg-[#0F3144]/10 rounded-lg transition">
                               <Eye size={16} />
                             </button>
                           </td>
@@ -858,7 +858,7 @@ export const OccupationalExposure: React.FC = () => {
                     className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2 ${
                       currentStep === 1
                         ? 'text-gray-300 cursor-not-allowed'
-                        : 'text-[#14415A] hover:bg-[#14415A]/5 border border-[#14415A]/20'
+                        : 'text-[#0F3144] hover:bg-[#0F3144]/5 border border-[#0F3144]/20'
                     }`}
                   >
                     السابق
@@ -870,7 +870,7 @@ export const OccupationalExposure: React.FC = () => {
 
                   <button
                     onClick={handleNextStep}
-                    className="px-6 py-2.5 bg-[#14415A] hover:bg-[#0f3347] text-white rounded-xl text-sm font-medium transition-all shadow-md flex items-center gap-2"
+                    className="px-6 py-2.5 bg-[#0F3144] hover:bg-[#0f3347] text-white rounded-xl text-sm font-medium transition-all shadow-md flex items-center gap-2"
                   >
                     التالي
                   </button>
@@ -881,7 +881,7 @@ export const OccupationalExposure: React.FC = () => {
                 <div className="flex items-center justify-start mt-6 pt-5 border-t border-gray-100">
                   <button
                     onClick={handlePrevStep}
-                    className="px-6 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2 text-[#14415A] hover:bg-[#14415A]/5 border border-[#14415A]/20"
+                    className="px-6 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center gap-2 text-[#0F3144] hover:bg-[#0F3144]/5 border border-[#0F3144]/20"
                   >
                     السابق
                   </button>

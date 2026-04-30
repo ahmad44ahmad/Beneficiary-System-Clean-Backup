@@ -9,7 +9,7 @@ import { twMerge } from 'tailwind-merge';
  * 
  * @example
  * cn('px-2 py-1', 'px-4') // Returns 'py-1 px-4' (px-4 wins)
- * cn('text-red-500', condition && 'text-blue-500') // Conditional classes
+ * cn('text-[#DC2626]', condition && 'text-[#269798]') // Conditional classes
  */
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));

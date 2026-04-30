@@ -44,14 +44,14 @@ export const SpeechAssessmentForm: React.FC<{
                         <label className="block text-sm font-medium text-gray-700">Receptive Language Age</label>
                         <input type="text" value={formData.receptiveLanguageAge}
                             onChange={(e) => handleSystemChange('receptiveLanguageAge', e.target.value)}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                             placeholder="e.g. 3 years 6 months" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Expressive Language Age</label>
                         <input type="text" value={formData.expressiveLanguageAge}
                             onChange={(e) => handleSystemChange('expressiveLanguageAge', e.target.value)}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border p-2"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] border p-2"
                             placeholder="e.g. 2 years" />
                     </div>
                 </div>
@@ -69,7 +69,7 @@ export const SpeechAssessmentForm: React.FC<{
                     <div className="flex items-center mt-6">
                         <input type="checkbox" checked={formData.drooling}
                             onChange={(e) => handleSystemChange('drooling', e.target.checked)}
-                            className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            className="h-4 w-4 text-[#0F3144] border-gray-300 rounded" />
                         <label className="ms-2 block text-sm text-gray-900">Drooling Present</label>
                     </div>
                 </div>
@@ -122,7 +122,7 @@ const SelectField = ({ label, value, options, onChange }: { label: string; value
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] sm:text-sm p-2 border">
             {options.map((opt: string) => (
                 <option key={opt} value={opt}>{opt}</option>
             ))}

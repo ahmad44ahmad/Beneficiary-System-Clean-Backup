@@ -46,9 +46,9 @@ export const VARIANCE_LABELS: Record<OutcomeActual['variance'], string> = {
 
 export const VARIANCE_TONES: Record<OutcomeActual['variance'], { bg: string; text: string; icon: string }> = {
     exceeded:  { bg: 'bg-hrsd-green/15', text: 'text-hrsd-green-dark', icon: '↗' },
-    on_target: { bg: 'bg-sky-100',       text: 'text-sky-800',         icon: '→' },
-    below:     { bg: 'bg-amber-100',     text: 'text-amber-800',       icon: '↓' },
-    failed:    { bg: 'bg-rose-100',      text: 'text-rose-800',        icon: '✕' },
+    on_target: { bg: 'bg-[#269798]/10',       text: 'text-[#0F3144]',         icon: '→' },
+    below:     { bg: 'bg-[#FCB614]/15',     text: 'text-[#92400E]',       icon: '↓' },
+    failed:    { bg: 'bg-[#DC2626]/15',      text: 'text-[#7F1D1D]',        icon: '✕' },
 };
 
 export const SEED_LEDGER: LedgerEntry[] = [

@@ -34,16 +34,16 @@ export const QualityProcessesPanel: React.FC = () => {
         <div className="space-y-6">
             {/* Insights Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="p-6 bg-gradient-to-br from-teal-50 to-white border-teal-100">
+                <Card className="p-6 bg-gradient-to-br from-[#269798]/10 to-white border-[#269798]/10">
                     <div className="flex items-start justify-between">
                         <div>
-                            <h3 className="text-lg font-bold text-teal-900 mb-2">توزيع العمليات</h3>
-                            <p className="text-sm text-teal-700">
+                            <h3 className="text-lg font-bold text-[#0F3144] mb-2">توزيع العمليات</h3>
+                            <p className="text-sm text-[#1B7778]">
                                 توازن في توزيع العمليات مع هيمنة للأقسام التشغيلية (العلاج الطبي، الخدمات).
                             </p>
                         </div>
-                        <div className="p-3 bg-teal-100 rounded-lg">
-                            <BarChart2 className="w-6 h-6 text-teal-600" />
+                        <div className="p-3 bg-[#269798]/10 rounded-lg">
+                            <BarChart2 className="w-6 h-6 text-[#1B7778]" />
                         </div>
                     </div>
                 </Card>
@@ -86,7 +86,7 @@ export const QualityProcessesPanel: React.FC = () => {
                             <div className="w-32 text-sm text-gray-600 font-medium truncate" title={dep}>{dep}</div>
                             <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
                                 <div
-                                    className={`h-full rounded-full ${idx === 0 ? 'bg-teal-500' : 'bg-teal-400 opacity-90'}`}
+                                    className={`h-full rounded-full ${idx === 0 ? 'bg-[#269798]' : 'bg-[#269798] opacity-90'}`}
                                     style={{ width: `${(count / departmentCounts[0][1]) * 100}%` }}
                                 ></div>
                             </div>
@@ -103,7 +103,7 @@ export const QualityProcessesPanel: React.FC = () => {
                     <input
                         type="text"
                         placeholder="بحث عن عملية، قسم..."
-                        className="w-full pe-10 ps-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
+                        className="w-full pe-10 ps-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#269798] outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -121,7 +121,7 @@ export const QualityProcessesPanel: React.FC = () => {
                     </select>
                 </div>
                 <div className="text-sm text-gray-500 whitespace-nowrap">
-                    عدد العمليات: <span className="font-bold text-teal-600">{filteredProcesses.length}</span> / {qualityProcesses.length}
+                    عدد العمليات: <span className="font-bold text-[#1B7778]">{filteredProcesses.length}</span> / {qualityProcesses.length}
                 </div>
             </div>
 
@@ -148,7 +148,7 @@ export const QualityProcessesPanel: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{process.responsible}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${process.frequency === 'يومي' || process.frequency === 'مستمر'
-                                            ? 'bg-blue-100 text-blue-800'
+                                            ? 'bg-[#269798]/15 text-[#1B7778]'
                                             : 'bg-gray-100 text-gray-800'
                                             }`}>
                                             {process.frequency}
@@ -157,7 +157,7 @@ export const QualityProcessesPanel: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <button
                                             onClick={() => setSelectedProcess(process)}
-                                            className="text-teal-600 hover:text-teal-800 font-medium flex items-center gap-1"
+                                            className="text-[#1B7778] hover:text-[#0F3144] font-medium flex items-center gap-1"
                                         >
                                             التفاصيل <ArrowRight className="w-4 h-4" />
                                         </button>
@@ -175,7 +175,7 @@ export const QualityProcessesPanel: React.FC = () => {
                     <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-center p-6 border-b">
                             <h2 className="text-xl font-bold text-gray-900">{selectedProcess.name}</h2>
-                            <button onClick={() => setSelectedProcess(null)} className="text-gray-400 hover:text-red-500">
+                            <button onClick={() => setSelectedProcess(null)} className="text-gray-400 hover:text-[#DC2626]">
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
@@ -200,25 +200,25 @@ export const QualityProcessesPanel: React.FC = () => {
                             </div>
 
                             <div>
-                                <h4 className="font-bold text-teal-800 mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+                                <h4 className="font-bold text-[#0F3144] mb-2 flex items-center gap-2">
+                                    <span className="w-2 h-2 bg-[#269798] rounded-full"></span>
                                     المدخلات والمخرجات
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="border border-teal-100 p-3 rounded bg-teal-50/50">
-                                        <label className="block text-xs font-bold text-teal-700 mb-1">المدخلات</label>
+                                    <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10/50">
+                                        <label className="block text-xs font-bold text-[#1B7778] mb-1">المدخلات</label>
                                         <p className="text-sm">{selectedProcess.inputs}</p>
                                     </div>
-                                    <div className="border border-teal-100 p-3 rounded bg-teal-50/50">
-                                        <label className="block text-xs font-bold text-teal-700 mb-1">المخرجات</label>
+                                    <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10/50">
+                                        <label className="block text-xs font-bold text-[#1B7778] mb-1">المخرجات</label>
                                         <p className="text-sm">{selectedProcess.outputs}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <h4 className="font-bold text-teal-800 mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+                                <h4 className="font-bold text-[#0F3144] mb-2 flex items-center gap-2">
+                                    <span className="w-2 h-2 bg-[#269798] rounded-full"></span>
                                     مؤشرات الأداء (KPIs)
                                 </h4>
                                 <div className="bg-white border rounded-lg p-4 shadow-sm">

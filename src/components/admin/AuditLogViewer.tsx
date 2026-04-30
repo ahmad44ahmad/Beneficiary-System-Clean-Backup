@@ -32,16 +32,16 @@ interface AuditLogEntry {
 
 // Action to Arabic labels
 const ACTION_LABELS: Record<string, { label: string; color: string; icon: typeof CheckCircle }> = {
-    create: { label: 'إنشاء', color: 'text-green-600 bg-green-100', icon: CheckCircle },
-    read: { label: 'عرض', color: 'text-blue-600 bg-blue-100', icon: Eye },
-    update: { label: 'تحديث', color: 'text-amber-600 bg-amber-100', icon: Activity },
-    delete: { label: 'حذف', color: 'text-red-600 bg-red-100', icon: XCircle },
-    login: { label: 'دخول', color: 'text-emerald-600 bg-emerald-100', icon: User },
+    create: { label: 'إنشاء', color: 'text-[#1E9658] bg-[#2BB574]/15', icon: CheckCircle },
+    read: { label: 'عرض', color: 'text-[#269798] bg-[#269798]/15', icon: Eye },
+    update: { label: 'تحديث', color: 'text-[#D49A0A] bg-[#FCB614]/15', icon: Activity },
+    delete: { label: 'حذف', color: 'text-[#DC2626] bg-[#DC2626]/15', icon: XCircle },
+    login: { label: 'دخول', color: 'text-[#1E9658] bg-[#2BB574]/15', icon: User },
     logout: { label: 'خروج', color: 'text-gray-600 bg-gray-100', icon: User },
-    export: { label: 'تصدير', color: 'text-purple-600 bg-purple-100', icon: Download },
-    print: { label: 'طباعة', color: 'text-indigo-600 bg-indigo-100', icon: Printer },
-    approve: { label: 'موافقة', color: 'text-green-600 bg-green-100', icon: CheckCircle },
-    reject: { label: 'رفض', color: 'text-red-600 bg-red-100', icon: XCircle },
+    export: { label: 'تصدير', color: 'text-[#D49A0A] bg-[#FCB614]/15', icon: Download },
+    print: { label: 'طباعة', color: 'text-[#0F3144] bg-[#0F3144]/10', icon: Printer },
+    approve: { label: 'موافقة', color: 'text-[#1E9658] bg-[#2BB574]/15', icon: CheckCircle },
+    reject: { label: 'رفض', color: 'text-[#DC2626] bg-[#DC2626]/15', icon: XCircle },
 };
 
 // Module labels
@@ -253,14 +253,14 @@ export const AuditLogViewer: React.FC = () => {
                         تتبع جميع العمليات والإجراءات في النظام للامتثال والمساءلة
                     </p>
                     {usingDemo && import.meta.env.DEV && (
-                        <p className="text-amber-600 text-sm mt-1">وضع العرض</p>
+                        <p className="text-[#D49A0A] text-sm mt-1">وضع العرض</p>
                     )}
                 </div>
                 <div className="flex gap-2">
                     <button
                         onClick={handleExport}
                         disabled={isExporting || filteredLogs.length === 0}
-                        className="px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
                     >
                         <FileSpreadsheet className="w-5 h-5" />
                         تصدير Excel
@@ -336,23 +336,23 @@ export const AuditLogViewer: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-4 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-blue-600">{filteredLogs.length}</p>
+                    <p className="text-2xl font-bold text-[#269798]">{filteredLogs.length}</p>
                     <p className="text-sm text-gray-500">إجمالي السجلات</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-green-600">
+                    <p className="text-2xl font-bold text-[#1E9658]">
                         {filteredLogs.filter(l => l.success).length}
                     </p>
                     <p className="text-sm text-gray-500">عمليات ناجحة</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-red-600">
+                    <p className="text-2xl font-bold text-[#DC2626]">
                         {filteredLogs.filter(l => !l.success).length}
                     </p>
                     <p className="text-sm text-gray-500">عمليات فاشلة</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-amber-600">
+                    <p className="text-2xl font-bold text-[#D49A0A]">
                         {new Set(filteredLogs.map(l => l.user_id)).size}
                     </p>
                     <p className="text-sm text-gray-500">مستخدمين نشطين</p>
@@ -404,12 +404,12 @@ export const AuditLogViewer: React.FC = () => {
                                                     {MODULE_LABELS[log.module] || log.module}
                                                 </span>
                                                 {log.success ? (
-                                                    <span className="flex items-center gap-1 text-green-600">
+                                                    <span className="flex items-center gap-1 text-[#1E9658]">
                                                         <CheckCircle className="w-4 h-4" />
                                                         نجاح
                                                     </span>
                                                 ) : (
-                                                    <span className="flex items-center gap-1 text-red-600">
+                                                    <span className="flex items-center gap-1 text-[#DC2626]">
                                                         <XCircle className="w-4 h-4" />
                                                         فشل
                                                     </span>
@@ -448,8 +448,8 @@ export const AuditLogViewer: React.FC = () => {
                                                             )}
                                                             {log.error_message && (
                                                                 <div className="col-span-2">
-                                                                    <p className="text-red-500">رسالة الخطأ</p>
-                                                                    <p className="text-red-700">{log.error_message}</p>
+                                                                    <p className="text-[#DC2626]">رسالة الخطأ</p>
+                                                                    <p className="text-[#B91C1C]">{log.error_message}</p>
                                                                 </div>
                                                             )}
                                                         </div>

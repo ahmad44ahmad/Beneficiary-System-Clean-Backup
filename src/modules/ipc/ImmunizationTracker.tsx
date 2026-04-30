@@ -31,9 +31,9 @@ const VACCINE_TYPES = [
 // Status Badge Component
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
     const styles: Record<string, string> = {
-        immune: 'bg-green-100 text-green-700 border-green-300',
-        pending: 'bg-yellow-100 text-yellow-700 border-yellow-300',
-        expired: 'bg-red-100 text-red-700 border-red-300',
+        immune: 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]',
+        pending: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]',
+        expired: 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]',
         non_responder: 'bg-gray-100 text-gray-700 border-gray-300',
         declined: 'bg-gray-100 text-gray-600 border-gray-300',
     };
@@ -108,9 +108,9 @@ const AddVaccinationModal: React.FC<{
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" dir="rtl">
             <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
                 {/* Header */}
-                <div className="flex items-center justify-between p-5 border-b bg-blue-50 rounded-t-2xl">
+                <div className="flex items-center justify-between p-5 border-b bg-[#269798]/10 rounded-t-2xl">
                     <div className="flex items-center gap-3">
-                        <Syringe className="w-6 h-6 text-blue-600" />
+                        <Syringe className="w-6 h-6 text-[#269798]" />
                         <h2 className="text-lg font-bold text-gray-800">تسجيل تحصين جديد</h2>
                     </div>
                     <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
@@ -127,7 +127,7 @@ const AddVaccinationModal: React.FC<{
                                 type="button"
                                 onClick={() => setPersonType('staff')}
                                 className={`flex-1 p-3 rounded-xl border-2 transition-all flex items-center justify-center gap-2 ${
-                                    personType === 'staff' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
+                                    personType === 'staff' ? 'border-[#269798] bg-[#269798]/10' : 'border-gray-200 hover:border-[#269798]'
                                 }`}
                             >
                                 <Users className="w-4 h-4" />
@@ -137,7 +137,7 @@ const AddVaccinationModal: React.FC<{
                                 type="button"
                                 onClick={() => setPersonType('beneficiary')}
                                 className={`flex-1 p-3 rounded-xl border-2 transition-all flex items-center justify-center gap-2 ${
-                                    personType === 'beneficiary' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'
+                                    personType === 'beneficiary' ? 'border-[#269798] bg-[#269798]/10' : 'border-gray-200 hover:border-[#269798]'
                                 }`}
                             >
                                 <User className="w-4 h-4" />
@@ -157,7 +157,7 @@ const AddVaccinationModal: React.FC<{
                                 value={staffName}
                                 onChange={e => setStaffName(e.target.value)}
                                 placeholder="أدخل اسم الموظف"
-                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none"
                             />
                         ) : (
                             <input
@@ -165,7 +165,7 @@ const AddVaccinationModal: React.FC<{
                                 value={beneficiaryId}
                                 onChange={e => setBeneficiaryId(e.target.value)}
                                 placeholder="أدخل رقم المستفيد"
-                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none"
                             />
                         )}
                     </div>
@@ -184,8 +184,8 @@ const AddVaccinationModal: React.FC<{
                                     }}
                                     className={`p-3 rounded-xl border-2 text-right transition-all ${
                                         vaccineCode === vaccine.code
-                                            ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
-                                            : 'border-gray-200 hover:border-blue-300'
+                                            ? 'border-[#269798] bg-[#269798]/10 ring-2 ring-[#269798]/20'
+                                            : 'border-gray-200 hover:border-[#269798]'
                                     }`}
                                 >
                                     <div className="font-medium text-sm">{vaccine.name_ar}</div>
@@ -202,7 +202,7 @@ const AddVaccinationModal: React.FC<{
                             <select
                                 value={doseNumber}
                                 onChange={e => setDoseNumber(Number(e.target.value))}
-                                className="w-full p-3 border border-gray-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-3 border border-gray-300 rounded-xl bg-white focus:ring-2 focus:ring-[#269798] outline-none"
                             >
                                 {Array.from({ length: selectedVaccine?.doses || 3 }, (_, i) => i + 1).map(n => (
                                     <option key={n} value={n}>الجرعة {n}</option>
@@ -215,27 +215,27 @@ const AddVaccinationModal: React.FC<{
                                 type="date"
                                 value={dateAdministered}
                                 onChange={e => setDateAdministered(e.target.value)}
-                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#269798] outline-none"
                             />
                         </div>
                     </div>
 
                     {/* Adverse Reaction */}
-                    <label className="flex items-center gap-3 p-3 bg-red-50 rounded-xl cursor-pointer">
+                    <label className="flex items-center gap-3 p-3 bg-[#DC2626]/10 rounded-xl cursor-pointer">
                         <input
                             type="checkbox"
                             checked={adverseReaction}
                             onChange={e => setAdverseReaction(e.target.checked)}
-                            className="w-5 h-5 rounded text-red-500 focus:ring-red-500"
+                            className="w-5 h-5 rounded text-[#DC2626] focus:ring-[#DC2626]"
                         />
-                        <span className="font-medium text-red-800">تم رصد رد فعل تحسسي</span>
+                        <span className="font-medium text-[#7F1D1D]">تم رصد رد فعل تحسسي</span>
                     </label>
                     {adverseReaction && (
                         <textarea
                             value={reactionNotes}
                             onChange={e => setReactionNotes(e.target.value)}
                             placeholder="صف رد الفعل التحسسي..."
-                            className="w-full p-3 border border-red-300 rounded-xl focus:ring-2 focus:ring-red-500 outline-none min-h-[70px] resize-none text-sm"
+                            className="w-full p-3 border border-[#DC2626] rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none min-h-[70px] resize-none text-sm"
                         />
                     )}
 
@@ -243,7 +243,7 @@ const AddVaccinationModal: React.FC<{
                     <button
                         onClick={handleSubmit}
                         disabled={saving}
-                        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-bold py-3 px-6 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all"
+                        className="w-full bg-[#1B7778] hover:bg-[#1B7778] disabled:bg-gray-300 text-white font-bold py-3 px-6 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all"
                     >
                         {saving ? (
                             <>
@@ -363,8 +363,8 @@ export const ImmunizationTracker: React.FC = () => {
                     >
                         <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <div className="p-3 bg-blue-100 rounded-xl">
-                        <Syringe className="w-8 h-8 text-blue-600" />
+                    <div className="p-3 bg-[#269798]/15 rounded-xl">
+                        <Syringe className="w-8 h-8 text-[#269798]" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">سجل التحصينات</h1>
@@ -382,7 +382,7 @@ export const ImmunizationTracker: React.FC = () => {
                     </button>
                     <button
                         onClick={() => setShowAddModal(true)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2 shadow-md"
+                        className="px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] flex items-center gap-2 shadow-md"
                     >
                         <Plus className="w-4 h-4" />
                         تسجيل تحصين
@@ -392,25 +392,25 @@ export const ImmunizationTracker: React.FC = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-blue-500">
+                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#269798]">
                     <p className="text-gray-500 text-sm">إجمالي السجلات</p>
                     <p className="text-2xl font-bold text-gray-800">{stats.total}</p>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-green-500">
+                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#2BB574]">
                     <p className="text-gray-500 text-sm">محصّن بالكامل</p>
-                    <p className="text-2xl font-bold text-green-600">{stats.immune}</p>
+                    <p className="text-2xl font-bold text-[#1E9658]">{stats.immune}</p>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-yellow-500">
+                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#FCB614]">
                     <p className="text-gray-500 text-sm">قيد الاكتمال</p>
-                    <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
+                    <p className="text-2xl font-bold text-[#D49A0A]">{stats.pending}</p>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-red-500">
+                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#DC2626]">
                     <p className="text-gray-500 text-sm">منتهي الصلاحية</p>
-                    <p className="text-2xl font-bold text-red-600">{stats.expired}</p>
+                    <p className="text-2xl font-bold text-[#DC2626]">{stats.expired}</p>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-orange-500">
+                <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#F7941D]">
                     <p className="text-gray-500 text-sm">مستحق هذا الشهر</p>
-                    <p className="text-2xl font-bold text-orange-600">{stats.dueThisMonth}</p>
+                    <p className="text-2xl font-bold text-[#D67A0A]">{stats.dueThisMonth}</p>
                 </div>
             </div>
 
@@ -424,7 +424,7 @@ export const ImmunizationTracker: React.FC = () => {
                         placeholder="بحث بالاسم..."
                         value={searchTerm}
                         onChange={e => setSearchTerm(e.target.value)}
-                        className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] outline-none"
                     />
                 </div>
 
@@ -432,20 +432,20 @@ export const ImmunizationTracker: React.FC = () => {
                 <div className="flex gap-2">
                     <button
                         onClick={() => setFilterType('all')}
-                        className={`px-4 py-2 rounded-lg transition-all ${filterType === 'all' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-4 py-2 rounded-lg transition-all ${filterType === 'all' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         الكل
                     </button>
                     <button
                         onClick={() => setFilterType('staff')}
-                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'staff' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'staff' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         <Users className="w-4 h-4" />
                         الموظفين
                     </button>
                     <button
                         onClick={() => setFilterType('beneficiary')}
-                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'beneficiary' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'beneficiary' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         <User className="w-4 h-4" />
                         المستفيدين
@@ -487,7 +487,7 @@ export const ImmunizationTracker: React.FC = () => {
                                         {imm.staff_name || `مستفيد #${imm.beneficiary_id?.slice(-4)}`}
                                     </td>
                                     <td className="px-4 py-3">
-                                        <span className={`px-2 py-1 rounded text-xs ${imm.person_type === 'staff' ? 'bg-purple-100 text-purple-700' : 'bg-teal-100 text-teal-700'}`}>
+                                        <span className={`px-2 py-1 rounded text-xs ${imm.person_type === 'staff' ? 'bg-[#FCB614]/15 text-[#D49A0A]' : 'bg-[#269798]/10 text-[#1B7778]'}`}>
                                             {imm.person_type === 'staff' ? 'موظف' : 'مستفيد'}
                                         </span>
                                     </td>
@@ -496,7 +496,7 @@ export const ImmunizationTracker: React.FC = () => {
                                     <td className="px-4 py-3 text-gray-600">{imm.date_administered}</td>
                                     <td className="px-4 py-3">
                                         {imm.next_due_date ? (
-                                            <span className="flex items-center gap-1 text-orange-600">
+                                            <span className="flex items-center gap-1 text-[#D67A0A]">
                                                 <Calendar className="w-4 h-4" />
                                                 {imm.next_due_date}
                                             </span>

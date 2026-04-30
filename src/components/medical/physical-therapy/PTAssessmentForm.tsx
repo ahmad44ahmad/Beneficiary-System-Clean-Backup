@@ -95,7 +95,7 @@ export const PTAssessmentForm: React.FC<{
                         <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded">
                             <span>{idx + 1}. {goal}</span>
                             <button onClick={() => setFormData(prev => ({ ...prev, goals: prev.goals?.filter((_, i) => i !== idx) }))}
-                                className="text-red-500 hover:text-red-700">
+                                className="text-[#DC2626] hover:text-[#B91C1C]">
                                 <Trash2 size={16} />
                             </button>
                         </div>
@@ -119,7 +119,7 @@ const SelectField = ({ label, value, options, onChange }: { label: string; value
     <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <select value={value} onChange={(e) => onChange(e.target.value)}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-[#0F3144] focus:ring-[#0F3144] sm:text-sm p-2 border">
             {options.map((opt: string) => (
                 <option key={opt} value={opt}>{opt}</option>
             ))}

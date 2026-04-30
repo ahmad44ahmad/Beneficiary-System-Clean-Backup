@@ -104,7 +104,7 @@ export const CostPerBeneficiary: React.FC = () => {
         value: amount,
     }));
 
-    const COLORS = ['rgb(20, 130, 135)', 'rgb(245, 150, 30)', 'rgb(45, 180, 115)', 'rgb(20, 65, 90)', 'rgb(250, 180, 20)', 'rgb(139, 92, 246)', 'rgb(236, 72, 153)', 'rgb(59, 130, 246)', 'rgb(234, 88, 12)', 'rgb(107, 114, 128)'];
+    const COLORS = ['rgb(38, 151, 152)', 'rgb(247, 148, 29)', 'rgb(43, 181, 116)', 'rgb(20, 65, 90)', 'rgb(252, 182, 20)', 'rgb(139, 92, 246)', 'rgb(236, 72, 153)', 'rgb(59, 130, 246)', 'rgb(234, 88, 12)', 'rgb(107, 114, 128)'];
 
     const categoryIcons: Record<string, React.ReactNode> = {
         'رواتب': <Users className="w-5 h-5" />,
@@ -121,10 +121,10 @@ export const CostPerBeneficiary: React.FC = () => {
 
     const costStatus = dailyCostPerBeneficiary <= 300 ? 'excellent' : dailyCostPerBeneficiary <= TARGET_DAILY_COST ? 'good' : dailyCostPerBeneficiary <= 400 ? 'acceptable' : 'over';
     const statusConfig = {
-        excellent: { label: 'ممتاز', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
-        good: { label: 'ضمن المستهدف', color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
-        acceptable: { label: 'مقبول', color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
-        over: { label: 'يتجاوز المستهدف', color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-200' },
+        excellent: { label: 'ممتاز', color: 'text-[#1E9658]', bg: 'bg-[#2BB574]/10', border: 'border-[#2BB574]/30' },
+        good: { label: 'ضمن المستهدف', color: 'text-[#1E9658]', bg: 'bg-[#2BB574]/10', border: 'border-[#2BB574]/20' },
+        acceptable: { label: 'مقبول', color: 'text-[#D49A0A]', bg: 'bg-[#FCB614]/10', border: 'border-[#FCB614]/30' },
+        over: { label: 'يتجاوز المستهدف', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/10', border: 'border-[#DC2626]/30' },
     };
 
     return (
@@ -219,10 +219,10 @@ export const CostPerBeneficiary: React.FC = () => {
                                     <XAxis dataKey="month" />
                                     <YAxis />
                                     <Tooltip formatter={(value: number) => [`${value} ريال`, 'تكلفة/مستفيد/يوم']} />
-                                    <ReferenceLine y={TARGET_DAILY_COST} stroke="#EF4444" strokeDasharray="5 5" label={{ value: `المستهدف: ${TARGET_DAILY_COST}`, position: 'right', fill: '#EF4444', fontSize: 12 }} />
+                                    <ReferenceLine y={TARGET_DAILY_COST} stroke="#DC2626" strokeDasharray="5 5" label={{ value: `المستهدف: ${TARGET_DAILY_COST}`, position: 'right', fill: '#DC2626', fontSize: 12 }} />
                                     <Bar dataKey="total" radius={[4, 4, 0, 0]}>
                                         {barChartData.map((entry, index) => (
-                                            <Cell key={`bar-${index}`} fill={entry.total <= TARGET_DAILY_COST ? 'rgb(16, 185, 129)' : 'rgb(245, 150, 30)'} />
+                                            <Cell key={`bar-${index}`} fill={entry.total <= TARGET_DAILY_COST ? 'rgb(16, 185, 129)' : 'rgb(247, 148, 29)'} />
                                         ))}
                                     </Bar>
                                 </BarChart>

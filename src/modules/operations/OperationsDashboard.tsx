@@ -105,7 +105,7 @@ export const OperationsDashboard: React.FC = () => {
             value: stats.totalAssets,
             subtitle: `${stats.activeAssets} أصل نشط`,
             icon: Building2,
-            color: 'bg-blue-500',
+            color: 'bg-[#269798]',
             trend: null
         },
         {
@@ -113,7 +113,7 @@ export const OperationsDashboard: React.FC = () => {
             value: stats.pendingMaintenance,
             subtitle: 'بحاجة للمتابعة',
             icon: Wrench,
-            color: 'bg-amber-500',
+            color: 'bg-[#FCB614]',
             trend: null
         },
         {
@@ -121,7 +121,7 @@ export const OperationsDashboard: React.FC = () => {
             value: stats.completedThisMonth,
             subtitle: 'طلب صيانة',
             icon: CheckCircle2,
-            color: 'bg-green-500',
+            color: 'bg-[#2BB574]',
             trend: '+12%'
         },
         {
@@ -129,7 +129,7 @@ export const OperationsDashboard: React.FC = () => {
             value: stats.overduePreventive,
             subtitle: 'تحتاج إجراء فوري',
             icon: AlertTriangle,
-            color: stats.overduePreventive > 0 ? 'bg-red-500' : 'bg-slate-400',
+            color: stats.overduePreventive > 0 ? 'bg-[#DC2626]' : 'bg-slate-400',
             trend: null
         },
         {
@@ -137,25 +137,25 @@ export const OperationsDashboard: React.FC = () => {
             value: `${stats.wasteThisMonth} كجم`,
             subtitle: 'إجمالي النفايات',
             icon: Trash2,
-            color: 'bg-purple-500',
+            color: 'bg-[#FCB614]',
             trend: '-5%'
         }
     ];
 
     const quickActions = [
         { title: 'طلب صيانة جديد', icon: Plus, link: '/operations/maintenance/new', color: 'bg-hrsd-primary' },
-        { title: 'سجل الأصول', icon: Building2, link: '/operations/assets', color: 'bg-blue-600' },
-        { title: 'الصيانة الوقائية', icon: Calendar, link: '/operations/preventive', color: 'bg-green-600' },
-        { title: 'إدارة المخلفات', icon: Trash2, link: '/operations/waste', color: 'bg-purple-600' },
-        { title: 'تقييم المقاولين', icon: ClipboardList, link: '/operations/evaluations', color: 'bg-amber-600' },
+        { title: 'سجل الأصول', icon: Building2, link: '/operations/assets', color: 'bg-[#1B7778]' },
+        { title: 'الصيانة الوقائية', icon: Calendar, link: '/operations/preventive', color: 'bg-[#1E9658]' },
+        { title: 'إدارة المخلفات', icon: Trash2, link: '/operations/waste', color: 'bg-[#D49A0A]' },
+        { title: 'تقييم المقاولين', icon: ClipboardList, link: '/operations/evaluations', color: 'bg-[#D49A0A]' },
     ];
 
     const getStatusBadge = (status: string) => {
         const styles: Record<string, string> = {
-            pending: 'bg-yellow-100 text-yellow-800',
-            approved: 'bg-blue-100 text-blue-800',
-            in_progress: 'bg-indigo-100 text-indigo-800',
-            completed: 'bg-green-100 text-green-800',
+            pending: 'bg-[#FCB614]/10 text-[#D49A0A]',
+            approved: 'bg-[#269798]/15 text-[#1B7778]',
+            in_progress: 'bg-[#0F3144]/10 text-[#0A2030]',
+            completed: 'bg-[#2BB574]/15 text-[#14532D]',
             cancelled: 'bg-gray-100 text-gray-800'
         };
         const labels: Record<string, string> = {
@@ -207,7 +207,7 @@ export const OperationsDashboard: React.FC = () => {
                                 <kpi.icon className="w-6 h-6" />
                             </div>
                             {kpi.trend && (
-                                <span className={`text-sm font-medium ${kpi.trend.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                                <span className={`text-sm font-medium ${kpi.trend.startsWith('+') ? 'text-[#1E9658]' : 'text-[#DC2626]'}`}>
                                     {kpi.trend}
                                 </span>
                             )}
@@ -279,9 +279,9 @@ export const OperationsDashboard: React.FC = () => {
                                         <td className="p-3">{req.title as string}</td>
                                         <td className="p-3 text-center text-sm">{req.request_type as string}</td>
                                         <td className="p-3 text-center">
-                                            <span className={`px-2 py-1 rounded text-xs ${req.priority === 'critical' ? 'bg-red-100 text-red-800' :
-                                                    req.priority === 'high' ? 'bg-orange-100 text-orange-800' :
-                                                        req.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                                            <span className={`px-2 py-1 rounded text-xs ${req.priority === 'critical' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' :
+                                                    req.priority === 'high' ? 'bg-[#F7941D]/15 text-[#92400E]' :
+                                                        req.priority === 'medium' ? 'bg-[#FCB614]/10 text-[#D49A0A]' :
                                                             'bg-gray-100 text-gray-800'
                                                 }`}>
                                                 {req.priority as string}

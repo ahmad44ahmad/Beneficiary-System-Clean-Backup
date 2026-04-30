@@ -34,13 +34,13 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
     return (
         <section
             dir="rtl"
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm"
+            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
         >
             <div className="flex items-baseline justify-between mb-5">
-                <h2 className="text-[17px] font-bold text-slate-900 dark:text-white">
+                <h2 className="text-[17px] font-bold text-hrsd-navy dark:text-white">
                     دورة تأمين الكسوة — أربع مراحل
                 </h2>
-                <span className="text-[12px] text-slate-500 dark:text-slate-400">
+                <span className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                     المصدر: ضوابط الكسوة 2020
                 </span>
             </div>
@@ -56,7 +56,7 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
                             ? 'border-hrsd-teal bg-hrsd-teal/5 shadow-md'
                             : state === 'completed'
                             ? 'border-hrsd-green bg-hrsd-green/5'
-                            : 'border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800';
+                            : 'border-gray-200 bg-gray-50 dark:border-gray-200 dark:bg-white';
 
                     const Icon =
                         state === 'completed' ? CheckCircle2 : state === 'current' ? Clock : Circle;
@@ -65,7 +65,7 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
                             ? 'text-hrsd-teal'
                             : state === 'completed'
                             ? 'text-hrsd-green'
-                            : 'text-slate-400';
+                            : 'text-hrsd-cool-gray';
 
                     return (
                         <li key={phase} className={`${base} ${tone}`}>
@@ -76,7 +76,7 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
                                             ? 'bg-hrsd-teal text-white'
                                             : state === 'completed'
                                             ? 'bg-hrsd-green text-white'
-                                            : 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300'
+                                            : 'bg-slate-200 text-hrsd-cool-gray dark:bg-gray-50 dark:text-hrsd-navy'
                                     }`}
                                 >
                                     {idx + 1}
@@ -84,15 +84,15 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
                                 <Icon className={`w-5 h-5 ${iconTone}`} />
                             </div>
                             <div>
-                                <h3 className="text-[15px] font-bold text-slate-900 dark:text-white leading-snug">
+                                <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white leading-snug">
                                     {label.ar}
                                 </h3>
-                                <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-1">
+                                <p className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-1">
                                     {label.en}
                                 </p>
                             </div>
                             {label.durationDays && (
-                                <p className="text-[13px] text-slate-600 dark:text-slate-300 mt-auto">
+                                <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-navy mt-auto">
                                     المدة المعتمدة: {label.durationDays[0]}–{label.durationDays[1]} يوم
                                 </p>
                             )}

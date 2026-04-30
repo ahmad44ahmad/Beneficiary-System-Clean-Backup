@@ -62,7 +62,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                     </div>
 
                     <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                        <div className="bg-blue-50/50 p-4 rounded-lg border border-blue-100 flex justify-between items-center text-sm">
+                        <div className="bg-[#269798]/10/50 p-4 rounded-lg border border-[#269798]/10 flex justify-between items-center text-sm">
                             <div>
                                 <span className="text-gray-500 ms-2">اسم المستفيد:</span>
                                 <span className="font-bold text-gray-900">{beneficiary.fullName}</span>
@@ -83,7 +83,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                     value={formData.date}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -95,7 +95,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                     value={formData.time}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all"
                                 />
                             </div>
                         </div>
@@ -110,7 +110,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                 onChange={handleChange}
                                 required
                                 placeholder="مثلاً: الصالة الرياضية، غرفة النوم..."
-                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all"
                             />
                         </div>
 
@@ -124,7 +124,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                 onChange={handleChange}
                                 required
                                 placeholder="جرح، كدمة، كسر، حرق..."
-                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all"
                             />
                         </div>
 
@@ -137,7 +137,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                 onChange={handleChange}
                                 rows={4}
                                 required
-                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all resize-none"
                             ></textarea>
                         </div>
 
@@ -149,20 +149,20 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                 value={formData.firstAidGiven}
                                 onChange={handleChange}
                                 rows={3}
-                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
+                                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all resize-none"
                             ></textarea>
                         </div>
 
-                        <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+                        <div className="bg-[#DC2626]/10 p-4 rounded-lg border border-[#DC2626]/10">
                             <label className="flex items-center gap-3 cursor-pointer">
                                 <input
                                     type="checkbox"
                                     name="takenToHospital"
                                     checked={formData.takenToHospital}
                                     onChange={handleCheckboxChange}
-                                    className="w-5 h-5 text-red-600 rounded focus:ring-red-500 border-gray-300"
+                                    className="w-5 h-5 text-[#DC2626] rounded focus:ring-[#DC2626] border-gray-300"
                                 />
-                                <span className="font-medium text-red-900">هل تم نقل الحالة للمستشفى؟</span>
+                                <span className="font-medium text-[#7F1D1D]">هل تم نقل الحالة للمستشفى؟</span>
                             </label>
                         </div>
 
@@ -175,7 +175,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                     name="witnesses"
                                     value={formData.witnesses}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -187,7 +187,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                                     value={formData.supervisorName}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#269798] focus:border-[#269798] outline-none transition-all"
                                 />
                             </div>
                         </div>
@@ -197,7 +197,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                         <Button type="button" variant="outline" onClick={onCancel}>
                             إلغاء
                         </Button>
-                        <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+                        <Button type="submit" className="bg-[#1B7778] hover:bg-[#1B7778] text-white gap-2">
                             <Save className="w-4 h-4" />
                             حفظ البلاغ
                         </Button>

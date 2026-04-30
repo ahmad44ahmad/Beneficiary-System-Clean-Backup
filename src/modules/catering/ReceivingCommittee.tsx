@@ -114,11 +114,11 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
         <div className="bg-white rounded-xl border border-gray-200 p-6 mt-8">
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-3">
-                    <div className="p-3 bg-blue-50 rounded-lg text-blue-700">
+                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#1B7778]">
                         <ShieldCheck className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-lg font-bold text-[#14415A]">لجنة الاستلام الرقمية</h3>
+                        <h3 className="text-lg font-bold text-[#0F3144]">لجنة الاستلام الرقمية</h3>
                         <p className="text-gray-500 text-sm">التوقيع والمصادقة الإلكترونية على الاستلام</p>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                             key={role.id}
                             onClick={() => setActiveRole(role.id)}
                             className={`px-3 py-1 text-xs rounded-md transition-colors ${activeRole === role.id
-                                ? 'bg-white shadow-sm text-blue-700 font-bold border border-blue-100'
+                                ? 'bg-white shadow-sm text-[#1B7778] font-bold border border-[#269798]/10'
                                 : 'text-gray-500 hover:text-gray-700'
                                 }`}
                         >
@@ -155,18 +155,18 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                             <div
                                 key={role.id}
                                 className={`relative p-5 rounded-xl border-2 transition-all ${signature
-                                    ? 'border-green-100 bg-green-50/50'
+                                    ? 'border-[#2BB574]/10 bg-[#2BB574]/10/50'
                                     : isMe
-                                        ? 'border-blue-200 bg-blue-50/30 shadow-md ring-2 ring-blue-100/50'
+                                        ? 'border-[#269798]/30 bg-[#269798]/10/30 shadow-md ring-2 ring-[#269798]/10/50'
                                         : 'border-dashed border-gray-200 bg-gray-50/50 opacity-70'
                                     }`}
                             >
                                 <div className="flex justify-between items-start mb-4">
-                                    <span className={`text-sm font-bold ${signature ? 'text-green-700' : 'text-gray-600'}`}>
+                                    <span className={`text-sm font-bold ${signature ? 'text-[#1E9658]' : 'text-gray-600'}`}>
                                         {role.title}
                                     </span>
                                     {signature ? (
-                                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                                        <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />
                                     ) : (
                                         <UserCheck className="w-5 h-5 text-gray-400" />
                                     )}
@@ -178,7 +178,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                                         <p className="text-xs text-gray-500 mt-1" dir="ltr">
                                             {new Date(signature.signed_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                                         </p>
-                                        <div className="mt-3 flex items-center gap-1 text-[10px] text-green-700 font-medium bg-green-100 w-fit px-2 py-0.5 rounded-full">
+                                        <div className="mt-3 flex items-center gap-1 text-[10px] text-[#1E9658] font-medium bg-[#2BB574]/15 w-fit px-2 py-0.5 rounded-full">
                                             <FileSignature className="w-3 h-3" />
                                             تم التوقيع رقمياً
                                         </div>
@@ -189,7 +189,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                                             <button
                                                 onClick={handleSign}
                                                 disabled={isSigning}
-                                                className="w-full py-2 bg-[#14415A] text-white rounded-lg text-sm font-medium hover:bg-[#0f3246] transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+                                                className="w-full py-2 bg-[#0F3144] text-white rounded-lg text-sm font-medium hover:bg-[#0f3246] transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
                                             >
                                                 {isSigning ? (
                                                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -216,9 +216,9 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                 <div className="flex items-center gap-2 text-sm">
                     <span className="text-gray-500">حالة التقرير اليومي:</span>
                     <span className={`px-2 py-1 rounded-md font-bold ${report?.status === 'approved'
-                        ? 'bg-green-100 text-green-700'
+                        ? 'bg-[#2BB574]/15 text-[#1E9658]'
                         : report?.status === 'pending_approval'
-                            ? 'bg-yellow-100 text-yellow-700'
+                            ? 'bg-[#FCB614]/10 text-[#D49A0A]'
                             : 'bg-gray-100 text-gray-600'
                         }`}>
                         {report?.status === 'approved' ? 'مكتمل ومعتمد' :

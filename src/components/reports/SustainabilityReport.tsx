@@ -28,21 +28,21 @@ export const SustainabilityReport: React.FC = () => {
         >
             {/* Impact Highlights */}
             <div className="grid grid-cols-3 gap-6 mb-10">
-                <div className="p-6 border rounded-lg bg-green-50 text-center">
-                    <Leaf className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <h4 className="font-bold text-green-800">الأثر الاجتماعي</h4>
+                <div className="p-6 border rounded-lg bg-[#2BB574]/10 text-center">
+                    <Leaf className="w-8 h-8 text-[#1E9658] mx-auto mb-2" />
+                    <h4 className="font-bold text-[#14532D]">الأثر الاجتماعي</h4>
                     <p className="text-3xl font-bold text-gray-900 mt-2">{successRate}%</p>
                     <p className="text-xs text-gray-500 mt-1">نسبة تحقيق أهداف التأهيل</p>
                 </div>
-                <div className="p-6 border rounded-lg bg-blue-50 text-center">
-                    <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                    <h4 className="font-bold text-blue-800">الكفاءة التشغيلية</h4>
+                <div className="p-6 border rounded-lg bg-[#269798]/10 text-center">
+                    <TrendingUp className="w-8 h-8 text-[#269798] mx-auto mb-2" />
+                    <h4 className="font-bold text-[#1B7778]">الكفاءة التشغيلية</h4>
                     <p className="text-3xl font-bold text-gray-900 mt-2">{assetUtilizationRate}%</p>
                     <p className="text-xs text-gray-500 mt-1">نسبة استغلال الأصول</p>
                 </div>
-                <div className="p-6 border rounded-lg bg-teal-50 text-center">
-                    <ShieldCheck className="w-8 h-8 text-teal-600 mx-auto mb-2" />
-                    <h4 className="font-bold text-teal-800">السلامة المهنية</h4>
+                <div className="p-6 border rounded-lg bg-[#269798]/10 text-center">
+                    <ShieldCheck className="w-8 h-8 text-[#1B7778] mx-auto mb-2" />
+                    <h4 className="font-bold text-[#0F3144]">السلامة المهنية</h4>
                     <p className="text-3xl font-bold text-gray-900 mt-2">{safetyResponseRate}%</p>
                     <p className="text-xs text-gray-500 mt-1">معدل الاستجابة للحوادث</p>
                 </div>

@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 
 // HRSD brand colors
-const NAVY = '#14415A';
+const NAVY = '#0F3144';
 const TEAL = '#1E6B5C';
 
 interface PPEStep {
@@ -203,7 +203,7 @@ export const PPEProtocols: React.FC = () => {
                     onClick={() => setCurrentStep(index)}
                     className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
                       isCompleted
-                        ? 'bg-green-500 text-white scale-90'
+                        ? 'bg-[#2BB574] text-white scale-90'
                         : isCurrent
                         ? 'text-white scale-110 shadow-lg'
                         : 'bg-gray-200 text-gray-400'
@@ -226,7 +226,7 @@ export const PPEProtocols: React.FC = () => {
                   {index < steps.length - 1 && (
                     <div
                       className={`flex-shrink-0 h-0.5 w-6 rounded transition-colors duration-300 ${
-                        index < currentStep ? 'bg-green-400' : 'bg-gray-200'
+                        index < currentStep ? 'bg-[#2BB574]' : 'bg-gray-200'
                       }`}
                     />
                   )}
@@ -307,29 +307,29 @@ export const PPEProtocols: React.FC = () => {
 
         {/* Alerts Section */}
         <div className="space-y-3">
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-            <div className="flex-shrink-0 w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-              <AlertTriangle className="w-5 h-5 text-red-600" />
+          <div className="bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-xl p-4 flex items-start gap-3">
+            <div className="flex-shrink-0 w-10 h-10 bg-[#DC2626]/15 rounded-lg flex items-center justify-center">
+              <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-red-800 mb-1">
+              <h4 className="text-sm font-bold text-[#7F1D1D] mb-1">
                 خلع المعدات هو الأكثر خطورة!
               </h4>
-              <p className="text-xs text-red-600 leading-relaxed">
+              <p className="text-xs text-[#DC2626] leading-relaxed">
                 معظم حالات التلوث تحدث أثناء خلع المعدات بشكل خاطئ
               </p>
             </div>
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-            <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
-              <Hand className="w-5 h-5 text-amber-600" />
+          <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-xl p-4 flex items-start gap-3">
+            <div className="flex-shrink-0 w-10 h-10 bg-[#FCB614]/15 rounded-lg flex items-center justify-center">
+              <Hand className="w-5 h-5 text-[#D49A0A]" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-amber-800 mb-1">
+              <h4 className="text-sm font-bold text-[#92400E] mb-1">
                 نظافة الأيدي بين كل خطوة
               </h4>
-              <p className="text-xs text-amber-600 leading-relaxed">
+              <p className="text-xs text-[#D49A0A] leading-relaxed">
                 يجب تعقيم الأيدي بين كل خطوة من خطوات الخلع
               </p>
             </div>
@@ -343,9 +343,9 @@ export const PPEProtocols: React.FC = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Contact */}
-            <div className="bg-white rounded-xl shadow border-2 border-green-400 p-5">
+            <div className="bg-white rounded-xl shadow border-2 border-[#2BB574] p-5">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <div className="w-3 h-3 rounded-full bg-[#2BB574]" />
                 <h3 className="font-bold text-gray-800 text-sm">
                   تلامسي (Contact)
                 </h3>
@@ -356,9 +356,9 @@ export const PPEProtocols: React.FC = () => {
             </div>
 
             {/* Droplet */}
-            <div className="bg-white rounded-xl shadow border-2 border-pink-400 p-5">
+            <div className="bg-white rounded-xl shadow border-2 border-[#DC2626] p-5">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 rounded-full bg-pink-500" />
+                <div className="w-3 h-3 rounded-full bg-[#DC2626]" />
                 <h3 className="font-bold text-gray-800 text-sm">
                   رذاذي (Droplet)
                 </h3>
@@ -369,9 +369,9 @@ export const PPEProtocols: React.FC = () => {
             </div>
 
             {/* Airborne */}
-            <div className="bg-white rounded-xl shadow border-2 border-blue-400 p-5">
+            <div className="bg-white rounded-xl shadow border-2 border-[#269798] p-5">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 rounded-full bg-blue-500" />
+                <div className="w-3 h-3 rounded-full bg-[#269798]" />
                 <h3 className="font-bold text-gray-800 text-sm">
                   هوائي (Airborne)
                 </h3>

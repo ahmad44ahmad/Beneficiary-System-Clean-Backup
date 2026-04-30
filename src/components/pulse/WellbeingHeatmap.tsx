@@ -6,6 +6,21 @@ import {
     AlertTriangle, CheckCircle, Eye
 } from 'lucide-react';
 
+/**
+ * Wellbeing Heatmap — Phase 2A.
+ * Brand level: Default (light mode).
+ *
+ * Per HRSD Brand Guidelines:
+ * - Light surface (white card on subtle gray surface).
+ * - Status colors limited to HRSD palette + one semantic exception:
+ *     critical (< 50) → red (semantic — life-safety justification)
+ *     warning (50–79) → HRSD gold #FCB614
+ *     good    (≥ 80)  → HRSD green #2BB574
+ * - Body text in cool-gray, headings in navy.
+ * - Maximum 2 brand colors + 1 semantic per surface.
+ * - Cards use white background with status-tinted left border for at-a-glance scan.
+ */
+
 interface BeneficiaryWellbeing {
     id: string;
     name: string;
@@ -35,182 +50,256 @@ const mockBeneficiaries: BeneficiaryWellbeing[] = [
     { id: '8', name: 'ريم الحربي', age: 29, room: 'غ-108', wellbeingScore: 85, trend: 'up', indicators: { health: 88, nutrition: 82, safety: 90, mood: 80, activity: 85 }, lastUpdate: '09:55', alerts: 0 },
 ];
 
-const getScoreColor = (score: number) => {
-    if (score >= 80) return 'from-green-500 to-emerald-400';
-    if (score >= 60) return 'from-yellow-500 to-amber-400';
-    return 'from-red-500 to-rose-400';
+/** Status thresholds — kept as functions for reuse and future tuning. */
+type ScoreStatus = 'critical' | 'warning' | 'good';
+const statusOf = (score: number): ScoreStatus => {
+    if (score >= 80) return 'good';
+    if (score >= 50) return 'warning';
+    return 'critical';
 };
 
-const getScoreBg = (score: number) => {
-    if (score >= 80) return 'bg-green-500/20 border-green-500/30';
-    if (score >= 60) return 'bg-yellow-500/20 border-yellow-500/30';
-    return 'bg-red-500/20 border-red-500/30';
+/**
+ * Brand-compliant status palette.
+ * - good: HRSD green #2BB574 (Pantone 2414C)
+ * - warning: HRSD gold #FCB614 (Pantone 7409C)
+ * - critical: semantic red #DC2626 (life-safety exception, not in brand palette)
+ *
+ * Each entry returns the four states a card needs.
+ */
+const STATUS_TOKENS: Record<ScoreStatus, {
+    text: string;
+    bg: string;
+    bgSoft: string;
+    border: string;
+    borderStrong: string;
+    bar: string;
+    label: string;
+}> = {
+    good: {
+        text: 'text-[#2BB574]',
+        bg: 'bg-[#2BB574]',
+        bgSoft: 'bg-[#2BB574]/10',
+        border: 'border-[#2BB574]/30',
+        borderStrong: 'border-[#2BB574]',
+        bar: 'bg-[#2BB574]',
+        label: 'حالة جيدة',
+    },
+    warning: {
+        text: 'text-[#D49A0A]',
+        bg: 'bg-[#FCB614]',
+        bgSoft: 'bg-[#FCB614]/10',
+        border: 'border-[#FCB614]/30',
+        borderStrong: 'border-[#FCB614]',
+        bar: 'bg-[#FCB614]',
+        label: 'تحتاج متابعة',
+    },
+    critical: {
+        text: 'text-[#DC2626]',
+        bg: 'bg-[#DC2626]',
+        bgSoft: 'bg-[#DC2626]/10',
+        border: 'border-[#DC2626]/30',
+        borderStrong: 'border-[#DC2626]',
+        bar: 'bg-[#DC2626]',
+        label: 'حالة حرجة',
+    },
 };
 
 const TrendIcon: React.FC<{ trend: 'up' | 'down' | 'stable' }> = ({ trend }) => {
-    if (trend === 'up') return <TrendingUp className="w-4 h-4 text-green-400" />;
-    if (trend === 'down') return <TrendingDown className="w-4 h-4 text-red-400" />;
-    return <Minus className="w-4 h-4 text-slate-400" />;
+    if (trend === 'up') return <TrendingUp className="w-4 h-4 text-[#2BB574]" />;
+    if (trend === 'down') return <TrendingDown className="w-4 h-4 text-[#DC2626]" />;
+    return <Minus className="w-4 h-4 text-hrsd-cool-gray" />;
 };
 
-const IndicatorBar: React.FC<{ value: number; icon: React.ElementType; label: string }> = ({ value, icon: Icon }) => (
-    <div className="flex items-center gap-2">
-        <Icon className="w-3 h-3 text-slate-400" />
-        <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
-            <div
-                className={`h-full rounded-full ${value >= 80 ? 'bg-green-500' : value >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                style={{ width: `${value}%` }}
-            />
+const IndicatorBar: React.FC<{ value: number; icon: React.ElementType; label: string }> = ({ value, icon: Icon, label }) => {
+    const tone = STATUS_TOKENS[statusOf(value)];
+    return (
+        <div className="flex items-center gap-2">
+            <Icon className="w-3.5 h-3.5 text-hrsd-cool-gray" aria-label={label} />
+            <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                    className={`h-full rounded-full ${tone.bar}`}
+                    style={{ width: `${value}%` }}
+                />
+            </div>
+            <span className="text-xs text-hrsd-cool-gray w-6 tabular-nums">{value}</span>
         </div>
-        <span className="text-xs text-slate-500 w-6">{value}</span>
-    </div>
-);
+    );
+};
 
 export const WellbeingHeatmap: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterStatus, setFilterStatus] = useState<'all' | 'critical' | 'warning' | 'good'>('all');
+    const [filterStatus, setFilterStatus] = useState<'all' | ScoreStatus>('all');
     const [selectedBeneficiary, setSelectedBeneficiary] = useState<string | null>(null);
 
     const filteredBeneficiaries = mockBeneficiaries.filter(b => {
         const matchesSearch = b.name.includes(searchTerm) || b.room.includes(searchTerm);
-        const matchesFilter = filterStatus === 'all' ||
-            (filterStatus === 'critical' && b.wellbeingScore < 50) ||
-            (filterStatus === 'warning' && b.wellbeingScore >= 50 && b.wellbeingScore < 80) ||
-            (filterStatus === 'good' && b.wellbeingScore >= 80);
+        const matchesFilter = filterStatus === 'all' || statusOf(b.wellbeingScore) === filterStatus;
         return matchesSearch && matchesFilter;
     });
 
     const stats = {
-        critical: mockBeneficiaries.filter(b => b.wellbeingScore < 50).length,
-        warning: mockBeneficiaries.filter(b => b.wellbeingScore >= 50 && b.wellbeingScore < 80).length,
-        good: mockBeneficiaries.filter(b => b.wellbeingScore >= 80).length,
+        critical: mockBeneficiaries.filter(b => statusOf(b.wellbeingScore) === 'critical').length,
+        warning: mockBeneficiaries.filter(b => statusOf(b.wellbeingScore) === 'warning').length,
+        good: mockBeneficiaries.filter(b => statusOf(b.wellbeingScore) === 'good').length,
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6" dir="rtl">
+        <div className="min-h-screen bg-white p-6" dir="rtl">
             {/* Header */}
             <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -16 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-8"
             >
-                <h1 className="text-3xl font-bold mb-2">خريطة الرفاهية</h1>
-                <p className="text-slate-400">تصور بصري تفاعلي لحالة جميع المستفيدين</p>
+                <h1 className="text-3xl font-bold text-hrsd-navy mb-2">خريطة الرفاهية</h1>
+                <p className="text-hrsd-cool-gray">
+                    تصوّر بصري تفاعلي لحالة جميع المستفيدين بحسب مؤشّرات الرعاية اليومية
+                </p>
             </motion.div>
 
-            {/* Stats Summary */}
+            {/* Stats Summary — three filter chips */}
             <div className="grid grid-cols-3 gap-4 mb-6">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-red-500/20 border border-red-500/30 rounded-xl p-4 text-center cursor-pointer hover:bg-red-500/30 transition-colors"
-                    onClick={() => setFilterStatus(filterStatus === 'critical' ? 'all' : 'critical')}
-                >
-                    <AlertTriangle className="w-6 h-6 text-red-400 mx-auto mb-2" />
-                    <p className="text-2xl font-bold text-red-400">{stats.critical}</p>
-                    <p className="text-red-300/70 text-sm">حالة حرجة</p>
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-yellow-500/20 border border-yellow-500/30 rounded-xl p-4 text-center cursor-pointer hover:bg-yellow-500/30 transition-colors"
-                    onClick={() => setFilterStatus(filterStatus === 'warning' ? 'all' : 'warning')}
-                >
-                    <Eye className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-                    <p className="text-2xl font-bold text-yellow-400">{stats.warning}</p>
-                    <p className="text-yellow-300/70 text-sm">تحتاج متابعة</p>
-                </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-green-500/20 border border-green-500/30 rounded-xl p-4 text-center cursor-pointer hover:bg-green-500/30 transition-colors"
-                    onClick={() => setFilterStatus(filterStatus === 'good' ? 'all' : 'good')}
-                >
-                    <CheckCircle className="w-6 h-6 text-green-400 mx-auto mb-2" />
-                    <p className="text-2xl font-bold text-green-400">{stats.good}</p>
-                    <p className="text-green-300/70 text-sm">حالة جيدة</p>
-                </motion.div>
+                {(['critical', 'warning', 'good'] as const).map((status, idx) => {
+                    const tone = STATUS_TOKENS[status];
+                    const count = stats[status];
+                    const Icon = status === 'critical' ? AlertTriangle : status === 'warning' ? Eye : CheckCircle;
+                    const isActive = filterStatus === status;
+                    return (
+                        <motion.button
+                            key={status}
+                            type="button"
+                            initial={{ opacity: 0, scale: 0.96 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: idx * 0.06 }}
+                            onClick={() => setFilterStatus(isActive ? 'all' : status)}
+                            className={`text-right rounded-xl p-4 border-2 transition-all bg-white ${
+                                isActive ? tone.borderStrong : tone.border
+                            } hover:${tone.bgSoft}`}
+                            aria-pressed={isActive}
+                        >
+                            <div className="flex items-center justify-between mb-3">
+                                <div className={`w-10 h-10 rounded-lg ${tone.bgSoft} flex items-center justify-center`}>
+                                    <Icon className={`w-5 h-5 ${tone.text}`} />
+                                </div>
+                                <p className={`text-3xl font-bold ${tone.text} tabular-nums`}>{count}</p>
+                            </div>
+                            <p className="text-sm font-semibold text-hrsd-navy">{tone.label}</p>
+                            <p className="text-xs text-hrsd-cool-gray mt-1">
+                                {isActive ? 'انقر لإلغاء التصفية' : 'انقر للتصفية'}
+                            </p>
+                        </motion.button>
+                    );
+                })}
             </div>
 
-            {/* Search & Filter */}
+            {/* Search & Filter row */}
             <div className="flex gap-4 mb-6">
                 <div className="flex-1 relative">
-                    <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                    <Search className="absolute end-3 top-1/2 -translate-y-1/2 w-4 h-4 text-hrsd-cool-gray" />
                     <input
                         type="text"
-                        placeholder="البحث بالاسم أو رقم الغرفة..."
+                        placeholder="البحث بالاسم أو رقم الغرفة…"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-xl pe-10 ps-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-white border border-gray-300 rounded-xl pe-10 ps-4 py-3 text-hrsd-navy placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-hrsd-teal/30 focus:border-hrsd-teal"
                     />
                 </div>
                 <button
+                    type="button"
                     onClick={() => setFilterStatus('all')}
-                    className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${filterStatus === 'all' ? 'bg-blue-500 text-white' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+                    className={`px-4 py-2 rounded-xl flex items-center gap-2 font-medium transition-colors ${
+                        filterStatus === 'all'
+                            ? 'bg-hrsd-navy text-white'
+                            : 'bg-white border border-gray-300 text-hrsd-cool-gray hover:bg-gray-50'
+                    }`}
                 >
                     <Filter className="w-4 h-4" />
-                    الكل
+                    عرض الكل
                 </button>
             </div>
 
             {/* Beneficiaries Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {filteredBeneficiaries.map((beneficiary, index) => (
-                    <motion.div
-                        key={beneficiary.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        className={`relative rounded-2xl border p-4 cursor-pointer transition-all hover:scale-105 ${getScoreBg(beneficiary.wellbeingScore)} ${selectedBeneficiary === beneficiary.id ? 'ring-2 ring-blue-500' : ''}`}
-                        onClick={() => setSelectedBeneficiary(selectedBeneficiary === beneficiary.id ? null : beneficiary.id)}
-                    >
-                        {/* Alerts Badge */}
-                        {beneficiary.alerts > 0 && (
-                            <div className="absolute -top-2 -start-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold animate-pulse">
-                                {beneficiary.alerts}
-                            </div>
-                        )}
+                {filteredBeneficiaries.map((beneficiary, index) => {
+                    const status = statusOf(beneficiary.wellbeingScore);
+                    const tone = STATUS_TOKENS[status];
+                    const isSelected = selectedBeneficiary === beneficiary.id;
+                    return (
+                        <motion.button
+                            type="button"
+                            key={beneficiary.id}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.04 }}
+                            className={`relative text-right rounded-2xl p-4 cursor-pointer transition-all bg-white border-2 ${
+                                isSelected ? tone.borderStrong + ' shadow-md' : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                            }`}
+                            onClick={() => setSelectedBeneficiary(isSelected ? null : beneficiary.id)}
+                            aria-pressed={isSelected}
+                        >
+                            {/* Status accent bar (left edge in RTL) */}
+                            <span
+                                className={`absolute top-3 bottom-3 start-0 w-1 rounded-full ${tone.bar}`}
+                                aria-hidden="true"
+                            />
 
-                        {/* Header */}
-                        <div className="flex items-start justify-between mb-3">
-                            <div>
-                                <h3 className="font-bold text-white">{beneficiary.name}</h3>
-                                <p className="text-slate-400 text-sm">{beneficiary.room} • {beneficiary.age} سنة</p>
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <TrendIcon trend={beneficiary.trend} />
-                            </div>
-                        </div>
+                            {/* Alerts Badge */}
+                            {beneficiary.alerts > 0 && (
+                                <div className="absolute -top-2 -start-2 w-6 h-6 bg-[#DC2626] text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm">
+                                    {beneficiary.alerts}
+                                </div>
+                            )}
 
-                        {/* Score Circle */}
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${getScoreColor(beneficiary.wellbeingScore)} flex items-center justify-center shadow-lg`}>
-                                <span className="text-xl font-bold text-white">{beneficiary.wellbeingScore}</span>
+                            {/* Header */}
+                            <div className="flex items-start justify-between mb-3 ps-3">
+                                <div>
+                                    <h3 className="font-bold text-hrsd-navy">{beneficiary.name}</h3>
+                                    <p className="text-hrsd-cool-gray text-sm">{beneficiary.room} · {beneficiary.age} سنة</p>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <TrendIcon trend={beneficiary.trend} />
+                                </div>
                             </div>
-                            <div className="flex-1 space-y-1.5">
-                                <IndicatorBar value={beneficiary.indicators.health} icon={Heart} label="صحة" />
-                                <IndicatorBar value={beneficiary.indicators.nutrition} icon={Utensils} label="تغذية" />
-                                <IndicatorBar value={beneficiary.indicators.mood} icon={Smile} label="مزاج" />
-                            </div>
-                        </div>
 
-                        {/* Expanded Details */}
-                        {selectedBeneficiary === beneficiary.id && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: 'auto' }}
-                                className="border-t border-slate-600/50 pt-3 mt-3 space-y-2"
-                            >
-                                <IndicatorBar value={beneficiary.indicators.safety} icon={Shield} label="سلامة" />
-                                <IndicatorBar value={beneficiary.indicators.activity} icon={Activity} label="نشاط" />
-                                <p className="text-slate-500 text-xs mt-2">آخر تحديث: {beneficiary.lastUpdate}</p>
-                            </motion.div>
-                        )}
-                    </motion.div>
-                ))}
+                            {/* Score + indicators */}
+                            <div className="flex items-center gap-4 mb-1 ps-3">
+                                <div className={`w-16 h-16 rounded-full ${tone.bgSoft} border-2 ${tone.border} flex items-center justify-center`}>
+                                    <span className={`text-xl font-bold ${tone.text} tabular-nums`}>
+                                        {beneficiary.wellbeingScore}
+                                    </span>
+                                </div>
+                                <div className="flex-1 space-y-1.5">
+                                    <IndicatorBar value={beneficiary.indicators.health} icon={Heart} label="الصحة" />
+                                    <IndicatorBar value={beneficiary.indicators.nutrition} icon={Utensils} label="التغذية" />
+                                    <IndicatorBar value={beneficiary.indicators.mood} icon={Smile} label="المزاج" />
+                                </div>
+                            </div>
+
+                            {/* Expanded Details */}
+                            {isSelected && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    className="border-t border-gray-200 pt-3 mt-3 space-y-2 ps-3"
+                                >
+                                    <IndicatorBar value={beneficiary.indicators.safety} icon={Shield} label="السلامة" />
+                                    <IndicatorBar value={beneficiary.indicators.activity} icon={Activity} label="النشاط" />
+                                    <p className="text-hrsd-cool-gray text-xs mt-2">
+                                        آخر تحديث: {beneficiary.lastUpdate}
+                                    </p>
+                                </motion.div>
+                            )}
+                        </motion.button>
+                    );
+                })}
             </div>
+
+            {/* Empty state when filter yields no results */}
+            {filteredBeneficiaries.length === 0 && (
+                <div className="text-center py-12">
+                    <p className="text-hrsd-cool-gray">لا توجد نتائج تطابق المعايير الحالية.</p>
+                </div>
+            )}
         </div>
     );
 };

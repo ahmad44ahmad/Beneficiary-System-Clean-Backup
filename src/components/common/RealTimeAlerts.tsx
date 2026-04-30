@@ -22,18 +22,18 @@ export interface SystemAlert {
 
 // Alert Configuration
 const ALERT_CONFIG = {
-    infection: { icon: Shield, color: 'red', sound: true, bgClass: 'bg-red-100', textClass: 'text-red-600' },
-    fall_risk: { icon: AlertTriangle, color: 'orange', sound: true, bgClass: 'bg-orange-100', textClass: 'text-orange-600' },
-    medication: { icon: Activity, color: 'purple', sound: true, bgClass: 'bg-purple-100', textClass: 'text-purple-600' },
-    inspection_failed: { icon: AlertTriangle, color: 'yellow', sound: false, bgClass: 'bg-yellow-100', textClass: 'text-yellow-600' },
-    incident: { icon: AlertTriangle, color: 'red', sound: true, bgClass: 'bg-red-100', textClass: 'text-red-600' },
+    infection: { icon: Shield, color: 'red', sound: true, bgClass: 'bg-[#DC2626]/15', textClass: 'text-[#DC2626]' },
+    fall_risk: { icon: AlertTriangle, color: 'orange', sound: true, bgClass: 'bg-[#F7941D]/15', textClass: 'text-[#D67A0A]' },
+    medication: { icon: Activity, color: 'purple', sound: true, bgClass: 'bg-[#FCB614]/15', textClass: 'text-[#D49A0A]' },
+    inspection_failed: { icon: AlertTriangle, color: 'yellow', sound: false, bgClass: 'bg-[#FCB614]/10', textClass: 'text-[#D49A0A]' },
+    incident: { icon: AlertTriangle, color: 'red', sound: true, bgClass: 'bg-[#DC2626]/15', textClass: 'text-[#DC2626]' },
 };
 
 const SEVERITY_STYLES = {
-    low: 'border-blue-300 bg-blue-50',
-    medium: 'border-yellow-300 bg-yellow-50',
-    high: 'border-orange-400 bg-orange-50',
-    critical: 'border-red-500 bg-red-50 animate-pulse',
+    low: 'border-[#269798] bg-[#269798]/10',
+    medium: 'border-[#FCB614] bg-[#FCB614]/10',
+    high: 'border-[#F7941D] bg-[#F7941D]/10',
+    critical: 'border-[#DC2626] bg-[#DC2626]/10 animate-pulse',
 };
 
 // Demo Alerts
@@ -116,10 +116,10 @@ const AlertCard: React.FC<{
                     <div className="flex-1">
                         <div className="flex items-center gap-2">
                             <h4 className="font-bold text-gray-800">{alert.title}</h4>
-                            <span className={`px-2 py-0.5 rounded text-xs font-medium ${alert.severity === 'critical' ? 'bg-red-500 text-white' :
-                                alert.severity === 'high' ? 'bg-orange-500 text-white' :
-                                    alert.severity === 'medium' ? 'bg-yellow-500 text-white' :
-                                        'bg-blue-500 text-white'
+                            <span className={`px-2 py-0.5 rounded text-xs font-medium ${alert.severity === 'critical' ? 'bg-[#DC2626] text-white' :
+                                alert.severity === 'high' ? 'bg-[#F7941D] text-white' :
+                                    alert.severity === 'medium' ? 'bg-[#FCB614] text-white' :
+                                        'bg-[#269798] text-white'
                                 }`}>
                                 {alert.severity === 'critical' ? 'حرج' :
                                     alert.severity === 'high' ? 'مرتفع' :
@@ -158,7 +158,7 @@ const AlertCard: React.FC<{
                 <div className="flex gap-2 mt-3">
                     <button
                         onClick={() => onAcknowledge(alert.id)}
-                        className="flex-1 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-700 flex items-center justify-center gap-1"
+                        className="flex-1 py-2 bg-[#1E9658] text-white rounded-lg text-sm font-medium hover:bg-[#1E9658] flex items-center justify-center gap-1"
                     >
                         <CheckCircle className="w-4 h-4" />
                         تم الاطلاع
@@ -268,9 +268,9 @@ export const RealTimeAlerts: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="fixed top-4 start-4 z-50 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all border border-gray-200"
             >
-                <Bell className={`w-6 h-6 ${unreadCount > 0 ? 'text-red-500' : 'text-gray-500'}`} />
+                <Bell className={`w-6 h-6 ${unreadCount > 0 ? 'text-[#DC2626]' : 'text-gray-500'}`} />
                 {unreadCount > 0 && (
-                    <span className="absolute -top-1 -end-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold animate-bounce">
+                    <span className="absolute -top-1 -end-1 w-5 h-5 bg-[#DC2626] text-white text-xs rounded-full flex items-center justify-center font-bold animate-bounce">
                         {unreadCount}
                     </span>
                 )}
@@ -280,7 +280,7 @@ export const RealTimeAlerts: React.FC = () => {
             {isOpen && (
                 <div className="fixed top-16 start-4 z-50 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-l from-red-600 to-orange-600 p-4 text-white">
+                    <div className="bg-gradient-to-l from-[#B91C1C] to-[#D67A0A] p-4 text-white">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <AlertTriangle className="w-5 h-5" />
@@ -344,18 +344,18 @@ export const RealTimeAlerts: React.FC = () => {
                     {alerts.filter(a => a.severity === 'critical' && !a.acknowledged).slice(0, 1).map(alert => (
                         <div
                             key={alert.id}
-                            className="bg-red-600 text-white p-4 rounded-xl shadow-2xl flex items-center justify-between animate-pulse"
+                            className="bg-[#B91C1C] text-white p-4 rounded-xl shadow-2xl flex items-center justify-between animate-pulse"
                         >
                             <div className="flex items-center gap-3">
                                 <AlertTriangle className="w-8 h-8" />
                                 <div>
                                     <p className="font-bold">{alert.title}</p>
-                                    <p className="text-sm text-red-100">{alert.message}</p>
+                                    <p className="text-sm text-[#DC2626]/40">{alert.message}</p>
                                 </div>
                             </div>
                             <button
                                 onClick={() => handleAcknowledge(alert.id)}
-                                className="px-4 py-2 bg-white text-red-600 rounded-lg font-bold hover:bg-red-50"
+                                className="px-4 py-2 bg-white text-[#DC2626] rounded-lg font-bold hover:bg-[#DC2626]/10"
                             >
                                 تم الاطلاع
                             </button>

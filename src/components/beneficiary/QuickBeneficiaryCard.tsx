@@ -35,9 +35,9 @@ const mockInfo: BeneficiaryQuickInfo = {
 };
 
 const TrendIcon: React.FC<{ trend: 'up' | 'down' | 'stable' }> = ({ trend }) => {
-    if (trend === 'up') return <TrendingUp className="w-4 h-4 text-green-400" />;
-    if (trend === 'down') return <TrendingDown className="w-4 h-4 text-red-400" />;
-    return <Minus className="w-4 h-4 text-slate-400" />;
+    if (trend === 'up') return <TrendingUp className="w-4 h-4 text-[#2BB574]" />;
+    if (trend === 'down') return <TrendingDown className="w-4 h-4 text-[#DC2626]" />;
+    return <Minus className="w-4 h-4 text-hrsd-cool-gray" />;
 };
 
 export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose }) => {
@@ -47,9 +47,9 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()} dir="rtl">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()} dir="rtl">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 rounded-t-3xl relative">
+                <div className="bg-gradient-to-r from-[#1B7778] to-[#1B7778] p-6 rounded-t-3xl relative">
                     <button onClick={onClose} className="absolute top-4 start-4 p-2 hover:bg-white/20 rounded-full"><X className="w-5 h-5 text-white" /></button>
                     <div className="flex items-center gap-4">
                         <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center"><User className="w-8 h-8 text-white" /></div>
@@ -70,9 +70,9 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
                         </div>
                     </div>
                     {info.allergies.length > 0 && (
-                        <div className="mt-4 bg-red-500/30 rounded-xl p-3 flex items-center gap-2">
-                            <AlertTriangle className="w-5 h-5 text-red-300" />
-                            <span className="text-red-100 text-sm font-medium">حساسية: {info.allergies.join('، ')}</span>
+                        <div className="mt-4 bg-[#DC2626]/30 rounded-xl p-3 flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
+                            <span className="text-[#DC2626]/40 text-sm font-medium">حساسية: {info.allergies.join('، ')}</span>
                         </div>
                     )}
                 </div>
@@ -80,26 +80,26 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
                 <div className="p-6 space-y-6">
                     {/* Vitals */}
                     <div>
-                        <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Heart className="w-4 h-4 text-red-400" />العلامات الحيوية</h3>
+                        <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Heart className="w-4 h-4 text-[#DC2626]" />العلامات الحيوية</h3>
                         <div className="grid grid-cols-4 gap-3">
-                            {[{ label: 'الضغط', value: info.vitals.bp, bgClass: 'bg-blue-500/20', textClass: 'text-blue-400' }, { label: 'النبض', value: info.vitals.hr, bgClass: 'bg-pink-500/20', textClass: 'text-pink-400' }, { label: 'الأكسجين', value: `${info.vitals.spo2}%`, bgClass: 'bg-cyan-500/20', textClass: 'text-cyan-400' }, { label: 'الحرارة', value: `${info.vitals.temp}°`, bgClass: 'bg-orange-500/20', textClass: 'text-orange-400' }].map((v, i) => (
+                            {[{ label: 'الضغط', value: info.vitals.bp, bgClass: 'bg-[#269798]/20', textClass: 'text-[#269798]' }, { label: 'النبض', value: info.vitals.hr, bgClass: 'bg-[#DC2626]/20', textClass: 'text-[#DC2626]' }, { label: 'الأكسجين', value: `${info.vitals.spo2}%`, bgClass: 'bg-[#269798]/20', textClass: 'text-[#269798]' }, { label: 'الحرارة', value: `${info.vitals.temp}°`, bgClass: 'bg-[#F7941D]/20', textClass: 'text-[#F7941D]' }].map((v, i) => (
                                 <div key={i} className={`${v.bgClass} rounded-xl p-3 text-center`}>
-                                    <p className="text-slate-400 text-xs">{v.label}</p>
+                                    <p className="text-hrsd-cool-gray text-xs">{v.label}</p>
                                     <p className={`text-lg font-bold ${v.textClass}`}>{v.value}</p>
                                 </div>
                             ))}
                         </div>
-                        <p className="text-slate-500 text-xs mt-2">آخر تحديث: {info.vitals.lastUpdate}</p>
+                        <p className="text-hrsd-cool-gray text-xs mt-2">آخر تحديث: {info.vitals.lastUpdate}</p>
                     </div>
 
                     {/* Medications */}
                     <div>
-                        <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Pill className="w-4 h-4 text-purple-400" />الأدوية النشطة</h3>
+                        <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Pill className="w-4 h-4 text-[#FCB614]" />الأدوية النشطة</h3>
                         <div className="space-y-2">
                             {info.activeMedications.map((med, i) => (
-                                <div key={i} className="bg-purple-500/20 rounded-xl p-3 flex justify-between items-center">
-                                    <div><p className="font-medium text-white">{med.name}</p><p className="text-purple-300 text-sm">{med.dosage}</p></div>
-                                    <span className="text-purple-400 text-sm">القادم: {med.nextDue}</span>
+                                <div key={i} className="bg-[#FCB614]/20 rounded-xl p-3 flex justify-between items-center">
+                                    <div><p className="font-medium text-white">{med.name}</p><p className="text-[#FCB614] text-sm">{med.dosage}</p></div>
+                                    <span className="text-[#FCB614] text-sm">القادم: {med.nextDue}</span>
                                 </div>
                             ))}
                         </div>
@@ -108,10 +108,10 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
                     {/* Alerts */}
                     {info.activeAlerts.length > 0 && (
                         <div>
-                            <h3 className="text-white font-bold mb-3 flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-orange-400" />التنبيهات النشطة</h3>
+                            <h3 className="text-white font-bold mb-3 flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-[#F7941D]" />التنبيهات النشطة</h3>
                             {info.activeAlerts.map((alert, i) => (
-                                <div key={i} className={`rounded-xl p-3 ${alert.severity === 'high' ? 'bg-red-500/20 border border-red-500/50' : 'bg-yellow-500/20'}`}>
-                                    <p className={alert.severity === 'high' ? 'text-red-400' : 'text-yellow-400'}>{alert.message}</p>
+                                <div key={i} className={`rounded-xl p-3 ${alert.severity === 'high' ? 'bg-[#DC2626]/20 border border-[#DC2626]/50' : 'bg-[#FCB614]/20'}`}>
+                                    <p className={alert.severity === 'high' ? 'text-[#DC2626]' : 'text-[#FCB614]'}>{alert.message}</p>
                                 </div>
                             ))}
                         </div>
@@ -119,12 +119,12 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
 
                     {/* Rehab Goals */}
                     <div>
-                        <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Target className="w-4 h-4 text-green-400" />أهداف التأهيل</h3>
+                        <h3 className="text-white font-bold mb-3 flex items-center gap-2"><Target className="w-4 h-4 text-[#2BB574]" />أهداف التأهيل</h3>
                         <div className="space-y-3">
                             {info.rehabGoals.map((goal, i) => (
                                 <div key={i}>
-                                    <div className="flex justify-between mb-1"><span className="text-slate-300 text-sm">{goal.name}</span><span className="text-green-400 text-sm">{goal.progress}%</span></div>
-                                    <div className="h-2 bg-slate-700 rounded-full overflow-hidden"><div className="h-full bg-green-500 rounded-full" style={{ width: `${goal.progress}%` }} /></div>
+                                    <div className="flex justify-between mb-1"><span className="text-hrsd-navy text-sm">{goal.name}</span><span className="text-[#2BB574] text-sm">{goal.progress}%</span></div>
+                                    <div className="h-2 bg-gray-50 rounded-full overflow-hidden"><div className="h-full bg-[#2BB574] rounded-full" style={{ width: `${goal.progress}%` }} /></div>
                                 </div>
                             ))}
                         </div>
@@ -132,8 +132,8 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
 
                     {/* Risk Indicators */}
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-orange-500/20 rounded-xl p-4 text-center"><p className="text-slate-400 text-sm">خطر السقوط</p><p className="text-2xl font-bold text-orange-400">{info.fallRisk}/60</p></div>
-                        <div className="bg-indigo-500/20 rounded-xl p-4 text-center"><Moon className="w-5 h-5 text-indigo-400 mx-auto mb-1" /><p className="text-slate-400 text-sm">جودة النوم</p><p className="text-2xl font-bold text-indigo-400">{info.sleepQuality}%</p></div>
+                        <div className="bg-[#F7941D]/20 rounded-xl p-4 text-center"><p className="text-hrsd-cool-gray text-sm">خطر السقوط</p><p className="text-2xl font-bold text-[#F7941D]">{info.fallRisk}/60</p></div>
+                        <div className="bg-[#0F3144]/20 rounded-xl p-4 text-center"><Moon className="w-5 h-5 text-[#0F3144] mx-auto mb-1" /><p className="text-hrsd-cool-gray text-sm">جودة النوم</p><p className="text-2xl font-bold text-[#0F3144]">{info.sleepQuality}%</p></div>
                     </div>
                 </div>
             </motion.div>

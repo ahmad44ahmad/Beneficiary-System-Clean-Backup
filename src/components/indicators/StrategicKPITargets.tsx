@@ -16,7 +16,7 @@ import {
 } from '../../data/strategicKpiTargets';
 
 // HRSD Brand Colors
-const HRSD_NAVY = '#14415A';
+const HRSD_NAVY = '#0F3144';
 const HRSD_TEAL = '#1E6B5C';
 const HRSD_GOLD = '#F59601';
 
@@ -35,9 +35,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
 type KpiStatus = 'excellent' | 'good' | 'needsImprovement';
 
 const STATUS_COLORS: Record<KpiStatus, string> = {
-    excellent: '#10B981',
-    good: '#F59E0B',
-    needsImprovement: '#EF4444',
+    excellent: '#2BB574',
+    good: '#FCB614',
+    needsImprovement: '#DC2626',
 };
 
 const STATUS_LABELS: Record<KpiStatus, string> = {
@@ -47,21 +47,21 @@ const STATUS_LABELS: Record<KpiStatus, string> = {
 };
 
 const STATUS_BG_CLASSES: Record<KpiStatus, string> = {
-    excellent: 'bg-emerald-500',
-    good: 'bg-amber-500',
-    needsImprovement: 'bg-red-500',
+    excellent: 'bg-[#2BB574]',
+    good: 'bg-[#FCB614]',
+    needsImprovement: 'bg-[#DC2626]',
 };
 
 const STATUS_TEXT_CLASSES: Record<KpiStatus, string> = {
-    excellent: 'text-emerald-600',
-    good: 'text-amber-600',
-    needsImprovement: 'text-red-600',
+    excellent: 'text-[#1E9658]',
+    good: 'text-[#D49A0A]',
+    needsImprovement: 'text-[#DC2626]',
 };
 
 const STATUS_BG_LIGHT_CLASSES: Record<KpiStatus, string> = {
-    excellent: 'bg-emerald-50 border-emerald-200',
-    good: 'bg-amber-50 border-amber-200',
-    needsImprovement: 'bg-red-50 border-red-200',
+    excellent: 'bg-[#2BB574]/10 border-[#2BB574]/30',
+    good: 'bg-[#FCB614]/10 border-[#FCB614]/30',
+    needsImprovement: 'bg-[#DC2626]/10 border-[#DC2626]/30',
 };
 
 function getKpiStatus(kpi: StrategicKPI): KpiStatus {
@@ -201,15 +201,15 @@ export const StrategicKPITargets: React.FC = () => {
                         {summaryStats.total}
                     </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 border border-emerald-100 shadow-sm">
+                <div className="bg-white rounded-xl p-4 border border-[#2BB574]/10 shadow-sm">
                     <div className="text-sm text-gray-500 mb-1">يحقق المستهدف</div>
-                    <div className="text-2xl font-bold text-emerald-600">
+                    <div className="text-2xl font-bold text-[#1E9658]">
                         {summaryStats.meetingTarget}
                     </div>
                 </div>
-                <div className="bg-white rounded-xl p-4 border border-red-100 shadow-sm">
+                <div className="bg-white rounded-xl p-4 border border-[#DC2626]/10 shadow-sm">
                     <div className="text-sm text-gray-500 mb-1">يحتاج تحسين</div>
-                    <div className="text-2xl font-bold text-red-600">
+                    <div className="text-2xl font-bold text-[#DC2626]">
                         {summaryStats.needsImprovement}
                     </div>
                 </div>
@@ -236,7 +236,7 @@ export const StrategicKPITargets: React.FC = () => {
                             onClick={() => setSelectedKpiCode(kpi.code)}
                             className={`bg-white rounded-xl p-4 border-2 shadow-sm cursor-pointer transition-all hover:shadow-md ${
                                 isSelected
-                                    ? 'border-blue-400 shadow-blue-100'
+                                    ? 'border-[#269798] shadow-blue-100'
                                     : 'border-gray-100 hover:border-gray-200'
                             }`}
                         >
@@ -265,10 +265,10 @@ export const StrategicKPITargets: React.FC = () => {
                                 {/* Trend Arrow */}
                                 <div className="flex items-center gap-1">
                                     {trend === 'up' && (
-                                        <ArrowUpRight className="w-4 h-4 text-emerald-500" />
+                                        <ArrowUpRight className="w-4 h-4 text-[#1E9658]" />
                                     )}
                                     {trend === 'down' && (
-                                        <ArrowDownRight className="w-4 h-4 text-red-500" />
+                                        <ArrowDownRight className="w-4 h-4 text-[#DC2626]" />
                                     )}
                                     {trend === 'stable' && (
                                         <Minus className="w-4 h-4 text-gray-400" />
@@ -417,13 +417,13 @@ export const StrategicKPITargets: React.FC = () => {
                                 {trendChartData.map((entry, index) => {
                                     let fill = HRSD_TEAL;
                                     if (selectedKpi.direction === 'higher_is_better') {
-                                        if (entry.value >= selectedKpi.thresholds.excellent) fill = '#10B981';
-                                        else if (entry.value >= selectedKpi.thresholds.good) fill = '#F59E0B';
-                                        else fill = '#EF4444';
+                                        if (entry.value >= selectedKpi.thresholds.excellent) fill = '#2BB574';
+                                        else if (entry.value >= selectedKpi.thresholds.good) fill = '#FCB614';
+                                        else fill = '#DC2626';
                                     } else {
-                                        if (entry.value <= selectedKpi.thresholds.excellent) fill = '#10B981';
-                                        else if (entry.value <= selectedKpi.thresholds.good) fill = '#F59E0B';
-                                        else fill = '#EF4444';
+                                        if (entry.value <= selectedKpi.thresholds.excellent) fill = '#2BB574';
+                                        else if (entry.value <= selectedKpi.thresholds.good) fill = '#FCB614';
+                                        else fill = '#DC2626';
                                     }
                                     return <Cell key={`cell-${index}`} fill={fill} />;
                                 })}
@@ -435,15 +435,15 @@ export const StrategicKPITargets: React.FC = () => {
                 {/* Chart Legend */}
                 <div className="flex items-center justify-center gap-6 mt-4 text-xs text-gray-500">
                     <div className="flex items-center gap-1">
-                        <div className="w-3 h-3 rounded-sm bg-emerald-500" />
+                        <div className="w-3 h-3 rounded-sm bg-[#2BB574]" />
                         <span>ممتاز</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <div className="w-3 h-3 rounded-sm bg-amber-500" />
+                        <div className="w-3 h-3 rounded-sm bg-[#FCB614]" />
                         <span>جيد</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <div className="w-3 h-3 rounded-sm bg-red-500" />
+                        <div className="w-3 h-3 rounded-sm bg-[#DC2626]" />
                         <span>يحتاج تحسين</span>
                     </div>
                     <div className="flex items-center gap-1">
@@ -476,15 +476,15 @@ export const StrategicKPITargets: React.FC = () => {
                         <div className="flex items-center gap-1">
                             {selectedKpi.direction === 'higher_is_better' ? (
                                 <>
-                                    <TrendingUp className="w-4 h-4 text-emerald-500" />
-                                    <span className="text-sm font-bold text-emerald-600">
+                                    <TrendingUp className="w-4 h-4 text-[#1E9658]" />
+                                    <span className="text-sm font-bold text-[#1E9658]">
                                         الأعلى أفضل
                                     </span>
                                 </>
                             ) : (
                                 <>
-                                    <TrendingDown className="w-4 h-4 text-blue-500" />
-                                    <span className="text-sm font-bold text-blue-600">
+                                    <TrendingDown className="w-4 h-4 text-[#269798]" />
+                                    <span className="text-sm font-bold text-[#269798]">
                                         الأقل أفضل
                                     </span>
                                 </>
@@ -505,23 +505,23 @@ export const StrategicKPITargets: React.FC = () => {
                     </div>
                 </div>
                 <div className="mt-4 grid grid-cols-3 gap-4">
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center">
-                        <div className="text-xs text-emerald-600 mb-1">ممتاز</div>
-                        <div className="text-lg font-bold text-emerald-700">
+                    <div className="bg-[#2BB574]/10 border border-[#2BB574]/30 rounded-lg p-3 text-center">
+                        <div className="text-xs text-[#1E9658] mb-1">ممتاز</div>
+                        <div className="text-lg font-bold text-[#1E9658]">
                             {selectedKpi.direction === 'lower_is_better' ? '≤' : '≥'}{' '}
                             {selectedKpi.thresholds.excellent} {selectedKpi.unitAr}
                         </div>
                     </div>
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
-                        <div className="text-xs text-amber-600 mb-1">جيد</div>
-                        <div className="text-lg font-bold text-amber-700">
+                    <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-lg p-3 text-center">
+                        <div className="text-xs text-[#D49A0A] mb-1">جيد</div>
+                        <div className="text-lg font-bold text-[#D49A0A]">
                             {selectedKpi.direction === 'lower_is_better' ? '≤' : '≥'}{' '}
                             {selectedKpi.thresholds.good} {selectedKpi.unitAr}
                         </div>
                     </div>
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
-                        <div className="text-xs text-red-600 mb-1">يحتاج تحسين</div>
-                        <div className="text-lg font-bold text-red-700">
+                    <div className="bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg p-3 text-center">
+                        <div className="text-xs text-[#DC2626] mb-1">يحتاج تحسين</div>
+                        <div className="text-lg font-bold text-[#B91C1C]">
                             {selectedKpi.direction === 'lower_is_better' ? '>' : '<'}{' '}
                             {selectedKpi.thresholds.good} {selectedKpi.unitAr}
                         </div>

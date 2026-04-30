@@ -29,13 +29,13 @@ export const Trajectories: React.FC = () => {
     return (
         <section className="space-y-5" dir="rtl">
             {/* شريط المستوى + ملاحظة شفافيّة */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-4 md:p-5 shadow-sm">
+            <div className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-4 md:p-5 shadow-sm">
                 <div className="flex flex-wrap items-start gap-4 justify-between">
                     <div>
-                        <h3 className="text-[16px] font-bold text-slate-900 dark:text-white mb-1">
+                        <h3 className="text-[16px] font-bold text-hrsd-navy dark:text-white mb-1">
                             المستوى الزمنيّ
                         </h3>
-                        <p className="text-[13px] text-slate-500 dark:text-slate-400">
+                        <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                             12 شهراً كاملاً من البيانات — مايو 2025 إلى أبريل 2026
                         </p>
                     </div>
@@ -43,7 +43,7 @@ export const Trajectories: React.FC = () => {
                     <LevelSelector value={level} onChange={setLevel} />
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700 flex items-start gap-2.5 text-[13px] text-slate-600 dark:text-slate-300">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-gray-200 flex items-start gap-2.5 text-[13px] text-hrsd-cool-gray dark:text-hrsd-navy">
                     <Info className="w-4 h-4 text-hrsd-teal shrink-0 mt-0.5" />
                     <p className="leading-relaxed">
                         <span className="font-semibold text-hrsd-navy">شفافيّةٌ مَطلوبة:</span>{' '}
@@ -71,7 +71,7 @@ const LevelSelector: React.FC<{
 }> = ({ value, onChange }) => {
     const levels: DecisionLevel[] = ['center', 'branch', 'agency'];
     return (
-        <div className="inline-flex bg-slate-100 dark:bg-slate-700 rounded-xl p-1 gap-1">
+        <div className="inline-flex bg-slate-100 dark:bg-gray-50 rounded-xl p-1 gap-1">
             {levels.map((l) => (
                 <button
                     key={l}
@@ -79,8 +79,8 @@ const LevelSelector: React.FC<{
                     onClick={() => onChange(l)}
                     className={`px-3.5 py-1.5 rounded-lg text-[13px] font-semibold transition-all ${
                         value === l
-                            ? 'bg-white dark:bg-slate-900 text-hrsd-navy dark:text-white shadow-sm'
-                            : 'text-slate-600 dark:text-slate-300 hover:text-hrsd-navy'
+                            ? 'bg-white dark:bg-white text-hrsd-navy dark:text-white shadow-sm'
+                            : 'text-hrsd-cool-gray dark:text-hrsd-navy hover:text-hrsd-navy'
                     }`}
                 >
                     {DECISION_LEVEL_LABELS[l]}
@@ -101,9 +101,9 @@ const TrajectoryCard: React.FC<{
 
     if (!trajectory) {
         return (
-            <article className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
-                <h3 className="text-[15px] font-bold text-slate-900 dark:text-white">{spec.titleAr}</h3>
-                <p className="text-[13px] text-slate-500 mt-2">لا توجد بيانات متاحة.</p>
+            <article className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5">
+                <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white">{spec.titleAr}</h3>
+                <p className="text-[13px] text-hrsd-cool-gray mt-2">لا توجد بيانات متاحة.</p>
             </article>
         );
     }
@@ -116,15 +116,15 @@ const TrajectoryCard: React.FC<{
 
     return (
         <article
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700
+            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
         >
             <header className="p-4 md:p-5 pb-0 flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                    <h3 className="text-[15px] font-bold text-slate-900 dark:text-white leading-tight">
+                    <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white leading-tight">
                         {spec.titleAr}
                     </h3>
-                    <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                    <p className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-0.5 leading-snug">
                         {spec.description}
                     </p>
                 </div>
@@ -134,23 +134,23 @@ const TrajectoryCard: React.FC<{
             {/* الأرقام المفتاحيّة */}
             <div className="px-4 md:px-5 pt-3 flex items-end gap-5 flex-wrap">
                 <div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">آخر قيمة</div>
-                    <div className="text-[24px] font-black text-slate-900 dark:text-white leading-none">
+                    <div className="text-[11px] text-hrsd-cool-gray dark:text-hrsd-cool-gray font-medium">آخر قيمة</div>
+                    <div className="text-[24px] font-black text-hrsd-navy dark:text-white leading-none">
                         {formatValue(gap.lastValue, spec.unit)}
                     </div>
                 </div>
 
                 <div className={`flex items-center gap-1 text-[13px] font-bold ${
-                    deltaFavorable ? 'text-hrsd-green-dark' : 'text-rose-600'
+                    deltaFavorable ? 'text-hrsd-green-dark' : 'text-[#B91C1C]'
                 }`}>
                     {deltaFavorable
                         ? (spec.higherIsBetter ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />)
                         : (spec.higherIsBetter ? <TrendingDown className="w-4 h-4" /> : <TrendingUp className="w-4 h-4" />)}
                     <span>{formatValue(Math.abs(delta), spec.unit)}</span>
-                    <span className="text-slate-400 font-normal me-1">خلال 12 شهراً</span>
+                    <span className="text-hrsd-cool-gray font-normal me-1">خلال 12 شهراً</span>
                 </div>
 
-                <div className="ms-auto flex items-center gap-1.5 text-[12px] text-slate-500 dark:text-slate-400">
+                <div className="ms-auto flex items-center gap-1.5 text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                     <Target className="w-3.5 h-3.5" />
                     <span>المستهدَف: {formatValue(gap.target, spec.unit)}</span>
                 </div>
@@ -175,9 +175,9 @@ const TrajectoryCard: React.FC<{
                         <Tooltip content={<CustomTooltip unit={spec.unit} />} />
                         <ReferenceLine
                             y={spec.targetValue}
-                            stroke="#FAB414"
+                            stroke="#FCB614"
                             strokeDasharray="5 3"
-                            label={{ value: 'المستهدَف', position: 'insideTopLeft', fill: '#FAB414', fontSize: 10 }}
+                            label={{ value: 'المستهدَف', position: 'insideTopLeft', fill: '#FCB614', fontSize: 10 }}
                         />
                         <Line
                             type="monotone"
@@ -194,19 +194,19 @@ const TrajectoryCard: React.FC<{
 
             {/* الحالة */}
             <footer className={`px-5 py-3 border-t ${
-                gap.onTrack ? 'bg-hrsd-green/5 border-hrsd-green/30' : 'bg-amber-50 border-amber-200'
+                gap.onTrack ? 'bg-hrsd-green/5 border-hrsd-green/30' : 'bg-[#FCB614]/10 border-[#FCB614]/30'
             } flex items-center gap-2`}>
                 {gap.onTrack ? (
                     <TrendingUp className="w-4 h-4 text-hrsd-green-dark" />
                 ) : (
-                    <AlertCircle className="w-4 h-4 text-amber-600" />
+                    <AlertCircle className="w-4 h-4 text-[#D49A0A]" />
                 )}
                 <span className={`text-[13px] font-semibold ${
-                    gap.onTrack ? 'text-hrsd-green-dark' : 'text-amber-800'
+                    gap.onTrack ? 'text-hrsd-green-dark' : 'text-[#92400E]'
                 }`}>
                     {gap.onTrack ? 'في المسار الصحيح' : `فجوة ${formatValue(gap.gap, spec.unit)} عن المستهدَف`}
                 </span>
-                <span className="ms-auto text-[11px] text-slate-500 dark:text-slate-400">
+                <span className="ms-auto text-[11px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                     {trajectory.levelScope}
                 </span>
             </footer>
@@ -218,8 +218,8 @@ const TrajectoryCard: React.FC<{
 const DataQualityBadge: React.FC<{ quality: Trajectory['dataQuality'] }> = ({ quality }) => {
     const tones = {
         real:    { bg: 'bg-hrsd-green/15', text: 'text-hrsd-green-dark', label: 'حقيقيّة' },
-        partial: { bg: 'bg-amber-100',     text: 'text-amber-800',       label: 'جزئيّة' },
-        modeled: { bg: 'bg-slate-100',     text: 'text-slate-600',       label: 'تقديريّة' },
+        partial: { bg: 'bg-[#FCB614]/15',     text: 'text-[#92400E]',       label: 'جزئيّة' },
+        modeled: { bg: 'bg-slate-100',     text: 'text-hrsd-cool-gray',       label: 'تقديريّة' },
     };
     const t = tones[quality];
     return (
@@ -236,8 +236,8 @@ const AnnotatedDot: React.FC<{ cx?: number; cy?: number; payload?: { annotation?
     if (payload?.annotation) {
         return (
             <g>
-                <circle cx={cx} cy={cy} r={5} fill="#FAB414" stroke="#fff" strokeWidth={2} />
-                <circle cx={cx} cy={cy} r={8} fill="none" stroke="#FAB414" strokeWidth={1} opacity={0.4} />
+                <circle cx={cx} cy={cy} r={5} fill="#FCB614" stroke="#fff" strokeWidth={2} />
+                <circle cx={cx} cy={cy} r={8} fill="none" stroke="#FCB614" strokeWidth={1} opacity={0.4} />
             </g>
         );
     }
@@ -253,14 +253,14 @@ const CustomTooltip: React.FC<{
     if (!active || !payload?.length) return null;
     const p = payload[0].payload;
     return (
-        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600
+        <div className="bg-white dark:bg-white border border-gray-200 dark:border-gray-300
             rounded-lg shadow-lg p-3 text-[12px]" dir="rtl">
-            <div className="font-bold text-slate-900 dark:text-white mb-1">{p.monthLabel}</div>
+            <div className="font-bold text-hrsd-navy dark:text-white mb-1">{p.monthLabel}</div>
             <div className="text-hrsd-teal font-semibold">
                 {formatValue(p.value, unit)}
             </div>
             {p.annotation && (
-                <div className="mt-1.5 pt-1.5 border-t border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 max-w-[200px] leading-snug">
+                <div className="mt-1.5 pt-1.5 border-t border-gray-200 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy max-w-[200px] leading-snug">
                     📌 {p.annotation}
                 </div>
             )}

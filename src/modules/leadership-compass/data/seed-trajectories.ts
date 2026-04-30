@@ -37,7 +37,7 @@ export const METRIC_SPECS: Record<MetricCode, MetricSpec> = {
         unit: 'نقطة',
         targetValue: 8,
         higherIsBetter: true,
-        color: '#148287',
+        color: '#269798',
         accent: 'teal',
     },
     sroi: {
@@ -47,7 +47,7 @@ export const METRIC_SPECS: Record<MetricCode, MetricSpec> = {
         unit: '×',
         targetValue: 2.5,
         higherIsBetter: true,
-        color: '#2DB473',
+        color: '#2BB574',
         accent: 'green',
     },
     compliance_iso: {
@@ -57,7 +57,7 @@ export const METRIC_SPECS: Record<MetricCode, MetricSpec> = {
         unit: '%',
         targetValue: 95,
         higherIsBetter: true,
-        color: '#14415A',
+        color: '#0F3144',
         accent: 'navy',
     },
     family_satisfaction: {
@@ -67,7 +67,7 @@ export const METRIC_SPECS: Record<MetricCode, MetricSpec> = {
         unit: '%',
         targetValue: 90,
         higherIsBetter: true,
-        color: '#FAB414',
+        color: '#FCB614',
         accent: 'gold',
     },
     employment_integration: {
@@ -77,7 +77,7 @@ export const METRIC_SPECS: Record<MetricCode, MetricSpec> = {
         unit: 'حالة',
         targetValue: 20,
         higherIsBetter: true,
-        color: '#F5961E',
+        color: '#F7941D',
         accent: 'orange',
     },
     safety_incidents: {

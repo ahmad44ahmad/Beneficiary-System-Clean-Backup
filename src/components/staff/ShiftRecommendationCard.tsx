@@ -30,17 +30,17 @@ export const ShiftRecommendationCard: React.FC = () => {
                 <div className="flex justify-between items-start mb-4">
                     <div>
                         <h3 className="font-bold text-gray-800 flex items-center gap-2">
-                            <Users className="w-5 h-5 text-blue-600" />
+                            <Users className="w-5 h-5 text-[#269798]" />
                             نظام "Opti-Staff" الذكي
                         </h3>
                         <p className="text-xs text-gray-500 mt-1">توصيات التوظيف بناءً على حدة الحالات</p>
                     </div>
                     {acuity.status === 'understaffed' ? (
-                        <span className="bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
+                        <span className="bg-[#DC2626]/15 text-[#B91C1C] text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
                             <AlertTriangle className="w-3 h-3" /> نقص في الكادر
                         </span>
                     ) : (
-                        <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
+                        <span className="bg-[#2BB574]/15 text-[#1E9658] text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
                             <CheckCircle className="w-3 h-3" /> توزيع مثالي
                         </span>
                     )}
@@ -49,17 +49,17 @@ export const ShiftRecommendationCard: React.FC = () => {
                 <div className="flex gap-4 mb-6">
                     <div className="flex-1 bg-gray-50 p-3 rounded-xl text-center">
                         <p className="text-xs text-gray-500 mb-1">نقاط حدة القسم</p>
-                        <p className="text-2xl font-bold text-purple-600">{acuity.totalAcuityScore}</p>
+                        <p className="text-2xl font-bold text-[#D49A0A]">{acuity.totalAcuityScore}</p>
                         <div className="flex justify-center gap-1 mt-1">
                             {[...Array(5)].map((_, i) => (
-                                <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < 3 ? 'bg-purple-500' : 'bg-gray-300'}`} />
+                                <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < 3 ? 'bg-[#FCB614]' : 'bg-gray-300'}`} />
                             ))}
                         </div>
                     </div>
-                    <div className="flex-1 bg-blue-50 p-3 rounded-xl text-center">
-                        <p className="text-xs text-blue-600 mb-1">الحالات الحرجة</p>
-                        <p className="text-2xl font-bold text-blue-700">{acuity.highRiskCount}</p>
-                        <p className="text-[10px] text-blue-400">تحتاج مراقبة 1:1</p>
+                    <div className="flex-1 bg-[#269798]/10 p-3 rounded-xl text-center">
+                        <p className="text-xs text-[#269798] mb-1">الحالات الحرجة</p>
+                        <p className="text-2xl font-bold text-[#1B7778]">{acuity.highRiskCount}</p>
+                        <p className="text-[10px] text-[#269798]">تحتاج مراقبة 1:1</p>
                     </div>
                 </div>
 
@@ -71,9 +71,9 @@ export const ShiftRecommendationCard: React.FC = () => {
                             <Tooltip cursor={{ fill: 'transparent' }} />
                             <Legend wrapperStyle={{ fontSize: '10px' }} />
                             <Bar dataKey="actual" name="الموجود" fill="#94a3b8" barSize={12} radius={[0, 4, 4, 0]} />
-                            <Bar dataKey="recommended" name="المطلوب (AI)" fill="#3b82f6" barSize={12} radius={[0, 4, 4, 0]}>
+                            <Bar dataKey="recommended" name="المطلوب (AI)" fill="#269798" barSize={12} radius={[0, 4, 4, 0]}>
                                 {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.actual < entry.recommended ? '#ef4444' : '#22c55e'} />
+                                    <Cell key={`cell-${index}`} fill={entry.actual < entry.recommended ? '#DC2626' : '#22c55e'} />
                                 ))}
                             </Bar>
                         </BarChart>
@@ -81,7 +81,7 @@ export const ShiftRecommendationCard: React.FC = () => {
                 </div>
 
                 {acuity.status === 'understaffed' && (
-                    <button className="w-full py-2 bg-red-50 text-red-600 text-sm rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-2">
+                    <button className="w-full py-2 bg-[#DC2626]/10 text-[#DC2626] text-sm rounded-lg hover:bg-[#DC2626]/15 transition-colors flex items-center justify-center gap-2">
                         <UserPlus className="w-4 h-4" />
                         طلب دعم فوري
                     </button>

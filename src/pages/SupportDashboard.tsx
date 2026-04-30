@@ -32,7 +32,7 @@ export const SupportDashboard: React.FC = () => {
             {/* Header */}
             <div className="mb-6">
                 <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                    <Box className="w-8 h-8 text-indigo-600" />
+                    <Box className="w-8 h-8 text-[#0F3144]" />
                     بوابة الخدمات المساندة والأصول
                 </h1>
                 <p className="text-gray-500 mt-1">نظام إدارة الأصول الثابتة، المخزون، والصيانة (SPGA Compliant)</p>
@@ -42,28 +42,28 @@ export const SupportDashboard: React.FC = () => {
             <div className="flex gap-4 border-b mb-6">
                 <button
                     onClick={() => setActiveTab('dashboard')}
-                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'dashboard' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'dashboard' ? 'border-[#0F3144] text-[#0F3144]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 >
                     لوحة المؤشرات
                 </button>
                 <button
                     onClick={() => setActiveTab('assets')}
-                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'assets' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'assets' ? 'border-[#0F3144] text-[#0F3144]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 >
                     سجل الأصول الثابتة
                 </button>
                 <button
                     onClick={() => setActiveTab('consumables')}
-                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'consumables' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'consumables' ? 'border-[#0F3144] text-[#0F3144]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 >
                     المخزون والكسوة
                 </button>
                 <button
                     onClick={() => setActiveTab('maintenance')}
-                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'maintenance' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                    className={`pb-3 px-4 text-sm font-medium transition-colors border-b-2 ${activeTab === 'maintenance' ? 'border-[#0F3144] text-[#0F3144]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 >
                     طلبات الصيانة
-                    {openTickets > 0 && <span className="mr-2 bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded-full">{openTickets}</span>}
+                    {openTickets > 0 && <span className="mr-2 bg-[#DC2626]/15 text-[#DC2626] text-xs px-2 py-0.5 rounded-full">{openTickets}</span>}
                 </button>
             </div>
 
@@ -81,7 +81,7 @@ export const SupportDashboard: React.FC = () => {
                                         <p className="text-sm text-gray-500 mb-1">إجمالي الأصول</p>
                                         <h3 className="text-3xl font-bold text-gray-900">{totalAssets}</h3>
                                     </div>
-                                    <Box className="w-8 h-8 text-indigo-100" />
+                                    <Box className="w-8 h-8 text-[#0F3144]/40" />
                                 </div>
                                 <div className="mt-4 text-xs text-gray-400">
                                     القيمة: {totalValue.toLocaleString()} ر.س
@@ -94,9 +94,9 @@ export const SupportDashboard: React.FC = () => {
                                         <p className="text-sm text-gray-500 mb-1">تذاكر الصيانة المفتوحة</p>
                                         <h3 className="text-3xl font-bold text-gray-900">{openTickets}</h3>
                                     </div>
-                                    <Wrench className="w-8 h-8 text-orange-100" />
+                                    <Wrench className="w-8 h-8 text-[#F7941D]/40" />
                                 </div>
-                                <div className="mt-4 text-xs text-orange-600 font-medium">
+                                <div className="mt-4 text-xs text-[#D67A0A] font-medium">
                                     {criticalTickets} تذاكر ذات أولوية عالية
                                 </div>
                             </Card>
@@ -105,11 +105,11 @@ export const SupportDashboard: React.FC = () => {
                                 <div className="flex justify-between items-start">
                                     <div>
                                         <p className="text-sm text-gray-500 mb-1">أصول تالفة / معطلة</p>
-                                        <h3 className="text-3xl font-bold text-red-600">{damagedAssets}</h3>
+                                        <h3 className="text-3xl font-bold text-[#DC2626]">{damagedAssets}</h3>
                                     </div>
-                                    <AlertTriangle className="w-8 h-8 text-red-100" />
+                                    <AlertTriangle className="w-8 h-8 text-[#DC2626]/40" />
                                 </div>
-                                <div className="mt-4 text-xs text-red-500">
+                                <div className="mt-4 text-xs text-[#DC2626]">
                                     تتطلب إجراء (إصلاح أو تكهين)
                                 </div>
                             </Card>
@@ -120,9 +120,9 @@ export const SupportDashboard: React.FC = () => {
                                         <p className="text-sm text-gray-500 mb-1">حالة المخزون</p>
                                         <h3 className="text-3xl font-bold text-gray-900">مستقر</h3>
                                     </div>
-                                    <Package className="w-8 h-8 text-green-100" />
+                                    <Package className="w-8 h-8 text-[#2BB574]/40" />
                                 </div>
-                                <div className="mt-4 text-xs text-green-600">
+                                <div className="mt-4 text-xs text-[#1E9658]">
                                     تم تحديث الجرد الأسبوعي
                                 </div>
                             </Card>
@@ -138,7 +138,7 @@ export const SupportDashboard: React.FC = () => {
                                 <div className="space-y-4">
                                     {mockTickets.slice(0, 5).map(ticket => (
                                         <div key={ticket.id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border hover:bg-gray-100 transition-colors">
-                                            <div className={`w-2 h-2 mt-2 rounded-full ${ticket.status === 'open' ? 'bg-red-500' : 'bg-orange-500'}`}></div>
+                                            <div className={`w-2 h-2 mt-2 rounded-full ${ticket.status === 'open' ? 'bg-[#DC2626]' : 'bg-[#F7941D]'}`}></div>
                                             <div className="flex-1">
                                                 <div className="flex justify-between">
                                                     <span className="font-medium text-sm text-gray-900">{ticket.assetName}</span>
@@ -150,7 +150,7 @@ export const SupportDashboard: React.FC = () => {
                                                         بواسطة: {ticket.reportedBy}
                                                     </span>
                                                     {ticket.priority === 'high' && (
-                                                        <span className="text-[10px] px-2 py-0.5 bg-red-100 text-red-700 rounded font-bold">
+                                                        <span className="text-[10px] px-2 py-0.5 bg-[#DC2626]/15 text-[#B91C1C] rounded font-bold">
                                                             عاجل
                                                         </span>
                                                     )}
@@ -165,16 +165,16 @@ export const SupportDashboard: React.FC = () => {
                             <Card className="p-6 bg-white shadow-sm">
                                 <h3 className="font-bold text-gray-800 mb-4">إجراءات سريعة</h3>
                                 <div className="grid grid-cols-2 gap-4">
-                                    <button className="p-4 border rounded-xl hover:bg-indigo-50 hover:border-indigo-200 transition-all text-center group" onClick={() => setActiveTab('assets')}>
-                                        <Box className="w-8 h-8 mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition-transform" />
+                                    <button className="p-4 border rounded-xl hover:bg-[#0F3144]/5 hover:border-[#0F3144]/30 transition-all text-center group" onClick={() => setActiveTab('assets')}>
+                                        <Box className="w-8 h-8 mx-auto mb-2 text-[#0F3144] group-hover:scale-110 transition-transform" />
                                         <span className="block text-sm font-medium text-gray-700">إضافة أصل جديد</span>
                                     </button>
-                                    <button className="p-4 border rounded-xl hover:bg-orange-50 hover:border-orange-200 transition-all text-center group">
-                                        <Wrench className="w-8 h-8 mx-auto mb-2 text-orange-500 group-hover:scale-110 transition-transform" />
+                                    <button className="p-4 border rounded-xl hover:bg-[#F7941D]/10 hover:border-[#F7941D]/30 transition-all text-center group">
+                                        <Wrench className="w-8 h-8 mx-auto mb-2 text-[#D67A0A] group-hover:scale-110 transition-transform" />
                                         <span className="block text-sm font-medium text-gray-700">فتح بلاغ صيانة</span>
                                     </button>
-                                    <button className="p-4 border rounded-xl hover:bg-green-50 hover:border-green-200 transition-all text-center group" onClick={() => setActiveTab('consumables')}>
-                                        <Package className="w-8 h-8 mx-auto mb-2 text-green-500 group-hover:scale-110 transition-transform" />
+                                    <button className="p-4 border rounded-xl hover:bg-[#2BB574]/10 hover:border-[#2BB574]/20 transition-all text-center group" onClick={() => setActiveTab('consumables')}>
+                                        <Package className="w-8 h-8 mx-auto mb-2 text-[#1E9658] group-hover:scale-110 transition-transform" />
                                         <span className="block text-sm font-medium text-gray-700">صرف مواد (كسوة)</span>
                                     </button>
                                 </div>

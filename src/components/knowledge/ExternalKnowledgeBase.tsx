@@ -12,8 +12,8 @@ export const ExternalKnowledgeBase: React.FC = () => {
     if (!url) {
         return (
             <div className="flex flex-col items-center justify-center h-[80vh] bg-white rounded-xl shadow-sm p-8 text-center" dir="rtl">
-                <div className="bg-blue-50 p-4 rounded-full mb-4">
-                    <BookOpen className="w-12 h-12 text-blue-600" />
+                <div className="bg-[#269798]/10 p-4 rounded-full mb-4">
+                    <BookOpen className="w-12 h-12 text-[#269798]" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">المكتبة الرقمية (Google Drive)</h2>
                 <p className="text-gray-600 mb-6 max-w-md">
@@ -57,14 +57,14 @@ export const ExternalKnowledgeBase: React.FC = () => {
         <div className="flex flex-col h-full bg-white rounded-xl shadow-sm overflow-hidden" dir="rtl">
             <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
                 <div className="flex items-center gap-3">
-                    <BookOpen className="w-5 h-5 text-blue-600" />
+                    <BookOpen className="w-5 h-5 text-[#269798]" />
                     <h2 className="font-bold text-gray-800">المكتبة الرقمية</h2>
                 </div>
                 <a
                     href={url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 transition-colors"
+                    className="flex items-center gap-2 text-sm text-[#269798] hover:text-[#1B7778] transition-colors"
                 >
                     <span>فتح في نافذة جديدة</span>
                     <ExternalLink className="w-4 h-4" />
@@ -74,7 +74,7 @@ export const ExternalKnowledgeBase: React.FC = () => {
             <div className="flex-1 relative bg-gray-100">
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1B7778]"></div>
                     </div>
                 )}
                 <iframe

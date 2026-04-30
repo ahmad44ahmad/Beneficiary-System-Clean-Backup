@@ -169,7 +169,7 @@ export const CateringDailyLog: React.FC = () => {
         <div className="p-6 bg-gray-50 min-h-screen" dir="rtl">
             <header className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-2xl font-bold text-[#14415A]">تسجيل الوجبات اليومي</h1>
+                    <h1 className="text-2xl font-bold text-[#0F3144]">تسجيل الوجبات اليومي</h1>
                     <p className="text-gray-600">إدارة توزيع وجبات: {selectedMealType}</p>
                 </div>
                 <div className="flex gap-3">
@@ -189,7 +189,7 @@ export const CateringDailyLog: React.FC = () => {
                     <select
                         value={selectedMealType}
                         onChange={(e) => setSelectedMealType(e.target.value)}
-                        className="border-gray-300 rounded-lg focus:ring-[#F5961E] focus:border-[#F5961E]"
+                        className="border-gray-300 rounded-lg focus:ring-[#F7941D] focus:border-[#F7941D]"
                     >
                         <option value="فطور">فطور</option>
                         <option value="غداء">غداء</option>
@@ -203,7 +203,7 @@ export const CateringDailyLog: React.FC = () => {
                         <button
                             onClick={generateDailyMeals}
                             disabled={generating}
-                            className="px-4 py-2 bg-[#148287] text-white rounded-lg hover:bg-[#0e6b6f] flex items-center gap-2"
+                            className="px-4 py-2 bg-[#269798] text-white rounded-lg hover:bg-[#0e6b6f] flex items-center gap-2"
                         >
                             {generating ? <Loader2 className="animate-spin w-4 h-4" /> : <Save className="w-4 h-4" />}
                             إنشاء قائمة الوجبات
@@ -211,7 +211,7 @@ export const CateringDailyLog: React.FC = () => {
                     ) : (
                         <button
                             onClick={markAllDelivered}
-                            className="px-4 py-2 bg-[#F5961E] text-white rounded-lg hover:bg-[#d98210] flex items-center gap-2"
+                            className="px-4 py-2 bg-[#F7941D] text-white rounded-lg hover:bg-[#d98210] flex items-center gap-2"
                         >
                             <Check className="w-4 h-4" />
                             تسجيل الكل "تم التسليم"
@@ -220,7 +220,7 @@ export const CateringDailyLog: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || meals.length === 0}
-                        className="px-4 py-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-4 h-4" />
@@ -248,7 +248,7 @@ export const CateringDailyLog: React.FC = () => {
                     </div>
                 ) : (
                     <table className="w-full text-right">
-                        <thead className="bg-[#14415A] text-white text-sm">
+                        <thead className="bg-[#0F3144] text-white text-sm">
                             <tr>
                                 <th className="px-6 py-4">المستفيد</th>
                                 <th className="px-6 py-4">النظام الغذائي</th>
@@ -261,7 +261,7 @@ export const CateringDailyLog: React.FC = () => {
                                 <tr key={meal.id} className="hover:bg-gray-50 transition-colors">
                                     <td className="px-6 py-4 font-medium">{meal.beneficiary_name}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded text-xs ${meal.plan_type === 'قياسي' ? 'bg-gray-100 text-gray-600' : 'bg-red-100 text-red-700 font-bold'
+                                        <span className={`px-2 py-1 rounded text-xs ${meal.plan_type === 'قياسي' ? 'bg-gray-100 text-gray-600' : 'bg-[#DC2626]/15 text-[#B91C1C] font-bold'
                                             }`}>
                                             {meal.plan_type}
                                         </span>
@@ -275,21 +275,21 @@ export const CateringDailyLog: React.FC = () => {
                                                 <button
                                                     onClick={() => updateStatus(meal.id, 'delivered')}
                                                     title="تم التسليم"
-                                                    className="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100"
+                                                    className="p-2 bg-[#269798]/10 text-[#269798] rounded-lg hover:bg-[#269798]/15"
                                                 >
                                                     <Utensils className="w-4 h-4" />
                                                 </button>
                                                 <button
                                                     onClick={() => updateStatus(meal.id, 'consumed')}
                                                     title="تم الاستهلاك"
-                                                    className="p-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100"
+                                                    className="p-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15"
                                                 >
                                                     <Check className="w-4 h-4" />
                                                 </button>
                                                 <button
                                                     onClick={() => updateStatus(meal.id, 'refused')}
                                                     title="رفض"
-                                                    className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100"
+                                                    className="p-2 bg-[#DC2626]/10 text-[#DC2626] rounded-lg hover:bg-[#DC2626]/15"
                                                 >
                                                     <X className="w-4 h-4" />
                                                 </button>

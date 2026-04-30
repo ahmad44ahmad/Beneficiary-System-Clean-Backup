@@ -81,10 +81,10 @@ export const WasteManagement: React.FC = () => {
 
     const wasteTypes = [
         { value: 'general', label: 'نفايات عامة', color: 'bg-gray-500' },
-        { value: 'recyclable', label: 'قابلة للتدوير', color: 'bg-green-500' },
-        { value: 'hazardous', label: 'خطرة', color: 'bg-red-500' },
-        { value: 'electronic', label: 'إلكترونية', color: 'bg-blue-500' },
-        { value: 'confidential', label: 'سرية', color: 'bg-purple-500' }
+        { value: 'recyclable', label: 'قابلة للتدوير', color: 'bg-[#2BB574]' },
+        { value: 'hazardous', label: 'خطرة', color: 'bg-[#DC2626]' },
+        { value: 'electronic', label: 'إلكترونية', color: 'bg-[#269798]' },
+        { value: 'confidential', label: 'سرية', color: 'bg-[#FCB614]' }
     ];
 
     const disposalMethods = [
@@ -139,8 +139,8 @@ export const WasteManagement: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-md">
                     <div className="flex items-center gap-3">
-                        <div className="p-3 bg-green-100 rounded-lg">
-                            <Recycle className="w-6 h-6 text-green-600" />
+                        <div className="p-3 bg-[#2BB574]/15 rounded-lg">
+                            <Recycle className="w-6 h-6 text-[#1E9658]" />
                         </div>
                         <div>
                             <p className="text-2xl font-bold">
@@ -152,8 +152,8 @@ export const WasteManagement: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-md">
                     <div className="flex items-center gap-3">
-                        <div className="p-3 bg-red-100 rounded-lg">
-                            <AlertTriangle className="w-6 h-6 text-red-600" />
+                        <div className="p-3 bg-[#DC2626]/15 rounded-lg">
+                            <AlertTriangle className="w-6 h-6 text-[#DC2626]" />
                         </div>
                         <div>
                             <p className="text-2xl font-bold">
@@ -165,8 +165,8 @@ export const WasteManagement: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-md">
                     <div className="flex items-center gap-3">
-                        <div className="p-3 bg-blue-100 rounded-lg">
-                            <FileText className="w-6 h-6 text-blue-600" />
+                        <div className="p-3 bg-[#269798]/15 rounded-lg">
+                            <FileText className="w-6 h-6 text-[#269798]" />
                         </div>
                         <div>
                             <p className="text-2xl font-bold">{monthlyRecords.length}</p>

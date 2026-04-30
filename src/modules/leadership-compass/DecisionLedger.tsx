@@ -45,26 +45,26 @@ export const DecisionLedger: React.FC = () => {
             </div>
 
             {/* الفلترة والبحث */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-4 flex flex-wrap gap-3 items-center">
+            <div className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-4 flex flex-wrap gap-3 items-center">
                 <div className="flex-1 min-w-[200px] relative">
-                    <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 start-3 text-slate-400" />
+                    <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 start-3 text-hrsd-cool-gray" />
                     <input
                         type="text"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="ابحث بالعنوان أو الدرس أو الوسم..."
-                        className="w-full ps-3 pe-10 py-2 border border-slate-200 dark:border-slate-600
-                            rounded-lg bg-white dark:bg-slate-900 text-[14px] focus:border-hrsd-teal focus:outline-none"
+                        className="w-full ps-3 pe-10 py-2 border border-gray-200 dark:border-gray-300
+                            rounded-lg bg-white dark:bg-white text-[14px] focus:border-hrsd-teal focus:outline-none"
                     />
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <Filter className="w-4 h-4 text-slate-400" />
+                    <Filter className="w-4 h-4 text-hrsd-cool-gray" />
                     <select
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
-                        className="px-3 py-2 border border-slate-200 dark:border-slate-600
-                            rounded-lg bg-white dark:bg-slate-900 text-[14px] font-medium"
+                        className="px-3 py-2 border border-gray-200 dark:border-gray-300
+                            rounded-lg bg-white dark:bg-white text-[14px] font-medium"
                     >
                         <option value="all">كلّ الحالات</option>
                         <option value="approved">مُعتمَدة</option>
@@ -73,7 +73,7 @@ export const DecisionLedger: React.FC = () => {
                     </select>
                 </div>
 
-                <div className="text-[13px] text-slate-500 dark:text-slate-400">
+                <div className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                     تَعرض {filtered.length} من {SEED_LEDGER.length}
                 </div>
             </div>
@@ -84,7 +84,7 @@ export const DecisionLedger: React.FC = () => {
                     <LedgerCard key={e.id} entry={e} />
                 ))}
                 {filtered.length === 0 && (
-                    <div className="text-center py-12 text-slate-500">لا قراراتٌ تُطابق البحث.</div>
+                    <div className="text-center py-12 text-hrsd-cool-gray">لا قراراتٌ تُطابق البحث.</div>
                 )}
             </div>
         </section>
@@ -100,7 +100,7 @@ const StatCard: React.FC<{
         navy:  { bg: 'bg-hrsd-navy/5',        text: 'text-hrsd-navy',      iconBg: 'bg-hrsd-navy text-white' },
         green: { bg: 'bg-hrsd-green/10',      text: 'text-hrsd-green-dark', iconBg: 'bg-hrsd-green text-white' },
         gold:  { bg: 'bg-hrsd-gold/10',       text: 'text-hrsd-gold-dark',  iconBg: 'bg-hrsd-gold text-white' },
-        slate: { bg: 'bg-slate-100',          text: 'text-slate-700',       iconBg: 'bg-slate-500 text-white' },
+        slate: { bg: 'bg-slate-100',          text: 'text-hrsd-navy',       iconBg: 'bg-slate-500 text-white' },
     };
     const t = tones[tone];
     return (
@@ -110,7 +110,7 @@ const StatCard: React.FC<{
             </div>
             <div>
                 <div className={`text-[22px] font-black leading-none ${t.text}`}>{value}</div>
-                <div className="text-[12px] text-slate-600 dark:text-slate-400 mt-0.5">{label}</div>
+                <div className="text-[12px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mt-0.5">{label}</div>
             </div>
         </div>
     );
@@ -119,9 +119,9 @@ const StatCard: React.FC<{
 // ─── بطاقة قرار تاريخيّ ─────────────────────────────────────────────────────
 const STATUS_ICONS = {
     approved:   { icon: CheckCircle2,  color: 'text-hrsd-green-dark', badge: 'bg-hrsd-green/15', label: 'مُعتمَد' },
-    rejected:   { icon: XCircle,       color: 'text-rose-600',        badge: 'bg-rose-100',      label: 'مرفوض' },
-    delayed:    { icon: PauseCircle,   color: 'text-amber-600',       badge: 'bg-amber-100',     label: 'مُؤجَّل' },
-    superseded: { icon: RotateCw,      color: 'text-slate-500',       badge: 'bg-slate-100',     label: 'استُبدِل' },
+    rejected:   { icon: XCircle,       color: 'text-[#B91C1C]',        badge: 'bg-[#DC2626]/10',      label: 'مرفوض' },
+    delayed:    { icon: PauseCircle,   color: 'text-[#D49A0A]',       badge: 'bg-[#FCB614]/15',     label: 'مُؤجَّل' },
+    superseded: { icon: RotateCw,      color: 'text-hrsd-cool-gray',       badge: 'bg-slate-100',     label: 'استُبدِل' },
 };
 
 const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
@@ -129,22 +129,22 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
     const StatusIcon = STATUS_ICONS[entry.status].icon;
 
     return (
-        <article className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <article className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 shadow-sm overflow-hidden">
             {/* الشريط العلويّ */}
-            <header className="p-5 border-b border-slate-100 dark:border-slate-700 flex items-start justify-between gap-4 flex-wrap">
+            <header className="p-5 border-b border-slate-100 dark:border-gray-200 flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex items-start gap-3">
                     <div className={`mt-1 ${STATUS_ICONS[entry.status].color}`}>
                         <StatusIcon className="w-5 h-5" />
                     </div>
                     <div>
                         <div className="flex items-center gap-2 text-[12px] mb-0.5">
-                            <span className="font-mono text-slate-500">{entry.decidedDate}</span>
-                            <span className="text-slate-400">·</span>
-                            <span className="font-semibold text-slate-600 dark:text-slate-300">{entry.category}</span>
-                            <span className="text-slate-400">·</span>
-                            <span className="text-slate-600 dark:text-slate-300">مستوى {entry.level}</span>
+                            <span className="font-mono text-hrsd-cool-gray">{entry.decidedDate}</span>
+                            <span className="text-hrsd-cool-gray">·</span>
+                            <span className="font-semibold text-hrsd-cool-gray dark:text-hrsd-navy">{entry.category}</span>
+                            <span className="text-hrsd-cool-gray">·</span>
+                            <span className="text-hrsd-cool-gray dark:text-hrsd-navy">مستوى {entry.level}</span>
                         </div>
-                        <h3 className="text-[17px] font-bold text-slate-900 dark:text-white leading-tight">
+                        <h3 className="text-[17px] font-bold text-hrsd-navy dark:text-white leading-tight">
                             {entry.title}
                         </h3>
                     </div>
@@ -157,7 +157,7 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
             <div className="p-5 space-y-4">
                 {/* نتائج فعليّة (ملخَّص دائماً ظاهر) */}
                 <div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray dark:text-hrsd-cool-gray mb-2">
                         النتائج الفعليّة
                     </div>
                     <div className="grid md:grid-cols-3 gap-2.5">
@@ -172,7 +172,7 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
                     <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-gold-dark mb-1.5">
                         🎓 الدرس المُستخلَص
                     </div>
-                    <p className="text-[13.5px] text-slate-800 dark:text-slate-200 leading-relaxed">
+                    <p className="text-[13.5px] text-hrsd-navy dark:text-slate-200 leading-relaxed">
                         {entry.lessonLearned}
                     </p>
                 </div>
@@ -181,26 +181,26 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
                 <button
                     type="button"
                     onClick={() => setExpanded(!expanded)}
-                    className="w-full py-2 rounded-lg border border-slate-200 dark:border-slate-600 text-[13px] font-semibold
-                        text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                    className="w-full py-2 rounded-lg border border-gray-200 dark:border-gray-300 text-[13px] font-semibold
+                        text-hrsd-cool-gray dark:text-hrsd-navy hover:bg-slate-50 dark:hover:bg-gray-50 transition-colors"
                 >
                     {expanded ? 'إخفاء التفاصيل' : 'عرض تفاصيل القرار الأصليّ'}
                 </button>
 
                 {expanded && (
-                    <div className="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-700">
+                    <div className="space-y-3 pt-3 border-t border-slate-100 dark:border-gray-200">
                         <div>
-                            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">التوصية الأصليّة</div>
-                            <p className="text-[13.5px] text-slate-700 dark:text-slate-200 leading-relaxed">{entry.originalRecommendation}</p>
+                            <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray mb-1">التوصية الأصليّة</div>
+                            <p className="text-[13.5px] text-hrsd-navy dark:text-slate-200 leading-relaxed">{entry.originalRecommendation}</p>
                         </div>
                         {entry.decisionNotes && (
                             <div>
-                                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">ملاحظات القرار</div>
-                                <p className="text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed">{entry.decisionNotes}</p>
+                                <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray mb-1">ملاحظات القرار</div>
+                                <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-navy leading-relaxed">{entry.decisionNotes}</p>
                             </div>
                         )}
                         {entry.cost && (
-                            <div className="flex gap-4 text-[13px] text-slate-600 dark:text-slate-300">
+                            <div className="flex gap-4 text-[13px] text-hrsd-cool-gray dark:text-hrsd-navy">
                                 <div>
                                     <span className="font-bold">التكلفة المُخطَّطة:</span>{' '}
                                     {entry.cost.plannedSar.toLocaleString('ar-SA')} ريال
@@ -214,16 +214,16 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
                             </div>
                         )}
                         <div>
-                            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">الصانع</div>
-                            <p className="text-[13px] text-slate-600 dark:text-slate-300">{entry.decidedBy}</p>
+                            <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray mb-1">الصانع</div>
+                            <p className="text-[13px] text-hrsd-cool-gray dark:text-hrsd-navy">{entry.decidedBy}</p>
                         </div>
                     </div>
                 )}
 
                 {/* الوسوم */}
-                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-700">
+                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100 dark:border-gray-200">
                     {entry.tags.map((tag) => (
-                        <span key={tag} className="text-[11px] bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-md">
+                        <span key={tag} className="text-[11px] bg-slate-100 dark:bg-gray-50 text-hrsd-cool-gray dark:text-hrsd-navy px-2 py-0.5 rounded-md">
                             #{tag}
                         </span>
                     ))}
@@ -237,9 +237,9 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
 const OutcomePanel: React.FC<{ label: string; outcome?: OutcomeActual }> = ({ label, outcome }) => {
     if (!outcome) {
         return (
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-3 border border-dashed border-slate-200 dark:border-slate-700">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">{label}</div>
-                <p className="text-[12px] text-slate-400 italic">لم يُقَس بعد</p>
+            <div className="bg-slate-50 dark:bg-white rounded-lg p-3 border border-dashed border-gray-200 dark:border-gray-200">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray mb-0.5">{label}</div>
+                <p className="text-[12px] text-hrsd-cool-gray italic">لم يُقَس بعد</p>
             </div>
         );
     }
@@ -250,9 +250,9 @@ const OutcomePanel: React.FC<{ label: string; outcome?: OutcomeActual }> = ({ la
                 <span>{label}</span>
                 <span className="ms-auto">{tone.icon} {VARIANCE_LABELS[outcome.variance]}</span>
             </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-0.5">المُخطَّط:</div>
-            <div className="text-[12.5px] text-slate-700 dark:text-slate-200 mb-1.5 leading-snug">{outcome.plannedValue}</div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400">الفعليّ:</div>
+            <div className="text-[11px] text-hrsd-cool-gray dark:text-hrsd-cool-gray mb-0.5">المُخطَّط:</div>
+            <div className="text-[12.5px] text-hrsd-navy dark:text-slate-200 mb-1.5 leading-snug">{outcome.plannedValue}</div>
+            <div className="text-[11px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">الفعليّ:</div>
             <div className={`text-[13px] font-bold leading-snug ${tone.text}`}>{outcome.actualValue}</div>
             {outcome.notes && (
                 <div className="mt-1.5 pt-1.5 border-t border-current opacity-70 text-[11px] italic leading-relaxed">

@@ -179,7 +179,7 @@ export const RehabPlanBuilder: React.FC = () => {
             <div className="bg-white border-b p-4 flex justify-between items-center shadow-sm z-10">
                 <div>
                     <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                        <Brain className="w-6 h-6 text-purple-600" />
+                        <Brain className="w-6 h-6 text-[#D49A0A]" />
                         الخطة التأهيلية الذكية (Smart IRP)
                     </h1>
                     <p className="text-xs text-gray-500">نظام دعم القرار القائم على دمج البيانات</p>
@@ -218,8 +218,8 @@ export const RehabPlanBuilder: React.FC = () => {
                                     <span className="text-primary-500 block text-xs mb-1">التشخيص الطبي</span>
                                     <span className="font-medium text-gray-900">{selectedBeneficiary.medicalDiagnosis}</span>
                                 </div>
-                                <div className="bg-green-50 p-3 rounded-lg border border-green-100">
-                                    <span className="text-green-600 block text-xs mb-1">الوضع الاجتماعي</span>
+                                <div className="bg-[#2BB574]/10 p-3 rounded-lg border border-[#2BB574]/10">
+                                    <span className="text-[#1E9658] block text-xs mb-1">الوضع الاجتماعي</span>
                                     <div className="flex justify-between">
                                         <span className="font-medium text-gray-900">{selectedBeneficiary.socialStatus}</span>
                                     </div>
@@ -228,15 +228,15 @@ export const RehabPlanBuilder: React.FC = () => {
 
                             {/* Smart Suggestions */}
                             <div>
-                                <h4 className="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2">مقترحات الذكاء الاصطناعي</h4>
+                                <h4 className="text-xs font-bold text-[#D49A0A] uppercase tracking-wider mb-2">مقترحات الذكاء الاصطناعي</h4>
                                 <div className="space-y-2">
                                     {suggestions.map((s, i) => (
-                                        <div key={i} className="group relative bg-purple-50 hover:bg-purple-100 border border-purple-200 p-3 rounded-lg transition-all cursor-pointer" onClick={() => addGoal(s)}>
+                                        <div key={i} className="group relative bg-[#FCB614]/10 hover:bg-[#FCB614]/15 border border-[#FCB614]/20 p-3 rounded-lg transition-all cursor-pointer" onClick={() => addGoal(s)}>
                                             <div className="flex justify-between items-start">
-                                                <span className="font-medium text-purple-900 text-sm">{s.title}</span>
-                                                <Plus className="w-4 h-4 text-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                <span className="font-medium text-[#92400E] text-sm">{s.title}</span>
+                                                <Plus className="w-4 h-4 text-[#D49A0A] opacity-0 group-hover:opacity-100 transition-opacity" />
                                             </div>
-                                            <div className="mt-1 text-xs text-purple-600 flex items-center gap-1">
+                                            <div className="mt-1 text-xs text-[#D49A0A] flex items-center gap-1">
                                                 <Brain className="w-3 h-3" />
                                                 {s.reason}
                                             </div>
@@ -296,14 +296,14 @@ export const RehabPlanBuilder: React.FC = () => {
                                             />
                                         </div>
                                     </div>
-                                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700" onClick={() => removeGoal(goal.id)}>حذف</Button>
+                                    <Button variant="ghost" size="sm" className="text-[#DC2626] hover:text-[#B91C1C]" onClick={() => removeGoal(goal.id)}>حذف</Button>
                                 </div>
 
                                 {/* ISO 9001 Progress Slider */}
                                 <div className="bg-gray-50 p-3 rounded-lg mt-2">
                                     <div className="flex justify-between text-xs mb-2">
                                         <span className="font-semibold text-gray-600">مؤشر التقدم (KPI Tracker)</span>
-                                        <span className={`font-bold ${goal.progress === 100 ? 'text-green-600' : 'text-primary-600'}`}>{goal.progress}%</span>
+                                        <span className={`font-bold ${goal.progress === 100 ? 'text-[#1E9658]' : 'text-primary-600'}`}>{goal.progress}%</span>
                                     </div>
                                     <input
                                         type="range"
@@ -331,7 +331,7 @@ export const RehabPlanBuilder: React.FC = () => {
                     <div className="mt-8 pt-6 border-t border-gray-200">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                                <Crosshair className="w-5 h-5 text-purple-600" />
+                                <Crosshair className="w-5 h-5 text-[#D49A0A]" />
                                 أهداف ICF (التصنيف الدولي للأداء)
                             </h2>
                         </div>
@@ -352,16 +352,16 @@ export const RehabPlanBuilder: React.FC = () => {
 
                     <div className="space-y-4">
                         {plan.approvals?.map(approval => (
-                            <div key={approval.role} className={`p-4 rounded-lg border transition-colors ${approval.status === 'approved' ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}>
+                            <div key={approval.role} className={`p-4 rounded-lg border transition-colors ${approval.status === 'approved' ? 'bg-[#2BB574]/10 border-[#2BB574]/20' : 'bg-gray-50 border-gray-200'}`}>
                                 <div className="flex justify-between items-center mb-2">
                                     <span className="font-bold text-sm text-gray-700 capitalize">{approval.role.replace('_', ' ')}</span>
-                                    {approval.status === 'approved' && <CheckCircle className="w-4 h-4 text-green-600" />}
+                                    {approval.status === 'approved' && <CheckCircle className="w-4 h-4 text-[#1E9658]" />}
                                 </div>
 
                                 {approval.status === 'approved' ? (
-                                    <div className="text-xs text-green-700">
+                                    <div className="text-xs text-[#1E9658]">
                                         <div>Approved by: {approval.approvedBy}</div>
-                                        <div className="text-green-600 opacity-75">{new Date(approval.approvedAt!).toLocaleDateString()}</div>
+                                        <div className="text-[#1E9658] opacity-75">{new Date(approval.approvedAt!).toLocaleDateString()}</div>
                                     </div>
                                 ) : (
                                     <Button

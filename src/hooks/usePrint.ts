@@ -59,7 +59,7 @@ export function usePrint(): UsePrintResult {
         .header {
             text-align: center;
             margin-bottom: 20px;
-            border-bottom: 3px solid #148287;
+            border-bottom: 3px solid #269798;
             padding-bottom: 15px;
         }
         .logo-section {
@@ -69,7 +69,7 @@ export function usePrint(): UsePrintResult {
             gap: 15px;
             margin-bottom: 10px;
         }
-        .title { font-size: 24px; font-weight: bold; color: #14415a; margin: 0; }
+        .title { font-size: 24px; font-weight: bold; color: #0F3144; margin: 0; }
         .subtitle { font-size: 14px; color: #666; margin-top: 5px; }
         .timestamp { font-size: 12px; color: #888; margin-top: 5px; }
         table {
@@ -78,7 +78,7 @@ export function usePrint(): UsePrintResult {
             margin-top: 20px;
         }
         th {
-            background: linear-gradient(135deg, #148287 0%, #0d6567 100%);
+            background: linear-gradient(135deg, #269798 0%, #0d6567 100%);
             color: white;
             padding: 12px 15px;
             border: 1px solid #0d6567;
@@ -107,7 +107,7 @@ export function usePrint(): UsePrintResult {
             margin: 15px 0;
             font-size: 13px;
         }
-        .stat-item { color: #148287; font-weight: 600; }
+        .stat-item { color: #269798; font-weight: 600; }
         @media print {
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }

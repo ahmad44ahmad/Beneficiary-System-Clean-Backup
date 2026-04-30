@@ -93,8 +93,8 @@ export const StrategicKPIDashboard: React.FC = () => {
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case 'complete': return 'bg-green-500';
-            case 'in_progress': return 'bg-amber-500';
+            case 'complete': return 'bg-[#2BB574]';
+            case 'in_progress': return 'bg-[#FCB614]';
             case 'pending': return 'bg-gray-400';
             default: return 'bg-gray-400';
         }
@@ -139,13 +139,13 @@ export const StrategicKPIDashboard: React.FC = () => {
                         <p className="text-sm opacity-80 mt-1">ريال لكل ريال مستثمر</p>
                     </div>
                     <div className="text-center md:border-s border-white/20 md:ps-8">
-                        <CheckCircle2 className="w-12 h-12 mx-auto mb-3 text-green-400" />
+                        <CheckCircle2 className="w-12 h-12 mx-auto mb-3 text-[#2BB574]" />
                         <p className="text-sm uppercase tracking-wide opacity-80">نسبة الامتثال</p>
                         <p className="text-5xl font-bold mt-2">{stats.overallCompliance}%</p>
                         <p className="text-sm opacity-80 mt-1">معايير الحوكمة</p>
                     </div>
                     <div className="text-center">
-                        <Activity className="w-12 h-12 mx-auto mb-3 text-amber-400" />
+                        <Activity className="w-12 h-12 mx-auto mb-3 text-[#FCB614]" />
                         <p className="text-sm uppercase tracking-wide opacity-80">المهام المكتملة</p>
                         <p className="text-5xl font-bold mt-2">{stats.completedTasks}</p>
                         <p className="text-sm opacity-80 mt-1">هذا الشهر</p>
@@ -156,23 +156,23 @@ export const StrategicKPIDashboard: React.FC = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-white rounded-xl p-5 shadow-md text-center">
-                    <Users className="w-8 h-8 mx-auto text-blue-500 mb-2" />
+                    <Users className="w-8 h-8 mx-auto text-[#269798] mb-2" />
                     <p className="text-3xl font-bold">{loading ? '...' : stats.totalBeneficiaries}</p>
                     <p className="text-sm text-gray-500">إجمالي المستفيدين</p>
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-md text-center">
-                    <CheckCircle2 className="w-8 h-8 mx-auto text-green-500 mb-2" />
+                    <CheckCircle2 className="w-8 h-8 mx-auto text-[#1E9658] mb-2" />
                     <p className="text-3xl font-bold">{loading ? '...' : stats.activeCases}</p>
                     <p className="text-sm text-gray-500">حالات نشطة</p>
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-md text-center">
-                    <AlertTriangle className="w-8 h-8 mx-auto text-amber-500 mb-2" />
+                    <AlertTriangle className="w-8 h-8 mx-auto text-[#D49A0A] mb-2" />
                     <p className="text-3xl font-bold">{loading ? '...' : stats.pendingRisks}</p>
                     <p className="text-sm text-gray-500">مخاطر قيد المعالجة</p>
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-md text-center">
                     <TrendingUp className="w-8 h-8 mx-auto text-hrsd-primary mb-2" />
-                    <p className="text-3xl font-bold text-green-600">+12%</p>
+                    <p className="text-3xl font-bold text-[#1E9658]">+12%</p>
                     <p className="text-sm text-gray-500">تحسن الأداء</p>
                 </div>
             </div>
@@ -196,8 +196,8 @@ export const StrategicKPIDashboard: React.FC = () => {
                             <div className="flex-1">
                                 <div className="flex items-center justify-between mb-1">
                                     <h3 className="font-bold text-gray-800">{module.name}</h3>
-                                    <span className={`text-xs px-2 py-1 rounded-full ${module.status === 'complete' ? 'bg-green-100 text-green-800' :
-                                            module.status === 'in_progress' ? 'bg-amber-100 text-amber-800' :
+                                    <span className={`text-xs px-2 py-1 rounded-full ${module.status === 'complete' ? 'bg-[#2BB574]/15 text-[#14532D]' :
+                                            module.status === 'in_progress' ? 'bg-[#FCB614]/15 text-[#92400E]' :
                                                 'bg-gray-100 text-gray-600'
                                         }`}>
                                         {getStatusLabel(module.status)}
@@ -227,19 +227,19 @@ export const StrategicKPIDashboard: React.FC = () => {
                     <div className="space-y-3">
                         <div className="flex items-center justify-between">
                             <span className="text-sm">هيئة عقارات الدولة</span>
-                            <span className="text-green-600 font-medium">متوافق</span>
+                            <span className="text-[#1E9658] font-medium">متوافق</span>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-sm">نظام أصول (وزارة المالية)</span>
-                            <span className="text-amber-600 font-medium">قيد التطبيق</span>
+                            <span className="text-[#D49A0A] font-medium">قيد التطبيق</span>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-sm">معايير IPSAS المحاسبية</span>
-                            <span className="text-green-600 font-medium">متوافق</span>
+                            <span className="text-[#1E9658] font-medium">متوافق</span>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-sm">ISO 9001:2015</span>
-                            <span className="text-amber-600 font-medium">قيد التقييم</span>
+                            <span className="text-[#D49A0A] font-medium">قيد التقييم</span>
                         </div>
                     </div>
                 </div>
@@ -252,25 +252,25 @@ export const StrategicKPIDashboard: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <span className="text-sm">تمكين ذوي الإعاقة</span>
                             <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-green-500 w-[85%]" />
+                                <div className="h-full bg-[#2BB574] w-[85%]" />
                             </div>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-sm">التحول الرقمي</span>
                             <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-green-500 w-[90%]" />
+                                <div className="h-full bg-[#2BB574] w-[90%]" />
                             </div>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-sm">الاستدامة المالية</span>
                             <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-amber-500 w-[70%]" />
+                                <div className="h-full bg-[#FCB614] w-[70%]" />
                             </div>
                         </div>
                         <div className="flex items-center justify-between">
                             <span className="text-sm">جودة الحياة</span>
                             <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-green-500 w-[80%]" />
+                                <div className="h-full bg-[#2BB574] w-[80%]" />
                             </div>
                         </div>
                     </div>

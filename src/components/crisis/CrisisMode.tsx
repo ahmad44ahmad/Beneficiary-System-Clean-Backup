@@ -34,15 +34,15 @@ const EvacuationList: React.FC<{
     onAssign: (_beneficiaryId: string, _staffId: string) => void;
 }> = ({ beneficiaries, color, title }) => {
     const bgColors = {
-        red: 'bg-red-50 border-red-500',
-        yellow: 'bg-yellow-50 border-yellow-500',
-        green: 'bg-green-50 border-green-500',
+        red: 'bg-[#DC2626]/10 border-[#DC2626]',
+        yellow: 'bg-[#FCB614]/10 border-[#FCB614]',
+        green: 'bg-[#2BB574]/10 border-[#2BB574]',
     };
 
     const iconColors = {
-        red: 'text-red-600',
-        yellow: 'text-orange-600',
-        green: 'text-green-600',
+        red: 'text-[#DC2626]',
+        yellow: 'text-[#D67A0A]',
+        green: 'text-[#1E9658]',
     };
 
     return (
@@ -54,8 +54,8 @@ const EvacuationList: React.FC<{
                 {beneficiaries.map(ben => (
                     <div key={ben.id} className="bg-white rounded-lg p-3 shadow-sm flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <div className={`w-3 h-3 rounded-full ${ben.evacuation_status === 'completed' ? 'bg-green-500' :
-                                ben.evacuation_status === 'in_progress' ? 'bg-blue-500 animate-pulse' :
+                            <div className={`w-3 h-3 rounded-full ${ben.evacuation_status === 'completed' ? 'bg-[#2BB574]' :
+                                ben.evacuation_status === 'in_progress' ? 'bg-[#269798] animate-pulse' :
                                     'bg-gray-300'
                                 }`} />
                             <div>
@@ -67,12 +67,12 @@ const EvacuationList: React.FC<{
                         </div>
                         <div className="flex items-center gap-2">
                             {ben.assigned_staff && (
-                                <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                                <span className="text-xs bg-[#269798]/15 text-[#1B7778] px-2 py-1 rounded">
                                     {ben.assigned_staff}
                                 </span>
                             )}
                             {ben.evacuation_status === 'completed' && (
-                                <CheckCircle className="w-5 h-5 text-green-600" />
+                                <CheckCircle className="w-5 h-5 text-[#1E9658]" />
                             )}
                         </div>
                     </div>
@@ -88,8 +88,8 @@ const StaffTaskCard: React.FC<{ staff: StaffMember }> = ({ staff }) => {
         <div className="bg-white rounded-lg p-3 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                    <div className={`w-2.5 h-2.5 rounded-full ${staff.status === 'available' ? 'bg-green-500' :
-                        staff.status === 'busy' ? 'bg-yellow-500 animate-pulse' :
+                    <div className={`w-2.5 h-2.5 rounded-full ${staff.status === 'available' ? 'bg-[#2BB574]' :
+                        staff.status === 'busy' ? 'bg-[#FCB614] animate-pulse' :
                             'bg-gray-400'
                         }`} />
                     <p className="font-bold text-gray-800">{staff.name}</p>
@@ -97,7 +97,7 @@ const StaffTaskCard: React.FC<{ staff: StaffMember }> = ({ staff }) => {
                 <span className="text-xs text-gray-500">{staff.role}</span>
             </div>
             {staff.assigned_task && (
-                <div className="bg-blue-50 rounded px-2 py-1 text-xs text-blue-700">
+                <div className="bg-[#269798]/10 rounded px-2 py-1 text-xs text-[#1B7778]">
                     📍 {staff.assigned_task}
                 </div>
             )}
@@ -169,21 +169,21 @@ export const CrisisMode: React.FC = () => {
         return (
             <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center" dir="rtl">
                 <div className="max-w-2xl w-full">
-                    <div className="bg-white rounded-2xl shadow-2xl p-8 border-4 border-red-500">
+                    <div className="bg-white rounded-2xl shadow-2xl p-8 border-4 border-[#DC2626]">
                         <div className="text-center mb-8">
-                            <div className="inline-block p-6 bg-red-100 rounded-full mb-4">
-                                <AlertOctagon className="w-16 h-16 text-red-600" />
+                            <div className="inline-block p-6 bg-[#DC2626]/15 rounded-full mb-4">
+                                <AlertOctagon className="w-16 h-16 text-[#DC2626]" />
                             </div>
                             <h1 className="text-3xl font-bold text-gray-900 mb-2">بروتوكول الطوارئ</h1>
                             <p className="text-gray-600">وضع ساعة الصفر - استناداً على تجربة نجران وجازان</p>
                         </div>
 
-                        <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-6">
-                            <h3 className="font-bold text-red-900 mb-3 flex items-center gap-2">
+                        <div className="bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-xl p-6 mb-6">
+                            <h3 className="font-bold text-[#7F1D1D] mb-3 flex items-center gap-2">
                                 <Zap className="w-5 h-5" />
                                 عند تفعيل وضع الطوارئ:
                             </h3>
-                            <ul className="space-y-2 text-sm text-red-800">
+                            <ul className="space-y-2 text-sm text-[#7F1D1D]">
                                 <li className="flex items-start gap-2">
                                     <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
                                     <span>تحويل الواجهة بالكامل إلى قوائم إخلاء مرمزة بالألوان</span>
@@ -204,23 +204,23 @@ export const CrisisMode: React.FC = () => {
                         </div>
 
                         <div className="grid grid-cols-3 gap-4 mb-6">
-                            <div className="bg-red-50 rounded-lg p-4 text-center border-2 border-red-300">
-                                <div className="text-3xl font-bold text-red-600 mb-1">{bedriddenCount}</div>
-                                <div className="text-xs text-red-700">طريح فراش</div>
+                            <div className="bg-[#DC2626]/10 rounded-lg p-4 text-center border-2 border-[#DC2626]">
+                                <div className="text-3xl font-bold text-[#DC2626] mb-1">{bedriddenCount}</div>
+                                <div className="text-xs text-[#B91C1C]">طريح فراش</div>
                             </div>
-                            <div className="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-300">
-                                <div className="text-3xl font-bold text-yellow-600 mb-1">{wheelchairCount}</div>
-                                <div className="text-xs text-yellow-700">كرسي متحرك</div>
+                            <div className="bg-[#FCB614]/10 rounded-lg p-4 text-center border-2 border-[#FCB614]">
+                                <div className="text-3xl font-bold text-[#D49A0A] mb-1">{wheelchairCount}</div>
+                                <div className="text-xs text-[#D49A0A]">كرسي متحرك</div>
                             </div>
-                            <div className="bg-green-50 rounded-lg p-4 text-center border-2 border-green-300">
-                                <div className="text-3xl font-bold text-green-600 mb-1">{ambulatoryCount}</div>
-                                <div className="text-xs text-green-700">يمشي</div>
+                            <div className="bg-[#2BB574]/10 rounded-lg p-4 text-center border-2 border-[#2BB574]">
+                                <div className="text-3xl font-bold text-[#1E9658] mb-1">{ambulatoryCount}</div>
+                                <div className="text-xs text-[#1E9658]">يمشي</div>
                             </div>
                         </div>
 
                         <button
                             onClick={handleActivation}
-                            className="w-full py-4 bg-gradient-to-r from-red-600 to-rose-700 text-white font-bold text-lg rounded-xl hover:from-red-700 hover:to-rose-800 transition-all shadow-lg flex items-center justify-center gap-3 animate-pulse"
+                            className="w-full py-4 bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white font-bold text-lg rounded-xl hover:from-[#B91C1C] hover:to-[#7F1D1D] transition-all shadow-lg flex items-center justify-center gap-3 animate-pulse"
                         >
                             <AlertOctagon className="w-6 h-6" />
                             تفعيل ساعة الصفر
@@ -234,7 +234,7 @@ export const CrisisMode: React.FC = () => {
     if (showActivation) {
         // Countdown Screen
         return (
-            <div className="min-h-screen bg-red-600 flex items-center justify-center">
+            <div className="min-h-screen bg-[#B91C1C] flex items-center justify-center">
                 <div className="text-center">
                     <div className="text-white text-9xl font-bold mb-4 animate-pulse">
                         {countdown}
@@ -247,9 +247,9 @@ export const CrisisMode: React.FC = () => {
 
     // Active Crisis Mode Interface
     return (
-        <div className="min-h-screen bg-red-50" dir="rtl">
+        <div className="min-h-screen bg-[#DC2626]/10" dir="rtl">
             {/* Emergency Header */}
-            <div className="bg-gradient-to-r from-red-600 to-rose-700 text-white p-4 sticky top-0 z-50 shadow-lg">
+            <div className="bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white p-4 sticky top-0 z-50 shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="animate-pulse">
@@ -257,7 +257,7 @@ export const CrisisMode: React.FC = () => {
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold">وضع الطوارئ النشط</h1>
-                            <p className="text-sm text-red-100">بروتوكول نجران - جميع الأنظمة في وضع الإخلاء</p>
+                            <p className="text-sm text-[#DC2626]/40">بروتوكول نجران - جميع الأنظمة في وضع الإخلاء</p>
                         </div>
                     </div>
                     <button
@@ -320,7 +320,7 @@ export const CrisisMode: React.FC = () => {
                 {/* Hospital Routing */}
                 <div className="bg-white rounded-xl p-5 shadow-md">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                        <Ambulance className="w-5 h-5 text-red-600" />
+                        <Ambulance className="w-5 h-5 text-[#DC2626]" />
                         توجيه المستشفيات
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -328,12 +328,12 @@ export const CrisisMode: React.FC = () => {
                             <div key={idx} className="border border-gray-200 rounded-lg p-4 hover-lift">
                                 <div className="flex items-center justify-between mb-2">
                                     <h4 className="font-bold text-gray-800">{hospital.name}</h4>
-                                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">{hospital.type}</span>
+                                    <span className="text-xs bg-[#269798]/15 text-[#1B7778] px-2 py-1 rounded">{hospital.type}</span>
                                 </div>
                                 <div className="space-y-1 text-sm text-gray-600">
                                     <div className="flex items-center gap-2">
                                         <Phone className="w-4 h-4" />
-                                        <a href={`tel:${hospital.phone}`} className="hover:text-blue-600">{hospital.phone}</a>
+                                        <a href={`tel:${hospital.phone}`} className="hover:text-[#269798]">{hospital.phone}</a>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <MapPin className="w-4 h-4" />
@@ -348,7 +348,7 @@ export const CrisisMode: React.FC = () => {
                 {/* Staff Status */}
                 <div className="bg-white rounded-xl p-5 shadow-md">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                        <Users className="w-5 h-5 text-blue-600" />
+                        <Users className="w-5 h-5 text-[#269798]" />
                         حالة الطاقم
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
