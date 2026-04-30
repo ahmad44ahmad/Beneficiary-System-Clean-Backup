@@ -7,7 +7,7 @@ import {
 
 // HRSD brand colors
 const NAVY = '#0F3144';
-const TEAL = '#1E6B5C';
+const TEAL = '#269798';
 
 interface PPEStep {
   title: string;

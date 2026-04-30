@@ -37,7 +37,7 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
             </div>
 
             {/* Header / Device Info */}
-            <div className="p-4 border-b bg-[#269798]/10/50 flex justify-between items-center">
+            <div className="p-4 border-b bg-[#269798]/10 flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <div className="bg-white p-2 rounded-lg border border-[#269798]/10 shadow-sm">
                         <Smartphone className="w-5 h-5 text-[#269798]" />

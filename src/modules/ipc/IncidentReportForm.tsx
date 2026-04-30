@@ -429,7 +429,7 @@ export const IncidentReportForm: React.FC = () => {
                             <label className="block text-gray-600 text-sm mb-2 flex items-center gap-1">
                                 🔍 تحليل الأسباب (5 لماذا)
                             </label>
-                            <div className="bg-[#FCB614]/10/50 rounded-xl p-4 border border-[#FCB614]/10 space-y-3">
+                            <div className="bg-[#FCB614]/10 rounded-xl p-4 border border-[#FCB614]/10 space-y-3">
                                 {rcaWhyChain.map((why, idx) => (
                                     <div key={idx} className="flex items-center gap-3">
                                         <div className="w-8 h-8 bg-[#FCB614] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">

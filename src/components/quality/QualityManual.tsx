@@ -691,8 +691,8 @@ export default function QualityManualPro() {
               </div>
               <div>
                 <h1 className="text-3xl font-black text-white">دليل الجودة الشامل</h1>
-                <p className="text-[#269798]/10">Quality Manual - ISO 9001:2015</p>
-                <p className="text-[#269798]/20/80 text-sm mt-1">مركز التأهيل الشامل بمنطقة الباحة</p>
+                <p className="text-white/80">Quality Manual - ISO 9001:2015</p>
+                <p className="text-white/70 text-sm mt-1">مركز التأهيل الشامل بمنطقة الباحة</p>
               </div>
             </div>
 
@@ -801,8 +801,8 @@ export default function QualityManualPro() {
                         <div className="flex items-center gap-3 mb-1">
                           <span className="text-white/80 font-mono text-lg">البند {currentSection.number}</span>
                           <span className={`px-3 py-1 rounded-full text-sm ${currentSection.status === 'complete' ? 'bg-white/20 text-white' :
-                            currentSection.status === 'partial' ? 'bg-[#FCB614]/20 text-[#FCB614]/40' :
-                              'bg-[#DC2626]/20 text-[#DC2626]/40'
+                            currentSection.status === 'partial' ? 'bg-[#FCB614]/30 text-white' :
+                              'bg-[#DC2626]/30 text-white'
                             }`}>
                             {currentSection.status === 'complete' ? '✓ مكتمل' :
                               currentSection.status === 'partial' ? '⚠ جزئي' : '✗ معلق'}

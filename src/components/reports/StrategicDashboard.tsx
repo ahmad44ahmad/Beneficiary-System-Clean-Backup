@@ -192,30 +192,30 @@ export const StrategicDashboard: React.FC = () => {
                                 <tr>
                                     <td className="p-4 font-bold">إدارة البنية التحتية</td>
                                     <td className="p-4">جولة تفتيش موحدة (شهرياً)</td>
-                                    <td className="p-4 bg-[#269798]/10/30">ملاءمة البيئة للخدمة</td>
-                                    <td className="p-4 bg-[#2BB574]/10/30">كشف مخاطر السقوط والحريق</td>
-                                    <td className="p-4 bg-[#FCB614]/10/30">التحقق من معايير الوصول الشامل</td>
+                                    <td className="p-4 bg-[#269798]/10">ملاءمة البيئة للخدمة</td>
+                                    <td className="p-4 bg-[#2BB574]/10">كشف مخاطر السقوط والحريق</td>
+                                    <td className="p-4 bg-[#FCB614]/10">التحقق من معايير الوصول الشامل</td>
                                 </tr>
                                 <tr>
                                     <td className="p-4 font-bold">الموارد البشرية</td>
                                     <td className="p-4">سجل الجدارات والتدريب</td>
-                                    <td className="p-4 bg-[#269798]/10/30">كفاءة أداء المهام</td>
-                                    <td className="p-4 bg-[#2BB574]/10/30">الوعي بالمخاطر والطوارئ</td>
-                                    <td className="p-4 bg-[#FCB614]/10/30">إتيكيت التعامل مع ذوي الإعاقة</td>
+                                    <td className="p-4 bg-[#269798]/10">كفاءة أداء المهام</td>
+                                    <td className="p-4 bg-[#2BB574]/10">الوعي بالمخاطر والطوارئ</td>
+                                    <td className="p-4 bg-[#FCB614]/10">إتيكيت التعامل مع ذوي الإعاقة</td>
                                 </tr>
                                 <tr>
                                     <td className="p-4 font-bold">القيادة والحوكمة</td>
                                     <td className="p-4">مراجعة الإدارة الموحدة</td>
-                                    <td className="p-4 bg-[#269798]/10/30">مراجعة مؤشرات الأداء</td>
-                                    <td className="p-4 bg-[#2BB574]/10/30">مراجعة حوادث السلامة</td>
-                                    <td className="p-4 bg-[#FCB614]/10/30">مؤشرات التقدم في التمكين</td>
+                                    <td className="p-4 bg-[#269798]/10">مراجعة مؤشرات الأداء</td>
+                                    <td className="p-4 bg-[#2BB574]/10">مراجعة حوادث السلامة</td>
+                                    <td className="p-4 bg-[#FCB614]/10">مؤشرات التقدم في التمكين</td>
                                 </tr>
                                 <tr>
                                     <td className="p-4 font-bold">إدارة المستفيدين</td>
                                     <td className="p-4">الملف الموحد (رقمي)</td>
-                                    <td className="p-4 bg-[#269798]/10/30">ضبط الخدمة وتوثيقها</td>
-                                    <td className="p-4 bg-[#2BB574]/10/30">الحالات الصحية والحساسية</td>
-                                    <td className="p-4 bg-[#FCB614]/10/30">احتياجات الدعم (I-CAN)</td>
+                                    <td className="p-4 bg-[#269798]/10">ضبط الخدمة وتوثيقها</td>
+                                    <td className="p-4 bg-[#2BB574]/10">الحالات الصحية والحساسية</td>
+                                    <td className="p-4 bg-[#FCB614]/10">احتياجات الدعم (I-CAN)</td>
                                 </tr>
                             </tbody>
                         </table>

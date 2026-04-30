@@ -105,7 +105,7 @@ export const FamilyMediaFeed: React.FC<FamilyMediaFeedProps> = ({ showApprovalQu
 
             {/* Director Approval Queue */}
             {showApprovalQueue && pendingPosts.length > 0 && (
-                <Card className="p-5 border-[#FCB614]/30 bg-[#FCB614]/10/50">
+                <Card className="p-5 border-[#FCB614]/30 bg-[#FCB614]/10">
                     <div className="flex items-start gap-3 mb-4">
                         <ShieldCheck className="w-5 h-5 text-[#FCB614] mt-0.5" />
                         <div>

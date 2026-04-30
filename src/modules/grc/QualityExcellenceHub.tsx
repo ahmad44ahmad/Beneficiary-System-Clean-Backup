@@ -89,7 +89,7 @@ const GoldenGuideView = () => {
     return (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Hero Section */}
-            <div className="bg-gradient-to-br from-[#0F3144] to-[#1E6B5C] rounded-2xl p-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#0F3144] to-[#269798] rounded-2xl p-8 text-white relative overflow-hidden">
                 <div className="relative z-10 grid grid-cols-2 gap-8 items-center">
                     <div>
                         <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm mb-4 border border-white/20">
@@ -653,7 +653,7 @@ const ChampionsLeagueView = () => {
 
     const badges = [
         { name: 'حارس القلعة', icon: '🏰', desc: 'الالتزام 100% بسجلات السلامة لمدة شهر كامل', count: 5, color: 'bg-[#0F3144]', points: 50 },
-        { name: 'صانع التغيير', icon: '💡', desc: 'تقديم فكرة Kaizen تم اعتمادها وتنفيذها', count: 2, color: 'bg-[#1E6B5C]', points: 100 },
+        { name: 'صانع التغيير', icon: '💡', desc: 'تقديم فكرة Kaizen تم اعتمادها وتنفيذها', count: 2, color: 'bg-[#269798]', points: 100 },
         { name: 'صقر المراقبة', icon: '🦅', desc: 'الإبلاغ عن 3+ أحداث Near-Miss في شهر', count: 3, color: 'bg-[#FCB614]', points: 75 },
         { name: 'بطل النظافة', icon: '🧤', desc: 'امتثال 100% في جولات نظافة الأيدي', count: 8, color: 'bg-[#269798]', points: 40 },
         { name: 'نجم التوثيق', icon: '📝', desc: 'إكمال جميع السجلات بدون ملاحظات لمدة شهر', count: 4, color: 'bg-[#FCB614]', points: 60 },
@@ -850,7 +850,7 @@ const ChampionsLeagueView = () => {
                     </Card>
 
                     {/* Quick Stats */}
-                    <Card className="p-6 bg-gradient-to-br from-[#0F3144] to-[#1E6B5C] text-white">
+                    <Card className="p-6 bg-gradient-to-br from-[#0F3144] to-[#269798] text-white">
                         <h3 className="font-bold mb-4 flex items-center gap-2">
                             <TrendingUp className="w-5 h-5 text-[#FCB614]" />
                             إحصائيات الشهر
@@ -992,7 +992,7 @@ const SopLibraryView = () => {
                             </div>
                             {/* Expanded Details */}
                             {expandedId === process.id && (
-                                <div className="px-4 pb-4 bg-[#269798]/10/30 border-t border-[#269798]/10 animate-in fade-in duration-200">
+                                <div className="px-4 pb-4 bg-[#269798]/5 border-t border-[#269798]/10 animate-in fade-in duration-200">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
                                         <div className="bg-white rounded-lg p-3 border border-gray-100">
                                             <div className="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1">

@@ -131,7 +131,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                 {/* Form Section */}
                 <div className="md:col-span-2 space-y-6">
 
-                    <div className="bg-[#F7941D]/10/50 p-4 rounded-lg border border-[#F7941D]/10">
+                    <div className="bg-[#F7941D]/10 p-4 rounded-lg border border-[#F7941D]/10">
                         <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2 border-b border-[#F7941D]/30 pb-2">
                             <History className="h-5 w-5 text-[#F7941D]" />
                             1. التاريخ والمناولة
@@ -179,7 +179,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                         </div>
                     </div>
 
-                    <div className="bg-[#F7941D]/10/50 p-4 rounded-lg border border-[#F7941D]/10">
+                    <div className="bg-[#F7941D]/10 p-4 rounded-lg border border-[#F7941D]/10">
                         <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2 border-b border-[#F7941D]/30 pb-2">
                             <Activity className="h-5 w-5 text-[#F7941D]" />
                             2. الحركة والمساعدة

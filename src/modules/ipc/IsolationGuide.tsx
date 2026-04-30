@@ -15,7 +15,7 @@ import {
 // HRSD Brand Colors
 const HRSD = {
   navy: '#0F3144',
-  teal: '#1E6B5C',
+  teal: '#269798',
 };
 
 interface IsolationType {
@@ -551,7 +551,7 @@ export const IsolationGuide: React.FC = () => {
           <h3 className="font-bold text-[#0F3144] text-base mb-1">
             ملاحظة مهمة - حالة عدم التأكد
           </h3>
-          <p className="text-sm text-[#FCB614] leading-relaxed">
+          <p className="text-sm text-[#0F3144] leading-relaxed">
             في حالة عدم معرفة نوع العدوى، طبّق الاحتياطات الهوائية (الأعلى
             حماية) حتى تحديد النوع
           </p>

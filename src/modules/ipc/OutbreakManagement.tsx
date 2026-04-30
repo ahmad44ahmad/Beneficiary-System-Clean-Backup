@@ -12,7 +12,7 @@ import {
 
 // HRSD brand colors
 const NAVY = '#0F3144';
-const TEAL = '#1E6B5C';
+const TEAL = '#269798';
 
 type TabType = 'dashboard' | 'tracing' | 'protocols';
 type Severity = 'low' | 'moderate' | 'high' | 'critical';

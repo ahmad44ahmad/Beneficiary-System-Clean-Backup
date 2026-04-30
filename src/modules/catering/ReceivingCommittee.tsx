@@ -155,9 +155,9 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                             <div
                                 key={role.id}
                                 className={`relative p-5 rounded-xl border-2 transition-all ${signature
-                                    ? 'border-[#2BB574]/10 bg-[#2BB574]/10/50'
+                                    ? 'border-[#2BB574]/10 bg-[#2BB574]/10'
                                     : isMe
-                                        ? 'border-[#269798]/30 bg-[#269798]/10/30 shadow-md ring-2 ring-[#269798]/10/50'
+                                        ? 'border-[#269798]/30 bg-[#269798]/10 shadow-md ring-2 ring-[#269798]/10'
                                         : 'border-dashed border-gray-200 bg-gray-50/50 opacity-70'
                                     }`}
                             >

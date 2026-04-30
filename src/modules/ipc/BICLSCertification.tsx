@@ -21,8 +21,8 @@ import {
 
 // HRSD brand colors
 const NAVY = '#0F3144';
-const TEAL = '#1E6B5C';
-const GOLD = '#F59601';
+const TEAL = '#269798';
+const GOLD = '#FCB614';
 
 // ─── BICSL Competencies ────────────────────────────────────────────────
 interface Competency {

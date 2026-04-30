@@ -182,7 +182,7 @@ export const AccountabilityAnalysis: React.FC = () => {
                     onClick={() => toggleSection('patterns')}
                 >
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-[#20655A]/20">
+                        <div className="p-2 rounded-lg bg-[#269798]/20">
                             <BarChart3 className="w-6 h-6 text-[#F7941D]" />
                         </div>
                         <div>

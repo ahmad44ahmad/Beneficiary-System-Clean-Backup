@@ -67,7 +67,7 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                             <div
                                 key={item.id}
                                 onClick={() => navigate(`/beneficiaries/${item.id}`)}
-                                className="flex items-center gap-3 p-3 rounded-xl bg-[#DC2626]/10/50 hover:bg-[#DC2626]/10 transition-colors cursor-pointer border border-transparent hover:border-[#DC2626]/10 group"
+                                className="flex items-center gap-3 p-3 rounded-xl bg-[#DC2626]/10 hover:bg-[#DC2626]/10 transition-colors cursor-pointer border border-transparent hover:border-[#DC2626]/10 group"
                             >
                                 <div className="relative">
                                     <div className="w-10 h-10 rounded-full bg-white border border-[#DC2626]/10 p-1 flex items-center justify-center">

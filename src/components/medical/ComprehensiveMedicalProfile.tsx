@@ -306,7 +306,7 @@ export const ComprehensiveMedicalProfile: React.FC<ComprehensiveMedicalProfilePr
                             <h3 className="text-lg font-medium text-hrsd-navy border-b pb-2">العلامات الحيوية والتغذية</h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="col-span-1 border p-4 rounded-lg bg-[#269798]/10/50">
+                                <div className="col-span-1 border p-4 rounded-lg bg-[#269798]/10">
                                     <h4 className="font-medium text-[#269798] mb-4">حساب كتلة الجسم (BMI)</h4>
                                     <div className="space-y-3">
                                         <input

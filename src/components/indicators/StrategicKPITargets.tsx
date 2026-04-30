@@ -17,8 +17,8 @@ import {
 
 // HRSD Brand Colors
 const HRSD_NAVY = '#0F3144';
-const HRSD_TEAL = '#1E6B5C';
-const HRSD_GOLD = '#F59601';
+const HRSD_TEAL = '#269798';
+const HRSD_GOLD = '#FCB614';
 
 // Icon mapping
 const ICON_MAP: Record<string, React.ElementType> = {

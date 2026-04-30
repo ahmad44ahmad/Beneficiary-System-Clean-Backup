@@ -62,7 +62,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="p-4 border-[#269798]/10 bg-[#269798]/10/50">
+                <Card className="p-4 border-[#269798]/10 bg-[#269798]/10">
                     <h4 className="font-bold text-[#0F3144] mb-3 flex items-center gap-2">
                         <Zap className="w-5 h-5" /> نقاط القوة
                     </h4>
@@ -86,7 +86,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     </div>
                 </Card>
 
-                <Card className="p-4 border-[#FCB614]/10 bg-[#FCB614]/10/50">
+                <Card className="p-4 border-[#FCB614]/10 bg-[#FCB614]/10">
                     <h4 className="font-bold text-[#0F3144] mb-3 flex items-center gap-2">
                         <Target className="w-5 h-5" /> التطلّعات
                     </h4>

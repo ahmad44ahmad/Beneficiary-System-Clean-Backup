@@ -205,11 +205,11 @@ export const QualityProcessesPanel: React.FC = () => {
                                     المدخلات والمخرجات
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10/50">
+                                    <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10">
                                         <label className="block text-xs font-bold text-[#269798] mb-1">المدخلات</label>
                                         <p className="text-sm">{selectedProcess.inputs}</p>
                                     </div>
-                                    <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10/50">
+                                    <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10">
                                         <label className="block text-xs font-bold text-[#269798] mb-1">المخرجات</label>
                                         <p className="text-sm">{selectedProcess.outputs}</p>
                                     </div>

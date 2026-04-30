@@ -257,7 +257,7 @@ export const OccupationalExposure: React.FC = () => {
       label: 'تم التعافي',
       value: demoIncidents.filter((i) => i.status === 'cleared').length,
       icon: CheckCircle2,
-      color: 'bg-[#1E6B5C]',
+      color: 'bg-[#269798]',
       iconColor: 'text-white',
     },
   ];
@@ -286,7 +286,7 @@ export const OccupationalExposure: React.FC = () => {
                   isActive
                     ? 'bg-[#0F3144] text-white shadow-lg'
                     : isComplete
-                    ? 'bg-[#1E6B5C] text-white'
+                    ? 'bg-[#269798] text-white'
                     : 'bg-gray-200 text-gray-500'
                 }`}
               >
@@ -303,7 +303,7 @@ export const OccupationalExposure: React.FC = () => {
             {idx < stepLabels.length - 1 && (
               <div
                 className={`flex-1 h-1 rounded-full mt-[-20px] min-w-[40px] ${
-                  stepNum < currentStep ? 'bg-[#1E6B5C]' : 'bg-gray-200'
+                  stepNum < currentStep ? 'bg-[#269798]' : 'bg-gray-200'
                 }`}
               />
             )}
@@ -426,7 +426,7 @@ export const OccupationalExposure: React.FC = () => {
               key={ft}
               className={`flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all text-sm ${
                 formData.fluid_type === ft
-                  ? 'border-[#1E6B5C] bg-[#1E6B5C]/5 text-[#1E6B5C] font-medium shadow-sm'
+                  ? 'border-[#269798] bg-[#269798]/5 text-[#269798] font-medium shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 text-gray-600'
               }`}
             >
@@ -436,7 +436,7 @@ export const OccupationalExposure: React.FC = () => {
                 value={ft}
                 checked={formData.fluid_type === ft}
                 onChange={(e) => updateFormField('fluid_type', e.target.value)}
-                className="accent-[#1E6B5C]"
+                className="accent-[#269798]"
               />
               {ft}
             </label>
@@ -455,7 +455,7 @@ export const OccupationalExposure: React.FC = () => {
               if (formData.source_known) updateFormField('source_status', '');
             }}
             className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-              formData.source_known ? 'bg-[#1E6B5C]' : 'bg-gray-300'
+              formData.source_known ? 'bg-[#269798]' : 'bg-gray-300'
             }`}
           >
             <span
@@ -518,7 +518,7 @@ export const OccupationalExposure: React.FC = () => {
             key={idx}
             className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-all ${
               formData.first_aid_steps[idx]
-                ? 'border-[#1E6B5C] bg-[#1E6B5C]/5'
+                ? 'border-[#269798] bg-[#269798]/5'
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >
@@ -526,16 +526,16 @@ export const OccupationalExposure: React.FC = () => {
               type="checkbox"
               checked={formData.first_aid_steps[idx]}
               onChange={() => toggleFirstAidStep(idx)}
-              className="mt-1 w-5 h-5 accent-[#1E6B5C] rounded shrink-0"
+              className="mt-1 w-5 h-5 accent-[#269798] rounded shrink-0"
             />
             <div className="flex-1">
               <span className="text-sm font-medium text-[#0F3144] ml-1">{idx + 1}.</span>
-              <span className={`text-sm ${formData.first_aid_steps[idx] ? 'text-[#1E6B5C]' : 'text-gray-700'}`}>
+              <span className={`text-sm ${formData.first_aid_steps[idx] ? 'text-[#269798]' : 'text-gray-700'}`}>
                 {step}
               </span>
             </div>
             {formData.first_aid_steps[idx] && (
-              <CheckCircle2 size={18} className="text-[#1E6B5C] shrink-0 mt-0.5" />
+              <CheckCircle2 size={18} className="text-[#269798] shrink-0 mt-0.5" />
             )}
           </label>
         ))}
@@ -653,7 +653,7 @@ export const OccupationalExposure: React.FC = () => {
         {/* Submit */}
         <button
           onClick={handleSubmit}
-          className="w-full py-3 bg-[#1E6B5C] hover:bg-[#185a4d] text-white font-bold rounded-xl text-sm transition-colors shadow-lg flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#269798] hover:bg-[#0F3144] text-white font-bold rounded-xl text-sm transition-colors shadow-lg flex items-center justify-center gap-2"
         >
           <FileText size={18} />
           إرسال البلاغ
@@ -667,7 +667,7 @@ export const OccupationalExposure: React.FC = () => {
   return (
     <div dir="rtl" className="min-h-screen bg-gray-50 pb-10">
       {/* Header */}
-      <div className="bg-gradient-to-l from-[#0F3144] to-[#1E6B5C] text-white px-6 py-5">
+      <div className="bg-gradient-to-l from-[#0F3144] to-[#269798] text-white px-6 py-5">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
