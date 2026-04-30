@@ -15,3 +15,11 @@ export { PageHeader } from './PageHeader';
 export { EmptyState } from './EmptyState';
 export { DescriptionList } from './DescriptionList';
 export type { DescriptionItem } from './DescriptionList';
+
+/**
+ * StatusBadge lives in components/common for legacy reasons but is a
+ * design-system primitive. Re-exported here so new code can import the
+ * canonical path:
+ *   import { StatusBadge } from '@/design-system/primitives';
+ */
+export { StatusBadge } from '../../components/common/StatusBadge';
