@@ -17,12 +17,30 @@ import {
   Calendar,
   Plus,
 } from 'lucide-react';
+import { StatusBadge } from '../../design-system/primitives';
+import type { StatusTone } from '../../components/common/StatusBadge';
+import { brand } from '../../design-system/tokens';
 // Supabase access via getSupabaseClient() from hooks/queries when needed
 
 // HRSD brand colors
-const NAVY = '#0F3144';
-const TEAL = '#269798';
-const GOLD = '#FCB614';
+const NAVY = brand.navy.hex;
+const TEAL = brand.teal.hex;
+const GOLD = brand.gold.hex;
+
+/**
+ * Saturated foreground hex per tone — used for inline (non-pill) text
+ * sites where the tone's color carries meaning but a full pill would
+ * be too heavy. Body text purists may swap to navy/cool-gray instead;
+ * we keep the tone color for clinical-status emphasis.
+ */
+const TONE_HEX: Record<StatusTone, string> = {
+  success:  brand.green.hex,
+  info:     brand.teal.hex,
+  warning:  brand.gold.hex,
+  elevated: brand.orange.hex,
+  danger:   '#DC2626',
+  neutral:  brand.coolGray.hex,
+};
 
 // ─── BICSL Competencies ────────────────────────────────────────────────
 interface Competency {
@@ -179,32 +197,18 @@ function formatDate(date: string | null): string {
   });
 }
 
-function getStatusBadge(status: CertificationStatus) {
-  const map: Record<CertificationStatus, { label: string; bg: string; text: string; icon: React.ReactNode }> = {
-    certified: {
-      label: 'حاصل على الرخصة',
-      bg: 'bg-[#2BB574]/15',
-      text: 'text-[#2BB574]',
-      icon: <CheckCircle2 className="w-4 h-4" />,
-    },
-    expired: {
-      label: 'منتهية الصلاحية',
-      bg: 'bg-[#DC2626]/15',
-      text: 'text-[#DC2626]',
-      icon: <XCircle className="w-4 h-4" />,
-    },
-    pending: {
-      label: 'قيد الإصدار',
-      bg: 'bg-[#FCB614]/15',
-      text: 'text-[#FCB614]',
-      icon: <Clock className="w-4 h-4" />,
-    },
-    expiring_soon: {
-      label: 'تنتهي قريباً',
-      bg: 'bg-[#F7941D]/15',
-      text: 'text-[#F7941D]',
-      icon: <AlertTriangle className="w-4 h-4" />,
-    },
+interface CertBadgeDescriptor {
+  tone: StatusTone;
+  label: string;
+  iconComponent: React.ElementType;
+}
+
+function getStatusBadge(status: CertificationStatus): CertBadgeDescriptor {
+  const map: Record<CertificationStatus, CertBadgeDescriptor> = {
+    certified:     { tone: 'success',  label: 'حاصل على الرخصة',  iconComponent: CheckCircle2 },
+    expired:       { tone: 'danger',   label: 'منتهية الصلاحية',  iconComponent: XCircle },
+    pending:       { tone: 'warning',  label: 'قيد الإصدار',       iconComponent: Clock },
+    expiring_soon: { tone: 'elevated', label: 'تنتهي قريباً',     iconComponent: AlertTriangle },
   };
   return map[status];
 }
@@ -452,10 +456,12 @@ export const BICLSCertification: React.FC = () => {
 
                 {/* Status badge */}
                 <div>
-                  <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${badge.bg} ${badge.text}`}>
-                    {badge.icon}
-                    {badge.label}
-                  </span>
+                  <StatusBadge
+                    tone={badge.tone}
+                    label={badge.label}
+                    icon={badge.iconComponent}
+                    size="sm"
+                  />
                 </div>
 
                 {/* Issue date */}
@@ -532,8 +538,11 @@ export const BICLSCertification: React.FC = () => {
                     <Award className="w-6 h-6" style={{ color: GOLD }} />
                     <div>
                       <p className="text-xs text-gray-500">الحالة الإجمالية للرخصة</p>
-                      <span className={`inline-flex items-center gap-1 text-sm font-bold ${badge.text}`}>
-                        {badge.icon}
+                      <span
+                        className="inline-flex items-center gap-1 text-sm font-bold"
+                        style={{ color: TONE_HEX[badge.tone] }}
+                      >
+                        <badge.iconComponent className="w-4 h-4" />
                         {badge.label}
                       </span>
                     </div>

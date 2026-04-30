@@ -11,14 +11,16 @@ import {
     Filter,
     FileText
 } from 'lucide-react';
+import { StatusBadge } from '../../design-system/primitives';
+import { brand } from '../../design-system/tokens';
 
-// HRSD Colors
+// HRSD Colors — inline JS literals; aligned to brand tokens.
 const HRSD = {
-    orange: 'rgb(245, 150, 30)',
-    gold: 'rgb(250, 180, 20)',
-    green: 'rgb(45, 180, 115)',
-    teal: 'rgb(20, 130, 135)',
-    navy: 'rgb(20, 65, 90)',
+    orange: brand.orange.hex,
+    gold:   brand.gold.hex,
+    green:  brand.green.hex,
+    teal:   brand.teal.hex,
+    navy:   brand.navy.hex,
 };
 
 interface ComplianceRequirement {
@@ -130,20 +132,15 @@ export const ComplianceTracker: React.FC = () => {
     }, []);
 
     const getStatusBadge = (status: string) => {
-        const config: Record<string, { icon: React.ElementType; bg: string; text: string; label: string }> = {
-            compliant: { icon: CheckCircle2, bg: 'bg-[#2BB574]/15', text: 'text-[#2BB574]', label: 'ممتثل' },
-            partial: { icon: AlertCircle, bg: 'bg-[#FCB614]/10', text: 'text-[#FCB614]', label: 'جزئي' },
-            non_compliant: { icon: XCircle, bg: 'bg-[#DC2626]/15', text: 'text-[#DC2626]', label: 'غير ممتثل' },
-            pending: { icon: AlertCircle, bg: 'bg-[#269798]/15', text: 'text-[#269798]', label: 'قيد المراجعة' },
-            not_applicable: { icon: AlertCircle, bg: 'bg-gray-100', text: 'text-gray-700', label: 'لا ينطبق' }
+        const config: Record<string, { tone: 'success' | 'warning' | 'danger' | 'info' | 'neutral'; label: string; icon: React.ElementType }> = {
+            compliant:      { tone: 'success', label: 'ممتثل',         icon: CheckCircle2 },
+            partial:        { tone: 'warning', label: 'جزئي',           icon: AlertCircle },
+            non_compliant:  { tone: 'danger',  label: 'غير ممتثل',     icon: XCircle },
+            pending:        { tone: 'info',    label: 'قيد المراجعة', icon: AlertCircle },
+            not_applicable: { tone: 'neutral', label: 'لا ينطبق',       icon: AlertCircle },
         };
-        const { icon: Icon, bg, text, label } = config[status] || config.pending;
-        return (
-            <span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${bg} ${text}`}>
-                <Icon className="w-3 h-3" />
-                {label}
-            </span>
-        );
+        const entry = config[status] ?? config.pending;
+        return <StatusBadge tone={entry.tone} label={entry.label} icon={entry.icon} size="sm" />;
     };
 
     const compliancePercentage = stats.total > 0
