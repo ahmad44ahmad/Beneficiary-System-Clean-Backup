@@ -7,6 +7,8 @@ import {
 } from 'lucide-react';
 import { empowermentService, RehabGoal, REHAB_DOMAINS } from '../../services/empowermentService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
+import { StatusBadge as BrandStatusBadge } from '../../design-system/primitives';
+import type { StatusTone } from '../../components/common/StatusBadge';
 
 // Progress Bar Component
 const PROGRESS_COLORS: Record<string, string> = {
@@ -25,31 +27,20 @@ const ProgressBar: React.FC<{ value: number; color?: string }> = ({ value, color
     </div>
 );
 
-// Status Badge
+// Status Badge — domain wrapper around the canonical StatusBadge primitive.
+// Maps rehabilitation-goal statuses to canonical brand tones.
+const GOAL_STATUS_CONFIG: Record<string, { tone: StatusTone; label: string }> = {
+    planned:            { tone: 'neutral',  label: 'مخطط' },
+    in_progress:        { tone: 'info',     label: 'قيد التنفيذ' },
+    achieved:           { tone: 'success',  label: 'مُحقق' },
+    partially_achieved: { tone: 'warning',  label: 'جزئي' },
+    on_hold:            { tone: 'elevated', label: 'معلق' },
+    abandoned:          { tone: 'danger',   label: 'متروك' },
+};
+
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
-    const styles: Record<string, string> = {
-        planned: 'bg-gray-100 text-gray-600',
-        in_progress: 'bg-[#269798]/15 text-[#269798]',
-        achieved: 'bg-[#2BB574]/15 text-[#2BB574]',
-        partially_achieved: 'bg-[#FCB614]/10 text-[#FCB614]',
-        on_hold: 'bg-[#F7941D]/15 text-[#F7941D]',
-        abandoned: 'bg-[#DC2626]/15 text-[#DC2626]',
-    };
-
-    const labels: Record<string, string> = {
-        planned: 'مخطط',
-        in_progress: 'قيد التنفيذ',
-        achieved: 'مُحقق ✅',
-        partially_achieved: 'جزئي',
-        on_hold: 'معلق',
-        abandoned: 'متروك',
-    };
-
-    return (
-        <span className={`px-2 py-1 rounded-full text-xs font-medium ${styles[status] || styles.planned}`}>
-            {labels[status] || status}
-        </span>
-    );
+    const entry = GOAL_STATUS_CONFIG[status] ?? { tone: 'neutral' as const, label: status };
+    return <BrandStatusBadge tone={entry.tone} label={entry.label} size="sm" showIcon={false} />;
 };
 
 // Goal Card Component

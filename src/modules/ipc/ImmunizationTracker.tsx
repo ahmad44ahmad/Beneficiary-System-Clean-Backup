@@ -7,6 +7,8 @@ import {
 } from 'lucide-react';
 import { ipcService, Immunization } from '../../services/ipcService';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
+import { StatusBadge as BrandStatusBadge } from '../../design-system/primitives';
+import type { StatusTone } from '../../components/common/StatusBadge';
 
 // Demo Data
 const DEMO_IMMUNIZATIONS: Immunization[] = [
@@ -28,29 +30,18 @@ const VACCINE_TYPES = [
     { code: 'VAR', name: 'الجدري المائي', name_ar: 'الجدري المائي', doses: 2 },
 ];
 
-// Status Badge Component
+// Status Badge — domain wrapper around the canonical StatusBadge primitive.
+const IMMUNITY_STATUS_CONFIG: Record<string, { tone: StatusTone; label: string }> = {
+    immune:        { tone: 'success', label: 'محصّن' },
+    pending:       { tone: 'warning', label: 'قيد الاكتمال' },
+    expired:       { tone: 'danger',  label: 'منتهي' },
+    non_responder: { tone: 'neutral', label: 'غير مستجيب' },
+    declined:      { tone: 'neutral', label: 'رفض' },
+};
+
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
-    const styles: Record<string, string> = {
-        immune: 'bg-[#2BB574]/15 text-[#2BB574] border-[#2BB574]',
-        pending: 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]',
-        expired: 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]',
-        non_responder: 'bg-gray-100 text-gray-700 border-gray-300',
-        declined: 'bg-gray-100 text-gray-600 border-gray-300',
-    };
-
-    const labels: Record<string, string> = {
-        immune: '✅ محصّن',
-        pending: '⏳ قيد الاكتمال',
-        expired: '⚠️ منتهي',
-        non_responder: 'غير مستجيب',
-        declined: 'رفض',
-    };
-
-    return (
-        <span className={`px-3 py-1 rounded-full text-sm border ${styles[status] || styles.pending}`}>
-            {labels[status] || status}
-        </span>
-    );
+    const entry = IMMUNITY_STATUS_CONFIG[status] ?? { tone: 'warning' as const, label: status };
+    return <BrandStatusBadge tone={entry.tone} label={entry.label} size="sm" />;
 };
 
 // Add Vaccination Modal
