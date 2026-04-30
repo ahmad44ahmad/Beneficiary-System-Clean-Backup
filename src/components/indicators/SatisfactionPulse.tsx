@@ -49,7 +49,7 @@ export const SatisfactionPulse: React.FC = () => {
     const getScoreBg = (score: number) => {
         if (score >= 80) return 'from-hrsd-green to-hrsd-green-dark';
         if (score >= 60) return 'from-hrsd-gold to-hrsd-gold-dark';
-        return 'from-[#DC2626] to-[#B91C1C]';
+        return 'from-[#DC2626] to-[#DC2626]';
     };
 
     const pieData = [

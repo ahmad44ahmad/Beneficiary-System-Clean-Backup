@@ -20,8 +20,8 @@ export const RiskRegister: React.FC<RiskRegisterProps> = ({ profile }) => {
 
     const getRiskColor = (score: number) => {
         if (score >= 6) return 'bg-[#DC2626]/15 text-[#7F1D1D] border-[#DC2626]/30';
-        if (score >= 3) return 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20';
-        return 'bg-[#2BB574]/15 text-[#14532D] border-[#2BB574]/20';
+        if (score >= 3) return 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]/20';
+        return 'bg-[#2BB574]/15 text-[#0F3144] border-[#2BB574]/20';
     };
 
     return (
@@ -44,16 +44,16 @@ export const RiskRegister: React.FC<RiskRegisterProps> = ({ profile }) => {
                         <Droplet className="w-8 h-8 text-[#DC2626]" />
                         <div>
                             <span className="text-xs font-bold text-[#DC2626] uppercase">Blood Type</span>
-                            <div className="text-2xl font-bold text-[#B91C1C]">{profile.medicalProfile?.bloodType || 'N/A'}</div>
+                            <div className="text-2xl font-bold text-[#DC2626]">{profile.medicalProfile?.bloodType || 'N/A'}</div>
                         </div>
                     </div>
                 </Card>
                 <Card className="p-4 border-[#F7941D]/10 bg-[#F7941D]/10">
                     <div className="flex items-center gap-3">
-                        <Activity className="w-8 h-8 text-[#D67A0A]" />
+                        <Activity className="w-8 h-8 text-[#F7941D]" />
                         <div>
                             <span className="text-xs font-bold text-[#F7941D] uppercase">Allergies</span>
-                            <div className="text-lg font-bold text-[#D67A0A]">
+                            <div className="text-lg font-bold text-[#F7941D]">
                                 {profile.medicalProfile?.history?.allergies?.length ? profile.medicalProfile.history.allergies.join(', ') : 'None'}
                             </div>
                         </div>

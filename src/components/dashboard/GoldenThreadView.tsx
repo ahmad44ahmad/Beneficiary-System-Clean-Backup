@@ -23,17 +23,17 @@ export const GoldenThreadView: React.FC = () => {
             switch (level) {
                 case 'national': return <Target className="w-5 h-5 text-[#0F3144]" />;
                 case 'ministry': return <Building2 className="w-5 h-5 text-[#269798]" />;
-                case 'department': return <Users className="w-5 h-5 text-[#1B7778]" />;
-                case 'operational': return <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />;
+                case 'department': return <Users className="w-5 h-5 text-[#269798]" />;
+                case 'operational': return <CheckCircle2 className="w-5 h-5 text-[#2BB574]" />;
                 default: return <Target className="w-5 h-5" />;
             }
         };
 
         const getStatusColor = (status: string) => {
             switch (status) {
-                case 'on_track': return 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]/20';
-                case 'at_risk': return 'bg-[#FCB614]/15 text-[#D49A0A] border-[#FCB614]/30';
-                case 'delayed': return 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]/30';
+                case 'on_track': return 'bg-[#2BB574]/15 text-[#2BB574] border-[#2BB574]/20';
+                case 'at_risk': return 'bg-[#FCB614]/15 text-[#FCB614] border-[#FCB614]/30';
+                case 'delayed': return 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]/30';
                 default: return 'bg-gray-100 text-gray-700';
             }
         };
@@ -154,11 +154,11 @@ export const GoldenThreadView: React.FC = () => {
                 </Card>
                 <Card className="p-6 bg-[#269798]/10 border-[#269798]/10">
                     <h3 className="font-bold text-[#0F3144] mb-2">أهداف المركز</h3>
-                    <p className="text-sm text-[#1B7778] opacity-80">ترجمة الرؤية إلى أهداف تشغيلية خاصة بالمركز والأقسام.</p>
+                    <p className="text-sm text-[#269798] opacity-80">ترجمة الرؤية إلى أهداف تشغيلية خاصة بالمركز والأقسام.</p>
                 </Card>
                 <Card className="p-6 bg-[#2BB574]/10 border-[#2BB574]/10">
-                    <h3 className="font-bold text-[#14532D] mb-2">الخطط الفردية</h3>
-                    <p className="text-sm text-[#1E9658] opacity-80">المهام اليومية مع المستفيدين. يجب أن ترتبط بهدف أعلى.</p>
+                    <h3 className="font-bold text-[#0F3144] mb-2">الخطط الفردية</h3>
+                    <p className="text-sm text-[#2BB574] opacity-80">المهام اليومية مع المستفيدين. يجب أن ترتبط بهدف أعلى.</p>
                 </Card>
             </div>
         </div>

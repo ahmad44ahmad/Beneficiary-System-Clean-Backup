@@ -44,7 +44,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#1E9658]">
+                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#2BB574]">
                             <ClipboardList size={24} />
                         </div>
                         <div className="me-4">
@@ -57,7 +57,7 @@ export const PhysicalTherapyDashboard: React.FC<PhysicalTherapyDashboardProps> =
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#FCB614]/15 text-[#D49A0A]">
+                        <div className="p-3 rounded-full bg-[#FCB614]/15 text-[#FCB614]">
                             <PenTool size={24} />
                         </div>
                         <div className="me-4">

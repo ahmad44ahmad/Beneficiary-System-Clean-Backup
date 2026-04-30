@@ -43,7 +43,7 @@ export const ViolationReport: React.FC = () => {
                                 <label key={level} className={`
                                     flex-1 flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all
                                     ${audit.severity === level
-                                        ? 'bg-[#DC2626]/10 border-[#DC2626] text-[#B91C1C] font-bold'
+                                        ? 'bg-[#DC2626]/10 border-[#DC2626] text-[#DC2626] font-bold'
                                         : 'border-gray-200 hover:bg-gray-50'}
                                 `}>
                                     <input
@@ -83,7 +83,7 @@ export const ViolationReport: React.FC = () => {
 
                     <div className="pt-4 flex justify-end gap-3">
                         <Button variant="ghost">إلغاء</Button>
-                        <Button variant="danger" className="bg-[#B91C1C] hover:bg-[#B91C1C] text-white">
+                        <Button variant="danger" className="bg-[#DC2626] hover:bg-[#DC2626] text-white">
                             إرسال التقرير
                         </Button>
                     </div>

@@ -94,7 +94,7 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
     labelEn: 'Clinical',
     color: 'text-[#DC2626]',
     bg: 'bg-[#DC2626]/20',
-    gradient: 'from-[#DC2626] to-[#B91C1C]',
+    gradient: 'from-[#DC2626] to-[#DC2626]',
     icon: Stethoscope
   },
   safety: {
@@ -102,7 +102,7 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
     labelEn: 'Safety',
     color: 'text-[#DC2626]',
     bg: 'bg-[#DC2626]/20',
-    gradient: 'from-[#DC2626] to-[#D67A0A]',
+    gradient: 'from-[#DC2626] to-[#F7941D]',
     icon: Flame
   },
   social: {
@@ -110,7 +110,7 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
     labelEn: 'Social',
     color: 'text-[#FCB614]',
     bg: 'bg-[#FCB614]/20',
-    gradient: 'from-[#FCB614] to-[#D49A0A]',
+    gradient: 'from-[#FCB614] to-[#FCB614]',
     icon: Users
   },
   infrastructure: {
@@ -118,7 +118,7 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
     labelEn: 'Infrastructure',
     color: 'text-[#FCB614]',
     bg: 'bg-[#FCB614]/20',
-    gradient: 'from-[#FCB614] to-[#D49A0A]',
+    gradient: 'from-[#FCB614] to-[#FCB614]',
     icon: Building2
   },
   compliance: {
@@ -126,7 +126,7 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
     labelEn: 'Compliance',
     color: 'text-[#269798]',
     bg: 'bg-[#269798]/20',
-    gradient: 'from-[#269798] to-[#1B7778]',
+    gradient: 'from-[#269798] to-[#269798]',
     icon: Scale
   },
   contractual: {
@@ -134,7 +134,7 @@ const CATEGORY_CONFIG: Record<RiskCategory, {
     labelEn: 'Contractual',
     color: 'text-[#2BB574]',
     bg: 'bg-[#2BB574]/20',
-    gradient: 'from-[#2BB574] to-[#1B7778]',
+    gradient: 'from-[#2BB574] to-[#269798]',
     icon: FileCheck
   },
 };
@@ -538,10 +538,10 @@ const BCP_SCENARIOS: BCPScenario[] = [
 const RiskMatrixPro = ({ risks, onCellClick }: { risks: Risk[]; onCellClick?: (l: number, i: number) => void }) => {
   const getColor = (likelihood: number, impact: number) => {
     const score = likelihood * impact;
-    if (score >= 15) return 'bg-gradient-to-br from-[#DC2626] to-[#B91C1C]';
-    if (score >= 10) return 'bg-gradient-to-br from-[#F7941D] to-[#D49A0A]';
+    if (score >= 15) return 'bg-gradient-to-br from-[#DC2626] to-[#DC2626]';
+    if (score >= 10) return 'bg-gradient-to-br from-[#F7941D] to-[#FCB614]';
     if (score >= 5) return 'bg-gradient-to-br from-[#FCB614] to-[#FCB614]';
-    return 'bg-gradient-to-br from-[#2BB574] to-[#1E9658]';
+    return 'bg-gradient-to-br from-[#2BB574] to-[#2BB574]';
   };
 
   const getRisksInCell = (likelihood: number, impact: number) => {
@@ -634,10 +634,10 @@ const RiskCardPro = ({ risk, index }: { risk: Risk; index: number }) => {
   };
 
   const getScoreGradient = (score: number) => {
-    if (score >= 15) return 'from-[#DC2626] to-[#B91C1C]';
-    if (score >= 10) return 'from-[#F7941D] to-[#D49A0A]';
-    if (score >= 5) return 'from-[#FCB614] to-[#D49A0A]';
-    return 'from-[#2BB574] to-[#1E9658]';
+    if (score >= 15) return 'from-[#DC2626] to-[#DC2626]';
+    if (score >= 10) return 'from-[#F7941D] to-[#FCB614]';
+    if (score >= 5) return 'from-[#FCB614] to-[#FCB614]';
+    return 'from-[#2BB574] to-[#2BB574]';
   };
 
   return (
@@ -880,10 +880,10 @@ const ComplianceCard = ({ req, index }: { req: ComplianceRequirement; index: num
 const BCPScenarioCard = ({ scenario, index }: { scenario: BCPScenario; index: number }) => {
   const getTypeConfig = (type: BCPScenario['type']) => {
     switch (type) {
-      case 'evacuation': return { icon: Siren, color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20', gradient: 'from-[#DC2626] to-[#B91C1C]' };
-      case 'pandemic': return { icon: Heart, color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', gradient: 'from-[#FCB614] to-[#D49A0A]' };
-      case 'infrastructure': return { icon: Zap, color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', gradient: 'from-[#FCB614] to-[#D49A0A]' };
-      case 'supply': return { icon: Droplets, color: 'text-[#269798]', bg: 'bg-[#269798]/20', gradient: 'from-[#269798] to-[#1B7778]' };
+      case 'evacuation': return { icon: Siren, color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/20', gradient: 'from-[#DC2626] to-[#DC2626]' };
+      case 'pandemic': return { icon: Heart, color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', gradient: 'from-[#FCB614] to-[#FCB614]' };
+      case 'infrastructure': return { icon: Zap, color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/20', gradient: 'from-[#FCB614] to-[#FCB614]' };
+      case 'supply': return { icon: Droplets, color: 'text-[#269798]', bg: 'bg-[#269798]/20', gradient: 'from-[#269798] to-[#269798]' };
     }
   };
 
@@ -1012,7 +1012,7 @@ export default function GRCDashboardPro() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl font-black text-white flex items-center gap-3">
-              <div className="p-3 bg-gradient-to-br from-[#269798] to-[#1E9658] rounded-2xl shadow-lg shadow-teal-500/30">
+              <div className="p-3 bg-gradient-to-br from-[#269798] to-[#2BB574] rounded-2xl shadow-lg shadow-teal-500/30">
                 <Shield className="w-8 h-8 text-white" />
               </div>
               الحوكمة والمخاطر والامتثال
@@ -1045,7 +1045,7 @@ export default function GRCDashboardPro() {
               label: 'المخاطر الحرجة',
               value: stats.criticalRisks,
               total: stats.totalRisks,
-              color: 'from-[#DC2626] to-[#B91C1C]',
+              color: 'from-[#DC2626] to-[#DC2626]',
               icon: AlertOctagon,
               trend: 'down',
               trendValue: '-2'
@@ -1053,7 +1053,7 @@ export default function GRCDashboardPro() {
             {
               label: 'معدل الامتثال',
               value: `${stats.complianceRate}%`,
-              color: 'from-[#2BB574] to-[#1B7778]',
+              color: 'from-[#2BB574] to-[#269798]',
               icon: CheckCircle,
               trend: 'up',
               trendValue: '+5%'
@@ -1062,13 +1062,13 @@ export default function GRCDashboardPro() {
               label: 'NCRs مفتوحة',
               value: stats.openNCRs,
               subValue: `${stats.avgNCRProgress}% متوسط الإنجاز`,
-              color: 'from-[#FCB614] to-[#D67A0A]',
+              color: 'from-[#FCB614] to-[#F7941D]',
               icon: FileText,
             },
             {
               label: 'خطط BCP جاهزة',
               value: `${stats.bcpReady}/${BCP_SCENARIOS.length}`,
-              color: 'from-[#269798] to-[#1B7778]',
+              color: 'from-[#269798] to-[#269798]',
               icon: Siren,
             },
           ].map(({ label, value, total, subValue, color, icon: Icon, trend, trendValue }) => (
@@ -1112,7 +1112,7 @@ export default function GRCDashboardPro() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all whitespace-nowrap ${activeTab === key
-              ? 'bg-gradient-to-r from-[#269798] to-[#1E9658] text-white shadow-lg shadow-teal-500/30'
+              ? 'bg-gradient-to-r from-[#269798] to-[#2BB574] text-white shadow-lg shadow-teal-500/30'
               : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >

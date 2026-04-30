@@ -163,8 +163,8 @@ export const ScenarioSimulator: React.FC = () => {
         <section className="space-y-5" dir="rtl">
             {/* ملاحظة افتتاحيّة — تواضع معرفيّ */}
             <div className="bg-[#FCB614]/10 border-r-4 border-[#FCB614] rounded-xl p-4 flex items-start gap-3">
-                <Info className="w-5 h-5 text-[#D49A0A] mt-0.5 shrink-0" />
-                <div className="text-[13.5px] text-[#92400E] leading-relaxed">
+                <Info className="w-5 h-5 text-[#FCB614] mt-0.5 shrink-0" />
+                <div className="text-[13.5px] text-[#0F3144] leading-relaxed">
                     <strong>هذه محاكاةٌ تقديريّةٌ، ليست تنبُّؤاً دقيقاً.</strong>{' '}
                     النموذج مبنيٌّ على فرضيّاتٍ من بيانات مركز الباحة (2-3 حالات توظيف سابقة، ومعدّلات دمجٍ أسريٍّ محدودة).
                     درجة الثقة موزونةٌ حسب الاستراتيجيّة. السيناريوهات مفيدةٌ لتأطير النقاش، لا لالتزام مالي.
@@ -237,7 +237,7 @@ export const ScenarioSimulator: React.FC = () => {
                         <div className={`px-4 py-2.5 rounded-xl border-2 text-[15px] font-black ${
                             Math.abs(splitTotal - 100) < 0.1
                                 ? 'border-hrsd-green bg-hrsd-green/5 text-hrsd-green-dark'
-                                : 'border-[#DC2626] bg-[#DC2626]/10 text-[#B91C1C]'
+                                : 'border-[#DC2626] bg-[#DC2626]/10 text-[#DC2626]'
                         }`}>
                             {splitTotal}% {Math.abs(splitTotal - 100) < 0.1 ? '✓' : '— يجب أن يساوي 100'}
                         </div>

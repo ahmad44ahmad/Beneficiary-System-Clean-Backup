@@ -81,7 +81,7 @@ export const LegacyConsultant: React.FC = () => {
                             w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0
                             ${msg.sender === 'user' ? 'bg-gray-200' : 'bg-[#F7941D]/15'}
                         `}>
-                            {msg.sender === 'user' ? <User className="w-5 h-5 text-gray-600" /> : <Brain className="w-5 h-5 text-[#D67A0A]" />}
+                            {msg.sender === 'user' ? <User className="w-5 h-5 text-gray-600" /> : <Brain className="w-5 h-5 text-[#F7941D]" />}
                         </div>
                         <div className={`
                             max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed

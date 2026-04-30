@@ -138,7 +138,7 @@ export const RiskRegister: React.FC = () => {
 
     const getRiskLevelBadge = (level: string) => {
         const config: Record<string, { bg: string; text: string; label: string }> = {
-            critical: { bg: 'bg-[#B91C1C]', text: 'text-white', label: 'حرج' },
+            critical: { bg: 'bg-[#DC2626]', text: 'text-white', label: 'حرج' },
             high: { bg: 'bg-[#F7941D]', text: 'text-white', label: 'عالي' },
             medium: { bg: 'bg-[#FCB614]', text: 'text-gray-800', label: 'متوسط' },
             low: { bg: 'bg-[#2BB574]', text: 'text-white', label: 'منخفض' }
@@ -157,11 +157,11 @@ export const RiskRegister: React.FC = () => {
             escalated: 'تم التصعيد'
         };
         const colors: Record<string, string> = {
-            identified: 'bg-[#269798]/15 text-[#1B7778]',
-            analyzing: 'bg-[#FCB614]/15 text-[#92400E]',
-            mitigating: 'bg-[#FCB614]/15 text-[#92400E]',
+            identified: 'bg-[#269798]/15 text-[#269798]',
+            analyzing: 'bg-[#FCB614]/15 text-[#0F3144]',
+            mitigating: 'bg-[#FCB614]/15 text-[#0F3144]',
             monitoring: 'bg-[#269798]/10 text-[#0F3144]',
-            closed: 'bg-[#2BB574]/15 text-[#14532D]',
+            closed: 'bg-[#2BB574]/15 text-[#0F3144]',
             escalated: 'bg-[#DC2626]/15 text-[#7F1D1D]'
         };
         return <span className={`px-2 py-1 rounded text-xs ${colors[status] || 'bg-gray-100'}`}>{labels[status] || status}</span>;
@@ -182,15 +182,15 @@ export const RiskRegister: React.FC = () => {
                         <ArrowLeft className="w-4 h-4" />
                         العودة للحوكمة
                     </Link>
-                    <h1 className="text-2xl font-bold flex items-center gap-3 text-[rgb(20,65,90)]">
-                        <AlertTriangle className="w-7 h-7 text-[rgb(245,150,30)]" />
+                    <h1 className="text-2xl font-bold flex items-center gap-3 text-[#0F3144]">
+                        <AlertTriangle className="w-7 h-7 text-[#F7941D]" />
                         سجل المخاطر
                     </h1>
                     <p className="text-gray-500 mt-1">تسجيل وتتبع ومعالجة المخاطر المؤسسية</p>
                 </div>
                 <button
                     onClick={() => setShowForm(true)}
-                    className="px-5 py-2.5 text-white rounded-xl flex items-center gap-2 shadow-lg hover:opacity-90 transition-opacity bg-[rgb(245,150,30)]"
+                    className="px-5 py-2.5 text-white rounded-xl flex items-center gap-2 shadow-lg hover:opacity-90 transition-opacity bg-[#F7941D]"
                 >
                     <Plus className="w-5 h-5" />
                     تسجيل خطر جديد
@@ -206,7 +206,7 @@ export const RiskRegister: React.FC = () => {
                         placeholder="البحث بالعنوان أو الرمز..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pr-10 pl-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[rgb(20,130,135)]"
+                        className="w-full pr-10 pl-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#269798]"
                     />
                 </div>
                 <div className="flex items-center gap-2">
@@ -229,24 +229,24 @@ export const RiskRegister: React.FC = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-5 gap-4">
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[rgb(20,65,90)]">
-                    <p className="text-3xl font-bold text-[rgb(20,65,90)]">{risks.length}</p>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[#0F3144]">
+                    <p className="text-3xl font-bold text-[#0F3144]">{risks.length}</p>
                     <p className="text-sm text-gray-500">إجمالي المخاطر</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[#DC2626]">
                     <p className="text-3xl font-bold text-[#DC2626]">{risks.filter(r => getRiskLevel(r.risk_score) === 'critical').length}</p>
                     <p className="text-sm text-gray-500">حرجة</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[rgb(245,150,30)]">
-                    <p className="text-3xl font-bold text-[rgb(245,150,30)]">{risks.filter(r => getRiskLevel(r.risk_score) === 'high').length}</p>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[#F7941D]">
+                    <p className="text-3xl font-bold text-[#F7941D]">{risks.filter(r => getRiskLevel(r.risk_score) === 'high').length}</p>
                     <p className="text-sm text-gray-500">عالية</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[rgb(250,180,20)]">
-                    <p className="text-3xl font-bold text-[rgb(250,180,20)]">{risks.filter(r => getRiskLevel(r.risk_score) === 'medium').length}</p>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[#FCB614]">
+                    <p className="text-3xl font-bold text-[#FCB614]">{risks.filter(r => getRiskLevel(r.risk_score) === 'medium').length}</p>
                     <p className="text-sm text-gray-500">متوسطة</p>
                 </div>
-                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[rgb(45,180,115)]">
-                    <p className="text-3xl font-bold text-[rgb(45,180,115)]">{risks.filter(r => getRiskLevel(r.risk_score) === 'low').length}</p>
+                <div className="bg-white rounded-xl p-4 shadow-lg text-center border-r-4 border-[#2BB574]">
+                    <p className="text-3xl font-bold text-[#2BB574]">{risks.filter(r => getRiskLevel(r.risk_score) === 'low').length}</p>
                     <p className="text-sm text-gray-500">منخفضة</p>
                 </div>
             </div>
@@ -262,7 +262,7 @@ export const RiskRegister: React.FC = () => {
                     </div>
                 ) : (
                     <table className="w-full">
-                        <thead className="text-gray-600 text-sm bg-[rgb(20,65,90)]/10">
+                        <thead className="text-gray-600 text-sm bg-[#0F3144]/10">
                             <tr>
                                 <th className="p-4 text-right">الرمز</th>
                                 <th className="p-4 text-right">العنوان</th>
@@ -291,10 +291,10 @@ export const RiskRegister: React.FC = () => {
                                     <td className="p-4 text-sm">{risk.owner || '-'}</td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-center gap-2">
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[rgb(20,130,135)]" title="عرض">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#269798]" title="عرض">
                                                 <Eye className="w-4 h-4" />
                                             </button>
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[rgb(245,150,30)]" title="تعديل">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#F7941D]" title="تعديل">
                                                 <Edit className="w-4 h-4" />
                                             </button>
                                         </div>
@@ -310,8 +310,8 @@ export const RiskRegister: React.FC = () => {
             {showForm && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-2xl p-8 max-w-3xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-auto">
-                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[rgb(20,65,90)]">
-                            <AlertTriangle className="w-6 h-6 text-[rgb(245,150,30)]" />
+                        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[#0F3144]">
+                            <AlertTriangle className="w-6 h-6 text-[#F7941D]" />
                             تسجيل خطر جديد
                         </h2>
                         <form onSubmit={handleSubmit} className="space-y-5">
@@ -348,7 +348,7 @@ export const RiskRegister: React.FC = () => {
                                     value={formData.title_ar}
                                     onChange={(e) => setFormData({ ...formData, title_ar: e.target.value })}
                                     placeholder="مثال: تعطل نظام الإطفاء الرئيسي"
-                                    className="w-full px-4 py-2.5 border rounded-xl focus:ring-2 focus:ring-[rgb(20,130,135)]"
+                                    className="w-full px-4 py-2.5 border rounded-xl focus:ring-2 focus:ring-[#269798]"
                                     required
                                 />
                             </div>
@@ -399,9 +399,9 @@ export const RiskRegister: React.FC = () => {
                                     <label className="block text-sm font-medium mb-1">درجة الخطر</label>
                                     <div
                                         className={`w-full px-4 py-2.5 border rounded-xl text-center font-bold text-xl text-white ${(formData.likelihood * formData.impact) >= 20 ? 'bg-[#dc2626]' :
-                                            (formData.likelihood * formData.impact) >= 12 ? 'bg-[rgb(245,150,30)]' :
-                                                (formData.likelihood * formData.impact) >= 6 ? 'bg-[rgb(250,180,20)]' :
-                                                    'bg-[rgb(45,180,115)]'
+                                            (formData.likelihood * formData.impact) >= 12 ? 'bg-[#F7941D]' :
+                                                (formData.likelihood * formData.impact) >= 6 ? 'bg-[#FCB614]' :
+                                                    'bg-[#2BB574]'
                                             }`}
                                     >
                                         {formData.likelihood * formData.impact}
@@ -455,7 +455,7 @@ export const RiskRegister: React.FC = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-6 py-2.5 text-white rounded-xl flex items-center gap-2 bg-[rgb(20,130,135)]"
+                                    className="px-6 py-2.5 text-white rounded-xl flex items-center gap-2 bg-[#269798]"
                                 >
                                     <Save className="w-4 h-4" />
                                     حفظ الخطر

@@ -85,7 +85,7 @@ const STATUS_TOKENS: Record<ScoreStatus, {
         label: 'حالة جيدة',
     },
     warning: {
-        text: 'text-[#D49A0A]',
+        text: 'text-[#FCB614]',
         bg: 'bg-[#FCB614]',
         bgSoft: 'bg-[#FCB614]/10',
         border: 'border-[#FCB614]/30',

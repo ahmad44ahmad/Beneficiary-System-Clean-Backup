@@ -40,18 +40,18 @@ export const EarlyWarningSystem: React.FC = () => {
 
     const getRiskColor = (level: string) => {
         switch (level) {
-            case 'أحمر': return 'from-[#B91C1C] to-[#B91C1C]';
-            case 'برتقالي': return 'from-[#F7941D] to-[#D67A0A]';
-            case 'أصفر': return 'from-[#FCB614] to-[#D49A0A]';
+            case 'أحمر': return 'from-[#DC2626] to-[#DC2626]';
+            case 'برتقالي': return 'from-[#F7941D] to-[#F7941D]';
+            case 'أصفر': return 'from-[#FCB614] to-[#FCB614]';
             default: return 'from-hrsd-green to-hrsd-green-dark';
         }
     };
 
     const topRisks = currentRisk ? [
-        { icon: Wrench, label: 'صيانة متأخرة', value: currentRisk.overdue_maintenance_count, weight: 5, color: 'text-[#D67A0A]' },
+        { icon: Wrench, label: 'صيانة متأخرة', value: currentRisk.overdue_maintenance_count, weight: 5, color: 'text-[#F7941D]' },
         { icon: Activity, label: 'حوادث سقوط', value: currentRisk.fall_incidents_week, weight: 10, color: 'text-[#DC2626]' },
-        { icon: AlertOctagon, label: 'تنبيهات حرجة', value: currentRisk.active_critical_alerts, weight: 15, color: 'text-[#B91C1C]' },
-        { icon: Shield, label: 'فجوات مساءلة', value: currentRisk.critical_accountability_gaps, weight: 20, color: 'text-[#D49A0A]' },
+        { icon: AlertOctagon, label: 'تنبيهات حرجة', value: currentRisk.active_critical_alerts, weight: 15, color: 'text-[#DC2626]' },
+        { icon: Shield, label: 'فجوات مساءلة', value: currentRisk.critical_accountability_gaps, weight: 20, color: 'text-[#FCB614]' },
         { icon: Users, label: 'أصول بحالة سيئة', value: currentRisk.poor_condition_assets, weight: 3, color: 'text-gray-600' },
     ].sort((a, b) => (b.value * b.weight) - (a.value * a.weight)) : [];
 

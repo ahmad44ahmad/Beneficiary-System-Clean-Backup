@@ -131,10 +131,10 @@ export const ComplianceTracker: React.FC = () => {
 
     const getStatusBadge = (status: string) => {
         const config: Record<string, { icon: React.ElementType; bg: string; text: string; label: string }> = {
-            compliant: { icon: CheckCircle2, bg: 'bg-[#2BB574]/15', text: 'text-[#1E9658]', label: 'ممتثل' },
-            partial: { icon: AlertCircle, bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]', label: 'جزئي' },
-            non_compliant: { icon: XCircle, bg: 'bg-[#DC2626]/15', text: 'text-[#B91C1C]', label: 'غير ممتثل' },
-            pending: { icon: AlertCircle, bg: 'bg-[#269798]/15', text: 'text-[#1B7778]', label: 'قيد المراجعة' },
+            compliant: { icon: CheckCircle2, bg: 'bg-[#2BB574]/15', text: 'text-[#2BB574]', label: 'ممتثل' },
+            partial: { icon: AlertCircle, bg: 'bg-[#FCB614]/10', text: 'text-[#FCB614]', label: 'جزئي' },
+            non_compliant: { icon: XCircle, bg: 'bg-[#DC2626]/15', text: 'text-[#DC2626]', label: 'غير ممتثل' },
+            pending: { icon: AlertCircle, bg: 'bg-[#269798]/15', text: 'text-[#269798]', label: 'قيد المراجعة' },
             not_applicable: { icon: AlertCircle, bg: 'bg-gray-100', text: 'text-gray-700', label: 'لا ينطبق' }
         };
         const { icon: Icon, bg, text, label } = config[status] || config.pending;

@@ -73,7 +73,7 @@ export const DignityProfileForm: React.FC<DignityProfileFormProps> = ({ initialD
             {/* Sensory */}
             <div className="space-y-4 pt-4 border-t">
                 <h4 className="font-semibold text-gray-700 flex items-center gap-2">
-                    <Sun className="w-5 h-5 text-[#D49A0A]" /> التفضيلات الحسية
+                    <Sun className="w-5 h-5 text-[#FCB614]" /> التفضيلات الحسية
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>

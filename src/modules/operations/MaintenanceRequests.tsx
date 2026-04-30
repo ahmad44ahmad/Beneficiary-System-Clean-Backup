@@ -144,18 +144,18 @@ export const MaintenanceRequests: React.FC = () => {
     const getPriorityColor = (priority: string) => {
         switch (priority) {
             case 'critical': return 'bg-[#DC2626]/15 text-[#7F1D1D]';
-            case 'high': return 'bg-[#F7941D]/15 text-[#92400E]';
-            case 'medium': return 'bg-[#FCB614]/10 text-[#D49A0A]';
-            case 'low': return 'bg-[#2BB574]/15 text-[#14532D]';
+            case 'high': return 'bg-[#F7941D]/15 text-[#0F3144]';
+            case 'medium': return 'bg-[#FCB614]/10 text-[#FCB614]';
+            case 'low': return 'bg-[#2BB574]/15 text-[#0F3144]';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case 'completed': return 'bg-[#2BB574]/15 text-[#14532D]';
-            case 'in_progress': return 'bg-[#269798]/15 text-[#1B7778]';
-            case 'pending': return 'bg-[#FCB614]/10 text-[#D49A0A]';
+            case 'completed': return 'bg-[#2BB574]/15 text-[#0F3144]';
+            case 'in_progress': return 'bg-[#269798]/15 text-[#269798]';
+            case 'pending': return 'bg-[#FCB614]/10 text-[#FCB614]';
             case 'cancelled':
             case 'rejected': return 'bg-[#DC2626]/15 text-[#7F1D1D]';
             default: return 'bg-gray-100 text-gray-800';
@@ -223,7 +223,7 @@ export const MaintenanceRequests: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || requests.length === 0}
-                        className="px-3 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50"
+                        className="px-3 py-2 bg-[#2BB574]/10 text-[#2BB574] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-4 h-4" />
@@ -248,7 +248,7 @@ export const MaintenanceRequests: React.FC = () => {
                     <p className="text-sm text-gray-500">إجمالي الطلبات</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-[#D49A0A]">{requests.filter(r => r.status === 'pending').length}</p>
+                    <p className="text-2xl font-bold text-[#FCB614]">{requests.filter(r => r.status === 'pending').length}</p>
                     <p className="text-sm text-gray-500">قيد الانتظار</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
@@ -256,7 +256,7 @@ export const MaintenanceRequests: React.FC = () => {
                     <p className="text-sm text-gray-500">قيد التنفيذ</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-[#1E9658]">{requests.filter(r => r.status === 'completed').length}</p>
+                    <p className="text-2xl font-bold text-[#2BB574]">{requests.filter(r => r.status === 'completed').length}</p>
                     <p className="text-sm text-gray-500">مكتملة</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow text-center">
@@ -318,7 +318,7 @@ export const MaintenanceRequests: React.FC = () => {
                                             <button className="p-2 hover:bg-gray-100 rounded-lg text-[#269798]">
                                                 <Eye className="w-4 h-4" />
                                             </button>
-                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#D49A0A]">
+                                            <button className="p-2 hover:bg-gray-100 rounded-lg text-[#FCB614]">
                                                 <Edit className="w-4 h-4" />
                                             </button>
                                         </div>

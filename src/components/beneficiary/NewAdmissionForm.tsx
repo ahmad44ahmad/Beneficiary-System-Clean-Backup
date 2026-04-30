@@ -156,7 +156,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                                     <div className="flex">
                                         <AlertCircle className="h-6 w-6 text-[#DC2626] ms-3" />
                                         <div>
-                                            <p className="text-sm text-[#B91C1C] font-bold">تنبيهات طبية:</p>
+                                            <p className="text-sm text-[#DC2626] font-bold">تنبيهات طبية:</p>
                                             <ul className="list-disc list-inside text-sm text-[#DC2626]">
                                                 {validation.warnings.map((w, i) => <li key={i}>{w}</li>)}
                                             </ul>
@@ -250,7 +250,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
 
                             {validation.actions.requireSeizureHistory && (
                                 <div className="bg-[#FCB614]/10 p-4 rounded border border-[#FCB614]/20 mb-4">
-                                    <h4 className="text-[#D49A0A] font-bold mb-2">مطلوب: تاريخ نوبات الصرع</h4>
+                                    <h4 className="text-[#FCB614] font-bold mb-2">مطلوب: تاريخ نوبات الصرع</h4>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="form-group">
                                             <label>تاريخ آخر نوبة</label>
@@ -333,7 +333,7 @@ export const NewAdmissionForm: React.FC<NewAdmissionFormProps> = ({ beneficiarie
                         ) : (
                             <button
                                 type="submit"
-                                className="btn-primary bg-[#1E9658] hover:bg-[#1E9658]"
+                                className="btn-primary bg-[#2BB574] hover:bg-[#2BB574]"
                                 disabled={!validation.isValid}
                             >
                                 <Save className="inline-icon ms-2" />

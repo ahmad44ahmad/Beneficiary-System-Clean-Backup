@@ -31,9 +31,9 @@ const VACCINE_TYPES = [
 // Status Badge Component
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
     const styles: Record<string, string> = {
-        immune: 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]',
-        pending: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]',
-        expired: 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]',
+        immune: 'bg-[#2BB574]/15 text-[#2BB574] border-[#2BB574]',
+        pending: 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]',
+        expired: 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]',
         non_responder: 'bg-gray-100 text-gray-700 border-gray-300',
         declined: 'bg-gray-100 text-gray-600 border-gray-300',
     };
@@ -243,7 +243,7 @@ const AddVaccinationModal: React.FC<{
                     <button
                         onClick={handleSubmit}
                         disabled={saving}
-                        className="w-full bg-[#1B7778] hover:bg-[#1B7778] disabled:bg-gray-300 text-white font-bold py-3 px-6 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all"
+                        className="w-full bg-[#269798] hover:bg-[#269798] disabled:bg-gray-300 text-white font-bold py-3 px-6 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all"
                     >
                         {saving ? (
                             <>
@@ -382,7 +382,7 @@ export const ImmunizationTracker: React.FC = () => {
                     </button>
                     <button
                         onClick={() => setShowAddModal(true)}
-                        className="px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] flex items-center gap-2 shadow-md"
+                        className="px-4 py-2 bg-[#269798] text-white rounded-lg hover:bg-[#269798] flex items-center gap-2 shadow-md"
                     >
                         <Plus className="w-4 h-4" />
                         تسجيل تحصين
@@ -398,11 +398,11 @@ export const ImmunizationTracker: React.FC = () => {
                 </div>
                 <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#2BB574]">
                     <p className="text-gray-500 text-sm">محصّن بالكامل</p>
-                    <p className="text-2xl font-bold text-[#1E9658]">{stats.immune}</p>
+                    <p className="text-2xl font-bold text-[#2BB574]">{stats.immune}</p>
                 </div>
                 <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#FCB614]">
                     <p className="text-gray-500 text-sm">قيد الاكتمال</p>
-                    <p className="text-2xl font-bold text-[#D49A0A]">{stats.pending}</p>
+                    <p className="text-2xl font-bold text-[#FCB614]">{stats.pending}</p>
                 </div>
                 <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#DC2626]">
                     <p className="text-gray-500 text-sm">منتهي الصلاحية</p>
@@ -410,7 +410,7 @@ export const ImmunizationTracker: React.FC = () => {
                 </div>
                 <div className="bg-white p-4 rounded-xl shadow-sm border-r-4 border-[#F7941D]">
                     <p className="text-gray-500 text-sm">مستحق هذا الشهر</p>
-                    <p className="text-2xl font-bold text-[#D67A0A]">{stats.dueThisMonth}</p>
+                    <p className="text-2xl font-bold text-[#F7941D]">{stats.dueThisMonth}</p>
                 </div>
             </div>
 
@@ -432,20 +432,20 @@ export const ImmunizationTracker: React.FC = () => {
                 <div className="flex gap-2">
                     <button
                         onClick={() => setFilterType('all')}
-                        className={`px-4 py-2 rounded-lg transition-all ${filterType === 'all' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-4 py-2 rounded-lg transition-all ${filterType === 'all' ? 'bg-[#269798]/15 text-[#269798]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         الكل
                     </button>
                     <button
                         onClick={() => setFilterType('staff')}
-                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'staff' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'staff' ? 'bg-[#269798]/15 text-[#269798]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         <Users className="w-4 h-4" />
                         الموظفين
                     </button>
                     <button
                         onClick={() => setFilterType('beneficiary')}
-                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'beneficiary' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-4 py-2 rounded-lg transition-all flex items-center gap-1 ${filterType === 'beneficiary' ? 'bg-[#269798]/15 text-[#269798]' : 'bg-gray-100 text-gray-600'}`}
                     >
                         <User className="w-4 h-4" />
                         المستفيدين
@@ -487,7 +487,7 @@ export const ImmunizationTracker: React.FC = () => {
                                         {imm.staff_name || `مستفيد #${imm.beneficiary_id?.slice(-4)}`}
                                     </td>
                                     <td className="px-4 py-3">
-                                        <span className={`px-2 py-1 rounded text-xs ${imm.person_type === 'staff' ? 'bg-[#FCB614]/15 text-[#D49A0A]' : 'bg-[#269798]/10 text-[#1B7778]'}`}>
+                                        <span className={`px-2 py-1 rounded text-xs ${imm.person_type === 'staff' ? 'bg-[#FCB614]/15 text-[#FCB614]' : 'bg-[#269798]/10 text-[#269798]'}`}>
                                             {imm.person_type === 'staff' ? 'موظف' : 'مستفيد'}
                                         </span>
                                     </td>
@@ -496,7 +496,7 @@ export const ImmunizationTracker: React.FC = () => {
                                     <td className="px-4 py-3 text-gray-600">{imm.date_administered}</td>
                                     <td className="px-4 py-3">
                                         {imm.next_due_date ? (
-                                            <span className="flex items-center gap-1 text-[#D67A0A]">
+                                            <span className="flex items-center gap-1 text-[#F7941D]">
                                                 <Calendar className="w-4 h-4" />
                                                 {imm.next_due_date}
                                             </span>

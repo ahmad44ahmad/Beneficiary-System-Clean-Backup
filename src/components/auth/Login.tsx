@@ -54,7 +54,7 @@ export const Login = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
                 <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">تسجيل الدخول</h2>
-                {error && <div className="bg-[#DC2626]/15 border border-[#DC2626] text-[#B91C1C] px-4 py-3 rounded mb-4">{error}</div>}
+                {error && <div className="bg-[#DC2626]/15 border border-[#DC2626] text-[#DC2626] px-4 py-3 rounded mb-4">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -84,14 +84,14 @@ export const Login = () => {
                     </div>
                     <div className="flex flex-col items-center justify-between">
                         <button
-                            className="bg-[#1B7778] hover:bg-[#1B7778] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
+                            className="bg-[#269798] hover:bg-[#269798] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
                             type="submit"
                             disabled={isPending}
                         >
                             {isPending ? 'جاري التحميل...' : 'دخول'}
                         </button>
                         <button
-                            className="bg-[#1E9658] hover:bg-[#1E9658] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
+                            className="bg-[#2BB574] hover:bg-[#2BB574] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mb-4"
                             type="button"
                             onClick={handleSignUp}
                             disabled={isPending}
@@ -99,7 +99,7 @@ export const Login = () => {
                             تسجيل جديد
                         </button>
                         <button
-                            className="bg-[#B91C1C] hover:bg-[#B91C1C] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                            className="bg-[#DC2626] hover:bg-[#DC2626] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                             type="button"
                             onClick={handleGoogleSignIn}
                             disabled={isPending}

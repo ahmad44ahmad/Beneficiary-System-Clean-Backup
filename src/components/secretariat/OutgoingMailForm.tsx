@@ -169,7 +169,7 @@ export const OutgoingMailForm: React.FC<OutgoingMailFormProps> = ({ onSubmit, on
                         </button>
                         <button
                             type="submit"
-                            className="flex items-center px-4 py-2 text-white bg-[#1B7778] rounded-md hover:bg-[#1B7778]"
+                            className="flex items-center px-4 py-2 text-white bg-[#269798] rounded-md hover:bg-[#269798]"
                         >
                             <Save size={18} className="ms-2" />
                             حفظ

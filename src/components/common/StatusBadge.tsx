@@ -29,22 +29,22 @@ const statusConfig: Record<string, {
 }> = {
     // Meal statuses
     pending: { label: 'معلق', bgColor: 'bg-gray-100', textColor: 'text-hrsd-cool-gray', icon: Clock },
-    preparing: { label: 'قيد التحضير', bgColor: 'bg-[#FCB614]/10', textColor: 'text-[#D49A0A]', icon: Clock },
+    preparing: { label: 'قيد التحضير', bgColor: 'bg-[#FCB614]/10', textColor: 'text-[#FCB614]', icon: Clock },
     ready: { label: 'جاهز', bgColor: 'bg-[#269798]/10', textColor: 'text-[#269798]', icon: Check },
     delivered: { label: 'تم التسليم', bgColor: 'bg-[#269798]/10', textColor: 'text-[#269798]', icon: Check },
-    consumed: { label: 'تم الاستهلاك', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]', icon: CheckCircle2 },
+    consumed: { label: 'تم الاستهلاك', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#2BB574]', icon: CheckCircle2 },
     refused: { label: 'رفض الوجبة', bgColor: 'bg-[#DC2626]/10', textColor: 'text-[#DC2626]', icon: X },
 
     // General statuses
-    active: { label: 'نشط', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]', icon: CheckCircle2 },
+    active: { label: 'نشط', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#2BB574]', icon: CheckCircle2 },
     inactive: { label: 'غير نشط', bgColor: 'bg-gray-100', textColor: 'text-hrsd-cool-gray' },
-    completed: { label: 'مكتمل', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]', icon: CheckCircle2 },
+    completed: { label: 'مكتمل', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#2BB574]', icon: CheckCircle2 },
     cancelled: { label: 'ملغى', bgColor: 'bg-[#DC2626]/10', textColor: 'text-[#DC2626]', icon: X },
 
     // Risk levels
-    low: { label: 'منخفض', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#1E9658]' },
-    medium: { label: 'متوسط', bgColor: 'bg-[#FCB614]/10', textColor: 'text-[#D49A0A]' },
-    high: { label: 'عالي', bgColor: 'bg-[#F7941D]/10', textColor: 'text-[#D67A0A]', icon: AlertCircle },
+    low: { label: 'منخفض', bgColor: 'bg-[#2BB574]/10', textColor: 'text-[#2BB574]' },
+    medium: { label: 'متوسط', bgColor: 'bg-[#FCB614]/10', textColor: 'text-[#FCB614]' },
+    high: { label: 'عالي', bgColor: 'bg-[#F7941D]/10', textColor: 'text-[#F7941D]', icon: AlertCircle },
     critical: { label: 'حرج', bgColor: 'bg-[#DC2626]/10', textColor: 'text-[#DC2626]', icon: AlertCircle }
 };
 

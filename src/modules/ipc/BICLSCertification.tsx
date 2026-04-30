@@ -184,25 +184,25 @@ function getStatusBadge(status: CertificationStatus) {
     certified: {
       label: 'حاصل على الرخصة',
       bg: 'bg-[#2BB574]/15',
-      text: 'text-[#1E9658]',
+      text: 'text-[#2BB574]',
       icon: <CheckCircle2 className="w-4 h-4" />,
     },
     expired: {
       label: 'منتهية الصلاحية',
       bg: 'bg-[#DC2626]/15',
-      text: 'text-[#B91C1C]',
+      text: 'text-[#DC2626]',
       icon: <XCircle className="w-4 h-4" />,
     },
     pending: {
       label: 'قيد الإصدار',
       bg: 'bg-[#FCB614]/15',
-      text: 'text-[#D49A0A]',
+      text: 'text-[#FCB614]',
       icon: <Clock className="w-4 h-4" />,
     },
     expiring_soon: {
       label: 'تنتهي قريباً',
       bg: 'bg-[#F7941D]/15',
-      text: 'text-[#D67A0A]',
+      text: 'text-[#F7941D]',
       icon: <AlertTriangle className="w-4 h-4" />,
     },
   };
@@ -213,21 +213,21 @@ function getCompetencyStatusStyle(status: CompetencyStatus) {
   const map: Record<CompetencyStatus, { bg: string; text: string; label: string; icon: React.ReactNode }> = {
     passed: {
       bg: 'bg-[#2BB574]/15',
-      text: 'text-[#1E9658]',
+      text: 'text-[#2BB574]',
       label: 'ناجح',
-      icon: <CheckCircle2 className="w-4 h-4 text-[#1E9658]" />,
+      icon: <CheckCircle2 className="w-4 h-4 text-[#2BB574]" />,
     },
     failed: {
       bg: 'bg-[#DC2626]/15',
-      text: 'text-[#B91C1C]',
+      text: 'text-[#DC2626]',
       label: 'غير ناجح',
       icon: <XCircle className="w-4 h-4 text-[#DC2626]" />,
     },
     pending: {
       bg: 'bg-[#FCB614]/15',
-      text: 'text-[#D49A0A]',
+      text: 'text-[#FCB614]',
       label: 'معلّق',
-      icon: <Clock className="w-4 h-4 text-[#D49A0A]" />,
+      icon: <Clock className="w-4 h-4 text-[#FCB614]" />,
     },
   };
   return map[status];
@@ -309,10 +309,10 @@ export const BICLSCertification: React.FC = () => {
         {/* Certified */}
         <div className="bg-white rounded-xl shadow-sm border border-[#2BB574]/30 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />
+            <CheckCircle2 className="w-5 h-5 text-[#2BB574]" />
             <span className="text-sm text-gray-500">حاصلون على الرخصة</span>
           </div>
-          <p className="text-3xl font-bold text-[#1E9658]">{stats.certified}</p>
+          <p className="text-3xl font-bold text-[#2BB574]">{stats.certified}</p>
         </div>
         {/* Expired */}
         <div className="bg-white rounded-xl shadow-sm border border-[#DC2626]/30 p-4">
@@ -325,10 +325,10 @@ export const BICLSCertification: React.FC = () => {
         {/* Expiring Soon */}
         <div className="bg-white rounded-xl shadow-sm border border-[#FCB614]/30 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
+            <AlertTriangle className="w-5 h-5 text-[#FCB614]" />
             <span className="text-sm text-gray-500">تنتهي خلال 90 يوم</span>
           </div>
-          <p className="text-3xl font-bold text-[#D49A0A]">{stats.expiringSoon}</p>
+          <p className="text-3xl font-bold text-[#FCB614]">{stats.expiringSoon}</p>
         </div>
       </div>
 

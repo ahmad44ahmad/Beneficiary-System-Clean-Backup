@@ -141,7 +141,7 @@ const TrajectoryCard: React.FC<{
                 </div>
 
                 <div className={`flex items-center gap-1 text-[13px] font-bold ${
-                    deltaFavorable ? 'text-hrsd-green-dark' : 'text-[#B91C1C]'
+                    deltaFavorable ? 'text-hrsd-green-dark' : 'text-[#DC2626]'
                 }`}>
                     {deltaFavorable
                         ? (spec.higherIsBetter ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />)
@@ -199,10 +199,10 @@ const TrajectoryCard: React.FC<{
                 {gap.onTrack ? (
                     <TrendingUp className="w-4 h-4 text-hrsd-green-dark" />
                 ) : (
-                    <AlertCircle className="w-4 h-4 text-[#D49A0A]" />
+                    <AlertCircle className="w-4 h-4 text-[#FCB614]" />
                 )}
                 <span className={`text-[13px] font-semibold ${
-                    gap.onTrack ? 'text-hrsd-green-dark' : 'text-[#92400E]'
+                    gap.onTrack ? 'text-hrsd-green-dark' : 'text-[#0F3144]'
                 }`}>
                     {gap.onTrack ? 'في المسار الصحيح' : `فجوة ${formatValue(gap.gap, spec.unit)} عن المستهدَف`}
                 </span>
@@ -218,7 +218,7 @@ const TrajectoryCard: React.FC<{
 const DataQualityBadge: React.FC<{ quality: Trajectory['dataQuality'] }> = ({ quality }) => {
     const tones = {
         real:    { bg: 'bg-hrsd-green/15', text: 'text-hrsd-green-dark', label: 'حقيقيّة' },
-        partial: { bg: 'bg-[#FCB614]/15',     text: 'text-[#92400E]',       label: 'جزئيّة' },
+        partial: { bg: 'bg-[#FCB614]/15',     text: 'text-[#0F3144]',       label: 'جزئيّة' },
         modeled: { bg: 'bg-slate-100',     text: 'text-hrsd-cool-gray',       label: 'تقديريّة' },
     };
     const t = tones[quality];

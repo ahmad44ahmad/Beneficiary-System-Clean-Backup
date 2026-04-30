@@ -124,11 +124,11 @@ export const EmergencyDashboard: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <button className="px-6 py-3 bg-[#B91C1C] hover:bg-[#B91C1C] rounded-xl font-bold flex items-center gap-2 animate-pulse">
+                        <button className="px-6 py-3 bg-[#DC2626] hover:bg-[#DC2626] rounded-xl font-bold flex items-center gap-2 animate-pulse">
                             <Phone className="w-5 h-5" />
                             اتصال طوارئ
                         </button>
-                        <button className="px-6 py-3 bg-[#1E9658] hover:bg-[#1E9658] rounded-xl font-bold flex items-center gap-2">
+                        <button className="px-6 py-3 bg-[#2BB574] hover:bg-[#2BB574] rounded-xl font-bold flex items-center gap-2">
                             <CheckCircle className="w-5 h-5" />
                             إنهاء الطوارئ
                         </button>

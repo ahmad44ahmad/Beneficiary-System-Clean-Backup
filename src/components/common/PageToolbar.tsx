@@ -140,7 +140,7 @@ export const PageToolbar: React.FC<PageToolbarProps> = ({
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || data.length === 0}
-                        className="px-3 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50 transition-colors"
+                        className="px-3 py-2 bg-[#2BB574]/10 text-[#2BB574] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 text-sm disabled:opacity-50 transition-colors"
                         aria-label="تصدير إلى Excel"
                     >
                         {isExporting ? (

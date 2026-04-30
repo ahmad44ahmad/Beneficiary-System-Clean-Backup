@@ -37,7 +37,7 @@ export const OutgoingMailForm: React.FC<OutgoingMailFormProps> = ({ onSave, onCa
             <div className="bg-white rounded-lg p-6 w-full max-w-2xl animate-in zoom-in-95 duration-200">
                 <div className="flex justify-between items-center mb-6 border-b pb-4">
                     <h2 className="text-xl font-bold flex items-center gap-2">
-                        <Send className="w-6 h-6 text-[#1E9658] transform -rotate-45" />
+                        <Send className="w-6 h-6 text-[#2BB574] transform -rotate-45" />
                         تسجيل صادر جديد
                     </h2>
                     <button onClick={onCancel} className="text-gray-500 hover:text-[#DC2626]">
@@ -165,7 +165,7 @@ export const OutgoingMailForm: React.FC<OutgoingMailFormProps> = ({ onSave, onCa
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-[#1E9658] text-white rounded-md hover:bg-[#1E9658] flex items-center gap-2"
+                            className="px-4 py-2 bg-[#2BB574] text-white rounded-md hover:bg-[#2BB574] flex items-center gap-2"
                         >
                             <Save className="w-4 h-4" />
                             حفظ

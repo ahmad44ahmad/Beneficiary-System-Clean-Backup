@@ -211,8 +211,8 @@ export const DailyIPCInspection: React.FC = () => {
 
     // Score color
     const getScoreColor = () => {
-        if (complianceScore >= 85) return 'text-[#1E9658] border-[#2BB574]';
-        if (complianceScore >= 60) return 'text-[#D49A0A] border-[#FCB614]';
+        if (complianceScore >= 85) return 'text-[#2BB574] border-[#2BB574]';
+        if (complianceScore >= 60) return 'text-[#FCB614] border-[#FCB614]';
         return 'text-[#DC2626] border-[#DC2626]';
     };
 
@@ -220,7 +220,7 @@ export const DailyIPCInspection: React.FC = () => {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-50">
                 <div className="text-center">
-                    <Loader2 className="w-8 h-8 animate-spin text-[#1E9658] mx-auto mb-4" />
+                    <Loader2 className="w-8 h-8 animate-spin text-[#2BB574] mx-auto mb-4" />
                     <p className="text-gray-600">جاري تحميل نموذج التفتيش...</p>
                 </div>
             </div>
@@ -230,7 +230,7 @@ export const DailyIPCInspection: React.FC = () => {
     return (
         <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#1E9658] via-[#1E9658] to-[#0F3144] rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#2BB574] via-[#2BB574] to-[#0F3144] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button
@@ -260,7 +260,7 @@ export const DailyIPCInspection: React.FC = () => {
                     type="button"
                     onClick={() => { setShowHistory(!showHistory); if (!showHistory && inspectionHistory.length === 0) loadHistory(); }}
                     className={`px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 transition-all ${
-                        showHistory ? 'bg-[#1E9658] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-[#2BB574]/10'
+                        showHistory ? 'bg-[#2BB574] text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-[#2BB574]/10'
                     }`}
                 >
                     <History className="w-4 h-4" />
@@ -272,12 +272,12 @@ export const DailyIPCInspection: React.FC = () => {
             {showHistory && (
                 <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm animate-in fade-in duration-300">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-[#1E9658]" />
+                        <Calendar className="w-5 h-5 text-[#2BB574]" />
                         سجل التفتيشات السابقة
                     </h3>
                     {loadingHistory ? (
                         <div className="text-center py-8">
-                            <Loader2 className="w-6 h-6 animate-spin text-[#1E9658] mx-auto" />
+                            <Loader2 className="w-6 h-6 animate-spin text-[#2BB574] mx-auto" />
                         </div>
                     ) : (
                         <div className="divide-y divide-gray-100">
@@ -285,9 +285,9 @@ export const DailyIPCInspection: React.FC = () => {
                                 <div key={record.id} className="flex items-center justify-between py-3 hover:bg-gray-50 px-2 rounded-lg transition-colors">
                                     <div className="flex items-center gap-3">
                                         <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
-                                            record.compliance_score >= 85 ? 'bg-[#2BB574]/15 text-[#1E9658]' :
-                                            record.compliance_score >= 60 ? 'bg-[#FCB614]/10 text-[#D49A0A]' :
-                                            'bg-[#DC2626]/15 text-[#B91C1C]'
+                                            record.compliance_score >= 85 ? 'bg-[#2BB574]/15 text-[#2BB574]' :
+                                            record.compliance_score >= 60 ? 'bg-[#FCB614]/10 text-[#FCB614]' :
+                                            'bg-[#DC2626]/15 text-[#DC2626]'
                                         }`}>
                                             {record.compliance_score}%
                                         </div>
@@ -356,7 +356,7 @@ export const DailyIPCInspection: React.FC = () => {
                                     key={shift}
                                     onClick={() => setSelectedShift(shift)}
                                     className={`flex-1 py-3 px-2 rounded-xl font-medium transition-all text-sm ${selectedShift === shift
-                                            ? 'bg-[#1E9658] text-white shadow-md'
+                                            ? 'bg-[#2BB574] text-white shadow-md'
                                             : 'bg-gray-100 text-gray-600 hover:bg-[#2BB574]/10'
                                         }`}
                                 >
@@ -374,7 +374,7 @@ export const DailyIPCInspection: React.FC = () => {
                     <div key={group.category} className="bg-white rounded-2xl shadow-sm overflow-hidden">
                         {/* Category Header */}
                         <div className="bg-[#2BB574]/10 px-5 py-3 border-b border-[#2BB574]/10">
-                            <h3 className="font-bold text-[#1E9658] flex items-center gap-2">
+                            <h3 className="font-bold text-[#2BB574] flex items-center gap-2">
                                 <span className="text-xl">{group.icon}</span>
                                 {group.label}
                             </h3>
@@ -395,7 +395,7 @@ export const DailyIPCInspection: React.FC = () => {
                                             onClick={() => handleToggle(item.id, true)}
                                             className={`p-2.5 rounded-full transition-all duration-200 ${item.isCompliant === true
                                                     ? 'bg-[#2BB574] text-white ring-2 ring-offset-2 ring-[#2BB574] scale-110'
-                                                    : 'bg-gray-100 text-gray-400 hover:bg-[#2BB574]/15 hover:text-[#1E9658]'
+                                                    : 'bg-gray-100 text-gray-400 hover:bg-[#2BB574]/15 hover:text-[#2BB574]'
                                                 }`}
                                             title="ممتثل"
                                         >
@@ -425,7 +425,7 @@ export const DailyIPCInspection: React.FC = () => {
             {complianceScore < 100 && (
                 <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                     <label className="block text-gray-700 font-semibold mb-2 flex items-center gap-2">
-                        <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
+                        <AlertTriangle className="w-5 h-5 text-[#FCB614]" />
                         تفاصيل المخالفات
                     </label>
                     <textarea
@@ -458,7 +458,7 @@ export const DailyIPCInspection: React.FC = () => {
                         <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2 text-[#1E9658] hover:text-[#1E9658] transition-colors font-medium"
+                            className="flex items-center gap-2 text-[#2BB574] hover:text-[#2BB574] transition-colors font-medium"
                         >
                             <Camera size={20} />
                             <span>إرفاق صور توثيقية</span>
@@ -506,7 +506,7 @@ export const DailyIPCInspection: React.FC = () => {
                 <button
                     onClick={handleSubmit}
                     disabled={submitting || !selectedLocation || !inspectorName.trim()}
-                    className="w-full bg-[#1E9658] hover:bg-[#1E9658] disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transform active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+                    className="w-full bg-[#2BB574] hover:bg-[#2BB574] disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transform active:scale-[0.98] transition-all flex items-center justify-center gap-3"
                 >
                     {submitting ? (
                         <>

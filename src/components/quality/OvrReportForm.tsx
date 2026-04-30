@@ -31,9 +31,9 @@ export const OvrReportForm: React.FC = () => {
     ];
 
     const severities = [
-        { id: 'near_miss', label: 'وشيك الوقوع (Near Miss)', color: 'bg-[#FCB614]/10 text-[#D49A0A]' },
-        { id: 'minor', label: 'بسيط', color: 'bg-[#2BB574]/15 text-[#14532D]' },
-        { id: 'moderate', label: 'متوسط', color: 'bg-[#F7941D]/15 text-[#92400E]' },
+        { id: 'near_miss', label: 'وشيك الوقوع (Near Miss)', color: 'bg-[#FCB614]/10 text-[#FCB614]' },
+        { id: 'minor', label: 'بسيط', color: 'bg-[#2BB574]/15 text-[#0F3144]' },
+        { id: 'moderate', label: 'متوسط', color: 'bg-[#F7941D]/15 text-[#0F3144]' },
         { id: 'major', label: 'جسمي', color: 'bg-[#DC2626]/15 text-[#7F1D1D]' },
         { id: 'sentinel', label: 'حدث جسيم (Sentinel)', color: 'bg-[#7F1D1D] text-white' }
     ];
@@ -72,7 +72,7 @@ export const OvrReportForm: React.FC = () => {
                 {[1, 2, 3].map((s) => (
                     <div key={s} className={`flex flex-col items-center gap-2 ${step >= s ? 'opacity-100' : 'opacity-40'}`}>
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm
-                            ${step === s ? 'bg-[#B91C1C] text-white ring-4 ring-[#DC2626]/10' :
+                            ${step === s ? 'bg-[#DC2626] text-white ring-4 ring-[#DC2626]/10' :
                                 step > s ? 'bg-[#2BB574] text-white' : 'bg-gray-200 text-gray-500'}`}>
                             {step > s ? <CheckCircle2 className="w-5 h-5" /> : s}
                         </div>
@@ -109,7 +109,7 @@ export const OvrReportForm: React.FC = () => {
                                     onChange={(e) => setFormData({ ...formData, isAnonymous: e.target.checked })}
                                     className="sr-only peer"
                                 />
-                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#269798] rounded-full peer peer-checked:after:translate-x-[-100%] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1B7778]"></div>
+                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#269798] rounded-full peer peer-checked:after:translate-x-[-100%] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#269798]"></div>
                             </label>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ export const OvrReportForm: React.FC = () => {
                                         key={cat.id}
                                         onClick={() => setFormData({ ...formData, category: cat.id as OvrReport['category'] })}
                                         className={`p-3 rounded-xl border text-center transition-all ${formData.category === cat.id
-                                            ? 'border-[#DC2626] bg-[#DC2626]/10 text-[#B91C1C] ring-2 ring-[#DC2626]/20'
+                                            ? 'border-[#DC2626] bg-[#DC2626]/10 text-[#DC2626] ring-2 ring-[#DC2626]/20'
                                             : 'border-gray-200 hover:border-[#DC2626]/30 hover:bg-gray-50'
                                             }`}
                                     >
@@ -149,7 +149,7 @@ export const OvrReportForm: React.FC = () => {
                                             }`}
                                     >
                                         <span>{sev.label}</span>
-                                        {formData.severity === sev.id && <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />}
+                                        {formData.severity === sev.id && <CheckCircle2 className="w-5 h-5 text-[#2BB574]" />}
                                     </button>
                                 ))}
                             </div>
@@ -161,7 +161,7 @@ export const OvrReportForm: React.FC = () => {
                     <div className="text-center space-y-6">
                         <div className="bg-[#269798]/10 p-6 rounded-2xl border border-[#269798]/10">
                             <h3 className="font-bold text-lg text-[#0F3144] mb-4">ملخص البلاغ</h3>
-                            <div className="space-y-2 text-sm text-[#1B7778] text-right">
+                            <div className="space-y-2 text-sm text-[#269798] text-right">
                                 <p><span className="font-bold ms-2">التصنيف:</span> {categories.find(c => c.id === formData.category)?.label}</p>
                                 <p><span className="font-bold ms-2">الضرر:</span> {severities.find(s => s.id === formData.severity)?.label}</p>
                                 <p><span className="font-bold ms-2">الخصوصية:</span> {formData.isAnonymous ? 'مجهول الهوية' : 'معرف بالاسم'}</p>
@@ -171,7 +171,7 @@ export const OvrReportForm: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-start gap-3 p-4 bg-[#FCB614]/10 rounded-xl text-[#D49A0A] text-sm text-right">
+                        <div className="flex items-start gap-3 p-4 bg-[#FCB614]/10 rounded-xl text-[#FCB614] text-sm text-right">
                             <Shield className="w-5 h-5 shrink-0 mt-0.5" />
                             <p>
                                 يضمن النظام أن هذا البلاغ سيعامل بسرية تامة ويستخدم لغرض التحسين والتطوير، وليس للعقاب.
@@ -183,7 +183,7 @@ export const OvrReportForm: React.FC = () => {
                 {step === 4 && (
                     <div className="text-center py-12">
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-[#2BB574]/15 rounded-full mb-6 animate-in zoom-in duration-500">
-                            <CheckCircle2 className="w-10 h-10 text-[#1E9658]" />
+                            <CheckCircle2 className="w-10 h-10 text-[#2BB574]" />
                         </div>
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">تم استلام (OVR) بنجاح</h2>
                         <p className="text-gray-500 mb-8">شكراً لمساهمتك في تحسين سلامة المستفيدين والجودة.</p>
@@ -220,7 +220,7 @@ export const OvrReportForm: React.FC = () => {
                                     setStep(step + 1);
                                 }}
                                 disabled={step === 1 && !formData.description}
-                                className="bg-[#B91C1C] text-white px-6 py-2 rounded-lg hover:bg-[#B91C1C] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="bg-[#DC2626] text-white px-6 py-2 rounded-lg hover:bg-[#DC2626] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 التالي
                                 <ArrowLeft className="w-4 h-4" />
@@ -229,7 +229,7 @@ export const OvrReportForm: React.FC = () => {
                             <button
                                 onClick={handleSubmit}
                                 disabled={isSubmitting}
-                                className="bg-[#1E9658] text-white px-8 py-2 rounded-lg hover:bg-[#1E9658] transition-colors flex items-center gap-2 shadow-lg shadow-green-200"
+                                className="bg-[#2BB574] text-white px-8 py-2 rounded-lg hover:bg-[#2BB574] transition-colors flex items-center gap-2 shadow-lg shadow-green-200"
                             >
                                 {isSubmitting ? 'جاري الإرسال...' : 'إعتماد وإرسال'}
                                 <Send className="w-4 h-4" />

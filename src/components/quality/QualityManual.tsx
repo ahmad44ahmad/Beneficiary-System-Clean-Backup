@@ -41,7 +41,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Introduction',
     icon: BookOpen,
     color: 'text-[#269798]',
-    gradient: 'from-[#269798] to-[#1E9658]',
+    gradient: 'from-[#269798] to-[#2BB574]',
     status: 'complete',
     lastUpdated: '01 ديسمبر 2025',
     subsections: [
@@ -75,7 +75,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Context of the Organization',
     icon: Building2,
     color: 'text-[#269798]',
-    gradient: 'from-[#269798] to-[#1B7778]',
+    gradient: 'from-[#269798] to-[#269798]',
     status: 'complete',
     lastUpdated: '15 ديسمبر 2025',
     subsections: [
@@ -134,7 +134,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Leadership',
     icon: Award,
     color: 'text-[#FCB614]',
-    gradient: 'from-[#FCB614] to-[#D67A0A]',
+    gradient: 'from-[#FCB614] to-[#F7941D]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -181,7 +181,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Planning',
     icon: Target,
     color: 'text-[#FCB614]',
-    gradient: 'from-[#FCB614] to-[#D49A0A]',
+    gradient: 'from-[#FCB614] to-[#FCB614]',
     status: 'complete',
     lastUpdated: '25 ديسمبر 2025',
     subsections: [
@@ -230,7 +230,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Support',
     icon: Settings,
     color: 'text-[#DC2626]',
-    gradient: 'from-[#DC2626] to-[#B91C1C]',
+    gradient: 'from-[#DC2626] to-[#DC2626]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -299,7 +299,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Operation',
     icon: Zap,
     color: 'text-[#2BB574]',
-    gradient: 'from-[#2BB574] to-[#1E9658]',
+    gradient: 'from-[#2BB574] to-[#2BB574]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -397,7 +397,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Performance Evaluation',
     icon: BarChart3,
     color: 'text-[#269798]',
-    gradient: 'from-[#269798] to-[#1B7778]',
+    gradient: 'from-[#269798] to-[#269798]',
     status: 'complete',
     lastUpdated: '05 يناير 2026',
     subsections: [
@@ -446,7 +446,7 @@ const MANUAL_SECTIONS: ManualSection[] = [
     titleEn: 'Improvement',
     icon: TrendingUp,
     color: 'text-[#DC2626]',
-    gradient: 'from-[#DC2626] to-[#B91C1C]',
+    gradient: 'from-[#DC2626] to-[#DC2626]',
     status: 'complete',
     lastUpdated: '20 فبراير 2026',
     subsections: [
@@ -682,7 +682,7 @@ export default function QualityManualPro() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-white to-white" dir="rtl">
       {/* الهيدر */}
-      <header className="bg-gradient-to-r from-[#1B7778] to-[#1E9658] px-6 py-8">
+      <header className="bg-gradient-to-r from-[#269798] to-[#2BB574] px-6 py-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">

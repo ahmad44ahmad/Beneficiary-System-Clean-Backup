@@ -114,11 +114,11 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
         <div className="flex items-center justify-center gap-2 mb-6">
             {[1, 2, 3].map(s => (
                 <React.Fragment key={s}>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${step >= s ? 'bg-[#1E9658] text-white' : 'bg-gray-200 text-gray-500'
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${step >= s ? 'bg-[#2BB574] text-white' : 'bg-gray-200 text-gray-500'
                         }`}>
                         {step > s ? <CheckCircle className="w-5 h-5" /> : s}
                     </div>
-                    {s < 3 && <ArrowRight className={`w-5 h-5 ${step > s ? 'text-[#1E9658]' : 'text-gray-300'}`} />}
+                    {s < 3 && <ArrowRight className={`w-5 h-5 ${step > s ? 'text-[#2BB574]' : 'text-gray-300'}`} />}
                 </React.Fragment>
             ))}
         </div>
@@ -127,7 +127,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
     return (
         <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#1E9658] via-[#1B7778] to-[#1B7778] rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#2BB574] via-[#269798] to-[#269798] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center gap-3">
                     <button onClick={() => step > 1 ? setStep(step - 1) : navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
@@ -146,7 +146,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
             {step === 1 && (
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Sparkles className="w-5 h-5 text-[#1E9658]" />
+                        <Sparkles className="w-5 h-5 text-[#2BB574]" />
                         اختر المجال التأهيلي
                     </h2>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -204,7 +204,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
 
                         <button
                             onClick={() => setStep(3)}
-                            className="w-full p-4 rounded-xl border-2 border-dashed border-gray-300 text-gray-500 hover:border-[#2BB574] hover:text-[#1E9658] transition-all"
+                            className="w-full p-4 rounded-xl border-2 border-dashed border-gray-300 text-gray-500 hover:border-[#2BB574] hover:text-[#2BB574] transition-all"
                         >
                             <span className="text-xl">+</span> إنشاء هدف مخصص
                         </button>
@@ -253,7 +253,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                                     key={m.value}
                                     onClick={() => setMeasurementType(m.value)}
                                     className={`p-3 rounded-xl border text-sm transition-all ${measurementType === m.value
-                                            ? 'border-[#2BB574] bg-[#2BB574]/10 text-[#1E9658]'
+                                            ? 'border-[#2BB574] bg-[#2BB574]/10 text-[#2BB574]'
                                             : 'border-gray-200 hover:border-[#2BB574]'
                                         }`}
                                 >
@@ -373,7 +373,7 @@ export const SmartGoalBuilder: React.FC<{ beneficiaryId?: string }> = ({ benefic
                     <button
                         onClick={handleSubmit}
                         disabled={submitting}
-                        className="w-full bg-[#1E9658] hover:bg-[#1E9658] disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3"
+                        className="w-full bg-[#2BB574] hover:bg-[#2BB574] disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3"
                     >
                         {submitting ? (
                             <><Loader2 className="w-5 h-5 animate-spin" /> جاري الحفظ...</>

@@ -54,7 +54,7 @@ export const SpeechTherapyDashboard: React.FC<SpeechTherapyDashboardProps> = ({ 
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#F7941D]/15 text-[#D67A0A]">
+                        <div className="p-3 rounded-full bg-[#F7941D]/15 text-[#F7941D]">
                             <AlertTriangle size={24} />
                         </div>
                         <div className="me-4">

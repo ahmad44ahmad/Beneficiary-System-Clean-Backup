@@ -53,7 +53,7 @@ export const PolicyHorizon: React.FC = () => {
 
 const ACCENT_STYLES: Record<'rose' | 'amber' | 'teal', { bg: string; text: string; border: string }> = {
     rose:  { bg: 'bg-[#DC2626]/10',   text: 'text-[#7F1D1D]',  border: 'border-[#DC2626]' },
-    amber: { bg: 'bg-[#FCB614]/10',  text: 'text-[#92400E]', border: 'border-[#FCB614]' },
+    amber: { bg: 'bg-[#FCB614]/10',  text: 'text-[#0F3144]', border: 'border-[#FCB614]' },
     teal:  { bg: 'bg-hrsd-teal/5', text: 'text-hrsd-teal', border: 'border-hrsd-teal/40' },
 };
 
@@ -176,7 +176,7 @@ const SignalCard: React.FC<{ signal: PolicySignal }> = ({ signal }) => {
                         </div>
 
                         {/* المخاطرة لو أُهمِلت */}
-                        <div className="flex items-start gap-2 text-[11.5px] text-[#B91C1C] bg-[#DC2626]/10 rounded-lg p-2.5">
+                        <div className="flex items-start gap-2 text-[11.5px] text-[#DC2626] bg-[#DC2626]/10 rounded-lg p-2.5">
                             <AlertCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                             <span><strong>خطرُ التجاهل:</strong> {signal.riskIfIgnored}</span>
                         </div>

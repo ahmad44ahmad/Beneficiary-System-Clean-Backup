@@ -141,8 +141,8 @@ export const ExecutiveDashboard: React.FC = () => {
             {/* Error Banner */}
             {fetchError && (
                 <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-xl p-4 flex items-center gap-3">
-                    <AlertTriangle className="w-5 h-5 text-[#D49A0A] shrink-0" />
-                    <p className="text-[#92400E] text-sm">{fetchError}</p>
+                    <AlertTriangle className="w-5 h-5 text-[#FCB614] shrink-0" />
+                    <p className="text-[#0F3144] text-sm">{fetchError}</p>
                 </div>
             )}
 
@@ -152,7 +152,7 @@ export const ExecutiveDashboard: React.FC = () => {
                     <h1 className="text-2xl font-bold text-gray-800">لوحة الحقيقة التنفيذية</h1>
                     <p className="text-gray-500">نظرة شمولية على مؤشرات الأداء والسلامة (بيانات حية)</p>
                 </div>
-                <div className="bg-[#2BB574]/10 text-[#1E9658] px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium shadow-sm">
+                <div className="bg-[#2BB574]/10 text-[#2BB574] px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium shadow-sm">
                     <Clock className="w-5 h-5" />
                     <span>آخر تحديث: {new Date().toLocaleTimeString('ar-SA')}</span>
                 </div>
@@ -208,7 +208,7 @@ export const ExecutiveDashboard: React.FC = () => {
                     <div className="absolute start-0 top-0 w-24 h-24 bg-[#F7941D]/10 rounded-br-full -ms-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 bg-[#F7941D]/15 text-[#D67A0A] rounded-lg">
+                            <div className="p-3 bg-[#F7941D]/15 text-[#F7941D] rounded-lg">
                                 <Activity className="w-6 h-6" />
                             </div>
                             <span className="text-sm font-bold text-gray-500">آخر 7 أيام</span>
@@ -225,10 +225,10 @@ export const ExecutiveDashboard: React.FC = () => {
                     <div className="absolute start-0 top-0 w-24 h-24 bg-[#2BB574]/10 rounded-br-full -ms-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 bg-[#2BB574]/15 text-[#1E9658] rounded-lg">
+                            <div className="p-3 bg-[#2BB574]/15 text-[#2BB574] rounded-lg">
                                 <ClipboardCheck className="w-6 h-6" />
                             </div>
-                            <span className="text-sm font-bold text-[#1E9658]">+4%</span>
+                            <span className="text-sm font-bold text-[#2BB574]">+4%</span>
                         </div>
                         <h3 className="text-3xl font-bold text-gray-800 mb-1">{kpis.staffCompliance}%</h3>
                         <p className="text-gray-500 text-sm">نسبة إنجاز التقارير اليومية</p>
@@ -243,7 +243,7 @@ export const ExecutiveDashboard: React.FC = () => {
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
                     <h3 className="font-bold text-gray-800 mb-6 flex justify-between">
                         <span>مؤشر التحول الرقمي (إلغاء الورق)</span>
-                        <span className="text-sm text-[#1E9658] bg-[#2BB574]/10 px-3 py-1 rounded-full">ممتاز</span>
+                        <span className="text-sm text-[#2BB574] bg-[#2BB574]/10 px-3 py-1 rounded-full">ممتاز</span>
                     </h3>
                     <div className="h-64 flex items-end justify-between gap-4 px-4">
                         {chartData.map((val, i) => (
@@ -263,7 +263,7 @@ export const ExecutiveDashboard: React.FC = () => {
                 {/* Live Alerts Stream */}
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
+                        <AlertTriangle className="w-5 h-5 text-[#FCB614]" />
                         تنبيهات مباشرة (High Risk)
                     </h3>
 

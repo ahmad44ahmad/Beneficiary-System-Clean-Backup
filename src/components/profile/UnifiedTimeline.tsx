@@ -64,7 +64,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
             title: `Medical Exam: ${exam.diagnosis}`,
             description: `Dr. ${exam.doctorName} - ${exam.recommendations}`,
             icon: <Stethoscope className="w-4 h-4" />,
-            colorClass: 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]/20'
+            colorClass: 'bg-[#2BB574]/15 text-[#2BB574] border-[#2BB574]/20'
         });
     });
 
@@ -78,7 +78,7 @@ export const UnifiedTimeline: React.FC<UnifiedTimelineProps> = ({ profile }) => 
             title: 'Rehab Plan Started',
             description: `${(plan.goals as unknown[])?.length ?? 0} Goals Set`,
             icon: <ClipboardCheck className="w-4 h-4" />,
-            colorClass: 'bg-[#FCB614]/15 text-[#D49A0A] border-[#FCB614]/20'
+            colorClass: 'bg-[#FCB614]/15 text-[#FCB614] border-[#FCB614]/20'
         });
     }
 

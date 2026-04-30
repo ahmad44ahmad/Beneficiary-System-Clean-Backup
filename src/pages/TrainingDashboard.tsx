@@ -21,7 +21,7 @@ export const TrainingDashboard = () => {
                     <h1 className="text-2xl font-bold text-gray-800">التأهيل المجتمعي والتدريب</h1>
                     <p className="text-gray-500">إدارة طلبات التحويل ومتابعة البرامج التدريبية</p>
                 </div>
-                <Button className="bg-[#1E9658]" onClick={() => setIsCreating(true)}>
+                <Button className="bg-[#2BB574]" onClick={() => setIsCreating(true)}>
                     + طلب تحويل جديد (نموذج 4)
                 </Button>
             </div>
@@ -71,10 +71,10 @@ export const TrainingDashboard = () => {
                                     <td className="p-3">{referral.referralDate}</td>
                                     <td className="p-3">
                                         <div className="flex gap-1 flex-wrap">
-                                            {types.map(t => <span key={t} className="px-2 py-0.5 bg-[#269798]/15 text-[#1B7778] rounded-full text-xs">{t}</span>)}
+                                            {types.map(t => <span key={t} className="px-2 py-0.5 bg-[#269798]/15 text-[#269798] rounded-full text-xs">{t}</span>)}
                                         </div>
                                     </td>
-                                    <td className="p-3"><span className="text-[#1E9658] bg-[#2BB574]/10 px-2 py-1 rounded">معتمد</span></td>
+                                    <td className="p-3"><span className="text-[#2BB574] bg-[#2BB574]/10 px-2 py-1 rounded">معتمد</span></td>
                                     <td className="p-3">
                                         <Button variant="ghost" size="sm">عرض</Button>
                                     </td>

@@ -33,7 +33,7 @@ export const QualityChecklist: React.FC<QualityChecklistProps> = ({ preview }) =
                     >
                         <span className={`text-sm ${item.checked ? 'text-gray-700' : 'text-gray-500'}`}>{item.label}</span>
                         {item.checked ? (
-                            <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />
+                            <CheckCircle2 className="w-5 h-5 text-[#2BB574]" />
                         ) : (
                             <Circle className="w-5 h-5 text-gray-300" />
                         )}

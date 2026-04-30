@@ -20,9 +20,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         // - outline:   teal border on white
         // - ghost:     neutral, hover gray
         const variants = {
-            primary: 'bg-[#269798] text-white hover:bg-[#1B7778] shadow-sm',
-            secondary: 'bg-[#FCB614] text-[#0F3144] hover:bg-[#D49A0A] shadow-sm',
-            danger: 'bg-[#DC2626] text-white hover:bg-[#B91C1C] shadow-sm',
+            primary: 'bg-[#269798] text-white hover:bg-[#269798] shadow-sm',
+            secondary: 'bg-[#FCB614] text-[#0F3144] hover:bg-[#FCB614] shadow-sm',
+            danger: 'bg-[#DC2626] text-white hover:bg-[#DC2626] shadow-sm',
             outline: 'border border-[#269798] text-[#269798] hover:bg-[#269798]/10 dark:hover:bg-slate-800',
             ghost: 'bg-transparent hover:bg-gray-100 text-hrsd-cool-gray hover:text-[#0F3144] dark:text-slate-300 dark:hover:bg-slate-700',
         };

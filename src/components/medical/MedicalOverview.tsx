@@ -31,7 +31,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                 <div className="md:col-span-2">
                     <div className="bg-gradient-to-r from-[#269798]/10 to-[#0F3144]/10 rounded-xl p-6 h-full flex flex-col justify-center border border-[#269798]/10">
                         <h3 className="text-[#0F3144] font-bold text-lg mb-2">الذكاء الاصطناعي الطبي</h3>
-                        <p className="text-[#1B7778] text-sm">
+                        <p className="text-[#269798] text-sm">
                             يتم تحليل المؤشرات الحيوية لحظياً عبر خوارزميات الذكاء الاصطناعي للكشف المبكر عن أي تدهور في الحالة الصحية.
                             النظام متصل الآن بأجهزة (IoMT) للمراقبة المستمرة.
                         </p>
@@ -46,7 +46,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     <p className="text-gray-500 mt-1">نظرة عامة على الحالة الصحية للمستفيدين</p>
                 </div>
                 <div className="flex gap-3">
-                    <Link to="/beneficiaries" className="px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] transition-colors flex items-center gap-2">
+                    <Link to="/beneficiaries" className="px-4 py-2 bg-[#269798] text-white rounded-lg hover:bg-[#269798] transition-colors flex items-center gap-2">
                         <Users className="w-4 h-4" />
                         عرض المستفيدين
                     </Link>
@@ -55,7 +55,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="bg-gradient-to-br from-[#269798] to-[#1B7778] text-white">
+                <Card className="bg-gradient-to-br from-[#269798] to-[#269798] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -67,7 +67,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-[#F7941D] to-[#D67A0A] text-white">
+                <Card className="bg-gradient-to-br from-[#F7941D] to-[#F7941D] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -79,7 +79,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-[#2BB574] to-[#1E9658] text-white">
+                <Card className="bg-gradient-to-br from-[#2BB574] to-[#2BB574] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -91,7 +91,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     </div>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-[#DC2626] to-[#B91C1C] text-white">
+                <Card className="bg-gradient-to-br from-[#DC2626] to-[#DC2626] text-white">
                     <div className="p-6">
                         <div className="flex items-center justify-between">
                             <div>
@@ -109,7 +109,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                 <Card title="الخدمات الطبية">
                     <div className="p-4 space-y-3">
                         <Link to="/beneficiaries" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-[#269798]/10 text-[#1B7778] group-hover:bg-[#269798]/20">
+                            <div className="p-2 rounded-lg bg-[#269798]/10 text-[#269798] group-hover:bg-[#269798]/20">
                                 <FileText className="w-5 h-5" />
                             </div>
                             <div>
@@ -118,7 +118,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                             </div>
                         </Link>
                         <Link to="/beneficiaries" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-[#F7941D]/15 text-[#D67A0A] group-hover:bg-[#F7941D]/20">
+                            <div className="p-2 rounded-lg bg-[#F7941D]/15 text-[#F7941D] group-hover:bg-[#F7941D]/20">
                                 <Activity className="w-5 h-5" />
                             </div>
                             <div>
@@ -127,7 +127,7 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                             </div>
                         </Link>
                         <Link to="/beneficiaries" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                            <div className="p-2 rounded-lg bg-[#2BB574]/15 text-[#1E9658] group-hover:bg-[#2BB574]/20">
+                            <div className="p-2 rounded-lg bg-[#2BB574]/15 text-[#2BB574] group-hover:bg-[#2BB574]/20">
                                 <TrendingUp className="w-5 h-5" />
                             </div>
                             <div>
@@ -205,33 +205,33 @@ export const MedicalOverview: React.FC<MedicalOverviewProps> = ({ vaccinations =
                     <div className="space-y-3">
                         <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                             <div className="w-10 h-10 rounded-full bg-[#269798]/10 flex items-center justify-center">
-                                <HeartPulse className="w-5 h-5 text-[#1B7778]" />
+                                <HeartPulse className="w-5 h-5 text-[#269798]" />
                             </div>
                             <div className="flex-1">
                                 <p className="font-medium text-gray-900">تقييم تمريضي جديد</p>
                                 <p className="text-sm text-gray-500">أحمد محمد السيد - قبل 2 ساعة</p>
                             </div>
-                            <span className="text-xs bg-[#2BB574]/15 text-[#1E9658] px-2 py-1 rounded-full">مكتمل</span>
+                            <span className="text-xs bg-[#2BB574]/15 text-[#2BB574] px-2 py-1 rounded-full">مكتمل</span>
                         </div>
                         <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                             <div className="w-10 h-10 rounded-full bg-[#F7941D]/15 flex items-center justify-center">
-                                <Syringe className="w-5 h-5 text-[#D67A0A]" />
+                                <Syringe className="w-5 h-5 text-[#F7941D]" />
                             </div>
                             <div className="flex-1">
                                 <p className="font-medium text-gray-900">تطعيم موسمي</p>
                                 <p className="text-sm text-gray-500">خالد ناصر العتيبي - قبل 4 ساعات</p>
                             </div>
-                            <span className="text-xs bg-[#269798]/15 text-[#1B7778] px-2 py-1 rounded-full">قيد التنفيذ</span>
+                            <span className="text-xs bg-[#269798]/15 text-[#269798] px-2 py-1 rounded-full">قيد التنفيذ</span>
                         </div>
                         <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                             <div className="w-10 h-10 rounded-full bg-[#FCB614]/15 flex items-center justify-center">
-                                <Activity className="w-5 h-5 text-[#D49A0A]" />
+                                <Activity className="w-5 h-5 text-[#FCB614]" />
                             </div>
                             <div className="flex-1">
                                 <p className="font-medium text-gray-900">قياس علامات حيوية</p>
                                 <p className="text-sm text-gray-500">فهد راشد الدوسري - قبل 6 ساعات</p>
                             </div>
-                            <span className="text-xs bg-[#2BB574]/15 text-[#1E9658] px-2 py-1 rounded-full">مكتمل</span>
+                            <span className="text-xs bg-[#2BB574]/15 text-[#2BB574] px-2 py-1 rounded-full">مكتمل</span>
                         </div>
                     </div>
                 </div>

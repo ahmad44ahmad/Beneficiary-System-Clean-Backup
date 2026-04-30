@@ -182,34 +182,34 @@ const protocols = [
 ];
 
 const severityConfig: Record<Severity, { label: string; bg: string; text: string; border: string }> = {
-  low: { label: 'منخفض', bg: 'bg-[#269798]/10', text: 'text-[#1B7778]', border: 'border-[#269798]/30' },
-  moderate: { label: 'متوسط', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]', border: 'border-[#FCB614]/30' },
-  high: { label: 'مرتفع', bg: 'bg-[#F7941D]/10', text: 'text-[#D67A0A]', border: 'border-[#F7941D]/30' },
-  critical: { label: 'حرج', bg: 'bg-[#DC2626]/10', text: 'text-[#B91C1C]', border: 'border-[#DC2626]/30' },
+  low: { label: 'منخفض', bg: 'bg-[#269798]/10', text: 'text-[#269798]', border: 'border-[#269798]/30' },
+  moderate: { label: 'متوسط', bg: 'bg-[#FCB614]/10', text: 'text-[#FCB614]', border: 'border-[#FCB614]/30' },
+  high: { label: 'مرتفع', bg: 'bg-[#F7941D]/10', text: 'text-[#F7941D]', border: 'border-[#F7941D]/30' },
+  critical: { label: 'حرج', bg: 'bg-[#DC2626]/10', text: 'text-[#DC2626]', border: 'border-[#DC2626]/30' },
 };
 
 const containmentLabels: Record<ContainmentStatus, { label: string; color: string }> = {
   active: { label: 'نشط', color: 'text-[#DC2626]' },
-  contained: { label: 'محتوى', color: 'text-[#D49A0A]' },
-  resolved: { label: 'منتهي', color: 'text-[#1E9658]' },
+  contained: { label: 'محتوى', color: 'text-[#FCB614]' },
+  resolved: { label: 'منتهي', color: 'text-[#2BB574]' },
 };
 
 const contactTypeLabels: Record<ContactType, { label: string; bg: string; text: string }> = {
-  beneficiary: { label: 'مستفيد', bg: 'bg-[#269798]/10', text: 'text-[#1B7778]' },
-  staff: { label: 'موظف', bg: 'bg-[#269798]/10', text: 'text-[#1B7778]' },
-  visitor: { label: 'زائر', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]' },
+  beneficiary: { label: 'مستفيد', bg: 'bg-[#269798]/10', text: 'text-[#269798]' },
+  staff: { label: 'موظف', bg: 'bg-[#269798]/10', text: 'text-[#269798]' },
+  visitor: { label: 'زائر', bg: 'bg-[#FCB614]/10', text: 'text-[#FCB614]' },
 };
 
 const exposureLabels: Record<ExposureLevel, { label: string; bg: string; text: string }> = {
-  close: { label: 'مباشر', bg: 'bg-[#DC2626]/10', text: 'text-[#B91C1C]' },
-  casual: { label: 'عرضي', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]' },
+  close: { label: 'مباشر', bg: 'bg-[#DC2626]/10', text: 'text-[#DC2626]' },
+  casual: { label: 'عرضي', bg: 'bg-[#FCB614]/10', text: 'text-[#FCB614]' },
   indirect: { label: 'غير مباشر', bg: 'bg-gray-50', text: 'text-gray-700' },
 };
 
 const contactStatusConfig: Record<ContactStatus, { label: string; bg: string; text: string }> = {
-  active: { label: 'تحت المراقبة', bg: 'bg-[#FCB614]/10', text: 'text-[#D49A0A]' },
+  active: { label: 'تحت المراقبة', bg: 'bg-[#FCB614]/10', text: 'text-[#FCB614]' },
   symptomatic: { label: 'أعراض ظاهرة', bg: 'bg-[#DC2626]/10', text: 'text-[#DC2626]' },
-  cleared: { label: 'تم الإخلاء', bg: 'bg-[#2BB574]/10', text: 'text-[#1E9658]' },
+  cleared: { label: 'تم الإخلاء', bg: 'bg-[#2BB574]/10', text: 'text-[#2BB574]' },
   infected: { label: 'مصاب', bg: 'bg-[#DC2626]/15', text: 'text-[#7F1D1D]' },
 };
 
@@ -368,7 +368,7 @@ export const OutbreakManagement: React.FC = () => {
                   <p className="text-3xl font-bold text-gray-800">{mohNotified}</p>
                 </div>
                 <div className="p-3 rounded-xl bg-[#FCB614]/10">
-                  <Phone className="w-6 h-6 text-[#D49A0A]" />
+                  <Phone className="w-6 h-6 text-[#FCB614]" />
                 </div>
               </div>
             </div>
@@ -381,7 +381,7 @@ export const OutbreakManagement: React.FC = () => {
                   <p className="text-3xl font-bold text-gray-800">{containedCount}</p>
                 </div>
                 <div className="p-3 rounded-xl bg-[#2BB574]/10">
-                  <CheckCircle2 className="w-6 h-6 text-[#1E9658]" />
+                  <CheckCircle2 className="w-6 h-6 text-[#2BB574]" />
                 </div>
               </div>
             </div>
@@ -392,7 +392,7 @@ export const OutbreakManagement: React.FC = () => {
             {/* Outbreaks List */}
             <div className="lg:col-span-2 space-y-4">
               <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-[#D67A0A]" />
+                <AlertTriangle className="w-5 h-5 text-[#F7941D]" />
                 التفشيات المسجلة
               </h2>
               {outbreaks.map((outbreak) => {
@@ -445,7 +445,7 @@ export const OutbreakManagement: React.FC = () => {
                       </div>
                       <div className="flex items-center gap-1.5">
                         {outbreak.moh_notified ? (
-                          <span className="flex items-center gap-1 text-[#1E9658]">
+                          <span className="flex items-center gap-1 text-[#2BB574]">
                             <CheckCircle2 className="w-4 h-4" />
                             مبلّغ للوزارة
                           </span>

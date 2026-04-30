@@ -117,7 +117,7 @@ export const GoalProgressTracker: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-50 p-6" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#1B7778] via-[#1B7778] to-[#1B7778] rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#269798] via-[#269798] to-[#269798] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
                     <button onClick={() => navigate('/empowerment')} className="p-2 hover:bg-white/10 rounded-lg">
                         <ChevronLeft className="w-5 h-5" />
@@ -163,7 +163,7 @@ export const GoalProgressTracker: React.FC = () => {
             {/* Chart */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-[#1B7778]" />
+                    <TrendingUp className="w-5 h-5 text-[#269798]" />
                     مسار التقدم
                 </h3>
                 <ResponsiveContainer width="100%" height={200}>
@@ -188,7 +188,7 @@ export const GoalProgressTracker: React.FC = () => {
             {!showAddForm && (
                 <button
                     onClick={() => setShowAddForm(true)}
-                    className="w-full mb-6 p-4 bg-[#1B7778] text-white rounded-xl hover:bg-[#1B7778] flex items-center justify-center gap-2 shadow-md"
+                    className="w-full mb-6 p-4 bg-[#269798] text-white rounded-xl hover:bg-[#269798] flex items-center justify-center gap-2 shadow-md"
                 >
                     <Plus className="w-5 h-5" />
                     تسجيل جلسة جديدة
@@ -230,7 +230,7 @@ export const GoalProgressTracker: React.FC = () => {
                                     key={type.value}
                                     onClick={() => setSessionType(type.value)}
                                     className={`flex-1 p-3 rounded-xl flex items-center justify-center gap-2 transition-all ${sessionType === type.value
-                                            ? 'bg-[#269798]/10 text-[#1B7778] border-2 border-[#269798]'
+                                            ? 'bg-[#269798]/10 text-[#269798] border-2 border-[#269798]'
                                             : 'bg-gray-100 text-gray-600'
                                         }`}
                                 >
@@ -280,7 +280,7 @@ export const GoalProgressTracker: React.FC = () => {
                         <button
                             onClick={handleSubmitProgress}
                             disabled={submitting}
-                            className="flex-1 bg-[#1B7778] text-white py-3 rounded-xl hover:bg-[#1B7778] flex items-center justify-center gap-2"
+                            className="flex-1 bg-[#269798] text-white py-3 rounded-xl hover:bg-[#269798] flex items-center justify-center gap-2"
                         >
                             {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
                             حفظ
@@ -309,8 +309,8 @@ export const GoalProgressTracker: React.FC = () => {
                             <div className="flex justify-between items-start mb-2">
                                 <div className="flex items-center gap-2">
                                     <div className={`w-10 h-10 rounded-full flex items-center justify-center ${log.recorded_value! > (log.previous_value || 0)
-                                            ? 'bg-[#2BB574]/15 text-[#1E9658]'
-                                            : 'bg-[#FCB614]/10 text-[#D49A0A]'
+                                            ? 'bg-[#2BB574]/15 text-[#2BB574]'
+                                            : 'bg-[#FCB614]/10 text-[#FCB614]'
                                         }`}>
                                         {log.recorded_value! > (log.previous_value || 0)
                                             ? <TrendingUp className="w-5 h-5" />
@@ -339,7 +339,7 @@ export const GoalProgressTracker: React.FC = () => {
                                 <p className="text-gray-600 text-sm bg-gray-50 p-2 rounded-lg">{log.progress_note}</p>
                             )}
                             {log.beneficiary_feedback && (
-                                <p className="text-[#1B7778] text-sm mt-2 flex items-center gap-1">
+                                <p className="text-[#269798] text-sm mt-2 flex items-center gap-1">
                                     <MessageSquare className="w-4 h-4" />
                                     "{log.beneficiary_feedback}"
                                 </p>

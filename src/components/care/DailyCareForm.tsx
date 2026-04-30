@@ -118,7 +118,7 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
     return (
         <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#2BB574]/10 font-readex" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#1E9658] to-[#1B7778] p-6 text-white flex justify-between items-center">
+            <div className="bg-gradient-to-l from-[#2BB574] to-[#269798] p-6 text-white flex justify-between items-center">
                 <div>
                     <h2 className="text-xl font-bold flex items-center gap-2">
                         <Activity className="h-6 w-6" />
@@ -138,7 +138,7 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
 
                 {/* Shift Selection */}
                 <div className="md:col-span-2 bg-[#2BB574]/10 p-4 rounded-lg flex items-center gap-4">
-                    <label className="font-bold text-[#14532D]">الوردية (Shift):</label>
+                    <label className="font-bold text-[#0F3144]">الوردية (Shift):</label>
                     <div className="flex gap-4">
                         {['صباحي', 'مسائي', 'ليلي'].map(s => (
                             <label key={s} className="flex items-center gap-2 cursor-pointer">
@@ -148,9 +148,9 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
                                     value={s}
                                     checked={formData.shift === s}
                                     onChange={handleChange}
-                                    className="text-[#1E9658] focus:ring-[#2BB574]"
+                                    className="text-[#2BB574] focus:ring-[#2BB574]"
                                 />
-                                <span className="text-[#14532D]">{s}</span>
+                                <span className="text-[#0F3144]">{s}</span>
                             </label>
                         ))}
                     </div>
@@ -319,7 +319,7 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
                                 onChange={handleChange}
                                 className="w-5 h-5 text-[#DC2626] rounded focus:ring-[#DC2626]"
                             />
-                            <span className="font-medium text-[#B91C1C]">يحتاج إلى متابعة طبية أو إشراف خاص في الوردية القادمة</span>
+                            <span className="font-medium text-[#DC2626]">يحتاج إلى متابعة طبية أو إشراف خاص في الوردية القادمة</span>
                         </label>
                     </div>
                 </div>
@@ -337,7 +337,7 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
                         <button
                             type="submit"
                             disabled={saving}
-                            className="px-8 py-2 bg-gradient-to-r from-[#1E9658] to-[#1B7778] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="px-8 py-2 bg-gradient-to-r from-[#2BB574] to-[#269798] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {saving ? 'جار الحفظ...' :
                                 <>

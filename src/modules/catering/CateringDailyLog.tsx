@@ -220,7 +220,7 @@ export const CateringDailyLog: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || meals.length === 0}
-                        className="px-4 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#2BB574]/10 text-[#2BB574] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-4 h-4" />
@@ -261,7 +261,7 @@ export const CateringDailyLog: React.FC = () => {
                                 <tr key={meal.id} className="hover:bg-gray-50 transition-colors">
                                     <td className="px-6 py-4 font-medium">{meal.beneficiary_name}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded text-xs ${meal.plan_type === 'قياسي' ? 'bg-gray-100 text-gray-600' : 'bg-[#DC2626]/15 text-[#B91C1C] font-bold'
+                                        <span className={`px-2 py-1 rounded text-xs ${meal.plan_type === 'قياسي' ? 'bg-gray-100 text-gray-600' : 'bg-[#DC2626]/15 text-[#DC2626] font-bold'
                                             }`}>
                                             {meal.plan_type}
                                         </span>
@@ -282,7 +282,7 @@ export const CateringDailyLog: React.FC = () => {
                                                 <button
                                                     onClick={() => updateStatus(meal.id, 'consumed')}
                                                     title="تم الاستهلاك"
-                                                    className="p-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15"
+                                                    className="p-2 bg-[#2BB574]/10 text-[#2BB574] rounded-lg hover:bg-[#2BB574]/15"
                                                 >
                                                     <Check className="w-4 h-4" />
                                                 </button>

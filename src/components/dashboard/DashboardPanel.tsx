@@ -60,10 +60,10 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
                         <div>
                             <p className="text-sm text-gray-500">المتواجدون حالياً</p>
                             <h3 className="text-2xl font-bold text-gray-900">{activeCases - externalVisits}</h3>
-                            <span className="text-xs text-[#1E9658] font-medium">داخل المركز</span>
+                            <span className="text-xs text-[#2BB574] font-medium">داخل المركز</span>
                         </div>
                         <div className="p-3 bg-[#2BB574]/10 rounded-full">
-                            <Home className="w-6 h-6 text-[#1E9658]" />
+                            <Home className="w-6 h-6 text-[#2BB574]" />
                         </div>
                     </div>
                 </Card>

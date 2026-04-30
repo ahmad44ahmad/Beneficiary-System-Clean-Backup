@@ -180,7 +180,7 @@ export const AccountabilityAlerts: React.FC<Props> = ({ onDismiss, compact = fal
                                             {gap.is_misdirected && gap.redirected_to && (
                                                 <>
                                                     <ArrowRight className="w-3 h-3" />
-                                                    <span className="text-[#D67A0A]">أُحيل لـ: {gap.redirected_to}</span>
+                                                    <span className="text-[#F7941D]">أُحيل لـ: {gap.redirected_to}</span>
                                                 </>
                                             )}
                                         </div>

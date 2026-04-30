@@ -67,7 +67,7 @@ export const ReportsDashboard: React.FC = () => {
                 <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-t-4 border-t-green-600 group" onClick={() => setSelectedReport('sustainability')}>
                     <div className="flex items-start justify-between mb-4">
                         <div className="bg-[#2BB574]/10 p-3 rounded-full group-hover:bg-[#2BB574]/15 transition-colors">
-                            <BarChart2 className="w-8 h-8 text-[#1E9658]" />
+                            <BarChart2 className="w-8 h-8 text-[#2BB574]" />
                         </div>
                         <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">استراتيجي / SROI</span>
                     </div>
@@ -75,7 +75,7 @@ export const ReportsDashboard: React.FC = () => {
                     <p className="text-gray-500 text-sm mb-4">
                         قياس العائد الاجتماعي (SROI)، كفاءة استخدام الموارد، ومؤشرات السلامة. يدعم تقارير الأداء الاستراتيجي.
                     </p>
-                    <div className="text-[#1E9658] font-bold text-sm flex items-center">
+                    <div className="text-[#2BB574] font-bold text-sm flex items-center">
                         عرض وطباعة التقرير &larr;
                     </div>
                 </Card>

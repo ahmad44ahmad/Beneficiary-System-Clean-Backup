@@ -88,7 +88,7 @@ export const QualityDashboard = () => {
                 <div className="bg-white p-6 rounded-xl shadow-sm border-r-4 border-[#2BB574]">
                     <p className="text-gray-500 text-sm font-medium mb-1">نسبة الامتثال</p>
                     <h3 className="text-3xl font-bold text-[#0F3144]">{stats.compliantPercentage}%</h3>
-                    <div className="flex items-center gap-1 text-[#1E9658] text-xs mt-2">
+                    <div className="flex items-center gap-1 text-[#2BB574] text-xs mt-2">
                         <CheckCircle className="w-4 h-4" />
                         <span>أداء جيد جداً</span>
                     </div>
@@ -105,7 +105,7 @@ export const QualityDashboard = () => {
                     <p className="text-gray-500 text-sm font-medium mb-1">التقييم العام للمتعهد</p>
                     <div className="flex items-center gap-2">
                         <h3 className="text-3xl font-bold text-[#0F3144]">4.5/5</h3>
-                        <Award className="w-8 h-8 text-[#D49A0A]" />
+                        <Award className="w-8 h-8 text-[#FCB614]" />
                     </div>
                 </div>
             </div>

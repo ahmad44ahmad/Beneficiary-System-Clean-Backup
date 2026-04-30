@@ -198,9 +198,9 @@ export const LeaveRequestFlow: React.FC = () => {
     const getStatusBadge = (status: LeaveRequestStatus) => {
         const styles = {
             PENDING_SOCIAL: 'bg-gray-100 text-gray-800',
-            PENDING_MEDICAL: 'bg-[#269798]/15 text-[#1B7778]',
-            PENDING_DIRECTOR: 'bg-[#FCB614]/15 text-[#92400E]',
-            APPROVED: 'bg-[#2BB574]/15 text-[#14532D]',
+            PENDING_MEDICAL: 'bg-[#269798]/15 text-[#269798]',
+            PENDING_DIRECTOR: 'bg-[#FCB614]/15 text-[#0F3144]',
+            APPROVED: 'bg-[#2BB574]/15 text-[#0F3144]',
             REJECTED: 'bg-[#DC2626]/15 text-[#7F1D1D]',
             ACTIVE: 'bg-[#2BB574] text-white',
             COMPLETED: 'bg-gray-500 text-white',
@@ -322,12 +322,12 @@ export const LeaveRequestFlow: React.FC = () => {
                                     الحالة الطبية (تحقق تلقائي)
                                 </h4>
                                 {mockMedicalStatus[selectedRequest.beneficiaryId]?.infection ? (
-                                    <div className="text-[#B91C1C]">
+                                    <div className="text-[#DC2626]">
                                         <div className="flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> <strong>تحذير:</strong> يوجد اشتباه عدوى أو حالة غير مستقرة.</div>
                                         <p className="mt-1 text-sm">{mockMedicalStatus[selectedRequest.beneficiaryId]?.notes}</p>
                                     </div>
                                 ) : (
-                                    <div className="text-[#1E9658]">
+                                    <div className="text-[#2BB574]">
                                         <div className="flex items-center gap-2"><Check className="w-4 h-4" /> الحالة مستقرة. لا توجد موانع طبية ظاهرة.</div>
                                     </div>
                                 )}
@@ -361,7 +361,7 @@ export const LeaveRequestFlow: React.FC = () => {
                                         onChange={(e) => setActionNote(e.target.value)}
                                     />
                                     <div className="flex gap-3">
-                                        <Button className="flex-1 bg-[#1E9658] hover:bg-[#1E9658]" onClick={() => handleApprove(selectedRequest)}>
+                                        <Button className="flex-1 bg-[#2BB574] hover:bg-[#2BB574]" onClick={() => handleApprove(selectedRequest)}>
                                             <Check className="w-4 h-4 ms-2" />
                                             موافقة واعتماد
                                         </Button>

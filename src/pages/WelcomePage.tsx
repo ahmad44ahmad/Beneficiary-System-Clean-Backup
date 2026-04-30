@@ -46,7 +46,7 @@ const pillars = [
         title: 'التحول الرقمي',
         description: 'رقمنة شاملة لجميع العمليات التشغيلية والإدارية بالمركز',
         color: '#269798',
-        colorDark: '#1B7778',
+        colorDark: '#269798',
         tags: ['أتمتة', 'رقمنة', 'كفاءة']
     },
     {
@@ -55,7 +55,7 @@ const pillars = [
         title: 'الذكاء الاصطناعي',
         description: 'تنبؤات ذكية بالمخاطر وأنظمة إنذار مبكر مدعومة بالذكاء الاصطناعي',
         color: '#269798',
-        colorDark: '#1B7778',
+        colorDark: '#269798',
         tags: ['تعلم آلي', 'تنبؤ', 'إنذار مبكر']
     },
     {
@@ -64,7 +64,7 @@ const pillars = [
         title: 'إدارة الجودة',
         description: 'منظومة جودة شاملة متوافقة مع معايير ISO 9001:2015',
         color: '#2BB574',
-        colorDark: '#1E9658',
+        colorDark: '#2BB574',
         tags: ['ISO 9001', 'تحسين مستمر', 'CAPA']
     },
     {
@@ -73,7 +73,7 @@ const pillars = [
         title: 'التميز المؤسسي',
         description: 'حوكمة رشيدة ومؤشرات أداء استراتيجية لتحقيق التميز',
         color: '#FCB614',
-        colorDark: '#D49A0A',
+        colorDark: '#FCB614',
         tags: ['حوكمة', 'KPI', 'مساءلة']
     },
     {
@@ -82,7 +82,7 @@ const pillars = [
         title: 'الامتثال والمعايير',
         description: 'التزام كامل بمعايير وزارة الموارد البشرية والمعايير الدولية',
         color: '#F7941D',
-        colorDark: '#D67A0A',
+        colorDark: '#F7941D',
         tags: ['PDPL', 'رؤية 2030', 'HRSD']
     }
 ];

@@ -32,15 +32,15 @@ interface AuditLogEntry {
 
 // Action to Arabic labels
 const ACTION_LABELS: Record<string, { label: string; color: string; icon: typeof CheckCircle }> = {
-    create: { label: 'إنشاء', color: 'text-[#1E9658] bg-[#2BB574]/15', icon: CheckCircle },
+    create: { label: 'إنشاء', color: 'text-[#2BB574] bg-[#2BB574]/15', icon: CheckCircle },
     read: { label: 'عرض', color: 'text-[#269798] bg-[#269798]/15', icon: Eye },
-    update: { label: 'تحديث', color: 'text-[#D49A0A] bg-[#FCB614]/15', icon: Activity },
+    update: { label: 'تحديث', color: 'text-[#FCB614] bg-[#FCB614]/15', icon: Activity },
     delete: { label: 'حذف', color: 'text-[#DC2626] bg-[#DC2626]/15', icon: XCircle },
-    login: { label: 'دخول', color: 'text-[#1E9658] bg-[#2BB574]/15', icon: User },
+    login: { label: 'دخول', color: 'text-[#2BB574] bg-[#2BB574]/15', icon: User },
     logout: { label: 'خروج', color: 'text-gray-600 bg-gray-100', icon: User },
-    export: { label: 'تصدير', color: 'text-[#D49A0A] bg-[#FCB614]/15', icon: Download },
+    export: { label: 'تصدير', color: 'text-[#FCB614] bg-[#FCB614]/15', icon: Download },
     print: { label: 'طباعة', color: 'text-[#0F3144] bg-[#0F3144]/10', icon: Printer },
-    approve: { label: 'موافقة', color: 'text-[#1E9658] bg-[#2BB574]/15', icon: CheckCircle },
+    approve: { label: 'موافقة', color: 'text-[#2BB574] bg-[#2BB574]/15', icon: CheckCircle },
     reject: { label: 'رفض', color: 'text-[#DC2626] bg-[#DC2626]/15', icon: XCircle },
 };
 
@@ -253,14 +253,14 @@ export const AuditLogViewer: React.FC = () => {
                         تتبع جميع العمليات والإجراءات في النظام للامتثال والمساءلة
                     </p>
                     {usingDemo && import.meta.env.DEV && (
-                        <p className="text-[#D49A0A] text-sm mt-1">وضع العرض</p>
+                        <p className="text-[#FCB614] text-sm mt-1">وضع العرض</p>
                     )}
                 </div>
                 <div className="flex gap-2">
                     <button
                         onClick={handleExport}
                         disabled={isExporting || filteredLogs.length === 0}
-                        className="px-4 py-2 bg-[#2BB574]/10 text-[#1E9658] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#2BB574]/10 text-[#2BB574] rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
                     >
                         <FileSpreadsheet className="w-5 h-5" />
                         تصدير Excel
@@ -340,7 +340,7 @@ export const AuditLogViewer: React.FC = () => {
                     <p className="text-sm text-gray-500">إجمالي السجلات</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-[#1E9658]">
+                    <p className="text-2xl font-bold text-[#2BB574]">
                         {filteredLogs.filter(l => l.success).length}
                     </p>
                     <p className="text-sm text-gray-500">عمليات ناجحة</p>
@@ -352,7 +352,7 @@ export const AuditLogViewer: React.FC = () => {
                     <p className="text-sm text-gray-500">عمليات فاشلة</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow text-center">
-                    <p className="text-2xl font-bold text-[#D49A0A]">
+                    <p className="text-2xl font-bold text-[#FCB614]">
                         {new Set(filteredLogs.map(l => l.user_id)).size}
                     </p>
                     <p className="text-sm text-gray-500">مستخدمين نشطين</p>
@@ -404,7 +404,7 @@ export const AuditLogViewer: React.FC = () => {
                                                     {MODULE_LABELS[log.module] || log.module}
                                                 </span>
                                                 {log.success ? (
-                                                    <span className="flex items-center gap-1 text-[#1E9658]">
+                                                    <span className="flex items-center gap-1 text-[#2BB574]">
                                                         <CheckCircle className="w-4 h-4" />
                                                         نجاح
                                                     </span>
@@ -449,7 +449,7 @@ export const AuditLogViewer: React.FC = () => {
                                                             {log.error_message && (
                                                                 <div className="col-span-2">
                                                                     <p className="text-[#DC2626]">رسالة الخطأ</p>
-                                                                    <p className="text-[#B91C1C]">{log.error_message}</p>
+                                                                    <p className="text-[#DC2626]">{log.error_message}</p>
                                                                 </div>
                                                             )}
                                                         </div>

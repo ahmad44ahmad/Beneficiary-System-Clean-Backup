@@ -33,14 +33,14 @@ export const VitalsMonitorCard: React.FC<{ beneficiaryId: string }> = ({ benefic
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2BB574] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-[#2BB574]"></span>
                 </span>
-                <span className="text-xs font-mono text-[#1E9658] font-bold">LIVE</span>
+                <span className="text-xs font-mono text-[#2BB574] font-bold">LIVE</span>
             </div>
 
             {/* Header / Device Info */}
             <div className="p-4 border-b bg-[#269798]/10/50 flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <div className="bg-white p-2 rounded-lg border border-[#269798]/10 shadow-sm">
-                        <Smartphone className="w-5 h-5 text-[#1B7778]" />
+                        <Smartphone className="w-5 h-5 text-[#269798]" />
                     </div>
                     <div>
                         <h3 className="font-bold text-gray-800 text-sm">VitalWatch Series 5</h3>

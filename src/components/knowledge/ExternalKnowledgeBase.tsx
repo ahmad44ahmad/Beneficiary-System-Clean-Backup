@@ -64,7 +64,7 @@ export const ExternalKnowledgeBase: React.FC = () => {
                     href={url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-[#269798] hover:text-[#1B7778] transition-colors"
+                    className="flex items-center gap-2 text-sm text-[#269798] hover:text-[#269798] transition-colors"
                 >
                     <span>فتح في نافذة جديدة</span>
                     <ExternalLink className="w-4 h-4" />
@@ -74,7 +74,7 @@ export const ExternalKnowledgeBase: React.FC = () => {
             <div className="flex-1 relative bg-gray-100">
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1B7778]"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#269798]"></div>
                     </div>
                 )}
                 <iframe

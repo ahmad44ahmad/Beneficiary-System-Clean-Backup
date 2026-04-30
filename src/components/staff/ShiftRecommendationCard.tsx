@@ -36,11 +36,11 @@ export const ShiftRecommendationCard: React.FC = () => {
                         <p className="text-xs text-gray-500 mt-1">توصيات التوظيف بناءً على حدة الحالات</p>
                     </div>
                     {acuity.status === 'understaffed' ? (
-                        <span className="bg-[#DC2626]/15 text-[#B91C1C] text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
+                        <span className="bg-[#DC2626]/15 text-[#DC2626] text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
                             <AlertTriangle className="w-3 h-3" /> نقص في الكادر
                         </span>
                     ) : (
-                        <span className="bg-[#2BB574]/15 text-[#1E9658] text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
+                        <span className="bg-[#2BB574]/15 text-[#2BB574] text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
                             <CheckCircle className="w-3 h-3" /> توزيع مثالي
                         </span>
                     )}
@@ -49,7 +49,7 @@ export const ShiftRecommendationCard: React.FC = () => {
                 <div className="flex gap-4 mb-6">
                     <div className="flex-1 bg-gray-50 p-3 rounded-xl text-center">
                         <p className="text-xs text-gray-500 mb-1">نقاط حدة القسم</p>
-                        <p className="text-2xl font-bold text-[#D49A0A]">{acuity.totalAcuityScore}</p>
+                        <p className="text-2xl font-bold text-[#FCB614]">{acuity.totalAcuityScore}</p>
                         <div className="flex justify-center gap-1 mt-1">
                             {[...Array(5)].map((_, i) => (
                                 <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < 3 ? 'bg-[#FCB614]' : 'bg-gray-300'}`} />
@@ -58,7 +58,7 @@ export const ShiftRecommendationCard: React.FC = () => {
                     </div>
                     <div className="flex-1 bg-[#269798]/10 p-3 rounded-xl text-center">
                         <p className="text-xs text-[#269798] mb-1">الحالات الحرجة</p>
-                        <p className="text-2xl font-bold text-[#1B7778]">{acuity.highRiskCount}</p>
+                        <p className="text-2xl font-bold text-[#269798]">{acuity.highRiskCount}</p>
                         <p className="text-[10px] text-[#269798]">تحتاج مراقبة 1:1</p>
                     </div>
                 </div>

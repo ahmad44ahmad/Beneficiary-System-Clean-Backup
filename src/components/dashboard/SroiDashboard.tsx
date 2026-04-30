@@ -234,7 +234,7 @@ export const SroiDashboard: React.FC = () => {
                             <div>
                                 <div className="flex justify-between mb-2">
                                     <label className="text-sm font-medium text-hrsd-navy">متوسط التكلفة الشهرية (للفرد)</label>
-                                    <span className="text-[#D67A0A] font-bold tabular-nums">{scenario.avgCostPerMonth.toLocaleString()} ر.س</span>
+                                    <span className="text-[#F7941D] font-bold tabular-nums">{scenario.avgCostPerMonth.toLocaleString()} ر.س</span>
                                 </div>
                                 <input
                                     type="range"
@@ -252,7 +252,7 @@ export const SroiDashboard: React.FC = () => {
                             <h4 className="text-sm font-bold text-[#269798] mb-2">رؤية المحاكاة</h4>
                             <p className="text-xs text-hrsd-navy leading-relaxed">
                                 زيادة نسبة نجاح التأهيل بـ 5% فقط تؤدي إلى وفورات سنوية تقدر بـ{' '}
-                                <strong className="text-[#1B7778]">
+                                <strong className="text-[#269798]">
                                     {((scenario.beneficiaryCount * 0.05 * (scenario.avgCostPerMonth * (scenario.costSavingsRate / 100)) * 12) / 1000).toFixed(0)} ألف ريال
                                 </strong>.
                             </p>

@@ -107,10 +107,10 @@ export const FamilyMediaFeed: React.FC<FamilyMediaFeedProps> = ({ showApprovalQu
             {showApprovalQueue && pendingPosts.length > 0 && (
                 <Card className="p-5 border-[#FCB614]/30 bg-[#FCB614]/10/50">
                     <div className="flex items-start gap-3 mb-4">
-                        <ShieldCheck className="w-5 h-5 text-[#D49A0A] mt-0.5" />
+                        <ShieldCheck className="w-5 h-5 text-[#FCB614] mt-0.5" />
                         <div>
-                            <h3 className="font-bold text-[#92400E]">قائمة اعتماد الإدارة</h3>
-                            <p className="text-xs text-[#D49A0A]">لا تُرسَل أي رسالة للأسرة قبل اعتماد المدير</p>
+                            <h3 className="font-bold text-[#0F3144]">قائمة اعتماد الإدارة</h3>
+                            <p className="text-xs text-[#FCB614]">لا تُرسَل أي رسالة للأسرة قبل اعتماد المدير</p>
                         </div>
                     </div>
                     <div className="space-y-3">
@@ -123,19 +123,19 @@ export const FamilyMediaFeed: React.FC<FamilyMediaFeedProps> = ({ showApprovalQu
                                         <span>•</span>
                                         <span>{post.author.name}</span>
                                     </div>
-                                    <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FCB614]/15 text-[#92400E] border border-[#FCB614]">قيد الاعتماد</span>
+                                    <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FCB614]/15 text-[#0F3144] border border-[#FCB614]">قيد الاعتماد</span>
                                 </div>
                                 <p className="text-sm text-hrsd-navy mb-3">{post.content}</p>
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => handleApprove(post.id)}
-                                        className="flex-1 bg-[#1E9658] hover:bg-[#1E9658] text-white rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-2"
+                                        className="flex-1 bg-[#2BB574] hover:bg-[#2BB574] text-white rounded-lg py-2 text-sm font-medium flex items-center justify-center gap-2"
                                     >
                                         <CheckCircle2 className="w-4 h-4" /> اعتماد وإرسال
                                     </button>
                                     <button
                                         onClick={() => handleReject(post.id)}
-                                        className="px-4 py-2 bg-white border border-gray-200 hover:border-[#DC2626] hover:text-[#B91C1C] text-hrsd-cool-gray rounded-lg text-sm font-medium flex items-center gap-2"
+                                        className="px-4 py-2 bg-white border border-gray-200 hover:border-[#DC2626] hover:text-[#DC2626] text-hrsd-cool-gray rounded-lg text-sm font-medium flex items-center gap-2"
                                     >
                                         <XCircle className="w-4 h-4" /> رفض
                                     </button>
@@ -161,11 +161,11 @@ export const FamilyMediaFeed: React.FC<FamilyMediaFeedProps> = ({ showApprovalQu
                                 <ImageIcon className="w-4 h-4" />
                                 <span>صورة</span>
                             </button>
-                            <button className="flex items-center gap-1 hover:text-[#1E9658] hover:bg-[#2BB574]/10 px-2 py-1 rounded-lg transition-colors">
+                            <button className="flex items-center gap-1 hover:text-[#2BB574] hover:bg-[#2BB574]/10 px-2 py-1 rounded-lg transition-colors">
                                 <Video className="w-4 h-4" />
                                 <span>فيديو</span>
                             </button>
-                            <span className="text-[11px] text-[#D49A0A] mr-auto self-center">يلزم اعتماد المدير قبل الإرسال</span>
+                            <span className="text-[11px] text-[#FCB614] mr-auto self-center">يلزم اعتماد المدير قبل الإرسال</span>
                         </div>
                     </div>
                 </div>
@@ -209,16 +209,16 @@ export const FamilyMediaFeed: React.FC<FamilyMediaFeedProps> = ({ showApprovalQu
                     {post.type === 'milestone' && (
                         <div className="mx-4 mt-2 p-4 bg-[#FCB614]/10 rounded-xl border border-[#FCB614]/10 flex items-center gap-3">
                             <div className="bg-[#FCB614]/10 p-2 rounded-full">
-                                <Calendar className="w-5 h-5 text-[#D49A0A]" />
+                                <Calendar className="w-5 h-5 text-[#FCB614]" />
                             </div>
                             <div>
-                                <p className="font-bold text-[#D49A0A] text-sm">إنجاز جديد!</p>
-                                <p className="text-xs text-[#D49A0A]">تم تحديث سجل الإنجازات في ملف التمكين</p>
+                                <p className="font-bold text-[#FCB614] text-sm">إنجاز جديد!</p>
+                                <p className="text-xs text-[#FCB614]">تم تحديث سجل الإنجازات في ملف التمكين</p>
                             </div>
                         </div>
                     )}
 
-                    <div className="px-4 pt-2 flex items-center gap-1.5 text-[11px] text-[#1E9658] border-t mt-2">
+                    <div className="px-4 pt-2 flex items-center gap-1.5 text-[11px] text-[#2BB574] border-t mt-2">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         <span>مُعتمَد من {post.approvedBy} {post.approvedAt && `— ${post.approvedAt}`}</span>
                     </div>
@@ -237,7 +237,7 @@ export const FamilyMediaFeed: React.FC<FamilyMediaFeedProps> = ({ showApprovalQu
                                 <MessageCircle className="w-5 h-5" />
                                 <span>{post.comments}</span>
                             </button>
-                            <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#1E9658] transition-colors" title="مشاركة">
+                            <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#2BB574] transition-colors" title="مشاركة">
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

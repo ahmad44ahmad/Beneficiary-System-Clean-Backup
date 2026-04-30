@@ -120,12 +120,12 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
                 {discovery.risks.length > 0 && (
                     <div className="bg-[#FCB614]/10 border-r-4 border-[#FCB614] rounded-lg p-3">
                         <div className="flex items-center gap-1.5 mb-1.5">
-                            <AlertTriangle className="w-4 h-4 text-[#D49A0A]" />
-                            <span className="text-[11px] font-bold uppercase tracking-wider text-[#92400E]">
+                            <AlertTriangle className="w-4 h-4 text-[#FCB614]" />
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-[#0F3144]">
                                 مخاطرُ التعميم
                             </span>
                         </div>
-                        <ul className="space-y-0.5 text-[12.5px] text-[#92400E] leading-relaxed">
+                        <ul className="space-y-0.5 text-[12.5px] text-[#0F3144] leading-relaxed">
                             {discovery.risks.map((r, i) => (
                                 <li key={i} className="flex gap-1.5"><span>•</span><span>{r}</span></li>
                             ))}

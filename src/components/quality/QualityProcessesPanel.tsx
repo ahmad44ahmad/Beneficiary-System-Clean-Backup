@@ -38,12 +38,12 @@ export const QualityProcessesPanel: React.FC = () => {
                     <div className="flex items-start justify-between">
                         <div>
                             <h3 className="text-lg font-bold text-[#0F3144] mb-2">توزيع العمليات</h3>
-                            <p className="text-sm text-[#1B7778]">
+                            <p className="text-sm text-[#269798]">
                                 توازن في توزيع العمليات مع هيمنة للأقسام التشغيلية (العلاج الطبي، الخدمات).
                             </p>
                         </div>
                         <div className="p-3 bg-[#269798]/10 rounded-lg">
-                            <BarChart2 className="w-6 h-6 text-[#1B7778]" />
+                            <BarChart2 className="w-6 h-6 text-[#269798]" />
                         </div>
                     </div>
                 </Card>
@@ -121,7 +121,7 @@ export const QualityProcessesPanel: React.FC = () => {
                     </select>
                 </div>
                 <div className="text-sm text-gray-500 whitespace-nowrap">
-                    عدد العمليات: <span className="font-bold text-[#1B7778]">{filteredProcesses.length}</span> / {qualityProcesses.length}
+                    عدد العمليات: <span className="font-bold text-[#269798]">{filteredProcesses.length}</span> / {qualityProcesses.length}
                 </div>
             </div>
 
@@ -148,7 +148,7 @@ export const QualityProcessesPanel: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{process.responsible}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${process.frequency === 'يومي' || process.frequency === 'مستمر'
-                                            ? 'bg-[#269798]/15 text-[#1B7778]'
+                                            ? 'bg-[#269798]/15 text-[#269798]'
                                             : 'bg-gray-100 text-gray-800'
                                             }`}>
                                             {process.frequency}
@@ -157,7 +157,7 @@ export const QualityProcessesPanel: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <button
                                             onClick={() => setSelectedProcess(process)}
-                                            className="text-[#1B7778] hover:text-[#0F3144] font-medium flex items-center gap-1"
+                                            className="text-[#269798] hover:text-[#0F3144] font-medium flex items-center gap-1"
                                         >
                                             التفاصيل <ArrowRight className="w-4 h-4" />
                                         </button>
@@ -206,11 +206,11 @@ export const QualityProcessesPanel: React.FC = () => {
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10/50">
-                                        <label className="block text-xs font-bold text-[#1B7778] mb-1">المدخلات</label>
+                                        <label className="block text-xs font-bold text-[#269798] mb-1">المدخلات</label>
                                         <p className="text-sm">{selectedProcess.inputs}</p>
                                     </div>
                                     <div className="border border-[#269798]/10 p-3 rounded bg-[#269798]/10/50">
-                                        <label className="block text-xs font-bold text-[#1B7778] mb-1">المخرجات</label>
+                                        <label className="block text-xs font-bold text-[#269798] mb-1">المخرجات</label>
                                         <p className="text-sm">{selectedProcess.outputs}</p>
                                     </div>
                                 </div>

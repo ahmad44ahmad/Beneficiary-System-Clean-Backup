@@ -72,7 +72,7 @@ export const DigitalAuditTool: React.FC = () => {
                                 strokeDashoffset={251.2 - (251.2 * complianceScore) / 100}
                             />
                         </svg>
-                        <span className="absolute text-2xl font-bold text-[#1B7778]">{complianceScore}%</span>
+                        <span className="absolute text-2xl font-bold text-[#269798]">{complianceScore}%</span>
                     </div>
                     <div className="mt-3 text-xs text-center px-2 py-1 bg-white rounded-full border shadow-sm">
                         {complianceScore >= 80 ? 'مستوى متميز (EFQM)' : complianceScore >= 50 ? 'مستوى مقبول' : 'مخاطر عالية'}
@@ -107,13 +107,13 @@ export const DigitalAuditTool: React.FC = () => {
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <span className={`text-xs font-bold px-2 py-0.5 rounded ${std.weight === 'critical' ? 'bg-[#DC2626]/15 text-[#B91C1C]' : 'bg-[#269798]/10 text-[#1B7778]'}`}>
+                                                    <span className={`text-xs font-bold px-2 py-0.5 rounded ${std.weight === 'critical' ? 'bg-[#DC2626]/15 text-[#DC2626]' : 'bg-[#269798]/10 text-[#269798]'}`}>
                                                         ISO {std.clause}
                                                     </span>
                                                     <h4 className="font-medium text-gray-900">{std.title}</h4>
                                                 </div>
                                                 <p className="text-sm text-gray-600 mb-2">{std.description}</p>
-                                                <div className="bg-[#269798]/10 p-2 rounded text-xs text-[#1B7778] flex items-start gap-2">
+                                                <div className="bg-[#269798]/10 p-2 rounded text-xs text-[#269798] flex items-start gap-2">
                                                     <AlertTriangle className="w-4 h-4 shrink-0" />
                                                     <span><strong>متطلب الامتثال:</strong> {std.requirement}</span>
                                                 </div>
@@ -123,14 +123,14 @@ export const DigitalAuditTool: React.FC = () => {
                                                 <div className="flex gap-1">
                                                     <button
                                                         onClick={() => handleAuditCheck(std.id, 'compliant')}
-                                                        className={`p-2 rounded-lg border transition-all ${results[std.id]?.status === 'compliant' ? 'bg-[#1E9658] text-white border-[#1E9658]' : 'hover:bg-[#2BB574]/10 text-gray-400'}`}
+                                                        className={`p-2 rounded-lg border transition-all ${results[std.id]?.status === 'compliant' ? 'bg-[#2BB574] text-white border-[#2BB574]' : 'hover:bg-[#2BB574]/10 text-gray-400'}`}
                                                         title="ممتثل"
                                                     >
                                                         <CheckCircle className="w-5 h-5" />
                                                     </button>
                                                     <button
                                                         onClick={() => handleAuditCheck(std.id, 'non-compliant')}
-                                                        className={`p-2 rounded-lg border transition-all ${results[std.id]?.status === 'non-compliant' ? 'bg-[#B91C1C] text-white border-[#B91C1C]' : 'hover:bg-[#DC2626]/10 text-gray-400'}`}
+                                                        className={`p-2 rounded-lg border transition-all ${results[std.id]?.status === 'non-compliant' ? 'bg-[#DC2626] text-white border-[#DC2626]' : 'hover:bg-[#DC2626]/10 text-gray-400'}`}
                                                         title="غير ممتثل"
                                                     >
                                                         <XCircle className="w-5 h-5" />

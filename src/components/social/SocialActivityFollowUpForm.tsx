@@ -124,7 +124,7 @@ export const SocialActivityFollowUpForm: React.FC<SocialActivityFollowUpFormProp
 
                     <div className="flex justify-end gap-3 pt-4">
                         <button type="button" onClick={onCancel} className="px-4 py-2 border rounded hover:bg-gray-50">إلغاء</button>
-                        <button type="submit" className="px-4 py-2 bg-[#1B7778] text-white rounded hover:bg-[#1B7778]">حفظ المتابعة</button>
+                        <button type="submit" className="px-4 py-2 bg-[#269798] text-white rounded hover:bg-[#269798]">حفظ المتابعة</button>
                     </div>
                 </form>
             </div>

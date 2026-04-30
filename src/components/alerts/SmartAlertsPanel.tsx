@@ -48,8 +48,8 @@ const defaultAlerts: SmartAlert[] = [
  */
 const SEVERITY_CONFIG = {
     critical: { hex: '#DC2626', bgColor: 'bg-[#DC2626]/10', borderColor: 'border-[#DC2626]/40', textColor: 'text-[#DC2626]', label: 'حرج' },
-    high:     { hex: '#F7941D', bgColor: 'bg-[#F7941D]/10', borderColor: 'border-[#F7941D]/40', textColor: 'text-[#D67A0A]', label: 'مرتفع' },
-    medium:   { hex: '#FCB614', bgColor: 'bg-[#FCB614]/10', borderColor: 'border-[#FCB614]/40', textColor: 'text-[#D49A0A]', label: 'متوسط' },
+    high:     { hex: '#F7941D', bgColor: 'bg-[#F7941D]/10', borderColor: 'border-[#F7941D]/40', textColor: 'text-[#F7941D]', label: 'مرتفع' },
+    medium:   { hex: '#FCB614', bgColor: 'bg-[#FCB614]/10', borderColor: 'border-[#FCB614]/40', textColor: 'text-[#FCB614]', label: 'متوسط' },
     low:      { hex: '#269798', bgColor: 'bg-[#269798]/10', borderColor: 'border-[#269798]/40', textColor: 'text-[#269798]', label: 'منخفض' },
 };
 
@@ -297,7 +297,7 @@ export const SmartAlertsPanel: React.FC = () => {
                                                         {severityConfig.label}
                                                     </span>
                                                     {alert.acknowledged && (
-                                                        <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#2BB574]/10 text-[#1E9658] border border-[#2BB574]/30">
+                                                        <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#2BB574]/10 text-[#2BB574] border border-[#2BB574]/30">
                                                             تم الاطلاع
                                                         </span>
                                                     )}
@@ -347,7 +347,7 @@ export const SmartAlertsPanel: React.FC = () => {
                                                         <button
                                                             type="button"
                                                             onClick={() => handleAcknowledge(alert.id)}
-                                                            className="flex-1 py-3 bg-[#269798] hover:bg-[#1B7778] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
+                                                            className="flex-1 py-3 bg-[#269798] hover:bg-[#269798] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
                                                         >
                                                             <Eye className="w-5 h-5" />
                                                             تم الاطلاع
@@ -356,7 +356,7 @@ export const SmartAlertsPanel: React.FC = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => handleResolve(alert.id)}
-                                                        className="flex-1 py-3 bg-[#2BB574] hover:bg-[#1E9658] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
+                                                        className="flex-1 py-3 bg-[#2BB574] hover:bg-[#2BB574] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
                                                     >
                                                         <CheckCircle className="w-5 h-5" />
                                                         تم الحل

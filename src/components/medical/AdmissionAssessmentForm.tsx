@@ -85,9 +85,9 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
             <div className="flex justify-between items-center mb-6 border-b pb-4">
                 <h2 className="text-xl font-bold text-gray-800">تقييم تمريضي جديد (Admission Assessment)</h2>
                 <div className="flex gap-2">
-                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 1 ? 'bg-[#1B7778] text-white' : 'bg-gray-100'}`}>1. العلامات الحيوية</span>
-                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 2 ? 'bg-[#1B7778] text-white' : 'bg-gray-100'}`}>2. الفحص البدني</span>
-                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 3 ? 'bg-[#1B7778] text-white' : 'bg-gray-100'}`}>3. المخاطر والوظائف</span>
+                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 1 ? 'bg-[#269798] text-white' : 'bg-gray-100'}`}>1. العلامات الحيوية</span>
+                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 2 ? 'bg-[#269798] text-white' : 'bg-gray-100'}`}>2. الفحص البدني</span>
+                    <span className={`px-3 py-1 rounded-full text-xs ${step >= 3 ? 'bg-[#269798] text-white' : 'bg-gray-100'}`}>3. المخاطر والوظائف</span>
                 </div>
             </div>
 
@@ -284,7 +284,7 @@ export const AdmissionAssessmentForm: React.FC<AdmissionAssessmentFormProps> = (
                             </div>
 
                             <div className="space-y-4">
-                                <h4 className="font-bold border-b pb-2 text-[#B91C1C]">تقييم المخاطر (Risk Assessment)</h4>
+                                <h4 className="font-bold border-b pb-2 text-[#DC2626]">تقييم المخاطر (Risk Assessment)</h4>
                                 <div className="space-y-2">
                                     <label className="flex items-center justify-between p-3 border rounded hover:bg-[#DC2626]/10 cursor-pointer">
                                         <span>خطر السقوط (Fall Risk - Morse)</span>

@@ -92,7 +92,7 @@ export const RiskAlertSystem: React.FC = () => {
             {alerts.map((alert) => (
                 <div
                     key={alert.id}
-                    className="bg-[#B91C1C] text-white p-4 rounded-xl shadow-2xl flex items-center justify-between border-4 border-[#DC2626] animate-bounce pointer-events-auto"
+                    className="bg-[#DC2626] text-white p-4 rounded-xl shadow-2xl flex items-center justify-between border-4 border-[#DC2626] animate-bounce pointer-events-auto"
                     dir="rtl"
                 >
                     <div className="flex items-center gap-4">

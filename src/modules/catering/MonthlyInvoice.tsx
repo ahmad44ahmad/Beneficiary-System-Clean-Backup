@@ -101,7 +101,7 @@ export const MonthlyInvoice: React.FC = () => {
                         <button
                             onClick={handleAnalyze}
                             disabled={analyzing || !invoiceData}
-                            className="print:hidden px-4 py-2 bg-[#D49A0A] text-white rounded-lg hover:bg-[#D49A0A] flex items-center gap-2 text-sm transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+                            className="print:hidden px-4 py-2 bg-[#FCB614] text-white rounded-lg hover:bg-[#FCB614] flex items-center gap-2 text-sm transition-all shadow-md hover:shadow-lg disabled:opacity-50"
                         >
                             {analyzing ? (
                                 <span className="flex items-center gap-2">جاري التحليل <Loader2 className="w-4 h-4 animate-spin" /></span>
@@ -117,15 +117,15 @@ export const MonthlyInvoice: React.FC = () => {
                     <div className="mb-8 p-6 bg-[#FCB614]/10 border border-[#FCB614]/10 rounded-xl relative animate-in fade-in slide-in-from-top-4">
                         <button
                             onClick={() => setAiAnalysis(null)}
-                            className="absolute top-4 left-4 text-[#FCB614] hover:text-[#D49A0A]"
+                            className="absolute top-4 left-4 text-[#FCB614] hover:text-[#FCB614]"
                         >
                             <X className="w-5 h-5" />
                         </button>
-                        <h3 className="flex items-center gap-2 font-bold text-[#92400E] mb-4">
+                        <h3 className="flex items-center gap-2 font-bold text-[#0F3144] mb-4">
                             <BrainCircuit className="w-6 h-6" />
                             تحليل المساعد الذكي (Gemini)
                         </h3>
-                        <div className="prose prose-sm max-w-none text-[#92400E] leading-relaxed whitespace-pre-line">
+                        <div className="prose prose-sm max-w-none text-[#0F3144] leading-relaxed whitespace-pre-line">
                             {aiAnalysis}
                         </div>
                     </div>
@@ -183,7 +183,7 @@ export const MonthlyInvoice: React.FC = () => {
                                 <p className="text-sm text-[#DC2626]">
                                     تم احتساب الغرامات بناءً على تقارير الجودة اليومية وسجلات "لجنة الاستلام"
                                 </p>
-                                <span className="text-xl font-bold text-[#B91C1C]">
+                                <span className="text-xl font-bold text-[#DC2626]">
                                     - {invoiceData.totalPenalties.toLocaleString()} ر.س
                                 </span>
                             </div>

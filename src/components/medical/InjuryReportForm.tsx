@@ -197,7 +197,7 @@ export const InjuryReportForm: React.FC<InjuryReportFormProps> = ({ beneficiary,
                         <Button type="button" variant="outline" onClick={onCancel}>
                             إلغاء
                         </Button>
-                        <Button type="submit" className="bg-[#1B7778] hover:bg-[#1B7778] text-white gap-2">
+                        <Button type="submit" className="bg-[#269798] hover:bg-[#269798] text-white gap-2">
                             <Save className="w-4 h-4" />
                             حفظ البلاغ
                         </Button>

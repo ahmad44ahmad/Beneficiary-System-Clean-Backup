@@ -72,7 +72,7 @@ export const LeadershipCompass: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <span className="inline-block text-[11px] font-bold uppercase tracking-wider
-                        bg-[#FCB614]/15 text-[#92400E] px-2.5 py-1 rounded">
+                        bg-[#FCB614]/15 text-[#0F3144] px-2.5 py-1 rounded">
                         نموذج تجريبيّ (v0)
                     </span>
                 </div>

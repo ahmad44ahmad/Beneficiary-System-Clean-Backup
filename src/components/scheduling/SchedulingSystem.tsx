@@ -149,7 +149,7 @@ export const SchedulingSystem: React.FC = () => {
                 className="flex items-center justify-between mb-6"
             >
                 <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[rgb(20,130,135)] to-[rgb(20,65,90)] rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-14 h-14 bg-gradient-to-br from-[#269798] to-[#0F3144] rounded-2xl flex items-center justify-center shadow-lg">
                         <Calendar className="w-7 h-7 text-white" />
                     </div>
                     <div>
@@ -157,7 +157,7 @@ export const SchedulingSystem: React.FC = () => {
                         <p className="text-hrsd-cool-gray text-sm">إدارة جدولة العلاج والزيارات والفحوصات</p>
                     </div>
                 </div>
-                <button className="px-6 py-3 bg-gradient-to-r from-[rgb(20,130,135)] to-[rgb(45,180,115)] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+                <button className="px-6 py-3 bg-gradient-to-r from-[#269798] to-[#2BB574] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <Plus className="w-5 h-5" />
                     موعد جديد
                 </button>
@@ -177,28 +177,28 @@ export const SchedulingSystem: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-[rgb(45,180,115)]/20 rounded-xl p-4 text-center border border-[rgb(45,180,115)]/30"
+                    className="bg-[#2BB574]/20 rounded-xl p-4 text-center border border-[#2BB574]/30"
                 >
-                    <p className="text-3xl font-bold text-[rgb(45,180,115)]">{stats.completed}</p>
-                    <p className="text-[rgb(45,180,115)]/70 text-sm">مكتملة</p>
+                    <p className="text-3xl font-bold text-[#2BB574]">{stats.completed}</p>
+                    <p className="text-[#2BB574]/70 text-sm">مكتملة</p>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-[rgb(245,150,30)]/20 rounded-xl p-4 text-center border border-[rgb(245,150,30)]/30"
+                    className="bg-[#F7941D]/20 rounded-xl p-4 text-center border border-[#F7941D]/30"
                 >
-                    <p className="text-3xl font-bold text-[rgb(245,150,30)]">{stats.inProgress}</p>
-                    <p className="text-[rgb(245,150,30)]/70 text-sm">جارية</p>
+                    <p className="text-3xl font-bold text-[#F7941D]">{stats.inProgress}</p>
+                    <p className="text-[#F7941D]/70 text-sm">جارية</p>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-[rgb(20,130,135)]/20 rounded-xl p-4 text-center border border-[rgb(20,130,135)]/30"
+                    className="bg-[#269798]/20 rounded-xl p-4 text-center border border-[#269798]/30"
                 >
-                    <p className="text-3xl font-bold text-[rgb(20,130,135)]">{stats.upcoming}</p>
-                    <p className="text-[rgb(20,130,135)]/70 text-sm">قادمة</p>
+                    <p className="text-3xl font-bold text-[#269798]">{stats.upcoming}</p>
+                    <p className="text-[#269798]/70 text-sm">قادمة</p>
                 </motion.div>
             </div>
 
@@ -217,7 +217,7 @@ export const SchedulingSystem: React.FC = () => {
                         <p className="text-hrsd-cool-gray text-sm mb-3">تصفية حسب النوع</p>
                         <button
                             onClick={() => setFilterType('all')}
-                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors text-right ${filterType === 'all' ? 'bg-[rgb(20,130,135)] text-white' : 'bg-gray-50 text-hrsd-cool-gray hover:bg-gray-200'}`}
+                            className={`w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors text-right ${filterType === 'all' ? 'bg-[#269798] text-white' : 'bg-gray-50 text-hrsd-cool-gray hover:bg-gray-200'}`}
                         >
                             جميع المواعيد
                         </button>
@@ -245,7 +245,7 @@ export const SchedulingSystem: React.FC = () => {
                             <input
                                 type="text"
                                 placeholder="بحث..."
-                                className="bg-white border border-gray-200 rounded-lg pe-9 ps-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[rgb(20,130,135)]"
+                                className="bg-white border border-gray-200 rounded-lg pe-9 ps-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[#269798]"
                             />
                         </div>
                     </div>
@@ -262,7 +262,7 @@ export const SchedulingSystem: React.FC = () => {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className={`flex gap-4 p-4 rounded-xl border ${apt.status === 'in_progress' ? 'bg-[rgb(245,150,30)]/10 border-[rgb(245,150,30)]/30' : 'bg-white/50 border-gray-200'}`}
+                                    className={`flex gap-4 p-4 rounded-xl border ${apt.status === 'in_progress' ? 'bg-[#F7941D]/10 border-[#F7941D]/30' : 'bg-white/50 border-gray-200'}`}
                                 >
                                     {/* Time */}
                                     <div className="text-center w-20 flex-shrink-0">

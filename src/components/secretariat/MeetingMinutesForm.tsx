@@ -223,7 +223,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                                     <button
                                         type="button"
                                         onClick={() => removeActionItem(index)}
-                                        className="text-[#DC2626] hover:text-[#B91C1C] p-2"
+                                        className="text-[#DC2626] hover:text-[#DC2626] p-2"
                                     >
                                         <Trash2 size={18} />
                                     </button>
@@ -242,7 +242,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSubmit
                         </button>
                         <button
                             type="submit"
-                            className="flex items-center px-4 py-2 text-white bg-[#1B7778] rounded-md hover:bg-[#1B7778]"
+                            className="flex items-center px-4 py-2 text-white bg-[#269798] rounded-md hover:bg-[#269798]"
                         >
                             <Save size={18} className="ms-2" />
                             حفظ

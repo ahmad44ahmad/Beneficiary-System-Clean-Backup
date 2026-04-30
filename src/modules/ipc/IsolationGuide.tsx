@@ -45,10 +45,10 @@ const isolationTypes: IsolationType[] = [
     color: '#22C55E',
     bgClass: 'bg-[#2BB574]/10',
     borderClass: 'border-[#2BB574]',
-    textClass: 'text-[#1E9658]',
+    textClass: 'text-[#2BB574]',
     hoverBgClass: 'hover:bg-[#2BB574]/15',
-    badgeBgClass: 'bg-[#2BB574]/15 text-[#14532D]',
-    icon: <HandIcon className="w-8 h-8 text-[#1E9658]" />,
+    badgeBgClass: 'bg-[#2BB574]/15 text-[#0F3144]',
+    icon: <HandIcon className="w-8 h-8 text-[#2BB574]" />,
     conditions: [
       'MRSA',
       'VRE',
@@ -77,10 +77,10 @@ const isolationTypes: IsolationType[] = [
     id: 'droplet',
     title: 'العزل الرذاذي',
     subtitle: 'Droplet Isolation',
-    color: '#EC4899',
+    color: '#7A7A7A',
     bgClass: 'bg-[#DC2626]/10',
     borderClass: 'border-[#DC2626]',
-    textClass: 'text-[#B91C1C]',
+    textClass: 'text-[#DC2626]',
     hoverBgClass: 'hover:bg-[#DC2626]/10',
     badgeBgClass: 'bg-[#DC2626]/10 text-[#7F1D1D]',
     icon: <Droplets className="w-8 h-8 text-[#DC2626]" />,
@@ -114,9 +114,9 @@ const isolationTypes: IsolationType[] = [
     color: '#269798',
     bgClass: 'bg-[#269798]/10',
     borderClass: 'border-[#269798]',
-    textClass: 'text-[#1B7778]',
+    textClass: 'text-[#269798]',
     hoverBgClass: 'hover:bg-[#269798]/15',
-    badgeBgClass: 'bg-[#269798]/15 text-[#1B7778]',
+    badgeBgClass: 'bg-[#269798]/15 text-[#269798]',
     icon: <Wind className="w-8 h-8 text-[#269798]" />,
     conditions: [
       'السل الرئوي النشط',
@@ -406,19 +406,19 @@ export const IsolationGuide: React.FC = () => {
                   المعيار
                 </th>
                 <th className="px-4 py-3 text-center">
-                  <span className="inline-flex items-center gap-1 text-[#1E9658] font-bold">
+                  <span className="inline-flex items-center gap-1 text-[#2BB574] font-bold">
                     <HandIcon className="w-4 h-4" />
                     تلامسي
                   </span>
                 </th>
                 <th className="px-4 py-3 text-center">
-                  <span className="inline-flex items-center gap-1 text-[#B91C1C] font-bold">
+                  <span className="inline-flex items-center gap-1 text-[#DC2626] font-bold">
                     <Droplets className="w-4 h-4" />
                     رذاذي
                   </span>
                 </th>
                 <th className="px-4 py-3 text-center">
-                  <span className="inline-flex items-center gap-1 text-[#1B7778] font-bold">
+                  <span className="inline-flex items-center gap-1 text-[#269798] font-bold">
                     <Wind className="w-4 h-4" />
                     هوائي
                   </span>
@@ -445,7 +445,7 @@ export const IsolationGuide: React.FC = () => {
                   الغرفة
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <span className="text-[#1E9658]">مفضلة فردية</span>
+                  <span className="text-[#2BB574]">مفضلة فردية</span>
                 </td>
                 <td className="px-4 py-3 text-center">
                   <span className="text-[#DC2626] font-medium">
@@ -463,7 +463,7 @@ export const IsolationGuide: React.FC = () => {
                   القفازات
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <CheckCircle2 className="w-5 h-5 text-[#1E9658] mx-auto" />
+                  <CheckCircle2 className="w-5 h-5 text-[#2BB574] mx-auto" />
                 </td>
                 <td className="px-4 py-3 text-center">
                   <CheckCircle2 className="w-5 h-5 text-[#DC2626] mx-auto" />
@@ -477,7 +477,7 @@ export const IsolationGuide: React.FC = () => {
                   العباءة
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <CheckCircle2 className="w-5 h-5 text-[#1E9658] mx-auto" />
+                  <CheckCircle2 className="w-5 h-5 text-[#2BB574] mx-auto" />
                 </td>
                 <td className="px-4 py-3 text-center">
                   <CheckCircle2 className="w-5 h-5 text-[#DC2626] mx-auto" />
@@ -505,17 +505,17 @@ export const IsolationGuide: React.FC = () => {
                   مستوى الخطورة
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#2BB574]/15 text-[#1E9658]">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#2BB574]/15 text-[#2BB574]">
                     متوسط
                   </span>
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#DC2626]/10 text-[#B91C1C]">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#DC2626]/10 text-[#DC2626]">
                     عالي
                   </span>
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#269798]/15 text-[#1B7778]">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#269798]/15 text-[#269798]">
                     عالي جدا
                   </span>
                 </td>
@@ -524,13 +524,13 @@ export const IsolationGuide: React.FC = () => {
                 <td className="px-4 py-3 font-medium text-gray-700">
                   طريقة الانتقال
                 </td>
-                <td className="px-4 py-3 text-center text-[#1E9658] text-xs">
+                <td className="px-4 py-3 text-center text-[#2BB574] text-xs">
                   لمس مباشر/غير مباشر
                 </td>
-                <td className="px-4 py-3 text-center text-[#B91C1C] text-xs">
+                <td className="px-4 py-3 text-center text-[#DC2626] text-xs">
                   قطرات {'>'} 5 ميكرون
                 </td>
-                <td className="px-4 py-3 text-center text-[#1B7778] text-xs">
+                <td className="px-4 py-3 text-center text-[#269798] text-xs">
                   جزيئات {'<'} 5 ميكرون
                 </td>
               </tr>
@@ -545,13 +545,13 @@ export const IsolationGuide: React.FC = () => {
         style={{ backgroundColor: '#FFF7ED' }}
       >
         <div className="w-12 h-12 rounded-xl bg-[#FCB614]/15 flex items-center justify-center flex-shrink-0">
-          <AlertTriangle className="w-6 h-6 text-[#D49A0A]" />
+          <AlertTriangle className="w-6 h-6 text-[#FCB614]" />
         </div>
         <div>
-          <h3 className="font-bold text-[#92400E] text-base mb-1">
+          <h3 className="font-bold text-[#0F3144] text-base mb-1">
             ملاحظة مهمة - حالة عدم التأكد
           </h3>
-          <p className="text-sm text-[#D49A0A] leading-relaxed">
+          <p className="text-sm text-[#FCB614] leading-relaxed">
             في حالة عدم معرفة نوع العدوى، طبّق الاحتياطات الهوائية (الأعلى
             حماية) حتى تحديد النوع
           </p>

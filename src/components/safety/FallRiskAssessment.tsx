@@ -57,8 +57,8 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
     };
 
     const getRiskLevel = (score: number) => {
-        if (score < 25) return { label: 'منخفض (Low Risk)', value: 'low', color: 'text-[#1E9658]', bg: 'bg-[#2BB574]/15', border: 'border-[#2BB574]/20' };
-        if (score < 51) return { label: 'متوسط (Medium Risk)', value: 'medium', color: 'text-[#D49A0A]', bg: 'bg-[#FCB614]/10', border: 'border-[#FCB614]/20' };
+        if (score < 25) return { label: 'منخفض (Low Risk)', value: 'low', color: 'text-[#2BB574]', bg: 'bg-[#2BB574]/15', border: 'border-[#2BB574]/20' };
+        if (score < 51) return { label: 'متوسط (Medium Risk)', value: 'medium', color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/10', border: 'border-[#FCB614]/20' };
         return { label: 'عالي (High Risk)', value: 'high', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/15', border: 'border-[#DC2626]/30' };
     };
 
@@ -110,7 +110,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
     return (
         <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#F7941D]/10 font-readex" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#D67A0A] to-[#D49A0A] p-6 text-white flex justify-between items-center">
+            <div className="bg-gradient-to-l from-[#F7941D] to-[#FCB614] p-6 text-white flex justify-between items-center">
                 <div>
                     <h2 className="text-xl font-bold flex items-center gap-2">
                         <ShieldAlert className="h-6 w-6" />
@@ -133,7 +133,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
 
                     <div className="bg-[#F7941D]/10/50 p-4 rounded-lg border border-[#F7941D]/10">
                         <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2 border-b border-[#F7941D]/30 pb-2">
-                            <History className="h-5 w-5 text-[#D67A0A]" />
+                            <History className="h-5 w-5 text-[#F7941D]" />
                             1. التاريخ والمناولة
                         </h3>
 
@@ -143,7 +143,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                                     type="checkbox"
                                     checked={formData.historyOfFalls}
                                     onChange={e => setFormData({ ...formData, historyOfFalls: e.target.checked })}
-                                    className="w-5 h-5 text-[#D67A0A] rounded focus:ring-[#F7941D]"
+                                    className="w-5 h-5 text-[#F7941D] rounded focus:ring-[#F7941D]"
                                 />
                                 <div>
                                     <span className="text-gray-900 font-medium block">تاريخ سابق للسقوط</span>
@@ -156,7 +156,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                                     type="checkbox"
                                     checked={formData.secondaryDiagnosis}
                                     onChange={e => setFormData({ ...formData, secondaryDiagnosis: e.target.checked })}
-                                    className="w-5 h-5 text-[#D67A0A] rounded focus:ring-[#F7941D]"
+                                    className="w-5 h-5 text-[#F7941D] rounded focus:ring-[#F7941D]"
                                 />
                                 <div>
                                     <span className="text-gray-900 font-medium block">وجود تشخيص ثانوي</span>
@@ -169,7 +169,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                                     type="checkbox"
                                     checked={formData.ivTherapy}
                                     onChange={e => setFormData({ ...formData, ivTherapy: e.target.checked })}
-                                    className="w-5 h-5 text-[#D67A0A] rounded focus:ring-[#F7941D]"
+                                    className="w-5 h-5 text-[#F7941D] rounded focus:ring-[#F7941D]"
                                 />
                                 <div>
                                     <span className="text-gray-900 font-medium block">علاج وريدي (IV / Heparin Lock)</span>
@@ -181,7 +181,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
 
                     <div className="bg-[#F7941D]/10/50 p-4 rounded-lg border border-[#F7941D]/10">
                         <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2 border-b border-[#F7941D]/30 pb-2">
-                            <Activity className="h-5 w-5 text-[#D67A0A]" />
+                            <Activity className="h-5 w-5 text-[#F7941D]" />
                             2. الحركة والمساعدة
                         </h3>
 
@@ -247,7 +247,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                             <div className="bg-white/60 rounded-lg p-3 text-sm text-gray-700 space-y-2 border border-gray-100">
                                 {score >= 51 && (
                                     <>
-                                        <div className="flex items-start gap-2 text-[#B91C1C] font-bold">
+                                        <div className="flex items-start gap-2 text-[#DC2626] font-bold">
                                             <span>•</span>
                                             <span>تفعيل بروتوكول السقوط العالي فوراً</span>
                                         </div>
@@ -267,7 +267,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                                 )}
                                 {score >= 25 && score < 51 && (
                                     <>
-                                        <div className="flex items-start gap-2 text-[#D49A0A] font-bold">
+                                        <div className="flex items-start gap-2 text-[#FCB614] font-bold">
                                             <span>•</span>
                                             <span>تفعيل إجراءات الوقاية القياسية</span>
                                         </div>
@@ -283,7 +283,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                                 )}
                                 {score < 25 && (
                                     <>
-                                        <div className="flex items-start gap-2 text-[#1E9658] font-bold">
+                                        <div className="flex items-start gap-2 text-[#2BB574] font-bold">
                                             <span>•</span>
                                             <span>الرعاية التمريضية الأساسية</span>
                                         </div>
@@ -301,7 +301,7 @@ export const FallRiskAssessment: React.FC<FallRiskAssessmentProps> = ({ benefici
                         <button
                             onClick={handleSave}
                             disabled={saving}
-                            className={`w-full mt-6 py-3 bg-gradient-to-r from-[#D67A0A] to-[#D49A0A] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 font-bold ${saving ? 'opacity-70 cursor-wait' : ''}`}
+                            className={`w-full mt-6 py-3 bg-gradient-to-r from-[#F7941D] to-[#FCB614] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 font-bold ${saving ? 'opacity-70 cursor-wait' : ''}`}
                         >
                             {saving ? 'جاري الحفظ...' : (
                                 <>

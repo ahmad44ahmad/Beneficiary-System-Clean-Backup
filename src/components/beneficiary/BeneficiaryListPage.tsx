@@ -497,8 +497,8 @@ export const BeneficiaryListPage: React.FC = () => {
                                 <button
                                     onClick={() => executeAction('export')}
                                     disabled={isExecuting}
-                                    className="flex items-center gap-2 px-3 py-2 bg-[#1E9658] 
-                                               hover:bg-[#1E9658] rounded-lg transition-all 
+                                    className="flex items-center gap-2 px-3 py-2 bg-[#2BB574] 
+                                               hover:bg-[#2BB574] rounded-lg transition-all 
                                                active:scale-95 disabled:opacity-50 text-sm font-medium"
                                 >
                                     <Download className="w-4 h-4" />
@@ -513,8 +513,8 @@ export const BeneficiaryListPage: React.FC = () => {
                                         }
                                     }}
                                     disabled={isExecuting}
-                                    className="flex items-center gap-2 px-3 py-2 bg-[#D49A0A] 
-                                               hover:bg-[#D49A0A] rounded-lg transition-all 
+                                    className="flex items-center gap-2 px-3 py-2 bg-[#FCB614] 
+                                               hover:bg-[#FCB614] rounded-lg transition-all 
                                                active:scale-95 disabled:opacity-50 text-sm font-medium"
                                 >
                                     <Archive className="w-4 h-4" />
@@ -529,8 +529,8 @@ export const BeneficiaryListPage: React.FC = () => {
                                         }
                                     }}
                                     disabled={isExecuting}
-                                    className="flex items-center gap-2 px-3 py-2 bg-[#B91C1C] 
-                                               hover:bg-[#B91C1C] rounded-lg transition-all 
+                                    className="flex items-center gap-2 px-3 py-2 bg-[#DC2626] 
+                                               hover:bg-[#DC2626] rounded-lg transition-all 
                                                active:scale-95 disabled:opacity-50 text-sm font-medium"
                                 >
                                     <Trash className="w-4 h-4" />

@@ -105,7 +105,7 @@ export const FallRiskAlertBanner: React.FC = () => {
                 className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-lg px-4"
                 dir="rtl"
             >
-                <div className="bg-gradient-to-r from-[#B91C1C] to-[#D67A0A] text-white rounded-xl shadow-2xl overflow-hidden">
+                <div className="bg-gradient-to-r from-[#DC2626] to-[#F7941D] text-white rounded-xl shadow-2xl overflow-hidden">
                     {/* Header */}
                     <div className="flex items-center justify-between px-4 py-2 bg-black/20">
                         <div className="flex items-center gap-2">

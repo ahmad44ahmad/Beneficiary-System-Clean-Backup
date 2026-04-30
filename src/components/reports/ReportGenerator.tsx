@@ -61,10 +61,10 @@ const ReportCard: React.FC<{
     const Icon = report.icon;
 
     const colorClasses: Record<string, { bg: string; icon: string; button: string }> = {
-        blue: { bg: 'bg-[#269798]/10', icon: 'text-[#269798]', button: 'bg-[#1B7778] hover:bg-[#1B7778]' },
-        green: { bg: 'bg-[#2BB574]/10', icon: 'text-[#1E9658]', button: 'bg-[#1E9658] hover:bg-[#1E9658]' },
-        purple: { bg: 'bg-[#FCB614]/10', icon: 'text-[#D49A0A]', button: 'bg-[#D49A0A] hover:bg-[#D49A0A]' },
-        teal: { bg: 'bg-[#269798]/10', icon: 'text-[#1B7778]', button: 'bg-[#1B7778] hover:bg-[#1B7778]' },
+        blue: { bg: 'bg-[#269798]/10', icon: 'text-[#269798]', button: 'bg-[#269798] hover:bg-[#269798]' },
+        green: { bg: 'bg-[#2BB574]/10', icon: 'text-[#2BB574]', button: 'bg-[#2BB574] hover:bg-[#2BB574]' },
+        purple: { bg: 'bg-[#FCB614]/10', icon: 'text-[#FCB614]', button: 'bg-[#FCB614] hover:bg-[#FCB614]' },
+        teal: { bg: 'bg-[#269798]/10', icon: 'text-[#269798]', button: 'bg-[#269798] hover:bg-[#269798]' },
     };
 
     const colors = colorClasses[report.color] || colorClasses.blue;
@@ -130,7 +130,7 @@ const ReportCard: React.FC<{
 
                     {generatedReport && (
                         <div className="mt-2 text-xs text-gray-500 flex items-center gap-1">
-                            <CheckCircle className="w-3 h-3 text-[#1E9658]" />
+                            <CheckCircle className="w-3 h-3 text-[#2BB574]" />
                             تم الإنشاء - {generatedReport.mode === 'html-fallback' ? 'وضع المعاينة' : 'PDF جاهز'}
                         </div>
                     )}
@@ -285,7 +285,7 @@ export const ReportGenerator: React.FC = () => {
                         <ChevronLeft className="w-5 h-5" />
                     </button>
                     <div className="p-3 bg-[#FCB614]/15 rounded-xl">
-                        <FileText className="w-8 h-8 text-[#D49A0A]" />
+                        <FileText className="w-8 h-8 text-[#FCB614]" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">مولد التقارير المؤسسية</h1>
@@ -297,7 +297,7 @@ export const ReportGenerator: React.FC = () => {
             {/* Date Range Filter */}
             <div className="bg-white rounded-2xl p-5 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-[#D49A0A]" />
+                    <Calendar className="w-5 h-5 text-[#FCB614]" />
                     نطاق التاريخ
                 </h3>
                 <div className="flex gap-4 items-center flex-wrap">

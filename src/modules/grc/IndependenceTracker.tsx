@@ -134,7 +134,7 @@ export const IndependenceTracker: React.FC = () => {
 
             {/* Budget Crisis Card */}
             {budget && (
-                <div className="bg-gradient-to-l from-[#B91C1C] to-[#DC2626] rounded-2xl p-6 text-white shadow-xl">
+                <div className="bg-gradient-to-l from-[#DC2626] to-[#DC2626] rounded-2xl p-6 text-white shadow-xl">
                     <div className="flex items-center gap-3 mb-4">
                         <AlertTriangle className="w-8 h-8" />
                         <h2 className="text-xl font-bold">فجوة الميزانية الحرجة</h2>
@@ -203,7 +203,7 @@ export const IndependenceTracker: React.FC = () => {
                                     <div className="flex items-center gap-2 mb-1">
                                         <h3 className="font-bold text-gray-800">{getServiceLabel(gap.service_type)}</h3>
                                         {gap.csr_dependency && (
-                                            <span className="px-2 py-0.5 text-xs rounded-full bg-[#FCB614]/10 text-[#D49A0A]">
+                                            <span className="px-2 py-0.5 text-xs rounded-full bg-[#FCB614]/10 text-[#FCB614]">
                                                 معلق على CSR
                                             </span>
                                         )}
@@ -218,9 +218,9 @@ export const IndependenceTracker: React.FC = () => {
                                             <span className="font-bold text-[#DC2626]">{gap.beneficiaries_needing}</span>
                                         </div>
                                         <div className="flex items-center gap-1">
-                                            <CheckCircle2 className="w-4 h-4 text-[#1E9658]" />
+                                            <CheckCircle2 className="w-4 h-4 text-[#2BB574]" />
                                             <span className="text-gray-600">متوفر:</span>
-                                            <span className="font-bold text-[#1E9658]">{gap.current_capacity}</span>
+                                            <span className="font-bold text-[#2BB574]">{gap.current_capacity}</span>
                                         </div>
                                         <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#DC2626]/15">
                                             <AlertCircle className="w-4 h-4 text-[#DC2626]" />
@@ -264,18 +264,18 @@ export const IndependenceTracker: React.FC = () => {
                                         {getRightLabel(item.right_category)}
                                     </td>
                                     <td className="py-3">
-                                        <span className="px-2 py-1 text-xs rounded-lg bg-[#DC2626]/15 text-[#B91C1C]">
+                                        <span className="px-2 py-1 text-xs rounded-lg bg-[#DC2626]/15 text-[#DC2626]">
                                             {item.current_status}
                                         </span>
                                     </td>
                                     <td className="py-3">
                                         {item.treated_as === 'preference' ? (
-                                            <span className="flex items-center gap-1 text-[#D49A0A]">
+                                            <span className="flex items-center gap-1 text-[#FCB614]">
                                                 <XCircle className="w-4 h-4" />
                                                 رغبة
                                             </span>
                                         ) : (
-                                            <span className="flex items-center gap-1 text-[#1E9658]">
+                                            <span className="flex items-center gap-1 text-[#2BB574]">
                                                 <CheckCircle2 className="w-4 h-4" />
                                                 حق
                                             </span>
@@ -297,7 +297,7 @@ export const IndependenceTracker: React.FC = () => {
             </div>
 
             {/* Comparison Section */}
-            <div className="bg-gradient-to-l from-[rgb(20,65,90)] to-[rgb(20,130,135)] rounded-2xl p-6 text-white">
+            <div className="bg-gradient-to-l from-[#0F3144] to-[#269798] rounded-2xl p-6 text-white">
                 <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
                     <BarChart3 className="w-5 h-5" />
                     مقارنة مع الخدمات الخارجية

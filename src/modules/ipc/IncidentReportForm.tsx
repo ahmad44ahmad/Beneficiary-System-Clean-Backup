@@ -19,10 +19,10 @@ const INCIDENT_CATEGORIES = [
 ];
 
 const SEVERITY_LEVELS = [
-    { value: 'mild', label: 'خفيف', color: 'bg-[#2BB574]/15 text-[#1E9658] border-[#2BB574]' },
-    { value: 'moderate', label: 'متوسط', color: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]' },
-    { value: 'severe', label: 'شديد', color: 'bg-[#F7941D]/15 text-[#D67A0A] border-[#F7941D]' },
-    { value: 'critical', label: 'حرج', color: 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]' },
+    { value: 'mild', label: 'خفيف', color: 'bg-[#2BB574]/15 text-[#2BB574] border-[#2BB574]' },
+    { value: 'moderate', label: 'متوسط', color: 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]' },
+    { value: 'severe', label: 'شديد', color: 'bg-[#F7941D]/15 text-[#F7941D] border-[#F7941D]' },
+    { value: 'critical', label: 'حرج', color: 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]' },
 ];
 
 const AFFECTED_TYPES = [
@@ -162,7 +162,7 @@ export const IncidentReportForm: React.FC = () => {
     return (
         <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#B91C1C] via-[#B91C1C] to-[#7F1D1D] rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#DC2626] via-[#DC2626] to-[#7F1D1D] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => navigate('/ipc')}
@@ -238,7 +238,7 @@ export const IncidentReportForm: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-700 font-bold mb-2 flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-[#1E9658]" />
+                            <MapPin className="w-4 h-4 text-[#2BB574]" />
                             الموقع
                         </label>
                         <select
@@ -256,7 +256,7 @@ export const IncidentReportForm: React.FC = () => {
                     </div>
                     <div>
                         <label className="block text-gray-700 font-bold mb-2 flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-[#D49A0A]" />
+                            <FileText className="w-4 h-4 text-[#FCB614]" />
                             اسم المُبلِّغ <span className="text-[#DC2626]">*</span>
                         </label>
                         <input
@@ -273,7 +273,7 @@ export const IncidentReportForm: React.FC = () => {
             {/* Clinical Details */}
             <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                 <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
-                    <Thermometer className="w-5 h-5 text-[#D67A0A]" />
+                    <Thermometer className="w-5 h-5 text-[#F7941D]" />
                     البيانات السريرية
                 </label>
 
@@ -352,7 +352,7 @@ export const IncidentReportForm: React.FC = () => {
             {/* Immediate Actions */}
             <div className="bg-white rounded-2xl p-5 mb-6 shadow-sm">
                 <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-[#1E9658]" />
+                    <Shield className="w-5 h-5 text-[#2BB574]" />
                     الإجراءات الفورية المتخذة
                 </label>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -376,9 +376,9 @@ export const IncidentReportForm: React.FC = () => {
                         type="checkbox"
                         checked={isolationRequired}
                         onChange={e => setIsolationRequired(e.target.checked)}
-                        className="w-5 h-5 rounded text-[#D49A0A] focus:ring-[#FCB614]"
+                        className="w-5 h-5 rounded text-[#FCB614] focus:ring-[#FCB614]"
                     />
-                    <span className="font-medium text-[#D49A0A]">يتطلب عزل فوري</span>
+                    <span className="font-medium text-[#FCB614]">يتطلب عزل فوري</span>
                 </label>
             </div>
 
@@ -390,7 +390,7 @@ export const IncidentReportForm: React.FC = () => {
                     className="w-full flex items-center justify-between"
                 >
                     <label className="block text-gray-700 font-bold flex items-center gap-2 cursor-pointer">
-                        <Search className="w-5 h-5 text-[#D49A0A]" />
+                        <Search className="w-5 h-5 text-[#FCB614]" />
                         تحليل السبب الجذري (RCA)
                         <span className="text-xs font-normal text-gray-400 mr-2">- اختياري</span>
                     </label>
@@ -506,7 +506,7 @@ export const IncidentReportForm: React.FC = () => {
             <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full bg-[#B91C1C] hover:bg-[#B91C1C] disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3 sticky bottom-4"
+                className="w-full bg-[#DC2626] hover:bg-[#DC2626] disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl shadow-md flex items-center justify-center gap-3 sticky bottom-4"
             >
                 {submitting ? (
                     <>

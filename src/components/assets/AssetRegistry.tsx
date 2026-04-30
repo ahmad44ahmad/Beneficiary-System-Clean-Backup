@@ -19,10 +19,10 @@ const categoryLabels: Record<AssetCategory, string> = {
 };
 
 const conditionColors: Record<AssetCondition, string> = {
-    new: 'bg-[#2BB574]/15 text-[#14532D]',
-    good: 'bg-[#269798]/15 text-[#1B7778]',
-    fair: 'bg-[#FCB614]/10 text-[#D49A0A]',
-    poor: 'bg-[#F7941D]/15 text-[#92400E]',
+    new: 'bg-[#2BB574]/15 text-[#0F3144]',
+    good: 'bg-[#269798]/15 text-[#269798]',
+    fair: 'bg-[#FCB614]/10 text-[#FCB614]',
+    poor: 'bg-[#F7941D]/15 text-[#0F3144]',
     damaged: 'bg-[#DC2626]/15 text-[#7F1D1D]',
     retired: 'bg-gray-100 text-gray-800'
 };
@@ -121,7 +121,7 @@ export const AssetRegistry: React.FC<AssetRegistryProps> = ({ assets, onReportFa
                                     <Button
                                         size="sm"
                                         variant="outline"
-                                        className="text-[#D67A0A] border-[#F7941D]/30 hover:bg-[#F7941D]/10"
+                                        className="text-[#F7941D] border-[#F7941D]/30 hover:bg-[#F7941D]/10"
                                         onClick={() => onReportFault(asset)}
                                         title="إبلاغ عن عطل"
                                     >

@@ -47,7 +47,7 @@ export const VARIANCE_LABELS: Record<OutcomeActual['variance'], string> = {
 export const VARIANCE_TONES: Record<OutcomeActual['variance'], { bg: string; text: string; icon: string }> = {
     exceeded:  { bg: 'bg-hrsd-green/15', text: 'text-hrsd-green-dark', icon: '↗' },
     on_target: { bg: 'bg-[#269798]/10',       text: 'text-[#0F3144]',         icon: '→' },
-    below:     { bg: 'bg-[#FCB614]/15',     text: 'text-[#92400E]',       icon: '↓' },
+    below:     { bg: 'bg-[#FCB614]/15',     text: 'text-[#0F3144]',       icon: '↓' },
     failed:    { bg: 'bg-[#DC2626]/15',      text: 'text-[#7F1D1D]',        icon: '✕' },
 };
 

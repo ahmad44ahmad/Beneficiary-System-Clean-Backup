@@ -41,7 +41,7 @@ const KPICard: React.FC<{
                         <span className="text-gray-500 text-sm">{unit}</span>
                     </div>
                     {trend !== undefined && (
-                        <div className={`flex items-center gap-1 mt-2 text-sm ${trend >= 0 ? 'text-[#1E9658]' : 'text-[#DC2626]'}`}>
+                        <div className={`flex items-center gap-1 mt-2 text-sm ${trend >= 0 ? 'text-[#2BB574]' : 'text-[#DC2626]'}`}>
                             {trend >= 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
                             <span>{Math.abs(trend)}% عن الأسبوع الماضي</span>
                         </div>
@@ -65,7 +65,7 @@ const WeeklyChart: React.FC<{ data: Array<{ week: string; compliance: number }> 
             {data.map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center flex-1">
                     <div
-                        className="w-full bg-[#2BB574] rounded-t-lg transition-all hover:bg-[#1E9658]"
+                        className="w-full bg-[#2BB574] rounded-t-lg transition-all hover:bg-[#2BB574]"
                         style={{
                             height: `${(item.compliance / maxValue) * 100}%`,
                             minHeight: '20px'
@@ -121,7 +121,7 @@ export const IPCDashboard: React.FC = () => {
                     <div>
                         <div className="flex items-center gap-3">
                             <div className="p-3 bg-[#2BB574]/15 rounded-xl">
-                                <Shield className="w-8 h-8 text-[#1E9658]" />
+                                <Shield className="w-8 h-8 text-[#2BB574]" />
                             </div>
                             <div>
                                 <h1 className="text-2xl font-bold text-gray-800">درع السلامة</h1>
@@ -141,7 +141,7 @@ export const IPCDashboard: React.FC = () => {
                     </button>
                     <button
                         onClick={() => navigate('/ipc/inspection')}
-                        className="px-4 py-2 bg-[#1E9658] text-white rounded-lg hover:bg-[#1E9658] flex items-center gap-2 shadow-md"
+                        className="px-4 py-2 bg-[#2BB574] text-white rounded-lg hover:bg-[#2BB574] flex items-center gap-2 shadow-md"
                     >
                         <Plus className="w-4 h-4" />
                         جولة تفتيش جديدة
@@ -192,7 +192,7 @@ export const IPCDashboard: React.FC = () => {
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="font-bold text-gray-800 flex items-center gap-2">
-                            <Activity className="w-5 h-5 text-[#1E9658]" />
+                            <Activity className="w-5 h-5 text-[#2BB574]" />
                             اتجاه الامتثال (آخر 4 أسابيع)
                         </h3>
                         <span className="text-sm text-gray-500">
@@ -206,69 +206,69 @@ export const IPCDashboard: React.FC = () => {
                 {/* Quick Actions */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-6 flex items-center gap-2">
-                        <ClipboardCheck className="w-5 h-5 text-[#1E9658]" />
+                        <ClipboardCheck className="w-5 h-5 text-[#2BB574]" />
                         الإجراءات السريعة
                     </h3>
                     <div className="grid grid-cols-3 gap-3">
                         <button
                             onClick={() => navigate('/ipc/inspection')}
-                            className="p-3 bg-[#2BB574]/10 rounded-xl text-[#1E9658] hover:bg-[#2BB574]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#2BB574]/10 rounded-xl text-[#2BB574] hover:bg-[#2BB574]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <ClipboardCheck size={28} />
                             <span className="font-medium text-sm">جولة تفتيش</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/incident/new')}
-                            className="p-3 bg-[#DC2626]/10 rounded-xl text-[#B91C1C] hover:bg-[#DC2626]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#DC2626]/10 rounded-xl text-[#DC2626] hover:bg-[#DC2626]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <AlertCircle size={28} />
                             <span className="font-medium text-sm">إبلاغ حادثة</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/immunizations')}
-                            className="p-3 bg-[#269798]/10 rounded-xl text-[#1B7778] hover:bg-[#269798]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#269798]/10 rounded-xl text-[#269798] hover:bg-[#269798]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <Syringe size={28} />
                             <span className="font-medium text-sm">التحصينات</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/ppe')}
-                            className="p-3 bg-[#FCB614]/10 rounded-xl text-[#D49A0A] hover:bg-[#FCB614]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#FCB614]/10 rounded-xl text-[#FCB614] hover:bg-[#FCB614]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <HardHat size={28} />
                             <span className="font-medium text-sm">بروتوكول PPE</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/bicsl')}
-                            className="p-3 bg-[#269798]/10 rounded-xl text-[#1B7778] hover:bg-[#269798]/10 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#269798]/10 rounded-xl text-[#269798] hover:bg-[#269798]/10 transition-colors flex flex-col items-center gap-2"
                         >
                             <ShieldCheck size={28} />
                             <span className="font-medium text-sm">رخصة BICSL</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/exposure/new')}
-                            className="p-3 bg-[#F7941D]/10 rounded-xl text-[#D67A0A] hover:bg-[#F7941D]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#F7941D]/10 rounded-xl text-[#F7941D] hover:bg-[#F7941D]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <Biohazard size={28} />
                             <span className="font-medium text-sm">تعرض مهني</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/outbreak')}
-                            className="p-3 bg-[#DC2626]/10 rounded-xl text-[#B91C1C] hover:bg-[#DC2626]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#DC2626]/10 rounded-xl text-[#DC2626] hover:bg-[#DC2626]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <AlertTriangle size={28} />
                             <span className="font-medium text-sm">إدارة التفشي</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/isolation')}
-                            className="p-3 bg-[#FCB614]/10 rounded-xl text-[#D49A0A] hover:bg-[#FCB614]/10 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#FCB614]/10 rounded-xl text-[#FCB614] hover:bg-[#FCB614]/10 transition-colors flex flex-col items-center gap-2"
                         >
                             <BedDouble size={28} />
                             <span className="font-medium text-sm">دليل العزل</span>
                         </button>
                         <button
                             onClick={() => navigate('/ipc/analytics')}
-                            className="p-3 bg-[#FCB614]/10 rounded-xl text-[#D49A0A] hover:bg-[#FCB614]/15 transition-colors flex flex-col items-center gap-2"
+                            className="p-3 bg-[#FCB614]/10 rounded-xl text-[#FCB614] hover:bg-[#FCB614]/15 transition-colors flex flex-col items-center gap-2"
                         >
                             <Activity size={28} />
                             <span className="font-medium text-sm">التحليلات</span>
@@ -289,7 +289,7 @@ export const IPCDashboard: React.FC = () => {
                     </div>
                     <button
                         onClick={() => navigate('/ipc/incidents')}
-                        className="px-4 py-2 bg-[#B91C1C] text-white rounded-lg hover:bg-[#B91C1C]"
+                        className="px-4 py-2 bg-[#DC2626] text-white rounded-lg hover:bg-[#DC2626]"
                     >
                         عرض الحالات
                     </button>

@@ -70,7 +70,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSave, 
             <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200">
                 <div className="flex justify-between items-center mb-6 border-b pb-4">
                     <h2 className="text-xl font-bold flex items-center gap-2">
-                        <Network className="w-6 h-6 text-[#D49A0A]" />
+                        <Network className="w-6 h-6 text-[#FCB614]" />
                         محضر اجتماع جديد
                     </h2>
                     <button onClick={onCancel} className="text-gray-500 hover:text-[#DC2626]">
@@ -107,7 +107,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSave, 
                                 onChange={(e) => setNewAttendee(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addAttendee())}
                             />
-                            <button type="button" onClick={addAttendee} className="bg-[#FCB614]/15 text-[#D49A0A] px-3 rounded-md hover:bg-[#FCB614]/20">
+                            <button type="button" onClick={addAttendee} className="bg-[#FCB614]/15 text-[#FCB614] px-3 rounded-md hover:bg-[#FCB614]/20">
                                 <Plus className="w-4 h-4" />
                             </button>
                         </div>
@@ -200,7 +200,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSave, 
                                             <td className="p-2">{item.assignee}</td>
                                             <td className="p-2">{item.dueDate}</td>
                                             <td className="p-2 text-center">
-                                                <button type="button" onClick={() => removeActionItem(i)} className="text-[#DC2626] hover:text-[#B91C1C]">
+                                                <button type="button" onClick={() => removeActionItem(i)} className="text-[#DC2626] hover:text-[#DC2626]">
                                                     <Trash2 className="w-4 h-4" />
                                                 </button>
                                             </td>
@@ -218,7 +218,7 @@ export const MeetingMinutesForm: React.FC<MeetingMinutesFormProps> = ({ onSave, 
 
                     <div className="flex justify-end gap-3 pt-4 border-t">
                         <button type="button" onClick={onCancel} className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">إلغاء</button>
-                        <button type="submit" className="px-4 py-2 bg-[#D49A0A] text-white rounded-md hover:bg-[#D49A0A] flex items-center gap-2">
+                        <button type="submit" className="px-4 py-2 bg-[#FCB614] text-white rounded-md hover:bg-[#FCB614] flex items-center gap-2">
                             <Save className="w-4 h-4" />
                             حفظ المحضر
                         </button>

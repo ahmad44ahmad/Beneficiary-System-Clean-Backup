@@ -29,7 +29,7 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary })
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#269798]/10 text-[#1B7778]">
+                        <div className="p-3 rounded-full bg-[#269798]/10 text-[#269798]">
                             <Smile size={24} />
                         </div>
                         <div className="me-4">
@@ -55,7 +55,7 @@ export const DentalDashboard: React.FC<DentalDashboardProps> = ({ beneficiary })
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#1E9658]">
+                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#2BB574]">
                             <HeartPulse size={24} />
                         </div>
                         <div className="me-4">

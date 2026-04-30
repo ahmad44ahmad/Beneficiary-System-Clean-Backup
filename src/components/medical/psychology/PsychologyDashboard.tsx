@@ -29,7 +29,7 @@ export const PsychologyDashboard: React.FC<PsychologyDashboardProps> = ({ benefi
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#269798]/10 text-[#1B7778]">
+                        <div className="p-3 rounded-full bg-[#269798]/10 text-[#269798]">
                             <Brain size={24} />
                         </div>
                         <div className="ms-4">

@@ -46,7 +46,7 @@ export const SecretariatDashboard = () => {
                 <button
                     onClick={() => setActiveTab('outgoing')}
                     className={`pb-3 px-4 flex items-center gap-2 transition-colors border-b-2 ${activeTab === 'outgoing'
-                            ? 'border-[#1E9658] text-[#1E9658] font-semibold'
+                            ? 'border-[#2BB574] text-[#2BB574] font-semibold'
                             : 'border-transparent text-gray-500 hover:text-gray-700'
                         }`}
                 >
@@ -56,7 +56,7 @@ export const SecretariatDashboard = () => {
                 <button
                     onClick={() => setActiveTab('meetings')}
                     className={`pb-3 px-4 flex items-center gap-2 transition-colors border-b-2 ${activeTab === 'meetings'
-                            ? 'border-[#D49A0A] text-[#D49A0A] font-semibold'
+                            ? 'border-[#FCB614] text-[#FCB614] font-semibold'
                             : 'border-transparent text-gray-500 hover:text-gray-700'
                         }`}
                 >
@@ -107,15 +107,15 @@ export const SecretariatDashboard = () => {
                                                 <td className="p-4">{mail.sender}</td>
                                                 <td className="p-4">{mail.receiverDept}</td>
                                                 <td className="p-4">
-                                                    <span className={`px-2 py-1 rounded text-xs ${mail.priority === 'urgent' ? 'bg-[#DC2626]/15 text-[#B91C1C]' :
+                                                    <span className={`px-2 py-1 rounded text-xs ${mail.priority === 'urgent' ? 'bg-[#DC2626]/15 text-[#DC2626]' :
                                                             mail.priority === 'top_urgent' ? 'bg-[#7F1D1D] text-white' : 'bg-gray-100 text-gray-700'
                                                         }`}>
                                                         {mail.priority === 'normal' ? 'عادي' : mail.priority === 'urgent' ? 'عاجل' : 'عاجل جداً'}
                                                     </span>
                                                 </td>
                                                 <td className="p-4">
-                                                    <span className={`px-2 py-1 rounded text-xs ${mail.status === 'processed' ? 'bg-[#2BB574]/15 text-[#1E9658]' :
-                                                            'bg-[#FCB614]/10 text-[#D49A0A]'
+                                                    <span className={`px-2 py-1 rounded text-xs ${mail.status === 'processed' ? 'bg-[#2BB574]/15 text-[#2BB574]' :
+                                                            'bg-[#FCB614]/10 text-[#FCB614]'
                                                         }`}>
                                                         {mail.status === 'processed' ? 'تم التوجيه' : 'قيد الإجراء'}
                                                     </span>
@@ -140,7 +140,7 @@ export const SecretariatDashboard = () => {
                                 </div>
                                 <Button variant="outline"><Filter className="w-4 h-4" /></Button>
                             </div>
-                            <Button onClick={() => setShowOutgoingForm(true)} className="bg-[#1E9658] hover:bg-[#1E9658]">
+                            <Button onClick={() => setShowOutgoingForm(true)} className="bg-[#2BB574] hover:bg-[#2BB574]">
                                 <Plus className="w-4 h-4 ms-2" />
                                 صادر جديد
                             </Button>
@@ -167,7 +167,7 @@ export const SecretariatDashboard = () => {
                                                 <td className="p-4">{mail.senderDept}</td>
                                                 <td className="p-4">{mail.destination}</td>
                                                 <td className="p-4">
-                                                    <span className={`px-2 py-1 rounded text-xs ${mail.status === 'sent' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-gray-100 text-gray-700'
+                                                    <span className={`px-2 py-1 rounded text-xs ${mail.status === 'sent' ? 'bg-[#269798]/15 text-[#269798]' : 'bg-gray-100 text-gray-700'
                                                         }`}>
                                                         {mail.status === 'sent' ? 'تم الإرسال' : 'مسودة'}
                                                     </span>
@@ -191,7 +191,7 @@ export const SecretariatDashboard = () => {
                                     <input type="text" placeholder="بحث في الاجتماعات..." className="w-full pe-10 ps-4 py-2 border rounded-md text-sm" />
                                 </div>
                             </div>
-                            <Button onClick={() => setShowMeetingForm(true)} className="bg-[#D49A0A] hover:bg-[#D49A0A]">
+                            <Button onClick={() => setShowMeetingForm(true)} className="bg-[#FCB614] hover:bg-[#FCB614]">
                                 <Plus className="w-4 h-4 ms-2" />
                                 اجتماع جديد
                             </Button>
@@ -206,7 +206,7 @@ export const SecretariatDashboard = () => {
                                             <p className="text-gray-500 text-sm">{minute.date} | {minute.time}</p>
                                         </div>
                                         <div className="bg-[#FCB614]/15 p-2 rounded-lg">
-                                            <Network className="w-5 h-5 text-[#D49A0A]" />
+                                            <Network className="w-5 h-5 text-[#FCB614]" />
                                         </div>
                                     </div>
 
@@ -238,7 +238,7 @@ export const SecretariatDashboard = () => {
 
                                     <div className="mt-4 pt-4 border-t flex justify-between items-center">
                                         <span className="text-xs text-gray-500">{minute.actionItems?.length || 0} مهام متابعة</span>
-                                        <button className="text-[#D49A0A] text-sm hover:underline">عرض التفاصيل</button>
+                                        <button className="text-[#FCB614] text-sm hover:underline">عرض التفاصيل</button>
                                     </div>
                                 </Card>
                             ))}

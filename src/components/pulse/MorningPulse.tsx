@@ -150,8 +150,8 @@ export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate 
                 className="text-center mb-8"
             >
                 <div className="inline-flex items-center gap-2 bg-[#FCB614]/10 px-4 py-1.5 rounded-full mb-4 border border-[#FCB614]/30">
-                    <Sparkles className="w-4 h-4 text-[#D49A0A]" />
-                    <span className="text-[#D49A0A] text-sm font-medium">منظومة بصيرة — نبض المركز</span>
+                    <Sparkles className="w-4 h-4 text-[#FCB614]" />
+                    <span className="text-[#FCB614] text-sm font-medium">منظومة بصيرة — نبض المركز</span>
                 </div>
                 <h2 className="text-4xl font-bold text-hrsd-navy">الموقف العام للمركز</h2>
                 <p className="text-hrsd-cool-gray mt-2">تحديث لحظي للمؤشرات التشغيلية</p>
@@ -233,7 +233,7 @@ export const MorningPulse: React.FC<MorningPulseProps> = ({ onClose, onNavigate 
                                 <p className="text-hrsd-cool-gray text-sm mt-1">الرطوبة: {data.weather.humidity}%</p>
                             </div>
                             <div className="w-20 h-20 bg-[#FCB614]/15 border-2 border-[#FCB614]/30 rounded-full flex items-center justify-center">
-                                <WeatherIcon className="w-10 h-10 text-[#D49A0A]" />
+                                <WeatherIcon className="w-10 h-10 text-[#FCB614]" />
                             </div>
                         </div>
                     </div>

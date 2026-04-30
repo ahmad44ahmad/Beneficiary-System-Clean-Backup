@@ -92,22 +92,22 @@ export const MedicalDashboard: React.FC<MedicalDashboardProps> = ({ beneficiary 
                             <div className="text-center p-4 bg-gradient-to-br from-[#DC2626]/10 to-[#DC2626]/10 rounded-xl border border-[#DC2626]/30 hover-lift">
                                 <HeartPulse className="w-6 h-6 text-[#DC2626] mx-auto mb-2" />
                                 <span className="text-xs text-[#DC2626] block font-semibold">ضغط الدم</span>
-                                <span className="text-2xl font-bold text-[#B91C1C]">120/80</span>
+                                <span className="text-2xl font-bold text-[#DC2626]">120/80</span>
                             </div>
                             <div className="text-center p-4 bg-gradient-to-br from-[#269798]/10 to-[#269798]/10 rounded-xl border border-[#269798]/30 hover-lift">
                                 <Activity className="w-6 h-6 text-[#269798] mx-auto mb-2" />
                                 <span className="text-xs text-[#269798] block font-semibold">النبض</span>
-                                <span className="text-2xl font-bold text-[#1B7778]">72</span>
+                                <span className="text-2xl font-bold text-[#269798]">72</span>
                             </div>
                             <div className="text-center p-4 bg-gradient-to-br from-[#2BB574]/10 to-[#2BB574]/10 rounded-xl border border-[#2BB574]/20 hover-lift">
-                                <HeartPulse className="w-6 h-6 text-[#1E9658] mx-auto mb-2" />
-                                <span className="text-xs text-[#1E9658] block font-semibold">الأكسجين</span>
-                                <span className="text-2xl font-bold text-[#1E9658]">98%</span>
+                                <HeartPulse className="w-6 h-6 text-[#2BB574] mx-auto mb-2" />
+                                <span className="text-xs text-[#2BB574] block font-semibold">الأكسجين</span>
+                                <span className="text-2xl font-bold text-[#2BB574]">98%</span>
                             </div>
                             <div className="text-center p-4 bg-gradient-to-br from-[#F7941D]/10 to-[#F7941D]/10 rounded-xl border border-[#F7941D]/30 hover-lift">
-                                <Activity className="w-6 h-6 text-[#D67A0A] mx-auto mb-2" />
-                                <span className="text-xs text-[#D67A0A] block font-semibold">الحرارة</span>
-                                <span className="text-2xl font-bold text-[#D67A0A]">37.0°</span>
+                                <Activity className="w-6 h-6 text-[#F7941D] mx-auto mb-2" />
+                                <span className="text-xs text-[#F7941D] block font-semibold">الحرارة</span>
+                                <span className="text-2xl font-bold text-[#F7941D]">37.0°</span>
                             </div>
                         </div>
                     </div>

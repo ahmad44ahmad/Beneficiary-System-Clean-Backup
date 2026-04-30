@@ -38,7 +38,7 @@ export const QualityExcellenceHub: React.FC = () => {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold flex items-center gap-3 text-[#0F3144]">
-                        <Star className="w-8 h-8 text-[#D49A0A] fill-[#FCB614]" />
+                        <Star className="w-8 h-8 text-[#FCB614] fill-[#FCB614]" />
                         مركز التميز المؤسسي
                     </h1>
                     <p className="text-gray-500 mt-2">
@@ -143,7 +143,7 @@ const GoldenGuideView = () => {
             {/* Roadmap Timeline */}
             <Card className="p-6">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-[#0F3144]">
-                    <TrendingUp className="w-5 h-5 text-[#1E9658]" />
+                    <TrendingUp className="w-5 h-5 text-[#2BB574]" />
                     خارطة الطريق: 12 شهراً للتميز
                 </h3>
                 <div className="relative">
@@ -157,10 +157,10 @@ const GoldenGuideView = () => {
                         ].map((phase, idx) => (
                             <div key={idx} className={`bg-white border rounded-xl p-4 shadow-sm transition-all hover:shadow-md ${phase.status === 'active' ? 'ring-2 ring-[#2BB574] border-transparent' : ''}`}>
                                 <div className="flex justify-between items-center mb-3">
-                                    <span className={`text-2xl font-black ${phase.status === 'completed' ? 'text-[#1E9658]' : phase.status === 'active' ? 'text-[#269798]' : 'text-gray-300'}`}>
+                                    <span className={`text-2xl font-black ${phase.status === 'completed' ? 'text-[#2BB574]' : phase.status === 'active' ? 'text-[#269798]' : 'text-gray-300'}`}>
                                         {phase.q}
                                     </span>
-                                    {phase.status === 'completed' && <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />}
+                                    {phase.status === 'completed' && <CheckCircle2 className="w-5 h-5 text-[#2BB574]" />}
                                 </div>
                                 <h4 className="font-bold text-gray-800 mb-2">{phase.title}</h4>
                                 <ul className="text-sm text-gray-500 space-y-1">
@@ -191,7 +191,7 @@ const GoldenGuideView = () => {
                             icon: ClipboardCheck,
                             color: 'bg-[#269798]',
                             bgLight: 'bg-[#269798]/10',
-                            textColor: 'text-[#1B7778]',
+                            textColor: 'text-[#269798]',
                             description: 'تحديد الفرص وتخطيط التغيير',
                             activities: ['تحليل الفجوات', 'تحديد الأهداف', 'تخطيط الموارد', 'تصميم العمليات']
                         },
@@ -201,7 +201,7 @@ const GoldenGuideView = () => {
                             icon: PlayCircle,
                             color: 'bg-[#2BB574]',
                             bgLight: 'bg-[#2BB574]/10',
-                            textColor: 'text-[#1E9658]',
+                            textColor: 'text-[#2BB574]',
                             description: 'اختبار التغيير وتنفيذه على نطاق صغير',
                             activities: ['تنفيذ الخطة', 'جمع البيانات', 'توثيق العمليات', 'تدريب الموظفين']
                         },
@@ -211,7 +211,7 @@ const GoldenGuideView = () => {
                             icon: CheckCircle2,
                             color: 'bg-[#FCB614]',
                             bgLight: 'bg-[#FCB614]/10',
-                            textColor: 'text-[#D49A0A]',
+                            textColor: 'text-[#FCB614]',
                             description: 'مراجعة الاختبار وتحليل النتائج',
                             activities: ['قياس الأداء', 'تحليل النتائج', 'مقارنة بالأهداف', 'تحديد الانحرافات']
                         },
@@ -221,7 +221,7 @@ const GoldenGuideView = () => {
                             icon: Settings2,
                             color: 'bg-[#DC2626]',
                             bgLight: 'bg-[#DC2626]/10',
-                            textColor: 'text-[#B91C1C]',
+                            textColor: 'text-[#DC2626]',
                             description: 'اتخاذ إجراءات بناءً على ما تعلمته',
                             activities: ['توحيد أفضل الممارسات', 'تصحيح الانحرافات', 'نشر التحسينات', 'بدء دورة جديدة']
                         },
@@ -262,7 +262,7 @@ const GoldenGuideView = () => {
             {/* FOCUS-PDSA Methodology */}
             <Card className="p-6">
                 <h3 className="text-xl font-bold mb-2 flex items-center gap-2 text-[#0F3144]">
-                    <Search className="w-5 h-5 text-[#D49A0A]" />
+                    <Search className="w-5 h-5 text-[#FCB614]" />
                     منهجية FOCUS-PDSA للتحسين المستمر
                 </h3>
                 <p className="text-sm text-gray-500 mb-6">المحرك التشغيلي والمنهج العلمي للتحسين المستمر - من النوايا الحسنة إلى التغيير المنهجي المدروس</p>
@@ -270,8 +270,8 @@ const GoldenGuideView = () => {
                 {/* Phase 1: FOCUS */}
                 <div className="mb-6">
                     <div className="flex items-center gap-2 mb-4">
-                        <div className="w-8 h-8 bg-[#D49A0A] rounded-lg flex items-center justify-center text-white font-bold text-sm">1</div>
-                        <h4 className="font-bold text-[#D49A0A]">المرحلة الأولى: التشخيص والتركيز (FOCUS)</h4>
+                        <div className="w-8 h-8 bg-[#FCB614] rounded-lg flex items-center justify-center text-white font-bold text-sm">1</div>
+                        <h4 className="font-bold text-[#FCB614]">المرحلة الأولى: التشخيص والتركيز (FOCUS)</h4>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
                         {[
@@ -283,8 +283,8 @@ const GoldenGuideView = () => {
                         ].map((step, idx) => (
                             <div key={idx} className="bg-[#FCB614]/10 border border-[#FCB614]/10 rounded-lg p-3 text-center hover:shadow-md transition-all">
                                 <div className="text-2xl mb-1">{step.icon}</div>
-                                <div className="text-[#D49A0A] font-bold text-lg">{step.letter}</div>
-                                <div className="text-[#D49A0A] font-medium text-sm">{step.ar}</div>
+                                <div className="text-[#FCB614] font-bold text-lg">{step.letter}</div>
+                                <div className="text-[#FCB614] font-medium text-sm">{step.ar}</div>
                                 <div className="text-xs text-gray-500 mt-1">{step.desc}</div>
                             </div>
                         ))}
@@ -294,15 +294,15 @@ const GoldenGuideView = () => {
                 {/* Phase 2: PDSA */}
                 <div>
                     <div className="flex items-center gap-2 mb-4">
-                        <div className="w-8 h-8 bg-[#1B7778] rounded-lg flex items-center justify-center text-white font-bold text-sm">2</div>
-                        <h4 className="font-bold text-[#1B7778]">المرحلة الثانية: التجريب والتعلم (PDSA)</h4>
+                        <div className="w-8 h-8 bg-[#269798] rounded-lg flex items-center justify-center text-white font-bold text-sm">2</div>
+                        <h4 className="font-bold text-[#269798]">المرحلة الثانية: التجريب والتعلم (PDSA)</h4>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                         {[
-                            { letter: 'P', ar: 'خطط', en: 'Plan', desc: 'وضع خطة دقيقة للتجربة', color: 'bg-[#269798]/10 border-[#269798]/10 text-[#1B7778]' },
-                            { letter: 'D', ar: 'نفذ', en: 'Do', desc: 'تطبيق الحل على نطاق تجريبي', color: 'bg-[#2BB574]/10 border-[#2BB574]/10 text-[#1E9658]' },
-                            { letter: 'S', ar: 'ادرس', en: 'Study', desc: 'تحليل البيانات والنتائج', color: 'bg-[#FCB614]/10 border-[#FCB614]/10 text-[#D49A0A]' },
-                            { letter: 'A', ar: 'تصرف', en: 'Act', desc: 'التبني أو التعديل أو التخلي', color: 'bg-[#DC2626]/10 border-[#DC2626]/10 text-[#B91C1C]' },
+                            { letter: 'P', ar: 'خطط', en: 'Plan', desc: 'وضع خطة دقيقة للتجربة', color: 'bg-[#269798]/10 border-[#269798]/10 text-[#269798]' },
+                            { letter: 'D', ar: 'نفذ', en: 'Do', desc: 'تطبيق الحل على نطاق تجريبي', color: 'bg-[#2BB574]/10 border-[#2BB574]/10 text-[#2BB574]' },
+                            { letter: 'S', ar: 'ادرس', en: 'Study', desc: 'تحليل البيانات والنتائج', color: 'bg-[#FCB614]/10 border-[#FCB614]/10 text-[#FCB614]' },
+                            { letter: 'A', ar: 'تصرف', en: 'Act', desc: 'التبني أو التعديل أو التخلي', color: 'bg-[#DC2626]/10 border-[#DC2626]/10 text-[#DC2626]' },
                         ].map((step, idx) => (
                             <div key={idx} className={`${step.color} border rounded-lg p-4 text-center hover:shadow-md transition-all`}>
                                 <div className={`font-bold text-2xl`}>{step.letter}</div>
@@ -316,7 +316,7 @@ const GoldenGuideView = () => {
                 {/* TQM Integration Note */}
                 <div className="mt-6 p-4 bg-gradient-to-r from-[#FCB614]/10 to-[#269798]/10 rounded-lg border border-[#FCB614]/10">
                     <div className="flex items-start gap-3">
-                        <Award className="w-6 h-6 text-[#D49A0A] flex-shrink-0 mt-1" />
+                        <Award className="w-6 h-6 text-[#FCB614] flex-shrink-0 mt-1" />
                         <div>
                             <p className="text-sm text-gray-700">
                                 <span className="font-bold text-[#0F3144]">القيمة الاستراتيجية:</span> تُمثل FOCUS-PDSA "الآلية التنفيذية" لفلسفة كايزن (Kaizen) والتحسين المستمر.
@@ -355,7 +355,7 @@ const QualityAccordionSection = () => {
             id: 'kpis',
             title: 'مؤشرات الأداء الرئيسية (KPIs)',
             icon: Target,
-            color: 'text-[#1E9658] bg-[#2BB574]/10',
+            color: 'text-[#2BB574] bg-[#2BB574]/10',
             content: <KPIsContent />
         },
         {
@@ -369,21 +369,21 @@ const QualityAccordionSection = () => {
             id: 'fms',
             title: 'إدارة المرافق والسلامة (FMS)',
             icon: Building2,
-            color: 'text-[#D67A0A] bg-[#F7941D]/10',
+            color: 'text-[#F7941D] bg-[#F7941D]/10',
             content: <FMSContent />
         },
         {
             id: 'roles',
             title: 'الهيكل التنظيمي والأدوار الوظيفية',
             icon: Users,
-            color: 'text-[#D49A0A] bg-[#FCB614]/10',
+            color: 'text-[#FCB614] bg-[#FCB614]/10',
             content: <RolesContent />
         },
         {
             id: 'risk',
             title: 'إدارة المخاطر والإبلاغ عن الحوادث (OVR)',
             icon: AlertTriangle,
-            color: 'text-[#D49A0A] bg-[#FCB614]/10',
+            color: 'text-[#FCB614] bg-[#FCB614]/10',
             content: <RiskManagementContent />
         }
     ];
@@ -438,7 +438,7 @@ const TQMContent = () => (
             ].map((item, idx) => (
                 <div key={idx} className="bg-[#269798]/10 rounded-lg p-4 text-center border border-[#269798]/10">
                     <item.icon className="w-8 h-8 text-[#269798] mx-auto mb-2" />
-                    <h4 className="font-bold text-sm text-[#1B7778]">{item.title}</h4>
+                    <h4 className="font-bold text-sm text-[#269798]">{item.title}</h4>
                     <p className="text-xs text-gray-600 mt-1">{item.desc}</p>
                 </div>
             ))}
@@ -466,14 +466,14 @@ const KPIsContent = () => (
                     ].map((kpi, idx) => (
                         <div key={idx} className="flex justify-between items-center bg-white rounded px-3 py-2 text-sm">
                             <span className="text-gray-700">{kpi.name}</span>
-                            <span className="font-mono text-xs bg-[#DC2626]/15 text-[#B91C1C] px-2 py-0.5 rounded">{kpi.target}</span>
+                            <span className="font-mono text-xs bg-[#DC2626]/15 text-[#DC2626] px-2 py-0.5 rounded">{kpi.target}</span>
                         </div>
                     ))}
                 </div>
             </div>
             {/* Operational KPIs */}
             <div className="bg-[#2BB574]/10 rounded-lg p-4 border border-[#2BB574]/10">
-                <h4 className="font-bold text-[#14532D] mb-3 flex items-center gap-2">
+                <h4 className="font-bold text-[#0F3144] mb-3 flex items-center gap-2">
                     <Activity className="w-4 h-4" />
                     المؤشرات التشغيلية
                 </h4>
@@ -486,7 +486,7 @@ const KPIsContent = () => (
                     ].map((kpi, idx) => (
                         <div key={idx} className="flex justify-between items-center bg-white rounded px-3 py-2 text-sm">
                             <span className="text-gray-700">{kpi.name}</span>
-                            <span className="font-mono text-xs bg-[#2BB574]/15 text-[#1E9658] px-2 py-0.5 rounded">{kpi.target}</span>
+                            <span className="font-mono text-xs bg-[#2BB574]/15 text-[#2BB574] px-2 py-0.5 rounded">{kpi.target}</span>
                         </div>
                     ))}
                 </div>
@@ -541,7 +541,7 @@ const FMSContent = () => (
                         { letter: 'E', ar: 'الإطفاء/الإخلاء', en: 'Extinguish/Evacuate' },
                     ].map((step, idx) => (
                         <div key={idx} className="flex items-center gap-2 bg-white rounded px-3 py-2">
-                            <span className="w-8 h-8 bg-[#B91C1C] text-white rounded-full flex items-center justify-center font-bold">{step.letter}</span>
+                            <span className="w-8 h-8 bg-[#DC2626] text-white rounded-full flex items-center justify-center font-bold">{step.letter}</span>
                             <span className="font-medium text-gray-800">{step.ar}</span>
                             <span className="text-xs text-gray-500">({step.en})</span>
                         </div>
@@ -550,7 +550,7 @@ const FMSContent = () => (
             </div>
             {/* Building Requirements */}
             <div className="bg-[#F7941D]/10 rounded-lg p-4 border border-[#F7941D]/10">
-                <h4 className="font-bold text-[#92400E] mb-3">🏢 متطلبات المبنى</h4>
+                <h4 className="font-bold text-[#0F3144] mb-3">🏢 متطلبات المبنى</h4>
                 <div className="space-y-2 text-sm">
                     {[
                         'ممرات وأبواب واسعة للكراسي المتحركة',
@@ -560,7 +560,7 @@ const FMSContent = () => (
                         'سياسة عدم التدخين',
                     ].map((req, idx) => (
                         <div key={idx} className="flex items-center gap-2 bg-white rounded px-3 py-2">
-                            <CheckCircle2 className="w-4 h-4 text-[#D67A0A]" />
+                            <CheckCircle2 className="w-4 h-4 text-[#F7941D]" />
                             <span className="text-gray-700">{req}</span>
                         </div>
                     ))}
@@ -586,8 +586,8 @@ const RolesContent = () => (
                     <div className="flex items-start gap-3">
                         <span className="text-2xl">{role.icon}</span>
                         <div>
-                            <span className="text-xs bg-[#FCB614]/20 text-[#D49A0A] px-2 py-0.5 rounded">{role.level}</span>
-                            <h4 className="font-bold text-[#92400E] mt-1">{role.title}</h4>
+                            <span className="text-xs bg-[#FCB614]/20 text-[#FCB614] px-2 py-0.5 rounded">{role.level}</span>
+                            <h4 className="font-bold text-[#0F3144] mt-1">{role.title}</h4>
                             <p className="text-xs text-gray-600 mt-1">{role.desc}</p>
                         </div>
                     </div>
@@ -595,7 +595,7 @@ const RolesContent = () => (
             ))}
         </div>
         <div className="bg-[#FCB614]/15 rounded-lg p-3 text-center">
-            <p className="text-sm text-[#92400E]">
+            <p className="text-sm text-[#0F3144]">
                 <strong>جميع الكوادر الصحية</strong> يجب أن يحصلوا على ترخيص من الهيئة السعودية للتخصصات الصحية
             </p>
         </div>
@@ -607,8 +607,8 @@ const RiskManagementContent = () => (
     <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {[
-                { title: 'الأخطاء الوشيكة', en: 'Near Misses', desc: 'أحداث كادت أن تسبب ضرراً', color: 'bg-[#FCB614]/10 border-[#FCB614]/20 text-[#D49A0A]' },
-                { title: 'حوادث بسيطة/متوسطة', en: 'Minor/Moderate', desc: 'أحداث نتج عنها ضرر طفيف', color: 'bg-[#F7941D]/10 border-[#F7941D]/30 text-[#92400E]' },
+                { title: 'الأخطاء الوشيكة', en: 'Near Misses', desc: 'أحداث كادت أن تسبب ضرراً', color: 'bg-[#FCB614]/10 border-[#FCB614]/20 text-[#FCB614]' },
+                { title: 'حوادث بسيطة/متوسطة', en: 'Minor/Moderate', desc: 'أحداث نتج عنها ضرر طفيف', color: 'bg-[#F7941D]/10 border-[#F7941D]/30 text-[#0F3144]' },
                 { title: 'أحداث جسيمة', en: 'Sentinel Events', desc: 'وفاة أو ضرر جسدي/نفسي جسيم', color: 'bg-[#DC2626]/10 border-[#DC2626]/30 text-[#7F1D1D]' },
             ].map((type, idx) => (
                 <div key={idx} className={`${type.color} border rounded-lg p-4 text-center`}>
@@ -619,7 +619,7 @@ const RiskManagementContent = () => (
             ))}
         </div>
         <div className="bg-[#FCB614]/10 rounded-lg p-4 border border-[#FCB614]/30">
-            <h4 className="font-bold text-[#92400E] mb-2 flex items-center gap-2">
+            <h4 className="font-bold text-[#0F3144] mb-2 flex items-center gap-2">
                 <Search className="w-4 h-4" />
                 تحليل السبب الجذري (RCA)
             </h4>
@@ -635,11 +635,11 @@ const ChampionsLeagueView = () => {
     const [selectedMonth, setSelectedMonth] = useState('فبراير');
 
     const teams = [
-        { id: 1, name: 'فريق التميز (الإدارة والخدمات)', score: 1250, badge: '👑', color: 'bg-[#FCB614]/10 text-[#D49A0A]', members: 12, streak: 3 },
+        { id: 1, name: 'فريق التميز (الإدارة والخدمات)', score: 1250, badge: '👑', color: 'bg-[#FCB614]/10 text-[#FCB614]', members: 12, streak: 3 },
         { id: 2, name: 'فريق الرعاية (الصحة والتأهيل)', score: 980, badge: '🥈', color: 'bg-gray-100 text-gray-700', members: 15, streak: 0 },
-        { id: 3, name: 'فريق الأمان (السلامة والصيانة)', score: 850, badge: '🥉', color: 'bg-[#F7941D]/15 text-[#D67A0A]', members: 8, streak: 1 },
-        { id: 4, name: 'فريق التمكين (التأهيل والبرامج)', score: 720, badge: '4️⃣', color: 'bg-[#269798]/15 text-[#1B7778]', members: 10, streak: 0 },
-        { id: 5, name: 'فريق الابتكار (تقنية المعلومات)', score: 680, badge: '5️⃣', color: 'bg-[#FCB614]/15 text-[#D49A0A]', members: 6, streak: 2 },
+        { id: 3, name: 'فريق الأمان (السلامة والصيانة)', score: 850, badge: '🥉', color: 'bg-[#F7941D]/15 text-[#F7941D]', members: 8, streak: 1 },
+        { id: 4, name: 'فريق التمكين (التأهيل والبرامج)', score: 720, badge: '4️⃣', color: 'bg-[#269798]/15 text-[#269798]', members: 10, streak: 0 },
+        { id: 5, name: 'فريق الابتكار (تقنية المعلومات)', score: 680, badge: '5️⃣', color: 'bg-[#FCB614]/15 text-[#FCB614]', members: 6, streak: 2 },
     ];
 
     const topPerformers = [
@@ -654,9 +654,9 @@ const ChampionsLeagueView = () => {
     const badges = [
         { name: 'حارس القلعة', icon: '🏰', desc: 'الالتزام 100% بسجلات السلامة لمدة شهر كامل', count: 5, color: 'bg-[#0F3144]', points: 50 },
         { name: 'صانع التغيير', icon: '💡', desc: 'تقديم فكرة Kaizen تم اعتمادها وتنفيذها', count: 2, color: 'bg-[#1E6B5C]', points: 100 },
-        { name: 'صقر المراقبة', icon: '🦅', desc: 'الإبلاغ عن 3+ أحداث Near-Miss في شهر', count: 3, color: 'bg-[#D49A0A]', points: 75 },
-        { name: 'بطل النظافة', icon: '🧤', desc: 'امتثال 100% في جولات نظافة الأيدي', count: 8, color: 'bg-[#1B7778]', points: 40 },
-        { name: 'نجم التوثيق', icon: '📝', desc: 'إكمال جميع السجلات بدون ملاحظات لمدة شهر', count: 4, color: 'bg-[#D49A0A]', points: 60 },
+        { name: 'صقر المراقبة', icon: '🦅', desc: 'الإبلاغ عن 3+ أحداث Near-Miss في شهر', count: 3, color: 'bg-[#FCB614]', points: 75 },
+        { name: 'بطل النظافة', icon: '🧤', desc: 'امتثال 100% في جولات نظافة الأيدي', count: 8, color: 'bg-[#269798]', points: 40 },
+        { name: 'نجم التوثيق', icon: '📝', desc: 'إكمال جميع السجلات بدون ملاحظات لمدة شهر', count: 4, color: 'bg-[#FCB614]', points: 60 },
     ];
 
     const monthlyChallenges = [
@@ -703,7 +703,7 @@ const ChampionsLeagueView = () => {
                     <Card className="p-6 bg-gradient-to-br from-white to-gray-50">
                         <div className="flex items-center justify-between mb-6">
                             <h3 className="text-xl font-bold flex items-center gap-2 text-[#0F3144]">
-                                <Trophy className="w-6 h-6 text-[#D49A0A]" />
+                                <Trophy className="w-6 h-6 text-[#FCB614]" />
                                 ترتيب الفرق - شهر {selectedMonth}
                             </h3>
                         </div>
@@ -721,7 +721,7 @@ const ChampionsLeagueView = () => {
                                                     <h4 className="font-bold text-gray-800">{team.name}</h4>
                                                     <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded">{team.members} عضو</span>
                                                     {team.streak > 0 && (
-                                                        <span className="text-xs bg-[#F7941D]/15 text-[#D67A0A] px-2 py-0.5 rounded">🔥 {team.streak} أشهر متتالية</span>
+                                                        <span className="text-xs bg-[#F7941D]/15 text-[#F7941D] px-2 py-0.5 rounded">🔥 {team.streak} أشهر متتالية</span>
                                                     )}
                                                 </div>
                                                 <span className="font-bold text-[#0F3144]">{team.score.toLocaleString()} نقطة</span>
@@ -736,7 +736,7 @@ const ChampionsLeagueView = () => {
                                     </div>
                                     {idx === 0 && (
                                         <div className="absolute -top-3 -right-3 rotate-12">
-                                            <span className="bg-[#FCB614] text-[#92400E] text-xs font-bold px-2 py-1 rounded shadow-lg">المتصدر!</span>
+                                            <span className="bg-[#FCB614] text-[#0F3144] text-xs font-bold px-2 py-1 rounded shadow-lg">المتصدر!</span>
                                         </div>
                                     )}
                                 </div>
@@ -747,7 +747,7 @@ const ChampionsLeagueView = () => {
                     {/* Monthly Challenges */}
                     <Card className="p-6">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-[#0F3144] mb-4">
-                            <Target className="w-5 h-5 text-[#D67A0A]" />
+                            <Target className="w-5 h-5 text-[#F7941D]" />
                             تحديات شهر {selectedMonth}
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -764,7 +764,7 @@ const ChampionsLeagueView = () => {
                                     </div>
                                     <div className="flex justify-between items-center text-xs">
                                         <span className="text-gray-500">{challenge.progress}% مكتمل</span>
-                                        <span className="font-bold text-[#D49A0A]">🏅 {challenge.reward} نقطة</span>
+                                        <span className="font-bold text-[#FCB614]">🏅 {challenge.reward} نقطة</span>
                                     </div>
                                 </div>
                             ))}
@@ -774,7 +774,7 @@ const ChampionsLeagueView = () => {
                     {/* Badges Gallery */}
                     <Card className="p-6">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-[#0F3144] mb-4">
-                            <Award className="w-5 h-5 text-[#D49A0A]" />
+                            <Award className="w-5 h-5 text-[#FCB614]" />
                             أوسمة التميز
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -799,7 +799,7 @@ const ChampionsLeagueView = () => {
                     {/* Scoring Criteria */}
                     <Card className="p-6">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-[#0F3144] mb-4">
-                            <ClipboardCheck className="w-5 h-5 text-[#1E9658]" />
+                            <ClipboardCheck className="w-5 h-5 text-[#2BB574]" />
                             نظام احتساب النقاط
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -836,7 +836,7 @@ const ChampionsLeagueView = () => {
                                     <div className="flex-1 min-w-0">
                                         <h5 className="font-bold text-gray-800 text-sm">{person.name}</h5>
                                         <p className="text-xs text-gray-500 mb-1">{person.role}</p>
-                                        <div className="inline-flex items-center gap-1 bg-[#2BB574]/10 text-[#1E9658] px-2 py-0.5 rounded text-[10px] font-medium border border-[#2BB574]/10">
+                                        <div className="inline-flex items-center gap-1 bg-[#2BB574]/10 text-[#2BB574] px-2 py-0.5 rounded text-[10px] font-medium border border-[#2BB574]/10">
                                             <span>{person.badge}</span>
                                             {person.achievement}
                                         </div>
@@ -977,10 +977,10 @@ const SopLibraryView = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <span className="px-2 py-1 rounded text-xs font-medium bg-[#2BB574]/10 text-[#1E9658]">
+                                    <span className="px-2 py-1 rounded text-xs font-medium bg-[#2BB574]/10 text-[#2BB574]">
                                         {process.frequency}
                                     </span>
-                                    <span className="px-2 py-1 rounded text-xs font-medium bg-[#269798]/10 text-[#1B7778]">
+                                    <span className="px-2 py-1 rounded text-xs font-medium bg-[#269798]/10 text-[#269798]">
                                         {process.duration}
                                     </span>
                                     {expandedId === process.id ? (
@@ -996,7 +996,7 @@ const SopLibraryView = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
                                         <div className="bg-white rounded-lg p-3 border border-gray-100">
                                             <div className="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1">
-                                                <ArrowRight className="w-3 h-3 text-[#1E9658]" />
+                                                <ArrowRight className="w-3 h-3 text-[#2BB574]" />
                                                 المدخلات
                                             </div>
                                             <p className="text-sm text-gray-700">{process.inputs}</p>
@@ -1010,7 +1010,7 @@ const SopLibraryView = () => {
                                         </div>
                                         <div className="bg-white rounded-lg p-3 border border-gray-100 md:col-span-2">
                                             <div className="text-xs font-bold text-gray-500 mb-1 flex items-center gap-1">
-                                                <Target className="w-3 h-3 text-[#D49A0A]" />
+                                                <Target className="w-3 h-3 text-[#FCB614]" />
                                                 مؤشر الأداء (KPI)
                                             </div>
                                             <p className="text-sm text-gray-700">{process.kpi}</p>
@@ -1018,11 +1018,11 @@ const SopLibraryView = () => {
                                         <div className="flex gap-4">
                                             <div className="bg-white rounded-lg p-3 border border-gray-100 flex-1">
                                                 <div className="text-xs font-bold text-gray-500 mb-1">التكرار</div>
-                                                <p className="text-sm font-medium text-[#1E9658]">{process.frequency}</p>
+                                                <p className="text-sm font-medium text-[#2BB574]">{process.frequency}</p>
                                             </div>
                                             <div className="bg-white rounded-lg p-3 border border-gray-100 flex-1">
                                                 <div className="text-xs font-bold text-gray-500 mb-1">المدة</div>
-                                                <p className="text-sm font-medium text-[#1B7778]">{process.duration}</p>
+                                                <p className="text-sm font-medium text-[#269798]">{process.duration}</p>
                                             </div>
                                         </div>
                                         <div className="bg-white rounded-lg p-3 border border-gray-100">

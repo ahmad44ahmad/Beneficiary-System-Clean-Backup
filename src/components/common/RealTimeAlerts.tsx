@@ -23,9 +23,9 @@ export interface SystemAlert {
 // Alert Configuration
 const ALERT_CONFIG = {
     infection: { icon: Shield, color: 'red', sound: true, bgClass: 'bg-[#DC2626]/15', textClass: 'text-[#DC2626]' },
-    fall_risk: { icon: AlertTriangle, color: 'orange', sound: true, bgClass: 'bg-[#F7941D]/15', textClass: 'text-[#D67A0A]' },
-    medication: { icon: Activity, color: 'purple', sound: true, bgClass: 'bg-[#FCB614]/15', textClass: 'text-[#D49A0A]' },
-    inspection_failed: { icon: AlertTriangle, color: 'yellow', sound: false, bgClass: 'bg-[#FCB614]/10', textClass: 'text-[#D49A0A]' },
+    fall_risk: { icon: AlertTriangle, color: 'orange', sound: true, bgClass: 'bg-[#F7941D]/15', textClass: 'text-[#F7941D]' },
+    medication: { icon: Activity, color: 'purple', sound: true, bgClass: 'bg-[#FCB614]/15', textClass: 'text-[#FCB614]' },
+    inspection_failed: { icon: AlertTriangle, color: 'yellow', sound: false, bgClass: 'bg-[#FCB614]/10', textClass: 'text-[#FCB614]' },
     incident: { icon: AlertTriangle, color: 'red', sound: true, bgClass: 'bg-[#DC2626]/15', textClass: 'text-[#DC2626]' },
 };
 
@@ -158,7 +158,7 @@ const AlertCard: React.FC<{
                 <div className="flex gap-2 mt-3">
                     <button
                         onClick={() => onAcknowledge(alert.id)}
-                        className="flex-1 py-2 bg-[#1E9658] text-white rounded-lg text-sm font-medium hover:bg-[#1E9658] flex items-center justify-center gap-1"
+                        className="flex-1 py-2 bg-[#2BB574] text-white rounded-lg text-sm font-medium hover:bg-[#2BB574] flex items-center justify-center gap-1"
                     >
                         <CheckCircle className="w-4 h-4" />
                         تم الاطلاع
@@ -280,7 +280,7 @@ export const RealTimeAlerts: React.FC = () => {
             {isOpen && (
                 <div className="fixed top-16 start-4 z-50 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-l from-[#B91C1C] to-[#D67A0A] p-4 text-white">
+                    <div className="bg-gradient-to-l from-[#DC2626] to-[#F7941D] p-4 text-white">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <AlertTriangle className="w-5 h-5" />
@@ -344,7 +344,7 @@ export const RealTimeAlerts: React.FC = () => {
                     {alerts.filter(a => a.severity === 'critical' && !a.acknowledged).slice(0, 1).map(alert => (
                         <div
                             key={alert.id}
-                            className="bg-[#B91C1C] text-white p-4 rounded-xl shadow-2xl flex items-center justify-between animate-pulse"
+                            className="bg-[#DC2626] text-white p-4 rounded-xl shadow-2xl flex items-center justify-between animate-pulse"
                         >
                             <div className="flex items-center gap-3">
                                 <AlertTriangle className="w-8 h-8" />

@@ -138,7 +138,7 @@ export const IPCAnalytics: React.FC = () => {
                         <ChevronLeft className="w-5 h-5" />
                     </button>
                     <div className="p-3 bg-[#FCB614]/15 rounded-xl">
-                        <BarChart3 className="w-8 h-8 text-[#D49A0A]" />
+                        <BarChart3 className="w-8 h-8 text-[#FCB614]" />
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">تحليلات مكافحة العدوى</h1>
@@ -154,7 +154,7 @@ export const IPCAnalytics: React.FC = () => {
                                 key={range}
                                 onClick={() => setDateRange(range)}
                                 className={`px-3 py-1.5 rounded-md text-sm transition-all ${dateRange === range
-                                        ? 'bg-[#D49A0A] text-white'
+                                        ? 'bg-[#FCB614] text-white'
                                         : 'text-gray-600 hover:bg-gray-100'
                                     }`}
                             >
@@ -164,7 +164,7 @@ export const IPCAnalytics: React.FC = () => {
                     </div>
                     <button
                         onClick={handleExportAll}
-                        className="px-4 py-2 bg-[#1E9658] text-white rounded-lg hover:bg-[#1E9658] flex items-center gap-2 shadow-sm"
+                        className="px-4 py-2 bg-[#2BB574] text-white rounded-lg hover:bg-[#2BB574] flex items-center gap-2 shadow-sm"
                     >
                         <Download className="w-4 h-4" />
                         تصدير CSV
@@ -191,11 +191,11 @@ export const IPCAnalytics: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#2BB574]">
                     <p className="text-gray-500 text-sm">متوسط الامتثال</p>
-                    <p className="text-2xl font-bold text-[#1E9658]">{stats.avgCompliance}%</p>
+                    <p className="text-2xl font-bold text-[#2BB574]">{stats.avgCompliance}%</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#F7941D]">
                     <p className="text-gray-500 text-sm">حوادث مفتوحة</p>
-                    <p className="text-2xl font-bold text-[#D67A0A]">{stats.openIncidents}</p>
+                    <p className="text-2xl font-bold text-[#F7941D]">{stats.openIncidents}</p>
                 </div>
             </div>
 
@@ -205,7 +205,7 @@ export const IPCAnalytics: React.FC = () => {
                 {/* Compliance Trend Chart */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5 text-[#1E9658]" />
+                        <TrendingUp className="w-5 h-5 text-[#2BB574]" />
                         اتجاه الامتثال الأسبوعي
                     </h3>
                     <ResponsiveContainer width="100%" height={280}>
@@ -292,7 +292,7 @@ export const IPCAnalytics: React.FC = () => {
                 {/* Category Trend Line Chart */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                     <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-[#D67A0A]" />
+                        <Calendar className="w-5 h-5 text-[#F7941D]" />
                         اتجاه الامتثال حسب الفئة
                     </h3>
                     <ResponsiveContainer width="100%" height={280}>
@@ -334,7 +334,7 @@ export const IPCAnalytics: React.FC = () => {
             {/* Alert Locations */}
             <div className="mt-6 bg-white rounded-2xl p-6 shadow-sm">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
+                    <AlertTriangle className="w-5 h-5 text-[#FCB614]" />
                     المواقع التي تحتاج اهتماماً
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -345,9 +345,9 @@ export const IPCAnalytics: React.FC = () => {
                         >
                             <div>
                                 <p className="font-bold text-gray-800">{loc.location}</p>
-                                <p className="text-sm text-[#D49A0A]">امتثال: {loc.compliance}%</p>
+                                <p className="text-sm text-[#FCB614]">امتثال: {loc.compliance}%</p>
                             </div>
-                            <button className="px-3 py-1.5 bg-[#FCB614] text-white rounded-lg text-sm hover:bg-[#D49A0A]">
+                            <button className="px-3 py-1.5 bg-[#FCB614] text-white rounded-lg text-sm hover:bg-[#FCB614]">
                                 عرض
                             </button>
                         </div>

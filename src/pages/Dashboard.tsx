@@ -116,7 +116,7 @@ export const Dashboard: React.FC = () => {
                             <h3 className="text-3xl font-bold text-hrsd-navy dark:text-white">{kpis.overallGoalAchievementRate}%</h3>
                         </div>
                         <div className="p-2 bg-[#FCB614]/10 rounded-lg">
-                            <Target className="w-6 h-6 text-[#D49A0A]" />
+                            <Target className="w-6 h-6 text-[#FCB614]" />
                         </div>
                     </div>
                     <div className="mt-4 w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
@@ -188,7 +188,7 @@ export const Dashboard: React.FC = () => {
                         <Card className="p-4 bg-[#FCB614]/10 border border-[#FCB614]/30 flex items-center justify-between cursor-pointer hover:bg-[#FCB614]/15 transition-colors">
                             <div className="flex items-center gap-3">
                                 <div className="bg-white dark:bg-slate-700 p-2 rounded-full shadow-sm">
-                                    <Target className="w-5 h-5 text-[#D49A0A]" />
+                                    <Target className="w-5 h-5 text-[#FCB614]" />
                                 </div>
                                 <span className="font-medium text-hrsd-navy">مراجعة الأهداف المتعثرة</span>
                             </div>
@@ -209,7 +209,7 @@ export const Dashboard: React.FC = () => {
                                 <Clock className="w-5 h-5 text-[#F7941D]" />
                                 المهام المعلقة
                             </h3>
-                            <span className="bg-[#F7941D]/15 text-[#D67A0A] text-xs font-bold px-2 py-0.5 rounded-full">
+                            <span className="bg-[#F7941D]/15 text-[#F7941D] text-xs font-bold px-2 py-0.5 rounded-full">
                                 {alerts.pendingDirectorApprovals}
                             </span>
                         </div>
@@ -223,7 +223,7 @@ export const Dashboard: React.FC = () => {
                                     <p className="text-xs text-hrsd-cool-gray mb-2">المستفيد: لاحق يحيى (1401)</p>
                                     <div className="flex gap-2">
                                         <span className="text-[10px] bg-[#269798]/15 text-[#269798] px-1.5 py-0.5 rounded">طبي</span>
-                                        <span className="text-[10px] bg-[#2BB574]/15 text-[#1E9658] px-1.5 py-0.5 rounded">اجتماعي</span>
+                                        <span className="text-[10px] bg-[#2BB574]/15 text-[#2BB574] px-1.5 py-0.5 rounded">اجتماعي</span>
                                     </div>
                                 </div>
                             ) : (

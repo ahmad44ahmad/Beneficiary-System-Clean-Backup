@@ -153,7 +153,7 @@ export const MedicationReminderAlert: React.FC = () => {
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 bg-[#FCB614]/15 rounded-lg">
-                                        <Clock className="w-4 h-4 text-[#D49A0A]" />
+                                        <Clock className="w-4 h-4 text-[#FCB614]" />
                                     </div>
                                     <div>
                                         <p className="font-medium text-gray-800 text-sm">
@@ -166,7 +166,7 @@ export const MedicationReminderAlert: React.FC = () => {
                                 </div>
                                 <button
                                     onClick={() => handleDismissAlert(alert.id)}
-                                    className="p-1 hover:bg-[#FCB614]/20 rounded-lg text-[#D49A0A]"
+                                    className="p-1 hover:bg-[#FCB614]/20 rounded-lg text-[#FCB614]"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -183,7 +183,7 @@ export const MedicationReminderAlert: React.FC = () => {
                     {/* Action Footer */}
                     <button
                         onClick={handleNavigate}
-                        className="w-full px-4 py-3 bg-[#D49A0A] text-white font-medium flex items-center justify-center gap-2 hover:bg-[#D49A0A] transition-colors"
+                        className="w-full px-4 py-3 bg-[#FCB614] text-white font-medium flex items-center justify-center gap-2 hover:bg-[#FCB614] transition-colors"
                     >
                         عرض جميع الأدوية
                         <ChevronRight className="w-4 h-4" />

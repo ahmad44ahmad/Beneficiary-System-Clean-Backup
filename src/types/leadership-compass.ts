@@ -79,9 +79,9 @@ export const URGENCY_TONES: Record<DecisionUrgency, {
     bg: string; text: string; border: string;
 }> = {
     low:      { bg: 'bg-gray-50',   text: 'text-hrsd-cool-gray',   border: 'border-gray-300' },
-    medium:   { bg: 'bg-[#FCB614]/10',   text: 'text-[#D49A0A]',   border: 'border-[#FCB614]' },
-    high:     { bg: 'bg-[#F7941D]/10',  text: 'text-[#D67A0A]',  border: 'border-[#F7941D]' },
-    critical: { bg: 'bg-[#DC2626]/10',    text: 'text-[#B91C1C]',    border: 'border-[#DC2626]' },
+    medium:   { bg: 'bg-[#FCB614]/10',   text: 'text-[#FCB614]',   border: 'border-[#FCB614]' },
+    high:     { bg: 'bg-[#F7941D]/10',  text: 'text-[#F7941D]',  border: 'border-[#F7941D]' },
+    critical: { bg: 'bg-[#DC2626]/10',    text: 'text-[#DC2626]',    border: 'border-[#DC2626]' },
 };
 
 // ─── Alternative option ───────────────────────────────────────────────────────
@@ -188,8 +188,8 @@ export const MIRROR_SEVERITY_TONES: Record<MirrorSeverity, {
     bg: string; text: string; border: string; icon: string;
 }> = {
     info:    { bg: 'bg-gray-50',   text: 'text-hrsd-navy',   border: 'border-gray-300', icon: 'ℹ️' },
-    watch:   { bg: 'bg-[#269798]/10',     text: 'text-[#1B7778]',     border: 'border-[#269798]',   icon: '👁️' },
-    concern: { bg: 'bg-[#FCB614]/10',   text: 'text-[#92400E]',   border: 'border-[#FCB614]', icon: '⚠️' },
+    watch:   { bg: 'bg-[#269798]/10',     text: 'text-[#269798]',     border: 'border-[#269798]',   icon: '👁️' },
+    concern: { bg: 'bg-[#FCB614]/10',   text: 'text-[#0F3144]',   border: 'border-[#FCB614]', icon: '⚠️' },
     urgent:  { bg: 'bg-[#DC2626]/10',    text: 'text-[#7F1D1D]',    border: 'border-[#DC2626]',  icon: '🔴' },
 };
 

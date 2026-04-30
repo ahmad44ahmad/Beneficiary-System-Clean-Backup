@@ -84,7 +84,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
             dir="rtl"
         >
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#0A2030] to-[#D49A0A] p-5 text-white">
+            <div className="bg-gradient-to-l from-[#0A2030] to-[#FCB614] p-5 text-white">
                 <h3 className="text-lg font-bold flex items-center gap-2">
                     <Mic className="h-5 w-5" />
                     المساعد الصوتي السريري
@@ -109,7 +109,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             disabled:opacity-50 disabled:cursor-not-allowed
                             ${
                                 isRecording
-                                    ? 'bg-[#DC2626] hover:bg-[#B91C1C] focus:ring-[#DC2626]/20 shadow-lg shadow-red-200'
+                                    ? 'bg-[#DC2626] hover:bg-[#DC2626] focus:ring-[#DC2626]/20 shadow-lg shadow-red-200'
                                     : isProcessing
                                       ? 'bg-gray-400 cursor-wait'
                                       : 'bg-[#0F3144] hover:bg-[#0A2030] focus:ring-[#0F3144]/20 shadow-lg shadow-indigo-200'
@@ -183,7 +183,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                 {/* Result Preview Card */}
                 {result && (
                     <div className="space-y-4 animate-in fade-in duration-500">
-                        <div className="flex items-center gap-2 text-[#1E9658] font-bold">
+                        <div className="flex items-center gap-2 text-[#2BB574] font-bold">
                             <CheckCircle2 className="h-5 w-5" />
                             تم استخراج البيانات بنجاح
                         </div>
@@ -295,14 +295,14 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             {result.incidents && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
                                     <p className="text-xs text-[#DC2626] mb-1">حوادث:</p>
-                                    <p className="text-sm text-[#B91C1C]">{result.incidents}</p>
+                                    <p className="text-sm text-[#DC2626]">{result.incidents}</p>
                                 </div>
                             )}
 
                             {/* Followup flag */}
                             {result.requires_followup && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
-                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#DC2626]/15 text-[#B91C1C] text-xs font-semibold">
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#DC2626]/15 text-[#DC2626] text-xs font-semibold">
                                         <AlertCircle className="h-3.5 w-3.5" />
                                         يحتاج متابعة طبية
                                     </span>
@@ -323,7 +323,7 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
                             <button
                                 type="button"
                                 onClick={handleFill}
-                                className="px-6 py-2 bg-gradient-to-r from-[#1E9658] to-[#1B7778] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2 font-bold"
+                                className="px-6 py-2 bg-gradient-to-r from-[#2BB574] to-[#269798] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2 font-bold"
                             >
                                 <ClipboardCheck className="h-5 w-5" />
                                 تعبئة النموذج
@@ -342,15 +342,15 @@ export const ClinicalVoiceAssistant: React.FC<ClinicalVoiceAssistantProps> = ({
 
 /** Color variants for DataCard */
 const COLOR_CLASSES: Record<string, string> = {
-    red: 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/30',
-    pink: 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/20',
-    blue: 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/30',
-    cyan: 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/20',
-    orange: 'bg-[#F7941D]/10 text-[#D67A0A] border-[#F7941D]/30',
-    green: 'bg-[#2BB574]/10 text-[#1E9658] border-[#2BB574]/20',
-    teal: 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/20',
+    red: 'bg-[#DC2626]/10 text-[#DC2626] border-[#DC2626]/30',
+    pink: 'bg-[#DC2626]/10 text-[#DC2626] border-[#DC2626]/20',
+    blue: 'bg-[#269798]/10 text-[#269798] border-[#269798]/30',
+    cyan: 'bg-[#269798]/10 text-[#269798] border-[#269798]/20',
+    orange: 'bg-[#F7941D]/10 text-[#F7941D] border-[#F7941D]/30',
+    green: 'bg-[#2BB574]/10 text-[#2BB574] border-[#2BB574]/20',
+    teal: 'bg-[#269798]/10 text-[#269798] border-[#269798]/20',
     indigo: 'bg-[#0F3144]/5 text-[#0A2030] border-[#0F3144]/30',
-    purple: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20',
+    purple: 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]/20',
 };
 
 interface DataCardProps {

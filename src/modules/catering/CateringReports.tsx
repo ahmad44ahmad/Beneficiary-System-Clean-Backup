@@ -266,7 +266,7 @@ export const CateringReports: React.FC = () => {
                     <button
                         onClick={handleExportExcel}
                         disabled={isExporting || attendanceData.length === 0}
-                        className="px-4 py-2 bg-[#2BB574]/10 text-[#1E9658] border border-[#2BB574]/30 rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-[#2BB574]/10 text-[#2BB574] border border-[#2BB574]/30 rounded-lg hover:bg-[#2BB574]/15 flex items-center gap-2 disabled:opacity-50"
                         aria-label="تصدير إلى Excel"
                     >
                         <FileSpreadsheet className="w-5 h-5" />
@@ -416,7 +416,7 @@ export const CateringReports: React.FC = () => {
                                                 </td>
 
                                                 {/* Disbursed */}
-                                                <td className="p-3 border border-gray-200 font-bold text-[#1B7778]">
+                                                <td className="p-3 border border-gray-200 font-bold text-[#269798]">
                                                     {item.nursery.disbursed + item.adults.disbursed}
                                                 </td>
                                                 <td className="p-3 border border-gray-200 text-gray-400">-</td>
@@ -460,7 +460,7 @@ export const CateringReports: React.FC = () => {
                             </div>
                             <div className="flex justify-between items-center py-2 border-b">
                                 <span className="text-gray-600">أيام الحضور الكامل</span>
-                                <span className="font-bold text-[#1E9658]">22 يوم</span>
+                                <span className="font-bold text-[#2BB574]">22 يوم</span>
                             </div>
                         </div>
                         <div className="border rounded-xl p-6">
@@ -471,7 +471,7 @@ export const CateringReports: React.FC = () => {
                             </div>
                             <div className="flex justify-between items-center py-2 border-b">
                                 <span className="text-gray-600">أيام الحضور الكامل</span>
-                                <span className="font-bold text-[#1E9658]">25 يوم</span>
+                                <span className="font-bold text-[#2BB574]">25 يوم</span>
                             </div>
                         </div>
                     </div>

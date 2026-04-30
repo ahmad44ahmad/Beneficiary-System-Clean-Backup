@@ -24,8 +24,8 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
     }, [beneficiaries]);
 
     const getTensionColor = (score: number) => {
-        if (score < 30) return 'text-[#1E9658]';
-        if (score < 60) return 'text-[#D67A0A]';
+        if (score < 30) return 'text-[#2BB574]';
+        if (score < 60) return 'text-[#F7941D]';
         return 'text-[#DC2626]';
     };
 
@@ -79,7 +79,7 @@ export const RiskPredictionCard: React.FC<RiskPredictionCardProps> = ({ benefici
                                     </span>
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h5 className="font-bold text-gray-800 text-sm truncate group-hover:text-[#B91C1C] transition-colors">
+                                    <h5 className="font-bold text-gray-800 text-sm truncate group-hover:text-[#DC2626] transition-colors">
                                         {item.fullName}
                                     </h5>
                                     <div className="text-xs text-[#DC2626] truncate flex items-center gap-1">

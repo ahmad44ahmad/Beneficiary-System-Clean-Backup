@@ -78,17 +78,17 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
     const getPersonalityIcon = (type: DignityProfile['personalityType']) => {
         switch (type) {
             case 'social': return <Users className="w-5 h-5 text-[#269798]" />;
-            case 'energetic': return <Zap className="w-5 h-5 text-[#D49A0A]" />;
+            case 'energetic': return <Zap className="w-5 h-5 text-[#FCB614]" />;
             case 'calm': return <Moon className="w-5 h-5 text-[#0F3144]" />;
-            case 'observer': return <Smile className="w-5 h-5 text-[#1E9658]" />;
+            case 'observer': return <Smile className="w-5 h-5 text-[#2BB574]" />;
             default: return <Smile className="w-5 h-5 text-gray-500" />;
         }
     };
 
     const getImpactColor = (level: 'high' | 'medium' | 'low') => {
         switch (level) {
-            case 'high': return 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20';
-            case 'medium': return 'bg-[#269798]/15 text-[#1B7778] border-[#269798]/30';
+            case 'high': return 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]/20';
+            case 'medium': return 'bg-[#269798]/15 text-[#269798] border-[#269798]/30';
             case 'low': return 'bg-gray-100 text-gray-800 border-gray-200';
         }
     };
@@ -145,13 +145,13 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 {/* Sensory Preferences (My Comfort) */}
                 <Card className="p-6">
                     <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <Star className="w-5 h-5 text-[#D49A0A]" />
+                        <Star className="w-5 h-5 text-[#FCB614]" />
                         تفضيلات "راحتي"
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="p-3 bg-gray-50 rounded-lg text-center">
                             <div className="flex justify-center mb-2">
-                                {sensoryPreferences.lighting === 'bright' ? <Sun className="text-[#D67A0A]" /> : <Moon className="text-[#0F3144]" />}
+                                {sensoryPreferences.lighting === 'bright' ? <Sun className="text-[#F7941D]" /> : <Moon className="text-[#0F3144]" />}
                             </div>
                             <span className="text-sm font-medium text-gray-700">الإضاءة</span>
                             <p className="text-xs text-gray-500">
@@ -160,7 +160,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                         </div>
                         <div className="p-3 bg-gray-50 rounded-lg text-center">
                             <div className="flex justify-center mb-2">
-                                {sensoryPreferences.noise === 'quiet' ? <Volume2 className="text-gray-400" /> : <Volume2 className="text-[#1E9658]" />}
+                                {sensoryPreferences.noise === 'quiet' ? <Volume2 className="text-gray-400" /> : <Volume2 className="text-[#2BB574]" />}
                             </div>
                             <span className="text-sm font-medium text-gray-700">الصوت</span>
                             <p className="text-xs text-gray-500">
@@ -179,7 +179,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                         {sensoryPreferences.smells && sensoryPreferences.smells.length > 0 && (
                             <div className="p-3 bg-gray-50 rounded-lg text-center">
                                 <div className="flex justify-center mb-2">
-                                    <Award className="text-[#D49A0A]" />
+                                    <Award className="text-[#FCB614]" />
                                 </div>
                                 <span className="text-sm font-medium text-gray-700">الروائح</span>
                                 <p className="text-xs text-gray-500 truncate">
@@ -194,22 +194,22 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                 <Card className="p-6 space-y-6">
                     <div>
                         <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-                            <ThumbsUp className="w-5 h-5 text-[#1E9658]" />
+                            <ThumbsUp className="w-5 h-5 text-[#2BB574]" />
                             ما يحبه
                         </h3>
                         <div className="flex flex-wrap gap-2">
                             {favorites.food.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#1E9658] text-xs rounded-full border border-[#2BB574]/20">
+                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#2BB574] text-xs rounded-full border border-[#2BB574]/20">
                                     {item}
                                 </span>
                             ))}
                             {favorites.activities.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#1E9658] text-xs rounded-full border border-[#2BB574]/20">
+                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#2BB574] text-xs rounded-full border border-[#2BB574]/20">
                                     {item}
                                 </span>
                             ))}
                             {favorites.colors.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#1E9658] text-xs rounded-full border border-[#2BB574]/20">
+                                <span key={i} className="px-2 py-1 bg-[#2BB574]/10 text-[#2BB574] text-xs rounded-full border border-[#2BB574]/20">
                                     {item}
                                 </span>
                             ))}
@@ -226,7 +226,7 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
                         </h3>
                         <div className="flex flex-wrap gap-2">
                             {dislikes.triggers.map((item, i) => (
-                                <span key={i} className="px-2 py-1 bg-[#DC2626]/10 text-[#B91C1C] text-xs rounded-full border border-[#DC2626]/30">
+                                <span key={i} className="px-2 py-1 bg-[#DC2626]/10 text-[#DC2626] text-xs rounded-full border border-[#DC2626]/30">
                                     {item}
                                 </span>
                             ))}
@@ -242,10 +242,10 @@ export const DignityProfileCard: React.FC<DignityProfileCardProps> = ({ profile,
             <Card className="p-6">
                 <div className="flex justify-between items-center mb-6">
                     <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                        <HandHeart className="w-5 h-5 text-[#1B7778]" />
+                        <HandHeart className="w-5 h-5 text-[#269798]" />
                         سجل الحسنات والإنجازات اليومية
                     </h3>
-                    <button className="text-sm text-[#1B7778] hover:text-[#1B7778] font-medium">
+                    <button className="text-sm text-[#269798] hover:text-[#269798] font-medium">
                         + إضافة إنجاز
                     </button>
                 </div>

@@ -49,7 +49,7 @@ export const QuickBeneficiaryCard: React.FC<QuickCardProps> = ({ isOpen, onClose
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
             <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()} dir="rtl">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-[#1B7778] to-[#1B7778] p-6 rounded-t-3xl relative">
+                <div className="bg-gradient-to-r from-[#269798] to-[#269798] p-6 rounded-t-3xl relative">
                     <button onClick={onClose} className="absolute top-4 start-4 p-2 hover:bg-white/20 rounded-full"><X className="w-5 h-5 text-white" /></button>
                     <div className="flex items-center gap-4">
                         <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center"><User className="w-8 h-8 text-white" /></div>

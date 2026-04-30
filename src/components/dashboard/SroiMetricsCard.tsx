@@ -29,12 +29,12 @@ export const SroiMetricsCard: React.FC<SroiMetricsCardProps> = ({
     // so old call-sites keep working while new code uses brand names directly.
     const iconColorStyles: Record<string, string> = {
         teal:   'bg-[#269798]/10 text-[#269798]',
-        orange: 'bg-[#F7941D]/10 text-[#D67A0A]',
-        gold:   'bg-[#FCB614]/10 text-[#D49A0A]',
-        green:  'bg-[#2BB574]/10 text-[#1E9658]',
+        orange: 'bg-[#F7941D]/10 text-[#F7941D]',
+        gold:   'bg-[#FCB614]/10 text-[#FCB614]',
+        green:  'bg-[#2BB574]/10 text-[#2BB574]',
         navy:   'bg-[#0F3144]/10 text-[#0F3144]',
         blue:   'bg-[#0F3144]/10 text-[#0F3144]',   // legacy alias → navy
-        purple: 'bg-[#FCB614]/10 text-[#D49A0A]',   // legacy alias → gold
+        purple: 'bg-[#FCB614]/10 text-[#FCB614]',   // legacy alias → gold
     };
 
     return (
@@ -47,7 +47,7 @@ export const SroiMetricsCard: React.FC<SroiMetricsCardProps> = ({
                     {trend && (
                         <div className={cn(
                             "flex items-center gap-1 text-sm font-medium px-2 py-1 rounded-full",
-                            trend === 'up' ? "bg-[#2BB574]/10 text-[#1E9658]" :
+                            trend === 'up' ? "bg-[#2BB574]/10 text-[#2BB574]" :
                                 trend === 'down' ? "bg-[#DC2626]/10 text-[#DC2626]" :
                                     "bg-gray-100 text-hrsd-cool-gray"
                         )}>

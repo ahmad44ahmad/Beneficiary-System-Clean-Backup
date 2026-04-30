@@ -46,10 +46,10 @@ const TagInput: React.FC<{
                 {value.map(tag => (
                     <span
                         key={tag}
-                        className="px-3 py-1 bg-[#DC2626]/10 text-[#B91C1C] rounded-full text-sm flex items-center gap-1"
+                        className="px-3 py-1 bg-[#DC2626]/10 text-[#DC2626] rounded-full text-sm flex items-center gap-1"
                     >
                         {tag}
-                        <button onClick={() => removeTag(tag)} className="text-[#DC2626] hover:text-[#B91C1C]">×</button>
+                        <button onClick={() => removeTag(tag)} className="text-[#DC2626] hover:text-[#DC2626]">×</button>
                     </span>
                 ))}
             </div>
@@ -60,7 +60,7 @@ const TagInput: React.FC<{
                     <button
                         key={suggestion}
                         onClick={() => addTag(suggestion)}
-                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-[#DC2626]/10 hover:text-[#B91C1C] transition-colors"
+                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-[#DC2626]/10 hover:text-[#DC2626] transition-colors"
                     >
                         + {suggestion}
                     </button>
@@ -267,14 +267,14 @@ export const DignityFile: React.FC = () => {
             {/* Daily Routine */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <Sun className="w-5 h-5 text-[#D49A0A]" />
+                    <Sun className="w-5 h-5 text-[#FCB614]" />
                     روتيني اليومي
                 </h3>
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Sun className="w-4 h-4 text-[#D49A0A]" />
+                            <Sun className="w-4 h-4 text-[#FCB614]" />
                             وقت الاستيقاظ
                         </label>
                         <input
@@ -313,7 +313,7 @@ export const DignityFile: React.FC = () => {
                         onChange={setPreferredActivities}
                         suggestions={ACTIVITIES}
                         label="الأنشطة المفضلة"
-                        icon={<Sparkles className="w-5 h-5 text-[#D49A0A]" />}
+                        icon={<Sparkles className="w-5 h-5 text-[#FCB614]" />}
                     />
 
                     <TagInput
@@ -329,7 +329,7 @@ export const DignityFile: React.FC = () => {
                         onChange={setMotivators}
                         suggestions={MOTIVATORS}
                         label="ما يحفزني"
-                        icon={<Star className="w-5 h-5 text-[#D49A0A]" />}
+                        icon={<Star className="w-5 h-5 text-[#FCB614]" />}
                     />
                 </div>
             )}
@@ -342,7 +342,7 @@ export const DignityFile: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2 flex items-center gap-1"><Sparkles className="w-4 h-4" /> الأنشطة المفضلة</p>
                             <div className="flex flex-wrap gap-2">
                                 {preferredActivities.map(a => (
-                                    <span key={a} className="px-3 py-1 bg-[#FCB614]/15 text-[#D49A0A] rounded-full text-sm">{a}</span>
+                                    <span key={a} className="px-3 py-1 bg-[#FCB614]/15 text-[#FCB614] rounded-full text-sm">{a}</span>
                                 ))}
                             </div>
                         </div>
@@ -353,7 +353,7 @@ export const DignityFile: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2 flex items-center gap-1"><Coffee className="w-4 h-4" /> ما يساعدني على الهدوء</p>
                             <div className="flex flex-wrap gap-2">
                                 {calmingStrategies.map(s => (
-                                    <span key={s} className="px-3 py-1 bg-[#269798]/10 text-[#1B7778] rounded-full text-sm">{s}</span>
+                                    <span key={s} className="px-3 py-1 bg-[#269798]/10 text-[#269798] rounded-full text-sm">{s}</span>
                                 ))}
                             </div>
                         </div>
@@ -364,7 +364,7 @@ export const DignityFile: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2 flex items-center gap-1"><Star className="w-4 h-4" /> ما يحفزني</p>
                             <div className="flex flex-wrap gap-2">
                                 {motivators.map(m => (
-                                    <span key={m} className="px-3 py-1 bg-[#FCB614]/10 text-[#D49A0A] rounded-full text-sm">{m}</span>
+                                    <span key={m} className="px-3 py-1 bg-[#FCB614]/10 text-[#FCB614] rounded-full text-sm">{m}</span>
                                 ))}
                             </div>
                         </div>
@@ -382,7 +382,7 @@ export const DignityFile: React.FC = () => {
                 <div className="space-y-4">
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Smile className="w-4 h-4 text-[#1E9658]" />
+                            <Smile className="w-4 h-4 text-[#2BB574]" />
                             ما يسعدني
                         </label>
                         <textarea
@@ -410,7 +410,7 @@ export const DignityFile: React.FC = () => {
 
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Star className="w-4 h-4 text-[#D49A0A]" />
+                            <Star className="w-4 h-4 text-[#FCB614]" />
                             أحلامي وتطلعاتي
                         </label>
                         <textarea

@@ -86,8 +86,8 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
                     className={`
                         p-4 rounded-md border flex items-start gap-3 shadow-sm
                         ${alert.type === 'critical' ? 'bg-[#DC2626]/10 border-[#DC2626]/30 text-[#7F1D1D]' : ''}
-                        ${alert.type === 'warning' ? 'bg-[#F7941D]/10 border-[#F7941D]/30 text-[#92400E]' : ''}
-                        ${alert.type === 'info' ? 'bg-[#269798]/10 border-[#269798]/30 text-[#1B7778]' : ''}
+                        ${alert.type === 'warning' ? 'bg-[#F7941D]/10 border-[#F7941D]/30 text-[#0F3144]' : ''}
+                        ${alert.type === 'info' ? 'bg-[#269798]/10 border-[#269798]/30 text-[#269798]' : ''}
                     `}
                 >
                     <div className="mt-0.5 shrink-0">

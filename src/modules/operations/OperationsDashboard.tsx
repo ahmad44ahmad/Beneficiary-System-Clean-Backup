@@ -144,18 +144,18 @@ export const OperationsDashboard: React.FC = () => {
 
     const quickActions = [
         { title: 'طلب صيانة جديد', icon: Plus, link: '/operations/maintenance/new', color: 'bg-hrsd-primary' },
-        { title: 'سجل الأصول', icon: Building2, link: '/operations/assets', color: 'bg-[#1B7778]' },
-        { title: 'الصيانة الوقائية', icon: Calendar, link: '/operations/preventive', color: 'bg-[#1E9658]' },
-        { title: 'إدارة المخلفات', icon: Trash2, link: '/operations/waste', color: 'bg-[#D49A0A]' },
-        { title: 'تقييم المقاولين', icon: ClipboardList, link: '/operations/evaluations', color: 'bg-[#D49A0A]' },
+        { title: 'سجل الأصول', icon: Building2, link: '/operations/assets', color: 'bg-[#269798]' },
+        { title: 'الصيانة الوقائية', icon: Calendar, link: '/operations/preventive', color: 'bg-[#2BB574]' },
+        { title: 'إدارة المخلفات', icon: Trash2, link: '/operations/waste', color: 'bg-[#FCB614]' },
+        { title: 'تقييم المقاولين', icon: ClipboardList, link: '/operations/evaluations', color: 'bg-[#FCB614]' },
     ];
 
     const getStatusBadge = (status: string) => {
         const styles: Record<string, string> = {
-            pending: 'bg-[#FCB614]/10 text-[#D49A0A]',
-            approved: 'bg-[#269798]/15 text-[#1B7778]',
+            pending: 'bg-[#FCB614]/10 text-[#FCB614]',
+            approved: 'bg-[#269798]/15 text-[#269798]',
             in_progress: 'bg-[#0F3144]/10 text-[#0A2030]',
-            completed: 'bg-[#2BB574]/15 text-[#14532D]',
+            completed: 'bg-[#2BB574]/15 text-[#0F3144]',
             cancelled: 'bg-gray-100 text-gray-800'
         };
         const labels: Record<string, string> = {
@@ -207,7 +207,7 @@ export const OperationsDashboard: React.FC = () => {
                                 <kpi.icon className="w-6 h-6" />
                             </div>
                             {kpi.trend && (
-                                <span className={`text-sm font-medium ${kpi.trend.startsWith('+') ? 'text-[#1E9658]' : 'text-[#DC2626]'}`}>
+                                <span className={`text-sm font-medium ${kpi.trend.startsWith('+') ? 'text-[#2BB574]' : 'text-[#DC2626]'}`}>
                                     {kpi.trend}
                                 </span>
                             )}
@@ -280,8 +280,8 @@ export const OperationsDashboard: React.FC = () => {
                                         <td className="p-3 text-center text-sm">{req.request_type as string}</td>
                                         <td className="p-3 text-center">
                                             <span className={`px-2 py-1 rounded text-xs ${req.priority === 'critical' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' :
-                                                    req.priority === 'high' ? 'bg-[#F7941D]/15 text-[#92400E]' :
-                                                        req.priority === 'medium' ? 'bg-[#FCB614]/10 text-[#D49A0A]' :
+                                                    req.priority === 'high' ? 'bg-[#F7941D]/15 text-[#0F3144]' :
+                                                        req.priority === 'medium' ? 'bg-[#FCB614]/10 text-[#FCB614]' :
                                                             'bg-gray-100 text-gray-800'
                                                 }`}>
                                                 {req.priority as string}

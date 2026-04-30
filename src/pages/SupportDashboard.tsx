@@ -96,7 +96,7 @@ export const SupportDashboard: React.FC = () => {
                                     </div>
                                     <Wrench className="w-8 h-8 text-[#F7941D]/40" />
                                 </div>
-                                <div className="mt-4 text-xs text-[#D67A0A] font-medium">
+                                <div className="mt-4 text-xs text-[#F7941D] font-medium">
                                     {criticalTickets} تذاكر ذات أولوية عالية
                                 </div>
                             </Card>
@@ -122,7 +122,7 @@ export const SupportDashboard: React.FC = () => {
                                     </div>
                                     <Package className="w-8 h-8 text-[#2BB574]/40" />
                                 </div>
-                                <div className="mt-4 text-xs text-[#1E9658]">
+                                <div className="mt-4 text-xs text-[#2BB574]">
                                     تم تحديث الجرد الأسبوعي
                                 </div>
                             </Card>
@@ -150,7 +150,7 @@ export const SupportDashboard: React.FC = () => {
                                                         بواسطة: {ticket.reportedBy}
                                                     </span>
                                                     {ticket.priority === 'high' && (
-                                                        <span className="text-[10px] px-2 py-0.5 bg-[#DC2626]/15 text-[#B91C1C] rounded font-bold">
+                                                        <span className="text-[10px] px-2 py-0.5 bg-[#DC2626]/15 text-[#DC2626] rounded font-bold">
                                                             عاجل
                                                         </span>
                                                     )}
@@ -170,11 +170,11 @@ export const SupportDashboard: React.FC = () => {
                                         <span className="block text-sm font-medium text-gray-700">إضافة أصل جديد</span>
                                     </button>
                                     <button className="p-4 border rounded-xl hover:bg-[#F7941D]/10 hover:border-[#F7941D]/30 transition-all text-center group">
-                                        <Wrench className="w-8 h-8 mx-auto mb-2 text-[#D67A0A] group-hover:scale-110 transition-transform" />
+                                        <Wrench className="w-8 h-8 mx-auto mb-2 text-[#F7941D] group-hover:scale-110 transition-transform" />
                                         <span className="block text-sm font-medium text-gray-700">فتح بلاغ صيانة</span>
                                     </button>
                                     <button className="p-4 border rounded-xl hover:bg-[#2BB574]/10 hover:border-[#2BB574]/20 transition-all text-center group" onClick={() => setActiveTab('consumables')}>
-                                        <Package className="w-8 h-8 mx-auto mb-2 text-[#1E9658] group-hover:scale-110 transition-transform" />
+                                        <Package className="w-8 h-8 mx-auto mb-2 text-[#2BB574] group-hover:scale-110 transition-transform" />
                                         <span className="block text-sm font-medium text-gray-700">صرف مواد (كسوة)</span>
                                     </button>
                                 </div>

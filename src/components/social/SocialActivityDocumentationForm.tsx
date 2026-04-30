@@ -216,7 +216,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
                             multiple
                             accept="image/*"
                             onChange={handleImageUpload}
-                            className="mb-2 w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#269798]/10 file:text-[#1B7778] hover:file:bg-[#269798]/15"
+                            className="mb-2 w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#269798]/10 file:text-[#269798] hover:file:bg-[#269798]/15"
                         />
                         <div className="flex gap-2 flex-wrap">
                             {formData.images?.map((img, i) => (
@@ -236,7 +236,7 @@ export const SocialActivityDocumentationForm: React.FC<SocialActivityDocumentati
 
                     <div className="flex justify-end gap-3 pt-4">
                         <button type="button" onClick={onCancel} className="px-4 py-2 border rounded hover:bg-gray-50">إلغاء</button>
-                        <button type="submit" className="px-4 py-2 bg-[#1B7778] text-white rounded hover:bg-[#1B7778]">حفظ التوثيق</button>
+                        <button type="submit" className="px-4 py-2 bg-[#269798] text-white rounded hover:bg-[#269798]">حفظ التوثيق</button>
                     </div>
                 </form>
             </div>

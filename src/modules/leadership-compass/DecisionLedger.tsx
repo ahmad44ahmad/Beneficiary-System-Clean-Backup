@@ -119,8 +119,8 @@ const StatCard: React.FC<{
 // ─── بطاقة قرار تاريخيّ ─────────────────────────────────────────────────────
 const STATUS_ICONS = {
     approved:   { icon: CheckCircle2,  color: 'text-hrsd-green-dark', badge: 'bg-hrsd-green/15', label: 'مُعتمَد' },
-    rejected:   { icon: XCircle,       color: 'text-[#B91C1C]',        badge: 'bg-[#DC2626]/10',      label: 'مرفوض' },
-    delayed:    { icon: PauseCircle,   color: 'text-[#D49A0A]',       badge: 'bg-[#FCB614]/15',     label: 'مُؤجَّل' },
+    rejected:   { icon: XCircle,       color: 'text-[#DC2626]',        badge: 'bg-[#DC2626]/10',      label: 'مرفوض' },
+    delayed:    { icon: PauseCircle,   color: 'text-[#FCB614]',       badge: 'bg-[#FCB614]/15',     label: 'مُؤجَّل' },
     superseded: { icon: RotateCw,      color: 'text-hrsd-cool-gray',       badge: 'bg-slate-100',     label: 'استُبدِل' },
 };
 

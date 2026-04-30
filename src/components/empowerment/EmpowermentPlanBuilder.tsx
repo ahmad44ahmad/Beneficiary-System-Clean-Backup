@@ -55,7 +55,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
         <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" dir="rtl">
             <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-[#FCB614]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Lightbulb className="w-8 h-8 text-[#D49A0A]" />
+                    <Lightbulb className="w-8 h-8 text-[#FCB614]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">اكتشف إمكاناتك</h3>
                 <p className="text-gray-500">ما الذي تُجيده؟ وما الذي تستمتع به؟</p>
@@ -79,7 +79,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {profile.strengths?.map((s, i) => (
-                            <span key={i} className="bg-white text-[#1B7778] px-3 py-1 rounded-full text-sm shadow-sm border border-[#269798]/10 flex items-center gap-1">
+                            <span key={i} className="bg-white text-[#269798] px-3 py-1 rounded-full text-sm shadow-sm border border-[#269798]/10 flex items-center gap-1">
                                 {s} <button onClick={() => setProfile(prev => ({ ...prev, strengths: prev.strengths?.filter((_, idx) => idx !== i) }))} className="hover:text-[#DC2626] ms-1">×</button>
                             </span>
                         ))}
@@ -87,7 +87,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                 </Card>
 
                 <Card className="p-4 border-[#FCB614]/10 bg-[#FCB614]/10/50">
-                    <h4 className="font-bold text-[#92400E] mb-3 flex items-center gap-2">
+                    <h4 className="font-bold text-[#0F3144] mb-3 flex items-center gap-2">
                         <Target className="w-5 h-5" /> التطلّعات
                     </h4>
                     <div className="flex gap-2 mb-3">
@@ -103,7 +103,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {profile.aspirations?.map((s, i) => (
-                            <span key={i} className="bg-white text-[#D49A0A] px-3 py-1 rounded-full text-sm shadow-sm border border-[#FCB614]/10 flex items-center gap-1">
+                            <span key={i} className="bg-white text-[#FCB614] px-3 py-1 rounded-full text-sm shadow-sm border border-[#FCB614]/10 flex items-center gap-1">
                                 {s} <button onClick={() => setProfile(prev => ({ ...prev, aspirations: prev.aspirations?.filter((_, idx) => idx !== i) }))} className="hover:text-[#DC2626] ms-1">×</button>
                             </span>
                         ))}
@@ -145,7 +145,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
         <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500" dir="rtl">
             <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-[#2BB574]/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-8 h-8 text-[#1E9658]" />
+                    <Target className="w-8 h-8 text-[#2BB574]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900">حدِّد الهدف الأول</h3>
                 <p className="text-gray-500">يجب أن يكون الهدف ذكياً (محدد، قابل للقياس، قابل للتحقيق، واقعي، مرتبط بزمن)</p>
@@ -179,7 +179,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
     return (
         <div className="bg-white rounded-xl shadow-lg border overflow-hidden max-w-4xl mx-auto my-8" dir="rtl">
             {/* Wizard Header */}
-            <div className="bg-gradient-to-r from-[#1B7778] to-[#D49A0A] p-6 text-white">
+            <div className="bg-gradient-to-r from-[#269798] to-[#FCB614] p-6 text-white">
                 <h2 className="text-2xl font-bold flex items-center gap-2">
                     <Zap className="w-6 h-6 text-[#FCB614]" />
                     بناء خطة التمكين
@@ -221,7 +221,7 @@ export const EmpowermentPlanBuilder: React.FC<EmpowermentPlanBuilderProps> = ({ 
                         الخطوة التالية <ArrowRight className="w-4 h-4 ms-2" />
                     </Button>
                 ) : (
-                    <Button onClick={() => onSave(profile as EmpowermentProfile)} className="bg-[#1E9658] hover:bg-[#1E9658] text-white">
+                    <Button onClick={() => onSave(profile as EmpowermentProfile)} className="bg-[#2BB574] hover:bg-[#2BB574] text-white">
                         إنهاء وحفظ الخطة <Check className="w-4 h-4 ms-2" />
                     </Button>
                 )}

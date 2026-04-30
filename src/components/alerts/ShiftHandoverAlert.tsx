@@ -138,14 +138,14 @@ export const ShiftHandoverAlert: React.FC = () => {
                         </div>
 
                         {alert.notes_count > 0 && (
-                            <p className="text-sm text-[#D49A0A] mb-3">
+                            <p className="text-sm text-[#FCB614] mb-3">
                                 ⚠️ {alert.notes_count} ملاحظات تحتاج متابعة
                             </p>
                         )}
 
                         <button
                             onClick={handleNavigate}
-                            className="w-full px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] flex items-center justify-center gap-2 transition-colors"
+                            className="w-full px-4 py-2 bg-[#269798] text-white rounded-lg hover:bg-[#269798] flex items-center justify-center gap-2 transition-colors"
                         >
                             عرض التسليم
                             <ChevronRight className="w-4 h-4" />

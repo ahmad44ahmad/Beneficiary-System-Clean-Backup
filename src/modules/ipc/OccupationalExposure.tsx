@@ -112,11 +112,11 @@ const getRiskLevel = (exposureType: string, sourceStatus: string): 'high' | 'mod
 const getRiskBadge = (risk: string) => {
   switch (risk) {
     case 'high':
-      return { label: 'مرتفع', className: 'bg-[#DC2626]/15 text-[#B91C1C] border border-[#DC2626]' };
+      return { label: 'مرتفع', className: 'bg-[#DC2626]/15 text-[#DC2626] border border-[#DC2626]' };
     case 'moderate':
-      return { label: 'متوسط', className: 'bg-[#FCB614]/10 text-[#D49A0A] border border-[#FCB614]' };
+      return { label: 'متوسط', className: 'bg-[#FCB614]/10 text-[#FCB614] border border-[#FCB614]' };
     case 'low':
-      return { label: 'منخفض', className: 'bg-[#2BB574]/15 text-[#1E9658] border border-[#2BB574]' };
+      return { label: 'منخفض', className: 'bg-[#2BB574]/15 text-[#2BB574] border border-[#2BB574]' };
     default:
       return { label: '-', className: 'bg-gray-100 text-gray-600' };
   }
@@ -125,13 +125,13 @@ const getRiskBadge = (risk: string) => {
 const getStatusBadge = (status: string) => {
   switch (status) {
     case 'monitoring':
-      return { label: 'تحت المتابعة', className: 'bg-[#269798]/15 text-[#1B7778] border border-[#269798]', icon: Clock };
+      return { label: 'تحت المتابعة', className: 'bg-[#269798]/15 text-[#269798] border border-[#269798]', icon: Clock };
     case 'cleared':
-      return { label: 'تم التعافي', className: 'bg-[#2BB574]/15 text-[#1E9658] border border-[#2BB574]', icon: CheckCircle2 };
+      return { label: 'تم التعافي', className: 'bg-[#2BB574]/15 text-[#2BB574] border border-[#2BB574]', icon: CheckCircle2 };
     case 'labs_pending':
-      return { label: 'بانتظار الفحوصات', className: 'bg-[#F7941D]/15 text-[#D67A0A] border border-[#F7941D]', icon: Activity };
+      return { label: 'بانتظار الفحوصات', className: 'bg-[#F7941D]/15 text-[#F7941D] border border-[#F7941D]', icon: Activity };
     case 'reported':
-      return { label: 'تم الإبلاغ', className: 'bg-[#FCB614]/15 text-[#D49A0A] border border-[#FCB614]', icon: FileText };
+      return { label: 'تم الإبلاغ', className: 'bg-[#FCB614]/15 text-[#FCB614] border border-[#FCB614]', icon: FileText };
     default:
       return { label: '-', className: 'bg-gray-100 text-gray-600', icon: Clock };
   }
@@ -140,7 +140,7 @@ const getStatusBadge = (status: string) => {
 const getPepLabel = (pep: string) => {
   switch (pep) {
     case 'started':
-      return { label: 'تم البدء', className: 'text-[#1B7778] font-medium' };
+      return { label: 'تم البدء', className: 'text-[#269798] font-medium' };
     case 'not_needed':
       return { label: 'غير مطلوب', className: 'text-gray-500' };
     default:
@@ -505,8 +505,8 @@ export const OccupationalExposure: React.FC = () => {
       </h3>
 
       <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-lg p-4 flex items-start gap-3">
-        <AlertTriangle size={20} className="text-[#D49A0A] mt-0.5 shrink-0" />
-        <p className="text-sm text-[#92400E]">
+        <AlertTriangle size={20} className="text-[#FCB614] mt-0.5 shrink-0" />
+        <p className="text-sm text-[#0F3144]">
           يرجى التأكد من تنفيذ جميع خطوات الإسعافات الأولية التالية فور وقوع الحادثة.
           وضع علامة على الخطوات التي تم تنفيذها.
         </p>
@@ -586,7 +586,7 @@ export const OccupationalExposure: React.FC = () => {
           <div className="flex items-center gap-3">
             <Shield
               size={24}
-              className={pepRecommended ? 'text-[#DC2626]' : 'text-[#1E9658]'}
+              className={pepRecommended ? 'text-[#DC2626]' : 'text-[#2BB574]'}
             />
             <div>
               <h4 className="font-semibold text-sm">
@@ -594,7 +594,7 @@ export const OccupationalExposure: React.FC = () => {
               </h4>
               <p
                 className={`text-base font-bold mt-1 ${
-                  pepRecommended ? 'text-[#B91C1C]' : 'text-[#1E9658]'
+                  pepRecommended ? 'text-[#DC2626]' : 'text-[#2BB574]'
                 }`}
               >
                 {pepRecommended ? 'مُوصى به' : 'غير مطلوب'}
@@ -621,19 +621,19 @@ export const OccupationalExposure: React.FC = () => {
                 time: '6 أسابيع',
                 desc: 'فحوصات متابعة',
                 icon: Clock,
-                color: 'text-[#D67A0A] bg-[#F7941D]/10 border-[#F7941D]/30',
+                color: 'text-[#F7941D] bg-[#F7941D]/10 border-[#F7941D]/30',
               },
               {
                 time: '3 أشهر',
                 desc: 'فحوصات متابعة',
                 icon: Clock,
-                color: 'text-[#D49A0A] bg-[#FCB614]/10 border-[#FCB614]/20',
+                color: 'text-[#FCB614] bg-[#FCB614]/10 border-[#FCB614]/20',
               },
               {
                 time: '6 أشهر',
                 desc: 'فحوصات نهائية',
                 icon: CheckCircle2,
-                color: 'text-[#1E9658] bg-[#2BB574]/10 border-[#2BB574]/20',
+                color: 'text-[#2BB574] bg-[#2BB574]/10 border-[#2BB574]/20',
               },
             ].map((item, idx) => (
               <div

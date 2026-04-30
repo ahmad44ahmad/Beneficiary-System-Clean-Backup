@@ -273,7 +273,7 @@ export const ClothingManagementPanel: React.FC = () => {
                                                     <td className="px-5 py-4 text-sm">
                                                         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
                                                             ${need.status === 'draft'
-                                                                ? 'bg-[#FCB614]/10 text-[#D49A0A]'
+                                                                ? 'bg-[#FCB614]/10 text-[#FCB614]'
                                                                 : 'bg-[#2BB574]/10 text-[#2BB574]'}`}>
                                                             {need.status === 'draft' ? 'مسودة' : 'معتمد'}
                                                         </span>

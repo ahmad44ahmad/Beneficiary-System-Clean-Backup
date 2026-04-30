@@ -114,7 +114,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
         <div className="bg-white rounded-xl border border-gray-200 p-6 mt-8">
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-3">
-                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#1B7778]">
+                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#269798]">
                         <ShieldCheck className="w-6 h-6" />
                     </div>
                     <div>
@@ -131,7 +131,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                             key={role.id}
                             onClick={() => setActiveRole(role.id)}
                             className={`px-3 py-1 text-xs rounded-md transition-colors ${activeRole === role.id
-                                ? 'bg-white shadow-sm text-[#1B7778] font-bold border border-[#269798]/10'
+                                ? 'bg-white shadow-sm text-[#269798] font-bold border border-[#269798]/10'
                                 : 'text-gray-500 hover:text-gray-700'
                                 }`}
                         >
@@ -162,11 +162,11 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                                     }`}
                             >
                                 <div className="flex justify-between items-start mb-4">
-                                    <span className={`text-sm font-bold ${signature ? 'text-[#1E9658]' : 'text-gray-600'}`}>
+                                    <span className={`text-sm font-bold ${signature ? 'text-[#2BB574]' : 'text-gray-600'}`}>
                                         {role.title}
                                     </span>
                                     {signature ? (
-                                        <CheckCircle2 className="w-5 h-5 text-[#1E9658]" />
+                                        <CheckCircle2 className="w-5 h-5 text-[#2BB574]" />
                                     ) : (
                                         <UserCheck className="w-5 h-5 text-gray-400" />
                                     )}
@@ -178,7 +178,7 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                                         <p className="text-xs text-gray-500 mt-1" dir="ltr">
                                             {new Date(signature.signed_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                                         </p>
-                                        <div className="mt-3 flex items-center gap-1 text-[10px] text-[#1E9658] font-medium bg-[#2BB574]/15 w-fit px-2 py-0.5 rounded-full">
+                                        <div className="mt-3 flex items-center gap-1 text-[10px] text-[#2BB574] font-medium bg-[#2BB574]/15 w-fit px-2 py-0.5 rounded-full">
                                             <FileSignature className="w-3 h-3" />
                                             تم التوقيع رقمياً
                                         </div>
@@ -216,9 +216,9 @@ export const ReceivingCommittee: React.FC<{ date: Date }> = ({ date }) => {
                 <div className="flex items-center gap-2 text-sm">
                     <span className="text-gray-500">حالة التقرير اليومي:</span>
                     <span className={`px-2 py-1 rounded-md font-bold ${report?.status === 'approved'
-                        ? 'bg-[#2BB574]/15 text-[#1E9658]'
+                        ? 'bg-[#2BB574]/15 text-[#2BB574]'
                         : report?.status === 'pending_approval'
-                            ? 'bg-[#FCB614]/10 text-[#D49A0A]'
+                            ? 'bg-[#FCB614]/10 text-[#FCB614]'
                             : 'bg-gray-100 text-gray-600'
                         }`}>
                         {report?.status === 'approved' ? 'مكتمل ومعتمد' :

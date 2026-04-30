@@ -26,7 +26,7 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary })
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#FCB614]/10 text-[#D49A0A]">
+                        <div className="p-3 rounded-full bg-[#FCB614]/10 text-[#FCB614]">
                             <Shirt size={24} />
                         </div>
                         <div className="ms-4">
@@ -50,7 +50,7 @@ export const SocialDashboard: React.FC<SocialDashboardProps> = ({ beneficiary })
                 </Card>
                 <Card>
                     <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#1E9658]">
+                        <div className="p-3 rounded-full bg-[#2BB574]/15 text-[#2BB574]">
                             <Calendar size={24} />
                         </div>
                         <div className="ms-4">

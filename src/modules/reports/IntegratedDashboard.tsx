@@ -44,8 +44,8 @@ export const IntegratedDashboard: React.FC = () => {
     const getScoreColor = (score: number) => wellbeingService.getScoreColor(score);
     const getStatusBg = (color: string) => {
         switch (color) {
-            case 'أخضر': return 'bg-[#2BB574]/15 text-[#14532D]';
-            case 'أصفر': return 'bg-[#FCB614]/10 text-[#D49A0A]';
+            case 'أخضر': return 'bg-[#2BB574]/15 text-[#0F3144]';
+            case 'أصفر': return 'bg-[#FCB614]/10 text-[#FCB614]';
             case 'أحمر': return 'bg-[#DC2626]/15 text-[#7F1D1D]';
             default: return 'bg-gray-100 text-gray-800';
         }
@@ -122,9 +122,9 @@ export const IntegratedDashboard: React.FC = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <p className="text-sm text-gray-500 mb-1">حالة ممتازة 🟢</p>
-                                <h3 className="text-3xl font-bold text-[#1E9658]">{stats.green_count}</h3>
+                                <h3 className="text-3xl font-bold text-[#2BB574]">{stats.green_count}</h3>
                             </div>
-                            <TrendingUp className="w-8 h-8 text-[#1E9658] opacity-50" />
+                            <TrendingUp className="w-8 h-8 text-[#2BB574] opacity-50" />
                         </div>
                     </div>
 
@@ -133,9 +133,9 @@ export const IntegratedDashboard: React.FC = () => {
                         <div className="flex justify-between items-start">
                             <div>
                                 <p className="text-sm text-gray-500 mb-1">تحتاج متابعة 🟡</p>
-                                <h3 className="text-3xl font-bold text-[#D49A0A]">{stats.yellow_count}</h3>
+                                <h3 className="text-3xl font-bold text-[#FCB614]">{stats.yellow_count}</h3>
                             </div>
-                            <AlertTriangle className="w-8 h-8 text-[#D49A0A] opacity-50" />
+                            <AlertTriangle className="w-8 h-8 text-[#FCB614] opacity-50" />
                         </div>
                     </div>
 
@@ -166,7 +166,7 @@ export const IntegratedDashboard: React.FC = () => {
                     </div>
                     <div className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-[#F7941D]/15 rounded-lg">
-                            <Utensils className="w-6 h-6 text-[#D67A0A]" />
+                            <Utensils className="w-6 h-6 text-[#F7941D]" />
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">متوسط التغذية</p>
@@ -184,7 +184,7 @@ export const IntegratedDashboard: React.FC = () => {
                     </div>
                     <div className="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-[#FCB614]/15 rounded-lg">
-                            <Smile className="w-6 h-6 text-[#D49A0A]" />
+                            <Smile className="w-6 h-6 text-[#FCB614]" />
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">متوسط المزاج</p>
@@ -354,8 +354,8 @@ export const IntegratedDashboard: React.FC = () => {
 
                         {selectedBeneficiary.requires_followup && (
                             <div className="mt-4 p-4 bg-[#FCB614]/10 border border-[#FCB614]/20 rounded-lg flex items-center gap-3">
-                                <AlertTriangle className="w-5 h-5 text-[#D49A0A]" />
-                                <span className="text-[#D49A0A]">يحتاج متابعة خاصة</span>
+                                <AlertTriangle className="w-5 h-5 text-[#FCB614]" />
+                                <span className="text-[#FCB614]">يحتاج متابعة خاصة</span>
                             </div>
                         )}
 

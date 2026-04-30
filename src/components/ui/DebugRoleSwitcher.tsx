@@ -19,7 +19,7 @@ export const DebugRoleSwitcher: React.FC = () => {
                         key={role}
                         onClick={() => switchRole(role)}
                         className={`px-2 py-1 text-xs rounded border ${currentUser.role === role
-                            ? 'bg-[#1B7778] border-[#269798] text-white'
+                            ? 'bg-[#269798] border-[#269798] text-white'
                             : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'
                             }`}
                         title={`Switch to ${role}`}

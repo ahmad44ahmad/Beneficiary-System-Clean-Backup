@@ -126,7 +126,7 @@ export const HRImpactIndicator: React.FC = () => {
                                 <span className="text-sm font-medium text-[#7F1D1D]">ارتباط الغياب بالجودة</span>
                             </div>
                             <p className="text-2xl font-bold text-[#DC2626]">{Math.abs(correlationInsight.value * 100).toFixed(0)}%</p>
-                            <p className="text-xs text-[#B91C1C] mt-1">{correlationInsight.interpretation}</p>
+                            <p className="text-xs text-[#DC2626] mt-1">{correlationInsight.interpretation}</p>
                         </div>
                     </div>
 
@@ -193,7 +193,7 @@ export const HRImpactIndicator: React.FC = () => {
                                                 <p className="font-bold text-[#DC2626]">{dept.care_completion_rate}%</p>
                                             </div>
                                         </div>
-                                        <p className="text-xs text-[#B91C1C] mt-2">
+                                        <p className="text-xs text-[#DC2626] mt-2">
                                             ⚠️ توصية: تعيين دعم طارئ من قسم آخر
                                         </p>
                                     </div>

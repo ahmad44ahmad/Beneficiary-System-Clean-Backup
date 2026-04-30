@@ -55,9 +55,9 @@ const mockMedications: Medication[] = [
 const STATUS_CONFIG = {
     pending:      { bgColor: 'bg-[#269798]/10', borderColor: 'border-[#269798]/40', textColor: 'text-[#269798]', label: 'قيد الانتظار' },
     overdue:      { bgColor: 'bg-[#DC2626]/10', borderColor: 'border-[#DC2626]/40', textColor: 'text-[#DC2626]', label: 'متأخر' },
-    administered: { bgColor: 'bg-[#2BB574]/10', borderColor: 'border-[#2BB574]/40', textColor: 'text-[#1E9658]', label: 'تم الإعطاء' },
-    skipped:      { bgColor: 'bg-[#FCB614]/10', borderColor: 'border-[#FCB614]/40', textColor: 'text-[#D49A0A]', label: 'تم التخطي' },
-    refused:      { bgColor: 'bg-[#F7941D]/10', borderColor: 'border-[#F7941D]/40', textColor: 'text-[#D67A0A]', label: 'رفض' },
+    administered: { bgColor: 'bg-[#2BB574]/10', borderColor: 'border-[#2BB574]/40', textColor: 'text-[#2BB574]', label: 'تم الإعطاء' },
+    skipped:      { bgColor: 'bg-[#FCB614]/10', borderColor: 'border-[#FCB614]/40', textColor: 'text-[#FCB614]', label: 'تم التخطي' },
+    refused:      { bgColor: 'bg-[#F7941D]/10', borderColor: 'border-[#F7941D]/40', textColor: 'text-[#F7941D]', label: 'رفض' },
 };
 
 export const MedicationAdministration: React.FC = () => {
@@ -137,7 +137,7 @@ export const MedicationAdministration: React.FC = () => {
                         <button
                             type="button"
                             onClick={handleExport}
-                            className="bg-[#2BB574]/10 hover:bg-[#2BB574]/15 border border-[#2BB574]/40 rounded-xl px-4 py-2 flex items-center gap-2 text-[#1E9658] transition-colors font-medium"
+                            className="bg-[#2BB574]/10 hover:bg-[#2BB574]/15 border border-[#2BB574]/40 rounded-xl px-4 py-2 flex items-center gap-2 text-[#2BB574] transition-colors font-medium"
                             title="تصدير سجل الأدوية بصيغة PDF"
                         >
                             <FileDown className="w-5 h-5" />
@@ -265,7 +265,7 @@ export const MedicationAdministration: React.FC = () => {
                                                         </div>
                                                     ))}
                                                     {med.interactions?.map((interaction, i) => (
-                                                        <div key={i} className="flex items-center gap-2 text-[#D67A0A]">
+                                                        <div key={i} className="flex items-center gap-2 text-[#F7941D]">
                                                             <AlertTriangle className="w-4 h-4" />
                                                             <span className="text-sm">{interaction}</span>
                                                         </div>
@@ -286,7 +286,7 @@ export const MedicationAdministration: React.FC = () => {
                                                                     onChange={(e) => setPreReqChecked(prev => ({ ...prev, [req]: e.target.checked }))}
                                                                     className="w-5 h-5 rounded border-gray-300 text-[#269798] focus:ring-[#269798]/30"
                                                                 />
-                                                                <span className={preReqChecked[req] ? 'text-[#1E9658]' : 'text-hrsd-navy'}>{req}</span>
+                                                                <span className={preReqChecked[req] ? 'text-[#2BB574]' : 'text-hrsd-navy'}>{req}</span>
                                                             </label>
                                                         ))}
                                                     </div>
@@ -296,7 +296,7 @@ export const MedicationAdministration: React.FC = () => {
                                             {/* Special Instructions — gold accent (was off-palette purple). */}
                                             {med.specialInstructions && (
                                                 <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-xl p-3">
-                                                    <p className="text-[#D49A0A] text-sm">
+                                                    <p className="text-[#FCB614] text-sm">
                                                         <strong>تعليمات خاصة:</strong> {med.specialInstructions}
                                                     </p>
                                                 </div>
@@ -304,13 +304,13 @@ export const MedicationAdministration: React.FC = () => {
 
                                             {/* Administration record */}
                                             {med.status === 'administered' && med.administeredBy && (
-                                                <div className="bg-[#2BB574]/10 border border-[#2BB574]/30 rounded-xl p-3 text-[#1E9658] text-sm space-y-1">
+                                                <div className="bg-[#2BB574]/10 border border-[#2BB574]/30 rounded-xl p-3 text-[#2BB574] text-sm space-y-1">
                                                     <div className="flex items-center gap-2">
                                                         <CheckCircle className="w-4 h-4" />
                                                         <span>تم إعطاء الجرعة بواسطة <strong>{med.administeredBy}</strong></span>
                                                     </div>
                                                     {med.administeredAt && (
-                                                        <div className="flex items-center gap-2 text-[#1E9658]/85">
+                                                        <div className="flex items-center gap-2 text-[#2BB574]/85">
                                                             <Clock className="w-3.5 h-3.5" />
                                                             <span>
                                                                 {new Date(med.administeredAt).toLocaleString('ar-SA', {
@@ -332,7 +332,7 @@ export const MedicationAdministration: React.FC = () => {
                                                         disabled={!allPreReqsMet}
                                                         className={`flex-1 min-w-[140px] py-3 rounded-xl font-medium flex items-center justify-center gap-2 transition-colors ${
                                                             allPreReqsMet
-                                                                ? 'bg-[#2BB574] hover:bg-[#1E9658] text-white'
+                                                                ? 'bg-[#2BB574] hover:bg-[#2BB574] text-white'
                                                                 : 'bg-gray-200 text-hrsd-cool-gray cursor-not-allowed'
                                                         }`}
                                                     >
@@ -342,14 +342,14 @@ export const MedicationAdministration: React.FC = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => handleSkip(med.id, 'سبب طبي')}
-                                                        className="px-4 py-3 bg-[#FCB614]/10 hover:bg-[#FCB614]/15 text-[#D49A0A] border border-[#FCB614]/30 rounded-xl font-medium transition-colors"
+                                                        className="px-4 py-3 bg-[#FCB614]/10 hover:bg-[#FCB614]/15 text-[#FCB614] border border-[#FCB614]/30 rounded-xl font-medium transition-colors"
                                                     >
                                                         تخطي
                                                     </button>
                                                     <button
                                                         type="button"
                                                         onClick={() => handleRefuse(med.id)}
-                                                        className="px-4 py-3 bg-[#F7941D]/10 hover:bg-[#F7941D]/15 text-[#D67A0A] border border-[#F7941D]/30 rounded-xl font-medium transition-colors"
+                                                        className="px-4 py-3 bg-[#F7941D]/10 hover:bg-[#F7941D]/15 text-[#F7941D] border border-[#F7941D]/30 rounded-xl font-medium transition-colors"
                                                     >
                                                         رفض
                                                     </button>

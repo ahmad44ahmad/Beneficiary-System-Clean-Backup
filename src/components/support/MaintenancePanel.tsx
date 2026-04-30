@@ -25,19 +25,19 @@ export const MaintenancePanel: React.FC = () => {
     const getIcon = (type: MaintenanceRequest['type']) => {
         switch (type) {
             case 'plumbing': return <Droplets className="w-5 h-5 text-[#269798]" />;
-            case 'electrical': return <Zap className="w-5 h-5 text-[#D49A0A]" />;
+            case 'electrical': return <Zap className="w-5 h-5 text-[#FCB614]" />;
             case 'ac': return <Thermometer className="w-5 h-5 text-[#269798]" />;
-            case 'carpentry': return <Hammer className="w-5 h-5 text-[#D67A0A]" />;
+            case 'carpentry': return <Hammer className="w-5 h-5 text-[#F7941D]" />;
             default: return <Wrench className="w-5 h-5 text-gray-500" />;
         }
     };
 
     const getPriorityColor = (priority: MaintenanceRequest['priority']) => {
         switch (priority) {
-            case 'critical': return 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]/30';
-            case 'high': return 'bg-[#F7941D]/15 text-[#D67A0A] border-[#F7941D]/30';
-            case 'medium': return 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20';
-            default: return 'bg-[#269798]/15 text-[#1B7778] border-[#269798]/30';
+            case 'critical': return 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]/30';
+            case 'high': return 'bg-[#F7941D]/15 text-[#F7941D] border-[#F7941D]/30';
+            case 'medium': return 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]/20';
+            default: return 'bg-[#269798]/15 text-[#269798] border-[#269798]/30';
         }
     };
 
@@ -47,24 +47,24 @@ export const MaintenancePanel: React.FC = () => {
                 <div className="flex gap-2">
                     <button
                         onClick={() => setFilter('all')}
-                        className={`px-3 py-1 text-sm rounded-full ${filter === 'all' ? 'bg-[#1B7778] text-white' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-3 py-1 text-sm rounded-full ${filter === 'all' ? 'bg-[#269798] text-white' : 'bg-gray-100 text-gray-600'}`}
                     >
                         الكل
                     </button>
                     <button
                         onClick={() => setFilter('pending')}
-                        className={`px-3 py-1 text-sm rounded-full ${filter === 'pending' ? 'bg-[#1B7778] text-white' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-3 py-1 text-sm rounded-full ${filter === 'pending' ? 'bg-[#269798] text-white' : 'bg-gray-100 text-gray-600'}`}
                     >
                         قيد الانتظار
                     </button>
                     <button
                         onClick={() => setFilter('in_progress')}
-                        className={`px-3 py-1 text-sm rounded-full ${filter === 'in_progress' ? 'bg-[#1B7778] text-white' : 'bg-gray-100 text-gray-600'}`}
+                        className={`px-3 py-1 text-sm rounded-full ${filter === 'in_progress' ? 'bg-[#269798] text-white' : 'bg-gray-100 text-gray-600'}`}
                     >
                         جاري العمل
                     </button>
                 </div>
-                <Button className="bg-[#1B7778] hover:bg-[#1B7778] text-white flex items-center gap-2">
+                <Button className="bg-[#269798] hover:bg-[#269798] text-white flex items-center gap-2">
                     <Plus className="w-4 h-4" />
                     طلب صيانة جديد
                 </Button>
@@ -98,9 +98,9 @@ export const MaintenancePanel: React.FC = () => {
                             </div>
 
                             <div className="flex flex-col items-end gap-2 min-w-[150px]">
-                                <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${req.status === 'completed' ? 'bg-[#2BB574]/10 text-[#1E9658]' :
-                                        req.status === 'in_progress' ? 'bg-[#269798]/10 text-[#1B7778]' :
-                                            req.status === 'pending' ? 'bg-gray-100 text-gray-600' : 'bg-[#DC2626]/10 text-[#B91C1C]'
+                                <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${req.status === 'completed' ? 'bg-[#2BB574]/10 text-[#2BB574]' :
+                                        req.status === 'in_progress' ? 'bg-[#269798]/10 text-[#269798]' :
+                                            req.status === 'pending' ? 'bg-gray-100 text-gray-600' : 'bg-[#DC2626]/10 text-[#DC2626]'
                                     }`}>
                                     {req.status === 'completed' ? <CheckCircle2 className="w-4 h-4" /> :
                                         req.status === 'in_progress' ? <Clock className="w-4 h-4" /> :
@@ -121,7 +121,7 @@ export const MaintenancePanel: React.FC = () => {
                         {req.status !== 'completed' && (
                             <div className="mt-4 pt-3 border-t flex justify-end gap-2">
                                 <Button variant="outline" className="text-xs h-8">تعيين فني</Button>
-                                <Button className="text-xs h-8 bg-[#1B7778] hover:bg-[#1B7778] text-white">تحديث الحالة</Button>
+                                <Button className="text-xs h-8 bg-[#269798] hover:bg-[#269798] text-white">تحديث الحالة</Button>
                             </div>
                         )}
                     </Card>

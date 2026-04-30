@@ -121,9 +121,9 @@ export const CostPerBeneficiary: React.FC = () => {
 
     const costStatus = dailyCostPerBeneficiary <= 300 ? 'excellent' : dailyCostPerBeneficiary <= TARGET_DAILY_COST ? 'good' : dailyCostPerBeneficiary <= 400 ? 'acceptable' : 'over';
     const statusConfig = {
-        excellent: { label: 'ممتاز', color: 'text-[#1E9658]', bg: 'bg-[#2BB574]/10', border: 'border-[#2BB574]/30' },
-        good: { label: 'ضمن المستهدف', color: 'text-[#1E9658]', bg: 'bg-[#2BB574]/10', border: 'border-[#2BB574]/20' },
-        acceptable: { label: 'مقبول', color: 'text-[#D49A0A]', bg: 'bg-[#FCB614]/10', border: 'border-[#FCB614]/30' },
+        excellent: { label: 'ممتاز', color: 'text-[#2BB574]', bg: 'bg-[#2BB574]/10', border: 'border-[#2BB574]/30' },
+        good: { label: 'ضمن المستهدف', color: 'text-[#2BB574]', bg: 'bg-[#2BB574]/10', border: 'border-[#2BB574]/20' },
+        acceptable: { label: 'مقبول', color: 'text-[#FCB614]', bg: 'bg-[#FCB614]/10', border: 'border-[#FCB614]/30' },
         over: { label: 'يتجاوز المستهدف', color: 'text-[#DC2626]', bg: 'bg-[#DC2626]/10', border: 'border-[#DC2626]/30' },
     };
 

@@ -95,7 +95,7 @@ export const PTAssessmentForm: React.FC<{
                         <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded">
                             <span>{idx + 1}. {goal}</span>
                             <button onClick={() => setFormData(prev => ({ ...prev, goals: prev.goals?.filter((_, i) => i !== idx) }))}
-                                className="text-[#DC2626] hover:text-[#B91C1C]">
+                                className="text-[#DC2626] hover:text-[#DC2626]">
                                 <Trash2 size={16} />
                             </button>
                         </div>

@@ -85,8 +85,8 @@ export const PTProgressNoteManager: React.FC<{
                                 <span className="ms-2 text-sm text-gray-500">{new Date(note.date).toLocaleTimeString()}</span>
                             </div>
                             <span className={`px-2 py-1 rounded text-xs font-medium 
-                        ${note.response === 'Cooperative' ? 'bg-[#2BB574]/15 text-[#14532D]' :
-                                    note.response === 'Resistant' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' : 'bg-[#FCB614]/10 text-[#D49A0A]'}`}>
+                        ${note.response === 'Cooperative' ? 'bg-[#2BB574]/15 text-[#0F3144]' :
+                                    note.response === 'Resistant' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' : 'bg-[#FCB614]/10 text-[#FCB614]'}`}>
                                 {note.response}
                             </span>
                         </div>

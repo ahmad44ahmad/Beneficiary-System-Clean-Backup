@@ -81,10 +81,10 @@ export const gradients = {
     hrsdGreen: 'from-[#2BB574] to-[#269798]',
 
     // Semantic Gradients (status only, not brand)
-    primary: 'from-[#269798] to-[#1B7778]',
-    danger: 'from-[#DC2626] to-[#B91C1C]',
+    primary: 'from-[#269798] to-[#269798]',
+    danger: 'from-[#DC2626] to-[#DC2626]',
     warning: 'from-[#FCB614] to-[#F7941D]',
-    success: 'from-[#2BB574] to-[#1E9658]',
+    success: 'from-[#2BB574] to-[#2BB574]',
     info: 'from-[#269798] to-[#0F3144]',
 
     // Card Gradients (light mode preferred per brand book)

@@ -13,8 +13,8 @@ export const ToastRenderer: React.FC = () => {
             {toasts.map((toast) => (
                 <div
                     key={toast.id}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg text-white min-w-[300px] animate-in slide-in-from-right-5 fade-in duration-300 ${toast.type === 'success' ? 'bg-[#1E9658]' :
-                            toast.type === 'error' ? 'bg-[#B91C1C]' : 'bg-[#1B7778]'
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg text-white min-w-[300px] animate-in slide-in-from-right-5 fade-in duration-300 ${toast.type === 'success' ? 'bg-[#2BB574]' :
+                            toast.type === 'error' ? 'bg-[#DC2626]' : 'bg-[#269798]'
                         }`}
                 >
                     {toast.type === 'success' && <CheckCircle className="w-5 h-5" />}

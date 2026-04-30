@@ -26,9 +26,9 @@ export const QualityDashboard: React.FC = () => {
 
     const getSeverityBadge = (severity: string) => {
         const styles: Record<string, string> = {
-            'near_miss': 'bg-[#FCB614]/10 text-[#D49A0A]',
-            'minor': 'bg-[#2BB574]/15 text-[#14532D]',
-            'moderate': 'bg-[#F7941D]/15 text-[#92400E]',
+            'near_miss': 'bg-[#FCB614]/10 text-[#FCB614]',
+            'minor': 'bg-[#2BB574]/15 text-[#0F3144]',
+            'moderate': 'bg-[#F7941D]/15 text-[#0F3144]',
             'major': 'bg-[#DC2626]/15 text-[#7F1D1D]',
             'sentinel': 'bg-[#7F1D1D] text-white'
         };
@@ -40,7 +40,7 @@ export const QualityDashboard: React.FC = () => {
             <div className="flex justify-between items-center">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                        <Shield className="w-8 h-8 text-[#1B7778]" />
+                        <Shield className="w-8 h-8 text-[#269798]" />
                         لوحة الجودة وسلامة المستفيدين
                     </h1>
                     <p className="text-gray-500 mt-1">مراقبة مؤشرات الأداء (KPIs) وتقارير الحوادث (OVR)</p>
@@ -55,7 +55,7 @@ export const QualityDashboard: React.FC = () => {
                     </Link>
                     <Link
                         to="/ovr/new"
-                        className="bg-[#B91C1C] text-white px-4 py-2 rounded-lg hover:bg-[#B91C1C] transition-colors flex items-center gap-2 shadow-sm"
+                        className="bg-[#DC2626] text-white px-4 py-2 rounded-lg hover:bg-[#DC2626] transition-colors flex items-center gap-2 shadow-sm"
                     >
                         <AlertTriangle className="w-4 h-4" />
                         تبليغ عن حادث جديد
@@ -80,14 +80,14 @@ export const QualityDashboard: React.FC = () => {
                     </div>
                 </Card>
                 <Card className="p-4 flex items-center gap-4 bg-white border-e-4 border-e-purple-500">
-                    <div className="bg-[#FCB614]/10 p-3 rounded-full"><Users className="w-6 h-6 text-[#D49A0A]" /></div>
+                    <div className="bg-[#FCB614]/10 p-3 rounded-full"><Users className="w-6 h-6 text-[#FCB614]" /></div>
                     <div>
                         <p className="text-sm text-gray-500">نسبة التبليغ المجهول</p>
                         <p className="text-2xl font-bold">{stats?.anonymousRate || '-'}%</p>
                     </div>
                 </Card>
                 <Card className="p-4 flex items-center gap-4 bg-white border-e-4 border-e-green-500">
-                    <div className="bg-[#2BB574]/10 p-3 rounded-full"><BarChart2 className="w-6 h-6 text-[#1E9658]" /></div>
+                    <div className="bg-[#2BB574]/10 p-3 rounded-full"><BarChart2 className="w-6 h-6 text-[#2BB574]" /></div>
                     <div>
                         <p className="text-sm text-gray-500">متوسط وقت الإغلاق</p>
                         <p className="text-2xl font-bold">{stats?.avgResolutionTimeDays || '-'} يوم</p>
@@ -99,7 +99,7 @@ export const QualityDashboard: React.FC = () => {
             <Card className="overflow-hidden">
                 <div className="p-5 border-b bg-gray-50 flex justify-between items-center">
                     <h3 className="font-bold text-gray-700">أحدث البلاغات المسجلة</h3>
-                    <button className="text-sm text-[#269798] hover:text-[#1B7778]">عرض الكل</button>
+                    <button className="text-sm text-[#269798] hover:text-[#269798]">عرض الكل</button>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-right">
@@ -124,8 +124,8 @@ export const QualityDashboard: React.FC = () => {
                                     </td>
                                     <td className="p-4">{getSeverityBadge(report.severity)}</td>
                                     <td className="p-4">
-                                        <span className={`inline-flex items-center gap-1 text-[12px] font-semibold px-2.5 py-1 rounded-md border ${report.status === 'open' ? 'bg-[#DC2626]/10 text-[#B91C1C] border-[#DC2626]/30' :
-                                                report.status === 'investigating' ? 'bg-[#269798]/10 text-[#1B7778] border-[#269798]/30' :
+                                        <span className={`inline-flex items-center gap-1 text-[12px] font-semibold px-2.5 py-1 rounded-md border ${report.status === 'open' ? 'bg-[#DC2626]/10 text-[#DC2626] border-[#DC2626]/30' :
+                                                report.status === 'investigating' ? 'bg-[#269798]/10 text-[#269798] border-[#269798]/30' :
                                                     'bg-gray-100 text-gray-600 border-gray-200'
                                             }`}>
                                             {report.status === 'open' && <AlertTriangle className="w-3 h-3" />}

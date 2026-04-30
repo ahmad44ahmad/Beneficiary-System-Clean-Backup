@@ -247,26 +247,26 @@ const DEMO_FINDINGS: AuditFinding[] = [
 // ─── Status Helpers ───────────────────────────────────────────────────────────
 const CYCLE_STATUS_MAP: Record<AuditCycle['status'], { label: string; color: string }> = {
   planned: { label: 'مخطط', color: 'bg-gray-100 text-gray-700' },
-  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#269798]/15 text-[#1B7778]' },
-  completed: { label: 'مكتمل', color: 'bg-[#2BB574]/15 text-[#1E9658]' },
-  cancelled: { label: 'ملغي', color: 'bg-[#DC2626]/15 text-[#B91C1C]' },
+  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#269798]/15 text-[#269798]' },
+  completed: { label: 'مكتمل', color: 'bg-[#2BB574]/15 text-[#2BB574]' },
+  cancelled: { label: 'ملغي', color: 'bg-[#DC2626]/15 text-[#DC2626]' },
 };
 
 const FINDING_STATUS_MAP: Record<AuditFinding['status'], { label: string; color: string }> = {
-  open: { label: 'مفتوح', color: 'bg-[#DC2626]/15 text-[#B91C1C]' },
-  action_planned: { label: 'إجراء مخطط', color: 'bg-[#F7941D]/15 text-[#D67A0A]' },
-  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#FCB614]/10 text-[#D49A0A]' },
-  completed: { label: 'مكتمل', color: 'bg-[#269798]/15 text-[#1B7778]' },
-  verified: { label: 'تم التحقق', color: 'bg-[#2BB574]/15 text-[#1E9658]' },
+  open: { label: 'مفتوح', color: 'bg-[#DC2626]/15 text-[#DC2626]' },
+  action_planned: { label: 'إجراء مخطط', color: 'bg-[#F7941D]/15 text-[#F7941D]' },
+  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#FCB614]/10 text-[#FCB614]' },
+  completed: { label: 'مكتمل', color: 'bg-[#269798]/15 text-[#269798]' },
+  verified: { label: 'تم التحقق', color: 'bg-[#2BB574]/15 text-[#2BB574]' },
   closed: { label: 'مغلق', color: 'bg-gray-100 text-gray-600' },
 };
 
 const FINDING_TYPE_MAP: Record<AuditFinding['finding_type'], { label: string; icon: React.ReactNode; color: string }> = {
   major_nc: { label: 'عدم مطابقة رئيسي', icon: <AlertOctagon className="w-4 h-4" />, color: 'bg-[#DC2626]/15 text-[#7F1D1D]' },
-  minor_nc: { label: 'عدم مطابقة بسيط', icon: <AlertTriangle className="w-4 h-4" />, color: 'bg-[#FCB614]/15 text-[#92400E]' },
-  observation: { label: 'ملاحظة', icon: <Info className="w-4 h-4" />, color: 'bg-[#269798]/15 text-[#1B7778]' },
-  opportunity: { label: 'فرصة تحسين', icon: <Lightbulb className="w-4 h-4" />, color: 'bg-[#FCB614]/15 text-[#92400E]' },
-  strength: { label: 'نقطة قوة', icon: <CheckCircle2 className="w-4 h-4" />, color: 'bg-[#2BB574]/15 text-[#14532D]' },
+  minor_nc: { label: 'عدم مطابقة بسيط', icon: <AlertTriangle className="w-4 h-4" />, color: 'bg-[#FCB614]/15 text-[#0F3144]' },
+  observation: { label: 'ملاحظة', icon: <Info className="w-4 h-4" />, color: 'bg-[#269798]/15 text-[#269798]' },
+  opportunity: { label: 'فرصة تحسين', icon: <Lightbulb className="w-4 h-4" />, color: 'bg-[#FCB614]/15 text-[#0F3144]' },
+  strength: { label: 'نقطة قوة', icon: <CheckCircle2 className="w-4 h-4" />, color: 'bg-[#2BB574]/15 text-[#0F3144]' },
 };
 
 // ─── Tab Type ─────────────────────────────────────────────────────────────────
@@ -377,11 +377,11 @@ export const InternalAuditSystem: React.FC = () => {
 
   const getResultColor = (result?: string): string => {
     const map: Record<string, string> = {
-      conforming: 'bg-[#2BB574]/15 text-[#14532D]',
-      minor_nc: 'bg-[#FCB614]/15 text-[#92400E]',
+      conforming: 'bg-[#2BB574]/15 text-[#0F3144]',
+      minor_nc: 'bg-[#FCB614]/15 text-[#0F3144]',
       major_nc: 'bg-[#DC2626]/15 text-[#7F1D1D]',
-      observation: 'bg-[#269798]/15 text-[#1B7778]',
-      opportunity: 'bg-[#FCB614]/15 text-[#92400E]',
+      observation: 'bg-[#269798]/15 text-[#269798]',
+      opportunity: 'bg-[#FCB614]/15 text-[#0F3144]',
     };
     return result ? map[result] || 'bg-gray-100 text-gray-600' : 'bg-gray-100 text-gray-600';
   };
@@ -810,7 +810,7 @@ export const InternalAuditSystem: React.FC = () => {
                                           isCurrent
                                             ? 'text-white'
                                             : isDone
-                                            ? 'bg-[#2BB574]/15 text-[#1E9658]'
+                                            ? 'bg-[#2BB574]/15 text-[#2BB574]'
                                             : 'bg-gray-100 text-gray-400'
                                         }`}
                                         style={isCurrent ? { backgroundColor: HRSD.teal } : undefined}

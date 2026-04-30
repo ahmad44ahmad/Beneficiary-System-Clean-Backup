@@ -125,13 +125,13 @@ export const SecretariatDashboard: React.FC = () => {
                                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                   ${item.priority === 'urgent' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' :
                                             item.priority === 'top_urgent' ? 'bg-[#DC2626]/20 text-[#7F1D1D]' :
-                                                'bg-[#2BB574]/15 text-[#14532D]'}`}>
+                                                'bg-[#2BB574]/15 text-[#0F3144]'}`}>
                                         {item.priority === 'urgent' ? 'عاجل' : item.priority === 'top_urgent' ? 'عاجل جداً' : 'عادي'}
                                     </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                  ${item.status === 'processed' ? 'bg-[#269798]/15 text-[#1B7778]' : 'bg-[#FCB614]/10 text-[#D49A0A]'}`}>
+                  ${item.status === 'processed' ? 'bg-[#269798]/15 text-[#269798]' : 'bg-[#FCB614]/10 text-[#FCB614]'}`}>
                                         {item.status === 'processed' ? 'تمت المعالجة' : 'قيد الانتظار'}
                                     </span>
                                 </td>
@@ -167,13 +167,13 @@ export const SecretariatDashboard: React.FC = () => {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.senderDept}</td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                  ${item.priority === 'urgent' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' : 'bg-[#2BB574]/15 text-[#14532D]'}`}>
+                  ${item.priority === 'urgent' ? 'bg-[#DC2626]/15 text-[#7F1D1D]' : 'bg-[#2BB574]/15 text-[#0F3144]'}`}>
                                     {item.priority === 'urgent' ? 'عاجل' : 'عادي'}
                                 </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                  ${item.status === 'sent' ? 'bg-[#2BB574]/15 text-[#14532D]' : 'bg-gray-100 text-gray-800'}`}>
+                  ${item.status === 'sent' ? 'bg-[#2BB574]/15 text-[#0F3144]' : 'bg-gray-100 text-gray-800'}`}>
                                     {item.status === 'sent' ? 'تم الإرسال' : 'مسودة'}
                                 </span>
                             </td>
@@ -193,7 +193,7 @@ export const SecretariatDashboard: React.FC = () => {
                             <Calendar size={18} className="ms-2" />
                             <span className="text-sm font-medium">{meeting.date} | {meeting.time}</span>
                         </div>
-                        <div className="bg-[#269798]/15 text-[#1B7778] text-xs px-2 py-1 rounded-full">
+                        <div className="bg-[#269798]/15 text-[#269798] text-xs px-2 py-1 rounded-full">
                             {meeting.location}
                         </div>
                     </div>
@@ -213,7 +213,7 @@ export const SecretariatDashboard: React.FC = () => {
                             {meeting.actionItems.slice(0, 2).map((task, idx) => (
                                 <li key={idx} className="flex justify-between items-center text-sm">
                                     <span className="truncate flex-1 ms-2">{task.task}</span>
-                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${task.status === 'completed' ? 'bg-[#2BB574]/15 text-[#14532D]' : 'bg-[#FCB614]/10 text-[#D49A0A]'}`}>
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${task.status === 'completed' ? 'bg-[#2BB574]/15 text-[#0F3144]' : 'bg-[#FCB614]/10 text-[#FCB614]'}`}>
                                         {task.status === 'completed' ? 'منجز' : 'قيد التنفيذ'}
                                     </span>
                                 </li>
@@ -244,7 +244,7 @@ export const SecretariatDashboard: React.FC = () => {
                         else if (activeTab === 'outgoing') setShowOutgoingForm(true);
                         else setShowMeetingForm(true);
                     }}
-                    className="flex items-center px-4 py-2 bg-[#1B7778] text-white rounded-lg hover:bg-[#1B7778] transition-colors shadow-sm"
+                    className="flex items-center px-4 py-2 bg-[#269798] text-white rounded-lg hover:bg-[#269798] transition-colors shadow-sm"
                 >
                     <Plus size={20} className="ms-2" />
                     {activeTab === 'incoming' ? 'تسجيل وارد جديد' :
@@ -256,7 +256,7 @@ export const SecretariatDashboard: React.FC = () => {
             <div className="bg-white rounded-lg p-1 shadow-sm inline-flex">
                 <button
                     onClick={() => setActiveTab('incoming')}
-                    className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'incoming' ? 'bg-[#269798]/10 text-[#1B7778] shadow-sm' : 'text-gray-500 hover:text-gray-900'
+                    className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'incoming' ? 'bg-[#269798]/10 text-[#269798] shadow-sm' : 'text-gray-500 hover:text-gray-900'
                         }`}
                 >
                     <Inbox size={18} className="ms-2" />
@@ -264,7 +264,7 @@ export const SecretariatDashboard: React.FC = () => {
                 </button>
                 <button
                     onClick={() => setActiveTab('outgoing')}
-                    className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'outgoing' ? 'bg-[#269798]/10 text-[#1B7778] shadow-sm' : 'text-gray-500 hover:text-gray-900'
+                    className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'outgoing' ? 'bg-[#269798]/10 text-[#269798] shadow-sm' : 'text-gray-500 hover:text-gray-900'
                         }`}
                 >
                     <Send size={18} className="ms-2" />
@@ -272,7 +272,7 @@ export const SecretariatDashboard: React.FC = () => {
                 </button>
                 <button
                     onClick={() => setActiveTab('meetings')}
-                    className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'meetings' ? 'bg-[#269798]/10 text-[#1B7778] shadow-sm' : 'text-gray-500 hover:text-gray-900'
+                    className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'meetings' ? 'bg-[#269798]/10 text-[#269798] shadow-sm' : 'text-gray-500 hover:text-gray-900'
                         }`}
                 >
                     <Users size={18} className="ms-2" />

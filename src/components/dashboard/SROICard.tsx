@@ -6,7 +6,7 @@ export const SROICard: React.FC = () => {
     const { ratio, socialValue, investment } = computeSroiCardSummary();
 
     return (
-        <div className="bg-gradient-to-br from-[#0A2030] to-[#92400E] rounded-xl p-6 text-white overflow-hidden relative shadow-lg" dir="rtl">
+        <div className="bg-gradient-to-br from-[#0A2030] to-[#0F3144] rounded-xl p-6 text-white overflow-hidden relative shadow-lg" dir="rtl">
             <div className="absolute top-0 end-0 w-64 h-64 bg-white opacity-5 rounded-full -me-32 -mt-32 pointer-events-none"></div>
             <div className="absolute bottom-0 start-0 w-48 h-48 bg-[#FCB614] opacity-10 rounded-full -ms-24 -mb-24 pointer-events-none"></div>
 

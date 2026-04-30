@@ -53,8 +53,8 @@ const STATUS_BG_CLASSES: Record<KpiStatus, string> = {
 };
 
 const STATUS_TEXT_CLASSES: Record<KpiStatus, string> = {
-    excellent: 'text-[#1E9658]',
-    good: 'text-[#D49A0A]',
+    excellent: 'text-[#2BB574]',
+    good: 'text-[#FCB614]',
     needsImprovement: 'text-[#DC2626]',
 };
 
@@ -203,7 +203,7 @@ export const StrategicKPITargets: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-4 border border-[#2BB574]/10 shadow-sm">
                     <div className="text-sm text-gray-500 mb-1">يحقق المستهدف</div>
-                    <div className="text-2xl font-bold text-[#1E9658]">
+                    <div className="text-2xl font-bold text-[#2BB574]">
                         {summaryStats.meetingTarget}
                     </div>
                 </div>
@@ -265,7 +265,7 @@ export const StrategicKPITargets: React.FC = () => {
                                 {/* Trend Arrow */}
                                 <div className="flex items-center gap-1">
                                     {trend === 'up' && (
-                                        <ArrowUpRight className="w-4 h-4 text-[#1E9658]" />
+                                        <ArrowUpRight className="w-4 h-4 text-[#2BB574]" />
                                     )}
                                     {trend === 'down' && (
                                         <ArrowDownRight className="w-4 h-4 text-[#DC2626]" />
@@ -476,8 +476,8 @@ export const StrategicKPITargets: React.FC = () => {
                         <div className="flex items-center gap-1">
                             {selectedKpi.direction === 'higher_is_better' ? (
                                 <>
-                                    <TrendingUp className="w-4 h-4 text-[#1E9658]" />
-                                    <span className="text-sm font-bold text-[#1E9658]">
+                                    <TrendingUp className="w-4 h-4 text-[#2BB574]" />
+                                    <span className="text-sm font-bold text-[#2BB574]">
                                         الأعلى أفضل
                                     </span>
                                 </>
@@ -506,22 +506,22 @@ export const StrategicKPITargets: React.FC = () => {
                 </div>
                 <div className="mt-4 grid grid-cols-3 gap-4">
                     <div className="bg-[#2BB574]/10 border border-[#2BB574]/30 rounded-lg p-3 text-center">
-                        <div className="text-xs text-[#1E9658] mb-1">ممتاز</div>
-                        <div className="text-lg font-bold text-[#1E9658]">
+                        <div className="text-xs text-[#2BB574] mb-1">ممتاز</div>
+                        <div className="text-lg font-bold text-[#2BB574]">
                             {selectedKpi.direction === 'lower_is_better' ? '≤' : '≥'}{' '}
                             {selectedKpi.thresholds.excellent} {selectedKpi.unitAr}
                         </div>
                     </div>
                     <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-lg p-3 text-center">
-                        <div className="text-xs text-[#D49A0A] mb-1">جيد</div>
-                        <div className="text-lg font-bold text-[#D49A0A]">
+                        <div className="text-xs text-[#FCB614] mb-1">جيد</div>
+                        <div className="text-lg font-bold text-[#FCB614]">
                             {selectedKpi.direction === 'lower_is_better' ? '≤' : '≥'}{' '}
                             {selectedKpi.thresholds.good} {selectedKpi.unitAr}
                         </div>
                     </div>
                     <div className="bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg p-3 text-center">
                         <div className="text-xs text-[#DC2626] mb-1">يحتاج تحسين</div>
-                        <div className="text-lg font-bold text-[#B91C1C]">
+                        <div className="text-lg font-bold text-[#DC2626]">
                             {selectedKpi.direction === 'lower_is_better' ? '>' : '<'}{' '}
                             {selectedKpi.thresholds.good} {selectedKpi.unitAr}
                         </div>

@@ -158,11 +158,11 @@ export const AccountabilityAnalysis: React.FC = () => {
                     <div className="text-sm text-gray-500">قضايا حرجة</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#F7941D]">
-                    <div className="text-3xl font-bold text-[#D67A0A]">{summaryStats.high_severity}</div>
+                    <div className="text-3xl font-bold text-[#F7941D]">{summaryStats.high_severity}</div>
                     <div className="text-sm text-gray-500">عالية الخطورة</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#FCB614]">
-                    <div className="text-3xl font-bold text-[#D49A0A]">{summaryStats.issues_over_2_years}</div>
+                    <div className="text-3xl font-bold text-[#FCB614]">{summaryStats.issues_over_2_years}</div>
                     <div className="text-sm text-gray-500">أكثر من سنتين</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm border-r-4 border-[#269798]">
@@ -286,7 +286,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             </div>
 
             {/* Critical Findings */}
-            <div className="bg-gradient-to-l from-[#B91C1C] to-[#DC2626] rounded-xl p-6 text-white">
+            <div className="bg-gradient-to-l from-[#DC2626] to-[#DC2626] rounded-xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                     <AlertTriangle className="w-5 h-5" />
                     النتائج الأكثر خطورة
@@ -316,7 +316,7 @@ export const AccountabilityAnalysis: React.FC = () => {
             </div>
 
             {/* Positive Achievements */}
-            <div className="mt-6 bg-gradient-to-l from-[#1E9658] to-[#2BB574] rounded-xl p-6 text-white">
+            <div className="mt-6 bg-gradient-to-l from-[#2BB574] to-[#2BB574] rounded-xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                     <TrendingUp className="w-5 h-5" />
                     الإنجازات الإيجابية (للتوازن)

@@ -41,8 +41,8 @@ const EvacuationList: React.FC<{
 
     const iconColors = {
         red: 'text-[#DC2626]',
-        yellow: 'text-[#D67A0A]',
-        green: 'text-[#1E9658]',
+        yellow: 'text-[#F7941D]',
+        green: 'text-[#2BB574]',
     };
 
     return (
@@ -67,12 +67,12 @@ const EvacuationList: React.FC<{
                         </div>
                         <div className="flex items-center gap-2">
                             {ben.assigned_staff && (
-                                <span className="text-xs bg-[#269798]/15 text-[#1B7778] px-2 py-1 rounded">
+                                <span className="text-xs bg-[#269798]/15 text-[#269798] px-2 py-1 rounded">
                                     {ben.assigned_staff}
                                 </span>
                             )}
                             {ben.evacuation_status === 'completed' && (
-                                <CheckCircle className="w-5 h-5 text-[#1E9658]" />
+                                <CheckCircle className="w-5 h-5 text-[#2BB574]" />
                             )}
                         </div>
                     </div>
@@ -97,7 +97,7 @@ const StaffTaskCard: React.FC<{ staff: StaffMember }> = ({ staff }) => {
                 <span className="text-xs text-gray-500">{staff.role}</span>
             </div>
             {staff.assigned_task && (
-                <div className="bg-[#269798]/10 rounded px-2 py-1 text-xs text-[#1B7778]">
+                <div className="bg-[#269798]/10 rounded px-2 py-1 text-xs text-[#269798]">
                     📍 {staff.assigned_task}
                 </div>
             )}
@@ -206,21 +206,21 @@ export const CrisisMode: React.FC = () => {
                         <div className="grid grid-cols-3 gap-4 mb-6">
                             <div className="bg-[#DC2626]/10 rounded-lg p-4 text-center border-2 border-[#DC2626]">
                                 <div className="text-3xl font-bold text-[#DC2626] mb-1">{bedriddenCount}</div>
-                                <div className="text-xs text-[#B91C1C]">طريح فراش</div>
+                                <div className="text-xs text-[#DC2626]">طريح فراش</div>
                             </div>
                             <div className="bg-[#FCB614]/10 rounded-lg p-4 text-center border-2 border-[#FCB614]">
-                                <div className="text-3xl font-bold text-[#D49A0A] mb-1">{wheelchairCount}</div>
-                                <div className="text-xs text-[#D49A0A]">كرسي متحرك</div>
+                                <div className="text-3xl font-bold text-[#FCB614] mb-1">{wheelchairCount}</div>
+                                <div className="text-xs text-[#FCB614]">كرسي متحرك</div>
                             </div>
                             <div className="bg-[#2BB574]/10 rounded-lg p-4 text-center border-2 border-[#2BB574]">
-                                <div className="text-3xl font-bold text-[#1E9658] mb-1">{ambulatoryCount}</div>
-                                <div className="text-xs text-[#1E9658]">يمشي</div>
+                                <div className="text-3xl font-bold text-[#2BB574] mb-1">{ambulatoryCount}</div>
+                                <div className="text-xs text-[#2BB574]">يمشي</div>
                             </div>
                         </div>
 
                         <button
                             onClick={handleActivation}
-                            className="w-full py-4 bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white font-bold text-lg rounded-xl hover:from-[#B91C1C] hover:to-[#7F1D1D] transition-all shadow-lg flex items-center justify-center gap-3 animate-pulse"
+                            className="w-full py-4 bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white font-bold text-lg rounded-xl hover:from-[#DC2626] hover:to-[#7F1D1D] transition-all shadow-lg flex items-center justify-center gap-3 animate-pulse"
                         >
                             <AlertOctagon className="w-6 h-6" />
                             تفعيل ساعة الصفر
@@ -234,7 +234,7 @@ export const CrisisMode: React.FC = () => {
     if (showActivation) {
         // Countdown Screen
         return (
-            <div className="min-h-screen bg-[#B91C1C] flex items-center justify-center">
+            <div className="min-h-screen bg-[#DC2626] flex items-center justify-center">
                 <div className="text-center">
                     <div className="text-white text-9xl font-bold mb-4 animate-pulse">
                         {countdown}
@@ -249,7 +249,7 @@ export const CrisisMode: React.FC = () => {
     return (
         <div className="min-h-screen bg-[#DC2626]/10" dir="rtl">
             {/* Emergency Header */}
-            <div className="bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white p-4 sticky top-0 z-50 shadow-lg">
+            <div className="bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white p-4 sticky top-0 z-50 shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <div className="animate-pulse">
@@ -328,7 +328,7 @@ export const CrisisMode: React.FC = () => {
                             <div key={idx} className="border border-gray-200 rounded-lg p-4 hover-lift">
                                 <div className="flex items-center justify-between mb-2">
                                     <h4 className="font-bold text-gray-800">{hospital.name}</h4>
-                                    <span className="text-xs bg-[#269798]/15 text-[#1B7778] px-2 py-1 rounded">{hospital.type}</span>
+                                    <span className="text-xs bg-[#269798]/15 text-[#269798] px-2 py-1 rounded">{hospital.type}</span>
                                 </div>
                                 <div className="space-y-1 text-sm text-gray-600">
                                     <div className="flex items-center gap-2">

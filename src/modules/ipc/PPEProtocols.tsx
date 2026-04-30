@@ -323,13 +323,13 @@ export const PPEProtocols: React.FC = () => {
 
           <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-xl p-4 flex items-start gap-3">
             <div className="flex-shrink-0 w-10 h-10 bg-[#FCB614]/15 rounded-lg flex items-center justify-center">
-              <Hand className="w-5 h-5 text-[#D49A0A]" />
+              <Hand className="w-5 h-5 text-[#FCB614]" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-[#92400E] mb-1">
+              <h4 className="text-sm font-bold text-[#0F3144] mb-1">
                 نظافة الأيدي بين كل خطوة
               </h4>
-              <p className="text-xs text-[#D49A0A] leading-relaxed">
+              <p className="text-xs text-[#FCB614] leading-relaxed">
                 يجب تعقيم الأيدي بين كل خطوة من خطوات الخلع
               </p>
             </div>

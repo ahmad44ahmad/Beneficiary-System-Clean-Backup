@@ -37,21 +37,21 @@ export const SupportDashboard: React.FC = () => {
             <div className="flex gap-2 border-b overflow-x-auto pb-1">
                 <button
                     onClick={() => setActiveTab('overview')}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'overview' ? 'bg-[#269798]/10 text-[#1B7778] font-bold border-b-2 border-[#1B7778]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'overview' ? 'bg-[#269798]/10 text-[#269798] font-bold border-b-2 border-[#269798]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
                 >
                     <PieChart className="w-4 h-4" />
                     لوحة المعلومات
                 </button>
                 <button
                     onClick={() => setActiveTab('custody')}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'custody' ? 'bg-[#269798]/10 text-[#1B7778] font-bold border-b-2 border-[#1B7778]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'custody' ? 'bg-[#269798]/10 text-[#269798] font-bold border-b-2 border-[#269798]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
                 >
                     <Box className="w-4 h-4" />
                     العهد والمستودعات
                 </button>
                 <button
                     onClick={() => setActiveTab('maintenance')}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'maintenance' ? 'bg-[#269798]/10 text-[#1B7778] font-bold border-b-2 border-[#1B7778]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors whitespace-nowrap ${activeTab === 'maintenance' ? 'bg-[#269798]/10 text-[#269798] font-bold border-b-2 border-[#269798]' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}
                 >
                     <Wrench className="w-4 h-4" />
                     طلبات الصيانة
@@ -84,7 +84,7 @@ export const SupportDashboard: React.FC = () => {
                                         <h3 className="text-3xl font-bold text-gray-800">2.5M</h3>
                                         <p className="text-xs text-gray-400 mt-2">ريال سعودي</p>
                                     </div>
-                                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#1B7778]">
+                                    <div className="p-3 bg-[#269798]/10 rounded-lg text-[#269798]">
                                         <Wallet className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@ export const SupportDashboard: React.FC = () => {
                                         <h3 className="text-3xl font-bold text-gray-800">{stats.activeMaintenance}</h3>
                                         <p className="text-xs text-[#DC2626] mt-2">{stats.criticalMaintenance} طلب حرج</p>
                                     </div>
-                                    <div className="p-3 bg-[#F7941D]/10 rounded-lg text-[#D67A0A]">
+                                    <div className="p-3 bg-[#F7941D]/10 rounded-lg text-[#F7941D]">
                                         <Wrench className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@ export const SupportDashboard: React.FC = () => {
                                         <h3 className="text-3xl font-bold text-gray-800">{stats.activeCustody}</h3>
                                         <p className="text-xs text-gray-400 mt-2">عهدة نشطة</p>
                                     </div>
-                                    <div className="p-3 bg-[#FCB614]/10 rounded-lg text-[#D49A0A]">
+                                    <div className="p-3 bg-[#FCB614]/10 rounded-lg text-[#FCB614]">
                                         <Briefcase className="w-6 h-6" />
                                     </div>
                                 </div>
@@ -127,20 +127,20 @@ export const SupportDashboard: React.FC = () => {
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center p-3 bg-[#2BB574]/10 rounded border border-[#2BB574]/10">
                                         <span className="font-medium text-gray-700">المبنى الرئيسي (الإدارة)</span>
-                                        <span className="text-[#1E9658] text-sm font-bold">ممتاز 100%</span>
+                                        <span className="text-[#2BB574] text-sm font-bold">ممتاز 100%</span>
                                     </div>
                                     <div className="flex justify-between items-center p-3 bg-[#FCB614]/10 rounded border border-[#FCB614]/10">
                                         <span className="font-medium text-gray-700">مبنى الضيافة (أ)</span>
-                                        <span className="text-[#D49A0A] text-sm font-bold">يحتاج صيانة طفيفة</span>
+                                        <span className="text-[#FCB614] text-sm font-bold">يحتاج صيانة طفيفة</span>
                                     </div>
                                     <div className="flex justify-between items-center p-3 bg-[#2BB574]/10 rounded border border-[#2BB574]/10">
                                         <span className="font-medium text-gray-700">المسجد والساحات</span>
-                                        <span className="text-[#1E9658] text-sm font-bold">ممتاز 100%</span>
+                                        <span className="text-[#2BB574] text-sm font-bold">ممتاز 100%</span>
                                     </div>
                                 </div>
                             </Card>
 
-                            <div className="bg-gradient-to-br from-[#0F3144] to-[#1B7778] rounded-xl p-6 text-white flex flex-col justify-center items-center text-center">
+                            <div className="bg-gradient-to-br from-[#0F3144] to-[#269798] rounded-xl p-6 text-white flex flex-col justify-center items-center text-center">
                                 <Wrench className="w-16 h-16 mb-4 opacity-80" />
                                 <h3 className="text-2xl font-bold mb-2">الإبلاغ السريع</h3>
                                 <p className="opacity-90 max-w-sm mb-6">

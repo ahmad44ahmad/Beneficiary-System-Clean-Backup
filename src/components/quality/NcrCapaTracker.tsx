@@ -157,26 +157,26 @@ const NCR_DATA: NCR[] = [
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const severityConfig = {
-  critical: { label: 'حرج', color: 'bg-[#DC2626]/15 text-[#B91C1C] border-[#DC2626]/30', dot: 'bg-[#DC2626]' },
-  major: { label: 'رئيسي', color: 'bg-[#F7941D]/15 text-[#D67A0A] border-[#F7941D]/30', dot: 'bg-[#F7941D]' },
-  minor: { label: 'ثانوي', color: 'bg-[#FCB614]/10 text-[#D49A0A] border-[#FCB614]/20', dot: 'bg-[#FCB614]' },
-  observation: { label: 'ملاحظة', color: 'bg-[#269798]/15 text-[#1B7778] border-[#269798]/30', dot: 'bg-[#269798]' },
+  critical: { label: 'حرج', color: 'bg-[#DC2626]/15 text-[#DC2626] border-[#DC2626]/30', dot: 'bg-[#DC2626]' },
+  major: { label: 'رئيسي', color: 'bg-[#F7941D]/15 text-[#F7941D] border-[#F7941D]/30', dot: 'bg-[#F7941D]' },
+  minor: { label: 'ثانوي', color: 'bg-[#FCB614]/10 text-[#FCB614] border-[#FCB614]/20', dot: 'bg-[#FCB614]' },
+  observation: { label: 'ملاحظة', color: 'bg-[#269798]/15 text-[#269798] border-[#269798]/30', dot: 'bg-[#269798]' },
 };
 
 const statusConfig = {
   open: { label: 'مفتوح', color: 'bg-[#DC2626]/10 text-[#DC2626]', icon: AlertCircle },
-  investigating: { label: 'تحقيق', color: 'bg-[#FCB614]/10 text-[#D49A0A]', icon: Search },
+  investigating: { label: 'تحقيق', color: 'bg-[#FCB614]/10 text-[#FCB614]', icon: Search },
   action_planned: { label: 'خطة إجراءات', color: 'bg-[#269798]/10 text-[#269798]', icon: ClipboardCheck },
-  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#FCB614]/10 text-[#D49A0A]', icon: Clock },
-  verification: { label: 'تحقق', color: 'bg-[#269798]/10 text-[#1B7778]', icon: Eye },
-  closed: { label: 'مغلق', color: 'bg-[#2BB574]/10 text-[#1E9658]', icon: CheckCircle2 },
+  in_progress: { label: 'قيد التنفيذ', color: 'bg-[#FCB614]/10 text-[#FCB614]', icon: Clock },
+  verification: { label: 'تحقق', color: 'bg-[#269798]/10 text-[#269798]', icon: Eye },
+  closed: { label: 'مغلق', color: 'bg-[#2BB574]/10 text-[#2BB574]', icon: CheckCircle2 },
 };
 
 const capaStatusConfig = {
   pending: { label: 'معلق', color: 'text-gray-500 bg-gray-100' },
   in_progress: { label: 'جاري', color: 'text-[#269798] bg-[#269798]/10' },
-  completed: { label: 'مكتمل', color: 'text-[#1E9658] bg-[#2BB574]/10' },
-  verified: { label: 'تم التحقق', color: 'text-[#1E9658] bg-[#2BB574]/10' },
+  completed: { label: 'مكتمل', color: 'text-[#2BB574] bg-[#2BB574]/10' },
+  verified: { label: 'تم التحقق', color: 'text-[#2BB574] bg-[#2BB574]/10' },
 };
 
 function daysUntil(dateStr: string): number {
@@ -187,11 +187,11 @@ function daysUntil(dateStr: string): number {
 
 function DueDateBadge({ date }: { date: string }) {
   const days = daysUntil(date);
-  let color = 'text-[#1E9658] bg-[#2BB574]/10';
+  let color = 'text-[#2BB574] bg-[#2BB574]/10';
   let text = `${days} يوم متبقي`;
   if (days < 0) { color = 'text-[#DC2626] bg-[#DC2626]/10'; text = `متأخر ${Math.abs(days)} يوم`; }
-  else if (days <= 14) { color = 'text-[#D49A0A] bg-[#FCB614]/10'; text = `${days} يوم متبقي`; }
-  else if (days <= 30) { color = 'text-[#D49A0A] bg-[#FCB614]/10'; }
+  else if (days <= 14) { color = 'text-[#FCB614] bg-[#FCB614]/10'; text = `${days} يوم متبقي`; }
+  else if (days <= 30) { color = 'text-[#FCB614] bg-[#FCB614]/10'; }
 
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium ${color}`}>
@@ -249,9 +249,9 @@ export const NcrCapaTracker: React.FC = () => {
         {[
           { label: 'إجمالي NCRs', value: stats.total, icon: FileText, color: 'text-[#269798] bg-[#269798]/10' },
           { label: 'مفتوحة', value: stats.open, icon: AlertCircle, color: 'text-[#DC2626] bg-[#DC2626]/10' },
-          { label: 'متأخرة', value: stats.overdue, icon: XCircle, color: stats.overdue > 0 ? 'text-[#DC2626] bg-[#DC2626]/15' : 'text-[#1E9658] bg-[#2BB574]/10' },
-          { label: 'إجراءات CAPA', value: `${stats.completedCapas}/${stats.totalCapas}`, icon: ClipboardCheck, color: 'text-[#D49A0A] bg-[#FCB614]/10' },
-          { label: 'نسبة الإنجاز', value: `${stats.totalCapas > 0 ? Math.round((stats.completedCapas / stats.totalCapas) * 100) : 0}%`, icon: TrendingUp, color: 'text-[#1E9658] bg-[#2BB574]/10' },
+          { label: 'متأخرة', value: stats.overdue, icon: XCircle, color: stats.overdue > 0 ? 'text-[#DC2626] bg-[#DC2626]/15' : 'text-[#2BB574] bg-[#2BB574]/10' },
+          { label: 'إجراءات CAPA', value: `${stats.completedCapas}/${stats.totalCapas}`, icon: ClipboardCheck, color: 'text-[#FCB614] bg-[#FCB614]/10' },
+          { label: 'نسبة الإنجاز', value: `${stats.totalCapas > 0 ? Math.round((stats.completedCapas / stats.totalCapas) * 100) : 0}%`, icon: TrendingUp, color: 'text-[#2BB574] bg-[#2BB574]/10' },
         ].map((stat, idx) => (
           <div key={idx} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-2">
@@ -404,9 +404,9 @@ export const NcrCapaTracker: React.FC = () => {
                             {/* Step number */}
                             <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
                               capa.status === 'completed' || capa.status === 'verified'
-                                ? 'bg-[#2BB574]/15 text-[#1E9658]'
+                                ? 'bg-[#2BB574]/15 text-[#2BB574]'
                                 : capa.status === 'in_progress'
-                                  ? 'bg-[#269798]/15 text-[#1B7778]'
+                                  ? 'bg-[#269798]/15 text-[#269798]'
                                   : 'bg-gray-100 text-gray-500'
                             }`}>
                               {capa.status === 'completed' || capa.status === 'verified' ? '✓' : idx + 1}
@@ -430,7 +430,7 @@ export const NcrCapaTracker: React.FC = () => {
                                 <span className="flex items-center gap-1"><User className="w-3 h-3" /> {capa.assignedTo}</span>
                                 <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {capa.dueDate}</span>
                                 {capa.completionDate && (
-                                  <span className="flex items-center gap-1 text-[#1E9658]">
+                                  <span className="flex items-center gap-1 text-[#2BB574]">
                                     <CheckCircle2 className="w-3 h-3" /> أُنجز: {capa.completionDate}
                                   </span>
                                 )}

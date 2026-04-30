@@ -53,8 +53,8 @@ export const DecisionCard: React.FC<{
 
                 {decision.deadline && (
                     <span className={`text-[13px] font-semibold flex items-center gap-1.5 ${
-                        overdue ? 'text-[#B91C1C]' :
-                        (daysLeft !== null && daysLeft <= 7) ? 'text-[#D67A0A]' : tone.text
+                        overdue ? 'text-[#DC2626]' :
+                        (daysLeft !== null && daysLeft <= 7) ? 'text-[#F7941D]' : tone.text
                     }`}>
                         <Clock className="w-4 h-4" />
                         {overdue
@@ -200,7 +200,7 @@ export const DecisionCard: React.FC<{
                                                     </ul>
                                                 </div>
                                                 <div>
-                                                    <div className="font-medium text-[#B91C1C] mb-1">عيوب</div>
+                                                    <div className="font-medium text-[#DC2626] mb-1">عيوب</div>
                                                     <ul className="space-y-0.5 text-hrsd-navy dark:text-hrsd-navy">
                                                         {a.cons.map((c, j) => <li key={j}>• {c}</li>)}
                                                     </ul>
@@ -229,16 +229,16 @@ export const DecisionCard: React.FC<{
                                 )}
                                 {decision.consequences.ifDelayed && (
                                     <div className="bg-[#FCB614]/10 border border-[#FCB614]/30 rounded-lg p-3">
-                                        <div className="font-bold text-[#D49A0A] mb-1.5">لو أجَّلت</div>
+                                        <div className="font-bold text-[#FCB614] mb-1.5">لو أجَّلت</div>
                                         <p className="text-hrsd-navy dark:text-hrsd-navy leading-relaxed">{decision.consequences.ifDelayed.impact}</p>
                                         {decision.consequences.ifDelayed.risk && (
-                                            <p className="text-[12px] text-[#D49A0A] mt-1">⚠ {decision.consequences.ifDelayed.risk}</p>
+                                            <p className="text-[12px] text-[#FCB614] mt-1">⚠ {decision.consequences.ifDelayed.risk}</p>
                                         )}
                                     </div>
                                 )}
                                 {decision.consequences.ifRejected && (
                                     <div className="bg-[#DC2626]/10 border border-[#DC2626]/20 rounded-lg p-3">
-                                        <div className="font-bold text-[#B91C1C] mb-1.5">لو رفضت</div>
+                                        <div className="font-bold text-[#DC2626] mb-1.5">لو رفضت</div>
                                         <p className="text-hrsd-navy dark:text-hrsd-navy leading-relaxed">{decision.consequences.ifRejected.impact}</p>
                                     </div>
                                 )}
@@ -270,7 +270,7 @@ export const DecisionCard: React.FC<{
                 <button
                     type="button"
                     onClick={() => onAction?.('delay', decision)}
-                    className="px-3.5 py-2 rounded-lg text-[13px] font-medium text-[#D49A0A]
+                    className="px-3.5 py-2 rounded-lg text-[13px] font-medium text-[#FCB614]
                         hover:bg-[#FCB614]/10 flex items-center gap-1.5 transition-colors"
                 >
                     <PauseCircle className="w-4 h-4" />
@@ -279,7 +279,7 @@ export const DecisionCard: React.FC<{
                 <button
                     type="button"
                     onClick={() => onAction?.('reject', decision)}
-                    className="px-3.5 py-2 rounded-lg text-[13px] font-medium text-[#B91C1C]
+                    className="px-3.5 py-2 rounded-lg text-[13px] font-medium text-[#DC2626]
                         hover:bg-[#DC2626]/10 flex items-center gap-1.5 transition-colors"
                 >
                     <XCircle className="w-4 h-4" />

@@ -119,7 +119,7 @@ export const ShiftHandover: React.FC = () => {
             >
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 bg-gradient-to-br from-[#FCB614] to-[#D67A0A] rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-14 h-14 bg-gradient-to-br from-[#FCB614] to-[#F7941D] rounded-2xl flex items-center justify-center shadow-lg">
                             <ArrowLeftRight className="w-7 h-7 text-white" />
                         </div>
                         <div>
@@ -130,7 +130,7 @@ export const ShiftHandover: React.FC = () => {
                     {!isConfirmed ? (
                         <button
                             onClick={() => setIsConfirmed(true)}
-                            className="px-6 py-3 bg-gradient-to-r from-[#2BB574] to-[#1E9658] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
+                            className="px-6 py-3 bg-gradient-to-r from-[#2BB574] to-[#2BB574] rounded-xl font-bold flex items-center gap-2 hover:opacity-90 transition-opacity"
                         >
                             <CheckCircle className="w-5 h-5" />
                             تأكيد الاستلام
@@ -148,7 +148,7 @@ export const ShiftHandover: React.FC = () => {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-gradient-to-r from-[#92400E]/30 to-[#92400E]/30 rounded-2xl p-6 mb-6 border border-[#FCB614]/30"
+                className="bg-gradient-to-r from-[#0F3144]/30 to-[#0F3144]/30 rounded-2xl p-6 mb-6 border border-[#FCB614]/30"
             >
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
@@ -252,7 +252,7 @@ export const ShiftHandover: React.FC = () => {
                             <div className="flex gap-3">
                                 <button
                                     onClick={handleAddItem}
-                                    className="flex-1 py-3 bg-[#FCB614] hover:bg-[#D49A0A] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
+                                    className="flex-1 py-3 bg-[#FCB614] hover:bg-[#FCB614] text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-colors"
                                 >
                                     <Send className="w-5 h-5" />
                                     إضافة

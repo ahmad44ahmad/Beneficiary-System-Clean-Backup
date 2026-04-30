@@ -106,14 +106,14 @@ export const StrategicDashboard: React.FC = () => {
                         <h2 className="text-2xl font-bold text-gray-800">السياق الاستراتيجي</h2>
                     </div>
                     <div className="prose max-w-none text-gray-700 leading-relaxed space-y-4">
-                        <h3 className="font-bold text-lg text-[#1B7778]">قراءة في عقل الوزارة الجديد</h3>
+                        <h3 className="font-bold text-lg text-[#269798]">قراءة في عقل الوزارة الجديد</h3>
                         <p>لفهم التحديات التشغيلية، يجب أولاً تشريح العقل الاستراتيجي الذي يوجه الوزارة حالياً، استناداً إلى وثائق التحول والاستراتيجيات الوطنية.</p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
                                 <h4 className="font-bold text-gray-900 mb-2">2.1 التحول من "التشغيل" إلى "التنظيم والتمكين"</h4>
                                 <p className="text-sm">تشير وثيقة "برامج التحول في وزارة الموارد البشرية" بوضوح إلى تغيير جذري في النموذج التشغيلي (Operating Model). الهدف هو تقليص القوى العاملة المباشرة في تقديم الخدمة من حوالي 21,000 موظف إلى أدوار إشرافية وتنظيمية، مع إسناد الخدمات التشغيلية للقطاعين الخاص وغير الربحي.</p>
-                                <p className="text-sm mt-2 text-[#1B7778] font-medium">← الجودة هي اللغة المشتركة لضبط آلاف الموردين.</p>
+                                <p className="text-sm mt-2 text-[#269798] font-medium">← الجودة هي اللغة المشتركة لضبط آلاف الموردين.</p>
                             </div>
                             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
                                 <h4 className="font-bold text-gray-900 mb-2">2.2 استراتيجية 2025: محاور التمكين وكفاءة الإنفاق</h4>
@@ -130,7 +130,7 @@ export const StrategicDashboard: React.FC = () => {
                 {/* 3. التشخيص العميق */}
                 <section id="deep-diagnosis" className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 scroll-mt-24">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 rounded-lg bg-[#F7941D]/15 flex items-center justify-center text-[#92400E] font-bold text-xl">3</div>
+                        <div className="w-10 h-10 rounded-lg bg-[#F7941D]/15 flex items-center justify-center text-[#0F3144] font-bold text-xl">3</div>
                         <h2 className="text-2xl font-bold text-gray-800">التشخيص العميق</h2>
                     </div>
                     <p className="mb-6 text-gray-600">بناءً على التكليف، تم إجراء مسح دقيق للملفات المتاحة، وتحديداً تلك المتعلقة بالعمليات اليومية في مراكز التأهيل والمستندات الطبية والإدارية.</p>
@@ -145,7 +145,7 @@ export const StrategicDashboard: React.FC = () => {
                         </div>
 
                         <div className="flex gap-4 p-4 border rounded-lg bg-white hover:shadow-md transition-shadow">
-                            <Shield className="w-8 h-8 text-[#1E9658] flex-shrink-0" />
+                            <Shield className="w-8 h-8 text-[#2BB574] flex-shrink-0" />
                             <div>
                                 <h4 className="font-bold text-gray-900">3.2 تحليل "السلامة والصحة المهنية": بين الورق والواقع</h4>
                                 <p className="text-sm text-gray-600 mt-1">التعامل مع السلامة كـ "رد فعل" (Reactive). الغائب هو "تقييم المخاطر الاستباقي". عدم تفعيل القرار الوزاري رقم 20912.</p>
@@ -161,7 +161,7 @@ export const StrategicDashboard: React.FC = () => {
                         </div>
 
                         <div className="flex gap-4 p-4 border rounded-lg bg-white hover:shadow-md transition-shadow">
-                            <Target className="w-8 h-8 text-[#D49A0A] flex-shrink-0" />
+                            <Target className="w-8 h-8 text-[#FCB614] flex-shrink-0" />
                             <div>
                                 <h4 className="font-bold text-gray-900">3.4 تحليل "التحول في الوزارة": الطموح مقابل الأدوات</h4>
                                 <p className="text-sm text-gray-600 mt-1">طموح لتبني نماذج عالمية (NDIS) وتقنيات (VR). لكنها لا تزال "مشاريع تجريبية" تفتقر إلى بنية تحتية للجودة لتحويلها لإجراءات قياسية.</p>
@@ -225,7 +225,7 @@ export const StrategicDashboard: React.FC = () => {
                 {/* 5. خارطة الطريق */}
                 <section id="roadmap" className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 scroll-mt-24">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 rounded-lg bg-[#269798]/15 flex items-center justify-center text-[#1B7778] font-bold text-xl">5</div>
+                        <div className="w-10 h-10 rounded-lg bg-[#269798]/15 flex items-center justify-center text-[#269798] font-bold text-xl">5</div>
                         <h2 className="text-2xl font-bold text-gray-800">خارطة الطريق (18-24 شهراً)</h2>
                     </div>
 
@@ -330,29 +330,29 @@ export const StrategicDashboard: React.FC = () => {
                         <li className="flex items-start gap-2 bg-[#2BB574]/10 p-3 rounded">
                             <div className="w-2 h-2 mt-2 rounded-full bg-[#2BB574]"></div>
                             <div>
-                                <span className="font-bold block text-[#14532D]">تقليل تكلفة الجودة الرديئة (COPQ)</span>
-                                <span className="text-sm text-[#1E9658]">تقليل تكلفة "إعادة العمل" التي تلتهم 15-20% من الميزانية.</span>
+                                <span className="font-bold block text-[#0F3144]">تقليل تكلفة الجودة الرديئة (COPQ)</span>
+                                <span className="text-sm text-[#2BB574]">تقليل تكلفة "إعادة العمل" التي تلتهم 15-20% من الميزانية.</span>
                             </div>
                         </li>
                         <li className="flex items-start gap-2 bg-[#2BB574]/10 p-3 rounded">
                             <div className="w-2 h-2 mt-2 rounded-full bg-[#2BB574]"></div>
                             <div>
-                                <span className="font-bold block text-[#14532D]">الوفورات الطبية</span>
-                                <span className="text-sm text-[#1E9658]">تقليل نفقات التنويم عبر بروتوكولات العدوى الصارمة.</span>
+                                <span className="font-bold block text-[#0F3144]">الوفورات الطبية</span>
+                                <span className="text-sm text-[#2BB574]">تقليل نفقات التنويم عبر بروتوكولات العدوى الصارمة.</span>
                             </div>
                         </li>
                         <li className="flex items-start gap-2 bg-[#2BB574]/10 p-3 rounded">
                             <div className="w-2 h-2 mt-2 rounded-full bg-[#2BB574]"></div>
                             <div>
-                                <span className="font-bold block text-[#14532D]">تحرير الموارد</span>
-                                <span className="text-sm text-[#1E9658]">التحول الرقمي يوفر وقت الموظفين للتركيز على الرعاية.</span>
+                                <span className="font-bold block text-[#0F3144]">تحرير الموارد</span>
+                                <span className="text-sm text-[#2BB574]">التحول الرقمي يوفر وقت الموظفين للتركيز على الرعاية.</span>
                             </div>
                         </li>
                         <li className="flex items-start gap-2 bg-[#2BB574]/10 p-3 rounded">
                             <div className="w-2 h-2 mt-2 rounded-full bg-[#2BB574]"></div>
                             <div>
-                                <span className="font-bold block text-[#14532D]">الاستدامة وجذب الاستثمار</span>
-                                <span className="text-sm text-[#1E9658]">نظام الجودة شرط أساسي لمشاريع الخصخصة.</span>
+                                <span className="font-bold block text-[#0F3144]">الاستدامة وجذب الاستثمار</span>
+                                <span className="text-sm text-[#2BB574]">نظام الجودة شرط أساسي لمشاريع الخصخصة.</span>
                             </div>
                         </li>
                     </ul>

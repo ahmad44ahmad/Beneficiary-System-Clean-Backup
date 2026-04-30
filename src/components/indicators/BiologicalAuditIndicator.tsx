@@ -56,8 +56,8 @@ export const BiologicalAuditIndicator: React.FC = () => {
 
     const severityColors = {
         critical: 'bg-[#DC2626]/10 border-[#DC2626] text-[#7F1D1D]',
-        high: 'bg-[#F7941D]/10 border-[#F7941D] text-[#92400E]',
-        medium: 'bg-[#FCB614]/10 border-[#FCB614] text-[#92400E]',
+        high: 'bg-[#F7941D]/10 border-[#F7941D] text-[#0F3144]',
+        medium: 'bg-[#FCB614]/10 border-[#FCB614] text-[#0F3144]',
     };
 
     const severityIcons = {
@@ -190,7 +190,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <Scale className="w-10 h-10 text-[#1E9658]" />
+                        <Scale className="w-10 h-10 text-[#2BB574]" />
                         <div>
                             <p className="text-2xl font-bold text-[#DC2626]">68.5 كجم</p>
                             <p className="text-sm text-gray-500">متوسط الوزن (منخفض)</p>
@@ -199,9 +199,9 @@ export const BiologicalAuditIndicator: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-sm">
                     <div className="flex items-center gap-3">
-                        <TrendingDown className="w-10 h-10 text-[#D67A0A]" />
+                        <TrendingDown className="w-10 h-10 text-[#F7941D]" />
                         <div>
-                            <p className="text-2xl font-bold text-[#D67A0A]">-24%</p>
+                            <p className="text-2xl font-bold text-[#F7941D]">-24%</p>
                             <p className="text-sm text-gray-500">فجوة غير مبررة</p>
                         </div>
                     </div>
@@ -209,7 +209,7 @@ export const BiologicalAuditIndicator: React.FC = () => {
             </div>
 
             {/* Action Button */}
-            <div className="mt-8 bg-gradient-to-r from-[#B91C1C] to-[#B91C1C] text-white rounded-xl p-6">
+            <div className="mt-8 bg-gradient-to-r from-[#DC2626] to-[#DC2626] text-white rounded-xl p-6">
                 <h3 className="font-bold text-xl mb-2">🚨 إجراء فوري مطلوب</h3>
                 <p className="mb-4">التناقضات الحالية تتطلب تحقيقاً سريعاً. النظام سيرسل تقريراً تلقائياً إلى:</p>
                 <div className="grid grid-cols-3 gap-3">

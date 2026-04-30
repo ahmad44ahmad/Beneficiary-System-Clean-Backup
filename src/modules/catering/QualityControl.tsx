@@ -210,7 +210,7 @@ export const QualityControl = () => {
                                                 <button
                                                     onClick={() => handleResponse(item.id, 'compliant')}
                                                     className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 transition-all ${responses[item.id] === 'compliant'
-                                                        ? 'bg-[#2BB574]/15 text-[#1E9658] ring-2 ring-[#2BB574]'
+                                                        ? 'bg-[#2BB574]/15 text-[#2BB574] ring-2 ring-[#2BB574]'
                                                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                                         }`}
                                                 >
@@ -220,7 +220,7 @@ export const QualityControl = () => {
                                                 <button
                                                     onClick={() => handleResponse(item.id, 'non_compliant')}
                                                     className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 transition-all ${responses[item.id] === 'non_compliant'
-                                                        ? 'bg-[#DC2626]/15 text-[#B91C1C] ring-2 ring-[#DC2626]'
+                                                        ? 'bg-[#DC2626]/15 text-[#DC2626] ring-2 ring-[#DC2626]'
                                                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                                                         }`}
                                                 >
@@ -235,7 +235,7 @@ export const QualityControl = () => {
                                             <div className="bg-[#DC2626]/10 p-4 rounded-lg mt-2 animate-in fade-in slide-in-from-top-2">
                                                 <div className="flex gap-4 items-center">
                                                     <div className="flex-1">
-                                                        <label className="text-xs font-bold text-[#B91C1C] block mb-1">ملاحظة المخالفة</label>
+                                                        <label className="text-xs font-bold text-[#DC2626] block mb-1">ملاحظة المخالفة</label>
                                                         <input
                                                             type="text"
                                                             className="w-full text-sm border-[#DC2626]/30 rounded-md focus:ring-[#DC2626] focus:border-[#DC2626]"
@@ -245,7 +245,7 @@ export const QualityControl = () => {
                                                         />
                                                     </div>
                                                     <div className="w-32">
-                                                        <label className="text-xs font-bold text-[#B91C1C] block mb-1">قيمة الحسم</label>
+                                                        <label className="text-xs font-bold text-[#DC2626] block mb-1">قيمة الحسم</label>
                                                         <div className="relative">
                                                             <input
                                                                 type="number"
@@ -278,7 +278,7 @@ export const QualityControl = () => {
                         <div className="space-y-4">
                             <div className="flex justify-between text-sm">
                                 <span className="text-gray-600">عدد البنود المطابقة:</span>
-                                <span className="font-bold text-[#1E9658]">{Object.values(responses).filter(r => r === 'compliant').length}</span>
+                                <span className="font-bold text-[#2BB574]">{Object.values(responses).filter(r => r === 'compliant').length}</span>
                             </div>
                             <div className="flex justify-between text-sm">
                                 <span className="text-gray-600">عدد المخالفات:</span>

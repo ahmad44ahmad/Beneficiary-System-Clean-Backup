@@ -24,7 +24,7 @@ export const STRENGTH_LABELS: Record<SignalStrength, string> = {
 
 export const STRENGTH_TONES: Record<SignalStrength, { bg: string; text: string; border: string; icon: string }> = {
     monitoring:      { bg: 'bg-gray-100',   text: 'text-hrsd-navy',     border: 'border-gray-300', icon: '👁' },
-    approaching:     { bg: 'bg-[#FCB614]/10',    text: 'text-[#92400E]',     border: 'border-[#FCB614]', icon: '⏳' },
+    approaching:     { bg: 'bg-[#FCB614]/10',    text: 'text-[#0F3144]',     border: 'border-[#FCB614]', icon: '⏳' },
     requires_action: { bg: 'bg-[#DC2626]/10',     text: 'text-[#7F1D1D]',      border: 'border-[#DC2626]',  icon: '🔔' },
 };
 

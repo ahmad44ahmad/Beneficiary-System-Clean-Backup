@@ -140,7 +140,7 @@ export const WasteManagement: React.FC = () => {
                 <div className="bg-white rounded-xl p-5 shadow-md">
                     <div className="flex items-center gap-3">
                         <div className="p-3 bg-[#2BB574]/15 rounded-lg">
-                            <Recycle className="w-6 h-6 text-[#1E9658]" />
+                            <Recycle className="w-6 h-6 text-[#2BB574]" />
                         </div>
                         <div>
                             <p className="text-2xl font-bold">

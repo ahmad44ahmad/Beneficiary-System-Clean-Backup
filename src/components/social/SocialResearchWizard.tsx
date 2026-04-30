@@ -223,11 +223,11 @@ export const SocialResearchWizard: React.FC = () => {
                 return (
                     <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
                         <div className="bg-[#FCB614]/10 p-5 rounded-xl border border-[#FCB614]/10">
-                            <h4 className="font-bold text-[#92400E] flex items-center gap-2">
+                            <h4 className="font-bold text-[#0F3144] flex items-center gap-2">
                                 <FileText className="w-4 h-4" />
                                 ملخص الباحث الاجتماعي
                             </h4>
-                            <p className="text-sm text-[#D49A0A] mt-1">
+                            <p className="text-sm text-[#FCB614] mt-1">
                                 هذا الملخص سيظهر في الملف الرئيسي للمستفيد وسيطلع عليه الفريق الطبي والإداري.
                             </p>
                         </div>
