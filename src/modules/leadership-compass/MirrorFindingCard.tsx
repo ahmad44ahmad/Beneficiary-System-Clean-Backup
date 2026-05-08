@@ -21,7 +21,7 @@ export const MirrorFindingCard: React.FC<{
     return (
         <article
             dir="rtl"
-            className={`bg-white dark:bg-white rounded-2xl border-2 ${tone.border}
+            className={`bg-white  rounded-2xl border-2 ${tone.border}
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
         >
             <div className={`${tone.bg} px-4 py-2 flex items-center justify-between`}>
@@ -50,7 +50,7 @@ export const MirrorFindingCard: React.FC<{
 
                 {/* بيانات مُساندة */}
                 {finding.supportingData && Object.keys(finding.supportingData).length > 0 && (
-                    <div className="bg-slate-50 dark:bg-white/50 rounded-lg p-3">
+                    <div className="bg-slate-50  rounded-lg p-3">
                         <div className="text-[11px] font-semibold text-hrsd-cool-gray dark:text-hrsd-cool-gray uppercase tracking-wider mb-1.5">
                             بيانات مُساندة
                         </div>

@@ -29,7 +29,7 @@ export const Trajectories: React.FC = () => {
     return (
         <section className="space-y-5" dir="rtl">
             {/* شريط المستوى + ملاحظة شفافيّة */}
-            <div className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-4 md:p-5 shadow-sm">
+            <div className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-4 md:p-5 shadow-sm">
                 <div className="flex flex-wrap items-start gap-4 justify-between">
                     <div>
                         <h3 className="text-[16px] font-bold text-hrsd-navy dark:text-white mb-1">
@@ -101,7 +101,7 @@ const TrajectoryCard: React.FC<{
 
     if (!trajectory) {
         return (
-            <article className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5">
+            <article className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-5">
                 <h3 className="text-[15px] font-bold text-hrsd-navy dark:text-white">{spec.titleAr}</h3>
                 <p className="text-[13px] text-hrsd-cool-gray mt-2">لا توجد بيانات متاحة.</p>
             </article>
@@ -116,7 +116,7 @@ const TrajectoryCard: React.FC<{
 
     return (
         <article
-            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200
+            className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
         >
             <header className="p-4 md:p-5 pb-0 flex items-start justify-between gap-3">
@@ -253,7 +253,7 @@ const CustomTooltip: React.FC<{
     if (!active || !payload?.length) return null;
     const p = payload[0].payload;
     return (
-        <div className="bg-white dark:bg-white border border-gray-200 dark:border-gray-300
+        <div className="bg-white  border border-gray-200 dark:border-gray-300
             rounded-lg shadow-lg p-3 text-[12px]" dir="rtl">
             <div className="font-bold text-hrsd-navy dark:text-white mb-1">{p.monthLabel}</div>
             <div className="text-hrsd-teal font-semibold">

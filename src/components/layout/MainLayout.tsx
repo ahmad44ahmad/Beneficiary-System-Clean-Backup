@@ -56,7 +56,7 @@ export const MainLayout = () => {
 
     return (
         <BrandLevelProvider>
-        <div className="flex h-screen bg-hrsd-bg-light dark:bg-white font-sans overflow-hidden transition-colors duration-300" dir="rtl">
+        <div className="flex h-screen bg-hrsd-bg-light  font-sans overflow-hidden transition-colors duration-300" dir="rtl">
             {/* Global Risk Alert System */}
             <RiskAlertSystem />
 

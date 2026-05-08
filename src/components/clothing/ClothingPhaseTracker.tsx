@@ -34,7 +34,7 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
     return (
         <section
             dir="rtl"
-            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
+            className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
         >
             <div className="flex items-baseline justify-between mb-5">
                 <h2 className="text-[17px] font-bold text-hrsd-navy dark:text-white">
@@ -56,7 +56,7 @@ export const ClothingPhaseTracker: React.FC<Props> = ({
                             ? 'border-hrsd-teal bg-hrsd-teal/5 shadow-md'
                             : state === 'completed'
                             ? 'border-hrsd-green bg-hrsd-green/5'
-                            : 'border-gray-200 bg-gray-50 dark:border-gray-200 dark:bg-white';
+                            : 'border-gray-200 bg-gray-50 dark:border-gray-200 ';
 
                     const Icon =
                         state === 'completed' ? CheckCircle2 : state === 'current' ? Clock : Circle;

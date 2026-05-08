@@ -32,7 +32,7 @@ export const DecisionCard: React.FC<{
     return (
         <article
             dir="rtl"
-            className={`bg-white dark:bg-white rounded-2xl border-2 ${tone.border}
+            className={`bg-white  rounded-2xl border-2 ${tone.border}
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
         >
             {/* شريط عاجليّة */}
@@ -157,7 +157,7 @@ export const DecisionCard: React.FC<{
                                 </h4>
                                 <div className="space-y-2">
                                     {decision.evidence.map((e, i) => (
-                                        <div key={i} className="bg-slate-50 dark:bg-white/50 rounded-lg p-3 border border-gray-200 dark:border-gray-200">
+                                        <div key={i} className="bg-slate-50  rounded-lg p-3 border border-gray-200 dark:border-gray-200">
                                             <div className="flex items-start gap-3">
                                                 <span className="shrink-0 inline-block text-[11px] font-bold uppercase tracking-wider
                                                     bg-hrsd-gold/20 text-hrsd-gold-dark px-2 py-0.5 rounded">
@@ -256,7 +256,7 @@ export const DecisionCard: React.FC<{
             </div>
 
             {/* أزرار الإجراء */}
-            <div className="bg-slate-50 dark:bg-white/50 px-5 py-3 border-t border-gray-200 dark:border-gray-200
+            <div className="bg-slate-50  px-5 py-3 border-t border-gray-200 dark:border-gray-200
                 flex flex-wrap gap-2 justify-end">
                 <button
                     type="button"

@@ -76,7 +76,7 @@ const HorizonBand: React.FC<{
             <div className="space-y-3">
                 {signals.length > 0
                     ? signals.map((s) => <SignalCard key={s.id} signal={s} />)
-                    : <div className="bg-white dark:bg-white border border-dashed border-gray-300 dark:border-gray-300 rounded-lg p-6 text-center text-[12px] text-hrsd-cool-gray">
+                    : <div className="bg-white  border border-dashed border-gray-300 dark:border-gray-300 rounded-lg p-6 text-center text-[12px] text-hrsd-cool-gray">
                         لا إشاراتٌ في هذا الأفق حاليّاً.
                     </div>
                 }
@@ -90,7 +90,7 @@ const SignalCard: React.FC<{ signal: PolicySignal }> = ({ signal }) => {
     const strength = STRENGTH_TONES[signal.strength];
 
     return (
-        <article className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 shadow-sm overflow-hidden">
+        <article className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 shadow-sm overflow-hidden">
             <div className={`${strength.bg} px-4 py-2 flex items-center gap-2 border-b ${strength.border}`}>
                 <span className="text-base" aria-hidden="true">{strength.icon}</span>
                 <span className={`text-[11px] font-bold uppercase tracking-wider ${strength.text}`}>
@@ -112,7 +112,7 @@ const SignalCard: React.FC<{ signal: PolicySignal }> = ({ signal }) => {
                     </p>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-white rounded-lg p-3">
+                <div className="bg-slate-50  rounded-lg p-3">
                     <div className="text-[10.5px] font-bold uppercase tracking-wider text-hrsd-cool-gray mb-1">
                         القضيّة الناشئة
                     </div>

@@ -91,7 +91,7 @@ export const LeadershipCompass: React.FC = () => {
 
             {/* أشرطة التبويب */}
             <nav
-                className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-1.5
+                className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-1.5
                     flex flex-wrap gap-1 shadow-sm"
                 aria-label="أقسام بوصلة القيادة"
             >

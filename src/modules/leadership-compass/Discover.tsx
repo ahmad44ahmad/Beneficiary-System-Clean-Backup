@@ -37,7 +37,7 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
 
     return (
         <article
-            className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200
+            className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200
                 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
         >
             {/* الشريط العلويّ */}
@@ -105,7 +105,7 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
                     </div>
                     <div className="grid md:grid-cols-3 gap-2">
                         {discovery.proposedActions.map((a, i) => (
-                            <div key={i} className="bg-slate-50 dark:bg-white border border-gray-200 dark:border-gray-200 rounded-lg p-3">
+                            <div key={i} className="bg-slate-50  border border-gray-200 dark:border-gray-200 rounded-lg p-3">
                                 <div className="flex items-center gap-1.5 text-hrsd-teal text-[13px] font-bold mb-1">
                                     <CheckCircle2 className="w-3.5 h-3.5" />
                                     {a.title}

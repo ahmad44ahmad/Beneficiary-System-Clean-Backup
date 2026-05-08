@@ -172,7 +172,7 @@ export const ScenarioSimulator: React.FC = () => {
             </div>
 
             {/* شريط الإدخال */}
-            <div className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 md:p-6 shadow-sm">
+            <div className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-5 md:p-6 shadow-sm">
                 <header className="flex items-center gap-3 mb-5">
                     <div className="w-11 h-11 bg-hrsd-teal/10 rounded-xl flex items-center justify-center">
                         <Calculator className="w-6 h-6 text-hrsd-teal" />
@@ -198,7 +198,7 @@ export const ScenarioSimulator: React.FC = () => {
                             step={100_000}
                             min={0}
                             className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-300
-                                rounded-xl bg-white dark:bg-white text-[15px] font-semibold
+                                rounded-xl bg-white  text-[15px] font-semibold
                                 text-hrsd-navy dark:text-white focus:border-hrsd-teal focus:outline-none"
                         />
                         <p className="text-[11.5px] text-hrsd-cool-gray mt-1.5">
@@ -220,7 +220,7 @@ export const ScenarioSimulator: React.FC = () => {
                                     className={`flex-1 py-2.5 rounded-xl text-[14px] font-bold transition-all border-2 ${
                                         horizon === h
                                             ? 'bg-hrsd-navy text-white border-hrsd-navy'
-                                            : 'bg-white dark:bg-white border-gray-200 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy hover:border-hrsd-teal'
+                                            : 'bg-white  border-gray-200 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy hover:border-hrsd-teal'
                                     }`}
                                 >
                                     {h} شهر
@@ -258,7 +258,7 @@ export const ScenarioSimulator: React.FC = () => {
                                 className={`px-3.5 py-1.5 rounded-lg text-[13px] font-semibold transition-all border ${
                                     activePreset === key
                                         ? 'bg-hrsd-teal text-white border-hrsd-teal'
-                                        : 'bg-white dark:bg-white border-gray-300 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy hover:border-hrsd-teal hover:text-hrsd-teal'
+                                        : 'bg-white  border-gray-300 dark:border-gray-300 text-hrsd-cool-gray dark:text-hrsd-navy hover:border-hrsd-teal hover:text-hrsd-teal'
                                 }`}
                             >
                                 {preset.label}
@@ -274,7 +274,7 @@ export const ScenarioSimulator: React.FC = () => {
                         const Icon = spec.icon;
                         const allocated = budget * (split[code] / 100);
                         return (
-                            <div key={code} className="bg-slate-50 dark:bg-white rounded-xl p-4 border border-gray-200 dark:border-gray-200">
+                            <div key={code} className="bg-slate-50  rounded-xl p-4 border border-gray-200 dark:border-gray-200">
                                 <div className="flex items-center gap-2.5 mb-2.5">
                                     <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${spec.color}20` }}>
                                         <Icon className="w-5 h-5" style={{ color: spec.color }} />
@@ -328,7 +328,7 @@ export const ScenarioSimulator: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div className="bg-slate-50 dark:bg-white border-2 border-dashed border-gray-300 dark:border-gray-300 rounded-xl p-8 text-center">
+                <div className="bg-slate-50  border-2 border-dashed border-gray-300 dark:border-gray-300 rounded-xl p-8 text-center">
                     <p className="text-[14px] text-hrsd-cool-gray dark:text-hrsd-cool-gray">
                         صحِّح مجموع التخصيص إلى 100% لرؤية نتائج المحاكاة.
                     </p>
@@ -350,7 +350,7 @@ const ScenarioCard: React.FC<{ scenario: ScenarioOutput; isUserScenario: boolean
             className={`rounded-2xl p-5 border-2 transition-shadow hover:shadow-md ${
                 isUserScenario
                     ? 'bg-hrsd-navy text-white border-hrsd-navy shadow-md'
-                    : 'bg-white dark:bg-white border-gray-200 dark:border-gray-200'
+                    : 'bg-white  border-gray-200 dark:border-gray-200'
             }`}
         >
             <header className="mb-4">
@@ -375,7 +375,7 @@ const ScenarioCard: React.FC<{ scenario: ScenarioOutput; isUserScenario: boolean
 
             {/* المُخرَجات المُتوقَّعة */}
             <div className={`rounded-xl p-3 mb-3 ${
-                isUserScenario ? 'bg-white/10' : 'bg-slate-50 dark:bg-white'
+                isUserScenario ? 'bg-white/10' : 'bg-slate-50 '
             }`}>
                 <div className={`text-[11px] font-bold uppercase tracking-wider mb-2 ${
                     isUserScenario ? 'text-hrsd-gold' : 'text-hrsd-cool-gray dark:text-hrsd-cool-gray'

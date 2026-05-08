@@ -55,7 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
                 role="dialog"
                 aria-modal="true"
                 className={cn(
-                    'relative w-full bg-white rounded-lg shadow-lg flex flex-col max-h-[90vh] dark:bg-white dark:shadow-2xl',
+                    'relative w-full bg-white rounded-lg shadow-lg flex flex-col max-h-[90vh]  dark:shadow-2xl',
                     sizes[size],
                     className
                 )}

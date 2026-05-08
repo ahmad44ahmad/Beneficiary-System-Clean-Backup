@@ -116,7 +116,7 @@ const MemberCard: React.FC<{
 export const ClothingCommitteeCard: React.FC<Props> = ({ assignments = {} }) => (
     <section
         dir="rtl"
-        className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
+        className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-5 shadow-sm"
     >
         <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">

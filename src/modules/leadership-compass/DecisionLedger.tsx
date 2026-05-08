@@ -45,7 +45,7 @@ export const DecisionLedger: React.FC = () => {
             </div>
 
             {/* الفلترة والبحث */}
-            <div className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 p-4 flex flex-wrap gap-3 items-center">
+            <div className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 p-4 flex flex-wrap gap-3 items-center">
                 <div className="flex-1 min-w-[200px] relative">
                     <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 start-3 text-hrsd-cool-gray" />
                     <input
@@ -54,7 +54,7 @@ export const DecisionLedger: React.FC = () => {
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="ابحث بالعنوان أو الدرس أو الوسم..."
                         className="w-full ps-3 pe-10 py-2 border border-gray-200 dark:border-gray-300
-                            rounded-lg bg-white dark:bg-white text-[14px] focus:border-hrsd-teal focus:outline-none"
+                            rounded-lg bg-white  text-[14px] focus:border-hrsd-teal focus:outline-none"
                     />
                 </div>
 
@@ -64,7 +64,7 @@ export const DecisionLedger: React.FC = () => {
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
                         className="px-3 py-2 border border-gray-200 dark:border-gray-300
-                            rounded-lg bg-white dark:bg-white text-[14px] font-medium"
+                            rounded-lg bg-white  text-[14px] font-medium"
                     >
                         <option value="all">كلّ الحالات</option>
                         <option value="approved">مُعتمَدة</option>
@@ -129,7 +129,7 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
     const StatusIcon = STATUS_ICONS[entry.status].icon;
 
     return (
-        <article className="bg-white dark:bg-white rounded-2xl border border-gray-200 dark:border-gray-200 shadow-sm overflow-hidden">
+        <article className="bg-white  rounded-2xl border border-gray-200 dark:border-gray-200 shadow-sm overflow-hidden">
             {/* الشريط العلويّ */}
             <header className="p-5 border-b border-slate-100 dark:border-gray-200 flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex items-start gap-3">
@@ -237,7 +237,7 @@ const LedgerCard: React.FC<{ entry: LedgerEntry }> = ({ entry }) => {
 const OutcomePanel: React.FC<{ label: string; outcome?: OutcomeActual }> = ({ label, outcome }) => {
     if (!outcome) {
         return (
-            <div className="bg-slate-50 dark:bg-white rounded-lg p-3 border border-dashed border-gray-200 dark:border-gray-200">
+            <div className="bg-slate-50  rounded-lg p-3 border border-dashed border-gray-200 dark:border-gray-200">
                 <div className="text-[11px] font-bold uppercase tracking-wider text-hrsd-cool-gray mb-0.5">{label}</div>
                 <p className="text-[12px] text-hrsd-cool-gray italic">لم يُقَس بعد</p>
             </div>
