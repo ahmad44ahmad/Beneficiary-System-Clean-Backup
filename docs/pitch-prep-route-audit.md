@@ -1,6 +1,6 @@
-# Pitch-prep route audit — 2026-05-08T08-28-46
+# Pitch-prep route audit — 2026-05-08T09-22-11
 
-**Source:** `scripts/route-audit.mjs`. Generated headless via Playwright/Chromium against `http://localhost:5175`.
+**Source:** `scripts/route-audit.mjs`. Generated headless via Playwright/Chromium against `https://beneficiary-system-clean-backup.vercel.app`.
 
 **Routes scanned:** 51. **Demo path = first 12 entries** (per `docs/pitch-prep.md` §"Demo path").
 

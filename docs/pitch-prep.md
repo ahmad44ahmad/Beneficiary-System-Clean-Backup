@@ -28,13 +28,27 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 | C | Visual + content polish | /handover navy palette, DignityFile brand swap (#DC2626 → #0F3144), governmental framing for residual placeholders | ✅ DONE 2026-05-08 | `pitch-prep-session-C` | `d8254cf`, `7bf9c2d`, `2aec740` |
 | D | Brand + Arabic register | C7 resolved (القياس → القيادة); arabic-check sweep on Session B/C strings; first-person fix on Karama emotional fields | ✅ DONE 2026-05-08 | `pitch-prep-session-D` | `fa2d3cc`, `8c14710` |
 | E | Backend hardening | 8 Session E migrations (provision 12 tables + 3 views + extend daily_care_logs + auth bridge + RLS overhaul + auth-user repair); demo auto-signin verified live; advisor 90 → 5; C9, C12, C13, C15 resolved; demo path 11/11 screens render, route-audit 0/0/0/0/0/0 | ✅ DONE 2026-05-08 | `pitch-prep-session-E` | `45fbfa6`, `e6243ac`, `f62f754`, `551db1d`, `494d9cf` |
-| F | *(Optional)* Build + deploy + smoke test | Production build, optional Vercel deploy, final smoke test | OPTIONAL | — | — |
+| F | Build + deploy + verify | Prod build verified locally; ?as=demo URL-flag autosignin shipped (`daf0b95`); URL-strip robustness fix (`6f3a5cc`); promoted to production at `beneficiary-system-clean-backup.vercel.app`; end-to-end auth→JWT→RLS chain verified on the deployed surface (seeded `/handover` row visible); 51-route audit on prod 0/0/0/0/0/0; laptop fallback verified; `docs/pitch-day-playbook.md` written | ✅ DONE 2026-05-08 | `pitch-prep-session-F` | `daf0b95`, `6f3a5cc` |
 
 **Highest-leverage order:** B → E → D → C → F. The pitch sees demo-path screens (B) and the Supabase reviewer sees the Studio dashboard (E). D sells "ministry-grade". C is insurance. F only matters if pitch is from a deployed URL.
 
 ---
 
 ## Decisions log (do NOT re-litigate without a reason)
+
+### 2026-05-08 (Session F)
+
+1. **Priority 0 — both deploy AND laptop fallback.** Pitch surface is the deployed production URL `https://beneficiary-system-clean-backup.vercel.app/dashboard?as=demo` with the Vite dev server at `localhost:5175` as Wi-Fi-failure recovery. Both verified end-to-end at session close.
+
+2. **Priority 1c — `?as=demo` URL flag (option ii).** Selected over manual `/login` because the pitch URL needs to resolve to the authenticated dashboard invisibly, no visible 5-second login step. `AuthContext.tsx` extended ~15 lines (commit `daf0b95`); the URL-strip via `history.replaceState` was lifted out of the signin success branch immediately after (commit `6f3a5cc`) so the param drops on cached-session loads too.
+
+3. **Switched from "preview only" to production deploy mid-session.** The original Priority-2 plan was preview-only, but the new preview URL hit Vercel **Standard Deployment Protection** — preview URLs require team auth and redirect to `vercel.com/login`. The existing 6h-old prod URL was public BUT serving a pre-Session D build (old «لوحة القياس» heading). Ahmad confirmed promotion (4-option AskUserQuestion). Deployed via `vercel deploy --prod --yes`; latest prod alias points to `dpl_DSjcBc61kbgwTVTQ2VfCSHzEzmHr`.
+
+4. **Stale Production-scope env vars left as-is.** 14 marketplace artifacts (`POSTGRES_*`, `NEXT_PUBLIC_SUPABASE_*`) from a 148-day-old integration. None `VITE_`-prefixed → not in client bundle. Deferred (carry-over C20).
+
+5. **`scripts/route-audit.mjs` extended to support deployed URLs.** Reads `BASE_URL` from env (falls back to `localhost:5175`) and visits `/dashboard?as=demo` first to seed the session. Re-ran against production: 0/0/0/0/0/0 across 51 routes. Caveat: the audit's `bodyTextLen` field came back `?` for every route (an evaluate()-context artifact, not real — manual checks confirm `bodyLen=2140` on `/dashboard`). Carry-over C21.
+
+6. **`vercel link` was not pre-existing in the repo.** Linked to existing `ahmed-abdullah-alshehris-projects/beneficiary-system-clean-backup` (created `.vercel/`, added to `.gitignore`). Replaced the trailing duplicate `.vercel` entry with `.env*.local` and `.env.*-pulled` patterns so `vercel env pull` outputs cannot leak.
 
 ### 2026-05-08 (Session E)
 
@@ -192,6 +206,9 @@ Recommend handling in Session C as part of the breadth pass — either remove th
 | C16 | `«الخدمات الطبية»` rename to `«سلامة المستفيدين»` | **RESOLVED Session E** — Ahmad chose "leave as-is": center's medical-services department, not wakalah. No rename. | — |
 | C17 *(new)* | `materialized_view_in_api` × 2 — `mv_wellbeing_index` and `mv_wellbeing_stats` are exposed via Data API (Supabase WARN). Anon already blocked via grants; only `authenticated` can SELECT. Moving them to a private schema would break `wellbeingService.from('mv_wellbeing_index')`. **Accepted** as the cost of keeping the service API surface stable. | Post-pitch refactor | post-pitch |
 | C18 *(new)* | `rls_policy_always_true` × 2 on `audit_logs_insert_auth` and `ai_decision_logs_insert_auth` — append-only `WITH CHECK (true)`. Tightening to a role check would drop audits from secretary/nurse activity. **Accepted** as intentional. | — | — |
+| ~~C19~~ *(opened+closed in F)* | ~~`?as=demo` URL-strip not firing on prod cached-session loads~~ | **RESOLVED** — `replaceState` was nested inside the signin success branch; lifted out so it fires on every load that carries the flag. Commit `6f3a5cc`, redeployed via `dpl_DSjcBc61kbgwTVTQ2VfCSHzEzmHr`. | — |
+| C20 *(new)* | 14 stale Production-scope Vercel env vars (`POSTGRES_*`, `NEXT_PUBLIC_SUPABASE_*`, `SUPABASE_*` non-VITE-prefixed) from a 148-day-old marketplace integration. Not bundled into the client. Cosmetic clutter on the Vercel project. | Vercel project settings | post-pitch |
+| C21 *(new)* | `scripts/route-audit.mjs` evaluate() returns `bodyTextLen` undefined on every route when run against the deployed surface (manual checks confirm rendering, so it's a script-side artifact, not real). The `0/0/0/0/0/0` aggregate is still trustworthy via console.error / WoW / English / button counts; only the bodyLen column is unreliable. | `scripts/route-audit.mjs` | post-pitch |
 
 ---
 
@@ -886,3 +903,42 @@ Per the `arabic-check` skill rubric, Session B/C strings I added were reviewed:
 ### Pattern note — `*Available = null` (lazy probe) on shift
 
 `shiftService` uses `null` (lazy probe) instead of `true` because the service updates the flag at runtime based on PGRST205 error code. The other three services (ipc, wellbeing, indicator) use a constant `true` because their patterns short-circuit only on the literal `false`. Both patterns will tolerate the table existing or being absent — defense in depth.
+
+---
+
+## Session F — completed work archive
+
+### Code changes
+
+| Concern | File:line | Before | After | Commit |
+|---|---|---|---|---|
+| `?as=demo` URL flag for prod autosignin | `AuthContext.tsx:90-115` | DEV-only autosignin (`import.meta.env.DEV`) | Adds `urlIsDemo` from `window.location.search`; signin fires when DEV OR flag present. On success the `?as=demo` param is dropped via `history.replaceState` | `daf0b95` |
+| `.gitignore` env-pull coverage | `.gitignore:104-108` | Trailing duplicate `.vercel` (line 52 already covered it) | Replaced with `.env*.local` and `.env.*-pulled` so `vercel env pull` outputs cannot leak | `daf0b95` |
+| URL-strip robustness | `AuthContext.tsx:90-122` | `replaceState` nested inside the `if (!error && data.session)` branch — never fired when getSession returned a cached session | `replaceState` lifted to its own post-block: fires on every load that carries `?as=demo`, regardless of whether signin was needed | `6f3a5cc` |
+| Route-audit `BASE_URL` support | `scripts/route-audit.mjs:11-20, 222-228, 290` | `BASE` hardcoded to `localhost:5175`; assumed dev server | Reads `process.env.BASE_URL`; pre-loop visit to `/dashboard?as=demo` + 7s wait so the loop runs authenticated against any URL; markdown header uses the actual `BASE` | `6f3a5cc` |
+
+### Vercel deployments (this session)
+
+| # | Deployment ID | Type | URL | Notes |
+|---|---|---|---|---|
+| 1 | `dpl_EUkPiNjDHq1eiWP5mQbYaRFv85NL` | Preview | `beneficiary-system-clean-backup-rk8j64rg3.vercel.app` | First deploy of `daf0b95`. SSO-gated → not pitch-usable. |
+| 2 | `dpl_7KSivqDTA3sHEE4xeKEPSbh1kkaq` | **Production** | aliased to `beneficiary-system-clean-backup.vercel.app` | Promoted via `vercel deploy --prod --yes` after Ahmad confirmed (URL-strip bug present). |
+| 3 | `dpl_DSjcBc61kbgwTVTQ2VfCSHzEzmHr` | **Production** | aliased to `beneficiary-system-clean-backup.vercel.app` | Final pitch deploy of `6f3a5cc` (URL-strip fix). |
+
+### Verifications run
+
+- `npm run lint` + `npx tsc --noEmit`: 0 errors / 0 type errors. Two pre-existing warnings unchanged (BrandLevelProvider, AddRequirementModal).
+- `npm run build`: 10.88s on commit `daf0b95`, 0 errors. Top-3 chunks: `vendor-icons` 887.34 kB / 164.51 kB gzip, `vendor-charts` 415.94 kB / 119.94 kB, `vendor-react` 231.55 kB / 73.93 kB. Total gzip JS ~700 kB (well under the 2 MB threshold).
+- `npm run preview` on port 4173 (production preview build):
+  - `/dashboard` (no flag) → 0 console errors, no `/auth/v1/token` calls, DEBUG widget absent (gated to DEV correctly), bilingual heading present.
+  - `/dashboard?as=demo` → POST `/auth/v1/token?grant_type=password` → 200, `app_metadata.role=director`, URL bar dropped to `/dashboard`. Negative path: clearing localStorage and visiting `/dashboard` (no flag) → 0 auth calls, `hasAuth=false` (flag does not fire by accident).
+- **Production verification — final deploy** (`dpl_DSjcBc61kbgwTVTQ2VfCSHzEzmHr`):
+  - `https://beneficiary-system-clean-backup.vercel.app/dashboard?as=demo` → after 8s: URL `/dashboard`, `hasAuth=true`, `role=director`, `email=demo@basira.local`, `bodyLen=2140`, bilingual heading «لوحة القيادة التنفيذية», theme-color `#0F3144`, 0 console errors, real Supabase REST queries returning 200 (`/rest/v1/beneficiaries`, `/rest/v1/accountability_gaps`, `/rest/v1/medication_schedules`).
+  - `/handover` (no flag) → seeded `shift_handover_items` row «متابعة علامات الجفاف لدى المستفيد محمد (172)» renders. **End-to-end RLS proof on the deployed surface — JWT → PostgREST → RLS policy approval → real DB row.**
+- **`basira-ui-verifier` subagent** — 11/12 checks PASS. Initial FAIL was the URL-strip cosmetic issue, which prompted the `6f3a5cc` fix and re-verification.
+- **51-route audit on production** (`BASE_URL=https://beneficiary-system-clean-backup.vercel.app node scripts/route-audit.mjs`) — aggregate **0 / 0 / 0 / 0 / 0 / 0** across all 51 routes (console errors / WoW / EN / empty buttons / قريباً / broken images). Caveat: bodyLen field came back `?` for every route (script-side evaluate() artifact, not a real empty-body — manual checks contradict). Filed as carry-over C21.
+- **Laptop fallback** (`http://localhost:5175/dashboard`) — Vite dev server already running (PID 5204); curl returned RTL Arabic + `theme-color="#0F3144"`. Playwright nav: `hasAuth=true`, `role=director`, 0 console errors, `bodyLen=2485`, bilingual heading, DEV auto-signin fires correctly via `import.meta.env.DEV` branch.
+
+### Operational artifact
+
+`docs/pitch-day-playbook.md` — tight one-pager for pitch time. Sections: Demo URL · Sign-in step · 8-screen click order · Failure modes + recovery · What NOT to show · Accepted advisor warnings (5 with C-ids).
