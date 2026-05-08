@@ -81,11 +81,17 @@ const isSupabaseReady = (): boolean => {
     return !!supabase;
 };
 
+// Wellbeing materialized views (mv_wellbeing_index, mv_wellbeing_stats) and the
+// v_early_warning_report view are not yet provisioned in the remote DB — Session E
+// migration. Until then we serve in-memory demo data; flip back to false to re-enable
+// supabase queries once the views ship.
+const wellbeingViewsAvailable = false;
+
 export const wellbeingService = {
 
     // Get all wellbeing scores
     async getWellbeingScores(): Promise<WellbeingScore[]> {
-        if (!isSupabaseReady()) {
+        if (!isSupabaseReady() || !wellbeingViewsAvailable) {
             return DEMO_BENEFICIARIES;
         }
 
@@ -108,7 +114,7 @@ export const wellbeingService = {
 
     // Get statistics summary
     async getWellbeingStats(): Promise<WellbeingStats> {
-        if (!isSupabaseReady()) {
+        if (!isSupabaseReady() || !wellbeingViewsAvailable) {
             return DEMO_STATS;
         }
 
@@ -131,7 +137,7 @@ export const wellbeingService = {
 
     // Get early warning list
     async getEarlyWarnings(): Promise<EarlyWarning[]> {
-        if (!isSupabaseReady()) {
+        if (!isSupabaseReady() || !wellbeingViewsAvailable) {
             return DEMO_BENEFICIARIES
                 .filter(b => b.wellbeing_score < 60 || b.requires_followup)
                 .map(b => ({
@@ -166,7 +172,7 @@ export const wellbeingService = {
 
     // Get single beneficiary score with details
     async getBeneficiaryScore(beneficiaryId: string): Promise<WellbeingScore | null> {
-        if (!isSupabaseReady()) {
+        if (!isSupabaseReady() || !wellbeingViewsAvailable) {
             return DEMO_BENEFICIARIES.find(b => b.beneficiary_id === beneficiaryId) || null;
         }
 

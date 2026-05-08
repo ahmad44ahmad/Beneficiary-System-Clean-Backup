@@ -154,12 +154,19 @@ const logError = (context: string, error: unknown) => {
 
 const isSupabaseReady = (): boolean => !!supabase;
 
+// IPC tables (locations, ipc_checklist_templates, ipc_inspections, ipc_incidents,
+// immunizations) are not yet provisioned in the remote DB — Session E migration.
+// Until then we serve in-memory demo data and skip the network round-trip entirely
+// to keep /ipc, /overview and /integrated-reports console-clean. After the migration
+// ships, flip this back to `false` to re-enable supabase queries.
+const ipcTablesAvailable = false;
+
 // Service
 
 export const ipcService = {
     // المواقع
     async getLocations(): Promise<Location[]> {
-        if (!isSupabaseReady()) return DEMO_LOCATIONS;
+        if (!isSupabaseReady() || !ipcTablesAvailable) return DEMO_LOCATIONS;
 
         try {
             const { data, error } = await supabase
@@ -177,7 +184,7 @@ export const ipcService = {
 
     // قوالب قوائم التحقق
     async getChecklistTemplates(): Promise<ChecklistTemplate[]> {
-        if (!isSupabaseReady()) return [DEMO_CHECKLIST_TEMPLATE];
+        if (!isSupabaseReady() || !ipcTablesAvailable) return [DEMO_CHECKLIST_TEMPLATE];
 
         try {
             const { data, error } = await supabase
@@ -195,7 +202,7 @@ export const ipcService = {
 
     // جولات التفتيش
     async getInspections(limit: number = 50): Promise<IPCInspection[]> {
-        if (!isSupabaseReady()) return [];
+        if (!isSupabaseReady() || !ipcTablesAvailable) return [];
 
         try {
             const { data, error } = await supabase
@@ -216,7 +223,7 @@ export const ipcService = {
     },
 
     async saveInspection(inspection: Partial<IPCInspection>): Promise<{ success: boolean; id?: string }> {
-        if (!isSupabaseReady()) {
+        if (!isSupabaseReady() || !ipcTablesAvailable) {
             return { success: true, id: 'demo-' + Date.now() };
         }
 
@@ -240,7 +247,7 @@ export const ipcService = {
 
     // حوادث العدوى
     async getIncidents(status?: string): Promise<IPCIncident[]> {
-        if (!isSupabaseReady()) return [];
+        if (!isSupabaseReady() || !ipcTablesAvailable) return [];
 
         try {
             let query = supabase
@@ -266,7 +273,7 @@ export const ipcService = {
     },
 
     async saveIncident(incident: Partial<IPCIncident>): Promise<{ success: boolean; id?: string }> {
-        if (!isSupabaseReady()) {
+        if (!isSupabaseReady() || !ipcTablesAvailable) {
             return { success: true, id: 'demo-' + Date.now() };
         }
 
@@ -290,7 +297,7 @@ export const ipcService = {
 
     // التحصينات
     async getImmunizations(personType?: 'beneficiary' | 'staff'): Promise<Immunization[]> {
-        if (!isSupabaseReady()) return [];
+        if (!isSupabaseReady() || !ipcTablesAvailable) return [];
 
         try {
             let query = supabase
@@ -317,7 +324,7 @@ export const ipcService = {
 
     // حفظ تحصين جديد
     async saveImmunization(immunization: Partial<Immunization>): Promise<{ success: boolean; id?: string }> {
-        if (!isSupabaseReady()) return { success: true, id: `demo-${Date.now()}` };
+        if (!isSupabaseReady() || !ipcTablesAvailable) return { success: true, id: `demo-${Date.now()}` };
 
         try {
             const { data, error } = await supabase
@@ -339,7 +346,7 @@ export const ipcService = {
 
     // إحصائيات اللوحة
     async getIPCStats(): Promise<IPCStats> {
-        if (!isSupabaseReady()) return DEMO_STATS;
+        if (!isSupabaseReady() || !ipcTablesAvailable) return DEMO_STATS;
 
         try {
             // جلب جولات الأسبوع الحالي
