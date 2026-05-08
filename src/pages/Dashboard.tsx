@@ -59,7 +59,7 @@ export const Dashboard: React.FC = () => {
                         <div className="p-3 bg-gradient-to-br from-hrsd-teal to-hrsd-navy rounded-xl">
                             <LayoutDashboard className="w-8 h-8 text-white" />
                         </div>
-                        لوحة القياس التنفيذية (Executive Dashboard)
+                        لوحة القيادة التنفيذية (Executive Dashboard)
                     </h1>
                     <p className="text-gray-500 dark:text-slate-400 mt-1 mr-16">نظرة شاملة على الأداء التشغيلي ومؤشرات الجودة (ISO 9001)</p>
                 </div>

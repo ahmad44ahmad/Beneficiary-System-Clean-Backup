@@ -35,7 +35,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({ beneficiaries, i
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">لوحة القياس والتحكم</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">لوحة القيادة والتحكم</h1>
                     <p className="text-gray-500">{new Date().toLocaleDateString('ar-SA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 </div>
             </div>
