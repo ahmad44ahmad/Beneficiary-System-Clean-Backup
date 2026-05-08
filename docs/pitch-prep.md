@@ -2,7 +2,7 @@
 
 **Owner:** Ahmad Al-Shahri
 **Branch:** `v2`
-**Last session:** E — completed 2026-05-08, tag `pitch-prep-session-E` (pending), HEAD `551db1d` (+ doc commit on top)
+**Last session:** E — completed 2026-05-08, tag `pitch-prep-session-E`, HEAD `494d9cf`
 **Doc purpose:** Durable cross-session memory. Every session starts by reading this file. Every session ends by updating it.
 
 ---
@@ -27,7 +27,7 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 | B | Demo-path bulletproofing + schema-drift sweep | Manual walkthrough of 8 demo screens; eliminate 36 console errors on 12 schema-drift routes | ✅ DONE 2026-05-08 | `pitch-prep-session-B` | `0a31262`, `3d41977`, `e5e9032`, `e8c2dbd`, `cc76e77` |
 | C | Visual + content polish | /handover navy palette, DignityFile brand swap (#DC2626 → #0F3144), governmental framing for residual placeholders | ✅ DONE 2026-05-08 | `pitch-prep-session-C` | `d8254cf`, `7bf9c2d`, `2aec740` |
 | D | Brand + Arabic register | C7 resolved (القياس → القيادة); arabic-check sweep on Session B/C strings; first-person fix on Karama emotional fields | ✅ DONE 2026-05-08 | `pitch-prep-session-D` | `fa2d3cc`, `8c14710` |
-| E | Backend hardening | 8 Session E migrations (provision 12 tables + 3 views + extend daily_care_logs + auth bridge + RLS overhaul); demo auto-signin; advisor 90 → 5; C9, C12, C13, C15 resolved | ✅ DONE 2026-05-08 | `pitch-prep-session-E` (pending) | `45fbfa6`, `e6243ac`, `f62f754`, `551db1d` |
+| E | Backend hardening | 8 Session E migrations (provision 12 tables + 3 views + extend daily_care_logs + auth bridge + RLS overhaul + auth-user repair); demo auto-signin verified live; advisor 90 → 5; C9, C12, C13, C15 resolved; demo path 11/11 screens render, route-audit 0/0/0/0/0/0 | ✅ DONE 2026-05-08 | `pitch-prep-session-E` | `45fbfa6`, `e6243ac`, `f62f754`, `551db1d`, `494d9cf` |
 | F | *(Optional)* Build + deploy + smoke test | Production build, optional Vercel deploy, final smoke test | OPTIONAL | — | — |
 
 **Highest-leverage order:** B → E → D → C → F. The pitch sees demo-path screens (B) and the Supabase reviewer sees the Studio dashboard (E). D sells "ministry-grade". C is insurance. F only matters if pitch is from a deployed URL.
@@ -777,6 +777,7 @@ Per the `arabic-check` skill rubric, Session B/C strings I added were reviewed:
 | C9 — DailyCareForm payload | `DailyCareForm.tsx:67-88` | `log_date` / `recorded_by: null` (NOT NULL violation) / fields without columns | `shift_date` / `recorded_by` from `useAuth().user.user_metadata.full_name` / weight & mobility & followup land on real columns | `e6243ac` |
 | DEV demo auto-signin | `AuthContext.tsx:54-105` | unauthenticated session in dev | `signInWithPassword('demo@basira.local', 'demo-pitch-2026')` gated to `import.meta.env.DEV` only | `f62f754` |
 | C13 — `dark:bg-white*` strip | 14 files (Skeleton ×4, Modal, MainLayout, ClothingSeasonalCalendar, ClothingPhaseTracker, ClothingCommitteeCard, Discover, LeadershipCompass, Trajectories, ScenarioSimulator, MirrorFindingCard, PolicyHorizon, DecisionCard, DecisionLedger) | ~38 instances of `dark:bg-white`, `dark:bg-white/50`, `dark:bg-white/5` | stripped (light-only project) | `551db1d` |
+| wellbeing query column-name fix | `wellbeingService.ts:102` | `.order('wellbeing_index', ...)` (column doesn't exist on the matview I built) | `.order('wellbeing_score', ...)` | `494d9cf` |
 
 ### Advisor counts — before vs after
 
@@ -798,7 +799,8 @@ Per the `arabic-check` skill rubric, Session B/C strings I added were reviewed:
 - `seeded counts`: `shift_handover_items=4`, `locations=6`, `ipc_checklist_templates=1`, `mv_wellbeing_index=139`, `mv_wellbeing_stats=1`.
 - `npm run lint` + `npx tsc --noEmit`: 0 errors / 0 type errors. Two pre-existing warnings unchanged (BrandLevelProvider react-refresh, AddRequirementModal `any`).
 - `curl http://localhost:5175/dashboard`: returned RTL Arabic page with `theme-color="#0F3144"` — correct codebase confirmed (basira-dev guard).
-- Dev Vite already running from prior session; advisor re-run verified post-overhaul state.
+- **Live Playwright walkthrough of the demo path (11 screens):** signed in as `demo@basira.local` with `app_metadata.role=director`. Confirmed expected Arabic content on each route — hero+5 pillars; «لوحة القيادة التنفيذية» bilingual; محرك التمكين + 3 categories + cup-of-water; Karama profile populated with form values «محمد» / «أبو سعد» / first-person emotional fields / cup-of-water dream; Family Portal; Smart Alerts; Legal Shield + 4 compliance pillars; ISO 9001 manual + 7 chapters; SROI; Beneficiaries list with Excel/طباعة; **/handover renders the seeded `shift_handover_items` title «متابعة علامات الجفاف...» — end-to-end proof that JWT → PostgREST → RLS policy approval → real DB row works**. 0 console errors during walkthrough.
+- **Route audit re-run** (`scripts/route-audit.mjs`, 51 routes via headless Chromium) post-RLS-overhaul caught a regression — `wellbeingService.getWellbeingScores` ordered by a non-existent column `wellbeing_index`, producing 2× HTTP 400 on `/integrated-reports`. Fixed in commit `494d9cf` (column → `wellbeing_score`, matching the matview definition). Audit re-run after the fix: aggregate **0 / 0 / 0 / 0 / 0 / 0** across all 51 routes.
 
 ### Pattern note — `*Available = null` (lazy probe) on shift
 
