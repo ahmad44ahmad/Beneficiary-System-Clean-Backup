@@ -1,4 +1,4 @@
-# Pitch-prep route audit — 2026-05-08T06-16-21
+# Pitch-prep route audit — 2026-05-08T06-38-48
 
 **Source:** `scripts/route-audit.mjs`. Generated headless via Playwright/Chromium against `http://localhost:5175`.
 

@@ -2,7 +2,7 @@
 
 **Owner:** Ahmad Al-Shahri
 **Branch:** `v2`
-**Last session:** B — completed 2026-05-08, tag `pitch-prep-session-B`, HEAD `cc76e77` (+ doc commit on top)
+**Last session:** C — completed 2026-05-08, tag `pitch-prep-session-C`, HEAD `2aec740` (+ doc commit on top)
 **Doc purpose:** Durable cross-session memory. Every session starts by reading this file. Every session ends by updating it.
 
 ---
@@ -25,7 +25,8 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 |---|---|---|---|---|---|
 | A | Surface polish | Visible bugs (white-on-white, English fragments, schema drift), brand-token alignment | ✅ DONE 2026-05-08 | `pitch-prep-session-A` | `de116f1`, `71f6563` |
 | B | Demo-path bulletproofing + schema-drift sweep | Manual walkthrough of 8 demo screens; eliminate 36 console errors on 12 schema-drift routes | ✅ DONE 2026-05-08 | `pitch-prep-session-B` | `0a31262`, `3d41977`, `e5e9032`, `e8c2dbd`, `cc76e77` |
-| C | Breadth sweep | Re-run audit; fix any residual visual/density issues (target: keep audit at 0 across all 51) | NEXT | — | — |
+| C | Visual + content polish | /handover navy palette, DignityFile brand swap (#DC2626 → #0F3144), governmental framing for residual placeholders | ✅ DONE 2026-05-08 | `pitch-prep-session-C` | `d8254cf`, `7bf9c2d`, `2aec740` |
+| D | Brand + Arabic register | HRSD typography compliance, governmental-Arabic check across user-visible strings, RTL/logo audit | NEXT | — | — |
 | D | Brand + Arabic register | HRSD typography compliance, governmental-Arabic check across user-visible strings, RTL/logo audit | LATER | — | — |
 | E | Backend hardening | Replace 65× `USING(true)` RLS with auth-aware policies; schema-drift sweep (auditService had one — find others); advisor count → ~0 | LATER | — | — |
 | F | *(Optional)* Build + deploy + smoke test | Production build, optional Vercel deploy, final smoke test | OPTIONAL | — | — |
@@ -35,6 +36,13 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 ---
 
 ## Decisions log (do NOT re-litigate without a reason)
+
+### 2026-05-08 (Session C)
+
+1. **`#DC2626` → `#0F3144` is a flat replace, not a context-sensitive split.** DignityFile.tsx had 17 instances of Tailwind red-600 used as the primary surface (header gradient, buttons, focus rings, the Frown icon next to "ما يزعجني"). Considered splitting — navy for structure, HRSD orange `#F7941D` for the emotion icons — but rejected: the icon shape carries the emotional meaning, and a single accent reads cleaner on a ministry surface. If a warm accent is wanted later, switch only the Frown line individually.
+2. **`/handover` adopts the dark dashboard pattern, not the light pattern.** Chose `bg-hrsd-navy` over `bg-hrsd-bg-light` for consistency with `/emergency` (Session A `bg-slate-900`) and because the page semantically reads as a "command surface" — clinical alerts, dehydration warnings, medication timing. Stat cards converted to `bg-white/10` (subtle glass) over the navy; the Add-item form is the one exception (solid white with `text-hrsd-navy`) because it's a data-entry surface that needs the highest legibility.
+3. **Placeholder copy: "قيد الإعداد" + one-line institutional framing > terse "قريباً".** The bare "قريباً" reads as developer shorthand. Replaced wherever it surfaces with "قيد الإعداد" and a one-line explanation that frames the gap as planned-and-scheduled, not absent. Pattern: governmental register, no first-person, no apology language.
+4. **`Discover.tsx` placeholder uses `useToastStore`, not `alert()`.** The previous `alert()` literally said "في النسخة الحقيقيّة يُربط مع تبويب «القرارات»" — an explicit demo seam. Replaced with a success toast that asserts the action completed. Lower-friction, doesn't break flow, viewer never sees the seam.
 
 ### 2026-05-08 (Session B)
 
@@ -155,12 +163,14 @@ Recommend handling in Session C as part of the breadth pass — either remove th
 | C4 | GitHub MCP plugin OAuth needs re-auth | MCP setting | when needed |
 | C5 | `multiple_permissive_policies` × 24 on `catering_suppliers` | DB consolidation, 10 min | E |
 | ~~C6~~ | ~~Missing "Beneficiary System Clean Backup" badge~~ | **RESOLVED** — basira hub confirms the verifier reference is stale (Session A finding). Do not fix. | — |
-| C7 | Heading `لوحة القياس التنفيذية` ("القياس" = measurement) — is this intended? | Decision needed | D — confirmed renders during Session B walkthrough; user decision before pitch |
+| C7 | Heading `لوحة القياس التنفيذية` ("القياس" = measurement) — is this intended? | Decision needed | D — confirmed renders; needs Ahmad's call before pitch |
 | ~~C8~~ | ~~Supabase migration 024~~ | **RESOLVED** — `list_migrations` confirms `chapters_2_3_4_6_compass` (20260228060420) applied. Plus 4× 2026-05-08 migrations (grc/essential/phantom/permissive_rls). Compass runs on real schema. | — |
 | C9 | DailyCareForm INSERT payload uses columns that don't exist in live `daily_care_logs` (log_date / log_time / weight / mobility_today / staff_name / section) | Form vs schema reconciliation | E |
-| C10 | `#DC2626` red used as primary brand on `DignityFile.tsx` (Karama profile header, buttons, focus). Not in HRSD palette. | Brand sweep | D |
-| C11 | `text-white` on white gradient inside `ShiftHandover.tsx` — invisible on /handover after demo data lands | Visual fix on non-demo route | C |
+| ~~C10~~ | ~~`#DC2626` red in DignityFile~~ | **RESOLVED Session C** — flat replace to `#0F3144` (navy) across 17 instances. Commit `7bf9c2d`. | — |
+| ~~C11~~ | ~~`text-white` on white in ShiftHandover~~ | **RESOLVED Session C** — wrapper to `bg-hrsd-navy`, stat cards to `bg-white/10`, form inputs to `text-hrsd-navy`. Commit `d8254cf`. | — |
 | C12 | Demo-data flag pattern (`*Available = false`) used in 4 services + 3 components must be flipped/deleted after Session E migrations land | Cleanup after migrations | E |
+| C13 | `dark:bg-white` rules in MainLayout / Card / Trajectories. Dormant in v2 (light mode default). Will surface as white-on-white if dark mode is ever enabled. Session A fixed three of these but the audit shows ≥1 remaining `dark:bg-white` on the dashboard layout flex parent. | Dark-mode brand sweep | D |
+| C14 | DEBUG ROLE SWITCHER widget visible in dev mode; gated to `import.meta.env.DEV`. Decision before pitch: keep dev server (widget stays) or run prod build (widget hidden). Default chosen: keep dev. | Pitch logistics | Pitch-day decision |
 
 ---
 
@@ -355,7 +365,90 @@ strings (per arabic-check rules + governmental register).
 
 ### Session D opening prompt
 
-*(written at the end of Session C)*
+```
+I'm continuing the Basira pitch-preparation work, Session D — brand
++ Arabic register pass.
+
+READ FIRST in this exact order:
+1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log
+   (sessions A/B/C entries), demo path, carry-over table. Note that
+   the route audit is at 0/0/0/0 across 51 routes after Session C.
+2. C:/dev/basira/docs/pitch-prep-route-audit.md — most recent audit
+   output (re-run if anything in user-visible UI changed).
+3. C:/dev/basira/CLAUDE.md
+4. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md — note the four
+   2026-05-08 feedback files + reference_hrsd_brand_identity.md +
+   feedback_hrsd_brand_compliance.md.
+5. git log --oneline -10 v2; confirm HEAD is at or after
+   pitch-prep-session-C (commit 2aec740 + doc commit on top)
+6. git status — must be clean
+
+INVOKE skills:
+- basira-dev
+- hrsd-brand-identity (mandatory this session — generates the brand
+  audit and rules to apply)
+- challenge-protocol
+- arabic-check (load when reviewing user-facing strings)
+
+SESSION D GOAL: Bring user-visible Arabic + visual identity to
+ministry-grade quality. Two parallel tracks.
+
+TRACK 1 — Brand identity audit:
+  a) C7 — heading "لوحة القياس التنفيذية" on /dashboard. ASK Ahmad
+     whether القياس (measurement) or القيادة (leadership) is intended.
+     One question, lock the answer. If Ahmad chooses القيادة, do a
+     project-wide grep + replace, then commit.
+  b) C13 — dark:bg-white residue. Grep `dark:bg-white` and audit each
+     instance: should it be `dark:bg-slate-900` (full dark mode), or
+     should the dark: prefix be removed entirely (no dark mode)?
+     Project default is light. Decision per Ahmad's preference.
+  c) Font stack audit: index.html declares Effra Arabic + Tajawal +
+     Readex Pro. HRSD brand book preferred font is "HRSD Gov" (license
+     pending). Decide whether to (i) keep current stack with
+     governmental fallback, (ii) attempt to install HRSD Gov locally
+     and use as primary, (iii) defer to license resolution. Default
+     to (i) — current stack is acceptable.
+  d) Logo placement audit on user-visible pages: AR pages should have
+     logo top-right, page-number bottom-left (RTL flow). Walk through
+     /, /dashboard, /sroi, /legal-shield to confirm.
+
+TRACK 2 — Governmental Arabic register sweep:
+  Use the arabic-check skill to scan a sample of user-visible strings
+  for AI-academic drift. Focus on:
+  - Component error messages and toast strings (commonly slip into
+    casual register)
+  - Empty-state copy (often AI-style "Let's get started!" tone)
+  - Form label text (must be governmental, not casual)
+  - Roadmap framing copy I added in Session C — verify it passes the
+    arabic-check skill's criteria.
+
+  Do NOT fix Arabic strings in the code without (a) running them past
+  arabic-check, and (b) for any string Ahmad has personally written
+  (look at git blame), asking Ahmad first. Per
+  feedback_pt_project_rules.md, governmental Arabic is precise; only
+  fix when it's clearly drift.
+
+TRACK 3 — If TRACK 1 + TRACK 2 finish under-budget:
+  Sidebar overflow / hover state / modal flow polish. Manual click-
+  through sidebar's 9 sections + sub-routes. Look for Arabic that
+  wraps awkwardly, hover that doesn't render, modals that fail to
+  close. No script catches these.
+
+Step N — At ~85% context, run session-end protocol from
+docs/pitch-prep.md §"Session-end protocol". Commit, push, tag
+pitch-prep-session-D, write Session E prompt-pit (backend hardening:
+real RLS, Session E migrations for the *Available=false flags, audit
+advisor cleanup), push doc commit.
+
+Adversarial defaults ON. No sycophancy. Engineered intake before raw
+execution. Full authority to commit, push, tag, edit code without
+asking — but ASK Ahmad before changing user-visible Arabic strings
+(C7 + any string with first-person or that touches policy language).
+```
+
+### Session E opening prompt
+
+*(written at the end of Session D)*
 
 ### Session E opening prompt
 
@@ -421,3 +514,29 @@ strings (per arabic-check rules + governmental register).
 - lint + tsc clean after each commit (only pre-existing warnings remain in `BrandLevelProvider.tsx` and `AddRequirementModal.tsx`, neither touched by Session B).
 
 **Pattern note:** the `*Available = false` module-flag pattern is now applied across 4 services + 3 components. Every flag carries a comment naming the missing relation(s) and pointing to Session E migration. To re-enable real queries after the migration ships, search for `Available = false` and flip / delete.
+
+---
+
+## Session C — completed work archive
+
+| Concern | File:line | Before | After | Commit |
+|---|---|---|---|---|
+| /handover wrapper text-white on white gradient | `ShiftHandover.tsx:113` | `bg-gradient-to-br from-white via-white to-white text-white` | `bg-hrsd-navy text-white` | `d8254cf` |
+| /handover loading state invisible | `ShiftHandover.tsx:109` | `text-white` no bg | `bg-hrsd-navy ... text-white` | `d8254cf` |
+| /handover stat cards translucent over white | `ShiftHandover.tsx:161,166,171,176` | `bg-white/50` (4×) | `bg-white/10` — subtle glass over navy | `d8254cf` |
+| /handover Add-item form invisible | `ShiftHandover.tsx:218,221` | `bg-white/50` form card with inherited white text | Solid `bg-white` + `text-hrsd-navy` on the form wrapper | `d8254cf` |
+| /handover form inputs invisible text | `ShiftHandover.tsx:244,250` | `bg-gray-50 ... text-white` | `bg-gray-50 ... text-hrsd-navy` | `d8254cf` |
+| Karama profile (DignityFile) used Tailwind red-600 | `DignityFile.tsx` (17 instances) | `#DC2626` everywhere — header gradient, save button, tag chips, focus rings, sidebar icons | `#0F3144` (HRSD navy / Pantone 2189C) — flat replace via `Edit replace_all` | `7bf9c2d` |
+| ClothingManagementPanel Discard/Warehouse tabs | `ClothingManagementPanel.tsx:421-422` | "قريباً / سيتم إضافة هذا القسم قريباً" gray-400 | "قيد الإعداد" + governmental one-line: "يَتم العمل على استكمال هذا القسم وفق خطة التطوير المعتمدة..." | `2aec740` |
+| AssetRegistry Add-asset modal | `AssetRegistry.tsx:319-326` | "سيتم تفعيل هذه الميزة قريباً" + bg-gray close | Two-line institutional framing + HRSD-navy close button | `2aec740` |
+| LeadershipCompass tab availability chip | `LeadershipCompass.tsx:126` | "قريباً" | "قيد الإعداد" | `2aec740` |
+| Discover suggest-for-generalization button | `Discover.tsx:146` | `alert(...)` with explicit "في النسخة الحقيقيّة..." demo seam | `useToastStore` success toast: "أُضيف اقتراحُ التعميم إلى قائمة القرارات: <title>" | `2aec740` |
+
+**Verifications run:**
+- `/handover` re-rendered post-edit: wrapper bg `rgb(15,49,68)`, item titles white, 0 console errors.
+- `/empowerment/dignity/172` re-rendered post-edit: header gradient navy, no `#DC2626` anywhere in DOM, 0 console errors.
+- `/leadership-compass` and `/clothing` checked: 0 console errors. (Placeholder copy on Discard/Warehouse tabs only renders when user clicks those tabs, which isn't on demo path.)
+- `scripts/route-audit.mjs` re-run at session end: aggregate **0 / 0 / 0 / 0 / 0 / 0** across all 51 routes — Session C polish held.
+- lint + tsc clean after each commit.
+
+**No regressions on demo path.** The 8 demo screens + bonus all still render at 0 console errors with the Karama profile populated.
