@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS dignity_files (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 ALTER TABLE dignity_files ENABLE ROW LEVEL SECURITY;
-CREATE POLICY IF NOT EXISTS "Allow all for dignity_files" ON dignity_files FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all for dignity_files" ON dignity_files;
+CREATE POLICY "Allow all for dignity_files" ON dignity_files FOR ALL USING (true);
 -- 2. DAILY CARE LOGS (سجل الرعاية اليومية)
 -- ═══════════════════════════════════════════════════════════════════════════════
 CREATE TABLE IF NOT EXISTS daily_care_logs (
@@ -42,7 +43,8 @@ CREATE TABLE IF NOT EXISTS daily_care_logs (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 ALTER TABLE daily_care_logs ENABLE ROW LEVEL SECURITY;
-CREATE POLICY IF NOT EXISTS "Allow all for daily_care_logs" ON daily_care_logs FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all for daily_care_logs" ON daily_care_logs;
+CREATE POLICY "Allow all for daily_care_logs" ON daily_care_logs FOR ALL USING (true);
 -- 3. FALL RISK ASSESSMENTS (تقييم مخاطر السقوط)
 -- ═══════════════════════════════════════════════════════════════════════════════
 CREATE TABLE IF NOT EXISTS fall_risk_assessments (
@@ -62,7 +64,8 @@ CREATE TABLE IF NOT EXISTS fall_risk_assessments (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 ALTER TABLE fall_risk_assessments ENABLE ROW LEVEL SECURITY;
-CREATE POLICY IF NOT EXISTS "Allow all for fall_risk_assessments" ON fall_risk_assessments FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all for fall_risk_assessments" ON fall_risk_assessments;
+CREATE POLICY "Allow all for fall_risk_assessments" ON fall_risk_assessments FOR ALL USING (true);
 -- 4. OM ASSETS (الأصول والمعدات)
 -- ═══════════════════════════════════════════════════════════════════════════════
 CREATE TABLE IF NOT EXISTS om_assets (
@@ -87,7 +90,8 @@ CREATE TABLE IF NOT EXISTS om_assets (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 ALTER TABLE om_assets ENABLE ROW LEVEL SECURITY;
-CREATE POLICY IF NOT EXISTS "Allow all for om_assets" ON om_assets FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all for om_assets" ON om_assets;
+CREATE POLICY "Allow all for om_assets" ON om_assets FOR ALL USING (true);
 -- 5. OM MAINTENANCE REQUESTS (طلبات الصيانة)
 -- ═══════════════════════════════════════════════════════════════════════════════
 CREATE TABLE IF NOT EXISTS om_maintenance_requests (
@@ -113,7 +117,8 @@ CREATE TABLE IF NOT EXISTS om_maintenance_requests (
     completed_at TIMESTAMPTZ
 );
 ALTER TABLE om_maintenance_requests ENABLE ROW LEVEL SECURITY;
-CREATE POLICY IF NOT EXISTS "Allow all for om_maintenance_requests" ON om_maintenance_requests FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all for om_maintenance_requests" ON om_maintenance_requests;
+CREATE POLICY "Allow all for om_maintenance_requests" ON om_maintenance_requests FOR ALL USING (true);
 -- 6. ACCOUNTABILITY GAPS (فجوات المساءلة)
 -- ═══════════════════════════════════════════════════════════════════════════════
 CREATE TABLE IF NOT EXISTS accountability_gaps (
@@ -146,7 +151,8 @@ CREATE TABLE IF NOT EXISTS accountability_gaps (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 ALTER TABLE accountability_gaps ENABLE ROW LEVEL SECURITY;
-CREATE POLICY IF NOT EXISTS "Allow all for accountability_gaps" ON accountability_gaps FOR ALL USING (true);
+DROP POLICY IF EXISTS "Allow all for accountability_gaps" ON accountability_gaps;
+CREATE POLICY "Allow all for accountability_gaps" ON accountability_gaps FOR ALL USING (true);
 -- ═══════════════════════════════════════════════════════════════════════════════
 -- SEED DATA
 -- ═══════════════════════════════════════════════════════════════════════════════
