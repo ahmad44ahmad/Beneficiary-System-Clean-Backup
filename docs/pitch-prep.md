@@ -764,6 +764,7 @@ Per the `arabic-check` skill rubric, Session B/C strings I added were reviewed:
 | 5 | `session_e_indicator_ops_tables` | `cost_tracking`, `quality_checks`, `om_waste_records`, `risk_score_log`, `benchmark_standards`, `iso_compliance_checklist` — 6 tables + RLS |
 | 6 | `session_e_extend_daily_care_logs` | ALTER TABLE: `weight NUMERIC(6,2)`, `mobility_today TEXT (CHECK)`, `requires_followup BOOLEAN`, `log_time TIME` — resolves C9 |
 | 7 | `session_e_rls_overhaul` | DO-block dropping all 69 existing `{public} USING(true)` policies, then creating fresh `authenticated`-tiered policies across 5 categories (PHI / APPEND_ONLY / OPS / GOV / STAFF) — totals **258 policies, 0 on `public`, 258 on `authenticated`** |
+| 8 | `session_e_demo_auth_bridge_repair` | Fixes two bugs in migration #1: (a) GoTrue v2 returns HTTP 500 (`Scan error on column index 3, name "confirmation_token"`) because the token columns were left NULL — UPDATE COALESCEs them to `''`; (b) no `auth.identities` row existed for the email provider — INSERT one with `provider_id = user.id::text` and `identity_data` including sub/email/email_verified. Both are idempotent. After this, signInWithPassword resolves; demo signs in as authenticated director, and `internal.has_role('director')` returns true via the staff.email JOIN |
 
 (Total tables provisioned: 12. Total views: 3. Total ALTER: 1. Total policies replaced: 69 → 258.)
 
