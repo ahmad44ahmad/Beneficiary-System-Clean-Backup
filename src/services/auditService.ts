@@ -93,25 +93,35 @@ async function flushAuditQueue(): Promise<void> {
 
     try {
         // Only insert to Supabase if available
+        // Live `audit_logs` schema (verified 2026-05-08): id, user_id, action, table_name,
+        // record_id, old_values jsonb, new_values jsonb, ip_address, user_agent,
+        // session_id, status_code int, created_at. Rich semantic fields (user_name,
+        // user_role, resource_type, description, error_message, success) are folded
+        // into the new_values JSONB blob to preserve them without schema drift.
         if (supabase) {
             const { error } = await supabase
                 .from('audit_logs')
                 .insert(entries.map(e => ({
                     user_id: e.userId,
-                    user_name: e.userName,
-                    user_role: e.userRole,
                     action: e.action,
-                    module: e.module,
-                    resource_id: e.resourceId,
-                    resource_type: e.resourceType,
-                    description: e.description,
-                    previous_value: e.previousValue ? JSON.stringify(e.previousValue) : null,
-                    new_value: e.newValue ? JSON.stringify(e.newValue) : null,
-                    ip_address: e.ipAddress,
-                    user_agent: e.userAgent,
-                    session_id: e.sessionId,
-                    success: e.success,
-                    error_message: e.errorMessage,
+                    table_name: e.module,
+                    record_id: e.resourceId ?? null,
+                    old_values: e.previousValue
+                        ? (typeof e.previousValue === 'object' ? e.previousValue : { value: e.previousValue })
+                        : null,
+                    new_values: {
+                        description: e.description,
+                        user_name: e.userName,
+                        user_role: e.userRole,
+                        resource_type: e.resourceType ?? null,
+                        error_message: e.errorMessage ?? null,
+                        success: e.success,
+                        payload: e.newValue ?? null,
+                    },
+                    ip_address: e.ipAddress ?? null,
+                    user_agent: e.userAgent ?? null,
+                    session_id: e.sessionId ?? null,
+                    status_code: e.success ? 200 : 500,
                     created_at: e.timestamp,
                 })));
 
