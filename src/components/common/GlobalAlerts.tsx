@@ -21,18 +21,18 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
             icon: <ShieldAlert className="w-5 h-5" />,
             action: (
                 <div className="mt-3 bg-white/50 p-3 rounded-md">
-                    <p className="text-xs font-bold mb-2">REQUIRED PPE & PROTOCOLS:</p>
+                    <p className="text-xs font-bold mb-2">مهمات الوقاية الشخصية والبروتوكولات المطلوبة:</p>
                     <div className="flex gap-4 text-sm">
-                        <div className="flex items-center gap-1" title="N95/Mask"><Wind className="w-4 h-4" /> Mask</div>
-                        <div className="flex items-center gap-1" title="Gloves"><Syringe className="w-4 h-4" /> Gloves</div>
-                        <div className="flex items-center gap-1" title="Gown"><Shirt className="w-4 h-4" /> Gown</div>
+                        <div className="flex items-center gap-1" title="كمامة N95"><Wind className="w-4 h-4" /> كمامة</div>
+                        <div className="flex items-center gap-1" title="قفازات طبية"><Syringe className="w-4 h-4" /> قفازات</div>
+                        <div className="flex items-center gap-1" title="مئزر طبي"><Shirt className="w-4 h-4" /> مئزر</div>
                     </div>
                     <div className="mt-3 flex gap-2">
-                        <Button size="sm" variant="outline" className="bg-[#DC2626]/15 border-[#DC2626]/30 hover:bg-[#DC2626]/20 text-[#7F1D1D]" onClick={() => alert('Laundry notified: Wash separately')}>
-                            <Shirt className="w-3 h-3 me-1" /> Notify Laundry
+                        <Button size="sm" variant="outline" className="bg-[#DC2626]/15 border-[#DC2626]/30 hover:bg-[#DC2626]/20 text-[#7F1D1D]">
+                            <Shirt className="w-3 h-3 me-1" /> تنبيه قسم الغسيل
                         </Button>
-                        <Button size="sm" variant="outline" className="bg-[#DC2626]/15 border-[#DC2626]/30 hover:bg-[#DC2626]/20 text-[#7F1D1D]" onClick={() => alert('Kitchen notified: Disposable utensils')}>
-                            <Utensils className="w-3 h-3 me-1" /> Disposable Utensils
+                        <Button size="sm" variant="outline" className="bg-[#DC2626]/15 border-[#DC2626]/30 hover:bg-[#DC2626]/20 text-[#7F1D1D]">
+                            <Utensils className="w-3 h-3 me-1" /> أدوات مائدة لاستخدام واحد
                         </Button>
                     </div>
                 </div>
@@ -58,8 +58,8 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
         alerts.push({
             id: 'behavior',
             type: 'warning',
-            title: 'Behavioral Risk',
-            message: 'History of aggression reported. Approach with caution.',
+            title: 'مخاطر سلوكية',
+            message: 'يوجد تاريخ سلوك عدواني مُبلَّغ عنه. يُتعامل بحذر.',
             icon: <AlertTriangle className="w-5 h-5" />
         });
     }
@@ -70,8 +70,8 @@ export const GlobalAlerts: React.FC<GlobalAlertsProps> = ({ profile }) => {
         alerts.push({
             id: 'medical',
             type: 'info',
-            title: 'Medical Attention Required',
-            message: `Beneficiary has: ${medicalTags.map(t => t.label).join(', ')}. Check care plan.`,
+            title: 'يلزم انتباه طبي',
+            message: `لدى المستفيد: ${medicalTags.map(t => t.label).join('، ')}. تُراجع خطة الرعاية.`,
             icon: <Info className="w-5 h-5" />
         });
     }

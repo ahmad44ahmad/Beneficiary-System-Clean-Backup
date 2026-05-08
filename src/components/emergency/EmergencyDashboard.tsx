@@ -99,7 +99,7 @@ export const EmergencyDashboard: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white text-white relative overflow-hidden" dir="rtl">
+        <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden" dir="rtl">
             {/* Pulsing Background */}
             <motion.div
                 className={`absolute inset-0 ${config.bgColor} opacity-20`}

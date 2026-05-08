@@ -245,7 +245,7 @@ export const SchedulingSystem: React.FC = () => {
                             <input
                                 type="text"
                                 placeholder="بحث..."
-                                className="bg-white border border-gray-200 rounded-lg pe-9 ps-4 py-2 text-sm text-white placeholder-slate-500 w-48 focus:outline-none focus:border-[#269798]"
+                                className="bg-white border border-gray-200 rounded-lg pe-9 ps-4 py-2 text-sm text-hrsd-navy placeholder-slate-500 w-48 focus:outline-none focus:border-[#269798]"
                             />
                         </div>
                     </div>

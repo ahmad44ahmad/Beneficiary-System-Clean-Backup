@@ -79,7 +79,7 @@ const LevelSelector: React.FC<{
                     onClick={() => onChange(l)}
                     className={`px-3.5 py-1.5 rounded-lg text-[13px] font-semibold transition-all ${
                         value === l
-                            ? 'bg-white dark:bg-white text-hrsd-navy dark:text-white shadow-sm'
+                            ? 'bg-white dark:bg-slate-700 text-hrsd-navy dark:text-white shadow-sm'
                             : 'text-hrsd-cool-gray dark:text-hrsd-navy hover:text-hrsd-navy'
                     }`}
                 >
