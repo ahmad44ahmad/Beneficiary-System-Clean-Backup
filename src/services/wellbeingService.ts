@@ -100,7 +100,7 @@ export const wellbeingService = {
             const { data, error } = await supabase
                 .from('mv_wellbeing_index')
                 .select('*')
-                .order('wellbeing_index', { ascending: true });
+                .order('wellbeing_score', { ascending: true });
 
             if (error || !data?.length) {
                 return DEMO_BENEFICIARIES;
