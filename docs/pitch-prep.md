@@ -136,7 +136,7 @@ The goal is **0 console errors on demo-path routes** + **<5 errors total across 
 |---|---|---|---|
 | C1 | Real RLS policies (replace 65 `USING(true)` with auth-aware) | Supabase migrations | E |
 | C2 | Reconcile `supabase/sql/` (24 files) vs `supabase/migrations/` drift | Supabase | E or post-pitch |
-| C3 | `auth_leaked_password_protection` toggle OFF | Supabase dashboard, 1 click | Ahmad does this directly |
+| C3 | `auth_leaked_password_protection` toggle OFF | **NOT a 1-click fix.** Org is on **Free plan**; the toggle is hidden entirely on Free per Supabase docs ("available on Pro Plan and above"). Pitch options: (A) upgrade Pro $25/mo, (B) don't show Studio in pitch, (C) accept the warning as "production-tier feature, activated at deployment". Default to (B). | Decision before pitch |
 | C4 | GitHub MCP plugin OAuth needs re-auth | MCP setting | when needed |
 | C5 | `multiple_permissive_policies` × 24 on `catering_suppliers` | DB consolidation, 10 min | E |
 | ~~C6~~ | ~~Missing "Beneficiary System Clean Backup" badge~~ | **RESOLVED** — basira hub confirms the verifier reference is stale (Session A finding). Do not fix. | — |
