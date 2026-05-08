@@ -2,7 +2,7 @@
 
 **Owner:** Ahmad Al-Shahri
 **Branch:** `v2`
-**Last session:** D — completed 2026-05-08, tag `pitch-prep-session-D`, HEAD `8c14710` (+ doc commit on top)
+**Last session:** E — completed 2026-05-08, tag `pitch-prep-session-E` (pending), HEAD `551db1d` (+ doc commit on top)
 **Doc purpose:** Durable cross-session memory. Every session starts by reading this file. Every session ends by updating it.
 
 ---
@@ -27,9 +27,7 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 | B | Demo-path bulletproofing + schema-drift sweep | Manual walkthrough of 8 demo screens; eliminate 36 console errors on 12 schema-drift routes | ✅ DONE 2026-05-08 | `pitch-prep-session-B` | `0a31262`, `3d41977`, `e5e9032`, `e8c2dbd`, `cc76e77` |
 | C | Visual + content polish | /handover navy palette, DignityFile brand swap (#DC2626 → #0F3144), governmental framing for residual placeholders | ✅ DONE 2026-05-08 | `pitch-prep-session-C` | `d8254cf`, `7bf9c2d`, `2aec740` |
 | D | Brand + Arabic register | C7 resolved (القياس → القيادة); arabic-check sweep on Session B/C strings; first-person fix on Karama emotional fields | ✅ DONE 2026-05-08 | `pitch-prep-session-D` | `fa2d3cc`, `8c14710` |
-| E | Backend hardening | Session E migrations (provision missing tables, flip *Available flags); replace 65× USING(true) RLS with auth-aware; Supabase advisor cleanup | NEXT | — | — |
-| D | Brand + Arabic register | HRSD typography compliance, governmental-Arabic check across user-visible strings, RTL/logo audit | LATER | — | — |
-| E | Backend hardening | Replace 65× `USING(true)` RLS with auth-aware policies; schema-drift sweep (auditService had one — find others); advisor count → ~0 | LATER | — | — |
+| E | Backend hardening | 8 Session E migrations (provision 12 tables + 3 views + extend daily_care_logs + auth bridge + RLS overhaul); demo auto-signin; advisor 90 → 5; C9, C12, C13, C15 resolved | ✅ DONE 2026-05-08 | `pitch-prep-session-E` (pending) | `45fbfa6`, `e6243ac`, `f62f754`, `551db1d` |
 | F | *(Optional)* Build + deploy + smoke test | Production build, optional Vercel deploy, final smoke test | OPTIONAL | — | — |
 
 **Highest-leverage order:** B → E → D → C → F. The pitch sees demo-path screens (B) and the Supabase reviewer sees the Studio dashboard (E). D sells "ministry-grade". C is insurance. F only matters if pitch is from a deployed URL.
@@ -37,6 +35,17 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 ---
 
 ## Decisions log (do NOT re-litigate without a reason)
+
+### 2026-05-08 (Session E)
+
+1. **RLS overhaul: aggressive option chosen.** Ahmad's call. Created a single demo director auth user (`demo@basira.local`, password `demo-pitch-2026`, dev-only) with a matching `staff` row, plus a private `internal.has_role()` SECURITY DEFINER helper bridging JWT email → `staff.role`. AuthContext auto-signs the demo into that user under `import.meta.env.DEV` only. All 69 existing `{public} USING(true)` policies were dropped and replaced with five tiers (PHI / APPEND_ONLY / OPS / GOV / STAFF), totalling 258 policies — 0 on `public` role (anon BLOCKED), 258 on `authenticated`. Per-row PHI access control is post-pitch architecture; for the closed-population care center, `authenticated USING(true)` SELECTs are acceptable. The aggressive option was chosen over Minimal (~10 PHI tables only) because the hardest part (auth bridging) is the same work, and pitch reviewer of Studio sees a cleaner posture.
+2. **C9 — extend `daily_care_logs`, don't trim the form.** Migration adds `weight`, `mobility_today`, `requires_followup`, `log_time` columns; form maps `log_date → shift_date` and resolves `recorded_by` from the auth user. Reasoning: weight + mobility tracking are clinically meaningful for a rehab center (operational measurements, not diagnoses — does not collide with the no-CBAHI rule).
+3. **C13 — strip `dark:` prefix, not flip to `dark:bg-slate-800`.** Ahmad's call. v2 is light-only; no dark-mode roadmap. Stripping is the cleanest and avoids dormant tech debt that becomes a regression vector if dark mode is ever enabled later.
+4. **C15 — review found all 3 src instances are citations of the 2020 regulation source agency or historical decision records; NO src-side rename needed.** `src/types/clothing.ts:4` is a JSDoc citation of the PDF's issuing agency. `src/modules/leadership-compass/data/seed-ledger.ts:62` is a historical decision record (`decidedBy` field for an approved 2024 decision). `src/components/clothing/ClothingManagementPanel.tsx:95` is a UI footer attributing the regulatory document to its issuing agency at the time of issue (2020). Per «decisions are permanent; archive, don't delete» rule, all three KEEP. Renaming in `docs/`, `presentations/`, `SECURITY.md` is deferred; reviewer for the live app will not see those.
+5. **C16 — left as-is.** Most «الخدمات الطبية» instances refer to the center's medical-services department (operational), not the wakalah. No project-wide rename.
+6. **wellbeing matviews are real computations, not seeded.** `mv_wellbeing_index` joins `beneficiaries` (139 active rows from prior seed work) with the latest `daily_care_logs` and `fall_risk_assessments` rows; with no source rows on the latter two, neutral defaults apply (health=70, nutrition=70, safety=80, mood=75, activity=70 → composite ≥80 → status_color=أخضر). Service `!data?.length` fallback preserves demo data when the matview is empty. Refresh via pg_cron is post-pitch.
+7. **Append-only RLS on `audit_logs` and `ai_decision_logs` keeps `WITH CHECK (true)`.** Advisor flags this as `rls_policy_always_true`; intentional. INSERT must be permissive for any authenticated user to record their own audit trail. Tightening to a role check would silently drop audits from secretary/nurse activity. SELECT is gated to director/admin. UPDATE/DELETE are not granted (append-only invariant).
+8. **`materialized_view_in_api` (mv_wellbeing_*) — accepted.** Supabase exposes any matview in `public` with grants. We grant SELECT only to `authenticated` (anon blocked), so the actual exposure is "any authenticated user can read aggregate wellbeing scores." Acceptable; moving to a private schema would break the wellbeingService `from('mv_wellbeing_index')` API surface.
 
 ### 2026-05-08 (Session D)
 
@@ -165,22 +174,24 @@ Recommend handling in Session C as part of the breadth pass — either remove th
 
 | # | Item | Where to fix | Session |
 |---|---|---|---|
-| C1 | Real RLS policies (replace 65 `USING(true)` with auth-aware) | Supabase migrations | E |
-| C2 | Reconcile `supabase/sql/` (24 files) vs `supabase/migrations/` drift | Supabase | E or post-pitch |
+| ~~C1~~ | ~~Real RLS policies (replace 65 `USING(true)` with auth-aware)~~ | **RESOLVED Session E** — 69 `{public} USING(true)` policies dropped; 258 fresh `authenticated`-tiered policies (PHI / APPEND / OPS / GOV / STAFF) via `internal.has_role()` helper. anon blocked. Migration `session_e_rls_overhaul`. | — |
+| C2 | Reconcile `supabase/sql/` (24 files) vs `supabase/migrations/` drift | Supabase | post-pitch |
 | C3 | `auth_leaked_password_protection` toggle OFF | **NOT a 1-click fix.** Org is on **Free plan**; the toggle is hidden entirely on Free per Supabase docs ("available on Pro Plan and above"). Pitch options: (A) upgrade Pro $25/mo, (B) don't show Studio in pitch, (C) accept the warning as "production-tier feature, activated at deployment". Default to (B). | Decision before pitch |
 | C4 | GitHub MCP plugin OAuth needs re-auth | MCP setting | when needed |
-| C5 | `multiple_permissive_policies` × 24 on `catering_suppliers` | DB consolidation, 10 min | E |
+| ~~C5~~ | ~~`multiple_permissive_policies` × 24 on `catering_suppliers`~~ | **RESOLVED Session E** — overhaul dropped wide policy + 3 per-action duplicates; `catering_suppliers` now has 4 OPS-tier policies. Advisor MPP count: 24 → 0. | — |
 | ~~C6~~ | ~~Missing "Beneficiary System Clean Backup" badge~~ | **RESOLVED** — basira hub confirms the verifier reference is stale (Session A finding). Do not fix. | — |
 | ~~C7~~ | ~~Heading `لوحة القياس التنفيذية`~~ | **RESOLVED Session D** — Ahmad chose «القيادة». Renamed in Dashboard.tsx + DashboardPanel.tsx. Commit `fa2d3cc`. | — |
-| ~~C8~~ | ~~Supabase migration 024~~ | **RESOLVED** — `list_migrations` confirms `chapters_2_3_4_6_compass` (20260228060420) applied. Plus 4× 2026-05-08 migrations (grc/essential/phantom/permissive_rls). Compass runs on real schema. | — |
-| C9 | DailyCareForm INSERT payload uses columns that don't exist in live `daily_care_logs` (log_date / log_time / weight / mobility_today / staff_name / section) | Form vs schema reconciliation | E |
-| ~~C10~~ | ~~`#DC2626` red in DignityFile~~ | **RESOLVED Session C** — flat replace to `#0F3144` (navy) across 17 instances. Commit `7bf9c2d`. | — |
-| ~~C11~~ | ~~`text-white` on white in ShiftHandover~~ | **RESOLVED Session C** — wrapper to `bg-hrsd-navy`, stat cards to `bg-white/10`, form inputs to `text-hrsd-navy`. Commit `d8254cf`. | — |
-| C12 | Demo-data flag pattern (`*Available = false`) used in 4 services + 3 components must be flipped/deleted after Session E migrations land | Cleanup after migrations | E |
-| C13 | `dark:bg-white` rules in MainLayout / Card / Trajectories. Dormant in v2 (light mode default). Will surface as white-on-white if dark mode is ever enabled. Session D inventory: ~30 instances across Skeleton, Modal, MainLayout, leadership-compass, clothing modules. | Dark-mode brand sweep | E (Ahmad deferred 2026-05-08) |
+| ~~C8~~ | ~~Supabase migration 024~~ | **RESOLVED** — `list_migrations` confirms `chapters_2_3_4_6_compass` (20260228060420) applied. | — |
+| ~~C9~~ | ~~DailyCareForm INSERT payload mismatch~~ | **RESOLVED Session E** — migration extended `daily_care_logs` with `weight`, `mobility_today`, `requires_followup`, `log_time`; form maps `log_date → shift_date` and resolves `recorded_by` from auth user. Commit `e6243ac`. | — |
+| ~~C10~~ | ~~`#DC2626` red in DignityFile~~ | **RESOLVED Session C** — flat replace to `#0F3144`. Commit `7bf9c2d`. | — |
+| ~~C11~~ | ~~`text-white` on white in ShiftHandover~~ | **RESOLVED Session C** — bg navy + stat cards `bg-white/10`. Commit `d8254cf`. | — |
+| ~~C12~~ | ~~Demo-data flag pattern flip~~ | **RESOLVED Session E** — `shiftItemsTableAvailable=null` (lazy probe); `ipcTablesAvailable / wellbeingViewsAvailable / indicatorViewsAvailable = true`; inline guards in CostPerBeneficiary / useCatering.fetchChecks / OperationsDashboard now query supabase. Commit `45fbfa6`. | — |
+| ~~C13~~ | ~~`dark:bg-white` residue~~ | **RESOLVED Session E** — `dark:bg-white*` stripped across 14 files (Skeleton, Modal, MainLayout, 11 leadership-compass + clothing). Commit `551db1d`. | — |
 | C14 | DEBUG ROLE SWITCHER widget visible in dev mode; gated to `import.meta.env.DEV`. Decision before pitch: keep dev server (widget stays) or run prod build (widget hidden). Default chosen: keep dev. | Pitch logistics | Pitch-day decision |
-| C15 | `«وكالة التأهيل والتوجيه الاجتماعي»` appears in 6 files (`types/clothing.ts`, `useViewModeStore.ts`, `ClothingManagementPanel.tsx`, three leadership-compass seed files). arabic-check skill flags this as ministry-restructure drift; new name per skill is `«وكالة تجربة المستفيد»`. Needs Ahmad's confirmation before project-wide replace — some uses may reference the historical wakalah name in source quotes, not the current entity. | Naming review | E |
-| C16 | `«الخدمات الطبية»` appears in ~10 files (sidebar, dashboard, secretariat forms, ISO audit clauses, organization data). arabic-check skill flags this as ministry-restructure drift; new name per skill is `«سلامة المستفيدين»`. Most instances refer to the center's medical-services department (not the wakalah), so this may be correct as-is. Needs Ahmad's confirmation. | Naming review | E |
+| ~~C15~~ | ~~Wakalah rename across src/~~ | **RESOLVED Session E** — review of all 3 src/ instances found each is a citation of the 2020 regulation source agency or a historical decision record (per «decisions are permanent» rule). NO src-side rename. `docs/`, `presentations/`, `SECURITY.md` deferred. | — |
+| C16 | `«الخدمات الطبية»` rename to `«سلامة المستفيدين»` | **RESOLVED Session E** — Ahmad chose "leave as-is": center's medical-services department, not wakalah. No rename. | — |
+| C17 *(new)* | `materialized_view_in_api` × 2 — `mv_wellbeing_index` and `mv_wellbeing_stats` are exposed via Data API (Supabase WARN). Anon already blocked via grants; only `authenticated` can SELECT. Moving them to a private schema would break `wellbeingService.from('mv_wellbeing_index')`. **Accepted** as the cost of keeping the service API surface stable. | Post-pitch refactor | post-pitch |
+| C18 *(new)* | `rls_policy_always_true` × 2 on `audit_logs_insert_auth` and `ai_decision_logs_insert_auth` — append-only `WITH CHECK (true)`. Tightening to a role check would drop audits from secretary/nurse activity. **Accepted** as intentional. | — | — |
 
 ---
 
@@ -547,6 +558,75 @@ information_schema before every DDL, and ASK Ahmad before applying
 any migration that touches RLS policies on production data tables.
 ```
 
+### Session F opening prompt (OPTIONAL — only if pitch demos from a deployed URL)
+
+```
+I'm continuing the Basira pitch-preparation work, Session F — final
+build / deploy / smoke test pass. This session is OPTIONAL: only run if
+the pitch is going to demo from a deployed URL rather than the dev
+server. If pitching from `npm run dev` on Ahmad's laptop, skip Session F.
+
+READ FIRST in this exact order:
+1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log
+   (sessions A/B/C/D/E entries), demo path, carry-over table.
+   Aggregate is now: 51 routes at 0/0/0/0/0/0; 5 advisor warnings
+   (vs 90 pre-Session E); RLS enforcement on; demo auto-signin gates
+   to import.meta.env.DEV only.
+2. C:/dev/basira/CLAUDE.md
+3. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md
+4. git log --oneline -10 v2; HEAD must be at or after
+   pitch-prep-session-E.
+5. git status — must be clean.
+
+INVOKE skills:
+- basira-dev (mandatory wrong-codebase guard)
+- challenge-protocol
+- vercel:deployments-cicd (if deploying to Vercel)
+
+SESSION F GOAL: Produce a pitch-ready production build, optionally
+deploy it, and smoke-test the demo path on the deployed surface.
+
+PRIORITY 1 — Production build verification:
+  a) npm run build (Vite) — confirm 0 errors. Capture bundle size.
+  b) npm run preview — verify build serves correctly on a different
+     port (e.g. 4173). The DEBUG ROLE SWITCHER must be GONE in this
+     build (gated to import.meta.env.DEV).
+  c) WARNING: `AuthContext` DEV demo auto-signin will not run in a
+     production build. The pitch-day path on a deployed URL will be
+     UNAUTHENTICATED unless we sign in via the login screen. Two
+     options to decide:
+      i.  Visit /login, enter demo@basira.local + demo-pitch-2026.
+          Then RLS resolves correctly. (Manual step at pitch start.)
+      ii. Add a tiny `?as=demo` URL flag that triggers the same
+          auto-signin in production (gated on a separate flag, not
+          DEV). Slightly more code; convenient.
+     ASK Ahmad which.
+
+PRIORITY 2 — Deploy (only if Ahmad confirms a deployed pitch):
+  a) Vercel deploy to a preview URL.
+  b) Configure env vars (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
+     in Vercel project settings.
+  c) Smoke-test the deployed URL on the 8-screen demo path.
+  d) Re-run scripts/route-audit.mjs against the deployed URL —
+     confirm 0/0/0/0/0/0 holds.
+
+PRIORITY 3 — Pitch-day playbook (one page, append to docs/):
+  a) URL to demo from (deployed vs dev server)
+  b) Login credentials if needed
+  c) The 8-screen click order
+  d) Failure modes + recovery (e.g., supabase outage → demo data
+     fallback still serves; auth fail → /login with demo creds)
+  e) C3 — Studio dashboard handling (skip Studio in pitch, or accept
+     the Free-tier auth_leaked_password_protection warning)
+
+Step N — Session-end protocol from docs/pitch-prep.md. Tag
+pitch-prep-session-F. Pitch is now ready.
+
+Adversarial defaults ON. No sycophancy. Full authority to commit,
+push, tag, deploy via Vercel CLI — but ASK Ahmad before any
+production-tier auth or env-var change that requires Pro upgrade.
+```
+
 ---
 
 ## Files this plan governs
@@ -668,3 +748,57 @@ Per the `arabic-check` skill rubric, Session B/C strings I added were reviewed:
 - `/empowerment/dignity/172` re-rendered post-fix: textarea values show first-person voice with tashkeel. 0 console errors.
 - `scripts/route-audit.mjs` re-run at session end: aggregate still **0 / 0 / 0 / 0 / 0 / 0** across all 51 routes — Session D edits held.
 - lint + tsc clean after each commit.
+
+---
+
+## Session E — completed work archive
+
+### Migrations applied (8 total, all via Supabase MCP `apply_migration`)
+
+| # | Migration name | What it ships |
+|---|---|---|
+| 1 | `session_e_demo_auth_bridge_and_role_helper` | `pgcrypto` ext, `demo@basira.local` auth user, matching `staff` row, private `internal` schema, `internal.current_user_role()` and `internal.has_role()` SECURITY DEFINER helpers |
+| 2 | `session_e_shift_handover_items` | `shift_handover_items` table + RLS + 4 seeded demo rows (the same 4 the in-memory service was returning) |
+| 3 | `session_e_ipc_tables` | `locations` (6 seeded), `ipc_checklist_templates` (1 seeded — WHO 5 Moments adapted), `ipc_inspections`, `ipc_incidents`, `immunizations` — 5 tables + RLS |
+| 4 | `session_e_wellbeing_views_v2` | `mv_wellbeing_index` (matview, computes from beneficiaries + daily_care_logs + fall_risk_assessments), `mv_wellbeing_stats` (single-row aggregate matview), `v_early_warning_report` (regular view, `security_invoker=true`). v1 failed on `assessment_date` column-not-found — corrected to `created_at` ordering |
+| 5 | `session_e_indicator_ops_tables` | `cost_tracking`, `quality_checks`, `om_waste_records`, `risk_score_log`, `benchmark_standards`, `iso_compliance_checklist` — 6 tables + RLS |
+| 6 | `session_e_extend_daily_care_logs` | ALTER TABLE: `weight NUMERIC(6,2)`, `mobility_today TEXT (CHECK)`, `requires_followup BOOLEAN`, `log_time TIME` — resolves C9 |
+| 7 | `session_e_rls_overhaul` | DO-block dropping all 69 existing `{public} USING(true)` policies, then creating fresh `authenticated`-tiered policies across 5 categories (PHI / APPEND_ONLY / OPS / GOV / STAFF) — totals **258 policies, 0 on `public`, 258 on `authenticated`** |
+
+(Total tables provisioned: 12. Total views: 3. Total ALTER: 1. Total policies replaced: 69 → 258.)
+
+### Code changes
+
+| Concern | File:line | Before | After | Commit |
+|---|---|---|---|---|
+| Flip `*Available` flags | `shiftService.ts:8` `ipcService.ts:162` `wellbeingService.ts:88` `indicatorsRepository.ts:10` | `false` | `null` lazy-probe (shift) / `true` (others) | `45fbfa6` |
+| Live cost / waste queries | `CostPerBeneficiary.tsx:55` `useCatering.fetchChecks:69` `OperationsDashboard.tsx:78` | inline `setCostData(demoCostData)` / no-op / hardcoded 0 | actual `from('cost_tracking' / 'quality_checks' / 'om_waste_records').select(...)` with demo fallback on empty | `45fbfa6` |
+| C9 — DailyCareForm payload | `DailyCareForm.tsx:67-88` | `log_date` / `recorded_by: null` (NOT NULL violation) / fields without columns | `shift_date` / `recorded_by` from `useAuth().user.user_metadata.full_name` / weight & mobility & followup land on real columns | `e6243ac` |
+| DEV demo auto-signin | `AuthContext.tsx:54-105` | unauthenticated session in dev | `signInWithPassword('demo@basira.local', 'demo-pitch-2026')` gated to `import.meta.env.DEV` only | `f62f754` |
+| C13 — `dark:bg-white*` strip | 14 files (Skeleton ×4, Modal, MainLayout, ClothingSeasonalCalendar, ClothingPhaseTracker, ClothingCommitteeCard, Discover, LeadershipCompass, Trajectories, ScenarioSimulator, MirrorFindingCard, PolicyHorizon, DecisionCard, DecisionLedger) | ~38 instances of `dark:bg-white`, `dark:bg-white/50`, `dark:bg-white/5` | stripped (light-only project) | `551db1d` |
+
+### Advisor counts — before vs after
+
+| | Pre-Session E | Post-Session E | Δ |
+|---|---|---|---|
+| Total security/performance lints | 90 | **5** | **−85** |
+| `multiple_permissive_policies` (WARN) | 24 | **0** | −24 |
+| `rls_policy_always_true` (WARN) | 65 | **2** (intentional, on append-only INSERT) | −63 |
+| `materialized_view_in_api` (WARN, new) | 0 | 2 | +2 (accepted — see C17) |
+| `auth_leaked_password_protection` (WARN) | 1 | 1 | no change (Free-tier blocked, see C3) |
+| Policies on `{public}` role (anon access) | 69 | **0** | **−69** |
+| Policies on `{authenticated}` role | 0 | **258** | +258 |
+
+### Verifications run
+
+- `pg_views` / `pg_matviews` query confirms wellbeing views exist; `mv_wellbeing_index` returned 139 rows (existing seeded beneficiaries with neutral defaults applied).
+- `pg_policies` count: 258 total, 70 with `qual='true'` (all SELECT-tier on `authenticated`, anon blocked), 0 on `public`.
+- `auth.users` + `public.staff` confirm 1 row each for `demo@basira.local`.
+- `seeded counts`: `shift_handover_items=4`, `locations=6`, `ipc_checklist_templates=1`, `mv_wellbeing_index=139`, `mv_wellbeing_stats=1`.
+- `npm run lint` + `npx tsc --noEmit`: 0 errors / 0 type errors. Two pre-existing warnings unchanged (BrandLevelProvider react-refresh, AddRequirementModal `any`).
+- `curl http://localhost:5175/dashboard`: returned RTL Arabic page with `theme-color="#0F3144"` — correct codebase confirmed (basira-dev guard).
+- Dev Vite already running from prior session; advisor re-run verified post-overhaul state.
+
+### Pattern note — `*Available = null` (lazy probe) on shift
+
+`shiftService` uses `null` (lazy probe) instead of `true` because the service updates the flag at runtime based on PGRST205 error code. The other three services (ipc, wellbeing, indicator) use a constant `true` because their patterns short-circuit only on the literal `false`. Both patterns will tolerate the table existing or being absent — defense in depth.
