@@ -106,11 +106,11 @@ export const ShiftHandover: React.FC = () => {
     };
 
     if (isLoading) {
-        return <div className="min-h-screen flex items-center justify-center text-white">جاري التحميل...</div>;
+        return <div className="min-h-screen bg-hrsd-navy flex items-center justify-center text-white">جاري التحميل...</div>;
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-white via-white to-white text-white p-6" dir="rtl">
+        <div className="min-h-screen bg-hrsd-navy text-white p-6" dir="rtl">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -158,22 +158,22 @@ export const ShiftHandover: React.FC = () => {
                     <span className="text-hrsd-cool-gray text-sm">بواسطة: {summary.staffName}</span>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
-                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                    <div className="bg-white/10 rounded-xl p-4 text-center">
                         <User className="w-6 h-6 text-[#269798] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.totalBeneficiaries}</p>
                         <p className="text-hrsd-cool-gray text-sm">مستفيد</p>
                     </div>
-                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                    <div className="bg-white/10 rounded-xl p-4 text-center">
                         <Pill className="w-6 h-6 text-[#FCB614] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.medicationsGiven}</p>
                         <p className="text-hrsd-cool-gray text-sm">دواء أُعطي</p>
                     </div>
-                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                    <div className="bg-white/10 rounded-xl p-4 text-center">
                         <AlertTriangle className="w-6 h-6 text-[#DC2626] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.incidentsReported}</p>
                         <p className="text-hrsd-cool-gray text-sm">حادثة</p>
                     </div>
-                    <div className="bg-white/50 rounded-xl p-4 text-center">
+                    <div className="bg-white/10 rounded-xl p-4 text-center">
                         <Activity className="w-6 h-6 text-[#2BB574] mx-auto mb-2" />
                         <p className="text-2xl font-bold">{summary.assessmentsCompleted}</p>
                         <p className="text-hrsd-cool-gray text-sm">تقييم</p>
@@ -215,7 +215,7 @@ export const ShiftHandover: React.FC = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="bg-white/50 rounded-2xl p-6 mb-6 border border-gray-200"
+                        className="bg-white rounded-2xl p-6 mb-6 border border-gray-200 text-hrsd-navy"
                     >
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="font-bold">إضافة بند جديد</h3>
@@ -241,13 +241,13 @@ export const ShiftHandover: React.FC = () => {
                                 placeholder="عنوان البند..."
                                 value={newItem.title}
                                 onChange={(e) => setNewItem(prev => ({ ...prev, title: e.target.value }))}
-                                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#FCB614]"
+                                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-hrsd-navy placeholder-slate-500 focus:outline-none focus:border-[#FCB614]"
                             />
                             <textarea
                                 placeholder="التفاصيل..."
                                 value={newItem.description}
                                 onChange={(e) => setNewItem(prev => ({ ...prev, description: e.target.value }))}
-                                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#FCB614] h-24 resize-none"
+                                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-hrsd-navy placeholder-slate-500 focus:outline-none focus:border-[#FCB614] h-24 resize-none"
                             />
                             <div className="flex gap-3">
                                 <button
