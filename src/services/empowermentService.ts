@@ -186,6 +186,27 @@ const DEMO_GOALS: RehabGoal[] = [
     },
 ];
 
+const DEMO_PREFERENCES: Record<string, BeneficiaryPreferences> = {
+    // 172 = محمد — أبو سعد. Anchor profile for the Karama / cup-of-water demo.
+    '172': {
+        id: 'demo-pref-172',
+        beneficiary_id: '172',
+        preferred_name: 'محمد',
+        preferred_title: 'أبو سعد',
+        communication_style: 'يُنادى بكنيته «أبو سعد»، ويُخفض الصوت عند الحديث معه بعد العصر.',
+        preferred_activities: ['جلسات قراءة القرآن', 'الجلوس في الشمس قبل الغروب', 'الجلسات الفردية الهادئة'],
+        hobbies: ['الاستماع إلى الإذاعات الصباحية'],
+        favorite_foods: ['تمر', 'قهوة عربية', 'الشاي الأخضر'],
+        calming_strategies: ['الاستماع للقرآن الكريم', 'الجلوس في الحديقة الخلفية', 'حضور الجماعة في المصلى'],
+        motivators: ['التقدير اللفظي', 'مرافقة الزملاء في الصلاة', 'الإطلاع على إنجازاته السابقة'],
+        what_makes_me_happy: 'الجلوس في الشمس قبل الغروب، وسماع القرآن، ووجود الزملاء حوله، وتقدير جهده في تَعلم الإمساك بكوب الماء.',
+        what_makes_me_upset: 'الأصوات العالية بعد العصر، وتأخّر موعد الصلاة، والتعجّل في تنفيذ روتينه اليومي.',
+        my_dreams: 'الاستقلال في إمساك كوب الماء وتناول الطعام دون مُساعدة، والمُشاركة الكاملة في صلاة الجماعة.',
+        wake_up_time: '05:00',
+        sleep_time: '22:00',
+    },
+};
+
 const DEMO_TEMPLATES: GoalTemplate[] = [
     { id: '1', domain: 'physical', goal_title: 'المشي باستقلالية', goal_description: 'المشي لمسافة محددة بدون مساعدة', measurement_type: 'numeric', measurement_unit: 'متر', typical_duration_weeks: 12, difficulty_level: 'moderate', age_group: 'all' },
     { id: '2', domain: 'physical', goal_title: 'صعود الدرج', goal_description: 'صعود ونزول 10 درجات بأمان', measurement_type: 'milestone', typical_duration_weeks: 8, difficulty_level: 'challenging', age_group: 'all' },
@@ -353,7 +374,8 @@ export const empowermentService = {
 
     // تفضيلات المستفيد (ملف الكرامة)
     async getPreferences(beneficiaryId: string): Promise<BeneficiaryPreferences | null> {
-        if (!isSupabaseReady()) return null;
+        const demoFallback = DEMO_PREFERENCES[beneficiaryId] ?? null;
+        if (!isSupabaseReady()) return demoFallback;
 
         try {
             const { data, error } = await supabase
@@ -364,12 +386,12 @@ export const empowermentService = {
 
             if (error) {
                 logError('getPreferences', error);
-                return null;
+                return demoFallback;
             }
-            return data;
+            return data ?? demoFallback;
         } catch (error) {
             logError('getPreferences', error);
-            return null;
+            return demoFallback;
         }
     },
 
