@@ -1,11 +1,9 @@
 import { supabase } from '../config/supabase';
 import { ShiftHandoverItem, ShiftType, ShiftSummary } from '../types/shift';
 
-// shift_handover_items is not yet provisioned in the remote DB (Session E migration).
-// Until the migration ships, we serve in-memory demo data and skip the network round
-// trip entirely — eliminates the HTTP 404 noise on /handover. Once the table exists,
-// flip this back to `null` to re-enable supabase + the lazy probe path below.
-let shiftItemsTableAvailable: boolean | null = false;
+// shift_handover_items provisioned in Session E (migration `session_e_shift_handover_items`).
+// Lazy probe: null → first query hits supabase; on table-missing error fallback to demo.
+let shiftItemsTableAvailable: boolean | null = null;
 
 const logError = (context: string, error: unknown) => {
     if (import.meta.env.DEV) {

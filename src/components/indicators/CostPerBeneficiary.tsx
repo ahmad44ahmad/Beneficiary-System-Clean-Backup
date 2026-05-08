@@ -53,11 +53,30 @@ export const CostPerBeneficiary: React.FC = () => {
     const [costData, setCostData] = useState<CostData[]>([]);
 
     useEffect(() => {
-        // cost_tracking table is not yet provisioned in the remote DB (Session E
-        // migration). Until then we serve demoCostData and skip the network call
-        // to keep /indicators/cost console-clean.
-        setCostData(demoCostData);
-        setLoading(false);
+        // cost_tracking provisioned in Session E. Lazy-probe: try supabase, fall
+        // back to demoCostData on error or empty result.
+        let cancelled = false;
+        (async () => {
+            try {
+                const mod = await import('../../config/supabase');
+                if (!mod.supabase) {
+                    if (!cancelled) { setCostData(demoCostData); setLoading(false); }
+                    return;
+                }
+                const { data, error } = await mod.supabase
+                    .from('cost_tracking')
+                    .select('cost_month, cost_category, amount, beneficiary_count')
+                    .order('cost_month', { ascending: true });
+                if (cancelled) return;
+                if (error || !data?.length) setCostData(demoCostData);
+                else setCostData(data as CostData[]);
+            } catch {
+                if (!cancelled) setCostData(demoCostData);
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        })();
+        return () => { cancelled = true; };
     }, []);
 
     // Calculate monthly totals

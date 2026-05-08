@@ -81,11 +81,12 @@ const isSupabaseReady = (): boolean => {
     return !!supabase;
 };
 
-// Wellbeing materialized views (mv_wellbeing_index, mv_wellbeing_stats) and the
-// v_early_warning_report view are not yet provisioned in the remote DB — Session E
-// migration. Until then we serve in-memory demo data; flip back to false to re-enable
-// supabase queries once the views ship.
-const wellbeingViewsAvailable = false;
+// Wellbeing views (mv_wellbeing_index, mv_wellbeing_stats, v_early_warning_report)
+// provisioned in Session E (migration `session_e_wellbeing_views_v2`). Views compute
+// from beneficiaries + daily_care_logs + fall_risk_assessments; if no source rows,
+// the matview is empty and the service still falls back to DEMO_BENEFICIARIES via
+// the !data?.length check. Refresh via pg_cron in production; not scheduled yet.
+const wellbeingViewsAvailable = true;
 
 export const wellbeingService = {
 

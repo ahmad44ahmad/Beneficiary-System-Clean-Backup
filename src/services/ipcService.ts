@@ -155,11 +155,10 @@ const logError = (context: string, error: unknown) => {
 const isSupabaseReady = (): boolean => !!supabase;
 
 // IPC tables (locations, ipc_checklist_templates, ipc_inspections, ipc_incidents,
-// immunizations) are not yet provisioned in the remote DB — Session E migration.
-// Until then we serve in-memory demo data and skip the network round-trip entirely
-// to keep /ipc, /overview and /integrated-reports console-clean. After the migration
-// ships, flip this back to `false` to re-enable supabase queries.
-const ipcTablesAvailable = false;
+// immunizations) provisioned in Session E (migration `session_e_ipc_tables`).
+// Demo data seeded for locations + the daily checklist template; inspections /
+// incidents / immunizations stay empty until staff record real data.
+const ipcTablesAvailable = true;
 
 // Service
 

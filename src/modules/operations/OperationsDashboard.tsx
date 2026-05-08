@@ -75,9 +75,16 @@ export const OperationsDashboard: React.FC = () => {
                 .lt('next_due_date', today.toISOString().split('T')[0])
                 .eq('status', 'active');
 
-            // om_waste_records table is not yet provisioned in the remote DB
-            // (Session E migration). Skip the query until then.
-            const wasteThisMonth = 0;
+            // om_waste_records provisioned in Session E. Sum quantities for the
+            // current month; empty table → 0.
+            const { data: waste } = await supabase
+                .from('om_waste_records')
+                .select('quantity')
+                .gte('record_date', monthStart);
+            const wasteThisMonth = (waste ?? []).reduce(
+                (acc: number, r: { quantity?: number }) => acc + (r.quantity ?? 0),
+                0
+            );
 
             setStats({
                 totalAssets: totalAssets || 0,

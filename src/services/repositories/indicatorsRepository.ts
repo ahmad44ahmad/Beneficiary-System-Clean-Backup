@@ -3,11 +3,10 @@
 
 import { supabase } from '../../config/supabase';
 
-// risk_score_log, benchmark_standards, iso_compliance_checklist are not yet
-// provisioned in the remote DB (Session E migration). Until then, return null
-// from the affected fetchers so callers fall back to demo data and we skip
-// the network round-trip on /indicators/early-warning + /indicators/iso.
-const indicatorViewsAvailable = false;
+// risk_score_log, benchmark_standards, iso_compliance_checklist provisioned in
+// Session E (migration `session_e_indicator_ops_tables`). Tables start empty;
+// callers' `if (!data?.length)` paths still serve demo data when no rows exist.
+const indicatorViewsAvailable = true;
 
 export const indicatorsRepository = {
     /**

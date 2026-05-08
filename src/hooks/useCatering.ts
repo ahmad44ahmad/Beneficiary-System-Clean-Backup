@@ -5,8 +5,7 @@ import type { Meal, CateringViolation, QualityCheck } from '../types/catering';
 export function useCatering() {
     const [meals, setMeals] = useState<Meal[]>([]);
     const [violations, setViolations] = useState<CateringViolation[]>([]);
-    // setChecks unused while quality_checks table is unprovisioned (Session E migration).
-    const [checks, _setChecks] = useState<QualityCheck[]>([]);
+    const [checks, setChecks] = useState<QualityCheck[]>([]);
     const [loading, setLoading] = useState(true);
 
     const fetchData = useCallback(async function fetchData() {
@@ -67,10 +66,13 @@ export function useCatering() {
     }, [fetchData]);
 
     async function fetchChecks() {
-        // quality_checks table is not yet provisioned in the remote DB (Session E
-        // migration). Skip the network call until the migration ships; existing
-        // demo `checks` state stays in place.
-        return;
+        // quality_checks provisioned in Session E. Empty result → keep existing state.
+        if (!supabase) return;
+        const { data, error } = await supabase
+            .from('quality_checks')
+            .select('*')
+            .order('check_date', { ascending: false });
+        if (!error && data) setChecks(data as QualityCheck[]);
     }
 
     async function addMeal(meal: Omit<Meal, 'id' | 'created_at'>) {
