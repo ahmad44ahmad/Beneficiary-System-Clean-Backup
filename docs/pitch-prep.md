@@ -2,7 +2,7 @@
 
 **Owner:** Ahmad Al-Shahri
 **Branch:** `v2`
-**Last session:** A — completed 2026-05-08, tag `pitch-prep-session-A`, HEAD `71f6563`
+**Last session:** B — completed 2026-05-08, tag `pitch-prep-session-B`, HEAD `cc76e77` (+ doc commit on top)
 **Doc purpose:** Durable cross-session memory. Every session starts by reading this file. Every session ends by updating it.
 
 ---
@@ -24,8 +24,8 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 | # | Session | Goal | Status | Tag | Commits |
 |---|---|---|---|---|---|
 | A | Surface polish | Visible bugs (white-on-white, English fragments, schema drift), brand-token alignment | ✅ DONE 2026-05-08 | `pitch-prep-session-A` | `de116f1`, `71f6563` |
-| B | Demo-path bulletproofing | Identify the EXACT 8-12 screens of the pitch, audit each end-to-end, fix everything on path | NEXT | — | — |
-| C | Breadth sweep | Automated Playwright audit of all 110 routes, fix top 20 issues by density | LATER | — | — |
+| B | Demo-path bulletproofing + schema-drift sweep | Manual walkthrough of 8 demo screens; eliminate 36 console errors on 12 schema-drift routes | ✅ DONE 2026-05-08 | `pitch-prep-session-B` | `0a31262`, `3d41977`, `e5e9032`, `e8c2dbd`, `cc76e77` |
+| C | Breadth sweep | Re-run audit; fix any residual visual/density issues (target: keep audit at 0 across all 51) | NEXT | — | — |
 | D | Brand + Arabic register | HRSD typography compliance, governmental-Arabic check across user-visible strings, RTL/logo audit | LATER | — | — |
 | E | Backend hardening | Replace 65× `USING(true)` RLS with auth-aware policies; schema-drift sweep (auditService had one — find others); advisor count → ~0 | LATER | — | — |
 | F | *(Optional)* Build + deploy + smoke test | Production build, optional Vercel deploy, final smoke test | OPTIONAL | — | — |
@@ -35,6 +35,13 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 ---
 
 ## Decisions log (do NOT re-litigate without a reason)
+
+### 2026-05-08 (Session B)
+
+1. **Schema-drift fixes use a module-level `*Available = false` flag, not lazy probing.** When a remote table doesn't exist, the service skips supabase entirely and serves in-memory demo data. Trade-off: production loses auto-detection — when the migration ships in Session E, the developer must flip the flag (or delete it). Reason: the lazy-probe alternative still fires one HTTP 404 per session, which Chrome auto-logs and the audit script counts. The flag eliminates the noise outright. Affected services: `shiftService`, `ipcService`, `wellbeingService`, `indicatorsRepository`, plus inline gates in `useCatering`, `CostPerBeneficiary`, `OperationsDashboard`. Each constant carries a comment naming the missing relation(s).
+2. **`/empowerment/dignity/172` empty-fields fix is a service-side demo fallback, not a UI rewrite.** `empowermentService.getPreferences` now returns the canonical "محمد / أبو سعد" preferences when Supabase has no row for `beneficiary_id = 172`. Demo data is keyed by beneficiary_id (mirrors the existing `DEMO_GOALS` pattern), so other beneficiary IDs continue to render an empty form (correct behaviour for new files). Saves still flow to Supabase via `savePreferences`; once a real row exists for 172, it takes precedence.
+3. **`log_date → shift_date` is a read-side rename only this session.** ExecutiveDashboard, supaService.getDailyCareLog and DailyFollowUpPanel reads/writes are now aligned to the live column name. The DailyCareForm INSERT payload still uses `log_date`/`log_time` plus other columns the live schema doesn't have (`weight`, `mobility_today`, `staff_name`, `section`); reconciling that form belongs in Session E migrations rather than this sweep, since it needs a deliberate column-by-column decision rather than a rename.
+4. **Pitch demo runs from dev server.** Confirmed during walkthrough: `DEBUG ROLE SWITCHER` widget is visible (gated to `import.meta.env.DEV`). If pitch wants the widget hidden, run `npm run build && npm run preview` instead of `npm run dev`. Default decision: keep dev server, accept the widget — it's a small badge, ministry viewer is unlikely to misread.
 
 ### 2026-05-08 (Session A)
 
@@ -76,57 +83,65 @@ Beneficiary id `172` = `MOCK_DIGNITY_PROFILES[1]` = أبو سعد / محمد. Cu
 
 ---
 
-## Known-clean routes (verified Session A)
+## Known-clean routes (verified end of Session B)
 
-| Route | Verified | Notes |
+**Aggregate (51-route audit, 2026-05-08T06-16-21):** **0 console errors, 0 white-on-white, 0 English fragments, 0 empty buttons, 0 قريباً markers, 0 broken images.** All 51 routes are density-0.
+
+### Demo-path manual walkthrough (8 screens + bonus, all 5s post-load capture)
+
+| # | Route | Errors | bodyLen | Notes |
+|---|---|---|---|---|
+| 1 | `/` | 0 | 1287 | Hero "بصيرة" + 5 pillars (التحول الرقمي، الذكاء الاصطناعي، إدارة الجودة، التميز المؤسسي، الامتثال والمعايير) + للدخول CTA. RTL/AR. |
+| 2 | `/dashboard` | 0 | 2484 | "مركز التأهيل الشامل بالباحة" + "لوحة القياس التنفيذية (Executive Dashboard)" bilingual heading + tنبيهات المساءلة + Vital Pulse panel. ⚠️ DEBUG ROLE SWITCHER widget visible (dev-mode only, gated). |
+| 3 | `/empowerment` | 0 | 2755 | محرك التمكين, 3 categories (الاستقلال الذاتي / الدمج المجتمعي / العودة لسوق العمل). Cup-of-water SMART goal renders inline: "الإمساك بكوب الماء بشكل مستقل" 44%, OT specialist owner, target 2026-04-09. **No click required** — goal is on the parent route. |
+| 3b | `/empowerment/dignity/172` | 0 | 1993 | **Fixed Session B** (commit `0a31262`). Form now populates: الاسم=محمد / اللقب=أبو سعد / 3 calming strategies / cup-of-water dream / wake 05:00 / sleep 22:00. |
+| 4 | `/family-portal` | 0 | 2763 | بوابة الأسرة, "محمد أحمد العمري" beneficiary, يوميات محمد journal, قائمة اعتماد الإدارة, آخر التحديثات. 0 English drift. |
+| 5 | `/alerts` | 0 | 2361 | لوحة التنبيهات الذكية + 6 alert types: انخفاض الأكسجين، ارتفاع الحرارة، موعد دواء متأخر، خطر سقوط، سلوك غير معتاد، تغيير في الشهية. |
+| 6 | `/legal-shield` | 0 | 3033 | الدرع القانوني + 4 compliance pillars (CRPD / PDPL / NCA ECC-2:2024 / معايير الوكالة) + cert issuance + audit trail. Exact pitch concept. |
+| 7 | `/quality/manual` | 0 | 2527 | دليل الجودة الشامل with all 7 ISO 9001 chapters (سياق المنظمة، القيادة، التخطيط، الدعم، العمليات، تقييم الأداء، التحسين). 132-operations claim renders. |
+| 8 | `/sroi` | 0 | 2482 | لوحة العائد الاجتماعي على الاستثمار + معدل العائد + الوفورات + المساهمة الاقتصادية + حالات التمكين + حاسبة الأثر + تحليل الأثر المالي. (1.80:1 ratio per Session A spot-check.) |
+| + | `/beneficiaries-list` | 0 | 13998 | Excel + طباعة buttons present. Body very dense (full beneficiary list + filters). |
+
+### Other routes that became clean in Session B
+
+All previously flagged 11 routes now density-0:
+
+| Route | Density before → after | Fix family |
 |---|---|---|
-| `/dashboard` | ✓ Playwright + verifier | Heading reads `لوحة القياس التنفيذية` (note: "القياس" not "القيادة" — confirm intent). Sidebar order: الرئيسية، الخدمات الطبية، الخدمات الاجتماعية، الحوكمة والجودة، العمليات، الذكاء والتنبؤ، التقارير، (extra: القيادة الاستراتيجيّة)، الإدارة. |
-| `/emergency` | ✓ post-fix | `bg-slate-900` background, white text fully visible, "كود أزرق" + 4-step protocol + vitals card render correctly. |
-| `/scheduling` | ✓ post-fix | Search input now uses `text-hrsd-navy` — typed text visible. |
-| `/beneficiaries-list` | ✓ | Excel export verified end-to-end (98KB SpreadsheetML, 142 rows, Arabic, filename `قائمة_المستفيدين.xls`). Print export verified end-to-end (26KB RTL HTML, valid `<table>`, auto `window.print()`). 0 console errors. |
-| `/sroi` | ✓ | Dense ministry-grade page; 1.80:1 ratio matches canonical; 0 console errors. |
+| `/handover` | 18 → 0 | shift_handover_items missing — module flag in shiftService skips network |
+| `/basira` | 12 → 0 | log_date → shift_date column rename in ExecutiveDashboard reads |
+| `/overview` | 12 → 0 | ipc_inspections / ipc_incidents missing — module flag in ipcService skips network |
+| `/ipc` | 12 → 0 | same fix as /overview |
+| `/integrated-reports` | 12 → 0 | mv_wellbeing_index / mv_wellbeing_stats missing — module flag in wellbeingService skips network |
+| `/indicators/cost` | 6 → 0 | cost_tracking missing — inline `setCostData(demoCostData)` |
+| `/catering` | 6 → 0 | quality_checks missing — fetchChecks no-op'd |
+| `/operations` | 6 → 0 | om_waste_records missing — wasteThisMonth zeroed |
+| `/admin/audit-logs` | 6 → 0 | order by `created_at` instead of `timestamp` (column rename) |
+| `/indicators/early-warning` | 3 → 0 | risk_score_log missing — module flag in indicatorsRepository |
+| `/indicators/iso` | 3 → 0 | iso_compliance_checklist missing — same fix |
 
 ---
 
-## Known-issue routes (per `docs/pitch-prep-route-audit.md` 2026-05-08)
+## Known-issue routes (post Session B)
 
-Automated 51-route Playwright sweep at end of Session A. **0 white-on-white, 0 English fragments, 0 empty buttons** across all 51 — Session A's surface fixes held everywhere. **39 routes are density-0 clean.** 12 routes flagged for console errors, all of the same family (schema drift — code references tables that don't exist in the live DB, same root cause as Session A's `audit_logs` bug):
+**None.** The 51-route Playwright audit (`docs/pitch-prep-route-audit.md`, 2026-05-08T06-16-21) reports 0 console errors, 0 white-on-white, 0 English fragments, 0 empty buttons, 0 قريباً, 0 broken images. Session B exit goal ("0 errors on demo path, <5 across 51") was overshot — total is 0.
 
-| Route | Density | Errors | Diagnosis |
-|---|---|---|---|
-| `/handover` | 18 | 6 | Code queries `public.shift_handover_items`; live DB suggests `public.san_martin_items` (rename or migration drift) |
-| `/empowerment/dignity/172` | 12 → **fixed in Session A bonus** | 4 | `getPreferences` used `.single()` when 0 rows; switched to `.maybeSingle()` |
-| `/basira` (Executive Dashboard alt) | 12 | 4 × 400 | Unknown table — Session B investigates |
-| `/overview` (Cross-Module Dashboard) | 12 | 4 × 404 | Missing tables |
-| `/ipc` | 12 | 4 × 404 | Missing tables |
-| `/integrated-reports` | 12 | 4 × 404 | Missing tables |
-| `/indicators/cost` | 6 | 2 × 404 | Missing tables |
-| `/catering` | 6 | 2 × 404 | Missing tables |
-| `/operations` | 6 | 2 × 404 | Missing tables |
-| `/admin/audit-logs` | 6 | 2 × 400 | Likely SELECT side of audit_logs (Session A fixed the INSERT side) |
-| `/indicators/early-warning` | 3 | 1 × 404 | Missing table |
-| `/indicators/iso` | 3 | 1 × 404 | Missing table |
+### Residual placeholders (cosmetic, not flagged by audit)
 
-**Demo path diagnosis after audit:** 11/12 demo-path routes density-0. Only `/empowerment/dignity/172` had errors → fixed in Session A bonus pass (commit see below).
-
-**3 explicit `قريباً` placeholders** (still unfixed but now scoped):
+These are explicit "قريباً" copy strings — they don't appear in the body-text scan because they're in modal/tab content or below the visible fold during the audit's snapshot. Not pitch-blocking:
 - `AssetRegistry.tsx:320` (`/operations/assets`)
 - `ClothingManagementPanel.tsx:421-422` (`/clothing`)
 - `LeadershipCompass.tsx:126` (`/leadership-compass`)
+- `Discover.tsx:146` placeholder `alert()` — `/leadership-compass` Discover tab
 
-**`Discover.tsx:146`** placeholder `alert()` — `/leadership-compass` Discover tab.
+Recommend handling in Session C as part of the breadth pass — either remove the route entries from the sidebar or replace with "post-pitch roadmap" framing.
 
-## Schema-drift sweep — Session B priority
+### Deferred work that surfaced during Session B (not pitch-blocking)
 
-Audit reveals a *systemic pattern*. Session A fixed `audit_logs`; the audit shows the same drift on at least 8 other tables/services. Recommended Session B approach:
-
-1. For each error route, identify which Supabase query is failing.
-2. Cross-reference table names against `information_schema.tables` (live DB).
-3. For "table doesn't exist" — either (a) add the table via migration, (b) rename the code-side query to match the live table, or (c) gracefully fall back to local mock data via `useLocalDataStore`.
-4. For "0 rows returned with .single()" — switch to `.maybeSingle()` (the empowerment fix is the model — single-line change).
-5. Re-run `node scripts/route-audit.mjs` after each batch; density should monotonically drop.
-
-The goal is **0 console errors on demo-path routes** + **<5 errors total across all 51**.
+- **DailyCareForm INSERT-side schema drift.** The form payload sends `log_date`, `log_time`, `weight`, `mobility_today`, `staff_name`, `section` — none of which exist in the live `daily_care_logs` schema. Inserts via this form silently fail. Not on demo path. Belongs in Session E migration (decide: extend the table, or trim the form).
+- **`#DC2626` (Tailwind red-600) used as primary brand color in `DignityFile.tsx`** — gradient header, button accents, focus rings. Not in the HRSD palette. Brand sweep for Session D.
+- **`text-white` on `bg-white` gradient in `ShiftHandover.tsx`** main wrapper, stat cards, item titles. Audit didn't flag because the page never reached substantive render before — now that the data flows, this is a real visual regression on `/handover` (non-demo). Session C/D.
+- **`dark:bg-white` rule in some layout / card classes.** Currently dormant (v2 defaults to light mode). Will surface as white-on-white if dark mode is ever enabled. Session D.
 
 ---
 
@@ -140,8 +155,12 @@ The goal is **0 console errors on demo-path routes** + **<5 errors total across 
 | C4 | GitHub MCP plugin OAuth needs re-auth | MCP setting | when needed |
 | C5 | `multiple_permissive_policies` × 24 on `catering_suppliers` | DB consolidation, 10 min | E |
 | ~~C6~~ | ~~Missing "Beneficiary System Clean Backup" badge~~ | **RESOLVED** — basira hub confirms the verifier reference is stale (Session A finding). Do not fix. | — |
-| C7 | Heading `لوحة القياس التنفيذية` ("القياس" = measurement) — is this intended? | Decision needed | B |
+| C7 | Heading `لوحة القياس التنفيذية` ("القياس" = measurement) — is this intended? | Decision needed | D — confirmed renders during Session B walkthrough; user decision before pitch |
 | ~~C8~~ | ~~Supabase migration 024~~ | **RESOLVED** — `list_migrations` confirms `chapters_2_3_4_6_compass` (20260228060420) applied. Plus 4× 2026-05-08 migrations (grc/essential/phantom/permissive_rls). Compass runs on real schema. | — |
+| C9 | DailyCareForm INSERT payload uses columns that don't exist in live `daily_care_logs` (log_date / log_time / weight / mobility_today / staff_name / section) | Form vs schema reconciliation | E |
+| C10 | `#DC2626` red used as primary brand on `DignityFile.tsx` (Karama profile header, buttons, focus). Not in HRSD palette. | Brand sweep | D |
+| C11 | `text-white` on white gradient inside `ShiftHandover.tsx` — invisible on /handover after demo data lands | Visual fix on non-demo route | C |
+| C12 | Demo-data flag pattern (`*Available = false`) used in 4 services + 3 components must be flipped/deleted after Session E migrations land | Cleanup after migrations | E |
 
 ---
 
@@ -264,59 +283,74 @@ demo path scope before starting Step 2.
 I'm continuing the Basira pitch-preparation work, Session C — breadth sweep.
 
 READ FIRST in this exact order:
-1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log, demo path
-2. C:/dev/basira/docs/pitch-prep-route-audit.md — 51-route automated
-   audit generated by scripts/route-audit.mjs at end of Session A
-   (or freshly re-run; see Step 1 below)
+1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log,
+   carry-over table, demo path. Note the audit is at 0/0/0/0 across
+   51 routes after Session B.
+2. C:/dev/basira/docs/pitch-prep-route-audit.md — most recent audit
+   output (re-run yourself if you change anything; the script
+   overwrites the file with a fresh timestamp).
 3. C:/dev/basira/CLAUDE.md
 4. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md — note the four
    2026-05-08 feedback files
-5. git log --oneline -10 v2; confirm HEAD is at or after pitch-prep-session-B
+5. git log --oneline -10 v2; confirm HEAD is at or after
+   pitch-prep-session-B (commit cc76e77 + doc commit on top)
+6. git status — must be clean
 
 INVOKE skills:
 - basira-dev
 - hrsd-brand-identity
 - challenge-protocol
 
-SESSION C GOAL: Reduce route-audit issue density to ~0 across non-demo
-routes (demo routes were handled in Session B).
+SESSION C GOAL: Visual + content polish on the residual issues that
+the route-audit script doesn't catch (the script measures density via
+console errors / WoW / English / empty buttons / قريباً body text;
+post-Session B these are all 0). Real work this session is about
+human-eye polish: alignment, overflow, hover states, placeholders that
+hide below the audit's fold, the deferred items in the carry-over table.
 
-Step 1 — Re-run the audit if Session B touched any UI code:
-  cd /c/dev/basira && npm run dev (background) ; sleep 8 ;
-  node scripts/route-audit.mjs
-  Inspect docs/pitch-prep-route-audit.md head — confirm density
-  numbers match what Session B noted.
+Priority order:
 
-Step 2 — Take the top 15 routes by density (excluding demo-path routes
-already addressed in Session B). For each:
-  a) Re-navigate via Playwright, wait ≥5s.
-  b) Cross-reference the route's affected components (App.tsx routing).
-  c) Apply targeted fixes — same playbook as Session A:
-     - white-on-white → swap to slate-900/text-white or hrsd-navy/text-white
-     - English fragments in body → translate to governmental Arabic
-       (defer to arabic-check skill if any string is uncertain)
-     - empty buttons → add aria-label or wire to a real handler;
-       if it's a known stub, hide behind a feature flag instead
-     - "قريباً" sections → if on a route reachable from the sidebar,
-       either remove the entry from the sidebar or replace the
-       placeholder card with a "post-pitch roadmap" panel that frames
-       the gap as roadmap, not absence
-  d) Lint+tsc clean before each commit.
-  e) One commit per route (or per logical batch of related routes).
+(1) **C11 (residual visual)** — `ShiftHandover.tsx` has `text-white` on
+    a white gradient. Audit didn't flag because /handover was failing
+    to load before Session B's data fix. Now data renders, so the page
+    is text-on-bg invisible. Fix the wrapper bg + text colors to HRSD
+    tokens (hrsd-navy bg, text-white). Single component, one commit.
 
-Step 3 — Re-run the audit. Each fixed route's density should drop
-toward 0. Update docs/pitch-prep-route-audit.md by re-running the
-script (it overwrites the file with a fresh timestamp).
+(2) **C7 (heading word choice)** — `لوحة القياس التنفيذية` on /dashboard
+    uses القياس (measurement) where القيادة (leadership/command) might
+    be intended. ASK Ahmad first; do not change without confirmation.
 
-Step 4 — Update docs/pitch-prep.md "Known-clean routes" / "Known-issue
-routes" tables to reflect new state.
+(3) **Residual قريباً placeholders** — AssetRegistry.tsx:320,
+    ClothingManagementPanel.tsx:421-422, LeadershipCompass.tsx:126,
+    Discover.tsx:146 alert(). These don't appear in the audit body
+    scan but a manual click into each module reveals them. For each:
+    decide whether to (a) hide the surface from the sidebar, or (b)
+    replace with a "post-pitch roadmap" framing card. Default to (b).
 
-Step 5 — At ~85% context, run session-end protocol. Commit, push,
-tag pitch-prep-session-C, update pitch-prep.md with Session D
-prompt-pit, push doc commit.
+(4) **C10 (brand sweep on DignityFile)** — replace `#DC2626` red with
+    HRSD navy `#0F3144` or teal `#269798`. The Karama profile is
+    rendered as a hero card with red gradient — should be navy/teal.
 
-Adversarial defaults ON. No sycophancy. Engineered intake. I have
-full authority to commit, push, tag, and edit code.
+(5) **Sidebar overflow / hover states / modal flow polish** — manually
+    click through the sidebar's 9 sections + sub-routes, look for
+    Arabic text that wraps awkwardly, hover states that don't render,
+    modal flows that fail. No script catches these.
+
+(6) Anything else surfaced by the manual pass.
+
+Don't re-litigate the schema-drift work or the demo-path work — both
+are durable. If a flagged module also touches a missing table, leave
+that alone and hand it to Session E.
+
+Step N — At ~85% context, run session-end protocol from
+docs/pitch-prep.md §"Session-end protocol". Commit, push, tag
+pitch-prep-session-C, write Session D prompt-pit (brand + Arabic
+register pass), push doc commit.
+
+Adversarial defaults ON. No sycophancy. Engineered intake before raw
+execution. Full authority to commit, push, tag, edit code without
+asking — but ASK Ahmad before changing wording on user-visible Arabic
+strings (per arabic-check rules + governmental register).
 ```
 
 ### Session D opening prompt
@@ -363,3 +397,27 @@ full authority to commit, push, tag, and edit code.
 - 36 console errors concentrated on 12 routes; 39 routes density-0 clean.
 - All errors are schema-drift family — 7-8 services querying tables that don't exist in the live DB or using `.single()` on missing rows. Same root cause as `audit_logs`.
 - Demo path: 11/12 routes density-0 after the empowerment bonus fix.
+
+---
+
+## Session B — completed work archive
+
+| Concern | File:line | Before | After | Commit |
+|---|---|---|---|---|
+| Empty Karama profile fields on /empowerment/dignity/172 | `empowermentService.ts:357` | `getPreferences` returned null on missing row — UI rendered all labels with empty values | DEMO_PREFERENCES keyed by beneficiary_id; id 172 returns canonical "محمد / أبو سعد" preferences when Supabase has no row | `0a31262` |
+| /handover 6 console errors (shift_handover_items missing) | `shiftService.ts` (rewrite) | Threw on PGRST205 + Chrome HTTP 404 + strict-mode double-fire | Module flag `shiftItemsTableAvailable=false`; serves DEMO_SHIFT_ITEMS (4 items) without network call | `3d41977` |
+| /basira 4× HTTP 400 (log_date column doesn't exist) | `ExecutiveDashboard.tsx:64,81` + `supaService.ts:513` + `DailyFollowUpPanel.tsx:54-57,123` | Queried `.eq('log_date', ...)` and `.gte('log_date', ...)` | Queries renamed to `shift_date`; `staff_name` → `recorded_by`; section folded into notes JSON | `e5e9032` |
+| /overview, /ipc, /integrated-reports — 12 errors total (ipc_inspections, ipc_incidents, immunizations, locations, ipc_checklist_templates, mv_wellbeing_index, mv_wellbeing_stats, v_early_warning_report all missing) | `ipcService.ts` + `wellbeingService.ts` | Each method tried supabase, hit PGRST205, fell to demo BUT after 4 console errors per page-load | Module-level `*Available=false` constants; every read/write short-circuits to demo without network call | `e8c2dbd` |
+| /admin/audit-logs 2× HTTP 400 (timestamp column) | `AuditLogViewer.tsx:146` | `.order('timestamp', ...)` | `.order('created_at', ...)` — column rename matching live schema (companion to Session A INSERT-side fix) | `cc76e77` |
+| /indicators/cost 2× HTTP 404 (cost_tracking missing) | `CostPerBeneficiary.tsx:56-78` | Queried supabase, fell back on error | Skips supabase, sets demoCostData inline | `cc76e77` |
+| /catering 2× HTTP 404 (quality_checks missing) | `useCatering.ts:68-75` | fetchChecks queried supabase | fetchChecks no-op'd; setChecks renamed _setChecks | `cc76e77` |
+| /operations 2× HTTP 404 (om_waste_records missing) | `OperationsDashboard.tsx:78-84` | Queried om_waste_records, summed quantity | wasteThisMonth = 0 hardcoded | `cc76e77` |
+| /indicators/early-warning + /indicators/iso 2× HTTP 404 | `indicatorsRepository.ts:10-44` | 3 fetchers queried risk_score_log / benchmark_standards / iso_compliance_checklist | Module flag `indicatorViewsAvailable=false`; all 3 return null | `cc76e77` |
+
+**Verifications run:**
+- Manual demo-path walkthrough: 8 screens + bonus, ≥5s wait per page, full-page screenshots saved to `~/AppData/Local/Temp/.playwright-mcp/`. All 0 errors.
+- Per-fix re-verification: each route navigated again post-edit, console scanned, density confirmed 0.
+- `scripts/route-audit.mjs` re-run at session end (`docs/pitch-prep-route-audit.md` 2026-05-08T06-16-21): **0 errors, 0 WoW, 0 EN, 0 empty buttons, 0 قريباً across all 51 routes.**
+- lint + tsc clean after each commit (only pre-existing warnings remain in `BrandLevelProvider.tsx` and `AddRequirementModal.tsx`, neither touched by Session B).
+
+**Pattern note:** the `*Available = false` module-flag pattern is now applied across 4 services + 3 components. Every flag carries a comment naming the missing relation(s) and pointing to Session E migration. To re-enable real queries after the migration ships, search for `Available = false` and flip / delete.
