@@ -510,8 +510,8 @@ export const supaService = {
             .from('daily_care_logs')
             .select('*')
             .eq('beneficiary_id', beneficiaryId)
-            .eq('log_date', date)
-            .order('log_time', { ascending: false });
+            .eq('shift_date', date)
+            .order('created_at', { ascending: false });
 
         if (error) {
             logError('getDailyCareLog', error);

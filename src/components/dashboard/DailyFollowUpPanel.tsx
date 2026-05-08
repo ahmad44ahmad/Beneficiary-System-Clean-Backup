@@ -51,13 +51,13 @@ export const DailyFollowUpPanel: React.FC = () => {
                 .limit(20);
 
             if (shifts && shifts.length > 0) {
-                const transformedShifts: DailyShiftRecord[] = shifts.map((s: { id: string; log_date: string; shift?: string; section?: string; staff_name?: string }) => ({
+                const transformedShifts: DailyShiftRecord[] = shifts.map((s: { id: string; shift_date: string; shift?: string; recorded_by?: string }) => ({
                     id: s.id,
-                    date: s.log_date,
-                    day: new Date(s.log_date).toLocaleDateString('ar-SA', { weekday: 'long' }),
+                    date: s.shift_date,
+                    day: new Date(s.shift_date).toLocaleDateString('ar-SA', { weekday: 'long' }),
                     shift: (s.shift || 'first') as DailyShiftRecord['shift'],
-                    section: (s.section || 'male') as DailyShiftRecord['section'],
-                    supervisorName: s.staff_name || 'غير محدد',
+                    section: 'male' as DailyShiftRecord['section'],
+                    supervisorName: s.recorded_by || 'غير محدد',
                     startTime: '08:00', // Default
                     endTime: '16:00', // Default
                     beneficiaryStats: { total: 15, internalVisits: 0, externalVisits: 0, admissions: 0, appointments: 0, emergencies: 0, deaths: 0, injuries: 0, others: '' },
@@ -120,11 +120,10 @@ export const DailyFollowUpPanel: React.FC = () => {
             const supabase = getSupabaseClient();
             if (supabase) {
                 const { error } = await supabase.from('daily_care_logs').insert([{
-                    log_date: data.date,
+                    shift_date: data.date,
                     shift: data.shift,
-                    section: data.section,
-                    staff_name: data.supervisorName,
-                    notes: JSON.stringify(data.beneficiaryStats) // storing stats in notes for now
+                    recorded_by: data.supervisorName,
+                    notes: JSON.stringify({ section: data.section, stats: data.beneficiaryStats })
                 }]);
 
                 if (error) throw error;

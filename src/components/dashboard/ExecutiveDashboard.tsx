@@ -61,7 +61,7 @@ export const ExecutiveDashboard: React.FC = () => {
                     .select('*', { count: 'exact', head: true })
                     .not('incidents', 'is', null)
                     .neq('incidents', '')
-                    .gte('log_date', oneWeekAgo.toISOString().split('T')[0]);
+                    .gte('shift_date', oneWeekAgo.toISOString().split('T')[0]);
 
                 setKpis(prev => ({
                     ...prev,
@@ -78,7 +78,7 @@ export const ExecutiveDashboard: React.FC = () => {
                 const { data: logsToday } = await supabase
                     .from('daily_care_logs')
                     .select('beneficiary_id')
-                    .eq('log_date', today);
+                    .eq('shift_date', today);
 
                 // Use simple Set for unique count
                 const uniqueLoggedBeneficiaries = new Set(logsToday?.map(l => l.beneficiary_id)).size;
