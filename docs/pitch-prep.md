@@ -562,69 +562,150 @@ any migration that touches RLS policies on production data tables.
 
 ```
 I'm continuing the Basira pitch-preparation work, Session F — final
-build / deploy / smoke test pass. This session is OPTIONAL: only run if
-the pitch is going to demo from a deployed URL rather than the dev
-server. If pitching from `npm run dev` on Ahmad's laptop, skip Session F.
+build / deploy / smoke test pass. This session is OPTIONAL.
+
+PRIORITY 0 — confirm with Ahmad whether Session F is needed at all.
+If pitch demos from `npm run dev` on Ahmad's laptop (the path Sessions
+A–E targeted), STOP — Session F is unnecessary. Ask him explicitly,
+one question, two options ("dev server on laptop" vs "deployed URL").
+If dev-server: drop the session and verify the laptop path works
+(start Vite, open /dashboard, walk the 8 screens). If deployed URL:
+proceed with the rest below.
 
 READ FIRST in this exact order:
-1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log
-   (sessions A/B/C/D/E entries), demo path, carry-over table.
-   Aggregate is now: 51 routes at 0/0/0/0/0/0; 5 advisor warnings
-   (vs 90 pre-Session E); RLS enforcement on; demo auto-signin gates
-   to import.meta.env.DEV only.
+1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log,
+   demo path, carry-overs (now C1..C18). Session E ledger row should
+   show ✅ DONE with commits 45fbfa6, e6243ac, f62f754, 551db1d,
+   494d9cf and tag pitch-prep-session-E. End of Session E state:
+     · 51-route audit aggregate 0 / 0 / 0 / 0 / 0 / 0
+     · 5 Supabase advisor warnings (was 90 pre-Session E):
+         3 accepted (C3 Free-tier, C17 mv_in_api, C18 audit append)
+         2 categories — auth_leaked_password_protection × 1,
+         materialized_view_in_api × 2 — both intentional.
+     · 258 RLS policies on `authenticated`, 0 on `public` (anon
+       blocked). Demo signs in invisibly as demo@basira.local
+       (app_metadata.role=director) under import.meta.env.DEV.
 2. C:/dev/basira/CLAUDE.md
-3. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md
-4. git log --oneline -10 v2; HEAD must be at or after
-   pitch-prep-session-E.
-5. git status — must be clean.
+3. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md — note
+   feedback_supabase_auth_user_insert_required_fields.md +
+   feedback_edit_requires_prior_read.md (both 2026-05-08).
+4. git log --oneline -10 v2; HEAD must be at or after tag
+   pitch-prep-session-E. git status must be clean.
 
-INVOKE skills:
-- basira-dev (mandatory wrong-codebase guard)
-- challenge-protocol
-- vercel:deployments-cicd (if deploying to Vercel)
+INVOKE skills at session start:
+- basira-dev — mandatory wrong-codebase guard.
+- challenge-protocol — adversarial intake.
+- vercel:deployments-cicd — when deploying.
+- vercel:env — when configuring env vars.
 
-SESSION F GOAL: Produce a pitch-ready production build, optionally
-deploy it, and smoke-test the demo path on the deployed surface.
+SESSION F GOAL: produce a pitch-ready production build of v2,
+deploy it (if Ahmad confirmed Priority 0), and verify the demo path
+on the deployed surface end-to-end.
 
-PRIORITY 1 — Production build verification:
-  a) npm run build (Vite) — confirm 0 errors. Capture bundle size.
-  b) npm run preview — verify build serves correctly on a different
-     port (e.g. 4173). The DEBUG ROLE SWITCHER must be GONE in this
-     build (gated to import.meta.env.DEV).
-  c) WARNING: `AuthContext` DEV demo auto-signin will not run in a
-     production build. The pitch-day path on a deployed URL will be
-     UNAUTHENTICATED unless we sign in via the login screen. Two
-     options to decide:
-      i.  Visit /login, enter demo@basira.local + demo-pitch-2026.
-          Then RLS resolves correctly. (Manual step at pitch start.)
-      ii. Add a tiny `?as=demo` URL flag that triggers the same
-          auto-signin in production (gated on a separate flag, not
-          DEV). Slightly more code; convenient.
-     ASK Ahmad which.
+PRIORITY 1 — Production build verification (always run):
+  a) npm run build (Vite). Expect 0 errors. Record bundle size and
+     the largest 3 chunks (`du -sh dist/assets/* | sort -h | tail -3`).
+     If gzipped JS > 2 MB total, flag — likely a regression.
+  b) npm run preview (port 4173). Confirm:
+       · DEBUG ROLE SWITCHER is GONE (gated to import.meta.env.DEV).
+       · No DEV demo auto-signin attempt in the network tab — there
+         must be NO call to /auth/v1/token with grant_type=password
+         on first load (the signInWithPassword branch is dev-only).
+       · /dashboard renders the bilingual «لوحة القيادة التنفيذية
+         (Executive Dashboard)» heading.
+  c) Auto-signin gap on production builds — the live pitch from a
+     deployed URL will be UNAUTHENTICATED on first load. RLS will
+     deny every supabase read, and demo screens will fall back to
+     in-memory data only (still rendered, but / handover loses its
+     seeded supabase rows). Two options — ASK Ahmad which:
+       i.  Manual: open /login → demo@basira.local / demo-pitch-2026
+           at the start of the demo. RLS resolves correctly.
+           Pro: zero new code. Con: visible login step at pitch.
+       ii. URL flag: extend AuthContext.tsx so that when the URL has
+           `?as=demo` AND no session, signInWithPassword fires the
+           same way DEV does. Production-safe (no creds in code path
+           unless flag set). ~10 lines + matches Session E pattern.
+           Pro: invisible demo. Con: queryParam in pitch URL bar.
+     Whichever Ahmad picks, the credentials are in
+     `session_e_demo_auth_bridge_and_role_helper`: don't change them.
 
-PRIORITY 2 — Deploy (only if Ahmad confirms a deployed pitch):
-  a) Vercel deploy to a preview URL.
-  b) Configure env vars (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
-     in Vercel project settings.
-  c) Smoke-test the deployed URL on the 8-screen demo path.
-  d) Re-run scripts/route-audit.mjs against the deployed URL —
-     confirm 0/0/0/0/0/0 holds.
+PRIORITY 2 — Deploy to Vercel (only if Priority 0 confirmed deploy):
+  a) Check existing Vercel project: GoTrue logs (Session E retrieval)
+     show requests from
+     `beneficiary-system-clean-back-ahmed-abdullah-alshehris-projects
+     .vercel.app`. Use `vercel projects list` to confirm. If the
+     project exists, deploy a new preview from v2 — don't replace
+     the existing project unless Ahmad asks.
+  b) Required env vars (Production scope):
+       · VITE_SUPABASE_URL=https://ruesovrbhcjphmfdcpsa.supabase.co
+       · VITE_SUPABASE_ANON_KEY=<anon> (publishable key, not
+         service-role — supabase MCP tool list_projects shows the
+         publishable key safely).
+     If GEMINI_API_KEY is set: confirm with Ahmad before promoting
+     to production scope (vs preview only).
+  c) After deploy completes, capture the preview URL.
+  d) HALT if any of:
+       · Build fails on Vercel but passes locally → likely env-var
+         missing or node-version mismatch.
+       · Deploy URL returns 401/403 on /dashboard → Supabase URL or
+         anon key wrong in Vercel env.
+       · /dashboard renders but bilingual heading absent → wrong
+         build / wrong branch deployed.
 
-PRIORITY 3 — Pitch-day playbook (one page, append to docs/):
-  a) URL to demo from (deployed vs dev server)
-  b) Login credentials if needed
-  c) The 8-screen click order
-  d) Failure modes + recovery (e.g., supabase outage → demo data
-     fallback still serves; auth fail → /login with demo creds)
-  e) C3 — Studio dashboard handling (skip Studio in pitch, or accept
-     the Free-tier auth_leaked_password_protection warning)
+PRIORITY 3 — Verify the deployed URL (always run if a URL exists):
+  a) basira-ui-verifier subagent for the codebase signature.
+  b) Re-run scripts/route-audit.mjs against the deployed URL:
+       BASE_URL=<deploy-url> node scripts/route-audit.mjs
+     Aggregate must match dev: 0 / 0 / 0 / 0 / 0 / 0 across 51 routes.
+     If a regression appears, fix or rollback (vercel rollback)
+     before claiming Session F done.
+  c) Manual Playwright walk of the 11-screen demo path (same script
+     I used at end of Session E):
+       /, /dashboard, /empowerment, /empowerment/dignity/172,
+       /family-portal, /smart-alerts, /legal-shield, /quality/manual,
+       /sroi, /beneficiaries-list, /handover.
+     Confirm seeded shift_handover_items title «متابعة علامات الجفاف
+     لدى المستفيد محمد (172)» appears on /handover — that's the
+     end-to-end RLS proof. If it's absent and the screen is empty,
+     it means the deployed user isn't authenticated; check the
+     Priority 1c decision was actually shipped.
 
-Step N — Session-end protocol from docs/pitch-prep.md. Tag
-pitch-prep-session-F. Pitch is now ready.
+PRIORITY 4 — Pitch-day playbook artifact `docs/pitch-day-playbook.md`:
+  Tight one-pager. Sections:
+  · `## Demo URL` — the preview URL or laptop URL.
+  · `## Sign-in step` — credentials + which screen, if not auto.
+  · `## The 8-screen click order` — copied from §"Demo path" above.
+  · `## Failure modes + recovery` — for each, name the symptom in
+    one line and the next click:
+      - Supabase outage → demo data still serves (Sessions B/C
+        flag pattern). Continue to next screen.
+      - Auth fails → /login + creds, then back to /dashboard.
+      - Wrong codebase loaded → STOP, restart from `/c/dev/basira`.
+      - One screen blank → switch to in-memory backup screen
+        (which one?).
+  · `## What NOT to show` — Supabase Studio (C3 leaked-password
+    warning visible on Free tier; pitch options A/B/C documented
+    in carry-over C3). Skip Studio entirely; the advisor view is
+    optional, not required.
+  · `## Accepted advisor warnings` — 5 total: list each with C-id
+    so Ahmad has a one-line answer if reviewer asks.
 
-Adversarial defaults ON. No sycophancy. Full authority to commit,
-push, tag, deploy via Vercel CLI — but ASK Ahmad before any
-production-tier auth or env-var change that requires Pro upgrade.
+PRIORITY 5 — Session-end protocol from docs/pitch-prep.md. Tag
+pitch-prep-session-F. Update Session F ledger row + a small Decisions
+log entry capturing Priority 0 outcome and Priority 1c choice.
+
+Adversarial defaults ON. No sycophancy. Engineered intake before raw
+execution. Full authority to commit, push, tag, deploy via Vercel
+CLI — but ASK Ahmad before:
+  · Any production-tier auth toggle (e.g. leaked-password) that
+    requires Pro upgrade ($25/mo).
+  · Promoting a Vercel preview to production (`vercel --prod`) vs
+    just generating a preview URL.
+  · Adding new env vars at Production scope.
+  · Changing the demo credentials or `staff` row.
+
+Skip Session F entirely if Ahmad confirms in Priority 0 that the
+pitch demos from `npm run dev`. Pitch is already ready in that case.
 ```
 
 ---
