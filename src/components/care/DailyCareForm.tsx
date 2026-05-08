@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { getSupabaseClient } from '../../hooks/queries';
+import { useAuth } from '../../context/AuthContext';
 import {
     Save,
     AlertCircle,
@@ -17,6 +18,7 @@ interface DailyCareFormProps {
 }
 
 export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, beneficiaryId, onSuccess }) => {
+    const { user } = useAuth();
     const [saving, setSaving] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [error, setError] = useState('');
@@ -64,12 +66,20 @@ export const DailyCareForm: React.FC<DailyCareFormProps> = ({ beneficiaryName, b
         setSuccessMessage('');
 
         try {
-            // Prepare payload with corrected types
+            // Live `daily_care_logs` schema: shift_date (DATE), recorded_by (NOT NULL).
+            // Session E migration extended it with weight, mobility_today,
+            // requires_followup, log_time. Resolve recorded_by from the auth user;
+            // fall back to a placeholder for demo / unauthenticated saves.
+            const recordedBy =
+                (user?.user_metadata as { full_name?: string } | undefined)?.full_name
+                ?? user?.email
+                ?? 'سجل غير معرّف';
+
             const payload = {
                 beneficiary_id: beneficiaryId,
-                recorded_by: null, // Typically from auth context, can be nullable if RLS allows/defaults
+                recorded_by: recordedBy,
                 shift: formData.shift,
-                log_date: new Date().toISOString().split('T')[0],
+                shift_date: new Date().toISOString().split('T')[0],
                 log_time: new Date().toLocaleTimeString('en-GB'), // HH:MM:SS
 
                 temperature: formData.temperature ? parseFloat(formData.temperature) : null,
