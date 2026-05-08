@@ -47,21 +47,32 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 
 ---
 
-## Demo path (hypothesis — confirm in Session B)
+## Demo path (validated 2026-04-27 — source: `wiki/projects/basira.md`)
 
-Derived from briefing artifacts (`session_2026-04-28_*` memory + briefing PowerPoint title `إيجاز معالي نائب الوزير - بصيرة.pptx`):
+The 8-screen path the VM-demo and narration video are aligned to:
 
-1. `/system-entry` → splash
-2. `/dashboard` → big-picture (executive measurement KPIs, "مركز التأهيل الشامل بالباحة" + ministry subtitle)
-3. `/beneficiaries` → select **Karama (أبو سعد)** beneficiary
-4. **DignityProfile / cup-of-water goal** → `/empowerment` or `/empowerment/dignity/:beneficiaryId`
-5. **7 AI engines** → `/indicators` (SmartIndicatorsHub) or specific (`/indicators/behavioral`, `/indicators/early-warning`, etc.)
-6. **Legal Shield** → `/legal-shield`
-7. **Director approval / leadership-compass** → `/leadership-compass`
-8. **SROI summary** → `/sroi` (1.80:1 canonical ratio)
-9. **Export demo** → `/beneficiaries-list` → click "Excel" or "طباعة"
+| # | Route | Demo concept | Notes |
+|---|---|---|---|
+| 1 | `/` | Welcome / hero landing | Pillars + 4 stat cards |
+| 2 | `/dashboard` | Big-picture executive view | "مركز التأهيل الشامل بالباحة" + ministry subtitle |
+| 3 | `/empowerment` | Click **أبو سعد** (beneficiary id `172`) | Karama demo profile, cup-of-water SMART goal |
+| 4 | `/family-portal` | Family engagement / `familyEngagementService` | 4-factor 0-100 score, 50% intervention threshold |
+| 5 | `/alerts` (= `/smart-alerts`) | IoT vitals → SmartAlertsPanel | response-speed capture from `useVitalsAlertsStore` |
+| 6 | `/legal-shield` | 4 compliance pillars + cert-issuance + audit trail | route shipped 2026-04-22 |
+| 7 | `/quality/manual` | 132 documented operations | (127 → 132 with 5 supervisory-form-derived ops) |
+| 8 | `/sroi` | 1:4.2 SROI (NEF/SSE methodology) | deadweight 25% / attribution 30% / displacement 5% |
 
-**Action item Session B:** Confirm with Ahmad which 8-12 screens are actually in the deck/script. Until confirmed, audit all 9 above.
+**Plus** export demo on `/beneficiaries-list` (click "Excel" or "طباعة" — both verified working in Session A).
+
+### Stale references — do NOT fix to match
+
+The basira hub explicitly warns that the `basira-dev` skill UI signature ("light theme", "Beneficiary System Clean Backup" badge, "300-px sidebar", "10-item flat governance list") is **stale**. Current UI (v2) is the source of truth. Verifier complaints about that badge or sidebar layout are **stale spec, not code bug** — do not "fix" the code.
+
+Per the basira hub: "Current UI signature (as of 2026-04-22, v2) is dark-by-default, persuasive landing page with hero + 4 stat cards + 5 pillars, 320-px sidebar with 9 sections (الرئيسية · الخدمات الطبية · الخدمات الاجتماعية · الحوكمة والجودة · العمليات · الذكاء والتنبؤ · التقارير · القيادة الاستراتيجيّة · الإدارة)." — Session A's verifier observed exactly this 9-section sidebar.
+
+### Demo data anchor
+
+Beneficiary id `172` = `MOCK_DIGNITY_PROFILES[1]` = أبو سعد / محمد. Cup-of-water SMART goal lives on this profile. Don't break the seeded ID.
 
 ---
 
@@ -77,14 +88,45 @@ Derived from briefing artifacts (`session_2026-04-28_*` memory + briefing PowerP
 
 ---
 
-## Known-issue routes (audit pending)
+## Known-issue routes (per `docs/pitch-prep-route-audit.md` 2026-05-08)
 
-- **3 explicit `قريباً` placeholders** worth checking if on demo path:
-  - `AssetRegistry.tsx:320` (`/operations/assets`, `/assets`)
-  - `ClothingManagementPanel.tsx:421-422` (`/clothing`)
-  - `LeadershipCompass.tsx:126` (`/leadership-compass` — **likely on demo path**)
-- **`Discover.tsx:146`** placeholder `alert()` admitting it's a stub — within `/leadership-compass` Discover tab. Replace with toast or wire to decisions tab.
-- **All other 100+ routes:** unaudited.
+Automated 51-route Playwright sweep at end of Session A. **0 white-on-white, 0 English fragments, 0 empty buttons** across all 51 — Session A's surface fixes held everywhere. **39 routes are density-0 clean.** 12 routes flagged for console errors, all of the same family (schema drift — code references tables that don't exist in the live DB, same root cause as Session A's `audit_logs` bug):
+
+| Route | Density | Errors | Diagnosis |
+|---|---|---|---|
+| `/handover` | 18 | 6 | Code queries `public.shift_handover_items`; live DB suggests `public.san_martin_items` (rename or migration drift) |
+| `/empowerment/dignity/172` | 12 → **fixed in Session A bonus** | 4 | `getPreferences` used `.single()` when 0 rows; switched to `.maybeSingle()` |
+| `/basira` (Executive Dashboard alt) | 12 | 4 × 400 | Unknown table — Session B investigates |
+| `/overview` (Cross-Module Dashboard) | 12 | 4 × 404 | Missing tables |
+| `/ipc` | 12 | 4 × 404 | Missing tables |
+| `/integrated-reports` | 12 | 4 × 404 | Missing tables |
+| `/indicators/cost` | 6 | 2 × 404 | Missing tables |
+| `/catering` | 6 | 2 × 404 | Missing tables |
+| `/operations` | 6 | 2 × 404 | Missing tables |
+| `/admin/audit-logs` | 6 | 2 × 400 | Likely SELECT side of audit_logs (Session A fixed the INSERT side) |
+| `/indicators/early-warning` | 3 | 1 × 404 | Missing table |
+| `/indicators/iso` | 3 | 1 × 404 | Missing table |
+
+**Demo path diagnosis after audit:** 11/12 demo-path routes density-0. Only `/empowerment/dignity/172` had errors → fixed in Session A bonus pass (commit see below).
+
+**3 explicit `قريباً` placeholders** (still unfixed but now scoped):
+- `AssetRegistry.tsx:320` (`/operations/assets`)
+- `ClothingManagementPanel.tsx:421-422` (`/clothing`)
+- `LeadershipCompass.tsx:126` (`/leadership-compass`)
+
+**`Discover.tsx:146`** placeholder `alert()` — `/leadership-compass` Discover tab.
+
+## Schema-drift sweep — Session B priority
+
+Audit reveals a *systemic pattern*. Session A fixed `audit_logs`; the audit shows the same drift on at least 8 other tables/services. Recommended Session B approach:
+
+1. For each error route, identify which Supabase query is failing.
+2. Cross-reference table names against `information_schema.tables` (live DB).
+3. For "table doesn't exist" — either (a) add the table via migration, (b) rename the code-side query to match the live table, or (c) gracefully fall back to local mock data via `useLocalDataStore`.
+4. For "0 rows returned with .single()" — switch to `.maybeSingle()` (the empowerment fix is the model — single-line change).
+5. Re-run `node scripts/route-audit.mjs` after each batch; density should monotonically drop.
+
+The goal is **0 console errors on demo-path routes** + **<5 errors total across all 51**.
 
 ---
 
@@ -97,8 +139,9 @@ Derived from briefing artifacts (`session_2026-04-28_*` memory + briefing PowerP
 | C3 | `auth_leaked_password_protection` toggle OFF | Supabase dashboard, 1 click | Ahmad does this directly |
 | C4 | GitHub MCP plugin OAuth needs re-auth | MCP setting | when needed |
 | C5 | `multiple_permissive_policies` × 24 on `catering_suppliers` | DB consolidation, 10 min | E |
-| C6 | Verifier flagged missing "Beneficiary System Clean Backup" badge — was it removed intentionally? | Decision needed | B |
+| ~~C6~~ | ~~Missing "Beneficiary System Clean Backup" badge~~ | **RESOLVED** — basira hub confirms the verifier reference is stale (Session A finding). Do not fix. | — |
 | C7 | Heading `لوحة القياس التنفيذية` ("القياس" = measurement) — is this intended? | Decision needed | B |
+| ~~C8~~ | ~~Supabase migration 024~~ | **RESOLVED** — `list_migrations` confirms `chapters_2_3_4_6_compass` (20260228060420) applied. Plus 4× 2026-05-08 migrations (grc/essential/phantom/permissive_rls). Compass runs on real schema. | — |
 
 ---
 
@@ -169,7 +212,15 @@ INVOKE skills at session start:
 - hrsd-brand-identity
 - challenge-protocol
 
-SESSION B GOAL: Demo-path bulletproofing.
+SESSION B GOAL: Demo-path bulletproofing + schema-drift sweep.
+
+The route-audit (docs/pitch-prep-route-audit.md, 2026-05-08T05-13)
+showed 11/12 demo-path routes are already density-0. The 12th
+(/empowerment/dignity/172) was fixed in Session A bonus (commit
+on top of pitch-prep-session-A tag). The remaining 36 console
+errors across 12 non-demo routes are all of the same schema-drift
+family. Use the playbook in pitch-prep.md §"Schema-drift sweep"
+to address them after demo-path verification.
 
 Step 1 — Confirm with me which 8-12 screens are the actual pitch demo
 flow. Don't audit yet. The hypothesis in pitch-prep.md §"Demo path"
@@ -209,7 +260,64 @@ demo path scope before starting Step 2.
 
 ### Session C opening prompt
 
-*(written at the end of Session B)*
+```
+I'm continuing the Basira pitch-preparation work, Session C — breadth sweep.
+
+READ FIRST in this exact order:
+1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log, demo path
+2. C:/dev/basira/docs/pitch-prep-route-audit.md — 51-route automated
+   audit generated by scripts/route-audit.mjs at end of Session A
+   (or freshly re-run; see Step 1 below)
+3. C:/dev/basira/CLAUDE.md
+4. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md — note the four
+   2026-05-08 feedback files
+5. git log --oneline -10 v2; confirm HEAD is at or after pitch-prep-session-B
+
+INVOKE skills:
+- basira-dev
+- hrsd-brand-identity
+- challenge-protocol
+
+SESSION C GOAL: Reduce route-audit issue density to ~0 across non-demo
+routes (demo routes were handled in Session B).
+
+Step 1 — Re-run the audit if Session B touched any UI code:
+  cd /c/dev/basira && npm run dev (background) ; sleep 8 ;
+  node scripts/route-audit.mjs
+  Inspect docs/pitch-prep-route-audit.md head — confirm density
+  numbers match what Session B noted.
+
+Step 2 — Take the top 15 routes by density (excluding demo-path routes
+already addressed in Session B). For each:
+  a) Re-navigate via Playwright, wait ≥5s.
+  b) Cross-reference the route's affected components (App.tsx routing).
+  c) Apply targeted fixes — same playbook as Session A:
+     - white-on-white → swap to slate-900/text-white or hrsd-navy/text-white
+     - English fragments in body → translate to governmental Arabic
+       (defer to arabic-check skill if any string is uncertain)
+     - empty buttons → add aria-label or wire to a real handler;
+       if it's a known stub, hide behind a feature flag instead
+     - "قريباً" sections → if on a route reachable from the sidebar,
+       either remove the entry from the sidebar or replace the
+       placeholder card with a "post-pitch roadmap" panel that frames
+       the gap as roadmap, not absence
+  d) Lint+tsc clean before each commit.
+  e) One commit per route (or per logical batch of related routes).
+
+Step 3 — Re-run the audit. Each fixed route's density should drop
+toward 0. Update docs/pitch-prep-route-audit.md by re-running the
+script (it overwrites the file with a fresh timestamp).
+
+Step 4 — Update docs/pitch-prep.md "Known-clean routes" / "Known-issue
+routes" tables to reflect new state.
+
+Step 5 — At ~85% context, run session-end protocol. Commit, push,
+tag pitch-prep-session-C, update pitch-prep.md with Session D
+prompt-pit, push doc commit.
+
+Adversarial defaults ON. No sycophancy. Engineered intake. I have
+full authority to commit, push, tag, and edit code.
+```
 
 ### Session D opening prompt
 
@@ -246,5 +354,12 @@ demo path scope before starting Step 2.
 | Stale loading-screen colors | `index.html:62,74` | `#1a365d→#0f2744`, `#eab308` | `#0F3144→#0A2030`, `#FCB614` | `de116f1` |
 | Stale palette doc | `CLAUDE.md` | wrong palette | correct palette + tokens.ts pointer | `de116f1` |
 | audit_logs schema drift | `auditService.ts:97-117` | 16 cols, 5 mismatched names | 12 cols matching live DB, semantic data in `new_values` JSONB | `71f6563` |
+| empowermentService.getPreferences | `empowermentService.ts:363` | `.single()` errors PGRST116 on 0 rows | `.maybeSingle()` returns `data: null` cleanly | (Session A bonus, post-audit) |
 
 **Verifications run:** Playwright on `/dashboard`, `/emergency`, `/scheduling`, `/beneficiaries-list`, `/sroi`. lint 0 errors. tsc 0 errors. Excel + Print exports verified end-to-end (blob inspected, Arabic + structure confirmed). audit_logs 400s gone (was 2 per page-load on `/beneficiaries-list`, now 0).
+
+**Automated breadth audit:** `scripts/route-audit.mjs` ran 51 routes via headless Chromium at session end. Output in `docs/pitch-prep-route-audit.md`. Results:
+- 0 white-on-white, 0 English fragments, 0 empty buttons across all 51 routes — Session A surface fixes held everywhere.
+- 36 console errors concentrated on 12 routes; 39 routes density-0 clean.
+- All errors are schema-drift family — 7-8 services querying tables that don't exist in the live DB or using `.single()` on missing rows. Same root cause as `audit_logs`.
+- Demo path: 11/12 routes density-0 after the empowerment bonus fix.

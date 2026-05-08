@@ -360,7 +360,7 @@ export const empowermentService = {
                 .from('beneficiary_preferences')
                 .select('*')
                 .eq('beneficiary_id', beneficiaryId)
-                .single();
+                .maybeSingle();
 
             if (error) {
                 logError('getPreferences', error);
