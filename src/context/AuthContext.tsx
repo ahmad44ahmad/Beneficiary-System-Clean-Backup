@@ -7,6 +7,13 @@ import { supabase } from '../config/supabase';
 // It will NEVER activate as a silent fallback for auth failures.
 const EXPLICIT_DEMO_MODE = import.meta.env.VITE_APP_MODE === 'demo';
 
+// Session E: dev demo auto-signin so role-aware RLS works on the demo path.
+// Created by migration `session_e_demo_auth_bridge_and_role_helper`. Gated to
+// import.meta.env.DEV — never runs in production builds. The credentials are
+// not secrets; the user is purpose-built for the seeded demo data.
+const DEV_DEMO_EMAIL = 'demo@basira.local';
+const DEV_DEMO_PASSWORD = 'demo-pitch-2026';
+
 interface AuthContextType {
     user: User | null;
     session: Session | null;
@@ -80,9 +87,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setLoading(false);
         }, AUTH_TIMEOUT_MS);
 
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabase.auth.getSession().then(async ({ data: { session } }) => {
             if (didTimeout) return;
             clearTimeout(timeoutId);
+
+            // DEV demo auto-signin: if no session in dev, sign in invisibly as the
+            // seeded director so role-aware RLS resolves on the demo path.
+            if (!session && import.meta.env.DEV && supabase) {
+                try {
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: DEV_DEMO_EMAIL,
+                        password: DEV_DEMO_PASSWORD,
+                    });
+                    if (!error && data.session) session = data.session;
+                } catch (err) {
+                    console.warn('[Auth] DEV demo auto-signin failed; continuing unauthenticated', err);
+                }
+            }
+
             setSession(session);
             setUser(session?.user ?? null);
             setLoading(false);
