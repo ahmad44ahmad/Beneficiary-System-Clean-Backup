@@ -312,15 +312,16 @@ export const AssetRegistry: React.FC = () => {
                 )}
             </div>
 
-            {/* Add Modal Placeholder */}
+            {/* Add asset modal — implementation in progress, gated to roadmap framing */}
             {showAddModal && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-xl p-8 max-w-2xl w-full mx-4 shadow-2xl">
-                        <h2 className="text-xl font-bold mb-4">إضافة أصل جديد</h2>
-                        <p className="text-gray-500 mb-6">سيتم تفعيل هذه الميزة قريباً</p>
+                        <h2 className="text-xl font-bold text-[#0F3144] mb-4">إضافة أصل جديد</h2>
+                        <p className="text-hrsd-cool-gray mb-2">يَجري إعداد نموذج إضافة الأصول وفق منهجية الجرد المعتمدة في الوزارة.</p>
+                        <p className="text-hrsd-cool-gray mb-6 text-sm">في الوقت الحالي، تُضاف الأصول الجديدة عبر الإجراء المؤسسي الموثّق، ويُتاح هذا الإدخال المباشر في المرحلة القادمة من النشر.</p>
                         <button
                             onClick={() => setShowAddModal(false)}
-                            className="px-6 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                            className="px-6 py-2 bg-[#0F3144] text-white rounded-lg hover:bg-[#0F3144]/90"
                         >
                             إغلاق
                         </button>

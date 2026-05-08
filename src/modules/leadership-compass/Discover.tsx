@@ -4,6 +4,7 @@ import {
     SEED_DISCOVERIES, CONFIDENCE_LABELS, CONFIDENCE_TONES,
     STAGE_LABELS, type Discovery,
 } from './data/seed-discoveries';
+import { useToastStore } from '../../stores/useToastStore';
 
 /**
  * تبويب «اكتشف» — محرّك يُبرز تدخّلاتٍ تَستحقّ الدراسة للتعميم.
@@ -32,6 +33,7 @@ export const Discover: React.FC = () => {
 
 const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
     const conf = CONFIDENCE_TONES[discovery.confidence];
+    const showToast = useToastStore((s) => s.showToast);
 
     return (
         <article
@@ -143,7 +145,7 @@ const DiscoveryCard: React.FC<{ discovery: Discovery }> = ({ discovery }) => {
                         type="button"
                         className="px-3.5 py-2 rounded-lg text-[13px] font-bold text-white
                             bg-hrsd-teal hover:bg-hrsd-teal-dark flex items-center gap-1.5 transition-colors shadow-sm"
-                        onClick={() => alert(`فُتح قرارٌ جديدٌ لتجربة توسّعٍ: ${discovery.title}\n(في النسخة الحقيقيّة يُربط مع تبويب «القرارات»)`)}
+                        onClick={() => showToast(`أُضيف اقتراحُ التعميم إلى قائمة القرارات: ${discovery.title}`, 'success')}
                     >
                         اقتراحٌ للتعميم
                         <ArrowUpRight className="w-4 h-4" />

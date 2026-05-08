@@ -123,7 +123,7 @@ export const LeadershipCompass: React.FC = () => {
                             )}
                             {!tab.available && (
                                 <span className="text-[10px] font-semibold bg-slate-200 text-hrsd-cool-gray px-1.5 py-0.5 rounded">
-                                    قريباً
+                                    قيد الإعداد
                                 </span>
                             )}
                         </button>

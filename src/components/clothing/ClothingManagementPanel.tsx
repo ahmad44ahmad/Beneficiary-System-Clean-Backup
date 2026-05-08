@@ -412,14 +412,16 @@ export const ClothingManagementPanel: React.FC = () => {
                     </div>
                 )}
 
-                {/* Placeholder Tabs (Discard, Warehouse) */}
+                {/* Roadmap framing for sections still under preparation (Discard, Warehouse) */}
                 {['discard', 'warehouse'].includes(activeTab) && (
                     <div className="flex flex-col items-center justify-center py-16 px-4 bg-white rounded-xl border border-gray-100">
                         <div className="w-20 h-20 bg-[#FCB614]/10 rounded-full flex items-center justify-center mb-4">
                             <FileText className="w-10 h-10 text-[#FCB614]" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-400 mb-2">قريباً</h3>
-                        <p className="text-sm text-gray-400">سيتم إضافة هذا القسم قريباً</p>
+                        <h3 className="text-lg font-semibold text-[#0F3144] mb-2">قيد الإعداد</h3>
+                        <p className="text-sm text-hrsd-cool-gray text-center max-w-md">
+                            يَتم العمل على استكمال هذا القسم وفق خطة التطوير المعتمدة، وسيُتاح ضمن المرحلة القادمة من النشر.
+                        </p>
                     </div>
                 )}
 
