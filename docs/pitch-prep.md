@@ -2,7 +2,7 @@
 
 **Owner:** Ahmad Al-Shahri
 **Branch:** `v2`
-**Last session:** C — completed 2026-05-08, tag `pitch-prep-session-C`, HEAD `2aec740` (+ doc commit on top)
+**Last session:** D — completed 2026-05-08, tag `pitch-prep-session-D`, HEAD `8c14710` (+ doc commit on top)
 **Doc purpose:** Durable cross-session memory. Every session starts by reading this file. Every session ends by updating it.
 
 ---
@@ -26,7 +26,8 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 | A | Surface polish | Visible bugs (white-on-white, English fragments, schema drift), brand-token alignment | ✅ DONE 2026-05-08 | `pitch-prep-session-A` | `de116f1`, `71f6563` |
 | B | Demo-path bulletproofing + schema-drift sweep | Manual walkthrough of 8 demo screens; eliminate 36 console errors on 12 schema-drift routes | ✅ DONE 2026-05-08 | `pitch-prep-session-B` | `0a31262`, `3d41977`, `e5e9032`, `e8c2dbd`, `cc76e77` |
 | C | Visual + content polish | /handover navy palette, DignityFile brand swap (#DC2626 → #0F3144), governmental framing for residual placeholders | ✅ DONE 2026-05-08 | `pitch-prep-session-C` | `d8254cf`, `7bf9c2d`, `2aec740` |
-| D | Brand + Arabic register | HRSD typography compliance, governmental-Arabic check across user-visible strings, RTL/logo audit | NEXT | — | — |
+| D | Brand + Arabic register | C7 resolved (القياس → القيادة); arabic-check sweep on Session B/C strings; first-person fix on Karama emotional fields | ✅ DONE 2026-05-08 | `pitch-prep-session-D` | `fa2d3cc`, `8c14710` |
+| E | Backend hardening | Session E migrations (provision missing tables, flip *Available flags); replace 65× USING(true) RLS with auth-aware; Supabase advisor cleanup | NEXT | — | — |
 | D | Brand + Arabic register | HRSD typography compliance, governmental-Arabic check across user-visible strings, RTL/logo audit | LATER | — | — |
 | E | Backend hardening | Replace 65× `USING(true)` RLS with auth-aware policies; schema-drift sweep (auditService had one — find others); advisor count → ~0 | LATER | — | — |
 | F | *(Optional)* Build + deploy + smoke test | Production build, optional Vercel deploy, final smoke test | OPTIONAL | — | — |
@@ -36,6 +37,13 @@ A pitch-preparation sweep of Basira before the ministry demo. Multi-session beca
 ---
 
 ## Decisions log (do NOT re-litigate without a reason)
+
+### 2026-05-08 (Session D)
+
+1. **Dashboard heading is «لوحة القيادة التنفيذية», not «القياس».** Ahmad's call. Bilingual «Executive Dashboard» suffix and the earlier ExecutiveReport.tsx wording both used القيادة; «القياس» on Dashboard.tsx was drift. Fixed in two places (Dashboard.tsx:62 and DashboardPanel.tsx:38 «لوحة القياس والتحكم» → «لوحة القيادة والتحكم»).
+2. **`dark:bg-white` residue is deferred to Session E, not addressed in Session D.** Ahmad's call. ~30 instances across Skeleton, Modal, MainLayout, leadership-compass, clothing modules. Pitch is light-only so this is dormant tech debt; flipping to `dark:bg-slate-800` or stripping the prefix entirely both belong in a deliberate cleanup pass alongside the Session E migrations.
+3. **MHRSD agency rename («وكالة التأهيل والتوجيه الاجتماعي» → «وكالة تجربة المستفيد») and «الخدمات الطبية» → «سلامة المستفيدين» NOT applied this session.** The arabic-check skill flags both as ministry-restructure terminology drift, but they touch 20+ files and may not apply at center-operational level (some refer to Al-Baha center departments, not the wakalah). Filed as carry-overs C15 and C16 — needs Ahmad's call before any project-wide replace.
+4. **Karama emotional fields rewritten in first-person, not third.** The form labels are «ما يسعدني / ما يزعجني / أحلامي وتطلعاتي» — first-person from the beneficiary. The Session B demo data was third-person about him («حوله / جهده / روتينه»). Mismatch read as either a staff note pasted into a self-description field or as ghost-writer break. Fixed: now reads as the beneficiary's voice, matching the labels. `أسلوب التواصل المفضل` stays third-person — it's a directive to staff.
 
 ### 2026-05-08 (Session C)
 
@@ -163,14 +171,16 @@ Recommend handling in Session C as part of the breadth pass — either remove th
 | C4 | GitHub MCP plugin OAuth needs re-auth | MCP setting | when needed |
 | C5 | `multiple_permissive_policies` × 24 on `catering_suppliers` | DB consolidation, 10 min | E |
 | ~~C6~~ | ~~Missing "Beneficiary System Clean Backup" badge~~ | **RESOLVED** — basira hub confirms the verifier reference is stale (Session A finding). Do not fix. | — |
-| C7 | Heading `لوحة القياس التنفيذية` ("القياس" = measurement) — is this intended? | Decision needed | D — confirmed renders; needs Ahmad's call before pitch |
+| ~~C7~~ | ~~Heading `لوحة القياس التنفيذية`~~ | **RESOLVED Session D** — Ahmad chose «القيادة». Renamed in Dashboard.tsx + DashboardPanel.tsx. Commit `fa2d3cc`. | — |
 | ~~C8~~ | ~~Supabase migration 024~~ | **RESOLVED** — `list_migrations` confirms `chapters_2_3_4_6_compass` (20260228060420) applied. Plus 4× 2026-05-08 migrations (grc/essential/phantom/permissive_rls). Compass runs on real schema. | — |
 | C9 | DailyCareForm INSERT payload uses columns that don't exist in live `daily_care_logs` (log_date / log_time / weight / mobility_today / staff_name / section) | Form vs schema reconciliation | E |
 | ~~C10~~ | ~~`#DC2626` red in DignityFile~~ | **RESOLVED Session C** — flat replace to `#0F3144` (navy) across 17 instances. Commit `7bf9c2d`. | — |
 | ~~C11~~ | ~~`text-white` on white in ShiftHandover~~ | **RESOLVED Session C** — wrapper to `bg-hrsd-navy`, stat cards to `bg-white/10`, form inputs to `text-hrsd-navy`. Commit `d8254cf`. | — |
 | C12 | Demo-data flag pattern (`*Available = false`) used in 4 services + 3 components must be flipped/deleted after Session E migrations land | Cleanup after migrations | E |
-| C13 | `dark:bg-white` rules in MainLayout / Card / Trajectories. Dormant in v2 (light mode default). Will surface as white-on-white if dark mode is ever enabled. Session A fixed three of these but the audit shows ≥1 remaining `dark:bg-white` on the dashboard layout flex parent. | Dark-mode brand sweep | D |
+| C13 | `dark:bg-white` rules in MainLayout / Card / Trajectories. Dormant in v2 (light mode default). Will surface as white-on-white if dark mode is ever enabled. Session D inventory: ~30 instances across Skeleton, Modal, MainLayout, leadership-compass, clothing modules. | Dark-mode brand sweep | E (Ahmad deferred 2026-05-08) |
 | C14 | DEBUG ROLE SWITCHER widget visible in dev mode; gated to `import.meta.env.DEV`. Decision before pitch: keep dev server (widget stays) or run prod build (widget hidden). Default chosen: keep dev. | Pitch logistics | Pitch-day decision |
+| C15 | `«وكالة التأهيل والتوجيه الاجتماعي»` appears in 6 files (`types/clothing.ts`, `useViewModeStore.ts`, `ClothingManagementPanel.tsx`, three leadership-compass seed files). arabic-check skill flags this as ministry-restructure drift; new name per skill is `«وكالة تجربة المستفيد»`. Needs Ahmad's confirmation before project-wide replace — some uses may reference the historical wakalah name in source quotes, not the current entity. | Naming review | E |
+| C16 | `«الخدمات الطبية»` appears in ~10 files (sidebar, dashboard, secretariat forms, ISO audit clauses, organization data). arabic-check skill flags this as ministry-restructure drift; new name per skill is `«سلامة المستفيدين»`. Most instances refer to the center's medical-services department (not the wakalah), so this may be correct as-is. Needs Ahmad's confirmation. | Naming review | E |
 
 ---
 
@@ -448,11 +458,94 @@ asking — but ASK Ahmad before changing user-visible Arabic strings
 
 ### Session E opening prompt
 
-*(written at the end of Session D)*
+```
+I'm continuing the Basira pitch-preparation work, Session E — backend
+hardening + final cleanup.
 
-### Session E opening prompt
+READ FIRST in this exact order:
+1. C:/dev/basira/docs/pitch-prep.md — full plan, decisions log
+   (sessions A/B/C/D entries), demo path, carry-over table.
+2. C:/dev/basira/docs/pitch-prep-route-audit.md — current state.
+   Aggregate has been at 0/0/0/0 since end of Session B.
+3. C:/dev/basira/CLAUDE.md
+4. ~/.claude/projects/C--Users-aass1/memory/MEMORY.md — note the four
+   2026-05-08 feedback files + feedback_check_fk_types_before_ddl.md
+   (CRITICAL for any DDL work).
+5. git log --oneline -15 v2; HEAD must be at or after
+   pitch-prep-session-D (commit 8c14710 + doc commit on top).
+6. git status — must be clean.
 
-*(written at the end of Session D)*
+INVOKE skills:
+- basira-dev
+- challenge-protocol
+- supabase:supabase (loads MCP best practices for Postgres + RLS)
+
+SESSION E GOAL: Provision the backend so the Session B/C demo-data
+flags can be retired, and harden security before the pitch reaches
+the Supabase Studio reviewer.
+
+Before any DDL: run information_schema.columns query for the FK target
+column types per feedback_check_fk_types_before_ddl. Specifically,
+beneficiaries.id is TEXT in this DB, not UUID — repo migrations may
+say otherwise but the live DB is the source of truth.
+
+PRIORITY 1 — Provision missing tables. Each ships with the demo data
+contract that the *Available flags rely on:
+  a) shift_handover_items — schema per src/types/shift.ts; service
+     contract in shiftService.ts. Create migration, then flip
+     `shiftItemsTableAvailable` from false → null (lazy probe).
+  b) ipc_inspections, ipc_incidents, ipc_checklist_templates,
+     immunizations, locations — schema per src/services/ipcService.ts.
+     Create migration, flip `ipcTablesAvailable`.
+  c) mv_wellbeing_index, mv_wellbeing_stats (materialized views) and
+     v_early_warning_report (regular view) — definitions per
+     wellbeingService.ts. After migration, flip
+     `wellbeingViewsAvailable`.
+  d) cost_tracking, quality_checks, om_waste_records, risk_score_log,
+     benchmark_standards, iso_compliance_checklist — schema per the
+     consuming components. Flip the corresponding inline guards
+     (CostPerBeneficiary, useCatering.fetchChecks,
+     OperationsDashboard.wasteThisMonth, indicatorsRepository).
+  e) C9: DailyCareForm INSERT payload reconciliation. Live
+     daily_care_logs has shift_date / recorded_by; the form sends
+     log_date / log_time / weight / mobility_today / staff_name /
+     section. Decide per column: extend the table, or trim the form.
+
+PRIORITY 2 — Real RLS. Carry-over C1: 65× `USING(true)` policies are
+permissive for pitch context. Replace with auth-aware policies:
+authenticated read on most tables; staff-role write on care/medical;
+director-role write on governance. Use the role taxonomy already in
+ProtectedRoute (director/admin/doctor/social_worker/specialist/
+secretary/nurse/staff).
+
+PRIORITY 3 — Supabase advisor cleanup:
+  a) C5 — `multiple_permissive_policies` × 24 on catering_suppliers.
+     Consolidate into single policies per role.
+  b) Check `mcp__plugin_supabase_supabase__get_advisors` for any new
+     warnings since Session A.
+
+PRIORITY 4 — Carry-overs C13/C15/C16. Ahmad-input questions:
+  - C13: dark:bg-white residue strategy (dark:slate-800 / strip prefix
+    / leave). Already deferred from Session D.
+  - C15: «وكالة التأهيل والتوجيه الاجتماعي» rename to
+    «وكالة تجربة المستفيد»? Some references are historical quotes.
+  - C16: «الخدمات الطبية» rename to «سلامة المستفيدين»? Most refer
+    to the center's department, not the wakalah.
+
+PRIORITY 5 (if budget allows) — C12 cleanup confirmation. After all
+*Available flags flip, sweep the codebase one more time for any
+hardcoded demo data that should now flow from real tables.
+
+Step N — Session-end protocol from docs/pitch-prep.md. Tag
+pitch-prep-session-E. Decide if Session F (build + deploy + smoke
+test) is needed before pitch.
+
+Adversarial defaults ON. No sycophancy. Engineered intake before raw
+execution. Full authority to commit, push, tag, edit code, AND
+apply Supabase migrations via MCP — but VERIFY column types in
+information_schema before every DDL, and ASK Ahmad before applying
+any migration that touches RLS policies on production data tables.
+```
 
 ---
 
@@ -540,3 +633,38 @@ asking — but ASK Ahmad before changing user-visible Arabic strings
 - lint + tsc clean after each commit.
 
 **No regressions on demo path.** The 8 demo screens + bonus all still render at 0 console errors with the Karama profile populated.
+
+---
+
+## Session D — completed work archive
+
+| Concern | File:line | Before | After | Commit |
+|---|---|---|---|---|
+| C7 — `لوحة القياس التنفيذية` on /dashboard heading | `pages/Dashboard.tsx:62` | `لوحة القياس التنفيذية (Executive Dashboard)` — Arabic «measurement» mismatched the bilingual «Executive» | `لوحة القيادة التنفيذية (Executive Dashboard)` — matches bilingual + ExecutiveReport.tsx wording | `fa2d3cc` |
+| C7 — companion sub-panel heading | `components/dashboard/DashboardPanel.tsx:38` | `لوحة القياس والتحكم` | `لوحة القيادة والتحكم` — governmental command-and-control idiom | `fa2d3cc` |
+| Karama profile first-person mismatch | `services/empowermentService.ts` DEMO_PREFERENCES['172'] | what_makes_me_happy / what_makes_me_upset / my_dreams written third-person about the beneficiary («حوله / جهده / روتينه اليومي») | Rewritten first-person to match form labels («ما يسعدني / ما يزعجني / أحلامي وتطلعاتي»). Tashkeel tightened on key nominals (الجلوسُ، سماعُ، وجودُ، الأصواتُ). أسلوب التواصل المفضل stays third-person — it's a directive to staff. | `8c14710` |
+
+### arabic-check sweep findings (Session B/C strings)
+
+Per the `arabic-check` skill rubric, Session B/C strings I added were reviewed:
+
+**✓ Compliant:**
+- `ClothingManagementPanel.tsx:423` — «يَتم العمل على استكمال هذا القسم وفق خطة التطوير المعتمدة، وسيُتاح ضمن المرحلة القادمة من النشر.» Governmental third-person passive (يَتم، سيُتاح). No hedging, no first-person plural.
+- `AssetRegistry.tsx:319-320` — «يَجري إعداد نموذج إضافة الأصول وفق منهجية الجرد المعتمدة في الوزارة.» + roadmap line. Institutional time-marker «في الوقت الحالي» is acceptable.
+- `Discover.tsx:148` — «أُضيف اقتراحُ التعميم إلى قائمة القرارات: <title>». Passive, concise.
+- `LeadershipCompass.tsx:126` — «قيد الإعداد». Governmental over the previous «قريباً».
+- `shiftService.ts` DEMO_SHIFT_ITEMS (4 items) — «يُعطى المستفيد ... دواء الضغط في الساعة العاشرة» etc. Passive, governmental.
+
+**⚠ Fixed:**
+- `empowermentService.ts` Karama emotional fields — first/third-person mismatch. Fixed in commit `8c14710`.
+
+**Out of scope this session (deferred to Session E):**
+- C15 — «وكالة التأهيل والتوجيه الاجتماعي» across 6 files. arabic-check flags as ministry-restructure terminology drift; new name «وكالة تجربة المستفيد». Some uses may be historical quotes — needs Ahmad's call.
+- C16 — «الخدمات الطبية» across 10+ files. arabic-check flags as drift; new name «سلامة المستفيدين». Most uses refer to center-level operational department, may be correct as-is — needs Ahmad's call.
+- Tashkeel completeness — most strings in the project use partial tashkeel (verbs only). Bringing the codebase to full vowel marking would be a separate scope decision; current density is consistent with surrounding files.
+
+**Verifications run:**
+- `/dashboard` re-rendered post-rename: heading reads «لوحة القيادة التنفيذية (Executive Dashboard)». 0 console errors.
+- `/empowerment/dignity/172` re-rendered post-fix: textarea values show first-person voice with tashkeel. 0 console errors.
+- `scripts/route-audit.mjs` re-run at session end: aggregate still **0 / 0 / 0 / 0 / 0 / 0** across all 51 routes — Session D edits held.
+- lint + tsc clean after each commit.
