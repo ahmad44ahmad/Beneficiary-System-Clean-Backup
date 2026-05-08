@@ -94,7 +94,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             // Demo auto-signin: fires in dev OR when the URL carries ?as=demo
             // (Session F flag for the deployed pitch URL). Signs in invisibly
             // as the seeded director so role-aware RLS resolves on the demo
-            // path. On success the ?as=demo param is dropped from the URL bar.
+            // path.
             const urlIsDemo = typeof window !== 'undefined'
                 && new URLSearchParams(window.location.search).get('as') === 'demo';
             if (!session && (import.meta.env.DEV || urlIsDemo) && supabase) {
@@ -103,17 +103,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                         email: DEV_DEMO_EMAIL,
                         password: DEV_DEMO_PASSWORD,
                     });
-                    if (!error && data.session) {
-                        session = data.session;
-                        if (urlIsDemo) {
-                            const u = new URL(window.location.href);
-                            u.searchParams.delete('as');
-                            window.history.replaceState({}, '', u.toString());
-                        }
-                    }
+                    if (!error && data.session) session = data.session;
                 } catch (err) {
                     console.warn('[Auth] demo auto-signin failed; continuing unauthenticated', err);
                 }
+            }
+            // Strip ?as=demo from the URL bar whenever the flag was used, so
+            // the address bar reads /dashboard at pitch time. Fires even if a
+            // session was already cached (signin block skipped).
+            if (urlIsDemo && typeof window !== 'undefined') {
+                const u = new URL(window.location.href);
+                u.searchParams.delete('as');
+                window.history.replaceState({}, '', u.toString());
             }
 
             setSession(session);

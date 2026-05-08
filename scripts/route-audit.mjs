@@ -8,16 +8,20 @@
  *
  * Output: docs/pitch-prep-route-audit.md (committed, used by Session C).
  *
- * Run from /c/dev/basira: `node scripts/route-audit.mjs`
+ * Run from /c/dev/basira:
+ *   node scripts/route-audit.mjs                        # against laptop dev (5175)
+ *   BASE_URL=https://<deploy-url> node scripts/route-audit.mjs  # against deployed URL
  *
- * Assumes dev server is up at http://localhost:5175.
+ * On a deployed URL the script visits /dashboard?as=demo first so the
+ * AuthContext URL-flag autosignin fires (Session F); subsequent route
+ * visits then land authenticated and RLS-protected reads succeed.
  */
 
 import { chromium } from 'playwright';
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const BASE = 'http://localhost:5175';
+const BASE = process.env.BASE_URL || 'http://localhost:5175';
 
 // Demo path (validated 2026-04-27) + module-representative routes.
 // First 8 are the demo path, in order. Rest are breadth coverage.
@@ -221,6 +225,13 @@ const ctx = await browser.newContext({
 });
 const page = await ctx.newPage();
 
+// Auth setup — visit /dashboard?as=demo first so the URL-flag autosignin
+// fires (Session F). After this the session is in localStorage and every
+// audited route lands authenticated.
+console.log(`Auth setup: ${BASE}/dashboard?as=demo`);
+await page.goto(BASE + '/dashboard?as=demo', { waitUntil: 'domcontentloaded', timeout: 20000 });
+await page.waitForTimeout(7000);
+
 const results = [];
 let i = 0;
 for (const r of ROUTES) {
@@ -287,7 +298,7 @@ const navFails = results.filter(r => r.navError).length;
 const noBody = results.filter(r => (r.audit?.bodyTextLen || 0) < 50).length;
 
 let md = `# Pitch-prep route audit — ${ts}\n\n`;
-md += `**Source:** \`scripts/route-audit.mjs\`. Generated headless via Playwright/Chromium against \`http://localhost:5175\`.\n\n`;
+md += `**Source:** \`scripts/route-audit.mjs\`. Generated headless via Playwright/Chromium against \`${BASE}\`.\n\n`;
 md += `**Routes scanned:** ${total}. **Demo path = first 12 entries** (per \`docs/pitch-prep.md\` §"Demo path").\n\n`;
 md += `## Aggregate counts\n\n`;
 md += `| Metric | Total |\n|---|---|\n`;
