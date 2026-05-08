@@ -91,17 +91,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             if (didTimeout) return;
             clearTimeout(timeoutId);
 
-            // DEV demo auto-signin: if no session in dev, sign in invisibly as the
-            // seeded director so role-aware RLS resolves on the demo path.
-            if (!session && import.meta.env.DEV && supabase) {
+            // Demo auto-signin: fires in dev OR when the URL carries ?as=demo
+            // (Session F flag for the deployed pitch URL). Signs in invisibly
+            // as the seeded director so role-aware RLS resolves on the demo
+            // path. On success the ?as=demo param is dropped from the URL bar.
+            const urlIsDemo = typeof window !== 'undefined'
+                && new URLSearchParams(window.location.search).get('as') === 'demo';
+            if (!session && (import.meta.env.DEV || urlIsDemo) && supabase) {
                 try {
                     const { data, error } = await supabase.auth.signInWithPassword({
                         email: DEV_DEMO_EMAIL,
                         password: DEV_DEMO_PASSWORD,
                     });
-                    if (!error && data.session) session = data.session;
+                    if (!error && data.session) {
+                        session = data.session;
+                        if (urlIsDemo) {
+                            const u = new URL(window.location.href);
+                            u.searchParams.delete('as');
+                            window.history.replaceState({}, '', u.toString());
+                        }
+                    }
                 } catch (err) {
-                    console.warn('[Auth] DEV demo auto-signin failed; continuing unauthenticated', err);
+                    console.warn('[Auth] demo auto-signin failed; continuing unauthenticated', err);
                 }
             }
 

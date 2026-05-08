@@ -103,3 +103,6 @@ skills-lock.json
 .vibe/
 .windsurf/
 .zencoder/
+
+.env*.local
+.env.*-pulled
