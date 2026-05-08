@@ -3,12 +3,18 @@
 
 import { supabase } from '../../config/supabase';
 
+// risk_score_log, benchmark_standards, iso_compliance_checklist are not yet
+// provisioned in the remote DB (Session E migration). Until then, return null
+// from the affected fetchers so callers fall back to demo data and we skip
+// the network round-trip on /indicators/early-warning + /indicators/iso.
+const indicatorViewsAvailable = false;
+
 export const indicatorsRepository = {
     /**
      * Fetch risk score log for Early Warning System
      */
     async fetchRiskScoreLog() {
-        if (!supabase) return null;
+        if (!supabase || !indicatorViewsAvailable) return null;
         const { data, error } = await supabase
             .from('risk_score_log')
             .select('*')
@@ -22,7 +28,7 @@ export const indicatorsRepository = {
      * Fetch benchmark standards
      */
     async fetchBenchmarkStandards() {
-        if (!supabase) return null;
+        if (!supabase || !indicatorViewsAvailable) return null;
         const { data, error } = await supabase
             .from('benchmark_standards')
             .select('*');
@@ -34,7 +40,7 @@ export const indicatorsRepository = {
      * Fetch ISO compliance checklist
      */
     async fetchISOComplianceChecklist() {
-        if (!supabase) return null;
+        if (!supabase || !indicatorViewsAvailable) return null;
         const { data, error } = await supabase
             .from('iso_compliance_checklist')
             .select('*')

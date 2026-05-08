@@ -143,7 +143,7 @@ export const AuditLogViewer: React.FC = () => {
             const { data, error } = await supabase
                 .from('audit_logs')
                 .select('*')
-                .order('timestamp', { ascending: false })
+                .order('created_at', { ascending: false })
                 .limit(500);
 
             if (error) {

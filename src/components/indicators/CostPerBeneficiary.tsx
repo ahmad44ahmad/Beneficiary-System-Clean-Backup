@@ -5,7 +5,6 @@ import {
     Users, Utensils, Zap, Droplets, Wrench, RefreshCw, Target,
     Shirt, Stethoscope, Bus, Package, Sparkles
 } from 'lucide-react';
-import { getSupabaseClient } from '../../hooks/queries';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, ReferenceLine } from 'recharts';
 
 const TARGET_DAILY_COST = 350;
@@ -54,27 +53,11 @@ export const CostPerBeneficiary: React.FC = () => {
     const [costData, setCostData] = useState<CostData[]>([]);
 
     useEffect(() => {
-        const fetchCosts = async () => {
-            setLoading(true);
-            const supabase = getSupabaseClient();
-            if (!supabase) {
-                setCostData(demoCostData);
-                setLoading(false);
-                return;
-            }
-            const { data, error } = await supabase
-                .from('cost_tracking')
-                .select('*')
-                .order('cost_month', { ascending: true });
-
-            if (error || !data || data.length === 0) {
-                setCostData(demoCostData);
-            } else {
-                setCostData(data);
-            }
-            setLoading(false);
-        };
-        fetchCosts();
+        // cost_tracking table is not yet provisioned in the remote DB (Session E
+        // migration). Until then we serve demoCostData and skip the network call
+        // to keep /indicators/cost console-clean.
+        setCostData(demoCostData);
+        setLoading(false);
     }, []);
 
     // Calculate monthly totals
