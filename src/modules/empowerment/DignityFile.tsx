@@ -46,10 +46,10 @@ const TagInput: React.FC<{
                 {value.map(tag => (
                     <span
                         key={tag}
-                        className="px-3 py-1 bg-[#DC2626]/10 text-[#DC2626] rounded-full text-sm flex items-center gap-1"
+                        className="px-3 py-1 bg-[#0F3144]/10 text-[#0F3144] rounded-full text-sm flex items-center gap-1"
                     >
                         {tag}
-                        <button onClick={() => removeTag(tag)} className="text-[#DC2626] hover:text-[#DC2626]">×</button>
+                        <button onClick={() => removeTag(tag)} className="text-[#0F3144] hover:text-[#0F3144]">×</button>
                     </span>
                 ))}
             </div>
@@ -60,7 +60,7 @@ const TagInput: React.FC<{
                     <button
                         key={suggestion}
                         onClick={() => addTag(suggestion)}
-                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-[#DC2626]/10 hover:text-[#DC2626] transition-colors"
+                        className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-[#0F3144]/10 hover:text-[#0F3144] transition-colors"
                     >
                         + {suggestion}
                     </button>
@@ -74,7 +74,7 @@ const TagInput: React.FC<{
                 onChange={e => setInputValue(e.target.value)}
                 onKeyPress={e => e.key === 'Enter' && (e.preventDefault(), addTag(inputValue))}
                 placeholder="أضف خيار آخر..."
-                className="mt-2 w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#DC2626] outline-none text-sm"
+                className="mt-2 w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0F3144] outline-none text-sm"
             />
         </div>
     );
@@ -184,9 +184,9 @@ export const DignityFile: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#DC2626]/10 to-white p-6" dir="rtl">
+        <div className="min-h-screen bg-gradient-to-b from-[#0F3144]/10 to-white p-6" dir="rtl">
             {/* Header */}
-            <div className="bg-gradient-to-l from-[#DC2626] via-[#DC2626] to-[#DC2626] rounded-2xl p-6 mb-6 text-white shadow-lg">
+            <div className="bg-gradient-to-l from-[#0F3144] via-[#0F3144] to-[#0F3144] rounded-2xl p-6 mb-6 text-white shadow-lg">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button onClick={() => navigate(-1)} className="p-2 hover:bg-white/10 rounded-lg" title="رجوع" aria-label="رجوع">
@@ -211,7 +211,7 @@ export const DignityFile: React.FC = () => {
                         <button
                             onClick={handleSave}
                             disabled={saving}
-                            className="px-4 py-2 bg-white text-[#DC2626] rounded-lg hover:bg-[#DC2626]/10 flex items-center gap-2"
+                            className="px-4 py-2 bg-white text-[#0F3144] rounded-lg hover:bg-[#0F3144]/10 flex items-center gap-2"
                         >
                             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                             حفظ
@@ -223,7 +223,7 @@ export const DignityFile: React.FC = () => {
             {/* Identity Section */}
             <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
                 <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <User className="w-5 h-5 text-[#DC2626]" />
+                    <User className="w-5 h-5 text-[#0F3144]" />
                     هويتي
                 </h3>
 
@@ -235,7 +235,7 @@ export const DignityFile: React.FC = () => {
                             value={preferredName}
                             onChange={e => setPreferredName(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50"
                             placeholder="كيف تحب أن تُنادى؟"
                         />
                     </div>
@@ -246,7 +246,7 @@ export const DignityFile: React.FC = () => {
                             value={preferredTitle}
                             onChange={e => setPreferredTitle(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50"
                             placeholder="أبو... / أم... / أستاذ..."
                         />
                     </div>
@@ -258,7 +258,7 @@ export const DignityFile: React.FC = () => {
                         value={communicationStyle}
                         onChange={e => setCommunicationStyle(e.target.value)}
                         disabled={!editMode}
-                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[60px] resize-none"
+                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50 min-h-[60px] resize-none"
                         placeholder="كيف تفضل أن يتحدث معك الآخرون؟"
                     />
                 </div>
@@ -282,7 +282,7 @@ export const DignityFile: React.FC = () => {
                             value={wakeUpTime}
                             onChange={e => setWakeUpTime(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50"
                             title="وقت الاستيقاظ"
                             aria-label="وقت الاستيقاظ"
                         />
@@ -297,7 +297,7 @@ export const DignityFile: React.FC = () => {
                             value={sleepTime}
                             onChange={e => setSleepTime(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50"
                             title="وقت النوم"
                             aria-label="وقت النوم"
                         />
@@ -389,21 +389,21 @@ export const DignityFile: React.FC = () => {
                             value={whatMakesMeHappy}
                             onChange={e => setWhatMakesMeHappy(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
                             placeholder="الأشياء التي تجلب لي الفرح..."
                         />
                     </div>
 
                     <div>
                         <label className="block text-gray-600 text-sm mb-1 flex items-center gap-1">
-                            <Frown className="w-4 h-4 text-[#DC2626]" />
+                            <Frown className="w-4 h-4 text-[#0F3144]" />
                             ما يزعجني
                         </label>
                         <textarea
                             value={whatMakesMeUpset}
                             onChange={e => setWhatMakesMeUpset(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
                             placeholder="الأشياء التي يجب تجنبها..."
                         />
                     </div>
@@ -417,7 +417,7 @@ export const DignityFile: React.FC = () => {
                             value={myDreams}
                             onChange={e => setMyDreams(e.target.value)}
                             disabled={!editMode}
-                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#DC2626] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F3144] outline-none disabled:bg-gray-50 min-h-[80px] resize-none"
                             placeholder="ما أتمنى تحقيقه..."
                         />
                     </div>
