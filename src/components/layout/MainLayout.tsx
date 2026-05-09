@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import React, { useState, Suspense, lazy } from 'react';
+import { Outlet } from 'react-router-dom';
 import { ErrorBoundary } from '../common/ErrorBoundary';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
@@ -38,13 +38,10 @@ export const MainLayout = () => {
     // Aggregate personas (Wakeel, Branch GM) are pinned to /aggregate.
     usePersonaRouting();
 
-    const _location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // Close mobile menu on route change
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, []);
+    // The mobile drawer is closed by the Sidebar's nav-link onClick handler
+    // (Sidebar.handleNavClick → onClose). No need for a route-watching effect.
 
     const handleMenuToggle = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
