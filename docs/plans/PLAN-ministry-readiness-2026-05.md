@@ -24,15 +24,16 @@ branch: v2
 
 | الحقل | القيمة |
 |---|---|
-| آخر تَحديث | ٢٠٢٦/٠٥/١٠ ٠٢:٥٢ صباحاً |
-| الـPhase الفعَّال | **٣ — تَنظيف الحَشو (لم يَبدأ)** |
-| تَقدُّم Phase 1 | ✅ مُكتَمِل — ١٠/١٠ — Commit `51590a3` |
-| تَقدُّم Phase 2 | ✅ مُكتَمِل — ٤ ملفَّات `src/` مُعَدَّلَة + Desktop wider — Commit مَطلوب |
-| الـPhase التالي | ٣ — تَنظيف الحَشو (`.bak.*` × ٣، `_location` dead code، animations غير مُستَخدَمَة، utilities مُكَرَّرَة) |
-| فرع git | `v2` (Phase 1 مُلتَزَم؛ Phase 2 يَنتظر Commit) |
+| آخر تَحديث | ٢٠٢٦/٠٥/١٠ ٠٣:٠٠ صباحاً |
+| الـPhase الفعَّال | **٤ — تَصحيحات هيكلية في الدليل (لم يَبدأ)** |
+| تَقدُّم Phase 1 | ✅ مُكتَمِل — Commit `51590a3` |
+| تَقدُّم Phase 2 | ✅ مُكتَمِل — Commit `675abbc` |
+| تَقدُّم Phase 3 | ✅ مُكتَمِل — Commit `d520b31` — ١٢+ ملف `.bak` مَحذوف، dead code من MainLayout، ~١٦٥ سَطر CSS غير مُستَخدَم محذوف |
+| الـPhase التالي | ٤ — جَدول "مَن يَرى ماذا" + فصل "كيف تَقرأ"، glossary، تَوحيد الخيط الذهبي |
+| فرع git | `v2` (٣ commits أمام origin؛ يَنتظر push) |
 | سيرفر التطوير | شَغَّال على `localhost:5175` |
 | Drive | المجلَّد `1A1oVqY9DDyJFBpDN85gHsYj-ViM8ck4c` — docx الكامل والمُحَسَّن مَرفوعان |
-| تَحقُّق Phase 2 | iPhone Pro Max (430×932): drawer من اليمين ✓، bottom nav ٥ بُنود ✓. Desktop (1920×1080): sidebar يمين، محتوى أَوسع، صَفر تَدهور |
+| تَحَقُّق Phase 3 | tsc --noEmit نَظيف، dashboard على 1920×1080 لم يَتغيَّر بَصرياً |
 
 ### مصادر الحقيقة المُعتَمَدَة في الجلسة الأولى
 - الموقع الرسمي: `hrsd.gov.sa/ministry/about-ministry/organizational-chart/ministry-leaders` (آخر تَعديل ٢٠٢٦/٠٥/٠٧).
@@ -440,4 +441,5 @@ const navItems = [
 |---|---|---|
 | ٢٠٢٦/٠٥/١٠ ٠٢:٢٠ | ١ | إنشاء الخطَّة + تَأكيد الهيكل من الموقع الرسمي والصور |
 | ٢٠٢٦/٠٥/١٠ ٠٢:٣٨ | ١ | **Phase 1 ✅ مُكتَمِل**: ٧ ملفَّات guide مُصَحَّحَة (التأهيل والتوجيه)، جدول قيادات أُضيف للمتن، Trust-Ground أُعيد صياغته كإطار فلسفي، إحسان مُوَضَّح كاسم خوارزمية حقيقية، ملف القحطاني في الفولت مُؤَرَّخ بـverification status، ذاكرة الجلسة مُحَدَّثَة، إملاء "الاستراتيّة" مُصَحَّح في build_docx.py وuser-manual، docx الكامل والمُحَسَّن مَرفوعان إلى Drive — Commit `51590a3` |
-| ٢٠٢٦/٠٥/١٠ ٠٢:٥٢ | ١ | **Phase 2 ✅ مُكتَمِل**: drawer يَنزلق من اليمين في RTL (hrsd-theme.css)، MobileNav يَعرض ٥ بُنود تَعكس البنية (Home, Beneficiaries, Compass, Alerts, + Menu)، Header.tsx يَستخدم safe-area-inset-top للـnotch (env() تُرجِع ٠ على Desktop)، MainLayout يُوَسِّع المُحتوى لـ1600px على 2xl. تَحَقُّق بَصري: iPhone Pro Max (430×932) ✓ + Desktop (1920×1080) ✓ بلا تَدهور |
+| ٢٠٢٦/٠٥/١٠ ٠٢:٥٢ | ١ | **Phase 2 ✅ مُكتَمِل**: drawer يَنزلق من اليمين في RTL (hrsd-theme.css)، MobileNav يَعرض ٥ بُنود تَعكس البنية (Home, Beneficiaries, Compass, Alerts, + Menu)، Header.tsx يَستخدم safe-area-inset-top للـnotch (env() تُرجِع ٠ على Desktop)، MainLayout يُوَسِّع المُحتوى لـ1600px على 2xl. تَحَقُّق بَصري: iPhone Pro Max (430×932) ✓ + Desktop (1920×1080) ✓ بلا تَدهور — Commit `675abbc` |
+| ٢٠٢٦/٠٥/١٠ ٠٣:٠٠ | ١ | **Phase 3 ✅ مُكتَمِل**: ١٢+ `.bak.*` مَحذوف من src/components/، dead code (`_location`، useLocation import، dead useEffect) مُزال من MainLayout.tsx، ~١٦٥ سطر CSS غير مُستَخدَم محذوف من hrsd-theme.css (mobile-* utilities + GRC mobile fixes + designer-credit). tsc --noEmit نَظيف. لا تَدهور بَصري على Desktop |
