@@ -380,11 +380,15 @@ body {
   transform: translateX(0);
 }
 
-/* ===== RTL Specific ===== */
+/* ===== RTL Specific =====
+ * In Arabic/RTL UX, primary navigation belongs on the RIGHT (where
+ * the eye begins reading). The drawer must therefore slide IN FROM
+ * THE RIGHT, not the left. Prior implementation forced left-anchored
+ * drawer which broke iPhone/Android RTL conventions. Fix 2026-05-10. */
 [dir="rtl"] .sidebar-drawer {
-  right: auto;
-  left: 0;
-  transform: translateX(-100%);
+  right: 0;
+  left: auto;
+  transform: translateX(100%);
 }
 
 [dir="rtl"] .sidebar-drawer.open {

@@ -86,7 +86,9 @@ export const MainLayout = () => {
 
                 {/* Page Content */}
                 <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 hrsd-scrollbar bg-[#f1f5f9] dark:bg-slate-900 transition-colors duration-300">
-                    <div className="max-w-7xl mx-auto animate-fade-in min-h-full">
+                    {/* Content cap: 1280px on most desktops, expands to 1600px on 2xl+ monitors so
+                      * 1920px+ ministry workstations don't show large empty side gutters. */}
+                    <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto animate-fade-in min-h-full">
                         <Breadcrumb className="mb-4" />
                         <Suspense fallback={<LoadingFallback />}>
                             <ErrorBoundary>

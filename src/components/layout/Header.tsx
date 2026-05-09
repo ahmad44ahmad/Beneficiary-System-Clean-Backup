@@ -50,7 +50,17 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     };
 
     return (
-        <header className="h-16 bg-gradient-to-l from-hrsd-navy to-hrsd-navy-dark border-b border-hrsd-teal/20 px-4 md:px-6 sticky top-0 z-30 flex items-center justify-between shadow-md" dir="rtl">
+        <header
+            className="bg-gradient-to-l from-hrsd-navy to-hrsd-navy-dark border-b border-hrsd-teal/20 px-4 md:px-6 sticky top-0 z-30 flex items-center justify-between shadow-md"
+            dir="rtl"
+            style={{
+                /* env(safe-area-inset-top) returns 0 on devices without a notch (desktop, older phones)
+                 * and the actual notch height on iPhone Pro/Pro Max (Dynamic Island). The fixed h-16 is
+                 * promoted to min-height so the bar grows on devices that need it without shrinking on others. */
+                paddingTop: 'env(safe-area-inset-top)',
+                minHeight: 'calc(4rem + env(safe-area-inset-top))',
+            }}
+        >
 
             {/* Mobile: Menu Button + Title */}
             <div className="flex items-center gap-3 md:hidden">

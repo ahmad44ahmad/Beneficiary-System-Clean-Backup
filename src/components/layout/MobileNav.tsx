@@ -4,22 +4,31 @@ import {
     Users,
     Menu,
     Home,
-    Stethoscope,
-    ClipboardList
+    Compass,
+    Bell,
 } from 'lucide-react';
 
 interface MobileNavProps {
     onMenuClick: () => void;
 }
 
+/**
+ * Bottom-fixed mobile navigation. Renders only on mobile (`md:hidden`).
+ * Items mirror the Sidebar's high-frequency surfaces — not a duplicate
+ * of every section, but the four destinations a center-leader / wakeel
+ * is most likely to reach for on a phone.
+ *
+ * Plus the always-present "القائمة" button which opens the full drawer
+ * (sidebar) for everything else.
+ */
 export const MobileNav: React.FC<MobileNavProps> = ({ onMenuClick }) => {
     const location = useLocation();
 
     const navItems = [
         { to: '/dashboard', icon: Home, label: 'الرئيسية' },
-        { to: '/beneficiaries', icon: Users, label: 'المستفيدين' },
-        { to: '/daily-follow-up', icon: ClipboardList, label: 'المتابعة' },
-        { to: '/medical', icon: Stethoscope, label: 'الطبي' },
+        { to: '/beneficiaries', icon: Users, label: 'المستفيدون' },
+        { to: '/leadership-compass', icon: Compass, label: 'البوصلة' },
+        { to: '/alerts', icon: Bell, label: 'التنبيهات' },
     ];
 
     const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
