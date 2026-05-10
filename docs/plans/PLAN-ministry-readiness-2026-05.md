@@ -1,11 +1,11 @@
 ---
 title: خطة جاهزية بصيرة للتقديم الوزاري
 created: 2026-05-10
-last_updated: 2026-05-10 02:38
-session_count: 1
+last_updated: 2026-05-10 03:25
+session_count: 2
 status: in-progress
-active_phase: 2
-phase_progress: phase-1-complete
+active_phase: 4
+phase_progress: phases-1-3-complete; phase-4-task-1-complete
 canonical_path: C:\dev\basira
 branch: v2
 ---
@@ -24,16 +24,18 @@ branch: v2
 
 | الحقل | القيمة |
 |---|---|
-| آخر تَحديث | ٢٠٢٦/٠٥/١٠ ٠٣:٠٠ صباحاً |
-| الـPhase الفعَّال | **٤ — تَصحيحات هيكلية في الدليل (لم يَبدأ)** |
+| آخر تَحديث | ٢٠٢٦/٠٥/١٠ ٠٣:٢٥ — منتصف الجلسة ٢ (Task 4.1 ✅) |
+| الـPhase الفعَّال | **٤ — تَصحيحات هيكلية في الدليل (Task 4.1 ✅، يَتبَع 4.2)** |
 | تَقدُّم Phase 1 | ✅ مُكتَمِل — Commit `51590a3` |
 | تَقدُّم Phase 2 | ✅ مُكتَمِل — Commit `675abbc` |
 | تَقدُّم Phase 3 | ✅ مُكتَمِل — Commit `d520b31` — ١٢+ ملف `.bak` مَحذوف، dead code من MainLayout، ~١٦٥ سَطر CSS غير مُستَخدَم محذوف |
+| تَقدُّم Phase 4 | Task 4.1 ✅ — Commit `f24c3c3` (`CLAUDE.md:232` typo fix `الاستراتيّة` → `الاستراتيجيّة` مع شدَّة، مُحاذاة `Sidebar.tsx:186`) |
 | الـPhase التالي | ٤ — جَدول "مَن يَرى ماذا" + فصل "كيف تَقرأ"، glossary، تَوحيد الخيط الذهبي |
-| فرع git | `v2` — مُتَزامِن مع `origin/v2` (آخر push: ٥ commits ٢٠٢٦/٠٥/١٠ ٠٣:٠٣ — Vercel سيُعيد النَّشر تلقائياً) |
-| سيرفر التطوير | شَغَّال على `localhost:5175` |
+| فرع git | `v2` — مُتَزامِن مع `origin/v2` (HEAD = `30d7d88`، صَفَر commits أمام origin) |
+| سيرفر التطوير | شَغَّال على `localhost:5175` (تأكيد HTTP 200 — ٣١٣٣ بايت في الجلسة ٢) |
 | Drive | المجلَّد `1A1oVqY9DDyJFBpDN85gHsYj-ViM8ck4c` — docx الكامل والمُحَسَّن مَرفوعان |
 | تَحَقُّق Phase 3 | tsc --noEmit نَظيف، dashboard على 1920×1080 لم يَتغيَّر بَصرياً |
+| تَحقُّق دخول الجلسة ٢ | git working-tree نَظيف. صَفَر مَواضع لـ"التوجيه والتأهيل" في `src/`. مُطابَقات `docs/guide/INDEX.md` و `docs/SESSION-REPORT-2026-05-10.md` كلُّها meta-mentions (تَوثِّق التَصحيح، ليست أخطاء). **تَنقيح Task 4.1**: `walkthrough-inventory-2026-04-23.md` نَظيف بالفعل من "الاستراتيّة" — يَبقى من القائمة الأصلية `CLAUDE.md:232` فقط (typo حقيقي). |
 
 ### مصادر الحقيقة المُعتَمَدَة في الجلسة الأولى
 - الموقع الرسمي: `hrsd.gov.sa/ministry/about-ministry/organizational-chart/ministry-leaders` (آخر تَعديل ٢٠٢٦/٠٥/٠٧).
@@ -322,13 +324,14 @@ const navItems = [
 
 ### المهام
 
-#### Task 4.1 — إصلاح "الاستراتيّة" → "الاستراتيجية"
-**المَواضع** (٤ ملفَّات):
-- `docs/guide/user-manual-2026.md:191`
-- `docs/guide/build_docx.py:429`
-- `CLAUDE.md:232`
-- `docs/walkthrough-inventory-2026-04-23.md:19`
-- [ ] Edit كل ملف.
+#### Task 4.1 — ✅ مُكتَمِل (Commit `f24c3c3`)
+**الإصلاح المُعتَمَد**: `الاستراتيّة` → `الاستراتيجيّة` (مع شدَّة، مُحاذاة `Sidebar.tsx:186`) — وليس `الاستراتيجية` بدون شدَّة كما اقتَرَح أوَّلاً.
+**القائمة الأصلية ٤ ملفَّات؛ الحالة الفعلية بعد التَحَقُّق**:
+- ✅ `docs/guide/user-manual-2026.md:191` — تَمَّ في Phase 1 بصيغة `الاستراتيجيّة`.
+- ✅ `docs/guide/build_docx.py:429` — تَمَّ في Phase 1 بنَفس الصيغة.
+- ✅ `CLAUDE.md:232` — تَمَّ في الجلسة ٢ (Commit `f24c3c3`).
+- ⊘ `docs/walkthrough-inventory-2026-04-23.md:19` — لم يَكُن يَحوي الخَطَأ أصلاً (تَنقيح القائمة).
+**ملاحظة لُغوية**: الشدَّة محصورة على label السايدبار (UI literal) لِحفظ grep symmetry. الـprose العام (وَصف القرارات/المؤشرات/...) يَبقى `الاستراتيجية` بدون شدَّة (المعيار اللغوي).
 
 #### Task 4.2 — جَدول "مَن يَرى ماذا" في فاتحة فصل ٠٢
 **الملف**: `user-manual-2026.md` فصل ٠٢.
@@ -443,3 +446,5 @@ const navItems = [
 | ٢٠٢٦/٠٥/١٠ ٠٢:٣٨ | ١ | **Phase 1 ✅ مُكتَمِل**: ٧ ملفَّات guide مُصَحَّحَة (التأهيل والتوجيه)، جدول قيادات أُضيف للمتن، Trust-Ground أُعيد صياغته كإطار فلسفي، إحسان مُوَضَّح كاسم خوارزمية حقيقية، ملف القحطاني في الفولت مُؤَرَّخ بـverification status، ذاكرة الجلسة مُحَدَّثَة، إملاء "الاستراتيّة" مُصَحَّح في build_docx.py وuser-manual، docx الكامل والمُحَسَّن مَرفوعان إلى Drive — Commit `51590a3` |
 | ٢٠٢٦/٠٥/١٠ ٠٢:٥٢ | ١ | **Phase 2 ✅ مُكتَمِل**: drawer يَنزلق من اليمين في RTL (hrsd-theme.css)، MobileNav يَعرض ٥ بُنود تَعكس البنية (Home, Beneficiaries, Compass, Alerts, + Menu)، Header.tsx يَستخدم safe-area-inset-top للـnotch (env() تُرجِع ٠ على Desktop)، MainLayout يُوَسِّع المُحتوى لـ1600px على 2xl. تَحَقُّق بَصري: iPhone Pro Max (430×932) ✓ + Desktop (1920×1080) ✓ بلا تَدهور — Commit `675abbc` |
 | ٢٠٢٦/٠٥/١٠ ٠٣:٠٠ | ١ | **Phase 3 ✅ مُكتَمِل**: ١٢+ `.bak.*` مَحذوف من src/components/، dead code (`_location`، useLocation import، dead useEffect) مُزال من MainLayout.tsx، ~١٦٥ سطر CSS غير مُستَخدَم محذوف من hrsd-theme.css (mobile-* utilities + GRC mobile fixes + designer-credit). tsc --noEmit نَظيف. لا تَدهور بَصري على Desktop |
+| ٢٠٢٦/٠٥/١٠ ٠٣:١٥ | ٢ | **بداية الجلسة ٢ — تَحقُّق دخول مُستَقِلّ**: git على `v2` نَظيف وHEAD = `30d7d88` مُتَزامِن مع origin. dev server على 5175 يَستجيب HTTP 200. grep لـ"التوجيه والتأهيل" على `docs/guide*` و `src/`: لا أخطاء فعلية (الـmatches meta-mentions). grep لـ"الاستراتيّة" يَكشف أن قائمة Task 4.1 الأصلية كانت ٤ ملفَّات لكن ٢ منها (`user-manual-2026.md` و `build_docx.py`) عُولِجَت في Phase 1، و`walkthrough-inventory.md` لم يَكُن يَحوي الخَطَأ أصلاً. **Task 4.1 الفعلي = إصلاح `CLAUDE.md:232` فقط**. |
+| ٢٠٢٦/٠٥/١٠ ٠٣:٢٥ | ٢ | **Task 4.1 ✅ مُكتَمِل**: `CLAUDE.md:232` typo `الاستراتيّة` → `الاستراتيجيّة` (مع شدَّة). الصيغة المُعتَمَدَة لـlabel السايدبار في كل الـdocs (مُحاذاة `Sidebar.tsx:186`)، تَفريق عَن الـprose العام الذي يَستخدم `الاستراتيجية` بدون شدَّة. — Commit `f24c3c3` |
