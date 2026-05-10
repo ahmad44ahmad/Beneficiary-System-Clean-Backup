@@ -30,7 +30,7 @@ branch: v2
 | تَقدُّم Phase 2 | ✅ مُكتَمِل — Commit `675abbc` |
 | تَقدُّم Phase 3 | ✅ مُكتَمِل — Commit `d520b31` — ١٢+ ملف `.bak` مَحذوف، dead code من MainLayout، ~١٦٥ سَطر CSS غير مُستَخدَم محذوف |
 | الـPhase التالي | ٤ — جَدول "مَن يَرى ماذا" + فصل "كيف تَقرأ"، glossary، تَوحيد الخيط الذهبي |
-| فرع git | `v2` (٣ commits أمام origin؛ يَنتظر push) |
+| فرع git | `v2` — مُتَزامِن مع `origin/v2` (آخر push: ٥ commits ٢٠٢٦/٠٥/١٠ ٠٣:٠٣ — Vercel سيُعيد النَّشر تلقائياً) |
 | سيرفر التطوير | شَغَّال على `localhost:5175` |
 | Drive | المجلَّد `1A1oVqY9DDyJFBpDN85gHsYj-ViM8ck4c` — docx الكامل والمُحَسَّن مَرفوعان |
 | تَحَقُّق Phase 3 | tsc --noEmit نَظيف، dashboard على 1920×1080 لم يَتغيَّر بَصرياً |
