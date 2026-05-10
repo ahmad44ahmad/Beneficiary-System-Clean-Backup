@@ -229,7 +229,7 @@ Client state (app, notifications, toast, UI, user, view mode) lives in Zustand s
 - **RTL:** Arabic-first with Tajawal/Cairo fonts
 - **Theming:** HRSD branding — official palette: navy `#0F3144`, teal `#269798`, green `#2BB574`, gold `#FCB614`, orange `#F7941D`, body Cool Gray 9 `#7A7A7A`. Source of truth: `src/design-system/tokens.ts`. The legacy `colors.ts` is a facade.
 - **Audit trail:** `startAuditService()` runs on app initialization
-- **Sidebar:** 320px wide, 9 sections including القيادة الاستراتيّة (v2)
+- **Sidebar:** 320px wide, 9 sections including القيادة الاستراتيجيّة (v2)
 
 ### Environment Variables
 
