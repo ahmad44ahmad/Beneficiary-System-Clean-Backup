@@ -406,7 +406,39 @@ def main():
     ], 1):
         add_para(doc, f"{i}. {t}")
     add_image(doc, os.path.join(ASSETS, "01-dashboard.png"), caption="الشاشة الرئيسية ولوحة القيادة التنفيذية")
-    add_h(doc, "٢-١  الأقسام التسعة في الشريط الجانبي", 3, color=TEAL)
+    add_h(doc, "٢-١  مَن يَرى ماذا في هذه الشاشة", 3, color=TEAL)
+    add_para(doc, "اللوحة الواحدة تُعرَض لكل المستخدمين؛ غير أن ما يَظهر فيها يَختلف بحَسب الدور — المؤشِّرات، التقارير، اللوحة الإشرافية، كلُّها مَحكومة بمستوى الصَّلاحية. الجَدول التالي يُلخِّص ما يُتاح لكل دور:", size=12)
+    table_v = doc.add_table(rows=6, cols=5)
+    table_v.style = "Light Grid Accent 1"
+    headers_v = ["اللوحة الإشرافية", "التقارير", "المؤشرات الذكية", "اللوحة الرئيسية", "الدور"]
+    for i, h in enumerate(headers_v):
+        cell = table_v.rows[0].cells[i]
+        p = cell.paragraphs[0]
+        set_para_rtl(p)
+        r = p.add_run(h)
+        r.bold = True
+        set_run_arabic(r)
+        r.font.size = Pt(11)
+    rows_v = [
+        ("✗", "✗", "✗", "تشغيلي يومي", "موظف ميداني"),
+        ("✗", "يومية/أسبوعية", "ميدانية", "تشغيلي + قسمه", "مدير قسم"),
+        ("✗", "شَهرية", "استراتيجية محلية", "كامل المركز", "مدير مركز"),
+        ("✓ كامل", "شَهرية", "إقليمية", "✗", "مدير عام بفرع"),
+        ("✓ متعدِّد المراكز", "فَصلية", "وزارية", "✗", "وكيل/مساعد"),
+    ]
+    for ri, row in enumerate(rows_v, 1):
+        for ci, val in enumerate(row):
+            cell = table_v.rows[ri].cells[ci]
+            p = cell.paragraphs[0]
+            set_para_rtl(p)
+            r = p.add_run(val)
+            set_run_arabic(r)
+            r.font.size = Pt(10)
+    doc.add_paragraph()
+    add_callout(doc, "ملاحظة على اللوحة الإشرافية",
+                "'اللوحة الإشرافية' (فصل ١٢) مَحفوظة لمستويات الفروع والوكالات، ولا تَظهر لمدراء المراكز.",
+                role_color=TEAL)
+    add_h(doc, "٢-٢  الأقسام التسعة في الشريط الجانبي", 3, color=TEAL)
     table = doc.add_table(rows=10, cols=3)
     table.style = "Light Grid Accent 1"
     headers = ["الجمهور المُستفيد", "الوحدات الفرعية", "القسم"]
@@ -438,7 +470,7 @@ def main():
             set_run_arabic(r)
             r.font.size = Pt(10)
     doc.add_paragraph()
-    add_h(doc, "٢-٢  مَا تَعرضه لوحة القيادة فوراً", 3, color=TEAL)
+    add_h(doc, "٢-٣  مَا تَعرضه لوحة القيادة فوراً", 3, color=TEAL)
     for b in [
         "بطاقات التنبيهات والمساءلة (عَدد القضايا المستحقة النَظَر، مع مستويات أهميَّة).",
         "مؤشِّرات الإنجاز: نسبة تَغطية الخطط، نسبة تَحقيق الأهداف، نسبة الأنشطة، نسبة المتابعات اليومية.",
